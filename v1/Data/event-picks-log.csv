@@ -1,0 +1,165 @@
+city,week_of,day,date,title,venue,category,source,rank,price_tier,spotify_link,tags,attended
+Austin,2026-04-13,Monday,2026-04-13,Werckmeister Harmonies (Béla Tarr),AFS Cinema,film,AFS Cinema,1,paid,,film|tarr|repertory|cinematalk,
+Austin,2026-04-13,Monday,2026-04-13,Story Club: The Ones Who Walk Away From Omelas,Central Market,literary,Do512/WebSearch,2,free,,literature|politics|le-guin|free,
+Austin,2026-04-13,Monday,2026-04-13,CHIME + SERPENT'S PATH,AFS Cinema,film,AFS Cinema,3,paid,,film|horror|kurosawa|j-horror,
+Austin,2026-04-13,Monday,2026-04-13,MIROIRS NO. 3,AFS Cinema,film,AFS Cinema,HM,paid,,film|experimental,
+Austin,2026-04-13,Tuesday,2026-04-14,The HIRS Collective w/ Votive & Commitment,29th Street Ballroom,music,Bandsintown,1,paid,https://open.spotify.com/artist/1NV2n4DkUNfCCuaaxsWJnl,punk|grindcore|queer|hardcore,
+Austin,2026-04-13,Tuesday,2026-04-14,UNKNOWN PLEASURES (Jia Zhangke 2002),AFS Cinema,film,AFS Cinema,2,paid,,film|chinese-cinema|arthouse|hometown-trilogy,
+Austin,2026-04-13,Tuesday,2026-04-14,Langhorne Slim: The Dreamin' Kind Tour,Antone's,music,Do512,3,paid,,folk|americana|singer-songwriter,
+Austin,2026-04-13,Tuesday,2026-04-14,CHIME + SERPENT'S PATH (2nd screening),AFS Cinema,film,AFS Cinema,HM,paid,,film|horror|kurosawa|j-horror,
+Austin,2026-04-13,Wednesday,2026-04-15,Happy Horror Hour — Hallucinogenic Hellscapes,Grata's Pizzeria & Pub,film/community,Meetup,1,free,,horror|film|community|free|psychedelic,
+Austin,2026-04-13,Wednesday,2026-04-15,GUN CRAZY (Joseph H. Lewis 1950),AFS Cinema,film,AFS Cinema,2,paid,,film|noir|classic|cinematalk,
+Austin,2026-04-13,Wednesday,2026-04-15,Vibe Code April with Mark Malstrom,Monkey Nest Coffee,tech,Meetup,3,free,,software|ai|coffee|vibe-coding|demo,
+Austin,2026-04-13,Wednesday,2026-04-15,Meshuggah w/ Cannibal Corpse & Carcass,ACL Live,music,Do512,HM,paid,,metal|extreme-metal|live,
+Austin,2026-04-13,Thursday,2026-04-16,HACK THE PLANET: LIVE FROM CYBERDELIA,Hyperreal Film Club,film,Hyperreal Film Club,1,free,,film|hackers|free|hyperreal|tech-culture|diy,
+Austin,2026-04-13,Thursday,2026-04-16,TERTULIAS: A Spanish Language Series,Alienated Majesty Books,literary,Alienated Majesty Books,2,free,,literature|poetry|community|free|spanish,
+Austin,2026-04-13,Thursday,2026-04-16,lowheaven w/ Drosera,Brushy Street Commons,music,Do512,3,tba,,punk|shoegaze|doom|diy|local,
+Austin,2026-04-13,Thursday,2026-04-16,Dirty Projectors: Song of the Earth w/ Austin Symphony,The Long Center,music,Do512,HM,paid,,avant-pop|orchestral|indie,
+Austin,2026-04-13,Friday,2026-04-17,if i die in mississippi — postmortem magnolia album release,Alienated Majesty Books,music,Alienated Majesty Books,1,free,https://open.spotify.com/artist/1zIvYNpswcoGPR5MtyOhz8,punk|folk|diy|free|zine|album-release,
+Austin,2026-04-13,Friday,2026-04-17,Pink Turns Blue w/ Octavian Winters,Elysium,music,Bandsintown,2,paid,https://open.spotify.com/artist/47oP5alMot58ggzcFwldky,post-punk|darkwave|goth|german,
+Austin,2026-04-13,Friday,2026-04-17,THE STRANGER (L'ETRANGER) — François Ozon,AFS Cinema,film,AFS Cinema,3,paid,,film|camus|french|arthouse|cinematalk,
+Austin,2026-04-13,Friday,2026-04-17,PALESTINE '36,AFS Cinema,film,AFS Cinema,HM,paid,,film|documentary|politics|history,
+Austin,2026-04-13,Saturday,2026-04-18,Cumbiadélica Festival 2026,29th Street Ballroom,festival,Austin Chronicle Staff Picks,1,paid,,festival|cumbia|latin|all-ages|all-day,
+Austin,2026-04-13,Saturday,2026-04-18,Inky Eyes No. 5: A Quarterly Comics Mixer,Alienated Majesty Books,literary,Alienated Majesty Books,2,free,,comics|zines|art|free|community,
+Austin,2026-04-13,Saturday,2026-04-18,HACK THE PLANET: LIVE FROM CYBERDELIA (Night 3),Hyperreal Film Club,film,Hyperreal Film Club,3,free,,film|hackers|free|hyperreal|night-3,
+Austin,2026-04-13,Saturday,2026-04-18,Austin Reggae Festival,Auditorium Shores,festival,Do512,HM,free,,reggae|free|outdoor|festival,
+Austin,2026-04-13,Sunday,2026-04-19,Lancelot du Lac (Bresson 1974) + Paper Cuts Book Pairing,AFS Cinema,film,AFS Cinema,1,paid,,film|bresson|cinematalk|books|4k-restoration,
+Austin,2026-04-13,Sunday,2026-04-19,Ethereal Resurrection Film Festival,Hyperreal Film Club,film,Hyperreal Film Club,2,free,,horror|film|festival|free|local|indie,
+Austin,2026-04-13,Sunday,2026-04-19,PALESTINE '36 (Matinee),AFS Cinema,film,AFS Cinema,3,paid,,film|documentary|politics|history|matinee,
+Austin,2026-04-13,Sunday,2026-04-19,A SERIOUS MAN (Coen Brothers 2009),AFS Cinema,film,AFS Cinema,HM,paid,,film|coens|dark-comedy,
+Philadelphia,2026-06-08,Monday,2026-06-08,Blood Sick Underground Cinema: HELLMARE & ZEBRA HOOVES,PhilaMOCA,horror,philamoca.org,1,paid,,horror|film|filmmaker-qa|diy,false
+Philadelphia,2026-06-08,Monday,2026-06-08,Hubert Harrison: Forbidden Genius of Black Radicalism,Free Library (Parkway Central),literary,libwww.freelibrary.org,2,free,,leftist|politics|history|literature|black-radicalism|free,false
+Philadelphia,2026-06-08,Monday,2026-06-08,Amyl and the Sniffers w/ Party Dozen,Highmark Mann,music,do215.com,3,paid,https://open.spotify.com/artist/3NqV2DJoAWsjl787bWaHW7,punk|rock|outdoor|major-act,false
+Philadelphia,2026-06-08,Monday,2026-06-08,Rainbow Girls & Set It Off (cinéSPEAK),Two Locals Brewing,film,cinespeak.org,hm,free,,film|queer|outdoor|free|pride,false
+Philadelphia,2026-06-09,Tuesday,2026-06-09,FUCK ICE Art Auction and Benefit Showcase,Tattooed Mom's,community,do215.com,1,free,,leftist|politics|anti-ice|art|community|free,false
+Philadelphia,2026-06-09,Tuesday,2026-06-09,Kevin Morby,Union Transfer,music,do215.com,2,paid,https://open.spotify.com/artist/6fxk3UXHTFYET8qCT9WlBF,indie|folk|singer-songwriter|literary,false
+Philadelphia,2026-06-09,Tuesday,2026-06-09,Danielle Allen | Radical Duke,Free Library (Parkway Central),literary,libwww.freelibrary.org,3,paid,,literature|politics|history|thomas-paine|leftist,false
+Philadelphia,2026-06-09,Tuesday,2026-06-09,Open Streets: Midtown Village,Sansom St Gayborhood,community,thephiladelphiacitizen.org,hm,free,,community|pride|free|outdoor,false
+Philadelphia,2026-06-10,Wednesday,2026-06-10,Prince Daddy & the Hyena w/ Remo Drive & Liquid Mike,Ukie Club,music,do215.com / 4333collective.net,1,paid,https://open.spotify.com/artist/3EYgeLZ0vtVHKkUL26Eu49,punk|emo|diy|4333-collective,false
+Philadelphia,2026-06-10,Wednesday,2026-06-10,Deer Tick,Underground Arts,music,do215.com,2,paid,,indie-rock|folk|americana,false
+Philadelphia,2026-06-10,Wednesday,2026-06-10,Meet & Geek: Colonial Garden Consortium,Mütter Museum,community,do215.com,3,paid,,botany|science|weird|community,false
+Philadelphia,2026-06-10,Wednesday,2026-06-10,Holy Wars & Oxymorrons,Nikki Lopez,music,phillygoth.net,hm,paid,,hardcore|metal|dark,false
+Philadelphia,2026-06-11,Thursday,2026-06-11,Marisa Anderson w/ Chakra Khan/Air Pirates,PhilaMOCA,music,philamoca.org,1,paid,https://open.spotify.com/artist/5j2d5CS0sh2LTpFsrKAFcW,guitar|experimental|political|unamerican-folk,false
+Philadelphia,2026-06-11,Thursday,2026-06-11,Slingshot Dakota,Spruce Street Harbor,music,do215.com,2,free,,indie|emo|outdoor|free,false
+Philadelphia,2026-06-11,Thursday,2026-06-11,To Wong Foo! Film Screening & Drag Tribute Show,Franky Bradley's,film,do215.com,3,paid,,film|queer|drag|pride,false
+Philadelphia,2026-06-11,Thursday,2026-06-11,Annabelle Chairlegs + Shortcuts,Nikki Lopez,music,do215.com,hm,paid,,punk|indie|local,false
+Philadelphia,2026-06-12,Friday,2026-06-12,Break Free Fest Friday: Lustsickpuppy + more,Cousin Danny's,festival,bandsintown.com,1,free,,punk|hardcore|poc-fronted|mutual-aid|free|political,true
+Philadelphia,2026-06-12,Friday,2026-06-12,Panic Shack,PhilaMOCA,music,philamoca.org / r5productions.com,2,paid,https://open.spotify.com/artist/26HCuM5PamldoaHII5Ifxc,punk|cardiff|diy,false
+Philadelphia,2026-06-12,Friday,2026-06-12,Niñxs (cinéSPEAK Under the Stars),Clark Park,film,cinespeak.org,3,free,,film|queer|outdoor|free|documentary|pride,false
+Philadelphia,2026-06-12,Friday,2026-06-12,Demonstrate + Speed Plans + Fightback,First Unitarian Church,music,do215.com,hm,paid,,hardcore|punk|diy,false
+Philadelphia,2026-06-13,Saturday,2026-06-13,JG Thirlwell performs Silver Mantis,PhilaMOCA,music,philamoca.org,1,paid,,industrial|experimental|foetus|avant-garde|performance,false
+Philadelphia,2026-06-13,Saturday,2026-06-13,Break Free Fest Saturday,Ukie Club,festival,bandsintown.com,2,paid,,punk|hardcore|poc-fronted|mutual-aid|political,false
+Philadelphia,2026-06-13,Saturday,2026-06-13,Liberty Lands Music Festival 2026,Liberty Lands Park,festival,do215.com,3,free,,music|outdoor|free|community|northern-liberties,false
+Philadelphia,2026-06-13,Saturday,2026-06-13,Sun Ra Arkestra,City Winery,music,do215.com,hm,paid,,jazz|avant-garde|experimental,false
+Philadelphia,2026-06-14,Sunday,2026-06-14,Saetia w/ Geoff Rickley + more,First Unitarian Church,music,r5productions.com,1,paid,,screamo|post-hardcore|reunion|historic|diy,true
+Philadelphia,2026-06-14,Sunday,2026-06-14,Odunde Festival,South St / Grays Ferry Ave,festival,thephiladelphiacitizen.org,2,free,,african-american|cultural|community|free|tradition,false
+Philadelphia,2026-06-14,Sunday,2026-06-14,Break Free Fest Sunday,Ukie Club,festival,bandsintown.com,3,paid,,punk|hardcore|poc-fronted|mutual-aid|political,false
+Philadelphia,2026-06-14,Sunday,2026-06-14,Lost Lizard Record Release Show,PhilaMOCA,music,philamoca.org,hm,paid,,local|record-release|indie,false
+Philadelphia,2026-06-15,Monday,2026-06-15,Philadelphia Psychotronic Film Society,PhilaMOCA,Horror & Occult,PhilaMOCA,1,low,,horror,cult-film
+Philadelphia,2026-06-15,Monday,2026-06-15,TCB – Toni Cade Bambara School of Organizing & #FreeBlackMamas,Vox Populi Gallery,Film & Cinema,cinéSPEAK,2,free,,leftist,film
+Philadelphia,2026-06-15,Monday,2026-06-15,A Dinner with The Playful Bunch: Tour Kickoff with Jim Strong & Draye Wilson,Beautiful World Syndicate,Music & Concerts,Philly Ask A Punk,3,free,,experimental,noise
+Philadelphia,2026-06-15,Monday,2026-06-15,Seahaven / Breakup Shoes / House and Home,Ukie Club,Music & Concerts,Philly Ask A Punk,hm,,,emo,indie-rock
+Philadelphia,2026-06-15,Monday,2026-06-15,Wild Nothing / Deakin,Underground Arts,Music & Concerts,Do215,hm,,,indie-pop,false
+Philadelphia,2026-06-16,Tuesday,2026-06-16,WITHDRAWAL (Philly Premiere),PhilaMOCA,Film & Cinema,PhilaMOCA,1,low,,film,premiere
+Philadelphia,2026-06-16,Tuesday,2026-06-16,Sarah J. Jackson | A Second Sight,Parkway Central Library,Literary,Free Library,2,free,,book,politics
+Philadelphia,2026-06-16,Tuesday,2026-06-16,Ritual VI: Mark of the Beast — Metal Burlesque Pagan Revelry,Doom,Horror & Occult,Phillygoth.net,3,paid,,horror,occult
+Philadelphia,2026-06-16,Tuesday,2026-06-16,Amitav Ghosh | Ghost-Eye,Parkway Central Library,Literary,Free Library,hm,,,book,author-event
+Philadelphia,2026-06-16,Tuesday,2026-06-16,Stroszek (Werner Herzog),Village of Industry & Art,Film & Cinema,Lightbox Film Center,hm,,,film,repertory
+Philadelphia,2026-06-17,Wednesday,2026-06-17,"Neptune (Bos), V.Vecker (YVR), Icky Bits, Jewel-Eye, Agita",Grays Warehouse,Music & Concerts,Philly Ask A Punk,1,free,,noise-punk,free-jazz
+Philadelphia,2026-06-17,Wednesday,2026-06-17,Algernon Cadwallader (Second Show) w/ Cara Beth Satalino,Ruba Club,Music & Concerts,Do215,2,free,https://open.spotify.com/artist/1BfYXNfaB5HBwHn4gxnEQE,post-hardcore,philly
+Philadelphia,2026-06-17,Wednesday,2026-06-17,Beginner Soldering: Flashing LED Circuit,Iffy Books,Tech & Maker,Iffy Books,3,free,,diy,electronics
+Philadelphia,2026-06-17,Wednesday,2026-06-17,Chinese American Bear w/ Layton Wu,PhilaMOCA,Music & Concerts,PhilaMOCA,hm,,,indie,false
+Philadelphia,2026-06-18,Thursday,2026-06-18,The Fiery Furnaces,Philadelphia Ethical Society,Music & Concerts,R5 Productions,1,paid,https://open.spotify.com/artist/03G0pJHLHj7FRuCV5OYzpv,art-rock,r5
+Philadelphia,2026-06-18,Thursday,2026-06-18,The Cremator (confirm details),Village of Industry & Art,Film & Cinema,Lightbox Film Center,2,paid,,film,czech-new-wave
+Philadelphia,2026-06-18,Thursday,2026-06-18,FAFIO Beginner Tech Meetup,Iffy Books,Tech & Maker,Iffy Books,3,free,,tech,diy
+Philadelphia,2026-06-18,Thursday,2026-06-18,"Asko (Chi), Raskol, Soft Targets",Cousin Danny's,Music & Concerts,Philly Ask A Punk,hm,,,punk,hardcore
+Philadelphia,2026-06-18,Thursday,2026-06-18,Glitterspitter w/ Pinky Lemon + Certain Luck,PhilaMOCA,Music & Concerts,PhilaMOCA,hm,,,punk,diy
+Philadelphia,2026-06-19,Friday,2026-06-19,Derya Yıldırım & Grup Şimşek w/ FUZZYTOWN,PhilaMOCA,Music & Concerts,PhilaMOCA,1,paid,https://open.spotify.com/artist/2Y0SH69uxHrHrjiZCuTSaT,turkish,psychedelic
+Philadelphia,2026-06-19,Friday,2026-06-19,Crooklyn (1994),Clark Park,Film & Cinema,cinéSPEAK,2,free,,film,outdoor
+Philadelphia,2026-06-19,Friday,2026-06-19,Juneteenth FREEDOM Celebration 2026,The Rotunda,Community & Politics,The Rotunda,3,free,,juneteenth,community
+Philadelphia,2026-06-19,Friday,2026-06-19,Teenage Bottle Rocket / Holy Mess / Vulture Raid,First Unitarian Church,Music & Concerts,Philly Ask A Punk,hm,,,punk,ska
+Philadelphia,2026-06-19,Friday,2026-06-19,Lockpick Night,Wooden Shoe Books,Tech & Maker,Wooden Shoe Books,hm,,,diy,lockpicking
+Philadelphia,2026-06-20,Saturday,2026-06-20,Julia's War 5 Year Anniversary — Snoozer Hooky Big Nick,First Unitarian Church,Music & Concerts,R5 Productions,1,paid,,punk,r5
+Philadelphia,2026-06-20,Saturday,2026-06-20,Build a Solar-Powered Meshtastic Node,Iffy Books,Tech & Maker,Iffy Books,2,paid,,tech,mesh-network
+Philadelphia,2026-06-20,Saturday,2026-06-20,Philly Tenants Union Training,Wooden Shoe Books,Community & Politics,Wooden Shoe Books,3,free,,"leftist,tenant-rights,political-ed",false
+Philadelphia,2026-06-20,Saturday,2026-06-20,STOLEN KINGDOM (Philly Premiere),PhilaMOCA,Film & Cinema,PhilaMOCA,hm,,,film,premiere
+Philadelphia,2026-06-20,Saturday,2026-06-20,Giant / Gun Itt / Hello Whirled / Vehicular Homicide Sisters,Orpheus' Garden,Music & Concerts,Philly Ask A Punk,hm,,,punk,diy
+Philadelphia,2026-06-21,Sunday,2026-06-21,West Philly's Epic Juneteenth Parade & Festival,Malcolm X Park,Community & Politics,Philadelphia Citizen,1,free,,juneteenth,parade
+Philadelphia,2026-06-21,Sunday,2026-06-21,Kahil El'Zabar / David Murray,Solar Myth,Music & Concerts,WXPN Concert Calendar,2,paid,https://open.spotify.com/artist/0PMwrvwdzNfudjFVX89yv6,jazz,aacm
+Philadelphia,2026-06-21,Sunday,2026-06-21,MAYBE THIS YEAR (screening),PFS Film Society Center,Film & Cinema,Do215,3,free,,film,pfs
+Philadelphia,2026-06-21,Sunday,2026-06-21,Sonido Gallo Negro,Johnny Brenda's,Music & Concerts,Do215,hm,,,cumbia,world-music
+Philadelphia,2026-06-21,Sunday,2026-06-21,Movies on the Block: Ne Zha (outdoor screening),Chinatown Community Park,Film & Cinema,Do215,hm,,,film,outdoor
+Philadelphia,2026-06-22,Monday,2026-06-22,NFC Sculpture Workshop,Iffy Books,tech,Iffy Books,1,low,,tech|maker|DIY|hardware|NFC,false
+Philadelphia,2026-06-22,Monday,2026-06-22,"Gothic night: Die Sexual, Ronnie Stone & DJ Baby Berlin",Johnny Brenda's,music,Phillygoth.net,2,paid,https://open.spotify.com/artist/6G8LVRZv0VxPuLwSQfVkEb,goth|post-punk|DIY,false
+Philadelphia,2026-06-22,Monday,2026-06-22,"CONTRACHARGE (chi), AGONESIAC, DISCLAIM",Cousin Danny's,music,Philly Ask A Punk,3,,,hardcore|punk|DIY,false
+Philadelphia,2026-06-22,Monday,2026-06-22,"WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)",PhilaMOCA,film,PhilaMOCA,HM,paid,,documentary|film|sold-out,false
+Philadelphia,2026-06-22,Monday,2026-06-22,ROAR (1981) — After Hours Curated,"Philadelphia Film Society, Film Society Center",film,Philadelphia Film Society,HM,,,film|cult,false
+Philadelphia,2026-06-22,Tuesday,2026-06-23,"WILDWOOD, NJ (1994) — Encore Screening",PhilaMOCA,film,PhilaMOCA,1,low,,documentary|film|local-history|Q&A,false
+Philadelphia,2026-06-22,Tuesday,2026-06-23,"Black Country, New Road",Franklin Music Hall,music,Do215,2,,https://open.spotify.com/artist/6Fc8FK4q5RjbZBlzqRBEf5,experimental|post-rock|UK|chamber-pop,false
+Philadelphia,2026-06-22,Tuesday,2026-06-23,Land to the Tillers Playtest,Wooden Shoe Books,community,Wooden Shoe Books,3,,,anarchist|games|political,false
+Philadelphia,2026-06-22,Tuesday,2026-06-23,Days of Heaven (1978) — Wawa Welcome America Free Movie Day,"Philadelphia Film Society, Film Society Center",film,Philadelphia Film Society,HM,free,,film|classic|free,false
+Philadelphia,2026-06-22,Tuesday,2026-06-23,Open Streets: Midtown Village,Sansom St Gayborhood,community,Philadelphia Citizen,HM,free,,community|free|outdoor,false
+Philadelphia,2026-06-22,Wednesday,2026-06-24,Speculative Futures Reading Group: The Ones Who Walk From Omelas by Ursula Le Guin,Iffy Books,literary,Iffy Books,1,free,,sci-fi|literary|political|le-guin,false
+Philadelphia,2026-06-22,Wednesday,2026-06-24,Lip Critic w/ Flatwounds + Bejalvin,PhilaMOCA,music,R5 Productions,2,paid,https://open.spotify.com/artist/4ABuKdLlVyzLztIFR8ETX9,noise-rock|Philly|DIY|experimental,false
+Philadelphia,2026-06-22,Wednesday,2026-06-24,DoYeon Kim Quartet (Ars Nova Workshop),Solar Myth,music,Do215,3,,,jazz|experimental|Philly,false
+Philadelphia,2026-06-22,Wednesday,2026-06-24,Analog A/V Session,Iffy Books,tech,Iffy Books,HM,free,,tech|maker|analog|DIY,false
+Philadelphia,2026-06-22,Wednesday,2026-06-24,Creed (2015) — Wawa Welcome America Free Movie Day,"Philadelphia Film Society, Film Society Center",film,Philadelphia Film Society,HM,free,,film|free|sports,false
+Philadelphia,2026-06-22,Thursday,2026-06-25,of Montreal and Cormae,Underground Arts,music,Songkick,1,,https://open.spotify.com/artist/2GsWB8y7P8vgNpXUepkj0S,psychedelic|indie-pop|glam,false
+Philadelphia,2026-06-22,Thursday,2026-06-25,Prewn,PhilaMOCA,music,R5 Productions,2,paid,https://open.spotify.com/artist/1Sm5PqM25CcIBtKSvZz9iS,indie-rock|emotional,false
+Philadelphia,2026-06-22,Thursday,2026-06-25,SWEATFEST @ PENTRIDGE STATION,Pentridge Station,festival,Philly Ask A Punk,3,,,punk|hardcore|DIY|festival|no-wave,false
+Philadelphia,2026-06-22,Thursday,2026-06-25,Art Club / Open Studio: BYO Project,Freehand Art Supply,arts,Luma,HM,free,,arts|open-studio|free,false
+Philadelphia,2026-06-22,Friday,2026-06-26,Beginner Soldering: LED Spinning Top,Iffy Books,tech,Iffy Books,1,low,,maker|DIY|electronics|soldering,false
+Philadelphia,2026-06-22,Friday,2026-06-26,Bike Routes w/ Wormy + Innerlove,PhilaMOCA,music,R5 Productions,2,paid,https://open.spotify.com/artist/0sBN7TbbFmFYH29xxa6VGA,indie-rock|DIY|Chicago,false
+Philadelphia,2026-06-22,Friday,2026-06-26,PARC First Aid Training,Wooden Shoe Books,community,Wooden Shoe Books,3,,,mutual-aid|community|political,false
+Philadelphia,2026-06-22,Friday,2026-06-26,Fundraising Market for LAVA Space,The Rotunda,community,The Rotunda,HM,free,,community|market|fundraiser|free,false
+Philadelphia,2026-06-22,Friday,2026-06-26,Goth night at Doom,"Doom, 421 N 7th St",music,Phillygoth.net,HM,free,,goth|DIY|free,false
+Philadelphia,2026-06-22,Saturday,2026-06-27,"LAYER MEAT, SPECTRAL FORCES, VOID OF INFINITE CONSEQUENCE: A Benefit Show for Sol Collective",God's Automatic Body,music,Philly Ask A Punk,1,,,experimental|avant-garde|free-jazz|benefit|DIY,true
+Philadelphia,2026-06-22,Saturday,2026-06-27,JINSEI — Philly Premiere,PhilaMOCA,film,PhilaMOCA,2,low,,film|premiere|PhilaMOCA,true
+Philadelphia,2026-06-22,Saturday,2026-06-27,Ramageddon,The Rotunda,music,The Rotunda,3,paid,,local-music|showcase|DIY|all-ages,false
+Philadelphia,2026-06-22,Saturday,2026-06-27,"River Roads Festival: Dar Williams, 10,000 Maniacs, Billy Bragg & Shawn Colvin",Heuser Park,festival,Do215,HM,,,folk|festival|political|billy-bragg,false
+Philadelphia,2026-06-22,Saturday,2026-06-27,6/27: EKGs (PGH) // Diuretic // Real Shocks // Anatomix (first show),Cousin Danny's,music,Philly Ask A Punk,HM,,,punk|hardcore|DIY,false
+Philadelphia,2026-06-22,Saturday,2026-06-27,Cyberdeck Meetup,Iffy Books,tech,Iffy Books,HM,free,,tech|maker|cyberdeck|DIY|free,false
+Philadelphia,2026-06-22,Saturday,2026-06-27,Tommy Conwell & The Young Rumblers + fireworks,RiverRink Summerfest,music,WXPN,HM,free,,music|free|outdoor,false
+Philadelphia,2026-06-22,Sunday,2026-06-28,Anarchy Summer Reading Group,Iffy Books,literary,Iffy Books,1,free,,anarchist|literary|political,
+Philadelphia,2026-06-22,Sunday,2026-06-28,The Human League with Soft Cell & Alison Moyet,The Met Presented by Highmark,music,WXPN,2,,https://open.spotify.com/artist/4yEEFEEhY7pVqkRe3DQOKq,synthpop|new-wave|80s,
+Philadelphia,2026-06-22,Sunday,2026-06-28,Kirk Franklin — Free Gospel Concert,Independence National Historical Park,music,WXPN,3,free,https://open.spotify.com/artist/6B3TFIlM5RYPxUCbbSqnHM,gospel|free|outdoor|choir,
+Philadelphia,2026-06-22,Sunday,2026-06-28,"ZORN, EARLY GRAVE, HEX (cleveland)",Cousin Danny's,music,Philly Ask A Punk,HM,,,hardcore|metal|DIY,
+Philadelphia,2026-06-22,Sunday,2026-06-28,DJ Ferret mixing MTV's '120 Minutes',National Mechanics,music,Phillygoth.net,HM,free,,goth|DJ|free,
+Philadelphia,2026-07-06,Monday,2026-07-06,Philadelphia Psychotronic Film Society,PhilaMOCA,horror,PhilaMOCA,1,low,,horror|film|diy|repertory,
+Philadelphia,2026-07-06,Monday,2026-07-06,Coffee Talk,Iffy Books,community,Iffy Books,2,free,,community|trans|lgbtq|free,
+Philadelphia,2026-07-06,Monday,2026-07-06,Romería,Film Society East,film,Philadelphia Film Society,3,,,film|arthouse|spanish-cinema,
+Philadelphia,2026-07-06,Monday,2026-07-06,Leviticus,Film Society Bourse,horror,Philadelphia Film Society,HM,,,horror|film,
+Philadelphia,2026-07-06,Monday,2026-07-06,FIFA Fan Fest,Lemon Hill,festival,Philadelphia Citizen,HM,free,,festival|soccer|free|outdoor,
+Philadelphia,2026-07-06,Tuesday,2026-07-07,With Hasan in Gaza,Lightbox Film Center,film,Lightbox Film Center,1,,,film|documentary|political|gaza,
+Philadelphia,2026-07-06,Tuesday,2026-07-07,Breakpoint LIVE! + PHL Code Club - Battle Snakes Hackathon,Indy Hall Clubhouse,tech,Luma,2,,,tech|hackathon|coding,
+Philadelphia,2026-07-06,Tuesday,2026-07-07,The Writing Room,Iffy Books,literary,Iffy Books,3,free,,literary|writing|community|free,
+Philadelphia,2026-07-06,Tuesday,2026-07-07,WXPN 88.5 Welcomes: Buck Meek,Johnny Brenda's,music,R5 Productions,HM,paid,https://open.spotify.com/artist/4mYY0UqYdvgdz60psupYBR,music|indie-folk|big-thief|sold-out,
+Philadelphia,2026-07-06,Tuesday,2026-07-07,craft club: watercolor zen with carlita,915 Spring Garden St,arts,Luma,HM,,,arts|workshop|watercolor,
+Philadelphia,2026-07-06,Wednesday,2026-07-08,Permacomputing + Solarpunk Meetup,Iffy Books,tech,Iffy Books,1,,,tech|solarpunk|sustainability|diy,
+Philadelphia,2026-07-06,Wednesday,2026-07-08,Art and Change Grant (ACG) Info Session & Farm51 Tour,Farm51,arts,Luma,2,free,,arts|funding|community|free,
+Philadelphia,2026-07-06,Wednesday,2026-07-08,Analog A/V Session,Iffy Books,tech,Iffy Books,3,free,,tech|maker|analog|free,
+Philadelphia,2026-07-06,Wednesday,2026-07-08,DJ Basixxx with MIXXX,Iffy Books,tech,Iffy Books,HM,low,,tech|diy|dj-tools,
+Philadelphia,2026-07-06,Wednesday,2026-07-08,Parks on Tap at Shofuso Japanese House,West Fairmount Park,outdoors,Philadelphia Citizen,HM,free,,outdoors|beer-garden|free,
+Philadelphia,2026-07-06,Wednesday,2026-07-08,Philadelphia Alternative Arts Council presents Jibz Cameron / Dynasty Handbag,PhilaMOCA,arts,PhilaMOCA,HM,paid,,arts|performance-art|comedy,
+Philadelphia,2026-07-06,Thursday,2026-07-09,Philly Premiere: MATADOR BOLERO,PhilaMOCA,film,PhilaMOCA,1,low,,film|premiere|experimental-music,
+Philadelphia,2026-07-06,Thursday,2026-07-09,Neo-Luddite Reading Group,Iffy Books,literary,Iffy Books,2,free,,literary|tech-critique|free,
+Philadelphia,2026-07-06,Thursday,2026-07-09,Beginner Soldering: Li-Ion Battery Pack,Iffy Books,tech,Iffy Books,3,low,,tech|maker|electronics,
+Philadelphia,2026-07-06,Thursday,2026-07-09,A Founding Mother: A Novel of Abigail Adams,Parkway Central Library,literary,Free Library,HM,free,,literary|history|free,
+Philadelphia,2026-07-06,Thursday,2026-07-09,Tiki Tiki,Village of Industry & Art,film,Lightbox Film Center,HM,,,film,
+Philadelphia,2026-07-06,Friday,2026-07-10,Evil Dead Burn (2026),Theatrical release,horror,Trakt.tv film releases,1,,,horror|film|franchise,
+Philadelphia,2026-07-06,Friday,2026-07-10,Goth Goth w/ The Angies and Party Nerves,Church of the Advocate,music,Songkick,2,,https://open.spotify.com/artist/6Ui1tbK48sNYdWUJsX0WuQ,music|goth|post-punk|historic-venue,
+Philadelphia,2026-07-06,Friday,2026-07-10,Vinyl Swap,Soul Fly Club,music,Luma,3,,,music|community|collectors,
+Philadelphia,2026-07-06,Friday,2026-07-10,WXPN 88.5 Welcomes | 'Zoned Out' Record Release Show!: Hurry,Johnny Brenda's,music,R5 Productions,HM,paid,,music|indie-rock|philly-band,
+Philadelphia,2026-07-06,Friday,2026-07-10,Beginner Soldering: LED Spinning Top,Iffy Books,tech,Iffy Books,HM,low,,tech|maker|electronics,
+Philadelphia,2026-07-06,Saturday,2026-07-11,Walk across the Ben Franklin Bridge (100th Anniversary),Ben Franklin Bridge,festival,Philadelphia Citizen,1,free,,festival|historic|free|outdoor,
+Philadelphia,2026-07-06,Saturday,2026-07-11,Venezuela in Crisis Book Launch,Wooden Shoe Books,literary,Wooden Shoe Books,2,free,,literary|leftist|political|free,
+Philadelphia,2026-07-06,Saturday,2026-07-11,"Insectoids, Webb Chapel, Brainwash Victim, Void of Infinite Consequence",Grey's Courtyard,music,Philly Ask A Punk,3,,,music|punk|noise|diy,
+Philadelphia,2026-07-06,Saturday,2026-07-11,Jejune,Ukie Club,music,R5 Productions,HM,paid,https://open.spotify.com/artist/0dH7IS6J0rfzfMCyxG8b4V,music|emo|reunion|sold-out,
+Philadelphia,2026-07-06,Saturday,2026-07-11,Longfriend Timefriend w/ Best Bear + Crabwalk + The Gnome Kelly,PhilaMOCA,music,PhilaMOCA,HM,paid,https://open.spotify.com/artist/27bB2wRGYg1MfYLoV17pBM,music|emo|diy|philly-band,
+Philadelphia,2026-07-06,Saturday,2026-07-11,Goth Night at Broad Hall (DJ Robert Drake),Broad Hall,music,Phillygoth.net,HM,low,,music|goth|dj,
+Philadelphia,2026-07-06,Sunday,2026-07-12,Screening of What Are You Doing With Your Life?,The Rotunda,film,The Rotunda,1,free,,film|documentary|community|free,
+Philadelphia,2026-07-06,Sunday,2026-07-12,Anarchy Summer Reading Group,Iffy Books,literary,Iffy Books,2,free,,literary|anarchist|political|free,
+Philadelphia,2026-07-06,Sunday,2026-07-12,"""The Hired Man"" Film Showing",Wooden Shoe Books,film,Wooden Shoe Books,3,free,,film|local|neo-noir|qa,
+Philadelphia,2026-07-06,Sunday,2026-07-12,Anarchist Sewing Club,Iffy Books,community,Iffy Books,HM,,,community|mutual-aid|diy,
+Philadelphia,2026-07-06,Sunday,2026-07-12,DJ Ferret mixing MTV's '120 Minutes',National Mechanics,music,Phillygoth.net,HM,free,,music|goth|new-wave|free,
+Philadelphia,2026-07-06,Sunday,2026-07-12,Barnes on the Block,Barnes Foundation,festival,Philadelphia Citizen,HM,free,,festival|arts|free|outdoor,
