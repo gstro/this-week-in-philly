@@ -19,7 +19,7 @@ An automated weekly events-curation pipeline for Philadelphia: every Sunday it c
 
 ## Pipeline architecture
 
-Three stages, chained by file handoffs. This structure is the same in v1 and v2; only the infrastructure changes (v1: three Mac scheduled tasks passing files through iCloud; v2: two Claude Code Routines — Collection on Haiku, Selection on Sonnet — passing files through Google Drive, plus a Python script suite for everything after selection).
+Three stages, chained by file handoffs. This structure is the same in v1 and v2; only the infrastructure changes (v1: three Mac scheduled tasks passing files through iCloud; v2: two Claude Code Routines — Collection on Haiku, Selection on Sonnet — passing files through the GitHub repo via `git push`, with GitHub Actions triggering the Python script suite for everything after selection, and GitHub Pages serving the report).
 
 ```
 Collection  → per-source JSONs + _manifest.json   (scrape 29 sources, tier-ordered cheapest-first)

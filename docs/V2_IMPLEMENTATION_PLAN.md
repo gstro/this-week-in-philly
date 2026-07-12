@@ -25,19 +25,27 @@ Selection explicitly allows fewer than 3 qualifying events per day. `calendar_cr
 
 ### Gaps to close
 
-**G1. No Drive download step.** Every script consumes local paths, but v2's data lives in Google Drive. Whatever runs `runner.sh` in the cloud must first pull the week folder down. Add a `drive_sync.py` (download `YYYY-MM-DD/` folder by ID) as step 0 of `runner.sh`.
+> **Design pivot (superseding note):** the design moved from Google Drive to GitHub-as-storage — intermediate data, the picks log, and the final report all live in the repo (`data/`, `docs/`); GitHub Actions (`on: push`) replaces the Anthropic-API-driven presentation trigger; GitHub Pages replaces the Drive-hosted report link. This resolves G1, G2, and G6 below by elimination, and replaces G4's email delivery with a stable Pages URL. They're kept struck through for the record rather than deleted outright, since they document *why* the pivot happened.
 
-**G2. The picks-log location contradicts the preferred runner architecture.** The data layer keeps `event-picks-log.csv` local "because it's only touched by scripts that run locally" — but Open Question 3's preferred answer (option a, a third Routine) means those scripts *don't* run locally. If option (a) is chosen (it is — see Q3 below), the CSV must migrate to Drive in v2, not "later." `attendance_check.py` and `csv_log.py` then read/write it via the Drive API (download → mutate → re-upload within the run).
+~~**G1. No Drive download step.** Every script consumes local paths, but v2's data lives in Google Drive. Whatever runs `runner.sh` in the cloud must first pull the week folder down. Add a `drive_sync.py` (download `YYYY-MM-DD/` folder by ID) as step 0 of `runner.sh`.~~
+**Resolved by pivot:** data lives in the repo. The GitHub Actions runner already has the pushed `data/YYYY-MM-DD/` from checkout — no download step, no `drive_sync.py`.
 
-**G3. OAuth won't survive the cloud as specified.** `credentials.json` + persisted `token.json` at `~/.config/twip/` assumes a durable home directory; Routines have none. Plan: run the interactive consent flow once locally, then inject client ID/secret/refresh token as Routine environment secrets, with `common.py` reconstructing credentials from env. Critical sub-gotcha: a Google Cloud OAuth app left in **Testing** status expires refresh tokens after 7 days — the consent screen must be pushed to **Production** (no verification needed for personal-scope use) or the pipeline dies silently on week two.
+~~**G2. The picks-log location contradicts the preferred runner architecture.**~~
+**Resolved by pivot:** `data/event-picks-log.csv` is committed to the repo directly by the presentation workflow. No Drive API round-trip.
 
-**G4. No delivery/notification step.** v1 stubbed iMessage; v2 drops notification entirely. `drive_upload.py` produces a link that nothing sends to Greg. Recommend a small `notify.py` that emails the Drive link + 7-line digest to gsmolodrone@gmail.com via the Gmail API (same OAuth app, one more scope). Cheap to add, and it doubles as the failure-alert channel.
+**G3. OAuth won't survive the cloud as specified.** `credentials.json` + persisted `token.json` at `~/.config/twip/` assumes a durable home directory; Routines and GitHub Actions runners have none. Plan: run the interactive consent flow once locally, then inject client ID/secret/refresh token as Routine environment secrets **and GitHub Actions repo secrets**, with `common.py` reconstructing credentials from env. Scope is Calendar-only now (no Drive, no Gmail). Critical sub-gotcha: a Google Cloud OAuth app left in **Testing** status expires refresh tokens after 7 days — the consent screen must be pushed to **Production** (no verification needed for personal-scope use) or the pipeline dies silently on week two.
 
-**G5. No failure story for the chain.** If Collection dies, Selection never fires and Sunday passes silently. Mitigations, in order of value: (1) `notify.py --failure` at the end of each Routine's error path; (2) document a manual re-fire runbook (each Routine is independently triggerable); (3) optionally give Selection a late-morning fallback cron that no-ops if `_selections.json` already exists and exits loudly if the manifest is missing.
+~~**G4. No delivery/notification step.**~~
+**Resolved by pivot (decision, not fully solved):** delivery is the stable weekly GitHub Pages URL (`docs/weeks/YYYY-MM-DD.html`, linked from `docs/index.html`) — no email. This is a conscious downgrade from "push a link to Greg" to "Greg checks a URL," and it also means the pipeline loses the email channel as a failure-alert mechanism (see G5).
 
-**G6. `drive_upload.py` should be idempotent.** Re-runs will create duplicate `report.html` files. Search the folder for an existing file of the same name and update it in place instead of creating.
+**G5. No failure story for the chain.** If Collection dies, Selection never fires and Sunday passes silently. Without `notify.py` (dropped per G4), mitigations are GitHub-native: (1) GitHub Actions sends a failure email automatically to repo watchers when `presentation.yml` fails — no code needed; (2) Collection/Selection Routine failures surface on the Routines dashboard (claude.ai/code/routines), not via email — check it after a silent Sunday; (3) document a manual re-fire runbook (each Routine is independently triggerable, and `presentation.yml` can be re-run from the Actions tab); (4) optionally give Selection a late-morning fallback cron that no-ops if `_selections.json` already exists and exits loudly if the manifest is missing.
+
+~~**G6. `drive_upload.py` should be idempotent.**~~
+**Resolved by pivot:** there is no `drive_upload.py`. `html_render.py` overwrites `docs/weeks/YYYY-MM-DD.html` in place on every run (a plain file write, not an upload) — idempotent by construction.
 
 **G7. Skill files are full of absolute Mac paths.** All four skills (and the v1 task files they'll be adapted from) reference `/Users/molo/...` paths. Migration to `.claude/skills/` requires rewriting every path to repo-relative or env-var form, not just copying files.
+
+**G8 (new). Public repo exposes personal data.** Going public (per design decision) means `data/event-picks-log.csv` (including pre-Philly Austin history) and the `.claude/skills/personal-interests` / `event-selection-philosophy` skill files become world-readable. Accepted tradeoff for a simple Pages setup — but worth a deliberate pass to scrub anything Greg wouldn't want public before flipping the repo visibility, rather than discovering it after the fact.
 
 ### Minor
 
@@ -54,8 +62,8 @@ Selection explicitly allows fewer than 3 qualifying events per day. `calendar_cr
 **Q2. Chrome connector in Routines? → Spike before building anything.**
 This is the single biggest unknown and it gates Collection (Tiers 2–5 ≈ 23 of 29 sources... though Tier 4's 8 Meetup feeds are iCal via web_fetch, so effectively ~15 sources). Phase 0 runs a throwaway Routine to test it. Fallback is playwright via setup script + per-source extraction notes in `philadelphia-sources/SKILL.md`. Do not start Routine work until this answer is in hand.
 
-**Q3. runner.sh trigger? → Option (a), a lightweight Presentation Routine.**
-Cleanest separation, fully cloud (the whole point of v2), and per-run cost is trivial since it's just script execution. Accepted consequences: G1 (drive_sync) and G2 (CSV to Drive) become requirements. Option (b) — Selection runs the scripts itself — is the documented fallback if a third Routine proves operationally annoying; it would actually skip the Drive round-trip since Selection already has `_selections.json` locally.
+**Q3. runner.sh trigger? → GitHub Actions, `on: push`.**
+Superseded by the storage pivot. Rather than a third Routine (option a) or Selection running scripts itself (option b), Selection's own `git push` of `_selections.json` is the trigger: `.github/workflows/presentation.yml` runs `on: push` filtered to `data/**/_selections.json`. This is cleaner than any of the three originally-considered options — no extra Routine, no API/webhook plumbing, no Mac dependency — and it's a natural consequence of storing data in the repo rather than Drive. G1 and G2 (drive_sync, CSV-to-Drive) no longer apply.
 
 **Q4. Songkick page cap impact? → Measured. Cap is safe.**
 The picks log answers this today: of 84 Philadelphia Top 3 picks logged, exactly **2 came from Songkick (2.4%)**, and only 2 of 136 total logged rows (picks + honorable mentions) are Songkick-sourced. The specialist sources dominate (Iffy Books 14, Do215 12, PhilaMOCA 10, Ask A Punk 6, R5 5 of Top 3 picks). Cap at 4 pages with zero meaningful cost.
@@ -66,14 +74,16 @@ The picks log answers this today: of 84 Philadelphia Top 3 picks logged, exactly
 
 ### Phase 0 — Spike & decide (small; do first, blocks everything cloud-side)
 
-1. Push this repo to GitHub as private `this-week-in-philly` (migration step 1).
+1. Push this repo to GitHub as **public** `this-week-in-philly`; enable GitHub Pages, serving `docs/` on `main` (migration step 1).
 2. **Routine environment spike** — create one throwaway Routine and verify in a single run:
    - Is `get_page_text` / Chrome available? (→ Q2)
    - Can it install playwright via setup script if not?
-   - Do env secrets work, and can bash `curl` an external API? (→ chaining viability)
+   - **Can the Routine `git push` to the repo?** What auth works — Claude GitHub App with write access, or a deploy key/PAT stored as a Routine secret? (→ replaces the old Drive-write assumption; this is the new critical unknown)
+   - Do env secrets work, and can bash `curl` an external API? (→ Collection→Selection chaining viability, unchanged)
    - Cron timezone semantics.
    - Available model IDs.
-3. Record answers in this doc; if Chrome is unavailable, add a "playwright extraction notes" task to Phase 4.
+3. **Confirm Pages build** — push a placeholder `docs/index.html` and verify it serves at the expected URL.
+4. Record answers in this doc; if Chrome is unavailable, add a "playwright extraction notes" task to Phase 4; if Routine git-push isn't viable, fall back to the Routine calling the GitHub REST API (create/update file contents) instead of a local `git` binary.
 
 **Exit criteria:** every cloud assumption in the design is confirmed or has a chosen fallback.
 
@@ -81,39 +91,37 @@ The picks log answers this today: of 84 Philadelphia Top 3 picks logged, exactly
 
 1. Move `v1/Skills/*` → `.claude/skills/*` (all four; keep `v1/` untouched as the running-system reference until cutover).
 2. Rewrite absolute Mac paths in the migrated skills to repo-relative / env-var form (G7).
-3. Scaffold `scripts/`, `templates/`, `requirements.txt` (`google-api-python-client`, `google-auth-oauthlib`, `spotipy`, `jinja2`), `README.md`.
+3. Scaffold `scripts/`, `templates/`, `data/`, `docs/` (with a placeholder `index.html`), `.github/workflows/`, `requirements.txt` (`google-api-python-client`, `google-auth-oauthlib`, `spotipy`, `jinja2` — no Gmail dependency), `README.md`.
 4. `.gitignore`: `credentials.json`, `token.json`, `.env`, `__pycache__/`.
+5. Confirm repo visibility is public and Pages is enabled (serving `docs/` on `main`) — see G8 for the data-exposure tradeoff this accepts.
 
 **Exit criteria:** repo matches the design's target structure; no secrets committable.
 
 ### Phase 2 — Script suite, built and tested locally (the bulk of the work)
 
-Build against an archived week's real data (June 22 per the design's migration step 3). Every script: standalone, CLI args + env vars, `--dry-run` where it mutates external state (calendar, Drive, CSV).
+Build against an archived week's real data (June 22 per the design's migration step 3). Every script: standalone, CLI args + env vars, `--dry-run` where it mutates external state (calendar, CSV).
 
 Build order (dependency-driven):
 
 | Order | Script | Notes |
 |---|---|---|
-| 1 | `common.py` | Google credentials from env (G3-compatible from day one), Drive helpers, week-date math |
+| 1 | `common.py` | Google (Calendar-only) credentials from env (G3-compatible from day one); week-date math. No Drive/Gmail helpers — data access is plain repo-relative file I/O. |
 | 2 | `spotify_lookup.py` | ThreadPoolExecutor; writes `_spotify.json`; no-match → null, never guess |
-| 3 | `templates/report.html.j2` + `html_render.py` | Port `events-report-format/SKILL.md` faithfully; **golden test:** render June 22 `_selections.json` and diff structurally against the v1-produced HTML |
-| 4 | `csv_log.py` | Idempotent on week+title (per design); price-tier inference from `cost` |
-| 5 | `attendance_check.py` | Calendar presence → `attended` true/false for last week's rows |
+| 3 | `templates/report.html.j2` + `html_render.py` | Port `events-report-format/SKILL.md` faithfully; writes `docs/weeks/YYYY-MM-DD.html` and updates `docs/index.html` with a link to the new week; **golden test:** render June 22 `_selections.json` and diff structurally against the v1-produced HTML |
+| 4 | `csv_log.py` | Idempotent on week+title (per design); price-tier inference from `cost`; reads/writes `data/event-picks-log.csv` directly |
+| 5 | `attendance_check.py` | Calendar presence → `attended` true/false for last week's rows in `data/event-picks-log.csv` |
 | 6 | `calendar_create.py` | Clears **target** week first (D2); end-time heuristics from v1 (literary +90m, film +2h, concert +3h, festival +6h); up to 21 events (D3) |
-| 7 | `drive_upload.py` | `disableConversionToGoogleType`; update-in-place if filename exists (G6) |
-| 8 | `drive_sync.py` | Download week folder from Drive to local temp (G1); upload changed CSV back |
-| 9 | `notify.py` | Email Drive link + digest; `--failure` mode for error alerts (G4/G5) |
-| 10 | `runner.sh` | Corrected version below |
+| 7 | `runner.sh` | Corrected version below |
+
+There is no `drive_upload.py`, `drive_sync.py`, or `notify.py` — storage is the repo itself, so there's nothing to sync, and delivery is the stable GitHub Pages URL rather than an emailed link (see G4).
 
 Corrected `runner.sh`:
 
 ```bash
 #!/bin/bash
 set -euo pipefail
-WEEK_DIR="$1"                       # local path to YYYY-MM-DD dir (drive_sync populates it)
-HTML_PATH="$WEEK_DIR/report.html"   # D1: inside the week dir, not its parent
-
-python scripts/drive_sync.py --pull "$WEEK_DIR"
+WEEK_DIR="$1"                                     # data/YYYY-MM-DD — already checked out by the Actions runner
+HTML_PATH="docs/weeks/$(basename "$WEEK_DIR").html"  # D1: named per-week, not a single overwritten file
 
 # attendance_check must finish before csv_log (shared CSV);
 # spotify_lookup is independent — run both concurrently
@@ -127,40 +135,75 @@ python scripts/html_render.py "$WEEK_DIR" "$HTML_PATH"
 
 python scripts/calendar_create.py "$WEEK_DIR" &
 CAL_PID=$!
-python scripts/drive_upload.py "$HTML_PATH" &
-UPLOAD_PID=$!
 python scripts/csv_log.py "$WEEK_DIR" &
 CSV_PID=$!
-wait "$CAL_PID"; wait "$UPLOAD_PID"; wait "$CSV_PID"
+wait "$CAL_PID"; wait "$CSV_PID"
 
-python scripts/drive_sync.py --push-csv
-python scripts/notify.py --week-dir "$WEEK_DIR"
+# The calling workflow (presentation.yml) commits and pushes:
+#   docs/weeks/*.html, docs/index.html, data/*/_spotify.json, data/event-picks-log.csv
 ```
 
-**Exit criteria:** full `runner.sh` run against June 22 data produces an HTML report that matches the v1 report, correct calendar events in a test calendar, and correct CSV rows — all from one command.
+`presentation.yml` (new, replaces the old "lightweight Presentation Routine" idea):
+
+```yaml
+name: Presentation
+on:
+  push:
+    paths:
+      - 'data/**/_selections.json'
+jobs:
+  present:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install -r scripts/requirements.txt
+      - name: Run presentation pipeline
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+        run: |
+          WEEK_DIR=$(dirname "$(git diff --name-only HEAD~1 HEAD -- 'data/**/_selections.json' | head -1)")
+          bash scripts/runner.sh "$WEEK_DIR"
+      - name: Commit and push report + updated log
+        run: |
+          git config user.name "twip-bot"
+          git config user.email "twip-bot@users.noreply.github.com"
+          git add docs/ data/event-picks-log.csv
+          git diff --staged --quiet || git commit -m "Publish report for $(date +%F)"
+          git push
+```
+
+Uses the default `GITHUB_TOKEN` for the push (no extra secret needed) — its commits don't retrigger `on: push` workflows, and the trigger path filter (`_selections.json` only) is untouched by this job anyway, so there's no risk of a loop.
+
+**Exit criteria:** full `runner.sh` run against June 22 data produces an HTML report that matches the v1 report, correct calendar events in a test calendar, and correct CSV rows — all from one command; a real push of a test `_selections.json` fires `presentation.yml` end-to-end and the report appears on the Pages URL.
 
 ### Phase 3 — Auth & data layer (one-time setup + one dual-write Sunday)
 
-1. Google Cloud project: enable Calendar, Drive (and Gmail if `notify.py` uses it) APIs; OAuth consent screen → **Production** status (G3); run local consent flow; capture refresh token.
+1. Google Cloud project: enable the **Calendar API only**; OAuth consent screen → **Production** status (G3); run local consent flow; capture refresh token.
 2. Spotify developer app; client credentials.
-3. Store all secrets as env vars locally and as Routine secrets later; never in the repo.
-4. Migrate `event-picks-log.csv` to Drive (G2); point scripts at it via `drive_sync.py`.
-5. **Dual-write Sunday** (migration step 4): update the v1 desktop collection task to also write JSONs to Drive; verify Selection-readable structure; v1 remains the system of record.
+3. Store all secrets as env vars locally, as Routine secrets, and as **GitHub Actions repo secrets**; never in the repo itself.
+4. `data/event-picks-log.csv` is created directly in the repo (no migration needed — it was never anywhere else in v2).
+5. **Dual-write Sunday** (migration step 4): update the v1 desktop collection task to also commit JSONs to a scratch branch/folder in the repo; verify Selection-readable structure; v1 remains the system of record.
 
-**Exit criteria:** scripts run end-to-end using only env-var auth (no `~/.config` files); one real Sunday's data lands in Drive alongside v1's iCloud copy.
+**Exit criteria:** scripts run end-to-end using only env-var auth (no `~/.config` files); one real Sunday's data lands in the repo alongside v1's iCloud copy.
 
-### Phase 4 — Routines (one per week, in dependency order)
+### Phase 4 — Routines + Actions (one per week, in dependency order)
 
-1. **Collection Routine** — Haiku, cron Sunday 2:00 AM ET (timezone per Phase 0 findings), Drive + Calendar connectors, Songkick 4-page cap, Chrome-or-playwright per Phase 0. Run parallel with v1 for one week; diff source JSONs against v1's.
-2. **Selection Routine** — Sonnet, API trigger; wire Collection's completion `curl`; verify `_selections.json` in Drive; blurb quality check against v1's output for the same week. Add fallback cron + failure notification (G5).
-3. **Presentation Routine** — lightweight, API-triggered by Selection; clones repo, runs `runner.sh`. Secrets: Google + Spotify env vars.
+1. **Collection Routine** — Haiku, cron Sunday 2:00 AM ET (timezone per Phase 0 findings), Calendar connector, git push access (per Phase 0 spike), Songkick 4-page cap, Chrome-or-playwright per Phase 0. Run parallel with v1 for one week; diff source JSONs committed to `data/` against v1's iCloud output.
+2. **Selection Routine** — Sonnet, API trigger; wire Collection's completion `curl`; verify `_selections.json` is committed and pushed to `data/`; blurb quality check against v1's output for the same week. Add fallback cron + note the GitHub-native failure story (G5) — no custom notify script.
+3. **Wire `presentation.yml`** — confirm the `on: push` trigger fires from Selection's real push (not just a manual test push from Phase 2); verify secrets resolve correctly in the Actions environment.
 
-**Exit criteria:** an end-to-end cloud run (Collection → Selection → Presentation) completes with the Mac closed, and the report email arrives.
+**Exit criteria:** an end-to-end cloud run (Collection → Selection → `presentation.yml`) completes with the Mac closed, and the report is live at the Pages URL.
 
 ### Phase 5 — Validation & cutover
 
-1. Run v1 and v2 in full parallel for 1–2 Sundays (separate Drive filenames / test calendar for v2 to avoid collisions).
-2. Compare per stage: source yield vs. v1 collection, Top 3 overlap + blurb quality vs. v1 selection, byte-level report diff.
+1. Run v1 and v2 in full parallel for 1–2 Sundays (separate `data/` week folders / test calendar for v2 to avoid collisions).
+2. Compare per stage: source yield vs. v1 collection, Top 3 overlap + blurb quality vs. v1 selection, byte-level report diff (v2's Pages HTML vs. v1's).
 3. Check Haiku specifically: did collection JSON quality hold? (This is the model-downgrade risk point; revert Collection to Sonnet if extraction quality slipped.)
 4. Decommission the three v1 desktop tasks (migration step 8); note token/cost per session from the Routines dashboard as the v2 baseline.
 
@@ -173,14 +216,18 @@ python scripts/notify.py --week-dir "$WEEK_DIR"
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
 | Chrome unavailable in Routines | Medium | High — blocks ~15 sources | Phase 0 spike; playwright fallback with updated extraction notes |
+| Routine cannot `git push` to the repo | Medium | High — breaks the entire data-bus design | Phase 0 spike tests this directly; fallback = Routine calls the GitHub REST contents API instead of shelling out to `git` |
 | Google refresh token expiry (Testing status) | High if unaddressed | High — silent death week 2 | Consent screen to Production in Phase 3 |
 | Haiku collection quality regression | Medium | Medium — garbage-in for selection | Parallel-run diff in Phase 5 step 3; revert to Sonnet is a one-line change |
-| API chaining not supported as designed | Low–Medium | Medium | Phase 0 spike; fallback = scheduled Selection with manifest-existence guard |
+| API chaining (Collection → Selection) not supported as designed | Low–Medium | Medium | Phase 0 spike; fallback = scheduled Selection with manifest-existence guard |
 | Template drift vs. desired report look | Low | Low — Q1 analysis shows spec is stable | Golden test in Phase 2; SKILL.md retained as spec of record |
-| Silent Sunday failure | Medium | Medium | `notify.py --failure` + fallback cron (G5) |
+| Silent Sunday failure | Medium | Medium | GitHub Actions failure email (presentation) + Routines dashboard checks (Collection/Selection) + fallback cron (G5) — no custom notify script |
+| Public repo exposes picks log + interest profile | Certain (accepted) | Low–Medium — personal data, not credentials | G8: deliberate scrub pass before flipping repo public in Phase 0/1 |
 
 ---
 
 ## Part 5 — Suggested Order of Attack
 
 Phase 0 and Phase 2 are independent — the spike can run while scripts are being built, since scripts are testable entirely locally. Phase 1 is an afternoon. The critical path is **Phase 0 → Phase 3 → Phase 4 → Phase 5** because each depends on cloud facts or real Sundays. Realistic calendar time: **4–5 weeks**, dominated by the one-Sunday-per-validation cadence, not by build effort.
+
+The GitHub pivot shrinks the build itself relative to the original Drive-based design: three scripts are gone entirely (`drive_sync.py`, `drive_upload.py`, `notify.py`), there's no Drive OAuth scope to provision, and the trigger mechanism (Open Question 3) is answered by a standard `on: push` workflow instead of a bespoke third Routine. The remaining unknowns are narrower and now center on one new question — whether a Routine can push to a git repo — rather than a Drive API integration surface.
