@@ -69,6 +69,41 @@ else
 fi
 echo
 
+# 4b. Real Collection source-domain reachability
+# One generic host (api.github.com) passing does NOT prove the ~29 real
+# event-source domains are reachable if the widened network access turns out
+# to be a curated allowlist rather than fully open. Sample across tiers
+# (see docs/v1/Skills/philadelphia-sources/SKILL.md) so a single run answers
+# the question that actually matters for Collection.
+echo "--- 4b. Source-domain reachability (sample across tiers) ---"
+SOURCE_DOMAINS=(
+  "philly.askapunk.net"      # Tier 1
+  "r5productions.com"        # Tier 2
+  "www.philamoca.org"        # Tier 3
+  "xpn.org"                  # Tier 3
+  "www.meetup.com"           # Tier 4 (iCal)
+  "do215.com"                # Tier 5
+  "www.songkick.com"         # Tier 5
+)
+SOURCE_PASS=0
+SOURCE_FAIL=0
+for domain in "${SOURCE_DOMAINS[@]}"; do
+  code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 10 "https://$domain/" 2>&1)
+  if [ "$code" -ge 200 ] 2>/dev/null && [ "$code" -lt 500 ]; then
+    echo "  $domain -> $code  OK"
+    SOURCE_PASS=$((SOURCE_PASS + 1))
+  else
+    echo "  $domain -> $code  UNREACHABLE"
+    SOURCE_FAIL=$((SOURCE_FAIL + 1))
+  fi
+done
+if [ "$SOURCE_FAIL" -eq 0 ]; then
+  pass "source_domains" "$SOURCE_PASS/${#SOURCE_DOMAINS[@]} sample domains reachable"
+else
+  fail "source_domains" "$SOURCE_FAIL/${#SOURCE_DOMAINS[@]} sample domains unreachable — widened access may be an allowlist that doesn't cover all sources"
+fi
+echo
+
 # 5. Playwright installability (Chrome fallback path)
 echo "--- 5. Playwright ---"
 if python3 -c "import playwright" >/dev/null 2>&1; then
