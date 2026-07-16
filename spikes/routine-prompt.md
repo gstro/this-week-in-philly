@@ -42,15 +42,24 @@ bash spikes/probe.sh
 ```
 
 Paste the **entire output** verbatim, including all `PROBE: ... = PASS/FAIL/SKIP`
-lines. This checks: runtime facts, cron/timezone info, env secret propagation
-(`SPIKE_SECRET`), external `curl` reachability, playwright installability, and
-(critically) whether this Routine can `git push` to the repo — it pushes a
-throwaway commit to a scratch branch (`spike/scratch-<timestamp>`) and cleans
-it up automatically. It does **not** touch `main` or `data/`.
+lines. This checks: runtime facts, cron/timezone info, env-var propagation
+(`SPIKE_ENV_VAR` — a plaintext environment variable, not a secret; see below),
+external `curl` reachability, playwright installability, and (critically)
+whether this Routine can `git push` to the repo — it pushes a throwaway commit
+to a scratch branch (`spike/scratch-<timestamp>`) and cleans it up
+automatically. It does **not** touch `main` or `data/`.
 
-If `PROBE: git_push` reports FAIL, and a `GITHUB_PUSH_TOKEN` secret is
-available in this environment, note that so we know to re-run with it set
-before concluding the GitHub App path doesn't work.
+**Important context on env vars:** the routine environment's "Environment
+variables" field is plaintext and explicitly shared with anyone using that
+environment (per its own UI warning: "don't add secrets or credentials"). So
+`SPIKE_ENV_VAR` only proves env vars *propagate* into the shell — it does not
+mean this is a safe place for real secrets like a GitHub push token. If a
+`GITHUB_PUSH_TOKEN` was set for this test anyway (to probe the push mechanism
+itself), treat it as disposable/already-rotated, not as evidence the env-var
+field is an acceptable long-term home for it. If `PROBE: git_push` reports
+PASS with no token needed (e.g. the Claude GitHub App already has write
+access), that's the preferred outcome — it sidesteps the secret-storage
+question for push auth entirely. Report which was true.
 
 ## 4. Summarize
 
@@ -63,7 +72,7 @@ could not test something, and say why):
 | `get_page_text` / Chrome available? | | |
 | Playwright installable (if Chrome unavailable)? | | |
 | `git push` to repo works? | | which auth (GitHub App / PAT / neither) |
-| Env secrets reach the Routine? | | |
+| Env vars reach the Routine? (propagation only — not a secrets claim) | | |
 | Outbound `curl` works? | | |
 | Cron timezone (UTC vs local) | | compare fire time to `date -u` from the probe |
 

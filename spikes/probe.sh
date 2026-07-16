@@ -9,7 +9,15 @@
 #   PROBE: <name> = PASS|FAIL|SKIP  <detail>
 #
 # Env vars (optional):
-#   SPIKE_SECRET        — any non-empty value; proves env secrets reach the Routine
+#   SPIKE_ENV_VAR        — any non-empty value; proves environment-level env vars
+#                          propagate into the Routine's shell. NOTE: this is a
+#                          propagation check only, not a secrets-storage claim —
+#                          the routine environment's env-var config is plaintext
+#                          and shared with anyone using that environment (per its
+#                          own UI warning), so it is NOT where real secrets
+#                          (GITHUB_PUSH_TOKEN, SELECTION_ROUTINE_TOKEN) belong.
+#                          See docs/PHASE_0_SPIKE.md for the open question on
+#                          where routine-level secrets actually go.
 #   GITHUB_PUSH_TOKEN    — PAT/deploy key to test as a git-push auth fallback
 #   PROBE_SKIP_PUSH=1    — skip the git push check entirely (safe local dry run)
 #   PROBE_PUSH_BRANCH    — override the scratch branch name (default: spike/scratch-<ts>)
@@ -41,12 +49,12 @@ echo "\$TZ:       ${TZ:-<unset>}"
 pass "timezone" "compare against Routine's actual fire time to learn UTC-vs-local"
 echo
 
-# 3. Env secrets
-echo "--- 3. Env secret propagation ---"
-if [ -n "${SPIKE_SECRET:-}" ]; then
-  pass "env_secret" "SPIKE_SECRET present, length=${#SPIKE_SECRET}"
+# 3. Env var propagation (NOT a secrets-storage test — see note above)
+echo "--- 3. Env var propagation ---"
+if [ -n "${SPIKE_ENV_VAR:-}" ]; then
+  pass "env_var" "SPIKE_ENV_VAR present, length=${#SPIKE_ENV_VAR}"
 else
-  fail "env_secret" "SPIKE_SECRET not set or empty"
+  fail "env_var" "SPIKE_ENV_VAR not set or empty"
 fi
 echo
 
