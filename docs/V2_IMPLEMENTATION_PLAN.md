@@ -49,8 +49,10 @@ Selection explicitly allows fewer than 3 qualifying events per day. `calendar_cr
 
 ### Minor
 
-- Pin Routine model IDs at creation time against the then-current model list; `claude-sonnet-4-6` in the design may be superseded (`claude-haiku-4-5` is current for Haiku).
-- Confirm the Routines cron timezone semantics (UTC vs. local) during the Phase 0 spike — `0 2 * * 0` in UTC is Saturday 9/10 PM ET, which would collect a day early.
+- ~~Pin Routine model IDs at creation time against the then-current model list; `claude-sonnet-4-6` in the design may be superseded (`claude-haiku-4-5` is current for Haiku).~~ **Resolved by Phase 0 spike (2026-07-16):** both dated IDs are stale. Use `claude-haiku-4-5-20251001` for Collection and `claude-sonnet-5` for Selection; re-check at Phase 4 creation time since this may drift again.
+- ~~Confirm the Routines cron timezone semantics (UTC vs. local) during the Phase 0 spike — `0 2 * * 0` in UTC is Saturday 9/10 PM ET, which would collect a day early.~~ **Partially resolved:** the spike confirmed the container clock itself is UTC, consistent with treating `cron_expression` as UTC — but the spike ran on a manual trigger, not a real cron fire, so the scheduler's own trigger-time semantics are still unconfirmed. Verify with one real scheduled fire before relying on it for the Sunday 2am run (Phase 4).
+- **(new, critical) Routine environment network access blocks arbitrary outbound hosts.** The Phase 0 spike found the default network-access level (proxied, allowlisting only npm/PyPI/jsr/crates/golang-proxy/`anthropic.com`) rejects `curl` to `api.github.com` and the playwright CDN alike with proxy-level `403`s — a policy block, not a connectivity failure. This blocks Collection's ~29 event-source domains, the playwright chromium download (Chrome fallback), and the Collection→Selection `curl` chaining call simultaneously. Must be resolved (widen the environment's network access level, or explicitly allowlist all source domains) before Phase 2/4 scripting or Routine builds proceed — see `docs/PHASE_0_SPIKE.md` for full detail. This is now the single most consequential open item from Phase 0.
+- **(new) `git push --delete` is not covered by ambient Routine credentials** (gets `HTTP 403`; no GitHub MCP tool offers branch deletion either), even though `git push` (create/update) works fine via ambient auth with no stored token needed. Any setup script or spike that creates scratch branches must plan for manual/external cleanup.
 
 ---
 
@@ -59,8 +61,8 @@ Selection explicitly allows fewer than 3 qualifying events per day. `calendar_cr
 **Q1. HTML rendering: script or Routine? → Script it.**
 `events-report-format/SKILL.md` is already a pixel-level spec — exact hex colors, font sizes, markup snippets, fixed category order. That's a Jinja2 template that happens to be written in prose. The parts of the skill that are *not* templatable (verification searches, dedup preferences, blurb tone) belong to Selection anyway, not rendering. Port the spec to `templates/report.html.j2`, validate with a golden-file comparison against a real v1 report, keep the SKILL.md as the human-readable design reference for the template.
 
-**Q2. Chrome connector in Routines? → Spike before building anything.**
-This is the single biggest unknown and it gates Collection (Tiers 2–5 ≈ 23 of 29 sources... though Tier 4's 8 Meetup feeds are iCal via web_fetch, so effectively ~15 sources). Phase 0 runs a throwaway Routine to test it. Fallback is playwright via setup script + per-source extraction notes in `philadelphia-sources/SKILL.md`. Do not start Routine work until this answer is in hand.
+**Q2. Chrome connector in Routines? → Spiked (2026-07-16). Not available; fallback needed — and currently also blocked.**
+This was the single biggest unknown and it gates Collection (Tiers 2–5 ≈ 23 of 29 sources... though Tier 4's 8 Meetup feeds are iCal via web_fetch, so effectively ~15 sources). Phase 0's throwaway Routine confirmed `get_page_text` does not exist as a tool in this environment — only `WebFetch` (fetch + small-model summarize, not raw page text) is available, which is not a substitute. The intended fallback, playwright via setup script, is itself currently blocked: chromium's binary download from `cdn.playwright.dev` is rejected by the environment's default network-access allowlist (see the new critical Risk Register row and `docs/PHASE_0_SPIKE.md`). So Q2 has two layers now: (1) confirmed — no native Chrome tool, playwright fallback is required; (2) newly blocking — the fallback itself needs the network-access fix before it's usable. Do not start Collection Routine work until the network-access issue is resolved and playwright install is re-verified.
 
 **Q3. runner.sh trigger? → GitHub Actions, `on: push`.**
 Superseded by the storage pivot. Rather than a third Routine (option a) or Selection running scripts itself (option b), Selection's own `git push` of `_selections.json` is the trigger: `.github/workflows/presentation.yml` runs `on: push` filtered to `data/**/_selections.json`. This is cleaner than any of the three originally-considered options — no extra Routine, no API/webhook plumbing, no Mac dependency — and it's a natural consequence of storing data in the repo rather than Drive. G1 and G2 (drive_sync, CSV-to-Drive) no longer apply.
@@ -74,16 +76,25 @@ The picks log answers this today: of 84 Philadelphia Top 3 picks logged, exactly
 
 ### Phase 0 — Spike & decide (small; do first, blocks everything cloud-side)
 
-1. Push this repo to GitHub as **public** `this-week-in-philly`; enable GitHub Pages, serving `docs/` on `main` (migration step 1).
+**Status: spike run complete (2026-07-16); one new blocking issue found, not yet resolved.** Full detail and raw output in `docs/PHASE_0_SPIKE.md`.
+
+1. Push this repo to GitHub as **public** `this-week-in-philly`; enable GitHub Pages, serving `docs/` on `main` (migration step 1). — Pages placeholder (`docs/index.html`) committed on `phase-0`; merge-to-main and live verification still open.
 2. **Routine environment spike** — create one throwaway Routine and verify in a single run:
-   - Is `get_page_text` / Chrome available? (→ Q2)
-   - Can it install playwright via setup script if not?
-   - **Can the Routine `git push` to the repo?** What auth works — Claude GitHub App with write access, or a deploy key/PAT stored as a Routine secret? (→ replaces the old Drive-write assumption; this is the new critical unknown)
-   - Do env secrets work, and can bash `curl` an external API? (→ Collection→Selection chaining viability, unchanged)
-   - Cron timezone semantics.
-   - Available model IDs.
-3. **Confirm Pages build** — push a placeholder `docs/index.html` and verify it serves at the expected URL.
-4. Record answers in this doc; if Chrome is unavailable, add a "playwright extraction notes" task to Phase 4; if Routine git-push isn't viable, fall back to the Routine calling the GitHub REST API (create/update file contents) instead of a local `git` binary.
+   - Is `get_page_text` / Chrome available? (→ Q2) — **No.** Tool doesn't exist; only `WebFetch` (fetch+summarize) is available.
+   - Can it install playwright via setup script if not? — **No, currently blocked** — see the new network-access finding below.
+   - **Can the Routine `git push` to the repo?** What auth works? — **Yes, via ambient credentials** (a local git relay); no stored token needed. `git push --delete` is *not* covered by the same ambient auth (403) — ref cleanup needs a human or non-sandboxed `git`.
+   - Do env vars work, and can bash `curl` an external API? — Env var propagation: **yes**. External `curl`: **no** — blocked by network access, not a chaining-specific issue (see below).
+   - Cron timezone semantics. — Container clock confirmed UTC; scheduler's actual cron-fire semantics still need one real scheduled run to confirm (this spike was manually triggered).
+   - Available model IDs. — Ran as `claude-sonnet-5`; no model-list tool exists. Use `claude-haiku-4-5-20251001` (Collection) / `claude-sonnet-5` (Selection) at Phase 4 creation time — the dated IDs in this doc are stale.
+   - **(found, not originally listed) Network access:** the environment's default network-access level blocks arbitrary outbound hosts via a proxy allowlist (npm/PyPI/jsr/crates/golang-proxy/`anthropic.com` only) — this alone blocks Collection's ~29 sources, the playwright chromium download, and the Collection→Selection curl trigger. **This is now the critical open item**, superseding the original "can it install playwright" and "can it curl" questions, since neither can be answered further until this is fixed.
+3. **Confirm Pages build** — push a placeholder `docs/index.html` and verify it serves at the expected URL. — File committed; PR-to-`main` + live-URL verification still open.
+4. Record answers in this doc — done (see rows/notes above and `docs/PHASE_0_SPIKE.md`). Chrome is unavailable, so the "playwright extraction notes" task is added to Phase 4, **contingent on the network-access fix**. Routine git-push works via ambient auth, so no GitHub REST API fallback is needed.
+
+**Remaining before Phase 0 can close:**
+- Resolve the network-access blocker (widen the environment's access level or allowlist all source domains); re-verify playwright install and external `curl` once fixed.
+- Merge the Pages placeholder to `main`, enable Pages, verify it serves live.
+- Confirm cron timezone semantics with one real scheduled fire (not just a manual trigger).
+- Delete the throwaway spike Routine.
 
 **Exit criteria:** every cloud assumption in the design is confirmed or has a chosen fallback.
 
@@ -215,11 +226,12 @@ Uses the default `GITHUB_TOKEN` for the push (no extra secret needed) — its co
 
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
-| Chrome unavailable in Routines | Medium | High — blocks ~15 sources | Phase 0 spike; playwright fallback with updated extraction notes |
-| Routine cannot `git push` to the repo | Medium | High — breaks the entire data-bus design | Phase 0 spike tests this directly; fallback = Routine calls the GitHub REST contents API instead of shelling out to `git` |
+| **(confirmed by Phase 0 spike) Routine network access blocks arbitrary outbound hosts** | **Confirmed, not hypothetical** | **Critical — blocks all ~29 Collection sources, the playwright CDN, and Collection→Selection curl chaining at once** | Widen the environment's "Network access" level (or explicitly allowlist all source domains) before Phase 2/4; see `docs/PHASE_0_SPIKE.md`. This supersedes the Chrome-unavailable and API-chaining rows below — the *reachability* problem sits underneath both of them and neither is fixable until it's resolved. |
+| ~~Chrome unavailable in Routines~~ | Confirmed | High — blocks ~15 sources | **Confirmed unavailable** (Phase 0 spike, 2026-07-16): `get_page_text` does not exist as a Routine tool; only `WebFetch` (fetch+summarize, not raw text) is available. Playwright fallback is required — but installing it is *also* blocked by the network-access risk above (chromium binary download fails the same host-allowlist check), so this risk is not independently resolvable yet. |
+| ~~Routine cannot `git push` to the repo~~ | Resolved | — | **Resolved (Phase 0 spike):** ambient credentials (a local git relay) push successfully with no stored token needed — the GitHub REST contents API fallback is not needed. Caveat: `git push --delete` is NOT covered by ambient auth (`403`); ref/branch deletion needs manual or external cleanup. |
 | Google refresh token expiry (Testing status) | High if unaddressed | High — silent death week 2 | Consent screen to Production in Phase 3 |
 | Haiku collection quality regression | Medium | Medium — garbage-in for selection | Parallel-run diff in Phase 5 step 3; revert to Sonnet is a one-line change |
-| API chaining (Collection → Selection) not supported as designed | Low–Medium | Medium | Phase 0 spike; fallback = scheduled Selection with manifest-existence guard |
+| API chaining (Collection → Selection) not supported as designed | Confirmed blocked (for now) | Medium | **Blocked by the network-access risk above** — the `curl` call to fire Selection was rejected by the same proxy allowlist. Re-test once network access is widened; fallback remains scheduled Selection with a manifest-existence guard if it's still unsupported after that fix. |
 | Template drift vs. desired report look | Low | Low — Q1 analysis shows spec is stable | Golden test in Phase 2; SKILL.md retained as spec of record |
 | Silent Sunday failure | Medium | Medium | GitHub Actions failure email (presentation) + Routines dashboard checks (Collection/Selection) + fallback cron (G5) — no custom notify script |
 | Public repo exposes picks log + interest profile | Certain (accepted) | Low–Medium — personal data, not credentials | G8: deliberate scrub pass before flipping repo public in Phase 0/1 |
