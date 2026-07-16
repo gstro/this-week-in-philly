@@ -35,27 +35,28 @@ names a chosen fallback.
 6. **Clean up:** delete the throwaway Routine; confirm no `spike/scratch-*`
    branch remains (`git ls-remote --heads origin 'spike/*'`).
 
-**Status: spike run complete (2026-07-16).** Results below. Two items still
-need Pages verification and a real cron fire (see table); everything else is
-answered. `spike/scratch-1784237340` (the probe's own leftover branch — its
-self-cleanup `git push --delete` failed with the network-access 403 described
-below) was deleted manually from a non-sandboxed `git` after the run;
-confirmed gone via `git ls-remote --heads origin 'spike/*'`.
+**Status: two spike runs complete (2026-07-16), with a material disagreement
+between them on the network-access finding — see "Run 2" below.** Pages
+verification and a real cron fire are still open (see table). `spike/scratch-1784237340`
+(Run 1's leftover branch) was deleted manually after Run 1. Run 2 left two
+*more* scratch branches undeleted (`spike/scratch-1784238686`,
+`spike/scratch-1784239136`) — same push-succeeds/delete-fails asymmetry;
+these still need manual cleanup.
 
 ---
 
 ## Results
 
-**Spike run:** 2026-07-16, one manual throwaway Routine, `claude-sonnet-5`, repo `this-week-in-philly`.
+### Run 1 — 2026-07-16, one manual throwaway Routine, `claude-sonnet-5`, repo `this-week-in-philly`.
 
 | Question | Expected (design assumption) | Observed | Decision / Fallback |
 |---|---|---|---|
-| **(critical, new) Can the Routine reach arbitrary external hosts?** | Yes — Collection needs to `web_fetch`/scrape ~29 independent event-source domains | **No.** Outbound network is proxied through a fixed host allowlist (npm, PyPI, jsr, crates, golang proxy, `anthropic.com`). `curl` to `api.github.com` and the playwright CDN (`cdn.playwright.dev`) both got proxy-level `403` ("host not permitted") — a policy block, not a DNS/connectivity failure. This is the environment's "Network access" setting (seen as "Trusted" in the New-environment UI), not a per-request failure. | **Blocks Collection as designed**, independent of the Chrome/playwright question below — even a working scraper can't reach philly-event-source domains under the default allowlist. Must find/set an environment network-access level that permits arbitrary outbound hosts (or an explicit per-domain allowlist covering all ~29 sources) before Collection is buildable. Investigate the "network policy and access levels" docs linked in the New-environment UI; re-test with a widened level before Phase 4. |
-| Can a Routine `git push` to the repo? | Yes, via Claude GitHub App write access | **Yes — via ambient credentials**, no `GITHUB_PUSH_TOKEN` needed. A local git relay (`local_proxy@127.0.0.1/git/gstro/this-week-in-philly`) handled auth transparently. Sidesteps the secret-storage question for push auth entirely (see the secrets-gap row below — now narrowed to just `SELECTION_ROUTINE_TOKEN`). **Caveat:** `git push --delete` (ref deletion) got `HTTP 403` — push and delete are asymmetric; no GitHub MCP tool exists to delete a branch either. Cleanup of scratch branches needs a human (or local, non-sandboxed `git`) — confirmed: `spike/scratch-1784237340` was deleted manually from outside the Routine after the run. | Use ambient git push auth for both Collection and Selection Routines — no push-token secret needed. Runbooks/spikes that create scratch branches must document manual cleanup (already reflected in this doc). |
-| `get_page_text` / Chrome available in Routines? | Yes | **No — the tool does not exist** in this environment. Only `WebFetch` is available, which fetches + summarizes via a small model rather than returning raw page text — a different mechanism, not a drop-in replacement. | Confirmed: install playwright via setup script (Chrome fallback). **But see the network-access row above — playwright's chromium binary download from `cdn.playwright.dev` is itself blocked by the same host allowlist**, so this fallback is *also* blocked until network access is widened. Add "playwright extraction notes" task to Phase 4 and update `philadelphia-sources/SKILL.md` per-source, contingent on the network fix. |
-| Env vars reach the Routine, and can bash `curl` an external API? | Yes | Env var propagation: **Yes** (`SPIKE_ENV_VAR` present, correct length). `curl` to an external API: **No** — same host-allowlist block as above, not a chaining-specific failure (confirms the finding is a blanket network policy, not something scoped only to the playwright CDN). | Collection→Selection `curl` chaining is blocked by the same network-access issue. Once network access is widened for Collection's ~29 sources, re-verify the `SELECTION_ROUTINE_URL` chaining call works too — likely the same fix covers both. |
-| **(new) Where do routine-level secrets actually go?** (`GITHUB_PUSH_TOKEN` if GitHub App write access isn't available; `SELECTION_ROUTINE_TOKEN` for the Collection→Selection `curl` trigger) | Design assumed "Routine environment secrets" — **wrong**: the routine environment's "Environment variables" field is plaintext and explicitly shared with anyone using that environment (UI warning: "don't add secrets or credentials") | **Narrowed by this run:** `git push` needs no token at all (ambient credentials cover it — see row above). Only `SELECTION_ROUTINE_TOKEN` (Collection→Selection API trigger) still lacks a confirmed-safe home; the `curl` call to test this was blocked by the network-access issue before the token question could even be reached. | Resolve after the network-access fix: re-test the Collection→Selection curl trigger, and at that point determine where `SELECTION_ROUTINE_TOKEN` should live (a secrets UI not yet found, or a design change e.g. moving to the manifest-existence-guard fallback from the Risk Register, which would eliminate the need for this token entirely). |
-| Cron timezone semantics | Unknown — `0 2 * * 0` in UTC would fire Sat 9/10 PM ET (a day early) | **Container clock is UTC** (`date` == `date -u`, `$TZ` unset). This confirms the container's own clock, but not yet the scheduler's cron-trigger semantics (i.e. whether a `cron_expression` fires at that UTC time or is reinterpreted). | Treat `cron_expression` as UTC per the `schedule` skill's own documentation (consistent with this observation) — but confirm with one real scheduled fire before relying on it for the Sunday 2am run, since this run was manually triggered, not cron-fired. |
+| **(critical) Can the Routine reach arbitrary external hosts?** | Yes — Collection needs to `web_fetch`/scrape ~29 independent event-source domains | **Contradictory across two runs same day — unresolved.** Run 1: `curl` to `api.github.com` and `cdn.playwright.dev` got `403`, diagnosed as a proxy-level host allowlist blocking everything outside npm/PyPI/jsr/crates/Go-proxy/`anthropic.com`. Run 2 (~30 min later, same repo): all 7 sampled real Philly source domains returned `200`, and playwright's full chromium download from `cdn.playwright.dev` succeeded end-to-end. Re-diagnosis of Run 2's `api.github.com` 403 shows it's a **GitHub-API repo-scoping response** (`"sessions are bound to their configured repositories"`), not a network block — meaning Run 1's allowlist theory was partly built on a misread of that one signal. No identified variable explains the discrepancy (not `SPIKE_ENV_VAR`, not a change either Routine made). See Run 2 detail below. | **Do not treat either run as final.** Re-run the probe a third time noting the environment's exact network-access-level setting at that moment, so a future discrepancy has a variable to point to. If Run 2's "open" result holds, Collection is buildable as designed with no network-access fix needed; if Run 1's "blocked" result recurs, the original fallback plan (widen network access / explicit per-domain allowlist) still applies. Do not proceed to Phase 4 Collection work until this is settled with a reproducible result. |
+| Can a Routine `git push` to the repo? | Yes, via Claude GitHub App write access | **Yes — via ambient credentials**, no `GITHUB_PUSH_TOKEN` needed, confirmed on both runs. A local git relay (`local_proxy@127.0.0.1/git/gstro/this-week-in-philly`) handled auth transparently. Sidesteps the secret-storage question for push auth entirely (see the secrets-gap row below — now narrowed to just `SELECTION_ROUTINE_TOKEN`). **Caveat:** `git push --delete` (ref deletion) got `HTTP 403` on both runs — push and delete are asymmetric; no GitHub MCP tool exists to delete a branch either. Cleanup needs a human (or local, non-sandboxed `git`). Confirmed cleaned up: `spike/scratch-1784237340` (Run 1). **Still outstanding:** `spike/scratch-1784238686` and `spike/scratch-1784239136` (Run 2) — need manual deletion. | Use ambient git push auth for both Collection and Selection Routines — no push-token secret needed. Runbooks/spikes that create scratch branches must document manual cleanup (already reflected in this doc) — this has now happened on every run so far; consider having `probe.sh` print a louder one-line reminder at the very end when delete-cleanup fails, so it isn't easy to miss. |
+| `get_page_text` / Chrome available in Routines? | Yes | **No — the tool does not exist** in this environment (confirmed both runs). Only `WebFetch` is available, which fetches + summarizes via a small model rather than returning raw page text — a different mechanism, not a drop-in replacement. | Confirmed: install playwright via setup script (Chrome fallback). Run 1 found the chromium download itself blocked; Run 2 found it succeeds. **Tied to the unresolved network-access question above** — re-verify alongside that third probe run before committing to this fallback in Phase 4. Add "playwright extraction notes" task to Phase 4 and update `philadelphia-sources/SKILL.md` per-source once network access is settled. |
+| Env vars reach the Routine, and can bash `curl` an external API? | Yes | Env var propagation: Run 1 **Yes** (`SPIKE_ENV_VAR` present, correct length); Run 2 **not set** (this run's environment config simply didn't have it — not evidence of a propagation regression, since Run 1 already proved propagation works). `curl` to real external domains: Run 1 **No** (everything blocked); Run 2 **Yes**, 7/7 real source domains reachable — see the critical row above. | Collection→Selection `curl` chaining should be re-tested alongside the third network-access probe run — same open question. |
+| **(new) Where do routine-level secrets actually go?** (`GITHUB_PUSH_TOKEN` if GitHub App write access isn't available; `SELECTION_ROUTINE_TOKEN` for the Collection→Selection `curl` trigger) | Design assumed "Routine environment secrets" — **wrong**: the routine environment's "Environment variables" field is plaintext and explicitly shared with anyone using that environment (UI warning: "don't add secrets or credentials") | **Narrowed by these runs:** `git push` needs no token at all (ambient credentials cover it — see row above, confirmed twice). Only `SELECTION_ROUTINE_TOKEN` (Collection→Selection API trigger) still lacks a confirmed-safe home; testing it requires the Collection→Selection `curl` call, which is entangled with the still-unresolved network-access question. | Resolve once the network-access question is settled: re-test the Collection→Selection curl trigger, and at that point determine where `SELECTION_ROUTINE_TOKEN` should live (a secrets UI not yet found, or a design change e.g. moving to the manifest-existence-guard fallback from the Risk Register, which would eliminate the need for this token entirely). |
+| Cron timezone semantics | Unknown — `0 2 * * 0` in UTC would fire Sat 9/10 PM ET (a day early) | **Container clock is UTC** (`date` == `date -u`, `$TZ` unset), confirmed on both runs. This confirms the container's own clock, but not yet the scheduler's cron-trigger semantics (i.e. whether a `cron_expression` fires at that UTC time or is reinterpreted). | Treat `cron_expression` as UTC per the `schedule` skill's own documentation (consistent with this observation) — but confirm with one real scheduled fire before relying on it for the Sunday 2am run, since both runs so far were manually triggered, not cron-fired. |
 | Available model IDs | `claude-haiku-4-5` (Collection), `claude-sonnet-4-6` or current equivalent (Selection) | Routine ran as **`claude-sonnet-5`**. No "list available models" tool exists in this environment to enumerate all options; known family from system context: Opus 4.8 (`claude-opus-4-8`), Sonnet 5 (`claude-sonnet-5`), Haiku 4.5 (`claude-haiku-4-5-20251001`), Fable 5 (`claude-fable-5`). `claude-sonnet-4-6` and `claude-haiku-4-5` (undated) from the design/plan docs are stale — the actual IDs have shifted since those docs were written. | Pin Collection to `claude-haiku-4-5-20251001` and Selection to `claude-sonnet-5` at Routine-creation time (Phase 4), not the dated design-doc IDs. Re-check IDs again at that point since this list may itself drift further. |
 | GitHub Pages builds and serves `docs/` from `main` | Yes | _pending — verify after placeholder merge to `main`; not exercised by this Routine run_ | Still open — do before closing Phase 0. |
 
@@ -155,3 +156,115 @@ Diagnosis beyond the raw PASS/FAIL (from the Routine's own follow-up investigati
 - `git push` succeeded via ambient credentials (a local git relay,
   `local_proxy@127.0.0.1/git/gstro/this-week-in-philly`) — no
   `GITHUB_PUSH_TOKEN` was needed.
+
+### Run 2 — 2026-07-16, one manual throwaway Routine, `claude-sonnet-5`, repo `this-week-in-philly`
+
+**This run reverses Run 1's central "network access is blocked" finding.**
+Same repo, same day, ~30 minutes later; no change was made to the environment
+between runs from inside either Routine. `spikes/probe.sh` had gained step 4b
+(real source-domain sampling) between runs, which is what surfaced this.
+
+| Question | Run 1 | Run 2 | 
+|---|---|---|
+| `external_curl` (`api.github.com/zen`) | FAIL, 403 (diagnosed as proxy policy block) | FAIL, 403 — but see diagnosis below: **not** a network block |
+| Real source domains (4b, 7 sampled) | not tested (didn't exist yet) | **PASS, 7/7** (`philly.askapunk.net`, `r5productions.com`, `www.philamoca.org`, `xpn.org`, `www.meetup.com`, `do215.com`, `www.songkick.com` all → 200) |
+| `playwright_installable` | FAIL (chromium download blocked) | **PASS** — `pip install playwright` + full chromium (177 MiB) + chrome-headless-shell (114 MiB) downloaded from `cdn.playwright.dev` |
+| `env_var` (`SPIKE_ENV_VAR`) | PASS, present | FAIL, not set — this run's environment config didn't have it set; not itself evidence of a propagation regression |
+| `git_push` | PASS, ambient credentials, delete-failed (1 leftover branch) | PASS, ambient credentials, delete-failed (1 more leftover branch — 2 now outstanding, see below) |
+
+**Diagnosis (this run):** re-ran `curl -v` against both blocked-looking
+targets directly, plus the agent-proxy status endpoint:
+- `api.github.com/zen` still returns 403, but the **CONNECT tunnel itself
+  succeeds** (`200 Connection Established`) and TLS completes cleanly against
+  a real cert (`CN=api.github.com`, issued by `CCR Upstream Proxy CA
+  (staging); O=Anthropic` — confirms the proxy is a TLS-terminating MITM, not
+  a CONNECT-level blocker). The 403 body is a **GitHub API response**, not a
+  proxy error page: `{"message":"This GitHub API path is not available:
+  sessions are bound to their configured repositories. Use repository-scoped
+  endpoints (repos/{owner}/{repo}/...)."}`. This matches the session's actual
+  GitHub scoping (this Routine's GitHub access is explicitly scoped to
+  `gstro/this-week-in-philly` — see the repo-scope note in this session's own
+  system context) — it is the GitHub proxy enforcing repo scoping, **not**
+  a general outbound-network restriction. Run 1's "proxy CONNECT 403 = policy
+  denial" diagnosis for this specific target looks like it was a
+  misdiagnosis of a GitHub-scoping response, not a network block — worth
+  keeping in mind since it means Run 1's "fixed host allowlist" theory was
+  built partly on this misread.
+- `cdn.playwright.dev/` (bare path, no query params) returns `400
+  InvalidQueryParameterValue` from Azure Blob Storage — a real backend
+  response (`x-ms-request-id`, `x-azure-ref` headers present), not a proxy
+  block. The actual asset URLs playwright's installer requests (with correct
+  query params) returned real files and downloaded successfully end-to-end.
+- The agent-proxy's own `no_proxy` list (from `curl -v`) includes
+  `anthropic.com`, npm/PyPI/jsr/crates/Go proxy, and RFC1918 ranges — i.e.
+  those bypass the proxy entirely — but everything else, **including the 7
+  source domains and `cdn.playwright.dev`**, is proxied and was NOT rejected
+  this run. Nothing in this run's evidence shows a host allowlist blocking
+  arbitrary outbound hosts; Run 1's central finding does not reproduce.
+
+**Open question this raises, not yet resolved:** two runs on the same day
+gave contradictory answers to "can this Routine reach arbitrary external
+hosts" with no identified controlling variable (not the `SPIKE_ENV_VAR`
+setting, not an env change either Routine made). Possibilities: (a) the
+environment's network-access level was changed by a human between runs, (b)
+the two runs used different underlying environments/sandboxes despite the
+same repo, or (c) network policy is applied inconsistently. **Before relying
+on open outbound access for the real Collection build, re-verify with a
+third run, ideally noting the exact environment name/network-access-level
+setting at the moment of the run**, so a future discrepancy has a variable to
+point to.
+
+**Leftover scratch branches (undeleted, need manual cleanup):**
+`spike/scratch-1784238686` (21:51 UTC) and `spike/scratch-1784239136` (21:58
+UTC) — both from Run 2's git-push probe (probe.sh was invoked twice in that
+session). Same asymmetry as Run 1: `git push` succeeds, `git push --delete`
+gets 403, no GitHub MCP tool offers branch deletion. Delete both manually
+(non-sandboxed `git push origin --delete spike/scratch-1784238686
+spike/scratch-1784239136`) before closing Phase 0.
+
+### Raw probe output (Run 2, 2026-07-16T21:58:14Z)
+
+```
+=== Phase 0 spike probe :: 2026-07-16T21:58:14Z ===
+
+--- 1. Runtime facts ---
+uname:   Linux vm 6.18.5 #1 SMP PREEMPT_DYNAMIC @0 x86_64 x86_64 x86_64 GNU/Linux
+python:  Python 3.11.15
+git:     git version 2.43.0
+pwd:     /home/user/this-week-in-philly
+whoami:  root
+env vars: 127
+PROBE: runtime_facts = PASS  collected above
+
+--- 2. Timezone ---
+UTC now:   Thu Jul 16 21:58:14 UTC 2026
+local now: Thu Jul 16 21:58:14 UTC 2026
+$TZ:       <unset>
+PROBE: timezone = PASS  compare against Routine's actual fire time to learn UTC-vs-local
+
+--- 3. Env var propagation ---
+PROBE: env_var = FAIL  SPIKE_ENV_VAR not set or empty
+
+--- 4. External curl ---
+PROBE: external_curl = FAIL  exit=0 http_code=403
+
+--- 4b. Source-domain reachability (sample across tiers) ---
+  philly.askapunk.net -> 200  OK
+  r5productions.com -> 200  OK
+  www.philamoca.org -> 200  OK
+  xpn.org -> 200  OK
+  www.meetup.com -> 200  OK
+  do215.com -> 200  OK
+  www.songkick.com -> 200  OK
+PROBE: source_domains = PASS  7/7 sample domains reachable
+
+--- 5. Playwright ---
+playwright not present; attempting install...
+PROBE: playwright_installable = PASS  pip install + chromium install succeeded
+
+--- 6. git push ---
+PROBE: git_push = PASS  pushed to origin/spike/scratch-1784239136 (ambient credentials)
+  (cleanup: FAILED to delete remote branch spike/scratch-1784239136 — see /tmp/spike_push_delete.log; delete manually)
+
+=== Probe complete ===
+```
