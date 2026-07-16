@@ -36,12 +36,12 @@ names a chosen fallback.
    branch remains (`git ls-remote --heads origin 'spike/*'`).
 
 **Status: two spike runs complete (2026-07-16), with a material disagreement
-between them on the network-access finding — see "Run 2" below.** Pages
-verification and a real cron fire are still open (see table). `spike/scratch-1784237340`
-(Run 1's leftover branch) was deleted manually after Run 1. Run 2 left two
-*more* scratch branches undeleted (`spike/scratch-1784238686`,
-`spike/scratch-1784239136`) — same push-succeeds/delete-fails asymmetry;
-these still need manual cleanup.
+between them on the network-access finding — see "Run 2" below.** GitHub
+Pages is confirmed live (`https://gstro.github.io/this-week-in-philly/`,
+placeholder marker verified present). A real cron fire is still open (see
+table). All known leftover `spike/scratch-*` branches from both runs have
+been deleted manually (confirmed via `git ls-remote --heads origin 'spike/*'`
+returning empty) — same push-succeeds/delete-fails asymmetry each time.
 
 ---
 
@@ -58,7 +58,7 @@ these still need manual cleanup.
 | **(new) Where do routine-level secrets actually go?** (`GITHUB_PUSH_TOKEN` if GitHub App write access isn't available; `SELECTION_ROUTINE_TOKEN` for the Collection→Selection `curl` trigger) | Design assumed "Routine environment secrets" — **wrong**: the routine environment's "Environment variables" field is plaintext and explicitly shared with anyone using that environment (UI warning: "don't add secrets or credentials") | **Narrowed by these runs:** `git push` needs no token at all (ambient credentials cover it — see row above, confirmed twice). Only `SELECTION_ROUTINE_TOKEN` (Collection→Selection API trigger) still lacks a confirmed-safe home; testing it requires the Collection→Selection `curl` call, which is entangled with the still-unresolved network-access question. | Resolve once the network-access question is settled: re-test the Collection→Selection curl trigger, and at that point determine where `SELECTION_ROUTINE_TOKEN` should live (a secrets UI not yet found, or a design change e.g. moving to the manifest-existence-guard fallback from the Risk Register, which would eliminate the need for this token entirely). |
 | Cron timezone semantics | Unknown — `0 2 * * 0` in UTC would fire Sat 9/10 PM ET (a day early) | **Container clock is UTC** (`date` == `date -u`, `$TZ` unset), confirmed on both runs. This confirms the container's own clock, but not yet the scheduler's cron-trigger semantics (i.e. whether a `cron_expression` fires at that UTC time or is reinterpreted). | Treat `cron_expression` as UTC per the `schedule` skill's own documentation (consistent with this observation) — but confirm with one real scheduled fire before relying on it for the Sunday 2am run, since both runs so far were manually triggered, not cron-fired. |
 | Available model IDs | `claude-haiku-4-5` (Collection), `claude-sonnet-4-6` or current equivalent (Selection) | Routine ran as **`claude-sonnet-5`**. No "list available models" tool exists in this environment to enumerate all options; known family from system context: Opus 4.8 (`claude-opus-4-8`), Sonnet 5 (`claude-sonnet-5`), Haiku 4.5 (`claude-haiku-4-5-20251001`), Fable 5 (`claude-fable-5`). `claude-sonnet-4-6` and `claude-haiku-4-5` (undated) from the design/plan docs are stale — the actual IDs have shifted since those docs were written. | Pin Collection to `claude-haiku-4-5-20251001` and Selection to `claude-sonnet-5` at Routine-creation time (Phase 4), not the dated design-doc IDs. Re-check IDs again at that point since this list may itself drift further. |
-| GitHub Pages builds and serves `docs/` from `main` | Yes | _pending — verify after placeholder merge to `main`; not exercised by this Routine run_ | Still open — do before closing Phase 0. |
+| GitHub Pages builds and serves `docs/` from `main` | Yes | **Confirmed.** `https://gstro.github.io/this-week-in-philly/` serves the placeholder with the `PHASE-0 PLACEHOLDER` marker present. | Resolved — no further action. |
 
 ---
 
