@@ -48,4 +48,5 @@ Each collection run starts by checking last week's "Curated Events" calendar. Th
 
 ## Repository contents
 
-- [`philly-events-pipeline-overview.md`](philly-events-pipeline-overview.md) — the detailed design document, including source tiers, session economics, and file handoff specifics.
+- [`docs/v1/philly-events-pipeline-overview.md`](docs/v1/philly-events-pipeline-overview.md) — the detailed design document, including source tiers, session economics, and file handoff specifics.
+- [`docs/V2_DESIGN.md`](docs/V2_DESIGN.md) and [`docs/V2_IMPLEMENTATION_PLAN.md`](docs/V2_IMPLEMENTATION_PLAN.md) — the cloud rewrite (v2) this repo is migrating to; v1 above remains the currently-running system until cutover.
