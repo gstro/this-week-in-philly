@@ -70,28 +70,8 @@ SOURCES = [
 ]
 
 
-def strip_placeholder_wrapper(text: str) -> str:
-    """Strips a literal *(...)* placeholder wrapper (e.g. "*(confirm
-    details)*" -> "confirm details"). Used for both cost and time -- both
-    fields use this convention to flag uncertain/unconfirmed values."""
-    text = (text or "").strip()
-    if text.startswith("*(") and text.endswith(")*"):
-        return text[2:-2].strip()
-    return text
-
-
-# Cost values treated as free beyond the literal "free" (case-insensitive).
-# Validated against tests/golden/2026-06-22.html; extend if a future week
-# surfaces another synonym, but don't guess ahead of evidence.
-_FREE_SYNONYMS = {"free", "no cover"}
-
-
 def clean_cost(cost: str) -> str:
-    return strip_placeholder_wrapper(cost)
-
-
-def is_free_cost(cost: str) -> bool:
-    return clean_cost(cost).casefold() in _FREE_SYNONYMS
+    return common.strip_placeholder_wrapper(cost)
 
 
 def has_multiple_showtimes(note: str) -> bool:
@@ -99,7 +79,7 @@ def has_multiple_showtimes(note: str) -> bool:
 
 
 def display_time(event_time: str, note: str) -> str:
-    event_time = strip_placeholder_wrapper(event_time)
+    event_time = common.strip_placeholder_wrapper(event_time)
     if not event_time:
         return "Various"
     return event_time + ("+" if has_multiple_showtimes(note) else "")
@@ -109,7 +89,7 @@ def price_class_and_text(event: dict) -> tuple[str, str]:
     if event.get("sold_out"):
         return "sold-out", "SOLD OUT"
     cost = clean_cost(event.get("cost", ""))
-    return ("price-free" if is_free_cost(cost) else "price-paid"), cost
+    return ("price-free" if common.is_free_cost(cost) else "price-paid"), cost
 
 
 def build_pick_name_html(pick: dict, spotify_entry: dict | None) -> str:

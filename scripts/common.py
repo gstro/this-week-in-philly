@@ -32,6 +32,24 @@ CATEGORY_ORDER = [
     "\U0001f3aa Festivals & Major Events",
 ]
 
+# Maps the canonical emoji category strings to the short lowercase slugs
+# used in the picks-log CSV's category column. Validated against the real
+# 2026-06-22 archived week's rows in docs/v1/Data/event-picks-log.csv
+# (all nine slugs confirmed; "outdoors" and "horror" only had precedent in
+# other weeks in that file, not 2026-06-22 itself, since those categories
+# didn't appear in that week's Top 3/honorable-mention picks).
+CATEGORY_TO_CSV_SLUG = {
+    "\U0001f3b5 Music & Concerts": "music",
+    "\U0001f3ac Film & Cinema": "film",
+    "\U0001f4da Literary": "literary",
+    "\U0001f91d Community & Politics": "community",
+    "\U0001f3a8 Arts & Workshops": "arts",
+    "\U0001f4bb Tech & Maker": "tech",
+    "\U0001f33f Markets & Outdoors": "outdoors",
+    "\U0001f47b Horror & Occult": "horror",
+    "\U0001f3aa Festivals & Major Events": "festival",
+}
+
 # Picks-log columns per CLAUDE.md's "Key contracts" section -- change with
 # care, this is the interface csv_log.py and attendance_check.py share.
 PICKS_LOG_COLUMNS = [
@@ -49,6 +67,33 @@ PICKS_LOG_COLUMNS = [
     "tags",
     "attended",
 ]
+
+# Cost values treated as free beyond the literal "free" (case-insensitive).
+# Validated against tests/golden/2026-06-22.html and the real picks-log CSV;
+# extend if a future week surfaces another synonym, but don't guess ahead
+# of evidence.
+FREE_COST_SYNONYMS = {"free", "no cover"}
+
+
+def is_placeholder_cost(text: str) -> bool:
+    """True if `text` is a literal *(...)* unconfirmed-value wrapper, e.g.
+    "*(confirm details)*" -- Selection's convention for "don't know yet"."""
+    text = (text or "").strip()
+    return text.startswith("*(") and text.endswith(")*")
+
+
+def strip_placeholder_wrapper(text: str) -> str:
+    """Strips a literal *(...)* placeholder wrapper (e.g. "*(confirm
+    details)*" -> "confirm details"). Used for both cost and time -- both
+    fields use this convention to flag uncertain/unconfirmed values."""
+    text = (text or "").strip()
+    if is_placeholder_cost(text):
+        return text[2:-2].strip()
+    return text
+
+
+def is_free_cost(cost: str) -> bool:
+    return strip_placeholder_wrapper(cost).casefold() in FREE_COST_SYNONYMS
 
 
 def picks_log_path() -> Path:
