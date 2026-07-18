@@ -12,9 +12,11 @@ files = ["scripts"]
 check_untyped_defs = true
 
 # spotipy ships no type stubs and no types-spotipy package exists (checked
-# PyPI). google-api-python-client's are covered by the google-api-python-
-# client-stubs dev dependency instead of being suppressed here -- see
-# scripts/common.py's TYPE_CHECKING import for the real Calendar v3 types.
+# PyPI). google-auth-oauthlib-stubs exists on PyPI but is broken (installs
+# an empty placeholder, no actual stub files -- checked). google-api-python-
+# client's are covered by the google-api-python-client-stubs dev dependency
+# instead of being suppressed here -- see scripts/common.py's TYPE_CHECKING
+# import for the real Calendar v3 types.
 [[tool.mypy.overrides]]
-module = ["spotipy", "spotipy.oauth2"]
+module = ["spotipy", "spotipy.oauth2", "google_auth_oauthlib.flow"]
 ignore_missing_imports = true
