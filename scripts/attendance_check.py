@@ -27,6 +27,8 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from googleapiclient.discovery import Resource
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common
 
@@ -37,7 +39,7 @@ def last_week_monday(target_monday: date) -> date:
     return target_monday - timedelta(days=7)
 
 
-def fetch_calendar_titles(service, calendar_id: str, monday: date) -> set[str]:
+def fetch_calendar_titles(service: Resource, calendar_id: str, monday: date) -> set[str]:
     start = datetime.combine(monday, datetime.min.time(), tzinfo=EASTERN)
     end = start + timedelta(days=7)
     titles = set()
@@ -73,7 +75,7 @@ def update_attendance(rows: list[dict], week_of: str, calendar_titles: set[str])
     return updated
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Update attendance for last week's picks in the CSV log"
     )

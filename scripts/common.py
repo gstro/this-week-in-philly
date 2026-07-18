@@ -11,6 +11,9 @@ import os
 from datetime import date, timedelta
 from pathlib import Path
 
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import Resource, build
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
 
@@ -150,15 +153,13 @@ def load_spotify(week_dir: Path) -> dict:
     return load_json(path)
 
 
-def get_calendar_credentials():
+def get_calendar_credentials() -> Credentials:
     """Reconstructs Google OAuth2 credentials from env vars (G3).
 
     Required: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN.
     Raises RuntimeError with a clear message if any are missing, rather than
     letting the underlying library fail cryptically.
     """
-    from google.oauth2.credentials import Credentials
-
     client_id = os.environ.get("GOOGLE_CLIENT_ID")
     client_secret = os.environ.get("GOOGLE_CLIENT_SECRET")
     refresh_token = os.environ.get("GOOGLE_REFRESH_TOKEN")
@@ -186,13 +187,11 @@ def get_calendar_credentials():
     )
 
 
-def get_calendar_service():
-    from googleapiclient.discovery import build
-
+def get_calendar_service() -> Resource:
     return build("calendar", "v3", credentials=get_calendar_credentials())
 
 
-def get_calendar_id(service) -> str:
+def get_calendar_id(service: Resource) -> str:
     """Finds the "Curated Events" calendar by name. Raises if not found --
     matches v1's behavior of stopping and telling Greg to create it first."""
     page_token = None

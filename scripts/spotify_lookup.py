@@ -22,6 +22,9 @@ import re
 import sys
 from pathlib import Path
 
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common
 
@@ -63,7 +66,7 @@ def candidate_names(title: str) -> list[str]:
     return candidates
 
 
-def find_spotify_match(sp, title: str) -> dict | None:
+def find_spotify_match(sp: spotipy.Spotify, title: str) -> dict | None:
     """Returns {"spotify_url": ..., "matched_text": ...} for the first
     candidate with an exact-name hit, or None. `matched_text` is the
     substring of `title` the renderer should wrap in the link -- not
@@ -95,7 +98,7 @@ def music_titles(selections: dict) -> list[str]:
     return titles
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Batch Spotify artist lookup for a week's Top 3 music picks"
     )
@@ -121,9 +124,6 @@ def main():
             file=sys.stderr,
         )
         sys.exit(1)
-
-    import spotipy
-    from spotipy.oauth2 import SpotifyClientCredentials
 
     sp = spotipy.Spotify(
         auth_manager=SpotifyClientCredentials(

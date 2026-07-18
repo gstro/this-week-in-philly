@@ -146,7 +146,7 @@ def append_rows(path: Path, rows: list[dict]) -> int:
     return written
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Append a week's picks to the picks log")
     parser.add_argument("week_dir", type=Path, help="data/YYYY-MM-DD")
     parser.add_argument("--dry-run", action="store_true")

@@ -28,6 +28,8 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from googleapiclient.discovery import Resource
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common
 
@@ -86,7 +88,7 @@ def build_event(day: dict, pick: dict) -> dict | None:
     return event
 
 
-def clear_target_week(service, calendar_id: str, monday: date) -> int:
+def clear_target_week(service: Resource, calendar_id: str, monday: date) -> int:
     start = datetime.combine(monday, datetime.min.time(), tzinfo=EASTERN)
     end = start + timedelta(days=7)
     deleted = 0
@@ -112,7 +114,7 @@ def clear_target_week(service, calendar_id: str, monday: date) -> int:
     return deleted
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Write a week's Top 3 picks to the calendar")
     parser.add_argument("week_dir", type=Path, help="data/YYYY-MM-DD")
     parser.add_argument("--dry-run", action="store_true")

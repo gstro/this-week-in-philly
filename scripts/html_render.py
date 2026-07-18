@@ -274,7 +274,7 @@ def render_index() -> str:
     return template.render(weeks=weeks)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Render a week's HTML report")
     parser.add_argument("week_dir", type=Path, help="data/YYYY-MM-DD")
     parser.add_argument("html_path", type=Path, help="docs/weeks/YYYY-MM-DD.html")
