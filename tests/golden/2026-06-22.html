@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week in Philadelphia — June 22–28, 2026</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; }
+
+    /* ── Header ── */
+    .site-header { background: #111; width: 100%; }
+    .site-header-inner { max-width: 800px; margin: 0 auto; padding: 1.4rem 1.5rem 1.5rem; }
+    .eyebrow { font-size: 0.62rem; text-transform: uppercase; color: #c9a84c; letter-spacing: 0.12em; margin-bottom: 0.45rem; }
+    h1 { color: #fff; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+    h1 span { color: #c9a84c; }
+    .subtitle { color: #888; font-size: 0.82rem; }
+
+    /* ── Content wrapper ── */
+    .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
+    hr.day-sep { border: none; border-top: 1px solid #d8d4ce; margin: 2.25rem 0; }
+
+    /* ── Day header ── */
+    .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .day-name { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.1em; flex-shrink: 0; }
+    .day-date { font-size: 1.25rem; font-weight: 700; color: #1c1c1c; flex-shrink: 0; }
+    .day-rule { flex: 1; height: 1px; background: #d8d4ce; }
+
+    /* ── Top 3 card ── */
+    .top3-card { background: #1c1c1c; border-radius: 7px; padding: 1rem 1.25rem; margin-bottom: 0.65rem; }
+    .top3-label { font-size: 0.62rem; text-transform: uppercase; color: #c9a84c; letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    .top3-pick { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.9rem; }
+    .top3-pick:last-child { margin-bottom: 0; }
+    .pick-num { color: #c9a84c; font-weight: 700; font-size: 0.9rem; min-width: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; }
+    .pick-main { flex: 1; min-width: 0; }
+    .pick-name { color: #fff; font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
+    .pick-name a { color: #c9a84c; text-decoration: none; }
+    .pick-name a:hover { text-decoration: underline; }
+    .pick-name a.event-link { color: #fff; }
+    .pick-why { color: #999; font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
+    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; }
+    .pick-venue { color: #bbb; font-size: 0.76rem; }
+    .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+
+    /* ── Honorable mentions ── */
+    p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
+
+    /* ── Category header ── */
+    .cat-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; margin-top: 1.1rem; }
+    .cat-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
+
+    /* ── Event cards ── */
+    .event-card { background: #fff; border-radius: 5px; padding: 0.5rem 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.06); display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; }
+    .event-left { flex: 1; min-width: 0; }
+    .event-name { font-size: 0.85rem; font-weight: 700; color: #1c1c1c; line-height: 1.3; }
+    .event-name a { color: inherit; text-decoration: none; }
+    .event-name a:hover { text-decoration: underline; }
+    .event-note { font-size: 0.73rem; color: #999; margin-top: 0.15rem; line-height: 1.4; }
+    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; }
+    .event-venue { font-size: 0.78rem; font-weight: 700; color: #444; }
+    .event-time { font-size: 0.7rem; color: #999; margin-top: 0.1rem; }
+    .price-free { font-size: 0.7rem; color: #2d7a3a; }
+    .price-paid { font-size: 0.7rem; color: #999; }
+    .sold-out { font-size: 0.7rem; color: #c0392b; font-weight: 600; }
+
+    /* ── All Week table ── */
+    .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+    .allweek-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
+    .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .allweek-table th { text-align: left; padding: 0.3rem 0.5rem; color: #888; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #d8d4ce; }
+    .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eee; color: #555; vertical-align: top; }
+    .allweek-table tr:last-child td { border-bottom: none; }
+    .allweek-table td strong { color: #1c1c1c; }
+
+    /* ── Sources footer ── */
+    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: #bbb; text-decoration: none; }
+    .sources a:hover { color: #888; }
+    .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="eyebrow">Weekly Guide</div>
+    <h1>This Week in <span>Philadelphia</span></h1>
+    <div class="subtitle">June 22–28, 2026 &nbsp;·&nbsp; Compiled Sunday</div>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- MONDAY, JUNE 22 -->
+  <div class="day-header">
+    <span class="day-name">Monday</span>
+    <span class="day-date">June 22</span>
+    <div class="day-rule"></div>
+  </div>
+
+  <div class="top3-card">
+    <div class="top3-label">⭐ Top 3 Picks</div>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://iffybooks.net/">NFC Sculpture Workshop</a></div>
+        <div class="pick-why">Build small clay sculptures with NFC tags embedded inside that trigger shortcuts on your phone — half art project, half hardware hack, at a DIY electronics bookstore with a no-one-turned-away-for-lack-of-funds door policy. Iffy Books keeps the barrier floor as low as it gets: $4.50 for the kit, pay what you can for instruction. If you've been wanting to start embedding tech into physical objects, this is the room to start in Philly.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Iffy Books</div>
+        <div class="pick-time-cost">6:00 PM · $4.50 kit + optional donation</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name">Gothic night: <a href="https://open.spotify.com/artist/6G8LVRZv0VxPuLwSQfVkEb">Die Sexual</a>, Ronnie Stone &amp; DJ Baby Berlin</div>
+        <div class="pick-why">Die Sexual bring a heavy, bass-driven gothic rock sound that rarely makes it to Philly — this is a proper goth night with live bands, not a DJ bar set. Doors at 7, show at 8, $15 advance at a venue that keeps the room the right size for this kind of music. 21+.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Johnny Brenda's</div>
+        <div class="pick-time-cost">8:00 PM · $15 adv / $20 DOS</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://philly.askapunk.net/events/483">CONTRACHARGE (chi), AGONESIAC, DISCLAIM</a></div>
+        <div class="pick-why">CONTRACHARGE travel from Chicago — shows like this at Cousin Danny's are exactly why the DIY network exists. The early 6 PM start means you can make this and still catch something later. Cost and address not confirmed in source; check Ask A Punk or reach out before going.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Cousin Danny's</div>
+        <div class="pick-time-cost">6:00 PM · confirm details</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: WILDWOOD, NJ (1994) — Cult Movie Monday (<strong>SOLD OUT</strong>) at PhilaMOCA · ROAR (1981) — After Hours Curated at Philadelphia Film Society</p>
+
+  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/events/483">⭐ CONTRACHARGE (chi), AGONESIAC, DISCLAIM</a></div>
+      <div class="event-note">DIY hardcore/punk, out of town band from Chicago. Cost not listed — likely cheap or door.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Cousin Danny's</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/concert-and-events/">Charley Crockett — Age of the Ram Tour</a></div>
+      <div class="event-note">WXPN-presented Charley Crockett at The Met. Large venue; check ticket availability.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Met</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/concert-and-events/">Del Amitri</a></div>
+      <div class="event-note">Scottish alt-rock/pop band. 21+ event at Underground Arts.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Underground Arts</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/">⭐ Gothic night: Die Sexual, Ronnie Stone &amp; DJ Baby Berlin</a></div>
+      <div class="event-note">Goth/post-punk live show. Doors 7pm. 21+.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda's</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$15 adv / $20 DOS</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/leviticus/">LEVITICUS (2026) — PFS SpringFest Selection</a></div>
+      <div class="event-note">Queer horror — two teenage boys flee a violent entity that takes the form of whoever they desire. Multiple showtimes daily.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Bourse</div>
+      <div class="event-time">12:10 PM+</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/disclosure-day/">DISCLOSURE DAY (2026)</a></div>
+      <div class="event-note">Steven Spielberg sci-fi. Multiple showtimes: 12:30pm, 3:30pm, 6:30pm, 9:15pm.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society East</div>
+      <div class="event-time">12:30 PM+</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/backrooms/">BACKROOMS (2026)</a></div>
+      <div class="event-note">Kane Parsons directs the internet horror meme turned film. Multiple showtimes: 1pm, 3:50pm, 6:30pm, 9pm.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Bourse</div>
+      <div class="event-time">1:00 PM+</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/the-furious/">THE FURIOUS (2025) — PFS SpringFest Selection</a></div>
+      <div class="event-note">Explosive martial arts film with Xie Miao and Joe Taslim. Multiple showtimes: 1pm, 4pm, 6:45pm, 9:30pm.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society East</div>
+      <div class="event-time">1:00 PM+</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/i-love-boosters-bourse/">I LOVE BOOSTERS (2025)</a></div>
+      <div class="event-note">Boots Riley (Sorry to Bother You) directs a caper comedy about professional shoplifters. Multiple showtimes: 1:15pm, 4pm, 6:40pm, 9:15pm.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Bourse</div>
+      <div class="event-time">1:15 PM+</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/princess-cyd/">PRINCESS CYD (2017) — Pride and Prejudice and Fabulousness Series</a></div>
+      <div class="event-note">Sapphic coming-of-age drama. Part of PFS's Pride Month curated series.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center</div>
+      <div class="event-time">2:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://libwww.freelibrary.org/programs/authorevents/">Mythology on Film (screening program)</a></div>
+      <div class="event-note">Free library film screening exploring mythological adaptations. Check Free Library site for title.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Lovett Memorial Library</div>
+      <div class="event-time">3:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/the-childrens-hour/">THE CHILDREN'S HOUR (1961) — Pride and Prejudice and Fabulousness Series</a></div>
+      <div class="event-note">Audrey Hepburn and Shirley MacLaine in William Wyler's searing drama about slander. PFS Pride Month series.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center</div>
+      <div class="event-time">4:45 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/roar/">ROAR (1981) — After Hours Curated</a></div>
+      <div class="event-note">Noel Marshall's insane big-cat film with Tippi Hedren and Melanie Griffith. PFS After Hours Curated series.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/philly-film-showcase/">PHILLY FILM SHOWCASE</a></div>
+      <div class="event-note">Local filmmakers of all ages and backgrounds. Q&amp;A with filmmakers follows.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center</div>
+      <div class="event-time">7:15 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/88639814/wildwoodnj-1994-philadelphia-philamoca">WILDWOOD, NJ (1994) — Cult Movie Monday</a></div>
+      <div class="event-note">SOLD OUT. Filmmaker Ruth Leitman in attendance, Q&amp;A moderated by Jeff Krulik. Encore screening available Tuesday June 23.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="sold-out">SOLD OUT</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/movies/showgirls/">SHOWGIRLS (1995) — After Hours Curated</a></div>
+      <div class="event-note">Paul Verhoeven's cult classic. PFS After Hours Curated series.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center</div>
+      <div class="event-time">9:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/west-philly-sanctuary-invites-you-to-a-fun-writing-workshop">West Philly Sanctuary: Beaded Keychain-Making Workshop (World Cup Edition)</a></div>
+      <div class="event-note">West Philly Sanctuary (immigrant support org) hosts a free World Cup–themed keychain workshop. All ages, alcohol-free. 12–2 PM.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://luma.com/wp222up8">community night: bring your own craft + queer book swap</a></div>
+      <div class="event-note">Pride Month community night — bring a craft to work on, bring a queer book to swap. Free at Cartesian Brewing.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Cartesian Brewing</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://luma.com/k9vo6rni">Custom Cutting Philly</a></div>
+      <div class="event-note">Haircutting workshop focusing on natural texture. Hosted by Caitlin Helle.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Barnet Fair</div>
+      <div class="event-time">11:00 AM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">⭐ NFC Sculpture Workshop</a></div>
+      <div class="event-note">Embed NFC tags in Sculpey clay sculptures to trigger phone shortcuts. Kit $4.50, instructor donation $5–$15, no one turned away for lack of funds.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">$4.50 kit + optional donation</div>
+    </div>
+  </div>
+
+  <!-- TUESDAY, JUNE 23 -->
+  <hr class="day-sep">
+  <div class="day-header">
+    <span class="day-name">Tuesday</span>
+    <span class="day-date">June 23</span>
+    <div class="day-rule"></div>
+  </div>
+
+  <div class="top3-card">
+    <div class="top3-label">⭐ Top 3 Picks</div>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.etix.com/ticket/p/36584906/">WILDWOOD, NJ (1994) — Encore Screening</a></div>
+        <div class="pick-why">Ruth Leitman's underground Hi-8 documentary about a 1994 New Jersey beach town sold out its PhilaMOCA premiere on Monday — this encore exists because people couldn't get in. Leitman will be in the room for a Q&amp;A, moderated by Jeff Krulik (director of Heavy Metal Parking Lot). $10 at PhilaMOCA, doors at 7.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-time-cost">7:30 PM · $10</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/6Fc8FK4q5RjbZBlzqRBEf5">Black Country, New Road</a></div>
+        <div class="pick-why">Black Country, New Road are one of the defining acts of current UK experimental music — chamber pop, post-rock, folk, and grief tangled into something constantly evolving. Philly dates are not frequent, and Franklin Music Hall is the right room to feel it. The kind of show that gets talked about afterward.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Franklin Music Hall</div>
+        <div class="pick-time-cost">8:00 PM · confirm details</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://woodenshoebooks.org/">Land to the Tillers Playtest</a></div>
+        <div class="pick-why">Playtesting a game called Land to the Tillers at an anarchist bookstore is already a sentence worth showing up for — leftist theory as game design, at Wooden Shoe. This is community-built work in progress, and showing up means shaping it while it's still being made. No cost listed.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Wooden Shoe Books</div>
+        <div class="pick-time-cost">6:00 PM · confirm details</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: Days of Heaven (1978) — Wawa Welcome America Free Movie Day at Philadelphia Film Society · Open Streets: Midtown Village at Sansom St Gayborhood</p>
+
+  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/23">Spoon &amp; The Beths: US Tour 2026</a></div>
+      <div class="event-note">Spoon + The Beths co-headlining at The Fillmore. Large venue but a solid pairing.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Fillmore</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/23">⭐ Black Country, New Road</a></div>
+      <div class="event-note">UK experimental rock/chamber pop. One of the most acclaimed current acts — don't sleep.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Franklin Music Hall</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/23">The Animeros</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ortlieb's</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/showtimes/">Days of Heaven (1978) — Wawa Welcome America Free Movie Day</a></div>
+      <div class="event-note">Terrence Malick's 1978 masterpiece — free as part of Wawa Welcome America. Two showtimes: 4pm and 7pm.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center</div>
+      <div class="event-time">4:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/36584906/">⭐ WILDWOOD, NJ (1994) — Encore Screening</a></div>
+      <div class="event-note">Encore after Monday's sold-out screening. Filmmaker Ruth Leitman in attendance, Q&amp;A follows. Doors 7pm.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$10</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/315062512/">KILLER JOE (2011) — Philadelphia Horror Film Night (Online)</a></div>
+      <div class="event-note">Online horror meetup watch-along. Via Discord.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Online (Discord)</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">📚 Literary</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">The Writing Room</a></div>
+      <div class="event-note">Co-working writing session in three 40-minute silent blocks with accountability check-ins. Writers of any kind welcome.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">5:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://thephiladelphiacitizen.org/good-citizen-calendar/">Open Streets: Midtown Village</a></div>
+      <div class="event-note">Seven blocks closed to cars every Tuesday 4–9pm through June, with live music, performances, and a family zone.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Sansom St Gayborhood</div>
+      <div class="event-time">4:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://woodenshoebooks.org/">⭐ Land to the Tillers Playtest</a></div>
+      <div class="event-note">Game playtest at the anarchist bookstore. Leftist political game; check Wooden Shoe site for details.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Wooden Shoe Books</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://luma.com/k1n2poav">Mural Making Workshop with Chenlin Cai and Xingzi Liang</a></div>
+      <div class="event-note">Hands-on mural painting exploring cultural storytelling. Hosted by AIGA Philadelphia.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Moore College of Art</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/in-person-vogue-practice-session-2026-06-23-18-00-00-0400">Vogue Practice Session</a></div>
+      <div class="event-note">Recurring weekly Vogue Practice Session. 6–9 PM, all ages, alcohol-free.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎪 Festivals &amp; Major Events</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/23">FIFA Fan Festival</a></div>
+      <div class="event-note">Free FIFA World Cup fan event at Lemon Hill. Running through July 4. (See also: All Week)</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Lemon Hill, Fairmount Park</div>
+      <div class="event-time">11:00 AM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <!-- WEDNESDAY, JUNE 24 -->
+  <hr class="day-sep">
+  <div class="day-header">
+    <span class="day-name">Wednesday</span>
+    <span class="day-date">June 24</span>
+    <div class="day-rule"></div>
+  </div>
+
+  <div class="top3-card">
+    <div class="top3-label">⭐ Top 3 Picks</div>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://iffybooks.net/">Speculative Futures Reading Group: 'The Ones Who Walk From Omelas' by Ursula Le Guin</a></div>
+        <div class="pick-why">Three linked stories — Le Guin's 'The Ones Who Walk From Omelas,' NK Jemisin's direct response 'The Ones Who Stay and Fight,' and Isabel J. Kim's newer riff — make this a living conversation across generations of speculative fiction writers about complicity and collective action. Literary theory meets leftist ethics meets actual fiction at a DIY bookstore with a donation jar. All three texts are available online; come prepared or come to listen.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Iffy Books</div>
+        <div class="pick-time-cost">7:00 PM · donation to store</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/4ABuKdLlVyzLztIFR8ETX9">Lip Critic</a> w/ Flatwounds + Bejalvin</div>
+        <div class="pick-why">Lip Critic are a Philly noise-rock band with a cult following for good reason — angular, propulsive, and genuinely weird in the best sense. R5 brings them to PhilaMOCA for an all-ages show; Flatwounds and Bejalvin open. $20, doors 7:30.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-time-cost">8:00 PM · $20</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/06/24">DoYeon Kim Quartet (Ars Nova Workshop)</a></div>
+        <div class="pick-why">Korean-born Philadelphia bassist DoYeon Kim brings her quartet to Solar Myth under the Ars Nova Workshop banner — one of the sharpest contemporary jazz and experimental music presenters in the city. If you want to hear what's happening at the edges of jazz in Philadelphia right now, this is the room.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Solar Myth</div>
+        <div class="pick-time-cost">7:30 PM · confirm details</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: Analog A/V Session at Iffy Books · Creed (2015) — Wawa Welcome America Free Movie Day at Philadelphia Film Society</p>
+
+  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-06-24-12-00-00-0400">Weekly Improvised Music Drop-in Jam Session</a></div>
+      <div class="event-note">Recurring weekly Rotunda drop-in jam. 12–2 PM, all ages, alcohol-free.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/24">Goetia / Cemetery Filth / Nuclear Tomb / Cavern Womb</a></div>
+      <div class="event-note">Death metal four-band bill.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Nikki Lopez</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/24">Lord Jah-Monte Ogbon + guests</a></div>
+      <div class="event-note">Philly rapper Lord Jah-Monte Ogbon at Silk City.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Silk City</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://luma.com/letmeknow-fcqo">field trip: free concert — Flawed Mangoes (Killswitch Memories Tour)</a></div>
+      <div class="event-note">Free via Live Nation / LMK club. Flawed Mangoes is a Boston guitarist known for his kill-switch technique.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Foundry</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/24">⭐ DoYeon Kim Quartet (Ars Nova Workshop)</a></div>
+      <div class="event-note">Contemporary jazz, Ars Nova Workshop presentation.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Solar Myth</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/24">Surf Trash ~ This Temper ~ Calling From Pluto</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kung Fu Necktie</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/97639981">⭐ Lip Critic w/ Flatwounds + Bejalvin</a></div>
+      <div class="event-note">R5 Productions. All ages. Doors 7:30.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$20</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/24">BLACKTRONIKA</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda's</div>
+      <div class="event-time">9:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/showtimes/">Creed (2015) — Wawa Welcome America Free Movie Day</a></div>
+      <div class="event-note">Free Wawa Welcome America screening. Two showtimes: 4pm and 7pm.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center</div>
+      <div class="event-time">4:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/315289390/">THE BANSHEE CHAPTER (2013) — Philadelphia Horror Film Night (Online)</a></div>
+      <div class="event-note">Online watch-along. Journalist investigates a friend's disappearance linked to government chemicals and a strange radio signal. Via Discord.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Online (Discord)</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">📚 Literary</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">⭐ Speculative Futures Reading Group: 'The Ones Who Walk From Omelas'</a></div>
+      <div class="event-note">Reading Le Guin alongside NK Jemisin's response and Isabel J. Kim's riff. All three texts free online. July book: Ada Hoffman's Ignore all Previous Instructions.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">donation to store</div>
+    </div>
+  </div>
+
+  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">Analog A/V Session</a></div>
+      <div class="event-note">Experiment with VHS and cassette tapes — analog-to-digital and digital-to-analog transfers. Equipment provided. Donation $5–$15, no one turned away.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">10:30 AM</div>
+      <div class="price-paid">optional donation</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">DJ Basixxx with MIXXX</a></div>
+      <div class="event-note">Intro to MIXXX, free/open-source DJ software. Bring a laptop and headphones.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">2:00 PM</div>
+      <div class="price-paid">optional $5–$15</div>
+    </div>
+  </div>
+
+  <!-- THURSDAY, JUNE 25 -->
+  <hr class="day-sep">
+  <div class="day-header">
+    <span class="day-name">Thursday</span>
+    <span class="day-date">June 25</span>
+    <div class="day-rule"></div>
+  </div>
+
+  <div class="top3-card">
+    <div class="top3-label">⭐ Top 3 Picks</div>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/2GsWB8y7P8vgNpXUepkj0S">of Montreal</a> and Cormae</div>
+        <div class="pick-why">of Montreal have been making maximalist, genre-shifting psychedelic pop since the late '90s — glam, prog, funk, and absurdist theater at once — and Philly appearances aren't frequent. Underground Arts is the right room for this kind of show. An event worth clearing your evening for.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Underground Arts</div>
+        <div class="pick-time-cost">8:00 PM · confirm details</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/1Sm5PqM25CcIBtKSvZz9iS">Prewn</a></div>
+        <div class="pick-why">Prewn make slow-burning indie rock with emotional weight — the kind of band that rewards a quiet room and full attention. $15 at PhilaMOCA, R5 all-ages, doors 7:30.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-time-cost">8:00 PM · $15</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://philly.askapunk.net/events/487">SWEATFEST @ PENTRIDGE STATION</a></div>
+        <div class="pick-why">Multi-act DIY fest hitting punk, hardcore, no wave, noise rock, power pop, and post-punk in one session at Pentridge Station. The Ask A Punk listing confirms live music and a 5 PM start — cost and full lineup TBD, check the link.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Pentridge Station</div>
+        <div class="pick-time-cost">5:00 PM · confirm details</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: Art Club / Open Studio: BYO Project at Freehand Art Supply</p>
+
+  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/71702286">⭐ Prewn</a></div>
+      <div class="event-note">R5 Productions. All ages. Doors 7:30.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$15</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.songkick.com/metro-areas/5202-us-philadelphia/june-2026">⭐ of Montreal and Cormae</a></div>
+      <div class="event-note">Psychedelic indie pop with Cormae opening. Source: Songkick; confirm ticket details directly.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Underground Arts</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎪 Festivals &amp; Major Events</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/events/487">⭐ SWEATFEST @ PENTRIDGE STATION</a></div>
+      <div class="event-note">Genres: hardcore punk, no wave, noise rock, power pop, post-punk. Full lineup and cost not listed.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Pentridge Station</div>
+      <div class="event-time">5:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/in-person-the-gathering-2026-06-25-20-00-00-0400">The Gathering</a></div>
+      <div class="event-note">All ages, alcohol-free. Check Rotunda site for details.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://luma.com/nlte7tg1">Art Club / Open Studio: BYO Project</a></div>
+      <div class="event-note">Thursday Night Art Club — bring your own project, no instruction, just community workspace. Easels and basic materials provided.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Freehand Art Supply</div>
+      <div class="event-time">5:15 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/techinmotionphilly/events/315229986/">Cyber Risk &amp; Resilience in Education in the Age of AI (Online)</a></div>
+      <div class="event-note">Panel on AI-era cyber threats in K-12 education. Speakers from Microsoft, University of Maryland, and school district CIOs.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Online</div>
+      <div class="event-time">2:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <!-- FRIDAY, JUNE 26 -->
+  <hr class="day-sep">
+  <div class="day-header">
+    <span class="day-name">Friday</span>
+    <span class="day-date">June 26</span>
+    <div class="day-rule"></div>
+  </div>
+
+  <div class="top3-card">
+    <div class="top3-label">⭐ Top 3 Picks</div>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://iffybooks.net/">Beginner Soldering: LED Spinning Top</a></div>
+        <div class="pick-why">No soldering experience required — you're building a top that flashes LEDs when it spins, and the kit is $5.39. Iffy Books' beginner soldering workshops are legitimately good entry points to electronics work, run by patient instructors with a no-one-turned-away door policy. The cost floor doesn't get lower.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Iffy Books</div>
+        <div class="pick-time-cost">2:00 PM · $5.39 kit + optional donation</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/0sBN7TbbFmFYH29xxa6VGA">Bike Routes</a> w/ Wormy + Innerlove</div>
+        <div class="pick-why">R5 brings Bike Routes — a Chicago indie rock band with road-tested, well-crafted songs — to PhilaMOCA for an all-ages Friday night. $15, doors 7:30. Wormy and Innerlove open; both worth arriving early for.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-time-cost">8:00 PM · $15</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://woodenshoebooks.org/">PARC First Aid Training</a></div>
+        <div class="pick-why">Philly Action Ready Coalition teaches practical street medicine at the anarchist bookstore — Narcan use, CPR, basic scans. No certifications, no jargon, just usable knowledge. Events like this are what mutual aid infrastructure actually looks like in practice.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Wooden Shoe Books</div>
+        <div class="pick-time-cost">6:00 PM · confirm details</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: Fundraising Market for LAVA Space at The Rotunda · Goth night at Doom, 421 N 7th St</p>
+
+  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/87185782">⭐ Bike Routes w/ Wormy + Innerlove</a></div>
+      <div class="event-note">R5 Productions. All ages. Doors 7:30.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$15</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/events/495">Positronix, Powerhouse of the Cell, ADMIN, The Angies</a></div>
+      <div class="event-note">Post-punk/punk, out of town band (Positronix). DIY show at Cousin Danny's.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Cousin Danny's</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/">Goth night at Doom</a></div>
+      <div class="event-note">Free goth night. 21+.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Doom, 421 N 7th St</div>
+      <div class="event-time">9:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://trakt.tv/movies/supergirl-2026">Supergirl (2026)</a></div>
+      <div class="event-note">Kara Zor-El teams with an unlikely companion on an interstellar revenge mission. Wide theatrical release.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Theatrical Release</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://woodenshoebooks.org/">⭐ PARC First Aid Training</a></div>
+      <div class="event-note">Street medicine basics: scans, Narcan, CPR. No certifications. Philly Action Ready Coalition.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Wooden Shoe Books</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://luma.com/jcekt20o">You Da Birthday: Craft Collective Turns One</a></div>
+      <div class="event-note">One-year anniversary of The Craft Collective — music, open crafting, and community. Open to all.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Margolis</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🌿 Markets &amp; Outdoors</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/fundraising-market-for-lava-space">Fundraising Market for LAVA Space</a></div>
+      <div class="event-note">Free market fundraiser supporting LAVA Space. 5–9 PM, all ages, alcohol-free.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda</div>
+      <div class="event-time">5:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">⭐ Beginner Soldering: LED Spinning Top</a></div>
+      <div class="event-note">Build an LED spinning top. No experience needed. Kit $5.39, instructor donation $5–$15, notaflof.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">2:00 PM</div>
+      <div class="price-paid">$5.39 kit + optional donation</div>
+    </div>
+  </div>
+
+  <!-- SATURDAY, JUNE 27 -->
+  <hr class="day-sep">
+  <div class="day-header">
+    <span class="day-name">Saturday</span>
+    <span class="day-date">June 27</span>
+    <div class="day-rule"></div>
+  </div>
+
+  <div class="top3-card">
+    <div class="top3-label">⭐ Top 3 Picks</div>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.gods.gay">LAYER MEAT, SPECTRAL FORCES, VOID OF INFINITE CONSEQUENCE: A Benefit Show for Sol Collective</a></div>
+        <div class="pick-why">Three experimental acts — avant-garde, free jazz, and noise — playing a benefit for Sol Collective, a West Philadelphia community arts and social justice organization. God's Automatic Body is a DIY space most of the city doesn't know about yet; shows there have a specificity that bigger venues lose. This one has community stakes attached and will be talked about.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">God's Automatic Body</div>
+        <div class="pick-time-cost">7:00 PM · confirm details</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.etix.com/ticket/p/81945212/">JINSEI — Philly Premiere</a></div>
+        <div class="pick-why">JINSEI gets its Philadelphia premiere at PhilaMOCA — which is already a meaningful signal about what kind of film this is. $12, doors at 7. Details on the film itself are sparse, which at PhilaMOCA usually means something genuinely strange is in store.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-time-cost">7:30 PM · $12</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.therotunda.org/event/ramageddon">Ramageddon</a></div>
+        <div class="pick-why">Ten local acts in one afternoon and evening at the Rotunda — HECCRA, ULTRA DELUXE, SLOW BURNING DAYDREAM, SODASEAS, POWERLINE TRAIL, GUILLERMO GUILLOTINE, LINDEN, IT HELPS ME SLEEP, ALL ENDS LEAD TO YOU, KWARTER ZIP. $15 advance for the density of local talent alone is a steal. All ages, alcohol-free, the Rotunda at full capacity for a showcase has a specific Philly energy.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">The Rotunda</div>
+        <div class="pick-time-cost">4:00 PM · $15 adv / $18 door</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: River Roads Festival (Dar Williams, 10,000 Maniacs, Billy Bragg &amp; Shawn Colvin) at Heuser Park · EKGs (PGH) // Diuretic // Real Shocks // Anatomix (first show) at Cousin Danny's · Cyberdeck Meetup at Iffy Books · Tommy Conwell &amp; The Young Rumblers + fireworks at RiverRink Summerfest</p>
+
+  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/ramageddon">⭐ Ramageddon</a></div>
+      <div class="event-note">10-act local showcase: HECCRA // ULTRA DELUXE // SLOW BURNING DAYDREAM // SODASEAS // POWERLINE TRAIL // GUILLERMO GUILLOTINE // LINDEN // IT HELPS ME SLEEP // ALL ENDS LEAD TO YOU // KWARTER ZIP. All ages, alcohol-free.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda</div>
+      <div class="event-time">4:00 PM</div>
+      <div class="price-paid">$15 adv / $18 door</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/27">The Silver — Album Release Show</a></div>
+      <div class="event-note">Local band album release at MilkBoy.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">MilkBoy</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/events/494">The Cradle (NYC), Brittle Brian, Nina Ryser, Gabriel Garcia Leeds</a></div>
+      <div class="event-note">Folk, guitar, experimental, synth pop. The Cradle comes from NYC.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Beautiful World Syndicate</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.gods.gay">⭐ LAYER MEAT, SPECTRAL FORCES, VOID OF INFINITE CONSEQUENCE: Benefit for Sol Collective</a></div>
+      <div class="event-note">Avant-garde, experimental, free jazz. Benefit for Sol Collective. Do215 lists as 'Spectral Forces / Angel Meat / Void of Infinite Consequences' — same show, confirm lineup.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">God's Automatic Body</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/27">Jack Johnson: SURFILMUSIC Tour</a></div>
+      <div class="event-note">Large outdoor venue.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Highmark Mann</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/27">Kenny Gray / Dutts</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kung Fu Necktie</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/27">Wale &amp; Smino</a></div>
+      <div class="event-note">Wale and Smino co-headline. Smino is a strong hip-hop/R&amp;B/soul crossover act.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Fillmore</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/events/476">EKGs (PGH) // Diuretic // Real Shocks // Anatomix (first show)</a></div>
+      <div class="event-note">Hardcore/punk, EKGs from Pittsburgh. Anatomix plays their first-ever show. DIY at Cousin Danny's.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Cousin Danny's</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/concert-and-events/">Tommy Conwell &amp; The Young Rumblers — Free Concert + Fireworks</a></div>
+      <div class="event-note">WXPN-presented free concert, 8–10 PM. Fireworks at 9:30 PM over the Delaware River.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">RiverRink Summerfest</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/events/493">Doc Rotteb / The Droogettes / Symptoms MWC and the cheap suits</a></div>
+      <div class="event-note">Oi/punk. Time listed as 7:00 AM — likely a data error. Confirm before going.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Warehouse 3</div>
+      <div class="event-time">confirm time</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://filmadelphia.org/showtimes/">High Noon (1952) — Wawa Welcome America Free Movie Day</a></div>
+      <div class="event-note">Free Wawa Welcome America screening of the 1952 classic.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center</div>
+      <div class="event-time">2:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/81945212/">⭐ JINSEI — Philly Premiere</a></div>
+      <div class="event-note">Philadelphia premiere. Doors 7pm.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$12</div>
+    </div>
+  </div>
+
+  <div class="cat-label">📚 Literary</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://libwww.freelibrary.org/programs/authorevents/">Tarique Connelly — A Teacher's Odyssey</a></div>
+      <div class="event-note">Philadelphia public school educator presents his memoir on grit, global teaching, and the literacy crisis.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Wynnefield Library</div>
+      <div class="event-time">1:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">Seen/Unseen Listening Session</a></div>
+      <div class="event-note">Audio series by Gigi Guida — a noticing tour through City Hall surfacing power in landscape and language. Facilitated by Gigi Guida and Mya Gordon.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">5:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/dc_215/events/315145723/">Study Hall / Work on CTFs</a></div>
+      <div class="event-note">DC215 DEF CON group Philadelphia. Casual CTF study session — come to work or just talk security.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ex Machina Parlor</div>
+      <div class="event-time">10:00 AM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">Cyberdeck Meetup</a></div>
+      <div class="event-note">Show off your DIY laptop (SBC + LCD + keyboard in a custom enclosure). LCDs, keyboards, and wooden boxes for sale.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">10:30 AM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/">Saints &amp; Sinners</a></div>
+      <div class="event-note">Goth club night. DJ Dr Octo-Pussy. 21+, 9pm–3am.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Saints &amp; Sinners, 2533 Emery St</div>
+      <div class="event-time">9:00 PM</div>
+      <div class="price-paid">$30+</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🎪 Festivals &amp; Major Events</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/06/27">River Roads Festival: Dar Williams, 10,000 Maniacs, Billy Bragg &amp; Shawn Colvin</a></div>
+      <div class="event-note">Folk/roots outdoor festival. Billy Bragg's presence gives this a political dimension worth noting.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Heuser Park</div>
+      <div class="event-time">1:15 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">🌿 Markets &amp; Outdoors</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://luma.com/98uaxqxe">cake picnic</a></div>
+      <div class="event-note">BYO cake (homemade or store-bought), make decorated cake cards to swap. Hosted by let me know club.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Rittenhouse Square</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <!-- SUNDAY, JUNE 28 -->
+  <hr class="day-sep">
+  <div class="day-header">
+    <span class="day-name">Sunday</span>
+    <span class="day-date">June 28</span>
+    <div class="day-rule"></div>
+  </div>
+
+  <div class="top3-card">
+    <div class="top3-label">⭐ Top 3 Picks</div>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://iffybooks.net/">Anarchy Summer Reading Group</a></div>
+        <div class="pick-why">Emma Goldman's Anarchism and Other Essays alongside Kropotkin's The Conquest of Bread — two foundational texts, one anarchist bookstore with a free door. Iffy Books runs this as a biweekly series through the summer; this is the session to start with if you've never read either. Come with questions or just come to listen.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Iffy Books</div>
+        <div class="pick-time-cost">6:00 PM · free</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/4yEEFEEhY7pVqkRe3DQOKq">The Human League</a> with <a href="https://open.spotify.com/artist/5QKNPEX9nJpJ2rqPnBhLoX" style="color:#c9a84c;text-decoration:none;">Soft Cell</a> &amp; Alison Moyet</div>
+        <div class="pick-why">The Human League, Soft Cell, and Alison Moyet on a single bill is a lineup that shouldn't exist outside a festival, and yet here it is at The Met. Three synthpop and new wave acts at the peak of their cultural moment, five decades in — the ticket price reflects it, but so does the occasion. A once-in-years bill.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">The Met</div>
+        <div class="pick-time-cost">7:30 PM · confirm details</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/6B3TFIlM5RYPxUCbbSqnHM">Kirk Franklin</a> — Free Gospel Concert</div>
+        <div class="pick-why">Kirk Franklin performing with a 250-member choir at Independence National Historical Park for free, 7–9 PM, as part of Wawa Welcome America. Gospel and soul at the highest register, outdoors, zero barrier to entry. The full-choir format makes this more spectacle than concert — worth showing up for even if gospel isn't your usual lane.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">Independence National Historical Park</div>
+        <div class="pick-time-cost">7:00 PM · free</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: ZORN, EARLY GRAVE, HEX (cleveland) at Cousin Danny's · DJ Ferret mixing MTV's '120 Minutes' at National Mechanics</p>
+
+  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/">DJ Ferret mixing MTV's '120 Minutes'</a></div>
+      <div class="event-note">All ages, 6–10 PM, no cover. '120 Minutes' alt/goth DJ set.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">National Mechanics</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-free">no cover</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/concert-and-events/">⭐ Kirk Franklin — Free Gospel Concert</a></div>
+      <div class="event-note">250-member choir. 7–9 PM. Wawa Welcome America. Free outdoor concert.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Independence National Historical Park</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/events/484">ZORN, EARLY GRAVE, HEX (cleveland)</a></div>
+      <div class="event-note">Hardcore/metal. HEX comes from Cleveland. DIY show at Cousin Danny's.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Cousin Danny's</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/concert-and-events/">⭐ The Human League with Soft Cell &amp; Alison Moyet</a></div>
+      <div class="event-note">Three synthpop/new wave legends. WXPN presented. Large venue but genuinely unmissable lineup.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Met</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">confirm details</div>
+    </div>
+  </div>
+
+  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/">Franky Bradley's event</a></div>
+      <div class="event-note">21+, 6–9:30pm. Details not provided — confirm before going.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Franky Bradley's</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">$20+</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/">Warehouse on Watts party</a></div>
+      <div class="event-note">Goth/dark party. 21+, 9pm–2am.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Warehouse on Watts, 923 N. Watts St</div>
+      <div class="event-time">9:00 PM</div>
+      <div class="price-paid">$15</div>
+    </div>
+  </div>
+
+  <div class="cat-label">📚 Literary</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://iffybooks.net/">⭐ Anarchy Summer Reading Group</a></div>
+      <div class="event-note">Biweekly anarchist reading group. Starting with Anarchism and Other Essays (Goldman) and The Conquest of Bread (Kropotkin).</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/315006198/">June Horror Book Club: Bury Your Gays by Chuck Tingle (Online)</a></div>
+      <div class="event-note">Online horror book club. Chuck Tingle's Bury Your Gays — queer survival horror. Via Discord.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Online (Discord)</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.hive76.org/classes/">Hive76 Open House</a></div>
+      <div class="event-note">Recurring weekly open house. Bring a project, get advice, meet members, take a tour. Sundays 2–5 PM.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Hive76</div>
+      <div class="event-time">2:00 PM</div>
+      <div class="price-free">free</div>
+    </div>
+  </div>
+
+  <!-- ALL WEEK / RECURRING -->
+  <div class="allweek-label">📅 All Week / Recurring</div>
+  <table class="allweek-table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Venue</th>
+        <th>When</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><a href="https://do215.com/events/2026/06/23" style="color:#1c1c1c;text-decoration:none;">FIFA Fan Festival</a></strong></td>
+        <td>Lemon Hill, East Fairmount Park</td>
+        <td>Through July 4, daily from 11am</td>
+        <td style="color:#2d7a3a;">free</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://thephiladelphiacitizen.org/good-citizen-calendar/" style="color:#1c1c1c;text-decoration:none;">Franklin's Key — Pig Iron Theatre Company</a></strong></td>
+        <td>Plays &amp; Players Theatre</td>
+        <td>Through June 28, multiple showtimes</td>
+        <td style="color:#999;">confirm details</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://thephiladelphiacitizen.org/good-citizen-calendar/" style="color:#1c1c1c;text-decoration:none;">Open Streets: Midtown Village</a></strong></td>
+        <td>Sansom St Gayborhood</td>
+        <td>Tuesdays 4–9 PM through June</td>
+        <td style="color:#2d7a3a;">free</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SOURCES FOOTER -->
+  <div class="sources">
+    <a href="https://do215.com">Do215</a> ·
+    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a> ·
+    <a href="https://cinesp.net">cinéSPEAK</a> ·
+    <a href="https://filmadelphia.org">Philadelphia Film Society</a> ·
+    <a href="https://philamoca.org">PhilaMOCA</a> ·
+    <a href="https://phillygoth.net">Phillygoth.net</a> ·
+    <a href="https://harrietsbookshop.com">Harriet's Bookshop</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a> ·
+    <a href="https://therotunda.org">The Rotunda</a> ·
+    <a href="https://r5productions.com">R5 Productions</a> ·
+    <a href="https://libwww.freelibrary.org">Free Library</a> ·
+    <a href="https://billypenn.com">Billy Penn</a> ·
+    <a href="https://thephiladelphiacitizen.org">Philadelphia Citizen</a> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a> ·
+    <a href="https://xpn.org">The Key by WXPN</a> ·
+    <a href="https://meetup.com">Meetup</a> ·
+    <a href="https://hive76.org">Hive76</a> ·
+    <a href="https://lu.ma">Luma</a> ·
+    <a href="https://songkick.com">Songkick</a> ·
+    <a href="https://calendar.google.com">Google Calendar</a>
+  </div>
+  <p class="sources-failure">⚠️ do215 unavailable this week (partial — June 22, 25, 26, 28 not covered; URL retrieval failed in scheduled-task context) — events from that source may be missing.</p>
+  <p class="sources-failure">⚠️ songkick unavailable this week (partial — full June page too large to process; 2 events confirmed via supplemental search) — events from that source may be missing.</p>
+
+</div>
+</body>
+</html>

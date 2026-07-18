@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week in Philadelphia — {{ date_range }}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; }
+
+    /* ── Header ── */
+    .site-header { background: #111; width: 100%; }
+    .site-header-inner { max-width: 800px; margin: 0 auto; padding: 1.4rem 1.5rem 1.5rem; }
+    .eyebrow { font-size: 0.62rem; text-transform: uppercase; color: #c9a84c; letter-spacing: 0.12em; margin-bottom: 0.45rem; }
+    h1 { color: #fff; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+    h1 span { color: #c9a84c; }
+    .subtitle { color: #888; font-size: 0.82rem; }
+
+    /* ── Content wrapper ── */
+    .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
+    hr.day-sep { border: none; border-top: 1px solid #d8d4ce; margin: 2.25rem 0; }
+
+    /* ── Day header ── */
+    .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .day-name { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.1em; flex-shrink: 0; }
+    .day-date { font-size: 1.25rem; font-weight: 700; color: #1c1c1c; flex-shrink: 0; }
+    .day-rule { flex: 1; height: 1px; background: #d8d4ce; }
+
+    /* ── Top 3 card ── */
+    .top3-card { background: #1c1c1c; border-radius: 7px; padding: 1rem 1.25rem; margin-bottom: 0.65rem; }
+    .top3-label { font-size: 0.62rem; text-transform: uppercase; color: #c9a84c; letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    .top3-pick { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.9rem; }
+    .top3-pick:last-child { margin-bottom: 0; }
+    .pick-num { color: #c9a84c; font-weight: 700; font-size: 0.9rem; min-width: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; }
+    .pick-main { flex: 1; min-width: 0; }
+    .pick-name { color: #fff; font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
+    .pick-name a { color: #c9a84c; text-decoration: none; }
+    .pick-name a:hover { text-decoration: underline; }
+    .pick-name a.event-link { color: #fff; }
+    .pick-why { color: #999; font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
+    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; }
+    .pick-venue { color: #bbb; font-size: 0.76rem; }
+    .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+
+    /* ── Honorable mentions ── */
+    p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
+
+    /* ── Category header ── */
+    .cat-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; margin-top: 1.1rem; }
+    .cat-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
+
+    /* ── Event cards ── */
+    .event-card { background: #fff; border-radius: 5px; padding: 0.5rem 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.06); display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; }
+    .event-left { flex: 1; min-width: 0; }
+    .event-name { font-size: 0.85rem; font-weight: 700; color: #1c1c1c; line-height: 1.3; }
+    .event-name a { color: inherit; text-decoration: none; }
+    .event-name a:hover { text-decoration: underline; }
+    .event-note { font-size: 0.73rem; color: #999; margin-top: 0.15rem; line-height: 1.4; }
+    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; }
+    .event-venue { font-size: 0.78rem; font-weight: 700; color: #444; }
+    .event-time { font-size: 0.7rem; color: #999; margin-top: 0.1rem; }
+    .price-free { font-size: 0.7rem; color: #2d7a3a; }
+    .price-paid { font-size: 0.7rem; color: #999; }
+    .sold-out { font-size: 0.7rem; color: #c0392b; font-weight: 600; }
+
+    /* ── All Week table (unused by v2 -- CSS kept for spec fidelity; see
+       html_render.py's module docstring for why the table isn't rendered) ── */
+    .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+    .allweek-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
+    .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .allweek-table th { text-align: left; padding: 0.3rem 0.5rem; color: #888; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #d8d4ce; }
+    .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eee; color: #555; vertical-align: top; }
+    .allweek-table tr:last-child td { border-bottom: none; }
+    .allweek-table td strong { color: #1c1c1c; }
+
+    /* ── Sources footer ── */
+    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: #bbb; text-decoration: none; }
+    .sources a:hover { color: #888; }
+    .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="eyebrow">Weekly Guide</div>
+    <h1>This Week in <span>Philadelphia</span></h1>
+    <div class="subtitle">{{ date_range }} &nbsp;·&nbsp; Compiled Sunday</div>
+  </div>
+</header>
+
+<div class="content">
+{% for day in days %}
+  {% if not loop.first %}
+  <hr class="day-sep">
+  {% endif %}
+  <div class="day-header">
+    <span class="day-name">{{ day.day_name }}</span>
+    <span class="day-date">{{ day.date_display }}</span>
+    <div class="day-rule"></div>
+  </div>
+
+  <div class="top3-card">
+    <div class="top3-label">⭐ Top 3 Picks</div>
+{% for pick in day.top3 %}
+    <div class="top3-pick">
+      <div class="pick-num">{{ pick.rank }}</div>
+      <div class="pick-main">
+        <div class="pick-name">{{ pick.name_html | safe }}</div>
+        <div class="pick-why">{{ pick.why }}</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue">{{ pick.venue }}</div>
+        <div class="pick-time-cost">{{ pick.time_cost }}</div>
+      </div>
+    </div>
+{% endfor %}
+  </div>
+{% if day.honorable_mentions_html %}
+
+  <p class="hm">Honorable mentions: {{ day.honorable_mentions_html | safe }}</p>
+{% endif %}
+{% for category in day.categories %}
+
+  <div class="cat-label">{{ category.label }}</div>
+{% for event in category.events %}
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name">{{ event.name_html | safe }}</div>
+{% if event.note %}
+      <div class="event-note">{{ event.note }}</div>
+{% endif %}
+    </div>
+    <div class="event-right">
+      <div class="event-venue">{{ event.venue }}</div>
+      <div class="event-time">{{ event.time_display }}</div>
+      <div class="{{ event.price_class }}">{{ event.price_text }}</div>
+    </div>
+  </div>
+{% endfor %}
+{% endfor %}
+{% endfor %}
+
+  <!-- SOURCES FOOTER -->
+  <div class="sources">
+{% for source in sources %}
+    <a href="{{ source.url }}">{{ source.name }}</a>{{ " ·" if not loop.last else "" }}
+{% endfor %}
+  </div>
+{% for failure in collection_failure_notes %}
+  <p class="sources-failure">⚠️ {{ failure }} — events from that source may be missing.</p>
+{% endfor %}
+
+</div>
+</body>
+</html>

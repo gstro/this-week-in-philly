@@ -1,0 +1,1485 @@
+{
+  "week": "2026-06-22",
+  "generated_at": "2026-06-21T08:31:00",
+  "total_events_after_dedup": 90,
+  "collection_failures": [
+    "do215 (partial — June 22, 25, 26, 28 not covered; URL retrieval failed in scheduled-task context)",
+    "songkick (partial — full June page too large to process; 2 events confirmed via supplemental search)"
+  ],
+  "days": [
+    {
+      "date": "2026-06-22",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "NFC Sculpture Workshop",
+          "venue": "Iffy Books",
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "time": "6:00 PM",
+          "cost": "$4.50 kit + optional instructor donation (notaflof)",
+          "url": "https://iffybooks.net/",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Build small clay sculptures with NFC tags embedded inside that trigger shortcuts on your phone — half art project, half hardware hack, at a DIY electronics bookstore with a no-one-turned-away-for-lack-of-funds door policy. Iffy Books keeps the barrier floor as low as it gets: $4.50 for the kit, pay what you can for instruction. If you've been wanting to start embedding tech into physical objects, this is the room to start in Philly."
+        },
+        {
+          "rank": 2,
+          "title": "Gothic night: Die Sexual, Ronnie Stone & DJ Baby Berlin",
+          "venue": "Johnny Brenda's",
+          "address": "1201 North Frankford Ave, Philadelphia, PA 19125",
+          "time": "8:00 PM",
+          "cost": "$15 adv / $20 DOS",
+          "url": "https://phillygoth.net/",
+          "category": "🎵 Music & Concerts",
+          "source": "Phillygoth.net",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Die Sexual bring a heavy, bass-driven gothic rock sound that rarely makes it to Philly — this is a proper goth night with live bands, not a DJ bar set. Doors at 7, show at 8, $15 advance at a venue that keeps the room the right size for this kind of music. 21+."
+        },
+        {
+          "rank": 3,
+          "title": "CONTRACHARGE (chi), AGONESIAC, DISCLAIM",
+          "venue": "Cousin Danny's",
+          "time": "6:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/483",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "why": "CONTRACHARGE travel from Chicago — shows like this at Cousin Danny's are exactly why the DIY network exists. The early 6 PM start means you can make this and still catch something later. Cost and address not confirmed in source; check Ask A Punk or reach out before going."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)",
+          "venue": "PhilaMOCA"
+        },
+        {
+          "title": "ROAR (1981) — After Hours Curated",
+          "venue": "Philadelphia Film Society, Film Society Center"
+        }
+      ],
+      "events": [
+        {
+          "title": "CONTRACHARGE (chi), AGONESIAC, DISCLAIM",
+          "venue": "Cousin Danny's",
+          "time": "6:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/483",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "note": "DIY hardcore/punk, out of town band from Chicago. Cost not listed — likely cheap or door."
+        },
+        {
+          "title": "Charley Crockett — Age of the Ram Tour",
+          "venue": "The Met Presented by Highmark",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://xpn.org/concert-and-events/",
+          "category": "🎵 Music & Concerts",
+          "source": "WXPN",
+          "is_music": true,
+          "sold_out": false,
+          "note": "WXPN-presented Charley Crockett at The Met. Large venue; check ticket availability."
+        },
+        {
+          "title": "Del Amitri",
+          "venue": "Underground Arts",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://xpn.org/concert-and-events/",
+          "category": "🎵 Music & Concerts",
+          "source": "WXPN",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Scottish alt-rock/pop band. 21+ event at Underground Arts."
+        },
+        {
+          "title": "Gothic night: Die Sexual, Ronnie Stone & DJ Baby Berlin",
+          "venue": "Johnny Brenda's",
+          "time": "8:00 PM",
+          "cost": "$15 adv / $20 DOS",
+          "url": "https://phillygoth.net/",
+          "category": "🎵 Music & Concerts",
+          "source": "Phillygoth.net",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Goth/post-punk live show. Doors 7pm. 21+."
+        },
+        {
+          "title": "LEVITICUS (2026) — PFS SpringFest Selection",
+          "venue": "Philadelphia Film Society, Film Society Bourse",
+          "time": "12:10 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/leviticus/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Queer horror — two teenage boys flee a violent entity that takes the form of whoever they desire. SpringFest 2026 selection. Multiple showtimes daily."
+        },
+        {
+          "title": "DISCLOSURE DAY (2026)",
+          "venue": "Philadelphia Film Society, Film Society East",
+          "time": "12:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/disclosure-day/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Steven Spielberg sci-fi. Multiple showtimes: 12:30pm, 3:30pm, 6:30pm, 9:15pm."
+        },
+        {
+          "title": "BACKROOMS (2026)",
+          "venue": "Philadelphia Film Society, Film Society Bourse",
+          "time": "1:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/backrooms/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Kane Parsons directs the internet horror meme turned film — a strange doorway opens in a furniture showroom basement. Multiple showtimes: 1pm, 3:50pm, 6:30pm, 9pm."
+        },
+        {
+          "title": "THE FURIOUS (2025) — PFS SpringFest Selection",
+          "venue": "Philadelphia Film Society, Film Society East",
+          "time": "1:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/the-furious/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Explosive martial arts film with Xie Miao and Joe Taslim. SpringFest 2026 selection. Multiple showtimes: 1pm, 4pm, 6:45pm, 9:30pm."
+        },
+        {
+          "title": "I LOVE BOOSTERS (2025)",
+          "venue": "Philadelphia Film Society, Film Society Bourse",
+          "time": "1:15 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/i-love-boosters-bourse/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Boots Riley (Sorry to Bother You) directs a caper comedy about professional shoplifters targeting a fashion maven. Multiple showtimes: 1:15pm, 4pm, 6:40pm, 9:15pm."
+        },
+        {
+          "title": "PRINCESS CYD (2017) — Pride and Prejudice and Fabulousness Series",
+          "venue": "Philadelphia Film Society, Film Society Center",
+          "time": "2:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/princess-cyd/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Sapphic coming-of-age drama. Part of PFS's Pride Month curated series."
+        },
+        {
+          "title": "Mythology on Film (screening program)",
+          "venue": "Lovett Memorial Library",
+          "time": "3:00 PM",
+          "cost": "free",
+          "url": "https://libwww.freelibrary.org/programs/authorevents/",
+          "category": "🎬 Film & Cinema",
+          "source": "Free Library",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Free library film screening exploring mythological adaptations on screen. Film title not specified — check Free Library site for details."
+        },
+        {
+          "title": "THE CHILDREN'S HOUR (1961) — Pride and Prejudice and Fabulousness Series",
+          "venue": "Philadelphia Film Society, Film Society Center",
+          "time": "4:45 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/the-childrens-hour/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Audrey Hepburn and Shirley MacLaine in William Wyler's searing drama about slander. Part of PFS's Pride Month curated series."
+        },
+        {
+          "title": "ROAR (1981) — After Hours Curated",
+          "venue": "Philadelphia Film Society, Film Society Center",
+          "time": "7:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/roar/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Noel Marshall's insane big-cat film with Tippi Hedren and Melanie Griffith. Part of the PFS After Hours Curated series."
+        },
+        {
+          "title": "PHILLY FILM SHOWCASE",
+          "venue": "Philadelphia Film Society, Film Society Center",
+          "time": "7:15 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/philly-film-showcase/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Local filmmakers of all ages and backgrounds. Q&A with filmmakers follows."
+        },
+        {
+          "title": "WILDWOOD, NJ (1994) — Cult Movie Monday",
+          "venue": "PhilaMOCA",
+          "time": "7:30 PM",
+          "cost": "SOLD OUT",
+          "url": "https://www.etix.com/ticket/p/88639814/wildwoodnj-1994-philadelphia-philamoca",
+          "category": "🎬 Film & Cinema",
+          "source": "PhilaMOCA",
+          "is_music": false,
+          "sold_out": true,
+          "note": "SOLD OUT. Filmmaker Ruth Leitman in attendance, Q&A moderated by Jeff Krulik (Heavy Metal Parking Lot). An encore screening is available Tuesday June 23."
+        },
+        {
+          "title": "SHOWGIRLS (1995) — After Hours Curated",
+          "venue": "Philadelphia Film Society, Film Society Center",
+          "time": "9:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://filmadelphia.org/movies/showgirls/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Paul Verhoeven's cult classic. PFS After Hours Curated series."
+        },
+        {
+          "title": "West Philly Sanctuary: Beaded Keychain-Making Workshop (World Cup Edition)",
+          "venue": "The Rotunda",
+          "time": "12:00 PM",
+          "cost": "free",
+          "url": "https://www.therotunda.org/event/west-philly-sanctuary-invites-you-to-a-fun-writing-workshop",
+          "category": "🤝 Community & Politics",
+          "source": "The Rotunda",
+          "is_music": false,
+          "sold_out": false,
+          "note": "West Philly Sanctuary (immigrant support org) hosts a free World Cup–themed keychain workshop. All ages, alcohol-free venue. 12–2 PM."
+        },
+        {
+          "title": "community night: bring your own craft + queer book swap",
+          "venue": "Cartesian Brewing",
+          "time": "6:30 PM",
+          "cost": "free",
+          "url": "https://luma.com/wp222up8",
+          "category": "🤝 Community & Politics",
+          "source": "Luma",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Pride Month community night — bring a craft to work on, bring a queer book to swap. Free at Cartesian Brewing."
+        },
+        {
+          "title": "Custom Cutting Philly",
+          "venue": "Barnet Fair",
+          "time": "11:00 AM",
+          "cost": "*(confirm details)*",
+          "url": "https://luma.com/k9vo6rni",
+          "category": "🎨 Arts & Workshops",
+          "source": "Luma",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Haircutting workshop focusing on natural texture. Hosted by Caitlin Helle."
+        },
+        {
+          "title": "NFC Sculpture Workshop",
+          "venue": "Iffy Books",
+          "time": "6:00 PM",
+          "cost": "$4.50 kit + optional instructor donation (notaflof)",
+          "url": "https://iffybooks.net/",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Embed NFC tags in Sculpey clay sculptures to trigger phone shortcuts. Kit $4.50 with tax, instructor donation $5–$15, no one turned away for lack of funds."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-23",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "WILDWOOD, NJ (1994) — Encore Screening",
+          "venue": "PhilaMOCA",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "$10",
+          "url": "https://www.etix.com/ticket/p/36584906/",
+          "category": "🎬 Film & Cinema",
+          "source": "PhilaMOCA",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Ruth Leitman's underground Hi-8 documentary about a 1994 New Jersey beach town sold out its PhilaMOCA premiere on Monday — this encore exists because people couldn't get in. Leitman will be in the room for a Q&A, moderated by Jeff Krulik (director of Heavy Metal Parking Lot). $10 at PhilaMOCA, doors at 7."
+        },
+        {
+          "rank": 2,
+          "title": "Black Country, New Road",
+          "venue": "Franklin Music Hall",
+          "address": "421 N 7th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/23",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Black Country, New Road are one of the defining acts of current UK experimental music — chamber pop, post-rock, folk, and grief tangled into something constantly evolving. Philly dates are not frequent, and Franklin Music Hall is the right room to feel it. The kind of show that gets talked about afterward."
+        },
+        {
+          "rank": 3,
+          "title": "Land to the Tillers Playtest",
+          "venue": "Wooden Shoe Books",
+          "address": "704 South St, Philadelphia, PA 19147",
+          "time": "6:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://woodenshoebooks.org/",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Playtesting a game called Land to the Tillers at an anarchist bookstore is already a sentence worth showing up for — leftist theory as game design, at Wooden Shoe. This is community-built work in progress, and showing up means shaping it while it's still being made. No cost listed."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Days of Heaven (1978) — Wawa Welcome America Free Movie Day",
+          "venue": "Philadelphia Film Society, Film Society Center"
+        },
+        {
+          "title": "Open Streets: Midtown Village",
+          "venue": "Sansom St Gayborhood"
+        }
+      ],
+      "events": [
+        {
+          "title": "Black Country, New Road",
+          "venue": "Franklin Music Hall",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/23",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "UK experimental rock/chamber pop. One of the most acclaimed current acts in the UK — don't sleep."
+        },
+        {
+          "title": "Spoon & The Beths: US Tour 2026",
+          "venue": "The Fillmore Philadelphia",
+          "time": "7:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/23",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Spoon + The Beths co-headlining at The Fillmore. Large corporate venue, but a solid pairing."
+        },
+        {
+          "title": "The Animeros",
+          "venue": "Ortlieb's",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/23",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false
+        },
+        {
+          "title": "Days of Heaven (1978) — Wawa Welcome America Free Movie Day",
+          "venue": "Philadelphia Film Society, Film Society Center",
+          "time": "4:00 PM",
+          "cost": "free",
+          "url": "https://filmadelphia.org/showtimes/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Terrence Malick's 1978 masterpiece — free as part of Wawa Welcome America. Two showtimes: 4pm and 7pm."
+        },
+        {
+          "title": "KILLER JOE (2011) — Philadelphia Horror Film Night (Online)",
+          "venue": "Online (Discord)",
+          "time": "8:00 PM",
+          "cost": "free",
+          "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/315062512/",
+          "category": "🎬 Film & Cinema",
+          "source": "Meetup: Philadelphia Horror",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Online horror meetup group watch-along. Killer Joe (2011) — Matthew McConaughey crime thriller. Via Discord."
+        },
+        {
+          "title": "WILDWOOD, NJ (1994) — Encore Screening",
+          "venue": "PhilaMOCA",
+          "time": "7:30 PM",
+          "cost": "$10",
+          "url": "https://www.etix.com/ticket/p/36584906/",
+          "category": "🎬 Film & Cinema",
+          "source": "PhilaMOCA",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Encore after Monday's sold-out screening. Filmmaker Ruth Leitman in attendance, Q&A follows. Doors 7pm."
+        },
+        {
+          "title": "Land to the Tillers Playtest",
+          "venue": "Wooden Shoe Books",
+          "time": "6:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://woodenshoebooks.org/",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Game playtest at the anarchist bookstore. Leftist political game; description not provided — check Wooden Shoe site for details."
+        },
+        {
+          "title": "Open Streets: Midtown Village",
+          "venue": "Sansom St Gayborhood",
+          "time": "4:00 PM",
+          "cost": "free",
+          "url": "https://thephiladelphiacitizen.org/good-citizen-calendar/",
+          "category": "🤝 Community & Politics",
+          "source": "Philadelphia Citizen",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Seven blocks closed to cars every Tuesday 4–9pm through June, with live music, performances, and a family zone."
+        },
+        {
+          "title": "FIFA Fan Festival",
+          "venue": "Lemon Hill, East Fairmount Park",
+          "time": "11:00 AM",
+          "cost": "free",
+          "url": "https://do215.com/events/2026/06/23",
+          "category": "🎪 Festivals & Major Events",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Free FIFA World Cup fan event at Lemon Hill. Running through July 4."
+        },
+        {
+          "title": "The Writing Room",
+          "venue": "Iffy Books",
+          "time": "5:00 PM",
+          "cost": "free",
+          "url": "https://iffybooks.net/",
+          "category": "📚 Literary",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Co-working writing session in three 40-minute silent blocks with accountability check-ins. Writers of any kind welcome. BYO coffee, computer, notepads."
+        },
+        {
+          "title": "Mural Making Workshop with Chenlin Cai and Xingzi Liang",
+          "venue": "Moore College of Art & Design, Room SP 202",
+          "time": "6:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://luma.com/k1n2poav",
+          "category": "🎨 Arts & Workshops",
+          "source": "Luma",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Hands-on mural painting workshop exploring cultural storytelling through art, with artists Chenlin Cai and Xingzi Liang of Sunny Design & Rainy Art Studio. Hosted by AIGA Philadelphia."
+        },
+        {
+          "title": "Vogue Practice Session",
+          "venue": "The Rotunda",
+          "time": "6:00 PM",
+          "cost": "free",
+          "url": "https://www.therotunda.org/event/in-person-vogue-practice-session-2026-06-23-18-00-00-0400",
+          "category": "🎨 Arts & Workshops",
+          "source": "The Rotunda",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Recurring weekly Vogue Practice Session at the Rotunda. 6–9 PM, all ages, alcohol-free."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-24",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Speculative Futures Reading Group: 'The Ones Who Walk From Omelas' by Ursula Le Guin",
+          "venue": "Iffy Books",
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "time": "7:00 PM",
+          "cost": "donation to store requested",
+          "url": "https://iffybooks.net/",
+          "category": "📚 Literary",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Three linked stories — Le Guin's 'The Ones Who Walk From Omelas,' NK Jemisin's direct response 'The Ones Who Stay and Fight,' and Isabel J. Kim's newer riff — make this a living conversation across generations of speculative fiction writers about complicity and collective action. Literary theory meets leftist ethics meets actual fiction at a DIY bookstore with a donation jar. All three texts are available online; come prepared or come to listen."
+        },
+        {
+          "rank": 2,
+          "title": "Lip Critic w/ Flatwounds + Bejalvin",
+          "venue": "PhilaMOCA",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "$20",
+          "url": "https://www.etix.com/ticket/p/97639981",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Lip Critic are a Philly noise-rock band with a cult following for good reason — angular, propulsive, and genuinely weird in the best sense. R5 brings them to PhilaMOCA for an all-ages show; Flatwounds and Bejalvin open. $20, doors 7:30."
+        },
+        {
+          "rank": 3,
+          "title": "DoYeon Kim Quartet (Ars Nova Workshop)",
+          "venue": "Solar Myth",
+          "address": "1010 S Broad St, Philadelphia, PA 19146",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/24",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Korean-born Philadelphia bassist DoYeon Kim brings her quartet to Solar Myth under the Ars Nova Workshop banner — one of the sharpest contemporary jazz and experimental music presenters in the city. If you want to hear what's happening at the edges of jazz in Philadelphia right now, this is the room."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Analog A/V Session",
+          "venue": "Iffy Books"
+        },
+        {
+          "title": "Creed (2015) — Wawa Welcome America Free Movie Day",
+          "venue": "Philadelphia Film Society, Film Society Center"
+        }
+      ],
+      "events": [
+        {
+          "title": "Lip Critic w/ Flatwounds + Bejalvin",
+          "venue": "PhilaMOCA",
+          "time": "8:00 PM",
+          "cost": "$20",
+          "url": "https://www.etix.com/ticket/p/97639981",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "is_music": true,
+          "sold_out": false,
+          "note": "R5 Productions. All ages. Doors 7:30."
+        },
+        {
+          "title": "Lord Jah-Monte Ogbon + guests",
+          "venue": "Silk City",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/24",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Philly rapper Lord Jah-Monte Ogbon at Silk City."
+        },
+        {
+          "title": "Surf Trash ~ This Temper ~ Calling From Pluto",
+          "venue": "Kung Fu Necktie",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/24",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false
+        },
+        {
+          "title": "BLACKTRONIKA",
+          "venue": "Johnny Brenda's",
+          "time": "9:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/24",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false
+        },
+        {
+          "title": "DoYeon Kim Quartet (Ars Nova Workshop)",
+          "venue": "Solar Myth",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/24",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Contemporary jazz, Ars Nova Workshop presentation."
+        },
+        {
+          "title": "Goetia / Cemetery Filth / Nuclear Tomb / Cavern Womb",
+          "venue": "Nikki Lopez",
+          "time": "7:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/24",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Death metal four-band bill."
+        },
+        {
+          "title": "field trip: free concert — Flawed Mangoes (Killswitch Memories Tour)",
+          "venue": "The Foundry",
+          "time": "7:30 PM",
+          "cost": "free",
+          "url": "https://luma.com/letmeknow-fcqo",
+          "category": "🎵 Music & Concerts",
+          "source": "Luma",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Free via Live Nation / LMK club partnership. Flawed Mangoes is a Boston guitarist known for his kill-switch technique."
+        },
+        {
+          "title": "Creed (2015) — Wawa Welcome America Free Movie Day",
+          "venue": "Philadelphia Film Society, Film Society Center",
+          "time": "4:00 PM",
+          "cost": "free",
+          "url": "https://filmadelphia.org/showtimes/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Free Wawa Welcome America screening of Creed (2015). Two showtimes: 4pm and 7pm."
+        },
+        {
+          "title": "THE BANSHEE CHAPTER (2013) — Philadelphia Horror Film Night (Online)",
+          "venue": "Online (Discord)",
+          "time": "8:00 PM",
+          "cost": "free",
+          "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/315289390/",
+          "category": "👻 Horror & Occult",
+          "source": "Meetup: Philadelphia Horror",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Online watch-along. The Banshee Chapter (2013) — journalist investigates a friend's disappearance linked to a government chemical and a strange radio signal. Via Discord."
+        },
+        {
+          "title": "Speculative Futures Reading Group: 'The Ones Who Walk From Omelas' by Ursula Le Guin",
+          "venue": "Iffy Books",
+          "time": "7:00 PM",
+          "cost": "donation to store requested",
+          "url": "https://iffybooks.net/",
+          "category": "📚 Literary",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Reading Le Guin alongside NK Jemisin's response and Isabel J. Kim's riff. All three texts free online. July book: Ada Hoffman's Ignore all Previous Instructions."
+        },
+        {
+          "title": "Franklin's Key — Pig Iron Theatre Company",
+          "venue": "Plays & Players Theatre",
+          "time": "*(confirm showtimes)*",
+          "cost": "*(confirm details)*",
+          "url": "https://thephiladelphiacitizen.org/good-citizen-calendar/",
+          "category": "🎨 Arts & Workshops",
+          "source": "Philadelphia Citizen",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Barrymore Award–winning sci-fi adventure from Pig Iron Theatre. Runs through June 28. Multiple showtimes."
+        },
+        {
+          "title": "Analog A/V Session",
+          "venue": "Iffy Books",
+          "time": "10:30 AM",
+          "cost": "optional instructor donation (notaflof)",
+          "url": "https://iffybooks.net/",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Experiment with VHS and cassette tapes — analog-to-digital and digital-to-analog transfers. Equipment provided. Donation $5–$15, no one turned away."
+        },
+        {
+          "title": "DJ Basixxx with MIXXX",
+          "venue": "Iffy Books",
+          "time": "2:00 PM",
+          "cost": "optional instructor donation ($5–$15 suggested)",
+          "url": "https://iffybooks.net/",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Intro to MIXXX, free/open-source DJ software. Bring a laptop and headphones. Optional: separate USB keyboard to use as a DJ controller."
+        },
+        {
+          "title": "Weekly Improvised Music Drop-in Jam Session",
+          "venue": "The Rotunda",
+          "time": "12:00 PM",
+          "cost": "free",
+          "url": "https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-06-24-12-00-00-0400",
+          "category": "🎵 Music & Concerts",
+          "source": "The Rotunda",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Recurring weekly Rotunda drop-in jam. 12–2 PM, all ages, alcohol-free."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-25",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "of Montreal and Cormae",
+          "venue": "Underground Arts",
+          "address": "1200 Callowhill St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia/june-2026",
+          "category": "🎵 Music & Concerts",
+          "source": "Songkick",
+          "is_music": true,
+          "sold_out": false,
+          "why": "of Montreal have been making maximalist, genre-shifting psychedelic pop since the late '90s — glam, prog, funk, and absurdist theater at once — and Philly appearances aren't frequent. Underground Arts is the right room for this kind of show. An event worth clearing your evening for."
+        },
+        {
+          "rank": 2,
+          "title": "Prewn",
+          "venue": "PhilaMOCA",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "$15",
+          "url": "https://www.etix.com/ticket/p/71702286",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Prewn make slow-burning indie rock with emotional weight — the kind of band that rewards a quiet room and full attention. $15 at PhilaMOCA, R5 all-ages, doors 7:30."
+        },
+        {
+          "rank": 3,
+          "title": "SWEATFEST @ PENTRIDGE STATION",
+          "venue": "Pentridge Station",
+          "time": "5:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/487",
+          "category": "🎪 Festivals & Major Events",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Multi-act DIY fest hitting punk, hardcore, no wave, noise rock, power pop, and post-punk in one session at Pentridge Station. The Ask A Punk listing confirms live music and a 5 PM start — cost and full lineup TBD, check the link."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Art Club / Open Studio: BYO Project",
+          "venue": "Freehand Art Supply"
+        }
+      ],
+      "events": [
+        {
+          "title": "Prewn",
+          "venue": "PhilaMOCA",
+          "time": "8:00 PM",
+          "cost": "$15",
+          "url": "https://www.etix.com/ticket/p/71702286",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "is_music": true,
+          "sold_out": false,
+          "note": "R5 Productions. All ages. Doors 7:30."
+        },
+        {
+          "title": "of Montreal and Cormae",
+          "venue": "Underground Arts",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia/june-2026",
+          "category": "🎵 Music & Concerts",
+          "source": "Songkick",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Psychedelic indie pop with Cormae opening. Source: Songkick; confirm ticket details directly."
+        },
+        {
+          "title": "SWEATFEST @ PENTRIDGE STATION",
+          "venue": "Pentridge Station",
+          "time": "5:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/487",
+          "category": "🎪 Festivals & Major Events",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Genres: hardcore punk, no wave, noise rock, power pop, post-punk. Full lineup and cost not listed."
+        },
+        {
+          "title": "The Gathering",
+          "venue": "The Rotunda",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://www.therotunda.org/event/in-person-the-gathering-2026-06-25-20-00-00-0400",
+          "category": "🤝 Community & Politics",
+          "source": "The Rotunda",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Event description not provided. All ages, alcohol-free venue. Check Rotunda site for details."
+        },
+        {
+          "title": "Cyber Risk & Resilience in Education in the Age of AI (Online)",
+          "venue": "Online",
+          "time": "2:00 PM",
+          "cost": "free",
+          "url": "https://www.meetup.com/techinmotionphilly/events/315229986/",
+          "category": "💻 Tech & Maker",
+          "source": "Meetup: Tech in Motion",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Panel on AI-era cyber threats in K-12 education. Speakers from Microsoft, University of Maryland, and school district CIOs. Online event."
+        },
+        {
+          "title": "Art Club / Open Studio: BYO Project",
+          "venue": "Freehand Art Supply",
+          "time": "5:15 PM",
+          "cost": "free",
+          "url": "https://luma.com/nlte7tg1",
+          "category": "🎨 Arts & Workshops",
+          "source": "Luma",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Thursday Night Art Club — bring your own project, no instruction, just community workspace. Easels and basic materials provided."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-26",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Beginner Soldering: LED Spinning Top",
+          "venue": "Iffy Books",
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "time": "2:00 PM",
+          "cost": "$5.39 kit (includes tax) + optional instructor donation (notaflof)",
+          "url": "https://iffybooks.net/",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "No soldering experience required — you're building a top that flashes LEDs when it spins, and the kit is $5.39. Iffy Books' beginner soldering workshops are legitimately good entry points to electronics work, run by patient instructors with a no-one-turned-away door policy. The cost floor doesn't get lower."
+        },
+        {
+          "rank": 2,
+          "title": "Bike Routes w/ Wormy + Innerlove",
+          "venue": "PhilaMOCA",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "$15",
+          "url": "https://www.etix.com/ticket/p/87185782",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "is_music": true,
+          "sold_out": false,
+          "why": "R5 brings Bike Routes — a Chicago indie rock band with road-tested, well-crafted songs — to PhilaMOCA for an all-ages Friday night. $15, doors 7:30. Wormy and Innerlove open; both worth arriving early for."
+        },
+        {
+          "rank": 3,
+          "title": "PARC First Aid Training",
+          "venue": "Wooden Shoe Books",
+          "address": "704 South St, Philadelphia, PA 19147",
+          "time": "6:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://woodenshoebooks.org/",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philly Action Ready Coalition teaches practical street medicine at the anarchist bookstore — Narcan use, CPR, basic scans. No certifications, no jargon, just usable knowledge. Events like this are what mutual aid infrastructure actually looks like in practice."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Fundraising Market for LAVA Space",
+          "venue": "The Rotunda"
+        },
+        {
+          "title": "Goth night at Doom",
+          "venue": "Doom, 421 N 7th St"
+        }
+      ],
+      "events": [
+        {
+          "title": "Bike Routes w/ Wormy + Innerlove",
+          "venue": "PhilaMOCA",
+          "time": "8:00 PM",
+          "cost": "$15",
+          "url": "https://www.etix.com/ticket/p/87185782",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "is_music": true,
+          "sold_out": false,
+          "note": "R5 Productions. All ages. Doors 7:30."
+        },
+        {
+          "title": "Positronix, Powerhouse of the Cell, ADMIN, The Angies",
+          "venue": "Cousin Danny's",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/495",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Post-punk/punk, out of town band (Positronix). DIY show at Cousin Danny's."
+        },
+        {
+          "title": "Goth night at Doom",
+          "venue": "Doom, 421 N 7th St",
+          "time": "9:00 PM",
+          "cost": "free",
+          "url": "https://phillygoth.net/",
+          "category": "🎵 Music & Concerts",
+          "source": "Phillygoth.net",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Free goth night. 21+."
+        },
+        {
+          "title": "Supergirl (2026)",
+          "venue": "Theatrical Release",
+          "time": "",
+          "cost": "*(confirm details)*",
+          "url": "https://trakt.tv/movies/supergirl-2026",
+          "category": "🎬 Film & Cinema",
+          "source": "Trakt.tv film releases",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Kara Zor-El teams with an unlikely companion on an interstellar revenge mission. Wide theatrical release."
+        },
+        {
+          "title": "Fundraising Market for LAVA Space",
+          "venue": "The Rotunda",
+          "time": "5:00 PM",
+          "cost": "free",
+          "url": "https://www.therotunda.org/event/fundraising-market-for-lava-space",
+          "category": "🌿 Markets & Outdoors",
+          "source": "The Rotunda",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Free market fundraiser supporting LAVA Space. 5–9 PM, all ages, alcohol-free."
+        },
+        {
+          "title": "PARC First Aid Training",
+          "venue": "Wooden Shoe Books",
+          "time": "6:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://woodenshoebooks.org/",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Street medicine basics: scans, Narcan, CPR. No certifications. Philly Action Ready Coalition."
+        },
+        {
+          "title": "You Da Birthday: Craft Collective Turns One",
+          "venue": "Margolis",
+          "time": "6:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://luma.com/jcekt20o",
+          "category": "🎨 Arts & Workshops",
+          "source": "Luma",
+          "is_music": false,
+          "sold_out": false,
+          "note": "One-year anniversary of The Craft Collective — music, open crafting, and community. Open to all."
+        },
+        {
+          "title": "Beginner Soldering: LED Spinning Top",
+          "venue": "Iffy Books",
+          "time": "2:00 PM",
+          "cost": "$5.39 kit + optional instructor donation (notaflof)",
+          "url": "https://iffybooks.net/",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Build an LED spinning top. No experience needed. Kit $5.39, instructor donation $5–$15, notaflof."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-27",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "LAYER MEAT, SPECTRAL FORCES, VOID OF INFINITE CONSEQUENCE: A Benefit Show for Sol Collective",
+          "venue": "God's Automatic Body",
+          "address": "5522 Baltimore Ave, Philadelphia, PA 19143",
+          "time": "7:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://www.gods.gay",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Three experimental acts — avant-garde, free jazz, and noise — playing a benefit for Sol Collective, a West Philadelphia community arts and social justice organization. God's Automatic Body is a DIY space most of the city doesn't know about yet; shows there have a specificity that bigger venues lose. This one has community stakes attached and will be talked about."
+        },
+        {
+          "rank": 2,
+          "title": "JINSEI — Philly Premiere",
+          "venue": "PhilaMOCA",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/81945212/",
+          "category": "🎬 Film & Cinema",
+          "source": "PhilaMOCA",
+          "is_music": false,
+          "sold_out": false,
+          "why": "JINSEI gets its Philadelphia premiere at PhilaMOCA — which is already a meaningful signal about what kind of film this is. $12, doors at 7. Details on the film itself are sparse, which at PhilaMOCA usually means something genuinely strange is in store."
+        },
+        {
+          "rank": 3,
+          "title": "Ramageddon",
+          "venue": "The Rotunda",
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "time": "4:00 PM",
+          "cost": "$15 advance / $18 door",
+          "url": "https://www.therotunda.org/event/ramageddon",
+          "category": "🎵 Music & Concerts",
+          "source": "The Rotunda",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Ten local acts in one afternoon and evening at the Rotunda — HECCRA, ULTRA DELUXE, SLOW BURNING DAYDREAM, SODASEAS, POWERLINE TRAIL, GUILLERMO GUILLOTINE, LINDEN, IT HELPS ME SLEEP, ALL ENDS LEAD TO YOU, KWARTER ZIP. $15 advance for the density of local talent alone is a steal. All ages, alcohol-free, the Rotunda at full capacity for a showcase has a specific Philly energy."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "River Roads Festival: Dar Williams, 10,000 Maniacs, Billy Bragg & Shawn Colvin",
+          "venue": "Heuser Park"
+        },
+        {
+          "title": "6/27: EKGs (PGH) // Diuretic // Real Shocks // Anatomix (first show)",
+          "venue": "Cousin Danny's"
+        },
+        {
+          "title": "Cyberdeck Meetup",
+          "venue": "Iffy Books"
+        },
+        {
+          "title": "Tommy Conwell & The Young Rumblers + fireworks",
+          "venue": "RiverRink Summerfest"
+        }
+      ],
+      "events": [
+        {
+          "title": "LAYER MEAT, SPECTRAL FORCES, VOID OF INFINITE CONSEQUENCE: A Benefit Show for Sol Collective",
+          "venue": "God's Automatic Body",
+          "time": "7:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://www.gods.gay",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Avant-garde, experimental, free jazz. Benefit for Sol Collective (West Philly community arts + social justice org). Do215 lists this as 'Spectral Forces / Angel Meat / Void of Infinite Consequences' — same show, possible lineup name discrepancy."
+        },
+        {
+          "title": "The Cradle (NYC), Brittle Brian, Nina Ryser, Gabriel Garcia Leeds",
+          "venue": "Beautiful World Syndicate",
+          "time": "7:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/494",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Folk, guitar, experimental, synth pop. The Cradle comes from NYC."
+        },
+        {
+          "title": "6/27: EKGs (PGH) // Diuretic // Real Shocks // Anatomix (first show)",
+          "venue": "Cousin Danny's",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/476",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Hardcore/punk, EKGs from Pittsburgh. Anatomix plays their first-ever show. DIY at Cousin Danny's."
+        },
+        {
+          "title": "Doc Rotteb / The Droogettes / Symptoms MWC and the cheap suits",
+          "venue": "Warehouse 3",
+          "time": "*(confirm details — 7:00 AM listed, possible error)*",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/493",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Oi/punk, Delco, Swarthmore, out of town band. Time listed as 7:00 AM — likely a data error. Confirm before going."
+        },
+        {
+          "title": "Ramageddon",
+          "venue": "The Rotunda",
+          "time": "4:00 PM",
+          "cost": "$15 advance / $18 door",
+          "url": "https://www.therotunda.org/event/ramageddon",
+          "category": "🎵 Music & Concerts",
+          "source": "The Rotunda",
+          "is_music": true,
+          "sold_out": false,
+          "note": "10-act local showcase. HECCRA // ULTRA DELUXE // SLOW BURNING DAYDREAM // SODASEAS // POWERLINE TRAIL // GUILLERMO GUILLOTINE // LINDEN // IT HELPS ME SLEEP // ALL ENDS LEAD TO YOU // KWARTER ZIP. All ages, alcohol-free."
+        },
+        {
+          "title": "River Roads Festival: Dar Williams, 10,000 Maniacs, Billy Bragg & Shawn Colvin",
+          "venue": "Heuser Park",
+          "time": "1:15 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/27",
+          "category": "🎪 Festivals & Major Events",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Folk/roots outdoor festival. Billy Bragg's presence gives this a political dimension worth noting."
+        },
+        {
+          "title": "Wale & Smino",
+          "venue": "The Fillmore Philadelphia",
+          "time": "8:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/27",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Wale and Smino co-headline. Smino is a strong hip-hop/R&B/soul crossover act."
+        },
+        {
+          "title": "Jack Johnson: SURFILMUSIC Tour",
+          "venue": "Highmark Mann",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/27",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Large outdoor venue."
+        },
+        {
+          "title": "The Silver — Album Release Show",
+          "venue": "MilkBoy",
+          "time": "6:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/27",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Local band album release at MilkBoy."
+        },
+        {
+          "title": "Kenny Gray / Dutts",
+          "venue": "Kung Fu Necktie",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://do215.com/events/2026/06/27",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false
+        },
+        {
+          "title": "Tommy Conwell & The Young Rumblers — Free Concert + Fireworks",
+          "venue": "Independence Blue Cross RiverRink Summerfest",
+          "time": "8:00 PM",
+          "cost": "free",
+          "url": "https://xpn.org/concert-and-events/",
+          "category": "🎵 Music & Concerts",
+          "source": "WXPN",
+          "is_music": true,
+          "sold_out": false,
+          "note": "WXPN-presented free concert, 8–10 PM. Fireworks at 9:30 PM over the Delaware River. Philly rock legend."
+        },
+        {
+          "title": "JINSEI — Philly Premiere",
+          "venue": "PhilaMOCA",
+          "time": "7:30 PM",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/81945212/",
+          "category": "🎬 Film & Cinema",
+          "source": "PhilaMOCA",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Philadelphia premiere. Doors 7pm."
+        },
+        {
+          "title": "High Noon (1952) — Wawa Welcome America Free Movie Day",
+          "venue": "Philadelphia Film Society, Film Society Center",
+          "time": "2:00 PM",
+          "cost": "free",
+          "url": "https://filmadelphia.org/showtimes/",
+          "category": "🎬 Film & Cinema",
+          "source": "Philadelphia Film Society",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Free Wawa Welcome America screening of the 1952 classic."
+        },
+        {
+          "title": "Tarique Connelly — A Teacher's Odyssey",
+          "venue": "Wynnefield Library",
+          "time": "1:00 PM",
+          "cost": "free",
+          "url": "https://libwww.freelibrary.org/programs/authorevents/",
+          "category": "📚 Literary",
+          "source": "Free Library",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Philadelphia public school educator presents his memoir on grit, global teaching, and the literacy crisis. Free at the Free Library."
+        },
+        {
+          "title": "Seen/Unseen Listening Session",
+          "venue": "Iffy Books",
+          "time": "5:00 PM",
+          "cost": "free",
+          "url": "https://iffybooks.net/",
+          "category": "🎨 Arts & Workshops",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Audio series by Philadelphian Gigi Guida — a noticing tour through City Hall surfacing power in landscape and language. Facilitated by Gigi Guida and educator Mya Gordon."
+        },
+        {
+          "title": "Cyberdeck Meetup",
+          "venue": "Iffy Books",
+          "time": "10:30 AM",
+          "cost": "free",
+          "url": "https://iffybooks.net/",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Show off your DIY laptop (SBC + LCD + keyboard in a custom enclosure). LCDs, keyboards, and wooden boxes for sale. Help others get started building."
+        },
+        {
+          "title": "Study Hall / Work on CTFs",
+          "venue": "Ex Machina Parlor",
+          "time": "10:00 AM",
+          "cost": "free",
+          "url": "https://www.meetup.com/dc_215/events/315145723/",
+          "category": "💻 Tech & Maker",
+          "source": "Meetup: DC 215",
+          "is_music": false,
+          "sold_out": false,
+          "note": "DC215 DEF CON group Philadelphia. Casual CTF study session — come to work or just talk security."
+        },
+        {
+          "title": "Saints & Sinners",
+          "venue": "Saints & Sinners, 2533 Emery St",
+          "time": "9:00 PM",
+          "cost": "$30+",
+          "url": "https://phillygoth.net/",
+          "category": "👻 Horror & Occult",
+          "source": "Phillygoth.net",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Goth club night. DJ Dr Octo-Pussy. 21+, 9pm–3am. $30+."
+        },
+        {
+          "title": "cake picnic",
+          "venue": "Rittenhouse Square",
+          "time": "12:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://luma.com/98uaxqxe",
+          "category": "🌿 Markets & Outdoors",
+          "source": "Luma",
+          "is_music": false,
+          "sold_out": false,
+          "note": "BYO cake (homemade or store-bought), make decorated cake cards to swap. Hosted by let me know club."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-28",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Anarchy Summer Reading Group",
+          "venue": "Iffy Books",
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "time": "6:00 PM",
+          "cost": "free",
+          "url": "https://iffybooks.net/",
+          "category": "📚 Literary",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Emma Goldman's Anarchism and Other Essays alongside Kropotkin's The Conquest of Bread — two foundational texts, one anarchist bookstore with a free door. Iffy Books runs this as a biweekly series through the summer; this is the session to start with if you've never read either. Come with questions or just come to listen."
+        },
+        {
+          "rank": 2,
+          "title": "The Human League with Soft Cell & Alison Moyet",
+          "venue": "The Met Presented by Highmark",
+          "address": "858 N Broad St, Philadelphia, PA 19130",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://xpn.org/concert-and-events/",
+          "category": "🎵 Music & Concerts",
+          "source": "WXPN",
+          "is_music": true,
+          "sold_out": false,
+          "why": "The Human League, Soft Cell, and Alison Moyet on a single bill is a lineup that shouldn't exist outside a festival, and yet here it is at The Met. Three synthpop and new wave acts at the peak of their cultural moment, five decades in — the ticket price reflects it, but so does the occasion. A once-in-years bill."
+        },
+        {
+          "rank": 3,
+          "title": "Kirk Franklin — Free Gospel Concert",
+          "venue": "Independence National Historical Park",
+          "address": "526 Market St, Philadelphia, PA 19106",
+          "time": "7:00 PM",
+          "cost": "free",
+          "url": "https://xpn.org/concert-and-events/",
+          "category": "🎵 Music & Concerts",
+          "source": "WXPN",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Kirk Franklin performing with a 250-member choir at Independence National Historical Park for free, 7–9 PM, as part of Wawa Welcome America. Gospel and soul at the highest register, outdoors, zero barrier to entry. The full-choir format makes this more spectacle than concert — worth showing up for even if gospel isn't your usual lane."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "ZORN, EARLY GRAVE, HEX (cleveland)",
+          "venue": "Cousin Danny's"
+        },
+        {
+          "title": "DJ Ferret mixing MTV's '120 Minutes'",
+          "venue": "National Mechanics"
+        }
+      ],
+      "events": [
+        {
+          "title": "The Human League with Soft Cell & Alison Moyet",
+          "venue": "The Met Presented by Highmark",
+          "time": "7:30 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://xpn.org/concert-and-events/",
+          "category": "🎵 Music & Concerts",
+          "source": "WXPN",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Three synthpop/new wave legends. WXPN presented. Large venue but genuinely unmissable lineup."
+        },
+        {
+          "title": "Kirk Franklin — Free Gospel Concert",
+          "venue": "Independence National Historical Park",
+          "time": "7:00 PM",
+          "cost": "free",
+          "url": "https://xpn.org/concert-and-events/",
+          "category": "🎵 Music & Concerts",
+          "source": "WXPN",
+          "is_music": true,
+          "sold_out": false,
+          "note": "250-member choir. 7–9 PM. Wawa Welcome America. Free outdoor concert."
+        },
+        {
+          "title": "ZORN, EARLY GRAVE, HEX (cleveland)",
+          "venue": "Cousin Danny's",
+          "time": "7:00 PM",
+          "cost": "*(confirm details)*",
+          "url": "https://philly.askapunk.net/events/484",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Hardcore/metal. HEX comes from Cleveland. DIY show at Cousin Danny's."
+        },
+        {
+          "title": "DJ Ferret mixing MTV's '120 Minutes'",
+          "venue": "National Mechanics",
+          "time": "6:00 PM",
+          "cost": "no cover",
+          "url": "https://phillygoth.net/",
+          "category": "🎵 Music & Concerts",
+          "source": "Phillygoth.net",
+          "is_music": true,
+          "sold_out": false,
+          "note": "All ages, 6–10 PM, no cover. '120 Minutes' alt/goth DJ set."
+        },
+        {
+          "title": "Warehouse on Watts party",
+          "venue": "Warehouse on Watts, 923 N. Watts St",
+          "time": "9:00 PM",
+          "cost": "$15",
+          "url": "https://phillygoth.net/",
+          "category": "👻 Horror & Occult",
+          "source": "Phillygoth.net",
+          "is_music": true,
+          "sold_out": false,
+          "note": "Goth/dark party. 21+, 9pm–2am, $15."
+        },
+        {
+          "title": "Franky Bradley's event",
+          "venue": "Franky Bradley's, 1320 Chancellor St",
+          "time": "6:00 PM",
+          "cost": "$20+",
+          "url": "https://phillygoth.net/",
+          "category": "👻 Horror & Occult",
+          "source": "Phillygoth.net",
+          "is_music": false,
+          "sold_out": false,
+          "note": "21+, 6–9:30pm, $20+. Details not provided — confirm before going."
+        },
+        {
+          "title": "Anarchy Summer Reading Group",
+          "venue": "Iffy Books",
+          "time": "6:00 PM",
+          "cost": "free",
+          "url": "https://iffybooks.net/",
+          "category": "📚 Literary",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Biweekly anarchist reading group. Starting with Anarchism and Other Essays (Goldman) and The Conquest of Bread (Kropotkin)."
+        },
+        {
+          "title": "June Horror Book Club: Bury Your Gays by Chuck Tingle (Online)",
+          "venue": "Online (Discord)",
+          "time": "6:30 PM",
+          "cost": "free",
+          "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/315006198/",
+          "category": "📚 Literary",
+          "source": "Meetup: Philadelphia Horror",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Online horror book club. Chuck Tingle's Bury Your Gays — queer survival horror. Via Discord."
+        },
+        {
+          "title": "Hive76 Open House",
+          "venue": "Hive76",
+          "time": "2:00 PM",
+          "cost": "free",
+          "url": "https://www.hive76.org/classes/",
+          "category": "💻 Tech & Maker",
+          "source": "Hive76",
+          "is_music": false,
+          "sold_out": false,
+          "note": "Recurring weekly open house. Bring a project, get advice, meet members, take a tour. Sundays 2–5 PM."
+        }
+      ]
+    }
+  ]
+}
