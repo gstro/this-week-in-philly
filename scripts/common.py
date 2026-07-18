@@ -10,9 +10,16 @@ import json
 import os
 from datetime import date, timedelta
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import Resource, build
+from googleapiclient.discovery import build
+
+if TYPE_CHECKING:
+    # Stub-only (google-api-python-client-stubs); doesn't exist at runtime,
+    # only for mypy -- gives the actual Calendar v3 method surface
+    # (calendarList(), events(), etc.) instead of the generic Resource type.
+    from googleapiclient._apis.calendar.v3.resources import CalendarResource
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
@@ -187,11 +194,11 @@ def get_calendar_credentials() -> Credentials:
     )
 
 
-def get_calendar_service() -> Resource:
+def get_calendar_service() -> "CalendarResource":
     return build("calendar", "v3", credentials=get_calendar_credentials())
 
 
-def get_calendar_id(service: Resource) -> str:
+def get_calendar_id(service: "CalendarResource") -> str:
     """Finds the "Curated Events" calendar by name. Raises if not found --
     matches v1's behavior of stopping and telling Greg to create it first."""
     page_token = None

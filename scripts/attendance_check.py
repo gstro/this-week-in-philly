@@ -25,12 +25,14 @@ import csv
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from typing import TYPE_CHECKING
 from zoneinfo import ZoneInfo
-
-from googleapiclient.discovery import Resource
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common
+
+if TYPE_CHECKING:
+    from googleapiclient._apis.calendar.v3.resources import CalendarResource
 
 EASTERN = ZoneInfo(common.CALENDAR_TIMEZONE)
 
@@ -39,7 +41,9 @@ def last_week_monday(target_monday: date) -> date:
     return target_monday - timedelta(days=7)
 
 
-def fetch_calendar_titles(service: Resource, calendar_id: str, monday: date) -> set[str]:
+def fetch_calendar_titles(
+    service: "CalendarResource", calendar_id: str, monday: date
+) -> set[str]:
     start = datetime.combine(monday, datetime.min.time(), tzinfo=EASTERN)
     end = start + timedelta(days=7)
     titles = set()
@@ -98,8 +102,11 @@ def main() -> None:
 
     with open(log_path, newline="") as f:
         reader = csv.DictReader(f)
-        fieldnames = reader.fieldnames
         rows = list(reader)
+        fieldnames = reader.fieldnames
+
+    if fieldnames is None:
+        raise RuntimeError(f"{log_path} has no header row")
 
     matching = [r for r in rows if r["city"] == "Philadelphia" and r["week_of"] == week_of]
     if not matching:

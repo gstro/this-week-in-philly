@@ -26,12 +26,15 @@ import argparse
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from typing import TYPE_CHECKING
 from zoneinfo import ZoneInfo
-
-from googleapiclient.discovery import Resource
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common
+
+if TYPE_CHECKING:
+    from googleapiclient._apis.calendar.v3.resources import CalendarResource
+    from googleapiclient._apis.calendar.v3.schemas import Event
 
 EASTERN = ZoneInfo(common.CALENDAR_TIMEZONE)
 
@@ -60,7 +63,7 @@ def parse_start(day_date: str, event_time: str) -> datetime | None:
     return naive.replace(tzinfo=EASTERN)
 
 
-def build_event(day: dict, pick: dict) -> dict | None:
+def build_event(day: dict, pick: dict) -> "Event | None":
     start = parse_start(day["date"], pick.get("time", ""))
     if start is None:
         print(
@@ -77,7 +80,7 @@ def build_event(day: dict, pick: dict) -> dict | None:
     if pick.get("url"):
         description_parts.append(pick["url"])
 
-    event = {
+    event: "Event" = {
         "summary": pick["title"],
         "start": {"dateTime": start.isoformat()},
         "end": {"dateTime": end.isoformat()},
@@ -88,7 +91,7 @@ def build_event(day: dict, pick: dict) -> dict | None:
     return event
 
 
-def clear_target_week(service: Resource, calendar_id: str, monday: date) -> int:
+def clear_target_week(service: "CalendarResource", calendar_id: str, monday: date) -> int:
     start = datetime.combine(monday, datetime.min.time(), tzinfo=EASTERN)
     end = start + timedelta(days=7)
     deleted = 0
@@ -123,7 +126,7 @@ def main() -> None:
     selections = common.load_selections(args.week_dir)
     monday = date.fromisoformat(selections["days"][0]["date"])
 
-    events = []
+    events: list["Event"] = []
     for day in selections["days"]:
         for pick in day["top3"]:
             event = build_event(day, pick)

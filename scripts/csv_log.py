@@ -62,7 +62,8 @@ def find_matching_event(mention: dict, events: list[dict]) -> dict:
     for event in events:
         if event["title"] == mention["title"]:
             return event
-    best, best_score = None, 0.0
+    best: dict = {}
+    best_score = 0.0
     for event in events:
         score = difflib.SequenceMatcher(
             None, mention["title"].casefold(), event["title"].casefold()
@@ -101,6 +102,7 @@ def build_rows(selections: dict, spotify: dict) -> list[dict]:
 
         for mention in day.get("honorable_mentions", []):
             event = find_matching_event(mention, day["events"])
+            category = event.get("category", "")
             rows.append(
                 {
                     "city": "Philadelphia",
@@ -109,9 +111,7 @@ def build_rows(selections: dict, spotify: dict) -> list[dict]:
                     "date": day["date"],
                     "title": mention["title"],
                     "venue": mention["venue"],
-                    "category": common.CATEGORY_TO_CSV_SLUG.get(
-                        event.get("category"), event.get("category", "")
-                    ),
+                    "category": common.CATEGORY_TO_CSV_SLUG.get(category, category),
                     "source": event.get("source", ""),
                     "rank": "HM",
                     "price_tier": infer_price_tier(
