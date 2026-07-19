@@ -25,7 +25,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
-      - run: pip install -r scripts/requirements-dev.txt
+      # requirements-collection.txt (playwright) is needed too -- fetch_page_text.py
+      # imports it, and mypy needs the package importable to type-check that
+      # import, even though it never executes/launches a browser.
+      - run: pip install -r scripts/requirements-dev.txt -r scripts/requirements-collection.txt
       - run: mypy
   pytest:
     runs-on: ubuntu-latest
