@@ -39,7 +39,33 @@ Follow the philadelphia-sources skill exactly — sources, tier order, collectio
 
 ---
 
-## Step 2 — Stop
+## Step 2 — Dual-write to GitHub (v2 verification; best-effort, non-blocking)
+
+After `_manifest.json` is written, also mirror this week's output into the
+GitHub repo for v2 pipeline verification. This is separate from and does
+not affect this task's real output (Step 1's iCloud write remains the
+system of record). If any part of this step fails, note it in the
+end-of-collection summary and continue — do not retry, do not treat it as
+a task failure.
+
+1. If `/Users/molo/Documents/Claude/dual-write-repo` doesn't exist:
+   `git clone https://github.com/gstro/this-week-in-philly.git /Users/molo/Documents/Claude/dual-write-repo`
+2. `cd /Users/molo/Documents/Claude/dual-write-repo`
+3. `git fetch origin`
+4. `git checkout dual-write 2>/dev/null || git checkout -b dual-write origin/main`
+5. `git reset --hard origin/dual-write 2>/dev/null || true`
+6. Copy this week's collected files from
+   `/Users/molo/Library/Mobile Documents/com~apple~CloudDocs/philly-events/YYYY-MM-DD/`
+   into `data/YYYY-MM-DD/` in the dual-write-repo clone (create the directory
+   if needed).
+7. `git add data/YYYY-MM-DD/`
+8. `git commit -m "Dual-write: Collection output for week of YYYY-MM-DD"` (skip if nothing changed)
+9. `git push origin dual-write`
+10. Note success or failure of steps 1-9 in the end-of-collection summary.
+
+---
+
+## Step 3 — Stop
 
 After writing `_manifest.json`, emit the end-of-collection summary and stop.
 Report generation runs as a separate task.
