@@ -1,0 +1,78 @@
+{
+  "source": "Iffy Books",
+  "collected_at": "2026-07-16T17:16:18",
+  "events": [
+    {
+      "title": "Coffee Talk",
+      "venue": "Iffy Books, 404 S. 20th St",
+      "date": "2026-07-20",
+      "time": "6:00 PM",
+      "cost": "Free",
+      "url": "https://iffybooks.net/",
+      "description": "A social hangout every first and third Monday for trans and non-binary people, their significant others, and allies. We have snacks and coffee."
+    },
+    {
+      "title": "The Writing Room",
+      "venue": "Iffy Books, 404 S. 20th St",
+      "date": "2026-07-21",
+      "time": "5:00 PM",
+      "cost": "Free",
+      "url": "https://iffybooks.net/",
+      "description": "Come co-work with other writers in three 40-minute units of silent writing. Writers and projects of any type welcome. 10-minute breaks and accountability check-ins between units. BYO coffee, water, computer chargers, notepads, etc."
+    },
+    {
+      "title": "Analog A/V Session",
+      "venue": "Iffy Books, 404 S. 20th St",
+      "date": "2026-07-22",
+      "time": "10:30 AM",
+      "cost": "notaflof (rec. $5–$15)",
+      "url": "https://iffybooks.net/",
+      "description": "Come experiment with VHS tapes and audio cassettes! We'll have equipment on hand for analog-to-digital and digital-to-analog transfers."
+    },
+    {
+      "title": "DJ Basixxx with Mixxx",
+      "venue": "Iffy Books, 404 S. 20th St",
+      "date": "2026-07-22",
+      "time": "2:00 PM",
+      "cost": "suggested $5–$15",
+      "url": "https://iffybooks.net/",
+      "description": "Curious about DJing but don't have money for equipment? Learn Mixxx, a free and open source DJ program, using regular QWERTY keyboards with stickers on the important keys. Find tracks, load them into Mixxx, and start beatmatching. Bring your own laptop and headphones."
+    },
+    {
+      "title": "Beginner Soldering: Li-Ion Battery Pack",
+      "venue": "Iffy Books, 404 S. 20th St",
+      "date": "2026-07-23",
+      "time": "2:30 PM",
+      "cost": "$3.99 kit + notaflof donation",
+      "url": "https://iffybooks.net/",
+      "description": "Make a rechargeable battery pack for your LoRa node, a microcontroller (ESP32/Pi Pico), or anything running on 3–4V. Perfect for folks who've never soldered. Kit includes 18650 battery clip, TP4056 charge controller, PH2.5 plug, heat shrink. 18650 battery sold separately."
+    },
+    {
+      "title": "Beginner Soldering: LED Spinning Top",
+      "venue": "Iffy Books, 404 S. 20th St",
+      "date": "2026-07-24",
+      "time": "2:00 PM",
+      "cost": "$5.39 kit + notaflof donation",
+      "url": "https://iffybooks.net/",
+      "description": "Build a spinning top toy with LED lights that flash when it spins. No previous soldering experience required!"
+    },
+    {
+      "title": "Cyberdeck Meetup",
+      "venue": "Iffy Books, 404 S. 20th St",
+      "date": "2026-07-25",
+      "time": "10:30 AM",
+      "cost": "Free",
+      "url": "https://iffybooks.net/",
+      "description": "A cyberdeck is a DIY laptop based on a single-board computer (SBC) such as Raspberry Pi, with a tiny LCD screen and keyboard in a folding case. Bring an SBC and start building your own! LCD screens, keyboards, and wooden boxes for sale. Show off an existing build and help others get started."
+    },
+    {
+      "title": "Anarchy Summer Reading Group: 'The Utopia of Rules' by David Graeber (1st half)",
+      "venue": "Iffy Books, 404 S. 20th St",
+      "date": "2026-07-26",
+      "time": "6:00 PM",
+      "cost": "Free",
+      "url": "https://iffybooks.net/",
+      "description": "Meeting every two weeks to discuss classics of anarchist literature. This session: the first half of David Graeber's 'The Utopia of Rules.'"
+    }
+  ]
+}

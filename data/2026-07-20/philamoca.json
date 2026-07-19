@@ -1,0 +1,60 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-07-16T17:20:19",
+  "events": [
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St",
+      "date": "2026-07-20",
+      "time": "Doors 7:00 PM / Show 7:30 PM",
+      "cost": "$5 at door",
+      "url": "https://www.philamoca.org/",
+      "description": "Monthly deep-dive into forgotten, deranged, and gloriously bad cinema — psychotronic weirdness you won't find on streaming."
+    },
+    {
+      "title": "PAVEMENTS",
+      "venue": "PhilaMOCA, 531 N 12th St",
+      "date": "2026-07-22",
+      "time": "Doors 7:00 PM / Show 7:30 PM",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/63098853/",
+      "description": "R5 Productions presents. Screening of PAVEMENTS, the Alex Ross Perry meta-film about the band Pavement, tied to the Make The World Better weekend."
+    },
+    {
+      "title": "Etheric Realms of the Night",
+      "venue": "PhilaMOCA, 531 N 12th St",
+      "date": "2026-07-23",
+      "time": "Doors 7:30 PM / Show 8:00 PM",
+      "cost": "$15–$20",
+      "url": "https://www.etix.com/ticket/p/63575828/",
+      "description": "IATT presents. Film premiere + Q&A."
+    },
+    {
+      "title": "JAWBREAKER: A DOCUMENTARY ABOUT ANTI CIMEX",
+      "venue": "PhilaMOCA, 531 N 12th St",
+      "date": "2026-07-24",
+      "time": "Doors 7:00 PM / Show 7:30 PM",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/64775099/jawbreakera-documentary-about-anti-cimex-philadelphia-philamoca",
+      "description": "General Speech presents. Documentary about Swedish hardcore/crust legends Anti-Cimex."
+    },
+    {
+      "title": "THE AFTER SUPPER SPECIAL",
+      "venue": "PhilaMOCA, 531 N 12th St",
+      "date": "2026-07-25",
+      "time": "Doors 7:30 PM / Show 8:00 PM",
+      "cost": "$15",
+      "url": "https://www.etix.com/ticket/p/49862231/the-after-supper-special-philadelphia-philamoca",
+      "description": "SlutLife Records presents."
+    },
+    {
+      "title": "STOMACH BOOK",
+      "venue": "PhilaMOCA, 531 N 12th St",
+      "date": "2026-07-26",
+      "time": "Doors 7:30 PM / Show 8:00 PM",
+      "cost": "$15–$20",
+      "url": "https://www.etix.com/ticket/p/39438116/",
+      "description": "With Devi McCallion + Bubblegum Octopus."
+    }
+  ]
+}

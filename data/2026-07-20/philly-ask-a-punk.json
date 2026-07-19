@@ -1,0 +1,114 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-07-16T17:16:18",
+  "events": [
+    {
+      "title": "BLEEDER (BMG), LOVERGIRL (MPLS), MYSTERY DUNGEONS, B00B",
+      "venue": "The Kennel (West Philly)",
+      "date": "2026-07-21",
+      "time": "6:00 PM",
+      "cost": "NOTAFLOF",
+      "url": "https://philly.askapunk.net/event/bleeder-bmg-lovergirl-mpls-mystery-dungeons-b00b",
+      "description": "Out-of-town band bill. Tags: emo chiptune, emotional hardcore, hardcore punk, punk. NOTAFLOF, mask required."
+    },
+    {
+      "title": "Bride (NOLA), Kate Ferencz, Annie Achron",
+      "venue": "Space 1026, 844 N. Broad St",
+      "date": "2026-07-22",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/bride-nola-kate-ferencz-annie-achron",
+      "description": "Out-of-town (New Orleans) synth/experimental bill. Tags: minimal, synth, experimental. With Kate Ferencz and Annie Achron."
+    },
+    {
+      "title": "Annie Achron, Bride, Kate Ferencz @ Space 1026",
+      "venue": "Space 1026, 844 N. Broad St",
+      "date": "2026-07-22",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/annie-achron-bride-kate-ferencz-space-1026",
+      "description": "Out-of-town band. Tags: electronic, experimental, synthpop. (Companion listing to the Bride/Kate Ferencz/Annie Achron show at Space 1026.)"
+    },
+    {
+      "title": "GOOD POLLUTION CASSETTE RELEASE SHOW",
+      "venue": "Dumpster Out Back (South Philly)",
+      "date": "2026-07-23",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/good-pollution-cassette-release-show",
+      "description": "Tape release show. Tags: art punk, noise rock, post-punk, punk, tape release."
+    },
+    {
+      "title": "RASKOL RECORD RELEASE//TOUR KICKOFF W/ GASKET, SPIKEPIT, BLUNT FORCE",
+      "venue": "Cousin Danny's, 5001 Market St",
+      "date": "2026-07-23",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/raskol-record-releasetour-kickoff-w-gasket-spikepit-blunt-force",
+      "description": "Record release and tour kickoff. Tags: experimental, hardcore, hardcore punk, noise, punk. Out-of-town band."
+    },
+    {
+      "title": "JAWBREAKER - A DOCUMENTARY ABOUT ANTI-CIMEX",
+      "venue": "PhilaMOCA, 531 N 12th St",
+      "date": "2026-07-24",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/jawbreaker-a-documentary-about-anti-cimex",
+      "description": "Documentary screening about Swedish hardcore/crust band Anti-Cimex."
+    },
+    {
+      "title": "The Remote Controls (Indianapolis)/Total Whine/Civil Rats/Bees!",
+      "venue": "Ortlieb's, 847 N. 3rd St",
+      "date": "2026-07-24",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/the-remote-controls-indianapolistotal-whinecivil-ratsbees",
+      "description": "Out-of-town (Indianapolis) headliner with Total Whine, Civil Rats, Bees!"
+    },
+    {
+      "title": "RAINBOW WIZARDS / SMOAKERSMOUTH / DJSWITCH / BATFXNGS / TWEAK",
+      "venue": "The Fire, 412 W Girard Ave",
+      "date": "2026-07-24",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/rainbow-wizards-smoakersmouth-djswitch-batfxngs-tweak",
+      "description": "Tags: experimental."
+    },
+    {
+      "title": "Sex Mex (San Antonio, Texas) w/ Dasgüt and Fat Heaven @ Nikki Lopez",
+      "venue": "Nikki Lopez, 304 South St",
+      "date": "2026-07-25",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/sex-mex-san-antonio-texas-with-dasgut-and-fat-heaven-nikki-lopez",
+      "description": "Out-of-town (San Antonio, TX) egg/garage rock. Tags: egg, garage rock. With Dasgüt and Fat Heaven."
+    },
+    {
+      "title": "Screenings at Sanctuary: Jaws and Sleepaway Camp",
+      "venue": "Sanctuary (West Philly)",
+      "date": "2026-07-25",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/screenings-at-sanctuary-jaws-and-sleepaway-camp",
+      "description": "Horror double feature: Jaws and Sleepaway Camp. Tags: horror, screening, movie."
+    },
+    {
+      "title": "Diskritik, Dislexia (Rochester), World of Chaos, Capital Punishment @ MouseTrap",
+      "venue": "Mousetrap (North Philly)",
+      "date": "2026-07-26",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/diskritik-dislexia-rochester-world-of-chaos-capital-punishment-mousetrap",
+      "description": "Out-of-town (Rochester) hardcore/noise/punk bill. Tags: experimental, hardcore, hardcore punk, noise, punk."
+    },
+    {
+      "title": "Mess / Vaxine / The Stress / The Slads",
+      "venue": "Johnny Brenda's, 1201 N Frankford Ave",
+      "date": "2026-07-26",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/mess-vaxine-the-stress-the-slads",
+      "description": "Punk bill. R5-linked: https://r5productions.com/event/mess/johnny-brendas/philadelphia-pennsylvania/"
+    }
+  ]
+}

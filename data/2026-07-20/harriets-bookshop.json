@@ -1,0 +1,6 @@
+{
+  "source": "Harriet's Bookshop",
+  "collected_at": "2026-07-16T17:27:01",
+  "note": "Eventbrite org page is JavaScript-rendered; no event dates were present in the raw HTML and no Chrome session was available in this scheduled run. No in-window events could be confirmed.",
+  "events": []
+}

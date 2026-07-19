@@ -1,0 +1,33 @@
+{
+  "source": "Meetup: Code & Coffee",
+  "collected_at": "2026-07-16T17:17:22",
+  "events": [
+    {
+      "title": "OG Coffee&Code Coding!",
+      "venue": "Philadelphia (Blockspace Community × Coffee&Code)",
+      "date": "2026-07-22",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/",
+      "description": "The OG Coffee&Code meetup, in collaboration with the Blockspace Community. No panels/pitches — an open, welcoming space for coders, builders, and designers to work at their own pace, meet other builders, and share ideas. Beginner-friendly and ego-free."
+    },
+    {
+      "title": "Composio Saturdays! Let your AI agents orchestrate your many apps in 3 hours!",
+      "venue": "Philadelphia (Coffee & Code)",
+      "date": "2026-07-25",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/",
+      "description": "A relaxed weekly meetup for developers and AI enthusiasts exploring AI agents and integrations with Composio.dev — the platform that lets AI agents and LLMs interact with real-world tools and workflows. Show & tell, hands-on integration sessions, and community networking."
+    },
+    {
+      "title": "Coding on Localhost; Connecting the Community",
+      "venue": "Game/Retro Lounge, Philadelphia",
+      "date": "2026-07-26",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/",
+      "description": "A fun, light code session where tech friends get together in a Game Lounge and code. Ask questions, share projects, help each other out, meet other coders. $5.40 tabletop fee for the Retro Lounge space (1-4PM), paid individually at check-in. BYO food/bev (no alcohol)."
+    }
+  ]
+}

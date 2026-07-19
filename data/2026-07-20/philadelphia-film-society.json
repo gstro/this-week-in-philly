@@ -1,0 +1,61 @@
+{
+  "source": "Philadelphia Film Society",
+  "collected_at": "2026-07-19T09:30:00",
+  "note": "Re-attempted on resume run. filmadelphia.org/showtimes returned current-programming snapshot via Chrome get_page_text (no per-date breakdown for the target week). Calendar view (showtimes-calendar-view) blocked by CAPTCHA/bot verification — not bypassed. Events below are the curated/repertory/special screenings currently in rotation at PFS venues, which typically play limited dates during the target week; specific per-day showtimes not confirmed. Generic wide first-run releases (The Odyssey digital, Backrooms, The Invite, etc.) omitted as low-signal.",
+  "events": [
+    {
+      "title": "I Saw the TV Glow",
+      "venue": "Film Society East",
+      "date": "2026-07-20",
+      "time": "see filmadelphia.org/showtimes",
+      "cost": "PFS ticket pricing",
+      "url": "https://filmadelphia.org/showtimes/",
+      "description": "Curated — Director Series (Jane Schoenbrun). A lonely suburban teen develops a cult following of one for a late-'90s teen show that leads him to a reality-altering, self-awakening in Jane Schoenbrun's moody, nostalgia masterpiece. Runtime 110 min. Genre: Horror. Release 2024. Part of PFS's Schoenbrun director series."
+    },
+    {
+      "title": "We're All Going to the World's Fair",
+      "venue": "Film Society East",
+      "date": "2026-07-20",
+      "time": "see filmadelphia.org/showtimes",
+      "cost": "PFS ticket pricing",
+      "url": "https://filmadelphia.org/showtimes/",
+      "description": "Curated — Director Series (Jane Schoenbrun). A one-of-a-kind debut film from Jane Schoenbrun follows a young girl's increasingly bizarre documentation of her digital descent into a mysterious internet horror game that begins to haunt her IRL. Runtime 86 min. Genre: Horror. Release 2021."
+    },
+    {
+      "title": "L'Eclisse",
+      "venue": "Film Society Center",
+      "date": "2026-07-20",
+      "time": "see filmadelphia.org/showtimes",
+      "cost": "PFS ticket pricing",
+      "url": "https://filmadelphia.org/showtimes/",
+      "description": "Curated — Summer of Trilogies (Antonioni). Somehow the beautiful Monica Vitti and Alain Delon struggle to find connection in '60s Rome in Antonioni's gorgeous black and white study of alienation in a modern world. Runtime 126 min. Genre: Drama. Release 1962."
+    },
+    {
+      "title": "Paper Moon",
+      "venue": "Film Society Center",
+      "date": "2026-07-20",
+      "time": "see filmadelphia.org/showtimes",
+      "cost": "PFS ticket pricing",
+      "url": "https://filmadelphia.org/showtimes/",
+      "description": "Curated — Limited Series: Road Trip. Shot in black and white, Peter Bogdanovich's charming Depression Era-comedy finds a conman (Ryan O'Neal) reluctantly transporting a recently orphaned young girl (Tatum O'Neal) to her new home in Missouri while targeting unknowing marks along the way. Runtime 108 min. Genre: Comedy. Release 1973."
+    },
+    {
+      "title": "Pee-Wee's Big Adventure",
+      "venue": "Film Society East",
+      "date": "2026-07-20",
+      "time": "see filmadelphia.org/showtimes",
+      "cost": "PFS ticket pricing",
+      "url": "https://filmadelphia.org/showtimes/",
+      "description": "Curated — Limited Series: Road Trip. Dust off your red bow tie, pick up your grey suit from the dry cleaning and join Pee-wee as he hitches a ride to Texas to rescue his dearly beloved red bicycle in Tim Burton's endlessly rewatchable big screen debut. Runtime 90 min. Genre: Comedy. Release 1985."
+    },
+    {
+      "title": "The Odyssey (35mm)",
+      "venue": "Film Society Center",
+      "date": "2026-07-20",
+      "time": "see filmadelphia.org/showtimes",
+      "cost": "PFS ticket pricing",
+      "url": "https://filmadelphia.org/showtimes/",
+      "description": "35mm Screening. Presented exclusively on 35mm, Christopher Nolan's newest epic set after the Trojan War follows Odysseus on a dangerous voyage back to Ithaca, meeting creatures like the Cyclops Polyphemus, Sirens, and Calypso along the way. Runtime 172 min. Release 2026. Repertory-format presentation on film."
+    }
+  ]
+}

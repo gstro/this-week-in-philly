@@ -1,0 +1,33 @@
+{
+  "source": "Meetup: DC 215",
+  "collected_at": "2026-07-16T17:17:22",
+  "events": [
+    {
+      "title": "Blue Team Village Solderathon",
+      "venue": "Philadelphia (overnight; runs Sun 12pm into Mon 8am)",
+      "date": "2026-07-19",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/",
+      "description": "Help Blue Team Village solder up badges. BTV is a nonprofit providing cybersecurity training and content at community conferences and sells electronic badges to fundraise. Any soldering experience is fine — mostly through-hole. Snacks and beverages provided; drop in anytime. Free BTV swag for helpers. (Runs overnight into Monday morning.)"
+    },
+    {
+      "title": "EMP Range Day",
+      "venue": "Philadelphia (EMP Crew)",
+      "date": "2026-07-24",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/",
+      "description": "For homelab enthusiasts, system engineers, and cyber range developers: the EMP Crew showcases cyber labs full of development tools, offensive/defensive emulation, and their portable cyber range kit headed to DEF CON and Black Hat USA. Play in the range with new Tengu Marauder Stryker units and robots in an emulated IoT range."
+    },
+    {
+      "title": "Study Hall / Work on CTFs",
+      "venue": "Philadelphia (DC215)",
+      "date": "2026-07-25",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/",
+      "description": "Get together to work on or discuss the CTF."
+    }
+  ]
+}

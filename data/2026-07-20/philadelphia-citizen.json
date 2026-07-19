@@ -1,0 +1,33 @@
+{
+  "source": "Philadelphia Citizen",
+  "collected_at": "2026-07-16T17:25:04",
+  "events": [
+    {
+      "title": "Sound of America (musical)",
+      "venue": "See soundofamericamusical.com",
+      "date": "2026-07-01",
+      "time": "",
+      "cost": "",
+      "url": "https://www.soundofamericamusical.com/",
+      "description": "Ongoing musical running July 1–August 1 (spans the target week)."
+    },
+    {
+      "title": "Parks on Tap at Historic Rittenhouse Town",
+      "venue": "Historic Rittenhouse Town",
+      "date": "2026-07-22",
+      "time": "",
+      "cost": "Free entry (pay for food/drink)",
+      "url": "https://www.parksontap.com/",
+      "description": "Roving pop-up beer garden at Historic Rittenhouse Town, July 22–26. Free to enter; food and drink for sale. Outdoor community gathering."
+    },
+    {
+      "title": "Make the World Better Concert Weekend (Pavement / Kurt Vile)",
+      "venue": "The Dell Music Center",
+      "date": "2026-07-24",
+      "time": "",
+      "cost": "See mtwbconcert.com",
+      "url": "https://mtwbconcert.com/",
+      "description": "Benefit concert weekend supporting a $25M effort to rehab rec centers and parks for local youth. July 24: Pavement headlines with Ratboys. July 25: Kurt Vile and the Violators."
+    }
+  ]
+}

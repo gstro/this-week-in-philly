@@ -1,0 +1,24 @@
+{
+  "source": "Trakt.tv film releases",
+  "collected_at": "2026-07-16T17:16:18",
+  "events": [
+    {
+      "title": "Her Private Hell (2026)",
+      "venue": "Theatrical release",
+      "date": "2026-07-24",
+      "time": "",
+      "cost": "",
+      "url": "",
+      "description": "Revenge wears leather. When a mysterious mist engulfs a futuristic metropolis, unleashing a deadly elusive entity, a troubled young woman searches for her father. Her quest collides with an American GI on a harrowing odyssey to rescue his daughter from Hell."
+    },
+    {
+      "title": "Avatar Aang: The Last Airbender (2026)",
+      "venue": "Theatrical release",
+      "date": "2026-07-25",
+      "time": "",
+      "cost": "",
+      "url": "",
+      "description": "The legacy reawakens. Avatar Aang, the world's last Airbender, learns of an ancient power that could save his culture from extinction. With his friends, he embarks on a global quest to find it before it falls into the wrong hands."
+    }
+  ]
+}

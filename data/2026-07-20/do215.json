@@ -1,0 +1,79 @@
+{
+  "source": "Do215",
+  "collected_at": "2026-07-16T17:27:01",
+  "note": "Partial: in a no-Chrome scheduled context, only the Jul 20 and Jul 25 day URLs were surfaced/retrievable via WebSearch. Jul 21-24 and Jul 26 day pages were not returned by search and could not be fetched (provenance).",
+  "events": [
+    {
+      "title": "Five Finger Death Punch",
+      "venue": "Freedom Mortgage Pavilion",
+      "date": "2026-07-20",
+      "time": "6:45 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/07/20",
+      "description": "Metal tour stop."
+    },
+    {
+      "title": "J. Cole: The Fall-Off Tour",
+      "venue": "Xfinity Mobile Arena",
+      "date": "2026-07-20",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/07/20",
+      "description": "Hip-hop arena show."
+    },
+    {
+      "title": "Kirk Whalum",
+      "venue": "City Winery",
+      "date": "2026-07-20",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/07/20",
+      "description": "Jazz/gospel saxophonist."
+    },
+    {
+      "title": "Dark Side Burlesque's Devil Fruits: A Burlesque & Drag Tribute to One Piece",
+      "venue": "Franky Bradley's",
+      "date": "2026-07-20",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/07/20",
+      "description": "Burlesque and drag tribute to the anime One Piece."
+    },
+    {
+      "title": "Big Wig Brunch",
+      "venue": "Punch Line Philly",
+      "date": "2026-07-25",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/07/25",
+      "description": "Drag brunch."
+    },
+    {
+      "title": "NE-YO & AKON: Nights Like This Tour 2026",
+      "venue": "Freedom Mortgage Pavilion",
+      "date": "2026-07-25",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/07/25",
+      "description": "R&B/pop tour."
+    },
+    {
+      "title": "Jill Scott — To Whom This May Concern Tour",
+      "venue": "The Met Philadelphia",
+      "date": "2026-07-25",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/07/25",
+      "description": "Philly neo-soul icon."
+    },
+    {
+      "title": "O.A.R. Three Decades Tour",
+      "venue": "Highmark Mann (Mann Center)",
+      "date": "2026-07-25",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/07/25",
+      "description": "Rock band anniversary tour."
+    }
+  ]
+}

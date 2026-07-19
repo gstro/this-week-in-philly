@@ -1,0 +1,33 @@
+{
+  "source": "The Rotunda",
+  "collected_at": "2026-07-16T17:16:18",
+  "events": [
+    {
+      "title": "In-person! Vogue Practice Session",
+      "venue": "The Rotunda, 4014 Walnut St",
+      "date": "2026-07-21",
+      "time": "6:00 PM",
+      "cost": "Free",
+      "url": "https://www.therotunda.org/event/in-person-vogue-practice-session-2026-07-21-18-00-00-0400",
+      "description": "Practice for the balls! Vogue drop-in. All are welcome. These [almost] weekly sessions are free unless the event is a ball. 6pm-9pm. (Recurring weekly.)"
+    },
+    {
+      "title": "In-person! Weekly improvised music drop-in jam session",
+      "venue": "The Rotunda, 4014 Walnut St",
+      "date": "2026-07-22",
+      "time": "12:00 PM",
+      "cost": "Free",
+      "url": "https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-07-22-12-00-00-0400",
+      "description": "Weekly Improvised Music Session. All are welcome to come and jam. Any genre/instrument/experience level welcome. Almost every Wednesday 12pm-2pm. (Recurring weekly.)"
+    },
+    {
+      "title": "In-person! Philly to Palestine Fashion Show",
+      "venue": "The Rotunda, 4014 Walnut St",
+      "date": "2026-07-26",
+      "time": "8:00 PM",
+      "cost": "Ticketed",
+      "url": "https://www.therotunda.org/event/philly-to-palestine-fashion-show",
+      "description": "Philly to Palestine Fashion Show. A night of fashion, a raffle (including two palm-sized tattoos donated by local artists), and a dance floor. 100% of proceeds split between the West Philly housing stabilization fund (a project of Kol Tzedek and YEAH Philly) and Hiba's family in Gaza. Doors 7pm, fashion show 8pm, dance floor 9:30pm."
+    }
+  ]
+}

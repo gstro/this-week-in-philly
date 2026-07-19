@@ -1,0 +1,130 @@
+{
+  "week": "2026-07-20",
+  "run_started": "2026-07-16T17:12:00",
+  "run_completed": "2026-07-16T17:27:12",
+  "resume_run": "2026-07-19T09:30:00",
+  "total_events": 94,
+  "sources": {
+    "billy-penn": {
+      "status": "ok",
+      "events": 0
+    },
+    "cinespeak": {
+      "status": "ok",
+      "events": 2
+    },
+    "do215": {
+      "status": "ok",
+      "events": 8,
+      "note": "partial"
+    },
+    "free-library": {
+      "status": "ok",
+      "events": 0
+    },
+    "harriets-bookshop": {
+      "status": "ok",
+      "events": 0,
+      "note": "partial"
+    },
+    "hive76": {
+      "status": "ok",
+      "events": 1
+    },
+    "iffy-books": {
+      "status": "ok",
+      "events": 8
+    },
+    "lightbox-film-center": {
+      "status": "ok",
+      "events": 1
+    },
+    "luma": {
+      "status": "ok",
+      "events": 9
+    },
+    "meetup-ai-philly": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-code-coffee": {
+      "status": "ok",
+      "events": 3
+    },
+    "meetup-dc215": {
+      "status": "ok",
+      "events": 3
+    },
+    "meetup-horror": {
+      "status": "ok",
+      "events": 4
+    },
+    "meetup-owasp": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-philly-film-club": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-philly-hardware": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-tech-in-motion": {
+      "status": "ok",
+      "events": 0
+    },
+    "philadelphia-citizen": {
+      "status": "ok",
+      "events": 3
+    },
+    "philadelphia-film-society": {
+      "status": "ok",
+      "events": 6,
+      "note": "recovered on 2026-07-19 resume run via Chrome get_page_text; curated/repertory screenings only, per-date times unconfirmed (calendar view CAPTCHA-blocked)"
+    },
+    "philamoca": {
+      "status": "ok",
+      "events": 6
+    },
+    "philly-ask-a-punk": {
+      "status": "ok",
+      "events": 12
+    },
+    "philly-shows": {
+      "status": "ok",
+      "events": 0
+    },
+    "phillygoth": {
+      "status": "ok",
+      "events": 5
+    },
+    "r5-productions": {
+      "status": "ok",
+      "events": 7
+    },
+    "songkick": {
+      "status": "ok",
+      "events": 8,
+      "note": "partial"
+    },
+    "the-rotunda": {
+      "status": "ok",
+      "events": 3
+    },
+    "trakt-film-releases": {
+      "status": "ok",
+      "events": 2
+    },
+    "wooden-shoe-books": {
+      "status": "ok",
+      "events": 3
+    },
+    "wxpn": {
+      "status": "ok",
+      "events": 0,
+      "note": "partial"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "source": "Songkick",
+  "collected_at": "2026-07-16T17:27:01",
+  "note": "Songkick month pages are not in the fetch provenance set in this no-Chrome scheduled context; events captured from a WebSearch summary of Songkick's Philadelphia listings and may be incomplete. Events overlapping R5 (Pavement, Kurt Vile, First Day Back) omitted here to avoid duplication.",
+  "events": [
+    {
+      "title": "J. Cole",
+      "venue": "Xfinity Mobile Arena",
+      "date": "2026-07-20",
+      "time": "",
+      "cost": "",
+      "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia",
+      "description": "Hip-hop arena show (The Fall-Off Tour)."
+    },
+    {
+      "title": "Justin Hayward",
+      "venue": "First Unitarian Church",
+      "date": "2026-07-22",
+      "time": "",
+      "cost": "",
+      "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia",
+      "description": "The Moody Blues frontman, solo."
+    },
+    {
+      "title": "Anthony Hamilton",
+      "venue": "Dell Music Center",
+      "date": "2026-07-23",
+      "time": "",
+      "cost": "",
+      "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia",
+      "description": "R&B/soul."
+    },
+    {
+      "title": "Silly Goose",
+      "venue": "MilkBoy Philadelphia",
+      "date": "2026-07-23",
+      "time": "",
+      "cost": "",
+      "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia",
+      "description": "Indie show at MilkBoy."
+    },
+    {
+      "title": "Cory Hanson",
+      "venue": "Johnny Brenda's",
+      "date": "2026-07-24",
+      "time": "",
+      "cost": "",
+      "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia",
+      "description": "Wand frontman; psych/indie rock at Johnny Brenda's."
+    },
+    {
+      "title": "Jill Scott — To Whom This May Concern Tour",
+      "venue": "The Met Philadelphia",
+      "date": "2026-07-24",
+      "time": "",
+      "cost": "",
+      "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia",
+      "description": "Philly neo-soul icon (two nights, Jul 24-25)."
+    },
+    {
+      "title": "Bone Thugs-n-Harmony",
+      "venue": "Stateside Live!",
+      "date": "2026-07-25",
+      "time": "",
+      "cost": "",
+      "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia",
+      "description": "Hip-hop legends."
+    },
+    {
+      "title": "BabyChiefDoit",
+      "venue": "The Foundry (The Fillmore)",
+      "date": "2026-07-25",
+      "time": "",
+      "cost": "",
+      "url": "https://www.songkick.com/metro-areas/5202-us-philadelphia",
+      "description": "Rap show at The Foundry."
+    }
+  ]
+}

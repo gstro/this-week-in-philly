@@ -1,0 +1,6 @@
+{
+  "source": "WXPN",
+  "collected_at": "2026-07-16T17:27:01",
+  "note": "xpn.org/concert-and-events is JavaScript-rendered; no in-window dated listings were present in the raw HTML and no Chrome session was available. WXPN-promoted shows this week are largely captured via R5 (Make The World Better weekend, First Day Back).",
+  "events": []
+}
