@@ -1,12 +1,14 @@
-name: Lint
+name: Lint & Test
 on:
   push:
     paths:
       - 'scripts/**.py'
+      - 'tests/**.py'
       - 'pyproject.toml'
   pull_request:
     paths:
       - 'scripts/**.py'
+      - 'tests/**.py'
       - 'pyproject.toml'
 jobs:
   ruff:
@@ -25,3 +27,16 @@ jobs:
         with: { python-version: '3.12' }
       - run: pip install -r scripts/requirements-dev.txt
       - run: mypy
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: |
+          pip install -r scripts/requirements-dev.txt -r scripts/requirements-collection.txt
+          playwright install --with-deps chromium
+      # Default addopts (pyproject.toml) excludes -m network -- this is the
+      # fast, offline suite only. Network/integration tests against the real
+      # sources are run manually (`pytest -m network`), not in CI.
+      - run: pytest -v

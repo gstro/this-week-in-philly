@@ -18,6 +18,7 @@ dependency.
 import argparse
 import sys
 
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
 
 # playwright's default headless UA gets flagged by some sites' bot detection
@@ -30,6 +31,22 @@ _USER_AGENT = (
     "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
 
+# Self-resolving bot-challenge interstitials (Cloudflare, WordPress.com/Jetpack,
+# etc.) that redirect to real content via JS after a few seconds -- these are
+# NOT hard blocks like filmadelphia.org's WAF "Access Denied" page (nothing to
+# wait out there). Confirmed hitting one of these live: cinespeak.org (WP.com)
+# intermittently showed "Checking your browser..." -- resolved by waiting
+# longer, not by anything UA-related (Free Library's Cloudflare case was UA;
+# this is a different mechanism). Detect and retry once rather than requiring
+# every caller to know to pass --wait-ms.
+_CHALLENGE_MARKERS = (
+    "checking your browser",
+    "just a moment",
+    "please wait while we verify",
+    "performing security verification",
+)
+_CHALLENGE_RETRY_WAIT_MS = 6000
+
 
 def fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
     with sync_playwright() as p:
@@ -37,14 +54,20 @@ def fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
         page = browser.new_page(user_agent=_USER_AGENT)
         try:
             page.goto(url, wait_until="networkidle", timeout=30_000)
-        except Exception:
+        except PlaywrightTimeoutError:
             # Some pages never go fully idle (polling widgets, analytics
-            # beacons, etc.) -- fall back to whatever loaded within the
-            # wait budget rather than failing the whole fetch.
+            # beacons, etc.) but did navigate -- fall back to whatever
+            # loaded within the wait budget rather than failing the whole
+            # fetch. Genuine navigation failures (DNS, connection refused)
+            # raise a different (non-Timeout) playwright Error and are
+            # deliberately NOT caught here -- those should propagate.
             pass
         if wait_ms:
             page.wait_for_timeout(wait_ms)
         text = page.inner_text("body")
+        if any(marker in text.casefold() for marker in _CHALLENGE_MARKERS):
+            page.wait_for_timeout(_CHALLENGE_RETRY_WAIT_MS)
+            text = page.inner_text("body")
         browser.close()
     if len(text) > max_chars:
         text = text[:max_chars] + f"\n\n[... truncated at {max_chars} chars ...]"
