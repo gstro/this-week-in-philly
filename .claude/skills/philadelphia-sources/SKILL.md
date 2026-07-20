@@ -180,6 +180,7 @@ During collection, Claude must not:
 - **Retry failed sources** — one attempt per source per run; use resume behavior for retries
 - **Exceed the confirmation turn format** — no additional commentary in confirmation turns
 - **Read source files back into context** — write-only during collection; files are read during report generation only
+- **Write custom collection/aggregation scripts** — call each source's documented Method directly (Bash → `fetch_page_text.py`, the relevant MCP tool, or WebSearch), one source at a time, exactly as this skill specifies. Do not build a Python script that fetches, parses, or batches multiple sources itself — that reimplements what this skill already documents and is slower to debug when a single source breaks
 
 ---
 
