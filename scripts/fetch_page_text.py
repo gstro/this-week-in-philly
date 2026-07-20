@@ -17,9 +17,30 @@ dependency.
 
 import argparse
 import sys
+from pathlib import Path
 
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
+
+# Some cloud Routine environments pre-bake a Chromium install at this fixed
+# path specifically so sessions don't need `playwright install` (which needs
+# apt-get/root for --with-deps and isn't available in these sandboxes).
+# Confirmed via a live debugging session in the Collection Routine's
+# environment (2026-07-20): the pip-installed playwright package's default
+# headless-mode browser revision didn't match what was pre-baked there
+# (a fresh `pip install playwright` grabs the latest version, which can
+# want a newer browser revision than an older pre-baked cache has) --
+# passing this executable_path explicitly bypasses playwright's own
+# version-matching and uses the known-working pre-installed browser instead.
+# Falls back to playwright's normal resolution (a fresh local install, e.g.
+# a dev laptop) when this path doesn't exist.
+_PREBAKED_CHROMIUM_PATH = Path("/opt/pw-browsers/chromium")
+
+
+def _resolve_executable_path() -> str | None:
+    if _PREBAKED_CHROMIUM_PATH.exists():
+        return str(_PREBAKED_CHROMIUM_PATH)
+    return None
 
 # playwright's default headless UA gets flagged by some sites' bot detection
 # (confirmed: libwww.freelibrary.org's Cloudflare challenge blocked the
@@ -50,7 +71,8 @@ _CHALLENGE_RETRY_WAIT_MS = 6000
 
 def fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        executable_path = _resolve_executable_path()
+        browser = p.chromium.launch(executable_path=executable_path)
         page = browser.new_page(user_agent=_USER_AGENT)
         try:
             page.goto(url, wait_until="networkidle", timeout=30_000)
