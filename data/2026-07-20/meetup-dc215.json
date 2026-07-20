@@ -1,5 +1,24 @@
 {
   "source": "Meetup: DC 215",
-  "collected_at": "2026-07-20T00:26:50.095655",
-  "events": []
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "EMP Range Day",
+      "venue": "Philadelphia, PA",
+      "date": "2026-07-24",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/",
+      "description": "DC 215 EMP Range Day. Cyber labs full of different development tools, offensive/defensive emulation, and portable cyber range kit for prospective homelab and system engineering enthusiasts. 6-9 PM."
+    },
+    {
+      "title": "Study Hall / Work on CTFs",
+      "venue": "Philadelphia, PA",
+      "date": "2026-07-25",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/",
+      "description": "DC 215 Study Hall / Work on CTFs. Time to get together and work on or just discuss the CTF. 11 AM-1 PM."
+    }
+  ]
 }

@@ -1,5 +1,15 @@
 {
   "source": "Philadelphia Citizen",
-  "collected_at": "2026-07-20T00:26:46.157647",
-  "events": []
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "Parks on Tap at Historic Rittenhouse Town",
+      "venue": "Historic Rittenhouse Town, 208 Lincoln Drive, Germantown, PA",
+      "date": "2026-07-22",
+      "time": "4:00 PM",
+      "cost": "Free entry, pay-as-you-go",
+      "url": "https://thephiladelphiacitizen.org/good-citizen-calendar/",
+      "description": "Roving beer and cocktail garden. Parks on Tap provides a great excuse to bring your friends and kids to happy hour in a natural green space. A portion of all proceeds benefits each park. Open July 22-26, Wednesdays through Fridays 4-10pm, Saturdays and Sundays noon-10pm."
+    }
+  ]
 }

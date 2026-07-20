@@ -1,5 +1,15 @@
 {
   "source": "Hive76",
-  "collected_at": "2026-07-20T00:26:39.888878",
-  "events": []
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "Hive76 Open House",
+      "venue": "Hive76, Philadelphia, PA",
+      "date": "2026-07-26",
+      "time": "2:30 PM",
+      "cost": "Free",
+      "url": "https://www.hive76.org/classes/",
+      "description": "Take a tour of Hive76's makerspace. See our woodshop, laser cutter, 3D printers and more. Regular Sunday open house event."
+    }
+  ]
 }

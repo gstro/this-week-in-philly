@@ -1,5 +1,15 @@
 {
   "source": "Lightbox Film Center",
-  "collected_at": "2026-07-20T00:26:44.949770",
-  "events": []
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "Aloïse",
+      "venue": "Village of Industry & Art, Philadelphia, PA",
+      "date": "2026-07-21",
+      "time": "",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/",
+      "description": "Lightbox Film Center presentation of Aloïse. Lightbox Film Center is Philadelphia's premier exhibitor of film and moving image art, presenting repertory, nonfiction, experimental and international cinema."
+    }
+  ]
 }

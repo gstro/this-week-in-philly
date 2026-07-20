@@ -1,5 +1,87 @@
 {
   "source": "Luma",
-  "collected_at": "2026-07-20T00:25:41.700641",
-  "events": []
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "PhillyDTC Summer Happy Hour",
+      "venue": "Morgan's Pier, 221 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+      "date": "2026-07-22",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://lu.ma/philly-dtc-summer-happy-hour",
+      "description": "Network with the Philly ecommerce community over light bites and drinks at a summer happy hour on the water."
+    },
+    {
+      "title": "PHL: Fireside Chat \"The Modern Motherhood Reset\"",
+      "venue": "Kin Boutique, 1010 Pine St, Philadelphia, PA 19107",
+      "date": "2026-07-22",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://lu.ma/phl-modern-motherhood-reset",
+      "description": "Intimate evening discussing the transformation that occurs when becoming a mother and rebuilding support systems."
+    },
+    {
+      "title": "Moth Night at the Schuylkill Center for Environmental Education",
+      "venue": "Schuylkill Center for Environmental Education, 8480 Hagys Mill Rd, Philadelphia, PA 19128",
+      "date": "2026-07-22",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://lu.ma/moth-night-schuylkill",
+      "description": "Nocturnal nature appreciation event using bright light to attract moths and other insects for observation."
+    },
+    {
+      "title": "platonic love craft and the nervous system with relational realm therapy",
+      "venue": "let me know club, 915 Spring Garden St, Philadelphia, PA 19123",
+      "date": "2026-07-22",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://lu.ma/platonic-love-craft",
+      "description": "Warm conversation exploring how we connect in platonic relationships and the role the nervous system plays in closeness and safety."
+    },
+    {
+      "title": "fundraiser for get a gato! <3",
+      "venue": "Get A Gato, 638 Christian St, Philadelphia, PA 19147",
+      "date": "2026-07-23",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://lu.ma/fundraiser-get-a-gato",
+      "description": "Fundraiser combining time with shelter cats and crafting activities to support Get A Gato."
+    },
+    {
+      "title": "The Rally Room at Urban Village",
+      "venue": "Urban Village Brewing Company, 1001 N 2nd St, Philadelphia, PA 19123",
+      "date": "2026-07-23",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://lu.ma/rally-room-urban-village",
+      "description": "Meetup for purpose-driven entrepreneurs emphasizing authentic connection before business discussion using conversation cards."
+    },
+    {
+      "title": "Sisterhood Summerween 👻",
+      "venue": "Thunder Mug Cafe, 4233 Ridge Ave, Philadelphia, PA 19129",
+      "date": "2026-07-25",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://lu.ma/sisterhood-summerween",
+      "description": "Book gathering for women of African descent featuring horror/thriller books by female authors of color, with DIY crafts."
+    },
+    {
+      "title": "Schuylkill Trail Takeover",
+      "venue": "Schuylkill Trail, Phillies Mural, 003S020076, Philadelphia, PA 19103",
+      "date": "2026-07-26",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://lu.ma/schuylkill-trail-takeover",
+      "description": "July hike featuring a scavenger hunt along the Schuylkill Trail with stretching, snack breaks, and community engagement."
+    },
+    {
+      "title": "Park Craft",
+      "venue": "Ardleigh Street & East Haines Street, Philadelphia, PA 19138",
+      "date": "2026-07-26",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://lu.ma/park-craft",
+      "description": "Open studio gathering transforming public green space into temporary creative hub emphasizing accessibility and collective care."
+    }
+  ]
 }

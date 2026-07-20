@@ -1,5 +1,24 @@
 {
-  "source": "cin\u00e9SPEAK",
-  "collected_at": "2026-07-20T00:26:44.586178",
-  "events": []
+  "source": "cinéSPEAK",
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "Philly Palestine Coalition x cinéSPEAK present Palestine 36",
+      "venue": "Studio 34, Philadelphia, PA",
+      "date": "2026-07-23",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://cinespeak.org/cinema/",
+      "description": "Community Event Filmmaker Conversation with Local Artists. Philly Palestine Coalition x cinéSPEAK present Palestine 36."
+    },
+    {
+      "title": "SEEDS (2025)",
+      "venue": "Studio 34, Philadelphia, PA",
+      "date": "2026-07-24",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://cinespeak.org/cinema/",
+      "description": "Documentary feature screening: SEEDS (2025)."
+    }
+  ]
 }

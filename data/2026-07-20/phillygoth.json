@@ -1,5 +1,24 @@
 {
   "source": "Phillygoth.net",
-  "collected_at": "2026-07-20T00:26:45.797370",
-  "events": []
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "Stabbing Westward, Priest, & Acumen Nation",
+      "venue": "Phantom Power, 121 W. Fredrick St, Millersville, PA",
+      "date": "2026-07-21",
+      "time": "6:00 PM",
+      "cost": "$35 adv / $40 door",
+      "url": "https://phillygoth.net/",
+      "description": "All ages show. Doors 6pm. Stabbing Westward, Priest, & Acumen Nation."
+    },
+    {
+      "title": "Asylum 13's Pretty Pride // Machine",
+      "venue": "Bar XIII, 1706 Philadelphia Pike, Wilmington, DE",
+      "date": "2026-07-23",
+      "time": "9:00 PM",
+      "cost": "$10",
+      "url": "https://phillygoth.net/",
+      "description": "21+ event. Asylum 13's Pretty Pride // Machine. 9pm."
+    }
+  ]
 }

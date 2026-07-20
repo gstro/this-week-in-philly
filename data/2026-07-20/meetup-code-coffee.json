@@ -1,5 +1,42 @@
 {
-  "source": "Meetup: Code & Coffee",
-  "collected_at": "2026-07-20T00:26:48.613009",
-  "events": []
+  "source": "Meetup: Code & Coffee Philly",
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "OG Coffee&Code Coding!",
+      "venue": "Philadelphia, PA",
+      "date": "2026-07-22",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/",
+      "description": "Code & Coffee meetup: OG Coffee&Code Coding session. 1-4 PM."
+    },
+    {
+      "title": "Composio Saturdays! Let your AI agents orchestrate your many apps in 3 hours!",
+      "venue": "Philadelphia, PA",
+      "date": "2026-07-25",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/",
+      "description": "Code & Coffee meetup: Composio Saturdays! Let your AI agents orchestrate your many apps in 3 hours! 1-4 PM."
+    },
+    {
+      "title": "Coffee & Code - Lewisburg meetup",
+      "venue": "Lewisburg, PA",
+      "date": "2026-07-25",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/",
+      "description": "Code & Coffee Lewisburg area meetup. 6-8 PM."
+    },
+    {
+      "title": "Coding on Localhost; Connecting the Community",
+      "venue": "Game Lounge/Retro Lounge, Philadelphia, PA",
+      "date": "2026-07-26",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/",
+      "description": "Code & Coffee meetup: Coding on Localhost; Connecting the Community. 1-4 PM at Game Lounge/Retro Lounge."
+    }
+  ]
 }

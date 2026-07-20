@@ -1,5 +1,42 @@
 {
   "source": "Meetup: Philadelphia Horror",
-  "collected_at": "2026-07-20T00:26:48.017724",
-  "events": []
+  "collected_at": "2026-07-20T00:00:00",
+  "events": [
+    {
+      "title": "SHARK SIDE OF THE MOON",
+      "venue": "Online stream",
+      "date": "2026-07-21",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/",
+      "description": "Philadelphia Horror Meetup online screening. SHARK SIDE OF THE MOON."
+    },
+    {
+      "title": "UNCLE BOONMEE WHO CAN RECALL HIS PAST LIVES (2010)",
+      "venue": "Online stream",
+      "date": "2026-07-22",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/",
+      "description": "Philadelphia Horror Meetup online screening. UNCLE BOONMEE WHO CAN RECALL HIS PAST LIVES (2010)."
+    },
+    {
+      "title": "Dinner & A Movie: HER PRIVATE HELL",
+      "venue": "Regal UA King of Prussia, 300 Goddard Blvd, King Of Prussia, PA 19406",
+      "date": "2026-07-24",
+      "time": "6:45 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/",
+      "description": "Dinner & A Movie: HER PRIVATE HELL at Regal UA King of Prussia theater."
+    },
+    {
+      "title": "Widow's Bay - Season 1",
+      "venue": "Online stream",
+      "date": "2026-07-26",
+      "time": "8:30 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/",
+      "description": "Philadelphia Horror Meetup online screening. Widow's Bay - Season 1."
+    }
+  ]
 }

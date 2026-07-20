@@ -1,5 +1,7 @@
 {
   "source": "Free Library",
-  "collected_at": "2026-07-20T00:26:41.375143",
+  "collected_at": "2026-07-20T00:00:00",
+  "status": "failed",
+  "reason": "Cloudflare security challenge could not be bypassed",
   "events": []
 }
