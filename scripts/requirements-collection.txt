@@ -2,3 +2,4 @@
 # NOT needed by the main pipeline (runner.sh/presentation.yml never renders
 # a page), so this is kept separate from scripts/requirements.txt.
 playwright
+requests

@@ -18,9 +18,11 @@ dependency.
 import argparse
 import os
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
-from playwright.sync_api import ProxySettings
+import requests
+from playwright.sync_api import Route
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
 
@@ -45,21 +47,67 @@ def _resolve_executable_path() -> str | None:
     return None
 
 
-# Some cloud Routine environments route all outbound HTTPS through a local
-# agent proxy (confirmed via a live diagnostic session, 2026-07-20:
-# HTTPS_PROXY=http://127.0.0.1:<port>). Unlike curl or Python's own http
-# libraries, a Chromium *browser process* does not read these env vars on
-# its own -- it must be told explicitly via launch()'s `proxy` argument, or
-# every navigation dies with net::ERR_CONNECTION_RESET. Falls back to no
-# proxy (playwright's default) when none of these are set, e.g. a dev laptop.
-def _resolve_proxy() -> ProxySettings | None:
+# Some cloud Routine environments route outbound HTTPS through a local agent
+# proxy (HTTPS_PROXY=http://127.0.0.1:<port>), but Chromium's own network
+# stack cannot complete a TLS handshake through it -- every navigation dies
+# with net::ERR_CONNECTION_RESET a few seconds after the ClientHello, even
+# though the CONNECT tunnel itself succeeds (full writeup:
+# docs/COLLECTION_PROXY_ISSUE.md). Standard HTTP client libraries like
+# `requests` don't hit this; only the browser's own TLS stack does.
+#
+# Workaround confirmed via a live diagnostic (2026-07-20), extending a
+# community pattern (github.com/anthropics/claude-code#11791) beyond its
+# original scope (sub-resources on a localhost dev server) to direct
+# top-level navigation on external sites: launch Chromium with
+# --no-proxy-server so it never attempts its own outbound connection, and
+# intercept every request via page.route(), fulfilling each one with a
+# response fetched by `requests` (which respects HTTPS_PROXY normally).
+# Real JS still executes locally in the browser -- only the network I/O is
+# rerouted. Falls back to direct (unproxied) requests when HTTPS_PROXY isn't
+# set, e.g. a dev laptop.
+_BLOCKED_RESOURCE_TYPES = {"image", "media", "font"}
+_STRIP_REQUEST_HEADERS = {"host", "content-length"}
+_STRIP_RESPONSE_HEADERS = {"content-encoding", "content-length", "transfer-encoding", "connection"}
+
+
+def _build_session() -> requests.Session:
+    session = requests.Session()
     proxy_url = (
         os.environ.get("HTTPS_PROXY")
         or os.environ.get("https_proxy")
         or os.environ.get("HTTP_PROXY")
         or os.environ.get("http_proxy")
     )
-    return {"server": proxy_url} if proxy_url else None
+    if proxy_url:
+        session.proxies = {"http": proxy_url, "https": proxy_url}
+    return session
+
+
+def _make_route_handler(session: requests.Session) -> Callable[[Route], None]:
+    def handle_route(route: Route) -> None:
+        request = route.request
+        if not request.url.startswith(("http://", "https://")):
+            route.continue_()
+            return
+        if request.resource_type in _BLOCKED_RESOURCE_TYPES:
+            route.abort()
+            return
+        try:
+            response = session.request(
+                request.method,
+                request.url,
+                headers={k: v for k, v in request.headers.items() if k.lower() not in _STRIP_REQUEST_HEADERS},
+                data=request.post_data_buffer,
+                timeout=15,
+                allow_redirects=False,
+            )
+        except requests.RequestException:
+            route.abort()
+            return
+        headers = {k: v for k, v in response.headers.items() if k.lower() not in _STRIP_RESPONSE_HEADERS}
+        route.fulfill(status=response.status_code, headers=headers, body=response.content)
+
+    return handle_route
 
 # playwright's default headless UA gets flagged by some sites' bot detection
 # (confirmed: libwww.freelibrary.org's Cloudflare challenge blocked the
@@ -91,9 +139,9 @@ _CHALLENGE_RETRY_WAIT_MS = 6000
 def fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
     with sync_playwright() as p:
         executable_path = _resolve_executable_path()
-        proxy = _resolve_proxy()
-        browser = p.chromium.launch(executable_path=executable_path, proxy=proxy)
+        browser = p.chromium.launch(executable_path=executable_path, args=["--no-proxy-server"])
         page = browser.new_page(user_agent=_USER_AGENT)
+        page.route("**/*", _make_route_handler(_build_session()))
         try:
             page.goto(url, wait_until="networkidle", timeout=30_000)
         except PlaywrightTimeoutError:
