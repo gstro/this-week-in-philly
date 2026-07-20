@@ -16,9 +16,11 @@ dependency.
 """
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
+from playwright.sync_api import ProxySettings
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
 
@@ -41,6 +43,23 @@ def _resolve_executable_path() -> str | None:
     if _PREBAKED_CHROMIUM_PATH.exists():
         return str(_PREBAKED_CHROMIUM_PATH)
     return None
+
+
+# Some cloud Routine environments route all outbound HTTPS through a local
+# agent proxy (confirmed via a live diagnostic session, 2026-07-20:
+# HTTPS_PROXY=http://127.0.0.1:<port>). Unlike curl or Python's own http
+# libraries, a Chromium *browser process* does not read these env vars on
+# its own -- it must be told explicitly via launch()'s `proxy` argument, or
+# every navigation dies with net::ERR_CONNECTION_RESET. Falls back to no
+# proxy (playwright's default) when none of these are set, e.g. a dev laptop.
+def _resolve_proxy() -> ProxySettings | None:
+    proxy_url = (
+        os.environ.get("HTTPS_PROXY")
+        or os.environ.get("https_proxy")
+        or os.environ.get("HTTP_PROXY")
+        or os.environ.get("http_proxy")
+    )
+    return {"server": proxy_url} if proxy_url else None
 
 # playwright's default headless UA gets flagged by some sites' bot detection
 # (confirmed: libwww.freelibrary.org's Cloudflare challenge blocked the
@@ -72,7 +91,8 @@ _CHALLENGE_RETRY_WAIT_MS = 6000
 def fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
     with sync_playwright() as p:
         executable_path = _resolve_executable_path()
-        browser = p.chromium.launch(executable_path=executable_path)
+        proxy = _resolve_proxy()
+        browser = p.chromium.launch(executable_path=executable_path, proxy=proxy)
         page = browser.new_page(user_agent=_USER_AGENT)
         try:
             page.goto(url, wait_until="networkidle", timeout=30_000)
