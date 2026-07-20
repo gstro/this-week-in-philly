@@ -20,3 +20,10 @@ check_untyped_defs = true
 [[tool.mypy.overrides]]
 module = ["spotipy", "spotipy.oauth2", "google_auth_oauthlib.flow"]
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "network: hits real external sites; excluded by default, run with `pytest -m network`",
+]
+addopts = "-m 'not network'"

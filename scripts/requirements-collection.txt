@@ -1,0 +1,4 @@
+# For fetch_page_text.py, used only by the Collection Routine (via Bash) --
+# NOT needed by the main pipeline (runner.sh/presentation.yml never renders
+# a page), so this is kept separate from scripts/requirements.txt.
+playwright

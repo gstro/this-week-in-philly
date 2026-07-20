@@ -278,7 +278,7 @@ Run these first. No browser session overhead; structured or semi-structured resp
 **Notes:** DIY electronics workshops, speculative fiction reading groups, and leftist/community programming — strong overlap with Greg's interests (DIY electronics + literature + politics). Speculative Futures Reading Group meets last Wednesday of every month.
 
 ⚠️ **Not yet confirmed via MCP — test before relying on.**
-**Fallback:** `get_page_text` on `https://iffybooks.net/` (scroll past the top item to get the full week; ✅ Confirmed Jun 2026)
+**Fallback:** `python scripts/fetch_page_text.py https://iffybooks.net/` (read past the top item to get the full week; ✅ Confirmed Jul 2026 with `fetch_page_text.py`)
 
 ---
 
@@ -292,18 +292,18 @@ Run these first. No browser session overhead; structured or semi-structured resp
 
 ---
 
-### Tier 2 — Simple `get_page_text`, low verbosity
+### Tier 2 — Simple `fetch_page_text.py`, low verbosity
 
-Single-purpose venues with focused, low-prose event listings. Clean plain text, no JS extraction needed.
+Single-purpose venues with focused, low-prose event listings. Clean plain text, no custom JS scraping needed.
 
 ---
 
 ### 6. R5 Productions
 **URL:** `https://r5productions.com/events/`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://r5productions.com/events/`
 **Notes:** Philadelphia's dominant mid-size indie promoter. Books First Unitarian Church, PhilaMOCA, Underground Arts, TLA, Johnny Brenda's, Ruba Club, Ukie Club, Cousin Danny's, Warehouse on Watts, Penn Museum, Philadelphia Ethical Society, Asian Arts Initiative, and Dell Music Center. Authoritative on sold-out status and exact pricing.
 
-**✅ Confirmed Jun 2026** — `get_page_text` returns a clean forward-looking event list through ~6 months. Format per event:
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`** — returns a clean forward-looking event list through ~6 months, same shape as the old `get_page_text` output below, with a cookie-consent/accessibility-toolbar banner at the very top (harmless noise, ignore it — the event listing follows). Format per event:
 ```
 [DAY, MON DD]
 [Optional subtitle / tour name]
@@ -322,20 +322,22 @@ Venue Name
 
 ### 7. Hive76
 **URL:** `https://www.hive76.org/classes/`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://www.hive76.org/classes/`
 **Address:** Philadelphia hackerspace
 **Notes:** Weekly open nights, member projects, electronics focus. Strong overlap with Greg's DIY electronics interest.
 
 ⚠️ **Use `/classes/` not `/events/`** — `/events/` redirects to a legacy wiki article. The actual calendar is at `/classes/` (confirmed Jun 2026). Open Houses run every Sunday 2:30–5pm (free, recurring).
 
-**✅ Confirmed Jun 2026**
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
 ### 8. Philadelphia Film Society
 **URL:** `https://filmadelphia.org/showtimes/`
-**Method:** Claude in Chrome → `get_page_text` / WebSearch
+**Method:** WebSearch (primary)
 **Notes:** Runs Philadelphia Film Center. Hosts PFS member screenings and curated film series. Good for arthouse and international cinema programming.
+
+🚨 **`fetch_page_text.py` is hard-blocked here** — confirmed Jul 2026: filmadelphia.org returns "Access Denied... request appears similar to malicious requests sent by robots" even with a realistic user-agent (a WAF doing deeper fingerprinting, not just a UA check like Free Library's Cloudflare challenge). Don't spend time trying to defeat it further — WebSearch is the established, working method for this source and always has been.
 
 **✅ Confirmed Jun 2026** (WebSearch approach returned showtimes reliably)
 
@@ -345,23 +347,27 @@ Venue Name
 **URL:** `https://www.eventbrite.com/o/harrietts-bookshop-52538975313`
 **Fallback:** `https://do215.com/venues/harriet-s-bookshop`
 **Address:** 258 E Girard Ave, Philadelphia, PA 19125
-**Method:** Claude in Chrome → `get_page_text` on the Eventbrite org page
+**Method:** Bash → `python scripts/fetch_page_text.py https://www.eventbrite.com/o/harrietts-bookshop-52538975313` on the Eventbrite org page
 **Notes:** Celebrates women authors, artists, and activists. Hosts Whiskey Fridays, major launch parties, and community events. Check for readings, signings, and workshops.
 
 ⚠️ **harrietsbookshop.com is unreliable** — the main site and `/pages/events` both return error pages consistently (confirmed Jun 2026). Use the Eventbrite org page as primary. The Do215 venue page is a useful secondary that catches events posted there but not Eventbrite.
+
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
 ### 10. Free Library of Philadelphia
 **URL:** `https://libwww.freelibrary.org/programs/authorevents/`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://libwww.freelibrary.org/programs/authorevents/`
 **Notes:** Extensive free literary programming, author talks, and community events across branches. Good source for high-profile author readings. Free admission.
 
-**✅ Confirmed Jun 2026**
+⚠️ **Cloudflare bot-check blocks the default headless UA** — confirmed Jul 2026, `fetch_page_text.py`'s default user-agent already handles this (see the script's `_USER_AGENT`), no action needed, but if this source ever fails again this is the first thing to check.
+
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
-### Tier 3 — `get_page_text`, moderate verbosity
+### Tier 3 — `fetch_page_text.py`, moderate verbosity
 
 Venues and publications with editorial voice or mixed content. More prose per event but still manageable.
 
@@ -370,7 +376,7 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 ### 11. PhilaMOCA
 **URL:** `https://www.philamoca.org/`
 **Address:** 531 N 12th St, Philadelphia, PA 19123
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://www.philamoca.org/`
 **Notes:** Philadelphia Mausoleum of Contemporary Art. The central hub for underground, horror, and weird culture in Philly. Check weekly — multiple recurring series run here:
 - **Blood Sick Underground Cinema** — monthly horror screenings, 2nd Mondays
 - **Psychotronic Film Society** — cult/horror screenings, twice monthly
@@ -380,56 +386,58 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 - **Phillygoth.net** (`https://phillygoth.net/`) — community-maintained dark/goth/occult calendar. Events that don't appear anywhere else.
 - **Pennhurst Asylum** — ⛔ **skip in weekly runs**. No event calendar; on-demand ticket purchases only. 35 miles from Philly (~35mi). Check in **October** (haunted house season) and **around Paracon weekend in May** only.
 
-**✅ Confirmed Jun 2026**
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
 ### 12. cinéSPEAK
 **URL:** `https://cinespeak.org/cinema/`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://cinespeak.org/cinema/`
 **Notes:** Arthouse film collective with politically engaged programming. Check for Third Thursdays (activist/documentary series) and other screenings. Events often free or PWYW.
 
 ⚠️ **Use `/cinema/` not the homepage** — `cinespeak.org` shows journal posts and mission copy with no event listings. `/events/` and `/screenings/` both 404 (confirmed Jun 2026).
 
-**✅ Confirmed Jun 2026**
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
 ### 13. Lightbox Film Center
 **URL:** `https://www.lightboxfilmcenter.org/`
 **Address:** 1901 S 9th St (Bok Building), Philadelphia, PA 19148
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://www.lightboxfilmcenter.org/`
 **Notes:** Philadelphia's premier repertory, experimental, documentary, and international cinema. Check weekly programming, series events, and special screenings. Free and low-cost screenings are common.
 
-**✅ Confirmed Jun 2026**
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
 ### 14. Phillygoth.net
 **URL:** `https://phillygoth.net/`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://phillygoth.net/`
 **Notes:** Community-maintained dark/goth/occult calendar. Events that don't appear on any other source. Browse the events section. Listed under PhilaMOCA (§11) as a secondary horror/occult source — check both together.
 
-**✅ Confirmed Jun 2026**
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
 ### 15. The Philadelphia Citizen — Good Citizen Calendar
 **URL:** `https://thephiladelphiacitizen.org/good-citizen-calendar/`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://thephiladelphiacitizen.org/good-citizen-calendar/`
 **Notes:** Curated picks with editorial voice. Good for community, civic, and arts events with a progressive angle.
 
-**✅ Confirmed Jun 2026**
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
 ### 16. The Key by WXPN
 **URL:** `https://xpn.org/concert-and-events/`
 **Secondary:** `https://xpn.org/feature/concert-previews/`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://xpn.org/concert-and-events/`
 **Notes:** WXPN (University of Pennsylvania) is one of the best indie/alternative/punk editorial outlets in the country. Good for discovering acts and finding Spotify links. The concert-previews archive has editorial roundup posts that are better for picks quality than the raw listing.
 
 ⚠️ **thekey.xpn.org has a certificate error** (confirmed Jun 2026) — do not use that subdomain. Use `xpn.org` directly. If `/concert-and-events/` output is sparse, try: `site:xpn.org "concert previews" philadelphia [month] [year]`
+
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
@@ -469,56 +477,31 @@ These run last. If the session runs short, cut here — these are the broadest a
 
 ### 18. Philly-Shows.com
 **URL:** `https://www.philly-shows.com/`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://www.philly-shows.com/`
 **Notes:** Dedicated Philadelphia hardcore and punk show tracker. Manually maintained. Sparse by design (confirmed Jun 2026 — ~2 shows/week vs. 9+ on Philly Ask A Punk for the same period). Lists prominent/R5-adjacent shows only, not the full DIY calendar. Quick pass only — treat as a supplementary spot-check after Philly Ask A Punk, not a primary source.
+
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
 
 ---
 
 ### 19. Do215
 **URL pattern:** `https://do215.com/events/YYYY/M/D` (no zero-padding on month or day)
-**Method:** Claude in Chrome → `get_page_text` on day-specific URLs
+**Method:** Bash → `python scripts/fetch_page_text.py https://do215.com/events/YYYY/M/D` on day-specific URLs
 **Notes:** Sister site to Do512 — same platform, same React rendering, same URL structure.
 
-**✅ Confirmed Jun 2026:** Navigate to each day's URL directly (e.g. `do215.com/events/2026/6/8`). `get_page_text` works cleanly and returns the full event listing. Navigate Mon–Sun separately. Filter out recurring "EVERY [DAY]" events.
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`:** Navigate to each day's URL directly (e.g. `do215.com/events/2026/7/22`) and it returns the full, rich event listing (venue, time, price, title) — no browser session, no URL-provenance workaround needed. Navigate Mon–Sun separately (7 calls). Filter out recurring "EVERY [DAY]" events.
 
-**🚨 Scheduled-task context (no Chrome):** `web_fetch` requires URL provenance — a URL must appear in a prior message or fetch result before it can be retrieved. Do215 day URLs are not linked from the homepage, so they must be surfaced via WebSearch first. Before fetching any day's URL, run one WebSearch that includes all seven target URLs as query terms:
+This resolves the old `web_fetch`-specific problem: `web_fetch` requires a URL to have appeared in a prior message/search result before it can be retrieved (provenance), and Do215 day URLs aren't linked from the homepage, so the v1 skill previously needed a WebSearch-first workaround to satisfy that. `fetch_page_text.py` (playwright, not `web_fetch`) has no such restriction — navigate directly, no workaround required.
 
-```
-WebSearch query: "do215.com/events/YYYY/MM/DD" for each day Mon–Sun
-Example: do215.com/events/2026/06/15 do215.com/events/2026/06/16 do215.com/events/2026/06/17 do215.com/events/2026/06/18 do215.com/events/2026/06/19 do215.com/events/2026/06/20 do215.com/events/2026/06/21
-```
-
-WebSearch returns those URLs in its links list, satisfying provenance. Then `web_fetch` each day URL that appeared in results. Any day URL that did not appear in results should be written as `status: failed, reason: "provenance — URL not returned by WebSearch"`.
-
-Note: Do215 accepts both zero-padded (`2026/06/15`) and non-padded (`2026/6/15`) day URLs — use zero-padded format for WebSearch since that is what search engines index.
-
-**🚨 FALLBACK — WebSearch:** If `get_page_text` fails:
+**🚨 FALLBACK — WebSearch:** If `fetch_page_text.py` fails for a specific day:
 ```
 query: "site:do215.com/events/YYYY/M/D" OR "do215.com philadelphia events [Day Month Date 2026]"
 ```
 
 <details>
-<summary>JS extraction (non-day-specific pages only)</summary>
+<summary>Non-day-specific pages (homepage / <code>/events/</code>) — rarely needed</summary>
 
-If you ever need to scrape the Do215 homepage or `/events/` (not the standard day-URL flow), use JavaScript — those pages use React rendering and `get_page_text` will fail with "page body too large." Do NOT use regex literals — use `.includes()` and `.startsWith()`.
-
-```javascript
-const year = new Date().getFullYear().toString();
-let events = [];
-document.querySelectorAll('a[href*="/events/"]').forEach(a => {
-  const href = a.href;
-  if (href.includes('/events/' + year + '/') && !href.includes('?')) {
-    const text = a.innerText.trim();
-    if (text && text.length > 3) {
-      const parent = a.closest('[class*="event"]') || a.parentElement;
-      const venue = parent ? parent.innerText.replace(text, '').trim().slice(0, 80) : '';
-      events.push(text + ' | ' + venue);
-    }
-  }
-});
-[...new Set(events)].slice(0, 30).join('\n');
-```
-Paginate with `slice(0, 25)` then `slice(20, 45)` to get the full list.
+The standard day-URL flow above returns everything needed for a normal collection run. If you ever need the Do215 homepage or `/events/` instead (React-rendered, not confirmed against `fetch_page_text.py`), the old Chrome-console JS-extraction approach doesn't apply here (no Chrome), but the same idea works via playwright's `page.evaluate()` if this is ever actually needed -- not written out since the day-URL flow above should always be sufficient.
 </details>
 
 ---
@@ -535,16 +518,16 @@ Paginate with `slice(0, 25)` then `slice(20, 45)` to get the full list.
 ### 21. Songkick
 **URL:** `https://www.songkick.com/metro-areas/5202-us-philadelphia/[month-YYYY]`
 **Example:** `https://www.songkick.com/metro-areas/5202-us-philadelphia/june-2026`
-**Method:** Claude in Chrome → `get_page_text`
+**Method:** Bash → `python scripts/fetch_page_text.py https://www.songkick.com/metro-areas/5202-us-philadelphia/[month-YYYY]`
 **Notes:** Broadest music aggregator — 1,252+ events for June 2026 alone. Good for catching shows not on R5, Do215, or Philly Ask A Punk (smaller indie acts on Johnny Brenda's, Ortlieb's, MilkBoy, etc.).
 
 ⚠️ **Platform stability risk:** Songkick was acquired by Suno (generative AI) in November 2025. Revalidate this source at each quarterly check.
 
-**✅ Confirmed Jun 2026** — `get_page_text` works and returns event names, venues, and dates.
+**✅ Confirmed Jul 2026 with `fetch_page_text.py`** — including pagination (`?page=2` etc., tested directly).
 
 **Two issues to manage:**
 
-1. **Pagination** — paginates at ~10 events per page. For week 2 of the month (Jun 8–14), page 1 ends around Jun 10; append `?page=2` for Jun 11–14. For weeks 3–4, go to page 3+.
+1. **Pagination, capped at 4 pages** — paginates at ~10 events per page. For week 2 of the month (Jun 8–14), page 1 ends around Jun 10; append `?page=2` for Jun 11–14. For weeks 3–4, go to page 3+. **Stop at page 4 regardless of whether the target week is fully covered.** Per V2_IMPLEMENTATION_PLAN.md's Q4 analysis of the real picks log: only 2 of 84 logged Philadelphia Top 3 picks (2.4%) ever came from Songkick, and the specialist sources (Iffy Books, Do215, PhilaMOCA, Ask A Punk, R5) dominate picks — the cap costs essentially nothing.
 
 2. **Geographic scope** — includes wider Philadelphia metro (Allentown, Camden NJ, Atlantic City, Wilkes-Barre). Filter to Philadelphia proper and inner suburbs (King of Prussia, Upper Darby, Ardmore). Discard events at Borgata Atlantic City, Bethlehem PA, etc. unless the act is genuinely unmissable.
 
@@ -633,22 +616,22 @@ week_shows = [e for e in events if in_week(e)]
 | Iffy Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Wooden Shoe Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Trakt.tv film releases | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
-| R5 Productions | `get_page_text` on `/events/` | 2 | ✅ Jun 2026 |
-| Hive76 | `get_page_text` on `/classes/` | 2 | ✅ Jun 2026 |
-| Philadelphia Film Society | `get_page_text` / WebSearch | 2 | ✅ Jun 2026 |
-| Harriet's Bookshop | `get_page_text` on Eventbrite org page | 2 | ⚠️ Main site broken |
-| Free Library | `get_page_text` | 2 | ✅ Jun 2026 |
-| PhilaMOCA | `get_page_text` | 3 | ✅ Jun 2026 |
-| cinéSPEAK | `get_page_text` on `/cinema/` | 3 | ✅ Jun 2026 |
-| Lightbox Film Center | `get_page_text` | 3 | ✅ Jun 2026 |
-| Phillygoth.net | `get_page_text` | 3 | ✅ Jun 2026 |
-| Philadelphia Citizen | `get_page_text` | 3 | ✅ Jun 2026 |
-| WXPN | `get_page_text` on `xpn.org/concert-and-events/` | 3 | ⚠️ thekey.xpn.org cert error; use xpn.org |
+| R5 Productions | `fetch_page_text.py` on `/events/` | 2 | ✅ Jul 2026 |
+| Hive76 | `fetch_page_text.py` on `/classes/` | 2 | ✅ Jul 2026 |
+| Philadelphia Film Society | WebSearch (primary; `fetch_page_text.py` is WAF-blocked) | 2 | ✅ Jun 2026 |
+| Harriet's Bookshop | `fetch_page_text.py` on Eventbrite org page | 2 | ✅ Jul 2026; ⚠️ Main site still broken |
+| Free Library | `fetch_page_text.py` | 2 | ✅ Jul 2026; needs realistic UA (Cloudflare) |
+| PhilaMOCA | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
+| cinéSPEAK | `fetch_page_text.py` on `/cinema/` | 3 | ✅ Jul 2026 |
+| Lightbox Film Center | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
+| Phillygoth.net | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
+| Philadelphia Citizen | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
+| WXPN | `fetch_page_text.py` on `xpn.org/concert-and-events/` | 3 | ✅ Jul 2026; thekey.xpn.org cert error, use xpn.org |
 | Meetup groups (all 8) | `web_fetch` iCal URL | 4 | ✅ Jun 2026 |
-| Philly-Shows.com | `get_page_text` | 5 | ⚠️ Sparse (~2/week); spot-check only |
-| Do215 | `get_page_text` on day URLs | 5 | ✅ Jun 2026 |
+| Philly-Shows.com | `fetch_page_text.py` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
+| Do215 | `fetch_page_text.py` on day URLs | 5 | ✅ Jul 2026; no provenance workaround needed |
 | Billy Penn | WebSearch + fetch | 5 | ⚠️ Sunday morning only |
-| Songkick | `get_page_text` on `/month-YYYY` URL | 5 | ✅ Jun 2026; ⚠️ Suno acquisition Nov 2025 |
+| Songkick | `fetch_page_text.py` on `/month-YYYY` URL, capped at 4 pages | 5 | ✅ Jul 2026; ⚠️ Suno acquisition Nov 2025 |
 | Bandsintown | ⛔ Dropped | — | Current-week only; no fix |
 | Pennhurst Asylum | ⛔ Skip | — | No calendar; Oct/May only |
 
