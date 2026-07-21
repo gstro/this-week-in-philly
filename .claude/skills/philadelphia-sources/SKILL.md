@@ -180,7 +180,8 @@ During collection, Claude must not:
 - **Retry failed sources** — one attempt per source per run; use resume behavior for retries
 - **Exceed the confirmation turn format** — no additional commentary in confirmation turns
 - **Read source files back into context** — write-only during collection; files are read during report generation only
-- **Write custom collection/aggregation scripts** — call each source's documented Method directly (Bash → `fetch_page_text.py`, the relevant MCP tool, or WebSearch), one source at a time, exactly as this skill specifies. Do not build a Python script that fetches, parses, or batches multiple sources itself — that reimplements what this skill already documents and is slower to debug when a single source breaks
+- **Write custom collection or parsing scripts, for one source or many** — call each source's documented Method directly (Bash → `fetch_raw.py`/`fetch_page_text.py`, the relevant MCP tool, or WebSearch), then read its output directly and identify each event's fields yourself, by reasoning about the text against the documented structure. Do not write a Python/regex/BeautifulSoup script to fetch or parse it — not even one scoped to a single source. **Confirmed live:** a per-source regex script written for R5 Productions had a capturing-group bug that silently matched only a 12-character date fragment instead of the full event block, so every event's title/venue lookup failed and it wrote 0 events — while `fetch_raw.py` itself had returned the complete, correct page. A parsing script fails silently like this; reading the text yourself does not, because you see what's actually there.
+- **Fetch multiple sources in parallel or in batches** — one source at a time, in the documented tier order. Batching several fetches together before processing any of them is how you end up reaching for a script to parse them all at once instead of reading each one's real output.
 
 ---
 
