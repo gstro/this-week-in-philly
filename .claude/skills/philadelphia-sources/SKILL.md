@@ -345,6 +345,8 @@ Venue Name
 
 **One fetch per venue is enough:** unlike Do215 (distinct one-off events per day), cinema programming runs in multi-day blocks — a single "today" snapshot per venue typically covers most of the target week's actual titles. Only add `?date=YYYY-MM-DD` fetches for specific days if session time allows and the week spans a Friday (when programming usually rotates).
 
+**Descriptions:** the Fandango theater pages above give title/rating/runtime/showtimes only, no synopsis — needed anyway for the report's "why" blurb. Confirmed Jul 2026: a plain WebSearch per **distinct film title** (dedupe across the 3 venues and across the week — PFS often runs the same title at multiple venues/days) reliably returns a synopsis directly in the search result (e.g. searching `"The Odyssey" 2026 movie overview synopsis` returned "Odysseus, king of Ithaca, embarks on a perilous journey..." directly, no extra fetch needed). Don't try to construct a Fandango `/movie-overview` URL yourself — the slug includes an internal ID (e.g. `the-odyssey-2026-241283`) that isn't derivable from the title, and the link only exists in the rendered DOM (JS-populated), not in `fetch_page_text.py`'s plain-text output. One WebSearch per distinct title is simpler and works reliably.
+
 **🚨 FALLBACK — WebSearch:** If all 3 Fandango pages fail (e.g. Fandango itself changes/blocks): `query: "Philadelphia Film Society" OR "PFS" showtimes [Month] [Year]`, then a second variant `query: site:filmadelphia.org showtimes [week dates]` if the first returns nothing useful. Treat WebSearch results as lower-confidence (may reflect cached/indexed pages, not live listings) — note this in the description field.
 
 **✅ Confirmed Jul 2026 with `fetch_page_text.py` via Fandango**
