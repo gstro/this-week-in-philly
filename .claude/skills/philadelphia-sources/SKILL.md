@@ -206,7 +206,7 @@ Report generation is a separate phase that reads from the output directory.
 
 ## Sources
 
-### Tier 1 — web_fetch / MCP (no browser required)
+### Tier 1 — fetch_raw.py / MCP (no browser required)
 
 Run these first. No browser session overhead; structured or semi-structured responses; write-and-forget is straightforward.
 
@@ -214,7 +214,7 @@ Run these first. No browser session overhead; structured or semi-structured resp
 
 ### 1. Philly Ask A Punk
 **URL:** `https://philly.askapunk.net/api/events`
-**Method:** `web_fetch` — returns JSON directly, no browser required
+**Method:** Bash → `python scripts/fetch_raw.py https://philly.askapunk.net/api/events` — returns JSON directly, no browser required. Use `fetch_raw.py`, not the `WebFetch` tool: WebFetch runs an AI summarization pass that can silently truncate or paraphrase a large raw JSON array; `fetch_raw.py` is a plain HTTP GET with no model in the loop, so the full events array comes back exactly as the API returned it.
 **Notes:** Best punk/DIY source. Catches shows that don't appear on larger aggregators — basement shows, benefit gigs, touring DIY bands. Run by the Gancio federated events platform.
 
 **JSON response shape:**
@@ -242,7 +242,7 @@ Run these first. No browser session overhead; structured or semi-structured resp
 
 ### 2. Luma
 **URL:** `https://api.luma.com/ics/get?entity=discover&id=discplace-VGLZZfVwOKRD1Yd`
-**Method:** `web_fetch` — returns iCal directly, no browser required
+**Method:** Bash → `python scripts/fetch_raw.py <url>` — returns iCal directly, no browser required (see note on Tier 1's heading: use `fetch_raw.py`, not `WebFetch`, so the feed isn't summarized)
 **Notes:** Increasingly dominant platform for tech, AI, and creative communities. Particularly useful for AI/vibe coding meetups, biotech/startup community events, and indie creative workshops. Philadelphia *discover* feed — featured/promoted events only, roughly 15–20 events per fetch spanning ~4 weeks. Low-noise.
 
 **Parsing:** See iCal Parsing Reference. DTSTART is UTC (Z suffix) — apply EDT/EST offset. Each VEVENT includes SUMMARY, DTSTART, DESCRIPTION (full Luma URL + address + description), LOCATION, and ORGANIZER.
@@ -254,7 +254,7 @@ Run these first. No browser session overhead; structured or semi-structured resp
 ### 3. The Rotunda
 **URL:** `https://www.therotunda.org/events?date=YYYY-MM-DD` (any date in the target month)
 **Example:** `https://www.therotunda.org/events?date=2026-06-01`
-**Method:** `web_fetch` — returns full event listing, no browser required
+**Method:** Bash → `python scripts/fetch_raw.py <url>` — returns full event listing, no browser required
 **Address:** 4014 Walnut St, Philadelphia, PA 19104 (West Philly)
 **Notes:** Community arts space. 300+ events/year — free film screenings, experimental music, spoken word, community workshops. Alcohol-free, all-ages.
 
@@ -442,14 +442,14 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 
 ---
 
-### Tier 4 — Meetup Groups (web_fetch iCal)
+### Tier 4 — Meetup Groups (iCal via fetch_raw.py)
 
 All Meetup groups now use the iCal method — no browser sessions required. Empty calendars are zero-cost to check.
 
 ---
 
 ### 17. Meetup Groups
-**Method:** `web_fetch` on `https://www.meetup.com/[group-slug]/events/ical/`
+**Method:** Bash → `python scripts/fetch_raw.py https://www.meetup.com/[group-slug]/events/ical/` (not `WebFetch` — see the note on Tier 1's heading)
 **Parsing:** See iCal Parsing Reference. DTSTART uses `TZID=America/New_York` — no UTC offset conversion needed, parse date string directly.
 **Filter:** LOCATION must contain a Philadelphia address. Flag empty or URL-only LOCATION as online-only — include for software/tech interest but note in report.
 
@@ -611,9 +611,9 @@ week_shows = [e for e in events if in_week(e)]
 
 | Source | Method | Tier | Status |
 |--------|--------|------|--------|
-| Philly Ask A Punk | `web_fetch` `/api/events` → JSON | 1 | ✅ Jun 2026 |
-| Luma | `web_fetch` iCal URL → parse VEVENT | 1 | ✅ Jun 2026 |
-| The Rotunda | `web_fetch` on `/events?date=YYYY-MM-DD` | 1 | ✅ Jun 2026 |
+| Philly Ask A Punk | `fetch_raw.py` `/api/events` → JSON | 1 | ✅ Jul 2026 |
+| Luma | `fetch_raw.py` iCal URL → parse VEVENT | 1 | ✅ Jul 2026 |
+| The Rotunda | `fetch_raw.py` on `/events?date=YYYY-MM-DD` | 1 | ✅ Jul 2026 |
 | Iffy Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Wooden Shoe Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Trakt.tv film releases | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
@@ -628,7 +628,7 @@ week_shows = [e for e in events if in_week(e)]
 | Phillygoth.net | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
 | Philadelphia Citizen | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
 | WXPN | `fetch_page_text.py` on `xpn.org/concert-and-events/` | 3 | ✅ Jul 2026; thekey.xpn.org cert error, use xpn.org |
-| Meetup groups (all 8) | `web_fetch` iCal URL | 4 | ✅ Jun 2026 |
+| Meetup groups (all 8) | `fetch_raw.py` iCal URL | 4 | ✅ Jul 2026 |
 | Philly-Shows.com | `fetch_page_text.py` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
 | Do215 | `fetch_page_text.py` on day URLs | 5 | ✅ Jul 2026; no provenance workaround needed |
 | Billy Penn | WebSearch + fetch | 5 | ⚠️ Sunday morning only |

@@ -16,7 +16,6 @@ dependency.
 """
 
 import argparse
-import os
 import sys
 from collections.abc import Callable
 from pathlib import Path
@@ -25,6 +24,8 @@ import requests
 from playwright.sync_api import Route
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
+
+from proxy_session import build_session
 
 # Some cloud Routine environments pre-bake a Chromium install at this fixed
 # path specifically so sessions don't need `playwright install` (which needs
@@ -68,19 +69,6 @@ def _resolve_executable_path() -> str | None:
 _BLOCKED_RESOURCE_TYPES = {"image", "media", "font"}
 _STRIP_REQUEST_HEADERS = {"host", "content-length"}
 _STRIP_RESPONSE_HEADERS = {"content-encoding", "content-length", "transfer-encoding", "connection"}
-
-
-def _build_session() -> requests.Session:
-    session = requests.Session()
-    proxy_url = (
-        os.environ.get("HTTPS_PROXY")
-        or os.environ.get("https_proxy")
-        or os.environ.get("HTTP_PROXY")
-        or os.environ.get("http_proxy")
-    )
-    if proxy_url:
-        session.proxies = {"http": proxy_url, "https": proxy_url}
-    return session
 
 
 def _make_route_handler(session: requests.Session) -> Callable[[Route], None]:
@@ -141,7 +129,7 @@ def fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
         executable_path = _resolve_executable_path()
         browser = p.chromium.launch(executable_path=executable_path, args=["--no-proxy-server"])
         page = browser.new_page(user_agent=_USER_AGENT)
-        page.route("**/*", _make_route_handler(_build_session()))
+        page.route("**/*", _make_route_handler(build_session()))
         try:
             page.goto(url, wait_until="networkidle", timeout=30_000)
         except PlaywrightTimeoutError:
