@@ -519,16 +519,18 @@ The standard day-URL flow above returns everything needed for a normal collectio
 ### 21. Songkick
 **URL:** `https://www.songkick.com/metro-areas/5202-us-philadelphia/[month-YYYY]`
 **Example:** `https://www.songkick.com/metro-areas/5202-us-philadelphia/june-2026`
-**Method:** Bash → `python scripts/fetch_page_text.py https://www.songkick.com/metro-areas/5202-us-philadelphia/[month-YYYY]`
+**Method:** **Page 1: Bash → `python scripts/fetch_raw.py https://www.songkick.com/metro-areas/5202-us-philadelphia/[month-YYYY]`** (raw HTML — page 1's event data is fully server-rendered, no JS/browser needed). **Pages 2+ only (if the target week isn't covered by page 1's date range): Bash → `python scripts/fetch_page_text.py <url>?page=N`** (browser required — see note below).
 **Notes:** Broadest music aggregator — 1,252+ events for June 2026 alone. Good for catching shows not on R5, Do215, or Philly Ask A Punk (smaller indie acts on Johnny Brenda's, Ortlieb's, MilkBoy, etc.).
 
 ⚠️ **Platform stability risk:** Songkick was acquired by Suno (generative AI) in November 2025. Revalidate this source at each quarterly check.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`** — including pagination (`?page=2` etc., tested directly).
+**Why page 1 uses `fetch_raw.py` but pages 2+ need `fetch_page_text.py`:** confirmed Jul 2026 — page 1's HTML has the full event listing server-rendered (`class="event-listings-element"` blocks with artist name, venue, and `<time datetime="...">`), so a plain HTTP GET returns everything a browser would. But `?page=2` (and beyond) returns `406 Not Acceptable` to a plain `requests`/curl-style client regardless of headers, cookies, or Referer — a CDN-level rule (Fastly) that appears to require a real browser's TLS/client fingerprint specifically on paginated requests. `fetch_page_text.py` still works for these (confirmed — Chromium's actual TLS fingerprint satisfies it). Parsing raw HTML instead of `fetch_page_text.py`'s clean extracted text means picking event title/venue/date out of markup directly — see the `.event-listings-element` structure above.
+
+**Only fetch page 2+ when actually needed** — this keeps `fetch_page_text.py` usage here rare instead of mandatory. Page 1's plain HTTP fetch is ~0.2s; each `fetch_page_text.py` page-2+ fetch can take 30-70+ seconds even though the eventual content is correct, because Songkick's rendered page triggers a large real-time-ad-bidding request storm (confirmed Jul 2026: 200+ distinct third-party ad/tracking domains firing continuously) that `fetch_page_text.py`'s route-interception proxy workaround (docs/COLLECTION_PROXY_ISSUE.md) has to individually round-trip through `requests` rather than Chromium's native concurrent networking — this is what caused this source to time out entirely in a recent run. Needing page 2+ only when the target week falls later in the month (see pagination note below) keeps this cost occasional rather than guaranteed every run.
 
 **Two issues to manage:**
 
-1. **Pagination, capped at 4 pages** — paginates at ~10 events per page. For week 2 of the month (Jun 8–14), page 1 ends around Jun 10; append `?page=2` for Jun 11–14. For weeks 3–4, go to page 3+. **Stop at page 4 regardless of whether the target week is fully covered.** Per V2_IMPLEMENTATION_PLAN.md's Q4 analysis of the real picks log: only 2 of 84 logged Philadelphia Top 3 picks (2.4%) ever came from Songkick, and the specialist sources (Iffy Books, Do215, PhilaMOCA, Ask A Punk, R5) dominate picks — the cap costs essentially nothing.
+1. **Pagination, capped at 4 pages** — paginates at ~10 events per page. Page 1 (via `fetch_raw.py`) typically covers the first ~3-4 days of the month. For week 2 of the month (Jun 8–14), append `?page=2` for Jun 11–14 (via `fetch_page_text.py`). For weeks 3–4, go to page 3+. **Stop at page 4 regardless of whether the target week is fully covered.** Per V2_IMPLEMENTATION_PLAN.md's Q4 analysis of the real picks log: only 2 of 84 logged Philadelphia Top 3 picks (2.4%) ever came from Songkick, and the specialist sources (Iffy Books, Do215, PhilaMOCA, Ask A Punk, R5) dominate picks — the cap costs essentially nothing.
 
 2. **Geographic scope** — includes wider Philadelphia metro (Allentown, Camden NJ, Atlantic City, Wilkes-Barre). Filter to Philadelphia proper and inner suburbs (King of Prussia, Upper Darby, Ardmore). Discard events at Borgata Atlantic City, Bethlehem PA, etc. unless the act is genuinely unmissable.
 
@@ -632,7 +634,7 @@ week_shows = [e for e in events if in_week(e)]
 | Philly-Shows.com | `fetch_page_text.py` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
 | Do215 | `fetch_page_text.py` on day URLs | 5 | ✅ Jul 2026; no provenance workaround needed |
 | Billy Penn | WebSearch + fetch | 5 | ⚠️ Sunday morning only |
-| Songkick | `fetch_page_text.py` on `/month-YYYY` URL, capped at 4 pages | 5 | ✅ Jul 2026; ⚠️ Suno acquisition Nov 2025 |
+| Songkick | `fetch_raw.py` for page 1; `fetch_page_text.py` only for page 2+ if needed, capped at 4 pages | 5 | ✅ Jul 2026; ⚠️ Suno acquisition Nov 2025 |
 | Bandsintown | ⛔ Dropped | — | Current-week only; no fix |
 | Pennhurst Asylum | ⛔ Skip | — | No calendar; Oct/May only |
 
