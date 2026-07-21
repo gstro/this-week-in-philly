@@ -17,10 +17,9 @@ natively via `requests`.
 """
 
 import argparse
-import os
 import sys
 
-import requests
+from proxy_session import build_session
 
 _USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -28,21 +27,8 @@ _USER_AGENT = (
 )
 
 
-def _build_session() -> requests.Session:
-    session = requests.Session()
-    proxy_url = (
-        os.environ.get("HTTPS_PROXY")
-        or os.environ.get("https_proxy")
-        or os.environ.get("HTTP_PROXY")
-        or os.environ.get("http_proxy")
-    )
-    if proxy_url:
-        session.proxies = {"http": proxy_url, "https": proxy_url}
-    return session
-
-
 def fetch_raw(url: str, max_chars: int) -> str:
-    session = _build_session()
+    session = build_session()
     response = session.get(url, headers={"User-Agent": _USER_AGENT}, timeout=20)
     response.raise_for_status()
     text = response.text
