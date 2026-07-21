@@ -180,7 +180,7 @@ During collection, Claude must not:
 - **Retry failed sources** — one attempt per source per run; use resume behavior for retries
 - **Exceed the confirmation turn format** — no additional commentary in confirmation turns
 - **Read source files back into context** — write-only during collection; files are read during report generation only
-- **Write custom collection or parsing scripts, for one source or many** — call each source's documented Method directly (Bash → `fetch_raw.py`/`fetch_page_text.py`, the relevant MCP tool, or WebSearch), then read its output directly and identify each event's fields yourself, by reasoning about the text against the documented structure. Do not write a Python/regex/BeautifulSoup script to fetch or parse it — not even one scoped to a single source. **Confirmed live:** a per-source regex script written for R5 Productions had a capturing-group bug that silently matched only a 12-character date fragment instead of the full event block, so every event's title/venue lookup failed and it wrote 0 events — while `fetch_raw.py` itself had returned the complete, correct page. A parsing script fails silently like this; reading the text yourself does not, because you see what's actually there.
+- **Write your own collection or parsing scripts, for one source or many** — call each source's documented Method exactly as written. For most sources that means Bash → `fetch_raw.py`/`fetch_page_text.py`, then read the output directly and identify each event's fields yourself, by reasoning about the text against the documented structure. For the sources whose Method pipes into `python scripts/parse_events.py <parser-key> ...` (see the Quick Reference table), running that exact documented command **is** the Method — it's a tested, version-controlled parser checked into this repo (`tests/test_parse_events.py`), not an improvised script. What's prohibited is writing a *new* one: a Python/regex/BeautifulSoup script you compose yourself during the run, for a source whose Method doesn't call for one — not even one scoped to a single source. **Confirmed live:** a per-source regex script written on the fly for R5 Productions had a capturing-group bug that silently matched only a 12-character date fragment instead of the full event block, so every event's title/venue lookup failed and it wrote 0 events — while `fetch_raw.py` itself had returned the complete, correct page. An improvised parsing script fails silently like this; reading the text yourself, or running the one pre-built and tested parser the Method actually specifies, does not.
 - **Fetch multiple sources in parallel or in batches** — one source at a time, in the documented tier order. Batching several fetches together before processing any of them is how you end up reaching for a script to parse them all at once instead of reading each one's real output.
 
 ---
@@ -215,47 +215,30 @@ Run these first. No browser session overhead; structured or semi-structured resp
 
 ### 1. Philly Ask A Punk
 **URL:** `https://philly.askapunk.net/api/events`
-**Method:** Bash → `python scripts/fetch_raw.py https://philly.askapunk.net/api/events` — returns JSON directly, no browser required. Use `fetch_raw.py`, not the `WebFetch` tool: WebFetch runs an AI summarization pass that can silently truncate or paraphrase a large raw JSON array; `fetch_raw.py` is a plain HTTP GET with no model in the loop, so the full events array comes back exactly as the API returned it.
+**Method:** Bash → `python scripts/fetch_raw.py https://philly.askapunk.net/api/events | python scripts/parse_events.py philly-ask-a-punk --source-name "Philly Ask A Punk" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/philly-ask-a-punk.json` — fully deterministic, no model parsing step. `parse_events.py` reads `fetch_raw.py`'s stdout, filters to the target week (handling `multidate` events itself), and writes the finished JSON file directly; it also prints `[source]: [N] events parsed.` to stderr, which is exactly the Confirmation Turn Format line for this source.
 **Notes:** Best punk/DIY source. Catches shows that don't appear on larger aggregators — basement shows, benefit gigs, touring DIY bands. Run by the Gancio federated events platform.
 
-**JSON response shape:**
-```json
-{
-  "id": 474,
-  "title": "Demonstrate Record Release",
-  "slug": "demonstrate-record-release",
-  "start_datetime": 1781305200,
-  "end_datetime": 1781319600,
-  "multidate": true,
-  "tags": ["hardcore", "punk"],
-  "place": { "name": "The First Unitarian Church", "address": "2125 Chestnut Street" },
-  "online_locations": ["https://r5productions.com/..."]
-}
-```
+**Why a real parser script, not manual reading or an ad hoc one:** confirmed live (2026-07-21) that both failure modes are real: routing this through the `WebFetch` tool risked silent truncation of the raw JSON array (WebFetch's own docs: "results may be summarized if the content is very large"); separately, a model-written one-off regex parser for a different source (R5 Productions) had a capturing-group bug that silently dropped every event with no error. `scripts/parse_events.py` is a tested, version-controlled parser (`tests/test_parse_events.py`) that fails loudly (raises, exit 1) if the API's shape changes, instead of silently returning zero events.
 
-**Filtering for the target week:** `start_datetime` is a Unix timestamp in UTC. See iCal Parsing Reference for the Python filtering snippet. For multi-day events, check for `"multidate": true` — include if `start_datetime` is before the window ends AND `end_datetime` is after the window starts.
+**Also check:** `/feed/ics` returns valid iCal; `/feed/rss` includes full HTML descriptions with embedded Bandcamp/Spotify links — useful for finding artist links without a separate search. (Not wired into `parse_events.py` — the `/api/events` JSON is the primary and sufficient source.)
 
-**Also check:** `/feed/ics` returns valid iCal; `/feed/rss` includes full HTML descriptions with embedded Bandcamp/Spotify links — useful for finding artist links without a separate search.
-
-**✅ Confirmed Jun 2026**
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`**
 
 ---
 
 ### 2. Luma
 **URL:** `https://api.luma.com/ics/get?entity=discover&id=discplace-VGLZZfVwOKRD1Yd`
-**Method:** Bash → `python scripts/fetch_raw.py <url>` — returns iCal directly, no browser required (see note on Tier 1's heading: use `fetch_raw.py`, not `WebFetch`, so the feed isn't summarized)
+**Method:** Bash → `python scripts/fetch_raw.py <url> | python scripts/parse_events.py luma-ical --source-name "Luma" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/luma.json` — deterministic, no model parsing step. `parse_events.py` handles the UTC-to-ET offset and the online-vs-address `LOCATION` distinction itself (a `LOCATION` starting with `http` means online-only; venue is set to `"(online / see description)"` and the real URL is preserved).
 **Notes:** Increasingly dominant platform for tech, AI, and creative communities. Particularly useful for AI/vibe coding meetups, biotech/startup community events, and indie creative workshops. Philadelphia *discover* feed — featured/promoted events only, roughly 15–20 events per fetch spanning ~4 weeks. Low-noise.
 
-**Parsing:** See iCal Parsing Reference. DTSTART is UTC (Z suffix) — apply EDT/EST offset. Each VEVENT includes SUMMARY, DTSTART, DESCRIPTION (full Luma URL + address + description), LOCATION, and ORGANIZER.
-
-**✅ Confirmed Jun 2026** (refreshes every 12 hours per `X-PUBLISHED-TTL`)
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`** (feed refreshes every 12 hours per `X-PUBLISHED-TTL`)
 
 ---
 
 ### 3. The Rotunda
 **URL:** `https://www.therotunda.org/events?date=YYYY-MM-DD` (any date in the target month)
 **Example:** `https://www.therotunda.org/events?date=2026-06-01`
-**Method:** Bash → `python scripts/fetch_raw.py <url>` — returns full event listing, no browser required
+**Method:** Bash → `python scripts/fetch_raw.py <url> | python scripts/parse_events.py the-rotunda --source-name "The Rotunda" --week-start YYYY-MM-DD --week-end YYYY-MM-DD --context-date <the same YYYY-MM-DD used in the URL's ?date= param> > {output_directory}/YYYY-MM-DD/the-rotunda.json` — the page is a monthly calendar grid, and `--context-date` is required: the HTML alone doesn't say which month the grid represents (it shows prev/next-month nav for all three months), so pass the same date used to build the URL. If the target week spans two months, run this twice (once per month URL) and merge — write the file from whichever run has the fuller/correct set, or combine both JSON `events` arrays before writing.
 **Address:** 4014 Walnut St, Philadelphia, PA 19104 (West Philly)
 **Notes:** Community arts space. 300+ events/year — free film screenings, experimental music, spoken word, community workshops. Alcohol-free, all-ages.
 
@@ -265,11 +248,9 @@ Run these first. No browser session overhead; structured or semi-structured resp
 - **Event Horizon** — ambient/experimental music, Fridays
 - **Fire Museum Presents** — avant-garde and world music
 
-**Parsing:** Page renders as a monthly calendar grid. Filter by date — each cell contains the day number followed by event title, time, and description. If the target week spans two months, fetch both month URLs.
-
 **Recurring events to deprioritize for Top 3:** Weekly improvised music jam (Wednesdays), Vogue Practice Session (Tuesdays).
 
-**✅ Confirmed Jun 2026**
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`**
 
 ---
 
@@ -302,27 +283,12 @@ Single-purpose venues with focused, low-prose event listings. Use each source's 
 
 ### 6. R5 Productions
 **URL:** `https://r5productions.com/events/`
-**Method:** Bash → `python scripts/fetch_raw.py https://r5productions.com/events/` — the event list is fully server-rendered; a browser isn't needed (confirmed Jul 2026: every known venue in a real capture was present in the raw HTML).
+**Method:** Bash → `python scripts/fetch_raw.py https://r5productions.com/events/ | python scripts/parse_events.py r5-productions --source-name "R5 Productions" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/r5-productions.json` — deterministic parser, not manual reading. See "Why a real parser script" under source #1 for why: a model-written one-off regex parser for this exact source silently dropped every event (capturing-group bug matched only a date fragment) while `fetch_raw.py` itself returned the complete, correct page. `scripts/parse_events.py` is tested against real captured markup (`tests/test_parse_events.py`) and raises instead of silently returning zero events if the page's structure changes.
 **Notes:** Philadelphia's dominant mid-size indie promoter. Books First Unitarian Church, PhilaMOCA, Underground Arts, TLA, Johnny Brenda's, Ruba Club, Ukie Club, Cousin Danny's, Warehouse on Watts, Penn Museum, Philadelphia Ethical Society, Asian Arts Initiative, and Dell Music Center. Authoritative on sold-out status and exact pricing.
 
-**Raw HTML structure (WordPress "RHP" events plugin):** ignore a long `<li class="optionFilter">` venue-filter dropdown near the top of the page — that's UI chrome, not events. Each real event is one block matching this shape (confirmed Jul 2026):
-```html
-<div id="eventDate" class="... eventMonth ...">Wed, Jul 22</div>
-...
-<div class="... eventTagLine ...">WXPN 88.5 Welcomes | Make The World Better Concert Weekend</div>
-<a id="eventTitle" ...><h2 class="... rhp-event__title--list ...">PAVEMENTS (2024)</h2></a>
-...
-<span class="rhp-event__time-text--list">Doors: 7 pm | Show: 7:30 pm</span>
-...
-<span class="rhp-event__cost-text--list">$15.39</span>
-...
-<a class="venueLink" ... title="PhilaMOCA">PhilaMOCA</a>
-```
-Map: `.eventMonth` → date, `.eventTagLine` (if present) + the `h2` → title (tagline is often the tour/series name, keep both), `.rhp-event__time-text--list` → time, `.rhp-event__cost-text--list` → cost, `.venueLink` text → venue.
+**Note on fundraiser shows:** R5 sometimes lists the beneficiary organization in the event subtitle (e.g. "A Fundraiser for Juntos Philadelphia") — `parse_events.py` keeps this in the description field automatically.
 
-**Note on fundraiser shows:** R5 sometimes lists the beneficiary organization in the event subtitle (e.g. "A Fundraiser for Juntos Philadelphia"). Always capture this in the description field — it's high-value context for Greg's interests.
-
-**✅ Confirmed Jul 2026 with `fetch_raw.py`**
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`**
 
 ---
 
@@ -391,7 +357,7 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 ### 11. PhilaMOCA
 **URL:** `https://www.philamoca.org/`
 **Address:** 531 N 12th St, Philadelphia, PA 19123
-**Method:** Bash → `python scripts/fetch_raw.py https://www.philamoca.org/` — the event list is fully server-rendered; a browser isn't needed (confirmed Jul 2026: every known event's venue was present in the raw HTML).
+**Method:** Bash → `python scripts/fetch_raw.py https://www.philamoca.org/ | python scripts/parse_events.py philamoca --source-name "PhilaMOCA" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/philamoca.json` — deterministic parser (`scripts/parse_events.py`), not manual reading — see source #1 for why.
 **Notes:** Philadelphia Mausoleum of Contemporary Art. The central hub for underground, horror, and weird culture in Philly. Check weekly — multiple recurring series run here:
 - **Blood Sick Underground Cinema** — monthly horror screenings, 2nd Mondays
 - **Psychotronic Film Society** — cult/horror screenings, twice monthly
@@ -401,18 +367,7 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 - **Phillygoth.net** (`https://phillygoth.net/`) — community-maintained dark/goth/occult calendar. Events that don't appear anywhere else.
 - **Pennhurst Asylum** — ⛔ **skip in weekly runs**. No event calendar; on-demand ticket purchases only. 35 miles from Philly (~35mi). Check in **October** (haunted house season) and **around Paracon weekend in May** only.
 
-**Raw HTML structure:** each event is one `<a class="event ...">` block (confirmed Jul 2026):
-```html
-<span class="event__title">Philadelphia Psychotronic Film Society</span>
-<p class="event__description">Warning: Psychotronic films may contain extreme subject matter...</p>
-<span class="event__detail-label">Tickets</span><span class="event__detail-value">$5 At Door</span>
-<span class="event__detail-label">Doors</span><time class="event__details-value" datetime="19:00">7:00</time>
-<span class="event__detail-label">Show</span><time class="event__details-value" datetime="19:30">7:30</time>
-<time class="event__date" datetime="2026-08-03">...</time>
-```
-Map: `.event__title` → title, `.event__description` → description, `.event__detail--tickets .event__detail-value` → cost, `.event__detail--time time` → doors/show times, `.event__date` `datetime` attribute → date (ISO, use directly).
-
-**✅ Confirmed Jul 2026 with `fetch_raw.py`**
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`**
 
 ---
 
@@ -441,23 +396,10 @@ Map: `.event__title` → title, `.event__description` → description, `.event__
 
 ### 14. Phillygoth.net
 **URL:** `https://phillygoth.net/`
-**Method:** Bash → `python scripts/fetch_raw.py https://phillygoth.net/` — the event list is fully server-rendered; a browser isn't needed (confirmed Jul 2026: both known events' venues were present in the raw HTML).
+**Method:** Bash → `python scripts/fetch_raw.py https://phillygoth.net/ | python scripts/parse_events.py phillygoth --source-name "Phillygoth.net" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/phillygoth.json` — deterministic parser, not manual reading. This specifically fixes a past under-collection here: a live run once wrote only 2 events when 7+ were actually in the window, because reading the page manually and extracting events by hand stopped early. `scripts/parse_events.py` walks every `em-event` block mechanically — it can't stop early (verified in `tests/test_parse_events.py`).
 **Notes:** Community-maintained dark/goth/occult calendar. Events that don't appear on any other source. Browse the events section. Listed under PhilaMOCA (§11) as a secondary horror/occult source — check both together.
 
-**Raw HTML structure (WordPress "Events Manager" plugin):** each event is one `<div class="em-event em-item">` block (confirmed Jul 2026):
-```html
-<div class="em-event em-item" data-href="https://phillygoth.net/events/...">
-  <h3 class="em-item-title"><a href="...">Stabbing Westward, Priest, &amp; Acumen Nation</a></h3>
-  <div class="em-event-date em-event-meta-datetime"> July 21, 2026</div>
-  <div class="em-event-location"><a href="...">Phantom Power, 121 W. Fredrick St. (Millersville, PA)</a></div>
-  <div class="em-item-actions input"><p>All ages, 6pm doors, $35 adv / $40 DOS</p> Featuring: ... Links: <a href="...">Facebook event</a></div>
-</div>
-```
-Map: `.em-item-title` → title, `.em-event-date` → date, `.em-event-location` → venue, `.em-item-actions` → time/cost/description.
-
-⚠️ **Extract every `em-event` block in the target week, not just the first couple** — a past run under-collected here (2 events written when 7+ were actually in the window) by stopping early rather than scanning the full listing. Count the `em-event` blocks whose date falls in the target week before writing the file.
-
-**✅ Confirmed Jul 2026 with `fetch_raw.py`**
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`**
 
 ---
 
@@ -491,24 +433,22 @@ All Meetup groups now use the iCal method — no browser sessions required. Empt
 ---
 
 ### 17. Meetup Groups
-**Method:** Bash → `python scripts/fetch_raw.py https://www.meetup.com/[group-slug]/events/ical/` (not `WebFetch` — see the note on Tier 1's heading)
-**Parsing:** See iCal Parsing Reference. DTSTART uses `TZID=America/New_York` — no UTC offset conversion needed, parse date string directly.
-**Filter:** LOCATION must contain a Philadelphia address. Flag empty or URL-only LOCATION as online-only — include for software/tech interest but note in report.
+**Method:** Bash → `python scripts/fetch_raw.py https://www.meetup.com/[group-slug]/events/ical/ | python scripts/parse_events.py meetup-ical --source-name "Meetup: [Display Name]" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/meetup-[filename-slug].json` — deterministic parser (`scripts/parse_events.py`), one run per group. Use the exact `--source-name` values from the table below (must match the Output Directory Structure naming). `parse_events.py` handles the `TZID=America/New_York` timezone (no offset math needed) and the online-vs-address `LOCATION` distinction (empty or `http`-prefixed `LOCATION` → venue `"(online)"`) itself.
 
-**If a group returns no VEVENTs:** write an empty events array and proceed immediately. Do not retry or navigate to the group page.
+**If a group returns no VEVENTs:** `parse_events.py` writes a valid empty `events` array on its own (a well-formed empty iCal calendar isn't an error) — nothing extra to do. Do not retry or navigate to the group page.
 
-**✅ Confirmed Jun 2026** (all 8 groups tested)
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`** (all 8 groups tested)
 
-| Group | Slug | Interest | Status |
-|-------|------|----------|--------|
-| Philadelphia Horror Meetup | `philadelphia-horror-meetup-group` | Horror | ✅ Active |
-| Code & Coffee Philly | `code-coffee-philly` | Software | ✅ Active |
-| AI Philly | `ai-philly` | AI/Software | ✅ Active |
-| Tech in Motion: Philadelphia | `techinmotionphilly` | Tech | ✅ Active |
-| DC 215 | `dc_215` | Hacker/Security | ✅ Active |
-| OWASP Philadelphia | `owasp-philadelphia-chapter` | Security | Empty Jun 2026 — keep |
-| Philly Hardware | `philly-hardware` | Hardware | Empty Jun 2026 — keep |
-| Philly Film Club | `philly-film-club` | Film | Empty Jun 2026 — keep |
+| Group | Slug | `--source-name` | Interest | Status |
+|-------|------|------------------|----------|--------|
+| Philadelphia Horror Meetup | `philadelphia-horror-meetup-group` | `Meetup: Philadelphia Horror` | Horror | ✅ Active |
+| Code & Coffee Philly | `code-coffee-philly` | `Meetup: Code & Coffee` | Software | ✅ Active |
+| AI Philly | `ai-philly` | `Meetup: AI Philly` | AI/Software | ✅ Active |
+| Tech in Motion: Philadelphia | `techinmotionphilly` | `Meetup: Tech in Motion` | Tech | ✅ Active |
+| DC 215 | `dc_215` | `Meetup: DC 215` | Hacker/Security | ✅ Active |
+| OWASP Philadelphia | `owasp-philadelphia-chapter` | `Meetup: OWASP` | Security | Empty Jun 2026 — keep |
+| Philly Hardware | `philly-hardware` | `Meetup: Philly Hardware` | Hardware | Empty Jun 2026 — keep |
+| Philly Film Club | `philly-film-club` | `Meetup: Philly Film Club` | Film | Empty Jun 2026 — keep |
 
 ---
 
@@ -520,20 +460,10 @@ These run last. If the session runs short, cut here — these are the broadest a
 
 ### 18. Philly-Shows.com
 **URL:** `https://www.philly-shows.com/`
-**Method:** Bash → `python scripts/fetch_raw.py https://www.philly-shows.com/` — the show list is fully server-rendered; a browser isn't needed (confirmed Jul 2026: real show data found directly in the raw HTML).
+**Method:** Bash → `python scripts/fetch_raw.py https://www.philly-shows.com/ | python scripts/parse_events.py philly-shows --source-name "Philly-Shows.com" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/philly-shows.json` — deterministic parser, not manual reading.
 **Notes:** Dedicated Philadelphia hardcore and punk show tracker. Manually maintained. Sparse by design (confirmed Jun 2026 — ~2 shows/week vs. 9+ on Philly Ask A Punk for the same period). Lists prominent/R5-adjacent shows only, not the full DIY calendar. Quick pass only — treat as a supplementary spot-check after Philly Ask A Punk, not a primary source.
 
-**Raw HTML structure (Webflow CMS list):** each show is one `<div class="showblock">` (confirmed Jul 2026):
-```html
-<p class="showdatevenue">July 17, 2026 7:00 PM</p>
-<p class="showdatevenue">Bonks Bar -3467 Richmond Street, Phila Pa 19134</p>
-<h3>Liberty &amp; Justice, XL Bully, The Uprise, Impact Driver, Off The Top, Rage &amp; Ruin, Vulture Raid</h3>
-<p class="showdescription">Liberty &amp; Justice , XL Bully, ...</p>
-<p class="showdescription showprice">$20</p>
-```
-Map: first `.showdatevenue` → date/time, second `.showdatevenue` → venue/address, `h3` → title (full lineup), `.showprice` → cost.
-
-**✅ Confirmed Jul 2026 with `fetch_raw.py`**
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`**
 
 ---
 
@@ -616,74 +546,29 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 
 ---
 
-## iCal Parsing Reference
-
-All iCal sources (Luma, Meetup groups, Wooden Shoe Books) parse VEVENT blocks with the same logic.
-
-**DTSTART format varies by source:**
-
-| Source | Format | Conversion |
-|--------|--------|------------|
-| Luma | UTC with Z suffix: `20260608T200000Z` | Subtract 4h (EDT) or 5h (EST) to get ET |
-| Meetup groups | Local time with TZID: `DTSTART;TZID=America/New_York:20260608T200000` | Parse date string directly — no offset needed |
-| Wooden Shoe Books | Local time with TZID (same as Meetup) | Parse date string directly — no offset needed |
-| Philly Ask A Punk | Unix timestamp (UTC) | See filtering snippet below |
-
-**Python filtering snippet (Philly Ask A Punk / Unix timestamps):**
-
-```python
-import datetime, json
-
-UTC_OFFSET_ET = -4 * 3600  # EDT; use -5 * 3600 for EST (Nov–Mar)
-
-events = json.loads(response_text)
-today      = datetime.date.today()
-week_start = today + datetime.timedelta(days=1)              # Monday (tomorrow)
-week_end   = week_start + datetime.timedelta(days=6)         # Sunday
-
-def in_week(event):
-    ts = event["start_datetime"]
-    d = datetime.datetime.utcfromtimestamp(ts + UTC_OFFSET_ET).date()
-    if event.get("multidate") and event.get("end_datetime"):
-        end_d = datetime.datetime.utcfromtimestamp(event["end_datetime"] + UTC_OFFSET_ET).date()
-        return d <= week_end and end_d >= week_start
-    return week_start <= d <= week_end
-
-week_shows = [e for e in events if in_week(e)]
-```
-
-**Key VEVENT fields:**
-- `SUMMARY` — event title
-- `DTSTART` — start date/time
-- `LOCATION` — venue address (may be empty for online events; flag as online-only)
-- `DESCRIPTION` — full event description and URL
-- `ORGANIZER;CN="..."` — host name (Luma only)
-
----
-
 ## Quick Reference: Extraction Method by Source
 
 | Source | Method | Tier | Status |
 |--------|--------|------|--------|
-| Philly Ask A Punk | `fetch_raw.py` `/api/events` → JSON | 1 | ✅ Jul 2026 |
-| Luma | `fetch_raw.py` iCal URL → parse VEVENT | 1 | ✅ Jul 2026 |
-| The Rotunda | `fetch_raw.py` on `/events?date=YYYY-MM-DD` | 1 | ✅ Jul 2026 |
+| Philly Ask A Punk | `fetch_raw.py` `/api/events` → `parse_events.py philly-ask-a-punk` | 1 | ✅ Jul 2026 |
+| Luma | `fetch_raw.py` iCal URL → `parse_events.py luma-ical` | 1 | ✅ Jul 2026 |
+| The Rotunda | `fetch_raw.py` on `/events?date=YYYY-MM-DD` → `parse_events.py the-rotunda` (needs `--context-date`) | 1 | ✅ Jul 2026 |
 | Iffy Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Wooden Shoe Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Trakt.tv film releases | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
-| R5 Productions | `fetch_raw.py` on `/events/` | 2 | ✅ Jul 2026 |
+| R5 Productions | `fetch_raw.py` on `/events/` → `parse_events.py r5-productions` | 2 | ✅ Jul 2026 |
 | Hive76 | `fetch_page_text.py` on `/classes/` | 2 | ✅ Jul 2026 |
 | Philadelphia Film Society | `fetch_page_text.py` on 3 Fandango venue pages (filmadelphia.org is WAF-blocked domain-wide; WebSearch is the fallback) | 2 | ✅ Jul 2026 |
 | Harriet's Bookshop | `fetch_page_text.py` on Eventbrite org page | 2 | ✅ Jul 2026; ⚠️ Main site still broken |
 | Free Library | `fetch_page_text.py` | 2 | ✅ Jul 2026; needs realistic UA (Cloudflare) |
-| PhilaMOCA | `fetch_raw.py` | 3 | ✅ Jul 2026 |
-| cinéSPEAK | `fetch_raw.py` on `/cinema/`; `fetch_page_text.py` fallback if bot-challenge shown | 3 | ✅ Jul 2026 |
+| PhilaMOCA | `fetch_raw.py` → `parse_events.py philamoca` | 3 | ✅ Jul 2026 |
+| cinéSPEAK | `fetch_raw.py` on `/cinema/` (manual reading — no stable structure); `fetch_page_text.py` fallback if bot-challenge shown | 3 | ✅ Jul 2026 |
 | Lightbox Film Center | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
-| Phillygoth.net | `fetch_raw.py` | 3 | ✅ Jul 2026 |
-| Philadelphia Citizen | `fetch_raw.py` | 3 | ✅ Jul 2026 |
+| Phillygoth.net | `fetch_raw.py` → `parse_events.py phillygoth` | 3 | ✅ Jul 2026 |
+| Philadelphia Citizen | `fetch_raw.py` (manual reading — prose, no stable structure) | 3 | ✅ Jul 2026 |
 | WXPN | `fetch_page_text.py` on `xpn.org/concert-and-events/` | 3 | ✅ Jul 2026; thekey.xpn.org cert error, use xpn.org |
-| Meetup groups (all 8) | `fetch_raw.py` iCal URL | 4 | ✅ Jul 2026 |
-| Philly-Shows.com | `fetch_raw.py` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
+| Meetup groups (all 8) | `fetch_raw.py` iCal URL → `parse_events.py meetup-ical` | 4 | ✅ Jul 2026 |
+| Philly-Shows.com | `fetch_raw.py` → `parse_events.py philly-shows` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
 | Do215 | `fetch_page_text.py` on day URLs | 5 | ✅ Jul 2026; no provenance workaround needed |
 | Billy Penn | WebSearch + fetch | 5 | ⚠️ Sunday morning only |
 | Songkick | `fetch_raw.py` for page 1; `fetch_page_text.py` only for page 2+ if needed, capped at 4 pages | 5 | ✅ Jul 2026; ⚠️ Suno acquisition Nov 2025 |
