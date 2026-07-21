@@ -1,0 +1,32 @@
+[
+  {
+    "id": 491,
+    "title": "BLEEDER (BMG), LOVERGIRL (MPLS), MYSTERY DUNGEONS, B00B",
+    "slug": "bleeder-bmg-lovergirl-mpls-mystery-dungeons-b00b",
+    "start_datetime": 1784671200,
+    "end_datetime": 1784689200,
+    "multidate": false,
+    "tags": ["hardcore punk", "punk"],
+    "place": { "name": "The Kennel", "address": "west philly" }
+  },
+  {
+    "id": 999,
+    "title": "Outside Window Show",
+    "slug": "outside-window-show",
+    "start_datetime": 1786230000,
+    "end_datetime": 1786248000,
+    "multidate": false,
+    "tags": ["rock"],
+    "place": { "name": "Some Venue", "address": "123 Main St" }
+  },
+  {
+    "id": 500,
+    "title": "Multi-day Festival",
+    "slug": "multi-day-festival",
+    "start_datetime": 1784500000,
+    "end_datetime": 1784850000,
+    "multidate": true,
+    "tags": ["festival"],
+    "place": { "name": "Various Venues", "address": "" }
+  }
+]

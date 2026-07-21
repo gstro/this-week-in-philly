@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Luma//What's Happening in Philadelphia//EN
+X-WR-CALNAME:What's Happening in Philadelphia
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART:20260722T210000Z
+DTEND:20260723T000000Z
+DTSTAMP:20260721T191155Z
+ORGANIZER;CN="Joe Vela":MAILTO:calendar-invite@lu.ma
+UID:evt-real-address@events.lu.ma
+SUMMARY:PhillyDTC Summer Happy Hour
+DESCRIPTION:Come network and laugh with the Philly ecommerce community.
+LOCATION:Morgan's Pier\, 221 N Columbus Blvd\, Philadelphia\, PA 19106\, USA
+SEQUENCE:1
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20260723T220000Z
+DTEND:20260723T233000Z
+DTSTAMP:20260721T191155Z
+ORGANIZER;CN="Online Host":MAILTO:calendar-invite@lu.ma
+UID:evt-online-only@events.lu.ma
+SUMMARY:Online-Only Vibe Coding Meetup
+DESCRIPTION:Join us online\, link in the event page.
+LOCATION:https://luma.com/event/evt-online-only
+SEQUENCE:1
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20260805T210000Z
+DTEND:20260806T000000Z
+DTSTAMP:20260721T191155Z
+ORGANIZER;CN="Outside Window":MAILTO:calendar-invite@lu.ma
+UID:evt-outside-window@events.lu.ma
+SUMMARY:Outside Window Meetup
+DESCRIPTION:Not in the target week.
+LOCATION:Some Venue\, Philadelphia\, PA\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

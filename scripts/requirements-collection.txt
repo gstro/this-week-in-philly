@@ -3,3 +3,4 @@
 # a page), so this is kept separate from scripts/requirements.txt.
 playwright
 requests
+beautifulsoup4

@@ -1,0 +1,42 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Philadelphia Area Horror Meetup Group
+X-WR-CALNAME:Philadelphia Area Horror Meetup Group
+BEGIN:VEVENT
+UID:event_1@meetup.com
+SEQUENCE:1
+DTSTAMP:20260721T191155Z
+DTSTART;TZID=America/New_York:20260721T200000
+DTEND;TZID=America/New_York:20260721T220000
+SUMMARY:SHARK SIDE OF THE MOON
+DESCRIPTION:Come join the group as we stream Connor's Bday Movie Pick.
+URL;VALUE=URI:https://www.meetup.com/philadelphia-horror-meetup-group/events/1/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:event_2@meetup.com
+SEQUENCE:1
+DTSTAMP:20260721T191155Z
+DTSTART;TZID=America/New_York:20260723T190000
+DTEND;TZID=America/New_York:20260723T210000
+SUMMARY:In-Person Watch Party
+DESCRIPTION:Meeting in person this time.
+LOCATION:PhilaMOCA\, 531 N 12th St\, Philadelphia\, PA 19123
+URL;VALUE=URI:https://www.meetup.com/philadelphia-horror-meetup-group/events/2/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:event_3@meetup.com
+SEQUENCE:1
+DTSTAMP:20260721T191155Z
+DTSTART;TZID=America/New_York:20260805T200000
+DTEND;TZID=America/New_York:20260805T220000
+SUMMARY:Outside Window Movie Night
+DESCRIPTION:Not in the target week.
+URL;VALUE=URI:https://www.meetup.com/philadelphia-horror-meetup-group/events/3/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
