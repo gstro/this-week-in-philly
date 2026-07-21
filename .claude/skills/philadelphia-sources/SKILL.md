@@ -334,13 +334,20 @@ Venue Name
 ---
 
 ### 8. Philadelphia Film Society
-**URL:** `https://filmadelphia.org/showtimes/`
-**Method:** WebSearch (primary)
-**Notes:** Runs Philadelphia Film Center. Hosts PFS member screenings and curated film series. Good for arthouse and international cinema programming.
+**URL:** PFS's 3 venues on Fandango (not filmadelphia.org — see below):
+- `https://www.fandango.com/pfs-film-society-center-aaxow/theater-page` (1412 Chestnut St)
+- `https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page` (400 Ranstead St)
+- `https://www.fandango.com/pfs-east-theater-aandq/theater-page` (125 S. 2nd St)
 
-🚨 **`fetch_page_text.py` is hard-blocked here** — confirmed Jul 2026: filmadelphia.org returns "Access Denied... request appears similar to malicious requests sent by robots" even with a realistic user-agent (a WAF doing deeper fingerprinting, not just a UA check like Free Library's Cloudflare challenge). Don't spend time trying to defeat it further — WebSearch is the established, working method for this source and always has been.
+**Method:** Bash → `python scripts/fetch_page_text.py <url>` on each of the 3 venue pages above (default/"today" view — no `?date=` param needed). Real showtimes with title, rating, runtime, and exact times per screen.
 
-**✅ Confirmed Jun 2026** (WebSearch approach returned showtimes reliably)
+**Why not filmadelphia.org directly:** 🚨 `fetch_page_text.py` is hard-blocked domain-wide on filmadelphia.org — confirmed Jul 2026: returns "Access Denied... request appears similar to malicious requests sent by robots" on every path tried (showtimes page, `/wp-json/`, RSS/iCal guesses), even with a realistic user-agent — a WAF doing client-fingerprint-level blocking, not just a UA check. Don't spend time trying to defeat it further. Fandango's theater pages for the same 3 venues are not behind this WAF and return the same underlying showtime data (PFS sells tickets through Fandango) — use those instead. Confirmed working Jul 2026, including curated/repertory titles (e.g. `L'Avventura (1960)`), with exact per-film times — more reliable than the old v1 method, which needed a manual Chrome-assisted resume and still couldn't confirm exact times (CAPTCHA-blocked calendar view).
+
+**One fetch per venue is enough:** unlike Do215 (distinct one-off events per day), cinema programming runs in multi-day blocks — a single "today" snapshot per venue typically covers most of the target week's actual titles. Only add `?date=YYYY-MM-DD` fetches for specific days if session time allows and the week spans a Friday (when programming usually rotates).
+
+**🚨 FALLBACK — WebSearch:** If all 3 Fandango pages fail (e.g. Fandango itself changes/blocks): `query: "Philadelphia Film Society" OR "PFS" showtimes [Month] [Year]`, then a second variant `query: site:filmadelphia.org showtimes [week dates]` if the first returns nothing useful. Treat WebSearch results as lower-confidence (may reflect cached/indexed pages, not live listings) — note this in the description field.
+
+**✅ Confirmed Jul 2026 with `fetch_page_text.py` via Fandango**
 
 ---
 
@@ -619,7 +626,7 @@ week_shows = [e for e in events if in_week(e)]
 | Trakt.tv film releases | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | R5 Productions | `fetch_page_text.py` on `/events/` | 2 | ✅ Jul 2026 |
 | Hive76 | `fetch_page_text.py` on `/classes/` | 2 | ✅ Jul 2026 |
-| Philadelphia Film Society | WebSearch (primary; `fetch_page_text.py` is WAF-blocked) | 2 | ✅ Jun 2026 |
+| Philadelphia Film Society | `fetch_page_text.py` on 3 Fandango venue pages (filmadelphia.org is WAF-blocked domain-wide; WebSearch is the fallback) | 2 | ✅ Jul 2026 |
 | Harriet's Bookshop | `fetch_page_text.py` on Eventbrite org page | 2 | ✅ Jul 2026; ⚠️ Main site still broken |
 | Free Library | `fetch_page_text.py` | 2 | ✅ Jul 2026; needs realistic UA (Cloudflare) |
 | PhilaMOCA | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
