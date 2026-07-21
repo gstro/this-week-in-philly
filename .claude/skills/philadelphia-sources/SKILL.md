@@ -293,31 +293,35 @@ Run these first. No browser session overhead; structured or semi-structured resp
 
 ---
 
-### Tier 2 — Simple `fetch_page_text.py`, low verbosity
+### Tier 2 — Simple sources, low verbosity
 
-Single-purpose venues with focused, low-prose event listings. Clean plain text, no custom JS scraping needed.
+Single-purpose venues with focused, low-prose event listings. Use each source's documented Method exactly — several of these are `fetch_raw.py` (server-rendered, no browser needed), not `fetch_page_text.py`.
 
 ---
 
 ### 6. R5 Productions
 **URL:** `https://r5productions.com/events/`
-**Method:** Bash → `python scripts/fetch_page_text.py https://r5productions.com/events/`
+**Method:** Bash → `python scripts/fetch_raw.py https://r5productions.com/events/` — the event list is fully server-rendered; a browser isn't needed (confirmed Jul 2026: every known venue in a real capture was present in the raw HTML).
 **Notes:** Philadelphia's dominant mid-size indie promoter. Books First Unitarian Church, PhilaMOCA, Underground Arts, TLA, Johnny Brenda's, Ruba Club, Ukie Club, Cousin Danny's, Warehouse on Watts, Penn Museum, Philadelphia Ethical Society, Asian Arts Initiative, and Dell Music Center. Authoritative on sold-out status and exact pricing.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`** — returns a clean forward-looking event list through ~6 months, same shape as the old `get_page_text` output below, with a cookie-consent/accessibility-toolbar banner at the very top (harmless noise, ignore it — the event listing follows). Format per event:
+**Raw HTML structure (WordPress "RHP" events plugin):** ignore a long `<li class="optionFilter">` venue-filter dropdown near the top of the page — that's UI chrome, not events. Each real event is one block matching this shape (confirmed Jul 2026):
+```html
+<div id="eventDate" class="... eventMonth ...">Wed, Jul 22</div>
+...
+<div class="... eventTagLine ...">WXPN 88.5 Welcomes | Make The World Better Concert Weekend</div>
+<a id="eventTitle" ...><h2 class="... rhp-event__title--list ...">PAVEMENTS (2024)</h2></a>
+...
+<span class="rhp-event__time-text--list">Doors: 7 pm | Show: 7:30 pm</span>
+...
+<span class="rhp-event__cost-text--list">$15.39</span>
+...
+<a class="venueLink" ... title="PhilaMOCA">PhilaMOCA</a>
 ```
-[DAY, MON DD]
-[Optional subtitle / tour name]
-HEADLINER
-Support act 1, Support act 2
-[All Ages / 21 And Over]
-Doors: X pm | Show: X pm
-$XX.XX
-Venue Name
-[Buy Tickets / Sold Out - Click For Waiting List]
-```
+Map: `.eventMonth` → date, `.eventTagLine` (if present) + the `h2` → title (tagline is often the tour/series name, keep both), `.rhp-event__time-text--list` → time, `.rhp-event__cost-text--list` → cost, `.venueLink` text → venue.
 
 **Note on fundraiser shows:** R5 sometimes lists the beneficiary organization in the event subtitle (e.g. "A Fundraiser for Juntos Philadelphia"). Always capture this in the description field — it's high-value context for Greg's interests.
+
+**✅ Confirmed Jul 2026 with `fetch_raw.py`**
 
 ---
 
@@ -377,16 +381,16 @@ Venue Name
 
 ---
 
-### Tier 3 — `fetch_page_text.py`, moderate verbosity
+### Tier 3 — moderate verbosity
 
-Venues and publications with editorial voice or mixed content. More prose per event but still manageable.
+Venues and publications with editorial voice or mixed content. More prose per event but still manageable. Use each source's documented Method exactly — several of these are `fetch_raw.py` (server-rendered, no browser needed), not `fetch_page_text.py`.
 
 ---
 
 ### 11. PhilaMOCA
 **URL:** `https://www.philamoca.org/`
 **Address:** 531 N 12th St, Philadelphia, PA 19123
-**Method:** Bash → `python scripts/fetch_page_text.py https://www.philamoca.org/`
+**Method:** Bash → `python scripts/fetch_raw.py https://www.philamoca.org/` — the event list is fully server-rendered; a browser isn't needed (confirmed Jul 2026: every known event's venue was present in the raw HTML).
 **Notes:** Philadelphia Mausoleum of Contemporary Art. The central hub for underground, horror, and weird culture in Philly. Check weekly — multiple recurring series run here:
 - **Blood Sick Underground Cinema** — monthly horror screenings, 2nd Mondays
 - **Psychotronic Film Society** — cult/horror screenings, twice monthly
@@ -396,18 +400,31 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 - **Phillygoth.net** (`https://phillygoth.net/`) — community-maintained dark/goth/occult calendar. Events that don't appear anywhere else.
 - **Pennhurst Asylum** — ⛔ **skip in weekly runs**. No event calendar; on-demand ticket purchases only. 35 miles from Philly (~35mi). Check in **October** (haunted house season) and **around Paracon weekend in May** only.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
+**Raw HTML structure:** each event is one `<a class="event ...">` block (confirmed Jul 2026):
+```html
+<span class="event__title">Philadelphia Psychotronic Film Society</span>
+<p class="event__description">Warning: Psychotronic films may contain extreme subject matter...</p>
+<span class="event__detail-label">Tickets</span><span class="event__detail-value">$5 At Door</span>
+<span class="event__detail-label">Doors</span><time class="event__details-value" datetime="19:00">7:00</time>
+<span class="event__detail-label">Show</span><time class="event__details-value" datetime="19:30">7:30</time>
+<time class="event__date" datetime="2026-08-03">...</time>
+```
+Map: `.event__title` → title, `.event__description` → description, `.event__detail--tickets .event__detail-value` → cost, `.event__detail--time time` → doors/show times, `.event__date` `datetime` attribute → date (ISO, use directly).
+
+**✅ Confirmed Jul 2026 with `fetch_raw.py`**
 
 ---
 
 ### 12. cinéSPEAK
 **URL:** `https://cinespeak.org/cinema/`
-**Method:** Bash → `python scripts/fetch_page_text.py https://cinespeak.org/cinema/`
+**Method:** Bash → `python scripts/fetch_raw.py https://cinespeak.org/cinema/` (primary — this page's listing is server-rendered as normal WordPress post content, no custom event markup to key off, just read the visible text between the markup). **Fallback:** if the raw response contains any of these phrases — `checking your browser`, `just a moment`, `please wait while we verify`, `performing security verification` — it's the intermittent WordPress.com/Jetpack bot-challenge interstitial (see below), not real content: re-fetch with `python scripts/fetch_page_text.py https://cinespeak.org/cinema/` instead, which already self-resolves this challenge by waiting it out in a real browser.
 **Notes:** Arthouse film collective with politically engaged programming. Check for Third Thursdays (activist/documentary series) and other screenings. Events often free or PWYW.
 
 ⚠️ **Use `/cinema/` not the homepage** — `cinespeak.org` shows journal posts and mission copy with no event listings. `/events/` and `/screenings/` both 404 (confirmed Jun 2026).
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
+⚠️ **Intermittent bot-challenge interstitial** — cinespeak.org sometimes (not always) shows a WordPress.com "Checking your browser..." page instead of real content, confirmed Jul 2026. A plain HTTP fetch (`fetch_raw.py`) has no way to wait it out the way a browser can — if you see the challenge markers above, use `fetch_page_text.py` for this one fetch instead.
+
+**✅ Confirmed Jul 2026 with `fetch_raw.py`** (real content — matched known titles exactly in testing)
 
 ---
 
@@ -423,19 +440,34 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 
 ### 14. Phillygoth.net
 **URL:** `https://phillygoth.net/`
-**Method:** Bash → `python scripts/fetch_page_text.py https://phillygoth.net/`
+**Method:** Bash → `python scripts/fetch_raw.py https://phillygoth.net/` — the event list is fully server-rendered; a browser isn't needed (confirmed Jul 2026: both known events' venues were present in the raw HTML).
 **Notes:** Community-maintained dark/goth/occult calendar. Events that don't appear on any other source. Browse the events section. Listed under PhilaMOCA (§11) as a secondary horror/occult source — check both together.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
+**Raw HTML structure (WordPress "Events Manager" plugin):** each event is one `<div class="em-event em-item">` block (confirmed Jul 2026):
+```html
+<div class="em-event em-item" data-href="https://phillygoth.net/events/...">
+  <h3 class="em-item-title"><a href="...">Stabbing Westward, Priest, &amp; Acumen Nation</a></h3>
+  <div class="em-event-date em-event-meta-datetime"> July 21, 2026</div>
+  <div class="em-event-location"><a href="...">Phantom Power, 121 W. Fredrick St. (Millersville, PA)</a></div>
+  <div class="em-item-actions input"><p>All ages, 6pm doors, $35 adv / $40 DOS</p> Featuring: ... Links: <a href="...">Facebook event</a></div>
+</div>
+```
+Map: `.em-item-title` → title, `.em-event-date` → date, `.em-event-location` → venue, `.em-item-actions` → time/cost/description.
+
+⚠️ **Extract every `em-event` block in the target week, not just the first couple** — a past run under-collected here (2 events written when 7+ were actually in the window) by stopping early rather than scanning the full listing. Count the `em-event` blocks whose date falls in the target week before writing the file.
+
+**✅ Confirmed Jul 2026 with `fetch_raw.py`**
 
 ---
 
 ### 15. The Philadelphia Citizen — Good Citizen Calendar
 **URL:** `https://thephiladelphiacitizen.org/good-citizen-calendar/`
-**Method:** Bash → `python scripts/fetch_page_text.py https://thephiladelphiacitizen.org/good-citizen-calendar/`
-**Notes:** Curated picks with editorial voice. Good for community, civic, and arts events with a progressive angle.
+**Method:** Bash → `python scripts/fetch_raw.py https://thephiladelphiacitizen.org/good-citizen-calendar/` — this is a long-form blog post covering Jan-Dec, fully server-rendered (confirmed Jul 2026: a known event's exact text was found verbatim in the raw HTML).
+**Notes:** Curated picks with editorial voice. Good for community, civic, and arts events with a progressive angle. Structure is prose under month headings (`JULY 2026`, `AUGUST 2026`, ...), not a card/list format — each item is a bolded date range or day (e.g. "July 24-25:") followed by a paragraph description.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
+⚠️ **Scan the full target week, not just the first match** — this page covers 6 months in one long scroll; a past run stopped after the first in-window item and missed a second one later in the same month's section (a concert listed under a different heading than the first match). Read through the entire month section(s) covering the target week before writing the file.
+
+**✅ Confirmed Jul 2026 with `fetch_raw.py`**
 
 ---
 
@@ -487,10 +519,20 @@ These run last. If the session runs short, cut here — these are the broadest a
 
 ### 18. Philly-Shows.com
 **URL:** `https://www.philly-shows.com/`
-**Method:** Bash → `python scripts/fetch_page_text.py https://www.philly-shows.com/`
+**Method:** Bash → `python scripts/fetch_raw.py https://www.philly-shows.com/` — the show list is fully server-rendered; a browser isn't needed (confirmed Jul 2026: real show data found directly in the raw HTML).
 **Notes:** Dedicated Philadelphia hardcore and punk show tracker. Manually maintained. Sparse by design (confirmed Jun 2026 — ~2 shows/week vs. 9+ on Philly Ask A Punk for the same period). Lists prominent/R5-adjacent shows only, not the full DIY calendar. Quick pass only — treat as a supplementary spot-check after Philly Ask A Punk, not a primary source.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
+**Raw HTML structure (Webflow CMS list):** each show is one `<div class="showblock">` (confirmed Jul 2026):
+```html
+<p class="showdatevenue">July 17, 2026 7:00 PM</p>
+<p class="showdatevenue">Bonks Bar -3467 Richmond Street, Phila Pa 19134</p>
+<h3>Liberty &amp; Justice, XL Bully, The Uprise, Impact Driver, Off The Top, Rage &amp; Ruin, Vulture Raid</h3>
+<p class="showdescription">Liberty &amp; Justice , XL Bully, ...</p>
+<p class="showdescription showprice">$20</p>
+```
+Map: first `.showdatevenue` → date/time, second `.showdatevenue` → venue/address, `h3` → title (full lineup), `.showprice` → cost.
+
+**✅ Confirmed Jul 2026 with `fetch_raw.py`**
 
 ---
 
@@ -628,19 +670,19 @@ week_shows = [e for e in events if in_week(e)]
 | Iffy Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Wooden Shoe Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Trakt.tv film releases | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
-| R5 Productions | `fetch_page_text.py` on `/events/` | 2 | ✅ Jul 2026 |
+| R5 Productions | `fetch_raw.py` on `/events/` | 2 | ✅ Jul 2026 |
 | Hive76 | `fetch_page_text.py` on `/classes/` | 2 | ✅ Jul 2026 |
 | Philadelphia Film Society | `fetch_page_text.py` on 3 Fandango venue pages (filmadelphia.org is WAF-blocked domain-wide; WebSearch is the fallback) | 2 | ✅ Jul 2026 |
 | Harriet's Bookshop | `fetch_page_text.py` on Eventbrite org page | 2 | ✅ Jul 2026; ⚠️ Main site still broken |
 | Free Library | `fetch_page_text.py` | 2 | ✅ Jul 2026; needs realistic UA (Cloudflare) |
-| PhilaMOCA | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
-| cinéSPEAK | `fetch_page_text.py` on `/cinema/` | 3 | ✅ Jul 2026 |
+| PhilaMOCA | `fetch_raw.py` | 3 | ✅ Jul 2026 |
+| cinéSPEAK | `fetch_raw.py` on `/cinema/`; `fetch_page_text.py` fallback if bot-challenge shown | 3 | ✅ Jul 2026 |
 | Lightbox Film Center | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
-| Phillygoth.net | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
-| Philadelphia Citizen | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
+| Phillygoth.net | `fetch_raw.py` | 3 | ✅ Jul 2026 |
+| Philadelphia Citizen | `fetch_raw.py` | 3 | ✅ Jul 2026 |
 | WXPN | `fetch_page_text.py` on `xpn.org/concert-and-events/` | 3 | ✅ Jul 2026; thekey.xpn.org cert error, use xpn.org |
 | Meetup groups (all 8) | `fetch_raw.py` iCal URL | 4 | ✅ Jul 2026 |
-| Philly-Shows.com | `fetch_page_text.py` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
+| Philly-Shows.com | `fetch_raw.py` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
 | Do215 | `fetch_page_text.py` on day URLs | 5 | ✅ Jul 2026; no provenance workaround needed |
 | Billy Penn | WebSearch + fetch | 5 | ⚠️ Sunday morning only |
 | Songkick | `fetch_raw.py` for page 1; `fetch_page_text.py` only for page 2+ if needed, capped at 4 pages | 5 | ✅ Jul 2026; ⚠️ Suno acquisition Nov 2025 |
