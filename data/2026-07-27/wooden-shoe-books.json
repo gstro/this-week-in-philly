@@ -1,0 +1,24 @@
+{
+  "source": "Wooden Shoe Books",
+  "collected_at": "2026-07-22T20:35:10.313889+00:00",
+  "events": [
+    {
+      "title": "PARC First Aid Training",
+      "venue": "Wooden Shoe Books (704 South St)",
+      "date": "2026-07-31",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=NmRqMzBwOXA2c3A2MmJiNWM0cDMyYjlrNzRwbTRiOXA2NG9tYWI5cGM4bzMyYzlvNmdybTZkMWw3MF8yMDI2MDczMVQyMjAwMDBaIHQ4cW1pdmU2M24yN21kajdndDAzbnRjMnU4QGc",
+      "description": "Learn street medicine with Philly Action Ready Coalition!  Basics of scans, Narcan usage, and CPR. No certifications offered just knowledge."
+    },
+    {
+      "title": "New York War Crimes Community Reading",
+      "venue": "Wooden Shoe Books (704 South St)",
+      "date": "2026-07-30",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=YTNxN3ZwbDc1OGoya2pjdmZwbjRwOXUzcTAgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw",
+      "description": "Join us on Thursday, July 30th at 6PM for a reading of The Prisoners Edition of the New York War Crimes."
+    }
+  ]
+}

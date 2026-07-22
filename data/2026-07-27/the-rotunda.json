@@ -1,0 +1,42 @@
+{
+  "source": "The Rotunda",
+  "collected_at": "2026-07-22T20:33:49.198664+00:00",
+  "events": [
+    {
+      "title": "In-person! Vogue Practice Session",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-07-28",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-vogue-practice-session-2026-07-28-18-00-00-0400",
+      "description": "In-person! Vogue Practice Session"
+    },
+    {
+      "title": "In-person! Weekly improvised music drop-in jam session",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-07-29",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-07-29-12-00-00-0400",
+      "description": "In-person! Weekly improvised music drop-in jam session"
+    },
+    {
+      "title": "In-person! The Gathering",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-07-30",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-the-gathering-2026-07-30-20-00-00-0400",
+      "description": "In-person! The Gathering"
+    },
+    {
+      "title": "In-person! Emergency Group and Jeffrey Alexander + The Heavy Lidders: An evening of experimental free-improv cosmic music",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-07-31",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/emergency-group-and-jeffrey-alexander-the-heavy-lidders",
+      "description": "In-person! Emergency Group and Jeffrey Alexander + The Heavy Lidders: An evening of experimental free-improv cosmic music"
+    }
+  ]
+}

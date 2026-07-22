@@ -1,0 +1,6 @@
+{
+  "source": "Philadelphia Film Society",
+  "status": "failed",
+  "reason": "Fandango fetch timeout",
+  "collected_at": "2026-07-22T20:36:35.263999+00:00"
+}

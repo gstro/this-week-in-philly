@@ -1,0 +1,105 @@
+{
+  "source": "Iffy Books",
+  "collected_at": "2026-07-22T20:35:10.313329+00:00",
+  "events": [
+    {
+      "title": "\ud83c\udfac Make a Hand-Coded SVG Animation!",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-07-27",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjRyajZiOWg2c3MzYWM5bjZrcDMwYzFkNjRyamdkOWg3MHAzOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "Learn to make an animated SVG file using a plaintext editor and web browser. No fancy tools needed! \nGeany text editor \nSublime Text \nHappy Birthday example file \nRegister\ncoming soon!"
+    },
+    {
+      "title": "\u270f\ufe0f The Writing Room",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-07-28",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9yajRiOWg2c3MzYWNobDcwbzMwYzFkNjRyamdkOWk2b3JqMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "Come co-work with other writers in three 40-minute units of silent writing. Writers and projects of any type welcome. 10-minute breaks and accountability check-ins between units. BYO coffee, water, computer chargers, notepads, etc."
+    },
+    {
+      "title": "\u2600\ufe0f Solar Music Synth Workshop",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-07-29",
+      "time": "10:30 AM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmNzamNiOWg2c3MzYWNwaTY0bzMwYzFkNjRyamdkOWo2OHMzNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "Join us and build a tiny solar-powered square wave generator on a breadboard. No soldering required! The workshop is free to attend, but you'll need to purchase a kit for $12.50 to complete the project."
+    },
+    {
+      "title": "\ud83d\udcd3 DIY Digital Notebook Workshop",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-07-29",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmNwamFiOWg2c3MzYWNwazYwczMwYzFkNjRyamdkOWo2Z3MzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "In this workshop you'll build a digital notebook, a pocket-sized device for taking notes with a USB keyboard."
+    },
+    {
+      "title": "\ud83e\ude90 Speculative Futures Reading Group: 'Ignore All Previous Instructions' by Ada Hoffman",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-07-29",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjhzajBiOWg2c3MzYWNwbDY0cjMwYzFkNjRyamdkOWo2a3JqMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "Our July book is Ada Hoffman's new Ignore All Previous Instructions, and we'll wrap up our summer with Louise Erderich's Future Home of the Living God in August."
+    },
+    {
+      "title": "\ud83d\udd0b Beginner Soldering: Li-Ion Battery Pack",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-07-30",
+      "time": "2:30 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9vM2liOWg2c3MzYWQxaTY0czMwYzFkNjRyamdkOWs2OHFqOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "Make a rechargeable battery pack for your LoRa node, a microcontroller such as an ESP32 or Pi Pico, or anything that runs on 3\u20134 Volts."
+    },
+    {
+      "title": "\ud83c\udfb6 Hack + Jam: Strudel Pattern Language",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-07-30",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9vM2FiOWg2c3MzYWQxajZvcDMwYzFkNjRyamdkOWs2Z3BqOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "Please join us at the wonderful Iffy Books for this month's edition of our livecoding jam! We will be making music using strudel. NO EXPERIENCE REQUIRED!"
+    },
+    {
+      "title": "\ud83d\udccd Offline GPS Unit Workshop",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-07-31",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmtxajJiOWg2c3MzYWQ5ZzZvcTMwYzFkNjRyamdkOWw2NHBqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "In this workshop you'll build a device that displays your GPS coordinates and the current time, without connecting to the internet or transmitting anything."
+    },
+    {
+      "title": "\ud83d\udce1 Meshtastic 101",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-08-01",
+      "time": "10:30 AM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNzM2diOWg2c3MzYWQ5bzYwcDMwYzFkNjRyamdkOWw3MHFqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "Join us for an introduction to Meshtastic, an application that lets you send private text messages over the air using pocket-sized LoRa radio transceivers."
+    },
+    {
+      "title": "\ud83d\udd0a DJ Basixxx with Mixxx",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-08-02",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9vamViOWg2c3MzYWRobzZvcTMwYzFkNjRyamdkOW03NHBqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "If you're curious about DJing but don't have money to drop on equipment, this workshop is for you!"
+    },
+    {
+      "title": "\ud83c\udfe0 IndieWeb Homebrew Website Club",
+      "venue": "Iffy Books (404 S. 20th St)",
+      "date": "2026-08-02",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNmNxMzhiOWg2c3MzYWRocDZjcjMwYzFkNjRyamdkOW42MG8zZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk",
+      "description": "Homebrew Website Club is a growing world-wide network of meetups for everyone who wants to take back their web experience from social media silos."
+    }
+  ]
+}
