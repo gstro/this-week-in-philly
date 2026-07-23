@@ -1,33 +1,33 @@
 {
   "source": "Wooden Shoe Books",
-  "collected_at": "2026-07-20T00:00:00",
+  "collected_at": "2026-07-23T01:34:28.398053+00:00",
   "events": [
-    {
-      "title": "Mississippi Law: Policing and Reform in America's Jim Crow Countryside",
-      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
-      "date": "2026-07-20",
-      "time": "7:00 PM",
-      "cost": "",
-      "url": "https://www.woodenshoeooks.com",
-      "description": "\"Mississippi Law\" tells a history of lawless police power and Black freedom struggles in the Jim Crow South that resonates with our own struggles to understand policing and resistance. In the segregated American South, policing was war. Rampant police violence came to the back roads and cattle pastures of America's rural countryside as ideas of race, property, and belonging reshaped the role of government in everyday life."
-    },
     {
       "title": "'Films That Explode Like Grenades: Robert Kramer and the Search for a Radical Cinema'",
       "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
       "date": "2026-07-25",
       "time": "6:00 PM",
-      "cost": "",
-      "url": "https://www.woodenshoeooks.com",
-      "description": "Join us on Saturday, July 25th at 6 pm for a discussion with Whitney Strub to celebrate the release of his new book, Films That Explode Like Grenades: Robert Kramer and the Search for a Radical Cinema (UChicago Press; June 2026). Robert Kramer (1939–99) was the emblematic filmmaker of the late-1960s New Left in the United States."
+      "cost": "Free",
+      "url": "https://www.woodenshoebooks.com/",
+      "description": "Join us on Saturday, July 25th at 6 pm for a discussion with Whitney Strub to celebrate the release of his new book, Films That Explode Like Grenades: Robert Kramer and the Search for a Radical Cinema (UChicago Press; June 2026). Robert Kramer (1939\u201399) was the emblematic filmmaker of the late-1960s New Left in the United States."
     },
     {
       "title": "Creating Your Personal Narrative",
       "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
       "date": "2026-07-26",
       "time": "6:00 PM",
-      "cost": "",
-      "url": "https://www.woodenshoeooks.com",
+      "cost": "Free",
+      "url": "https://www.woodenshoebooks.com/",
       "description": "Join the BGWP to learn about the importance of crafting your personal narrative, including brainstorming, workshop time, and a history of why our individual stories are of the utmost importance."
+    },
+    {
+      "title": "Mississippi Law: Policing and Reform in America's Jim Crow Countryside",
+      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+      "date": "2026-07-20",
+      "time": "7:00 PM",
+      "cost": "Free",
+      "url": "https://www.woodenshoebooks.com/",
+      "description": "\"Mississippi Law\" tells a history of lawless police power and Black freedom struggles in the Jim Crow South that resonates with our own struggles to understand policing and resistance. In the segregated American South, policing was war."
     }
   ]
 }

@@ -1,33 +1,5 @@
 {
   "source": "Billy Penn",
-  "collected_at": "2026-07-20T00:00:00",
-  "events": [
-    {
-      "title": "Cedar Park Jazz Series",
-      "venue": "Cedar Park, 49th and Baltimore, Philadelphia, PA",
-      "date": "2026-07-24",
-      "time": "",
-      "cost": "Free",
-      "url": "https://billypenn.com",
-      "description": "Cedar Park Jazz Series with live music every Friday through the end of July. July 24 performance."
-    },
-    {
-      "title": "African Restaurant Week",
-      "venue": "Multiple participating restaurants, Philadelphia, PA",
-      "date": "2026-07-20",
-      "time": "",
-      "cost": "Discounted menus at participating restaurants",
-      "url": "https://billypenn.com",
-      "description": "African Restaurant Week runs July 16-26 with discounted menus at participating restaurants."
-    },
-    {
-      "title": "African Restaurant Week Food & Music Festival",
-      "venue": "Love Park, Philadelphia, PA",
-      "date": "2026-07-26",
-      "time": "",
-      "cost": "",
-      "url": "https://billypenn.com",
-      "description": "Food and music festival at Love Park on July 26 as part of African Restaurant Week."
-    }
-  ]
+  "collected_at": "2026-07-23T01:40:37.035502+00:00",
+  "events": []
 }

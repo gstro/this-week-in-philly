@@ -1,7 +1,6 @@
 {
   "source": "Philadelphia Film Society",
-  "collected_at": "2026-07-20T00:00:00",
   "status": "failed",
-  "reason": "Website blocked by WAF; showtimes page unavailable (403 Forbidden)",
-  "events": []
+  "reason": "Fandango pages unavailable (Playwright timeout)",
+  "collected_at": "2026-07-23T01:36:23.044400+00:00"
 }

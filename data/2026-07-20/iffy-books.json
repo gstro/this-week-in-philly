@@ -1,78 +1,42 @@
 {
   "source": "Iffy Books",
-  "collected_at": "2026-07-20T00:00:00",
+  "collected_at": "2026-07-23T01:34:28.397774+00:00",
   "events": [
     {
-      "title": "☕️ Coffee Talk",
-      "venue": "Iffy Books, 404 S. 20th St, Philadelphia, PA 19146",
-      "date": "2026-07-20",
-      "time": "6:00 PM",
-      "cost": "",
-      "url": "https://iffybooks.net",
-      "description": "A social hangout every first and third Monday for trans and non-binary people, their significant others, and allies. We have snacks and coffee."
-    },
-    {
-      "title": "✏️ The Writing Room",
-      "venue": "Iffy Books, 404 S. 20th St, Philadelphia, PA 19146",
-      "date": "2026-07-21",
-      "time": "5:00 PM",
-      "cost": "",
-      "url": "https://iffybooks.net",
-      "description": "Come co-work with other writers in three 40-minute units of silent writing. Writers and projects of any type welcome. 10-minute breaks and accountability check-ins between units. BYO coffee, water, computer chargers, notepads, etc."
-    },
-    {
-      "title": "📼 Analog A/V Session",
-      "venue": "Iffy Books, 404 S. 20th St, Philadelphia, PA 19146",
-      "date": "2026-07-22",
-      "time": "10:30 AM",
-      "cost": "Donation",
-      "url": "https://iffybooks.net",
-      "description": "Come experiment with VHS tapes and audio cassettes! We'll have equipment on hand for analog-to-digital and digital-to-analog transfers."
-    },
-    {
-      "title": "🔊 DJ Basixxx with Mixxx",
-      "venue": "Iffy Books, 404 S. 20th St, Philadelphia, PA 19146",
-      "date": "2026-07-22",
-      "time": "2:00 PM",
-      "cost": "Donation",
-      "url": "https://iffybooks.net",
-      "description": "Learn to use Mixxx, a free and open source DJ program. You'll learn to find tracks on the web, load them into Mixxx, and get started with beatmatching. Bring your own laptop and headphones."
-    },
-    {
-      "title": "🔋 Beginner Soldering: Li-Ion Battery Pack",
-      "venue": "Iffy Books, 404 S. 20th St, Philadelphia, PA 19146",
-      "date": "2026-07-23",
-      "time": "2:30 PM",
-      "cost": "Donation + kit",
-      "url": "https://iffybooks.net",
-      "description": "Make a rechargeable battery pack for your LoRa node, a microcontroller such as an ESP32 or Pi Pico, or anything that runs on 3–4 Volts. Perfect for folks who've never soldered before! You'll need to buy a li-ion battery pack kit."
-    },
-    {
-      "title": "⚡️ Beginner Soldering: LED Spinning Top",
-      "venue": "Iffy Books, 404 S. 20th St, Philadelphia, PA 19146",
-      "date": "2026-07-24",
-      "time": "2:00 PM",
-      "cost": "Donation + kit",
-      "url": "https://iffybooks.net",
-      "description": "Build a spinning top toy with LED lights that flash when it spins. No previous soldering experience required! Registration and kit purchase available."
-    },
-    {
-      "title": "💻 Cyberdeck Meetup",
-      "venue": "Iffy Books, 404 S. 20th St, Philadelphia, PA 19146",
+      "title": "\ud83d\udcbb Cyberdeck Meetup",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
       "date": "2026-07-25",
       "time": "10:30 AM",
-      "cost": "",
-      "url": "https://iffybooks.net",
-      "description": "A cyberdeck is a DIY laptop based on a single-board computer (SBC) such as Raspberry Pi, with a tiny LCD screen and keyboard enclosed in a folding case. Bring an SBC to this meetup and start building your own! We'll have LCD screens and keyboards for sale."
+      "cost": "TBD",
+      "url": "https://www.iffybooks.net/",
+      "description": "A cyberdeck is a DIY laptop based on a single-board computer (SBC) such as Raspberry Pi, with a tiny LCD screen and keyboard enclosed in a folding case. Bring an SBC to this meetup and start building your own! We'll have LCD screens and keyboards for sale, as well as wooden boxes in various sizes. If you've already built a cyberdeck, you can show it off and help others get started!"
     },
     {
-      "title": "🏴 Anarchy Summer Reading Group: 'The Utopia of Rules' by David Graeber (1st half)",
-      "venue": "Iffy Books, 404 S. 20th St, Philadelphia, PA 19146",
+      "title": "\ud83d\udd0b Beginner Soldering: Li-Ion Battery Pack",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-07-23",
+      "time": "2:30 PM",
+      "cost": "$4.31 + battery",
+      "url": "https://www.iffybooks.net/",
+      "description": "Make a rechargeable battery pack for your LoRa node, a microcontroller such as an ESP32 or Pi Pico, or anything that runs on 3\u20134 Volts. Perfect for folks who've never soldered before! Kit includes 18650 battery clip w/ attached wires, TP4056 charge controller board, PH2.5 plug w/ attached wires, and heat shrink tubing."
+    },
+    {
+      "title": "\ud83c\udff4 Anarchy Summer Reading Group: 'The Utopia of Rules' by David Graeber (1st half)",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
       "date": "2026-07-26",
       "time": "6:00 PM",
-      "cost": "",
-      "url": "https://iffybooks.net",
-      "description": "Meeting every two weeks to discuss classics of anarchist literature. Currently discussing 'The Utopia of Rules' by David Graeber."
+      "cost": "Free",
+      "url": "https://www.iffybooks.net/",
+      "description": "We're meeting every two weeks to discuss classics of anarchist literature, starting with Anarchism and Other Essays by Emma Goldman and The Conquest of Bread by Peter Kropotkin."
+    },
+    {
+      "title": "\u26a1\ufe0f Beginner Soldering: LED Spinning Top (canceled this week!)",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-07-24",
+      "time": "2:00 PM",
+      "cost": "TBD",
+      "url": "https://www.iffybooks.net/",
+      "description": "We're canceling this class due to a scheduling conflict. Sorry for the inconvenience!"
     }
   ]
 }

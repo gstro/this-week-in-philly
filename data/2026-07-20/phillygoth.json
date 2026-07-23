@@ -1,24 +1,69 @@
 {
   "source": "Phillygoth.net",
-  "collected_at": "2026-07-20T00:00:00",
+  "collected_at": "2026-07-23T01:38:11.143145+00:00",
   "events": [
     {
-      "title": "Stabbing Westward, Priest, & Acumen Nation",
-      "venue": "Phantom Power, 121 W. Fredrick St, Millersville, PA",
-      "date": "2026-07-21",
-      "time": "6:00 PM",
-      "cost": "$35 adv / $40 door",
-      "url": "https://phillygoth.net/",
-      "description": "All ages show. Doors 6pm. Stabbing Westward, Priest, & Acumen Nation."
+      "title": "Asylum 13's Pretty Pride // Machine",
+      "venue": "Bar XIII, 1706 Philadelphia Pike (Wilmington, DE)",
+      "date": "2026-07-23",
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/asylum-13s-pretty-pride-machine-2026-07-23/",
+      "description": "21+, 9pm, $10Featuring: DJs Baby Berlin & Brad ScottLinks:Facebook event"
     },
     {
-      "title": "Asylum 13's Pretty Pride // Machine",
-      "venue": "Bar XIII, 1706 Philadelphia Pike, Wilmington, DE",
+      "title": "Death Disco",
+      "venue": "Neon Clown Dream Lounge, 1250 N Front St",
       "date": "2026-07-23",
-      "time": "9:00 PM",
-      "cost": "$10",
-      "url": "https://phillygoth.net/",
-      "description": "21+ event. Asylum 13's Pretty Pride // Machine. 9pm."
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/death-disco-5/",
+      "description": "8pm-midnight, no coverFeaturing: DJ EBGIII spinning darkwave, goth rock, 80s electro, & industrialLinks:Facebook event"
+    },
+    {
+      "title": "Heathen Playhouse: Carnal Carnival",
+      "venue": "Saints & Sinners 2533 Emery St",
+      "date": "2026-07-25",
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/heathen-playhouse-carnal-carnival/",
+      "description": "21+, 9pm-3am, $30+Featuring: DJ Xris SMack!Links:Facebook event"
+    },
+    {
+      "title": "Hot Ghoul Summer: Atlantic City Night Cruise & Dark Dance Party",
+      "venue": "Atlantic City Cruises, 800 N New Hampshire Ave. (Atlantic City, NJ)",
+      "date": "2026-07-25",
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/hot-ghoul-summer-atlantic-city-night-cruise-dark-dance-party-2/",
+      "description": "21+, 1pm-5pm beach hang / 8pm-11pm, $70.23 / free after party at Anchor Rock ClubFeaturing: DJs Mighty Mike Saga & Gabriel DraxLinks:Facebook event"
+    },
+    {
+      "title": "Nothing But Silence, Velvet Wounds, & Cassette Curse",
+      "venue": "Ruba, 416 Green St",
+      "date": "2026-07-25",
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/nothing-but-silence-velvet-wounds-cassette-curse/",
+      "description": "21+, 7pm-11pm, $10Featuring:Links:Event page"
+    },
+    {
+      "title": "Shadowland Lancaster",
+      "venue": "Zoetroplis, 112 N Water St (Lancaster, PA)",
+      "date": "2026-07-25",
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/shadowland-lancaster-22/",
+      "description": "21+, 8pm-midnight, $10Featuring: DJs Stygian & Baby BerlinLinks:Facebook event"
+    },
+    {
+      "title": "Phoenixville PRFM",
+      "venue": "Root Down Brewing Co, 1 N Main St (Phoenixville, PA)",
+      "date": "2026-07-26",
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/phoenixville-prfm-2026-01-25-2026-02-22-2026-03-29-2026-04-26-2026-05-31-2026-06-28-2026-07-26/",
+      "description": "Featuring:Links:"
     }
   ]
 }

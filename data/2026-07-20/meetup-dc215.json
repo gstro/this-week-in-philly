@@ -1,24 +1,24 @@
 {
   "source": "Meetup: DC 215",
-  "collected_at": "2026-07-20T00:00:00",
+  "collected_at": "2026-07-23T01:40:16.913838+00:00",
   "events": [
     {
       "title": "EMP Range Day",
-      "venue": "Philadelphia, PA",
+      "venue": "(online)",
       "date": "2026-07-24",
       "time": "6:00 PM",
       "cost": "",
-      "url": "https://www.meetup.com/dc_215/",
-      "description": "DC 215 EMP Range Day. Cyber labs full of different development tools, offensive/defensive emulation, and portable cyber range kit for prospective homelab and system engineering enthusiasts. 6-9 PM."
+      "url": "https://www.meetup.com/dc_215/events/315624634/",
+      "description": "DC215\nIf you're a potential homelab enthusiast, system engineer, or cyber range developer come and check out the EMP Crew's Cyber Range Day! We'll be showcasing our cyber labs full of different development tools, offensive/defensive emulation, and our portable cyber range kit we'll be taking to DEFCON and Blackhat USA this year. You'll get to play around in our range with our new Tengu Marauder Stryker units and robots in an emulated IoT range."
     },
     {
       "title": "Study Hall / Work on CTFs",
-      "venue": "Philadelphia, PA",
+      "venue": "(online)",
       "date": "2026-07-25",
       "time": "11:00 AM",
       "cost": "",
-      "url": "https://www.meetup.com/dc_215/",
-      "description": "DC 215 Study Hall / Work on CTFs. Time to get together and work on or just discuss the CTF. 11 AM-1 PM."
+      "url": "https://www.meetup.com/dc_215/events/315558373/",
+      "description": "DC215\nTime to get together and work on or just discuss the CTF."
     }
   ]
 }

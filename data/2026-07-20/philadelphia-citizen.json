@@ -1,15 +1,33 @@
 {
   "source": "Philadelphia Citizen",
-  "collected_at": "2026-07-20T00:00:00",
+  "collected_at": "2026-07-23T01:38:52.637003+00:00",
   "events": [
     {
-      "title": "Parks on Tap at Historic Rittenhouse Town",
+      "title": "Historic Rittenhouse Town",
       "venue": "Historic Rittenhouse Town, 208 Lincoln Drive, Germantown, PA",
       "date": "2026-07-22",
-      "time": "4:00 PM",
-      "cost": "Free entry, pay-as-you-go",
-      "url": "https://thephiladelphiacitizen.org/good-citizen-calendar/",
-      "description": "Roving beer and cocktail garden. Parks on Tap provides a great excuse to bring your friends and kids to happy hour in a natural green space. A portion of all proceeds benefits each park. Open July 22-26, Wednesdays through Fridays 4-10pm, Saturdays and Sundays noon-10pm."
+      "time": "TBD",
+      "cost": "Varies",
+      "url": "https://www.parksontap.com/locations-1/2026/7/historicrittenhousetown",
+      "description": "Historic Rittenhouse Town tour/event during Parks on Tap programming (July 22-26)."
+    },
+    {
+      "title": "Make the World Better Concert: Pavement + Ratboys",
+      "venue": "The Dell, 2400 Strawberry Mansion Drive, Philadelphia, PA",
+      "date": "2026-07-24",
+      "time": "TBD",
+      "cost": "$37+ (single day or 2-day pass $74)",
+      "url": "https://mtwbconcert.com/",
+      "description": "Make the World Better Concert, a do-good-for-Philly effort by former Eagle Connor Barwin. Pavement headlines with Ratboys on July 24, Kurt Vile and the Violators on July 25. Part of $25 million rehab effort for rec centers and parks for local youth."
+    },
+    {
+      "title": "Make the World Better Concert: Kurt Vile and the Violators",
+      "venue": "The Dell, 2400 Strawberry Mansion Drive, Philadelphia, PA",
+      "date": "2026-07-25",
+      "time": "TBD",
+      "cost": "$37+ (single day or 2-day pass $74)",
+      "url": "https://mtwbconcert.com/",
+      "description": "Make the World Better Concert: Kurt Vile and the Violators headline on July 25. Part of $25 million rehab effort for rec centers and parks for local youth."
     }
   ]
 }

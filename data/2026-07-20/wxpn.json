@@ -1,123 +1,51 @@
 {
   "source": "WXPN",
-  "collected_at": "2026-07-20T00:00:00",
+  "collected_at": "2026-07-23T01:39:57.537639+00:00",
   "events": [
     {
-      "title": "Five Finger Death Punch / Cody Jinks / Eva Under Fire",
-      "venue": "Freedom Mortgage Pavilion, Philadelphia, PA",
-      "date": "2026-07-20",
-      "time": "",
-      "cost": "All Ages",
+      "title": "Wunderhorse / Been Stellar",
+      "venue": "Union Transfer, Philadelphia, PA",
+      "date": "2026-07-24",
+      "time": "TBD",
+      "cost": "TBD",
       "url": "https://xpn.org/concert-and-events/",
-      "description": "Five Finger Death Punch with Cody Jinks and Eva Under Fire at Freedom Mortgage Pavilion."
+      "description": "Wunderhorse and Been Stellar at Union Transfer. Philadelphia area concert."
     },
     {
-      "title": "J. Cole",
-      "venue": "Xfinity Mobile Arena, Philadelphia, PA",
-      "date": "2026-07-20",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "J. Cole at Xfinity Mobile Arena in Philadelphia."
-    },
-    {
-      "title": "Rhyuhn",
-      "venue": "City Winery, Philadelphia, PA",
-      "date": "2026-07-20",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "Rhyuhn at City Winery, Philadelphia."
-    },
-    {
-      "title": "Kirk Whalum",
-      "venue": "City Winery, Philadelphia, PA",
-      "date": "2026-07-20",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "Kirk Whalum at City Winery, Philadelphia."
-    },
-    {
-      "title": "Chicago / Styx",
-      "venue": "Freedom Mortgage Pavilion, Philadelphia, PA",
-      "date": "2026-07-21",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "Chicago with Styx at Freedom Mortgage Pavilion."
-    },
-    {
-      "title": "Mike Campbells & The Dirty Knobs",
-      "venue": "Keswick Theatre, Philadelphia, PA",
-      "date": "2026-07-21",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "Mike Campbells & The Dirty Knobs at Keswick Theatre, Philadelphia."
-    },
-    {
-      "title": "Downtown Boys / Pop Music Fever Dream",
-      "venue": "Johnny Brenda's, 1201 N Frankford Ave, Philadelphia, PA 19125",
-      "date": "2026-07-21",
-      "time": "",
+      "title": "Allah-Las / Rahill",
+      "venue": "Underground Arts, Philadelphia, PA",
+      "date": "2026-07-24",
+      "time": "TBD",
       "cost": "21+",
       "url": "https://xpn.org/concert-and-events/",
-      "description": "Downtown Boys with Pop Music Fever Dream at Johnny Brenda's. 21+ venue."
+      "description": "Allah-Las and Rahill at Underground Arts. 21+ venue."
     },
     {
-      "title": "J. Cole",
-      "venue": "Xfinity Mobile Arena, Philadelphia, PA",
-      "date": "2026-07-21",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "J. Cole at Xfinity Mobile Arena in Philadelphia."
-    },
-    {
-      "title": "The Eric McGarry Group",
-      "venue": "Chris' Jazz Cafe, Philadelphia, PA",
-      "date": "2026-07-21",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "The Eric McGarry Group at Chris' Jazz Cafe, Philadelphia."
-    },
-    {
-      "title": "AJ McQueen",
-      "venue": "City Winery, Philadelphia, PA",
-      "date": "2026-07-21",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "AJ McQueen at City Winery, Philadelphia."
-    },
-    {
-      "title": "Fat, Evil Children",
-      "venue": "Johnny Brenda's, 1201 N Frankford Ave, Philadelphia, PA 19125",
-      "date": "2026-07-22",
-      "time": "",
+      "title": "Red Meat Conspiracy / Seven Teller",
+      "venue": "MilkBoy, Philadelphia, PA",
+      "date": "2026-07-24",
+      "time": "TBD",
       "cost": "21+",
       "url": "https://xpn.org/concert-and-events/",
-      "description": "Fat, Evil Children at Johnny Brenda's. 21+ venue."
+      "description": "Red Meat Conspiracy and Seven Teller at MilkBoy. 21+ venue."
     },
     {
-      "title": "First Day Back / gapyear",
-      "venue": "The First Unitarian Church, 2125 Chestnut St, Philadelphia, PA 19103",
-      "date": "2026-07-22",
-      "time": "",
-      "cost": "All Ages",
-      "url": "https://xpn.org/concert-and-events/",
-      "description": "First Day Back with gapyear at The First Unitarian Church."
-    },
-    {
-      "title": "Max Subar / Mallory Hawk / Thank You Thank You",
-      "venue": "Ortlieb's, 847 N 3rd St, Philadelphia, PA 19123",
-      "date": "2026-07-22",
-      "time": "",
+      "title": "Fuzzy Slippers / The Remote Controls / Bees! / Civil Rats",
+      "venue": "Ortlieb's, Philadelphia, PA",
+      "date": "2026-07-24",
+      "time": "TBD",
       "cost": "21+",
       "url": "https://xpn.org/concert-and-events/",
-      "description": "Max Subar with Mallory Hawk and Thank You Thank You at Ortlieb's. 21+ venue."
+      "description": "Fuzzy Slippers, The Remote Controls, Bees!, and Civil Rats at Ortlieb's. 21+ venue."
+    },
+    {
+      "title": "Jill Scott / Freebird / Aquil Dawud",
+      "venue": "The Met, Philadelphia, PA",
+      "date": "2026-07-24",
+      "time": "TBD",
+      "cost": "All Ages",
+      "url": "https://xpn.org/concert-and-events/",
+      "description": "Jill Scott, Freebird, and Aquil Dawud at The Met. All ages."
     }
   ]
 }

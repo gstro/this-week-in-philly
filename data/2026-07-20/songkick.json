@@ -1,7 +1,5 @@
 {
   "source": "Songkick",
-  "collected_at": "2026-07-20T00:00:00",
-  "status": "failed",
-  "reason": "fetch_page_text.py timeout",
+  "collected_at": "2026-07-23T01:40:37.035729+00:00",
   "events": []
 }

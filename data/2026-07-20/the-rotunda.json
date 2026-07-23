@@ -1,42 +1,51 @@
 {
   "source": "The Rotunda",
-  "collected_at": "2026-07-20T00:00:00",
+  "collected_at": "2026-07-23T01:33:58.283072+00:00",
   "events": [
     {
-      "title": "West Philadelphia Sanctuary Writing Workshop",
+      "title": "in-person! West Philadelphia Sanctuary writing workshop",
       "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
       "date": "2026-07-20",
       "time": "7:00 PM",
-      "cost": "Free",
-      "url": "https://www.therotunda.org/events",
-      "description": "A free creative writing gathering where participants can share work and connect with other writers in a relaxed, welcoming environment. All skill levels and styles welcome."
+      "cost": "",
+      "url": "https://www.therotunda.org/event/west-philadelphia-sanctuary-writing-workshop",
+      "description": "in-person! West Philadelphia Sanctuary writing workshop"
     },
     {
       "title": "In-person! Vogue Practice Session",
       "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
       "date": "2026-07-21",
       "time": "6:00 PM",
-      "cost": "Free",
-      "url": "https://www.therotunda.org/events",
-      "description": "Drop-in vogue practice session for those preparing for balls. Open to all participants at no cost (unless event is a ball with stated admission)."
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-vogue-practice-session-2026-07-21-18-00-00-0400",
+      "description": "In-person! Vogue Practice Session"
     },
     {
-      "title": "In-person! Weekly Improvised Music Drop-in Jam Session",
+      "title": "In-person! Weekly improvised music drop-in jam session",
       "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
       "date": "2026-07-22",
       "time": "12:00 PM",
-      "cost": "Free",
-      "url": "https://www.therotunda.org/events",
-      "description": "Open music session welcoming musicians of any genre, instrument, or experience level to collaborate with others."
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-07-22-12-00-00-0400",
+      "description": "In-person! Weekly improvised music drop-in jam session"
     },
     {
-      "title": "Philly to Palestine Fashion Show",
+      "title": "In-person! Philadelphia Dramatists Center's \u201cMuse of Fire\u201d 24 hour play festival",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-07-25",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/philadelphia-dramatists-center-s-muse-of-fire-24-hour-play-festival",
+      "description": "In-person! Philadelphia Dramatists Center's \u201cMuse of Fire\u201d 24 hour play festival"
+    },
+    {
+      "title": "In-person! Fashion Show",
       "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
       "date": "2026-07-26",
       "time": "8:00 PM",
-      "cost": "Varies",
-      "url": "https://www.therotunda.org/events",
-      "description": "Fashion show featuring runway performances, raffles, and dancing. Proceeds benefit West Philly housing stabilization and humanitarian aid to Gaza."
+      "cost": "",
+      "url": "https://www.therotunda.org/event/philly-to-palestine-fashion-show",
+      "description": "In-person! Fashion Show"
     }
   ]
 }

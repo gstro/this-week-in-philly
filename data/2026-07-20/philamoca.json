@@ -1,60 +1,51 @@
 {
   "source": "PhilaMOCA",
-  "collected_at": "2026-07-20T00:00:00",
+  "collected_at": "2026-07-23T01:37:56.223291+00:00",
   "events": [
     {
-      "title": "Philadelphia Psychotronic Film Society",
-      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
-      "date": "2026-07-20",
-      "time": "7:00 PM",
-      "cost": "$5 at door",
-      "url": "https://www.philamoca.org/",
-      "description": "Philadelphia Psychotronic Film Society screening. Warning: Psychotronic films may contain extreme subject matter, attend at your own risk. Doors 7pm, Show 7:30pm."
-    },
-    {
-      "title": "R5 PRODUCTIONS PRESENTS PAVEMENTS",
+      "title": "PAVEMENTS",
       "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
       "date": "2026-07-22",
-      "time": "7:00 PM",
+      "time": "7:00, 7:30",
       "cost": "$12",
-      "url": "https://www.philamoca.org/",
-      "description": "R5 Productions presents Pavements. Doors 7pm, Show 7:30pm."
+      "url": "https://www.etix.com/ticket/p/63098853/",
+      "description": ""
     },
     {
-      "title": "IATT PRESENTS Etheric Realms of the Night",
+      "title": "Etheric Realms of the Night",
       "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
       "date": "2026-07-23",
-      "time": "7:30 PM",
-      "cost": "$15 - $20",
-      "url": "https://www.philamoca.org/",
-      "description": "IATT Presents Etheric Realms of the Night. Film premiere + Q&A! Doors 7:30pm, Show 8pm."
+      "time": "7:30, 8:00",
+      "cost": "$15\u2013$20",
+      "url": "https://www.etix.com/ticket/p/63575828/",
+      "description": "Film premiere + Q&A!"
     },
     {
-      "title": "GENERAL SPEECH PRESENTS JAWBREAKER: A DOCUMENTARY ABOUT ANTI CIMEX",
+      "title": "JAWBREAKER: A DOCUMENTARY ABOUT ANTI CIMEX",
       "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
       "date": "2026-07-24",
-      "time": "7:00 PM",
+      "time": "7:00, 7:30",
       "cost": "$12",
-      "url": "https://www.philamoca.org/",
-      "description": "General Speech presents Jawbreaker: A Documentary About Anti Cimex. Doors 7pm, Show 7:30pm."
+      "url": "https://www.etix.com/ticket/p/64775099/jawbreakera-documentary-about-anti-cimex-philadelphia-philamoca",
+      "description": ""
     },
     {
-      "title": "SLUTLIFE RECORDS PRESENTS THE AFTER SUPPER SPECIAL",
+      "title": "THE AFTER SUPPER SPECIAL",
       "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
       "date": "2026-07-25",
-      "time": "7:30 PM",
+      "time": "7:30, 8:00",
       "cost": "$15",
-      "url": "https://www.philamoca.org/",
-      "description": "Slutlife Records Presents The After Supper Special. Doors 7:30pm, Show 8pm."
+      "url": "https://www.etix.com/ticket/p/49862231/the-after-supper-special-philadelphia-philamoca",
+      "description": ""
     },
     {
-      "title": "STOMACH BOOK w/ Devi McCallion + Bubblegum Octopus",
+      "title": "STOMACH BOOK",
       "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
       "date": "2026-07-26",
-      "time": "7:30 PM",
-      "cost": "$15 - $20",
-      "url": "https://www.philamoca.org/",
-      "description": "Stomach Book with Devi McCallion and Bubblegum Octopus. Doors 7:30pm, Show 8pm."
+      "time": "7:30, 8:00",
+      "cost": "$15\u2013$20",
+      "url": "https://www.etix.com/ticket/p/39438116/",
+      "description": ""
     }
   ]
 }

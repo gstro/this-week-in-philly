@@ -1,5 +1,96 @@
 {
   "source": "Philly Ask A Punk",
-  "collected_at": "2026-07-20T00:00:00",
-  "events": []
+  "collected_at": "2026-07-23T01:33:29.489376+00:00",
+  "events": [
+    {
+      "title": "GOOD POLLUTION CASSETTE RELEASE SHOW",
+      "venue": "Dumpster Out Back (South Philly)",
+      "date": "2026-07-23",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/good-pollution-cassette-release-show",
+      "description": "art punk / noise rock / post-punk / punk / tape release"
+    },
+    {
+      "title": "RASKOL RECORD RELEASE//TOUR KICKOFF W/ GASKET, SPIKEPIT, BLUNT FORCE",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-07-23",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/raskol-record-releasetour-kickoff-w-gasket-spikepit-blunt-force",
+      "description": "OUT OF TOWN BAND / experimental / hardcore / hardcore punk / noise / philadelphia / punk"
+    },
+    {
+      "title": "JAWBREAKER - A DOCUMENTARY ABOUT ANTI-CIMEX",
+      "venue": "PhilaMoca (531 N 12th St)",
+      "date": "2026-07-24",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/jawbreaker-a-documentary-about-anti-cimex",
+      "description": ""
+    },
+    {
+      "title": "The Remote Controls (Indianapolis)/Total Whine/Civil Rats/Bees!",
+      "venue": "Ortlieb's (847 N. 3rd St)",
+      "date": "2026-07-24",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/the-remote-controls-indianapolistotal-whinecivil-ratsbees",
+      "description": ""
+    },
+    {
+      "title": "RAINBOW WIZARDS / SMOAKERSMOUTH / DJSWITCH / BATFXNGS / TWEAK",
+      "venue": "The Fire (412 West Girard Philadelphia Pa 19123)",
+      "date": "2026-07-24",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/rainbow-wizards-smoakersmouth-djswitch-batfxngs-tweak",
+      "description": "experimental"
+    },
+    {
+      "title": "Fan Club, Piss Me Off, S.M.I.L.E.",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-07-24",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/fan-club-piss-me-off-smile",
+      "description": "OUT OF TOWN BAND / hardcore / hardcore punk / punk"
+    },
+    {
+      "title": "Sex Mex (San Antonio, Texas) w/ Dasg\u00fct and Fat Heaven @ Nikki Lopez",
+      "venue": "Nikki Lopez (304 South Street, Philadelphia, PA 19147)",
+      "date": "2026-07-25",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/sex-mex-san-antonio-texas-with-dasgut-and-fat-heaven-nikki-lopez",
+      "description": "OUT OF TOWN BAND / egg / garage rock"
+    },
+    {
+      "title": "Screenings at Sanctuary: Jaws and Sleepaway Camp",
+      "venue": "Sanctuary (West Philly)",
+      "date": "2026-07-25",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/screenings-at-sanctuary-jaws-and-sleepaway-camp",
+      "description": "Horror / Screening / movie"
+    },
+    {
+      "title": "Diskritik, Dislexia (Rochester), World of Chaos. Capital Punishment @ MouseTrap",
+      "venue": "Mousetrap (North philly)",
+      "date": "2026-07-26",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/diskritik-dislexia-rochester-world-of-chaos-capital-punishment-mousetrap",
+      "description": "OUT OF TOWN BAND / experimental / hardcore / hardcore punk / noise / philadelphia / punk"
+    },
+    {
+      "title": "Mess / Vaxine / The Stress / The Slads",
+      "venue": "Johnny Brenda's (1201 Frankford Ave)",
+      "date": "2026-07-26",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/mess-vaxine-the-stress-the-slads",
+      "description": ""
+    }
+  ]
 }
