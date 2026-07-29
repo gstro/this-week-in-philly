@@ -1,0 +1,102 @@
+{
+  "_meta": {
+    "description": "Hand-maintained expected-yield baseline for scripts/check_yield.py. min_expected is a conservative floor -- comfortably below the lowest legitimate weekly count seen for that source -- not a target, so it doesn't false-positive on a genuinely quiet week. A source at status 'ok' with events below its floor gets flagged. Sources with min_expected: 0 are known to have genuinely empty weeks (confirmed against v1's dual-write run, which predates v2's under-collection) and are excluded from the yield-floor check entirely -- only the provenance and manifest/file-agreement checks apply to them.",
+    "baseline_source": "git show 728633b:data/2026-07-20/_manifest.json (v1 Mac dual-write, the last known-complete collection of a real week before v2's Collection Routine began silently zeroing sources under budget pressure -- see docs/COLLECTION_YIELD_INVESTIGATION.md)",
+    "revisit": "Each quarterly source-revalidation pass (see philadelphia-sources/SKILL.md Maintenance section) and whenever a source gains a deterministic parser -- raise min_expected once real yield is confirmed stable under the new method.",
+    "total_floor": 45
+  },
+  "sources": {
+    "billy-penn": {
+      "min_expected": 0,
+      "note": "WebSearch source; weekly calendar post isn't live until Sunday morning, after the scheduled 2am ET collection run. 0 is structurally expected most weeks -- not a failure signal for this source."
+    },
+    "cinespeak": {
+      "min_expected": 1,
+      "note": "Historical range 1-2/week (v1: 2, v2 run A: 2). Server-rendered WordPress; deterministic parser planned."
+    },
+    "do215": {
+      "min_expected": 4,
+      "note": "v1 marked this 'partial' (events=8). A real JSON API (/events/YYYY/M/D.json) now backs this source (scripts/event_parsers/do215.py + scripts/collect_source.py) -- confirmed live 2026-07-29 against the real week of 2026-08-03: 467 events, not the 8-60 every prior estimate assumed. Almost all of the volume is legitimate but repetitive (e.g. a museum's daily guided tour re-listed as a distinct dated event on each of its 5 occurrences that week) with no structural field distinguishing it from a genuine one-off -- this is exactly the case event-selection-philosophy's 'Avoid: recurring weekly events' rule exists for, but that rule has never had to operate at this volume from a single source. Floor kept low and deliberately not raised to the true yield, since the real number this source contributes to a week's total_events_after_dedup is now an open question for Selection, not Collection, to absorb."
+    },
+    "free-library": {
+      "min_expected": 0,
+      "note": "Chronically blocked by Cloudflare bot check; 0 or failed in every observed run including v1. Not a regression signal until the block is resolved."
+    },
+    "harriets-bookshop": {
+      "min_expected": 0,
+      "note": "v1 marked this 'partial' at 0 events; Eventbrite org page returns no structured data (0 JSON-LD blocks). Chronically unreliable, not newly broken."
+    },
+    "hive76": {
+      "min_expected": 1,
+      "note": "Stable at 1/week across all observed runs (weekly Open House)."
+    },
+    "iffy-books": {
+      "min_expected": 3,
+      "note": "Google Calendar via MCP. Historical range 4-8; floor set with margin since the true minimum in a slow week is unconfirmed."
+    },
+    "lightbox-film-center": {
+      "min_expected": 0,
+      "note": "Genuinely 0 some weeks (listings can jump 2+ weeks between screenings, confirmed during investigation), but demonstrably nonzero when the parser lands (2 real events found in a week v2 collected as 0). Kept at 0 until the parser stabilizes true yield -- the provenance check still catches fabrication."
+    },
+    "luma": {
+      "min_expected": 5,
+      "note": "Historical range 7-9; floor set with margin."
+    },
+    "meetup-ai-philly": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run (well-formed iCal, 0 VEVENTs). Parser's own structural validation (raises only if BEGIN:VCALENDAR is absent) already covers this source; yield-floor adds nothing." },
+    "meetup-code-coffee": { "min_expected": 0, "note": "Active group but weekly count is genuinely variable (0-4 observed); relies on the parser's own structural validation, not a yield floor, to avoid false positives on a quiet week." },
+    "meetup-dc215": { "min_expected": 0, "note": "Same reasoning as meetup-code-coffee." },
+    "meetup-horror": { "min_expected": 0, "note": "Same reasoning as meetup-code-coffee." },
+    "meetup-owasp": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
+    "meetup-philly-film-club": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
+    "meetup-philly-hardware": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
+    "meetup-tech-in-motion": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
+    "philadelphia-citizen": {
+      "min_expected": 1,
+      "note": "Stable at 3/week in legitimate runs (v1: 3, v2 run A: 1, v2 HEAD: 3); floor set below the lowest of those."
+    },
+    "philadelphia-film-society": {
+      "min_expected": 0,
+      "note": "Browser-only (Fandango showtimes are JS-rendered; no working API found). Currently timing out in both recent v2 runs. Kept at 0 to avoid crying wolf on a source that's known-broken until it's fixed, not newly regressed."
+    },
+    "philamoca": {
+      "min_expected": 4,
+      "note": "Deterministic parser. Historical range 5-6; floor set with margin."
+    },
+    "philly-ask-a-punk": {
+      "min_expected": 6,
+      "note": "Deterministic parser (Gancio API). One real incident (2026-07-21) where a WebFetch-routed fetch was silently truncated and returned 0 -- floor set to catch a repeat without false-positiving on a slower week. Historical non-incident range 10-12."
+    },
+    "philly-shows": {
+      "min_expected": 0,
+      "note": "Documented sparse (~1-2/week); deterministic parser already in place and structurally validated."
+    },
+    "phillygoth": {
+      "min_expected": 2,
+      "note": "Deterministic parser. Historical legitimate range 2-7 (excludes the 2026-07-27 fabricated 0); floor set at the low end."
+    },
+    "r5-productions": {
+      "min_expected": 5,
+      "note": "Deterministic parser. Stable at 7/week across all observed legitimate runs."
+    },
+    "songkick": {
+      "min_expected": 0,
+      "note": "v1 got 8 (marked 'partial'); a real per-listing JSON-LD route was found during investigation but pagination is rate-limited (intermittent 406, not page-specific) and unfixed as of this baseline. Kept at 0 -- a real fetch failure here should surface as status:failed, not a yield-floor flag, until the parser lands."
+    },
+    "the-rotunda": {
+      "min_expected": 2,
+      "note": "Deterministic parser. Historical range 3-5."
+    },
+    "trakt-film-releases": {
+      "min_expected": 1,
+      "note": "Google Calendar via MCP. Stable at 2/week."
+    },
+    "wooden-shoe-books": {
+      "min_expected": 2,
+      "note": "Google Calendar via MCP. Stable at 3/week."
+    },
+    "wxpn": {
+      "min_expected": 0,
+      "note": "v1 itself marked this 'partial' at 0 events. A real WP REST API (backend.xpn.org/wp-json/wp/v2/event) returned 13-19/week during investigation -- the true floor is well above 0, but kept at 0 here until the parser lands and stabilizes real yield; the provenance check still catches fabrication in the meantime."
+    }
+  }
+}
