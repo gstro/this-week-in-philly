@@ -50,7 +50,7 @@ def main() -> None:
 
     try:
         text = fetch_raw(args.url, args.max_chars)
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 -- top-level CLI catch-all: clean FAILED message, not a raw traceback
         print(f"FAILED to fetch {args.url}: {exc}", file=sys.stderr)
         sys.exit(1)
 

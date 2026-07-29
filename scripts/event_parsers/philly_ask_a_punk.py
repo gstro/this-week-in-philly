@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import datetime
-from typing import Any
 import json
+from typing import Any
 
 from .base import Event, ParseError, write_event
 

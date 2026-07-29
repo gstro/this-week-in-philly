@@ -57,7 +57,7 @@ def parse_start(day_date: str, event_time: str) -> datetime | None:
     if not event_time:
         return None
     try:
-        naive = datetime.strptime(f"{day_date} {event_time}", "%Y-%m-%d %I:%M %p")
+        naive = datetime.strptime(f"{day_date} {event_time}", "%Y-%m-%d %I:%M %p")  # noqa: DTZ007 -- EASTERN attached below
     except ValueError:
         return None
     return naive.replace(tzinfo=EASTERN)
@@ -80,7 +80,7 @@ def build_event(day: dict, pick: dict) -> "Event | None":
     if pick.get("url"):
         description_parts.append(pick["url"])
 
-    event: "Event" = {
+    event: Event = {
         "summary": pick["title"],
         "start": {"dateTime": start.isoformat()},
         "end": {"dateTime": end.isoformat()},
@@ -126,7 +126,7 @@ def main() -> None:
     selections = common.load_selections(args.week_dir)
     monday = date.fromisoformat(selections["days"][0]["date"])
 
-    events: list["Event"] = []
+    events: list[Event] = []
     for day in selections["days"]:
         for pick in day["top3"]:
             event = build_event(day, pick)

@@ -12,7 +12,20 @@ CLI just dispatches through PARSERS.
 
 from collections.abc import Callable
 
-from . import do215, luma, meetup, philamoca, philly_ask_a_punk, philly_shows, phillygoth, r5_productions, the_rotunda
+from . import (
+    cinespeak,
+    do215,
+    lightbox,
+    luma,
+    meetup,
+    philamoca,
+    philly_ask_a_punk,
+    philly_shows,
+    phillygoth,
+    r5_productions,
+    the_rotunda,
+    wxpn,
+)
 from .base import Event, EventParser, ParseError
 
 # Typed as a plain Callable, not dict[str, EventParser]: mypy's structural
@@ -32,6 +45,9 @@ PARSERS: dict[str, Callable[..., list[Event]]] = {
     "luma-ical": luma.parse,
     "meetup-ical": meetup.parse,
     "do215": do215.parse,
+    "wxpn": wxpn.parse,
+    "cinespeak": cinespeak.parse,
+    "lightbox-film-center": lightbox.parse,
 }
 
 __all__ = ["PARSERS", "Event", "EventParser", "ParseError"]

@@ -74,7 +74,7 @@ def find_spotify_match(sp: spotipy.Spotify, title: str) -> dict | None:
     for candidate in candidate_names(title):
         try:
             result = sp.search(q=f'artist:"{candidate}"', type="artist", limit=1)
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 -- one candidate's search failing shouldn't skip the rest
             print(f"  Spotify search failed for {candidate!r}: {exc}", file=sys.stderr)
             continue
         items = result.get("artists", {}).get("items", [])

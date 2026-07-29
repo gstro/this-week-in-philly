@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import datetime
-from typing import Any
 import re
+from typing import Any
 
 from bs4 import BeautifulSoup
 
