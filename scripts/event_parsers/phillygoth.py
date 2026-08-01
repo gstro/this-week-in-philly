@@ -8,7 +8,7 @@ from typing import Any
 
 from bs4 import BeautifulSoup
 
-from .base import Event, ParseError, attr, parse_month, text, write_event
+from .base import Event, ParseError, attr, parse_month, resolve_year, text, write_event
 
 
 def parse(html: str, week_start: datetime.date, week_end: datetime.date, **_kwargs: Any) -> list[Event]:  # noqa: ANN401
@@ -21,7 +21,7 @@ def parse(html: str, week_start: datetime.date, week_end: datetime.date, **_kwar
     for container in containers:
         date_el = container.select_one(".em-event-date")
         date_text = text(date_el)
-        event_date = _parse_long_date(date_text, week_start.year)
+        event_date = _parse_long_date(date_text, week_start)
         if event_date is None or not (week_start <= event_date <= week_end):
             continue
 
@@ -43,15 +43,26 @@ def parse(html: str, week_start: datetime.date, week_end: datetime.date, **_kwar
     return events
 
 
-def _parse_long_date(date_text: str, default_year: int) -> datetime.date | None:
-    match = re.search(r"(\w+)\s+(\d{1,2}),?\s+(\d{4})?", date_text)
+def _parse_long_date(date_text: str, week_start: datetime.date) -> datetime.date | None:
+    # \s* (not \s+) before the optional year group: BeautifulSoup's
+    # get_text(strip=True) removes trailing whitespace, so a genuinely
+    # year-less date ("January 1", nothing after) would never match at all
+    # under a mandatory \s+ -- silently skipping every such event rather
+    # than falling through to resolve_year below.
+    match = re.search(r"(\w+)\s+(\d{1,2}),?\s*(\d{4})?", date_text)
     if not match:
         return None
     month = parse_month(match.group(1))
     if month is None:
         return None
-    year = int(match.group(3)) if match.group(3) else default_year
-    try:
-        return datetime.date(year, month, int(match.group(2)))
-    except ValueError:
+    day = int(match.group(2))
+    if match.group(3):
+        # The page did give an explicit year -- trust it, no resolution needed.
+        try:
+            return datetime.date(int(match.group(3)), month, day)
+        except ValueError:
+            return None
+    year = resolve_year(month, day, week_start)
+    if year is None:
         return None
+    return datetime.date(year, month, day)  # already validated by resolve_year

@@ -36,7 +36,15 @@ import sys
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from event_parsers import Event, ParseError, do215, lightbox, wxpn
+from event_parsers import (
+    Event,
+    ParseError,
+    do215,
+    lightbox,
+    philadelphia_film_society,
+    wxpn,
+)
+from fetch_page_text import fetch_text
 from proxy_session import build_session
 
 _USER_AGENT = (
@@ -167,6 +175,67 @@ def collect_lightbox(_week_start: datetime.date, _week_end: datetime.date) -> Fe
     return FetchResult(raw_events=events, failed_requests=failed)
 
 
+# The 3 venues Philadelphia Film Society sells tickets for on Fandango (per
+# philadelphia-sources/SKILL.md's venue list) -- fixed and known, so the
+# collector attaches each venue's real name/address directly rather than
+# trying to re-derive it from Fandango's page text (see
+# philadelphia_film_society.py's module docstring for why).
+_PFS_VENUES = [
+    {
+        "name": "PFS Film Society Center",
+        "address": "1412 Chestnut Street, Philadelphia, PA 19102",
+        "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+    },
+    {
+        "name": "PFS Bourse Theater",
+        "address": "400 Ranstead St, Philadelphia, PA 19106",
+        "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+    },
+    {
+        "name": "PFS East Theater",
+        "address": "125 S. 2nd Street, Philadelphia, PA 19106",
+        "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+    },
+]
+
+
+def collect_philadelphia_film_society(week_start: datetime.date, week_end: datetime.date) -> FetchResult:
+    # Two representative days per venue (Wednesday + Saturday of the target
+    # week), not all 7: confirmed live 2026-08-01 that PFS's own day-picker
+    # skips straight from Sunday to the following Wednesday for weeks
+    # further out, suggesting programming runs in Wed-Sun blocks rather than
+    # changing daily -- though this is inferred from the calendar widget's
+    # available-days pattern, not confirmed by comparing two same-block days'
+    # actual lineups directly. Each fetch needs a full browser render
+    # (~15-30s observed), so 6 fetches keeps this to a few minutes rather
+    # than the 10+ a full 7-day sweep across 3 venues would cost. Each
+    # (venue, day) fetch is isolated -- one hanging or erroring must not take
+    # the other 5 down with it, which is what the observed real failures
+    # ("Fandango pages unavailable (Playwright timeout)") are consistent with.
+    sample_days = [week_start + datetime.timedelta(days=2), week_start + datetime.timedelta(days=5)]  # Wed, Sat
+
+    entries: list[dict] = []
+    failed: list[str] = []
+    for venue in _PFS_VENUES:
+        for day in sample_days:
+            url = f"{venue['url']}?date={day.isoformat()}"
+            try:
+                rendered_text = fetch_text(url, wait_ms=0, max_chars=20_000)
+            except Exception as exc:  # noqa: BLE001 -- one venue/day failing shouldn't kill the other 5
+                failed.append(f"{url} ({exc})")
+                rendered_text = None
+            entries.append(
+                {
+                    "venue_name": venue["name"],
+                    "venue_address": venue["address"],
+                    "theater_url": venue["url"],
+                    "context_date": day.isoformat(),
+                    "rendered_text": rendered_text,
+                }
+            )
+    return FetchResult(raw_events=entries, failed_requests=failed)
+
+
 # Each collector fetches its source's raw data (as many requests as needed)
 # and returns it merged into one blob ready for that source's pure parser --
 # adding a new multi-fetch source means adding one entry here, following the
@@ -175,12 +244,14 @@ COLLECTORS: dict[str, Callable[[datetime.date, datetime.date], FetchResult]] = {
     "do215": collect_do215,
     "wxpn": collect_wxpn,
     "lightbox-film-center": collect_lightbox,
+    "philadelphia-film-society": collect_philadelphia_film_society,
 }
 
 PARSE_FUNCS: dict[str, Callable[..., list[Event]]] = {
     "do215": do215.parse,
     "wxpn": wxpn.parse,
     "lightbox-film-center": lightbox.parse,
+    "philadelphia-film-society": philadelphia_film_society.parse,
 }
 
 # Each source's parser expects raw JSON in its own shape (do215: an object
@@ -193,6 +264,7 @@ RAW_WRAPPERS: dict[str, Callable[[list[dict]], str]] = {
     "do215": lambda events: json.dumps({"events": events}),
     "wxpn": json.dumps,
     "lightbox-film-center": json.dumps,
+    "philadelphia-film-society": json.dumps,
 }
 
 

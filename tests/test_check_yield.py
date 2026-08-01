@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from check_yield import (  # noqa: E402
+from check_yield import (
     check_manifest_file_agreement,
     check_non_destructive,
     check_provenance,

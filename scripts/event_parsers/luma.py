@@ -5,11 +5,16 @@ from __future__ import annotations
 import datetime
 import re
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from . import _ical
 from .base import Event, ParseError, write_event
 
-_UTC_OFFSET_ET = -4 * 3600  # EDT; -5*3600 for EST (Nov-Mar)
+# Was a hardcoded -4h (EDT) offset with no DST branch -- correct roughly
+# March-November, silently an hour off the rest of the year. ZoneInfo
+# resolves the right UTC offset for America/New_York on any given date,
+# including the EDT/EST transition itself, with no manual date math.
+_EASTERN = ZoneInfo("America/New_York")
 
 
 def parse(raw: str, week_start: datetime.date, week_end: datetime.date, **_kwargs: Any) -> list[Event]:  # noqa: ANN401
@@ -30,7 +35,7 @@ def parse(raw: str, week_start: datetime.date, week_end: datetime.date, **_kwarg
             continue
         year, month, day, hour, minute, second = (int(g) for g in match.groups())
         utc_dt = datetime.datetime(year, month, day, hour, minute, second, tzinfo=datetime.UTC)
-        local_dt = utc_dt + datetime.timedelta(seconds=_UTC_OFFSET_ET)
+        local_dt = utc_dt.astimezone(_EASTERN)
         event_date = local_dt.date()
         if not (week_start <= event_date <= week_end):
             continue

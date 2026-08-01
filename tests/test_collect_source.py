@@ -18,16 +18,17 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from collect_source import (  # noqa: E402
-    FetchResult,
+from collect_source import (
     RAW_WRAPPERS,
+    FetchResult,
     _fetch_do215_day,
     build_output,
     collect_do215,
     collect_lightbox,
+    collect_philadelphia_film_society,
     collect_wxpn,
 )
-from event_parsers import ParseError  # noqa: E402
+from event_parsers import ParseError
 
 
 class _FakeResponse:
@@ -59,7 +60,7 @@ class _FakeSession:
         self.responses = responses
         self.requested_urls: list[str] = []
 
-    def get(self, url: str, headers: dict, timeout: int) -> _FakeResponse:  # noqa: ANN001, ARG002
+    def get(self, url: str, headers: dict, timeout: int) -> _FakeResponse:
         self.requested_urls.append(url)
         result = self.responses.get(url)
         if result is None:
@@ -297,3 +298,43 @@ def test_collect_lightbox_records_failure_for_one_broken_detail_page_but_keeps_g
     movie_b = next(e for e in result.raw_events if e["title"] == "Movie B")
     assert movie_b["detail_html"] is None  # ...but B's detail_html is None, not fabricated content
     assert len(result.failed_requests) == 1
+
+
+# --- collect_philadelphia_film_society: 3 venues x 2 sample days, isolated ---
+
+
+def test_collect_pfs_fetches_all_3_venues_on_wednesday_and_saturday(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls: list[str] = []
+
+    def fake_fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
+        calls.append(url)
+        return f"rendered:{url}"
+
+    monkeypatch.setattr("collect_source.fetch_text", fake_fetch_text)
+
+    result = collect_philadelphia_film_society(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    assert len(result.raw_events) == 6  # 3 venues x 2 days
+    assert result.failed_requests == []
+    # week_start=Monday 2026-08-03 -> Wed=08-05, Sat=08-08
+    dates = {e["context_date"] for e in result.raw_events}
+    assert dates == {"2026-08-05", "2026-08-08"}
+    venues = {e["venue_name"] for e in result.raw_events}
+    assert venues == {"PFS Film Society Center", "PFS Bourse Theater", "PFS East Theater"}
+    assert all("?date=" in url for url in calls)
+
+
+def test_collect_pfs_isolates_one_venue_days_failure_from_the_others(monkeypatch: pytest.MonkeyPatch) -> None:
+    def fake_fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
+        if "bourse" in url and "2026-08-08" in url:
+            raise TimeoutError("hung")
+        return f"rendered:{url}"
+
+    monkeypatch.setattr("collect_source.fetch_text", fake_fetch_text)
+
+    result = collect_philadelphia_film_society(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    assert len(result.raw_events) == 6  # the failed fetch still gets an entry...
+    failed_entry = next(e for e in result.raw_events if "bourse" in e["theater_url"] and e["context_date"] == "2026-08-08")
+    assert failed_entry["rendered_text"] is None  # ...but with rendered_text=None, not fabricated content
+    assert len(result.failed_requests) == 1
+    # The other 5 fetches must still have succeeded.
+    assert sum(1 for e in result.raw_events if e["rendered_text"] is not None) == 5

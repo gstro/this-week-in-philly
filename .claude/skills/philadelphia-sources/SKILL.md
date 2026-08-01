@@ -66,8 +66,6 @@ Write all collected events to a dated directory under the `output_directory` spe
 | Meetup: Philly Film Club | `meetup-philly-film-club.json` |
 | Philly-Shows.com | `philly-shows.json` |
 | Do215 | `do215.json` |
-| Billy Penn | `billy-penn.json` |
-| Songkick | `songkick.json` |
 
 Create the dated directory before the first source run. Do not write `_manifest.json` until all sources have been attempted.
 
@@ -95,7 +93,7 @@ Each source file contains one JSON object:
 }
 ```
 
-**Description field:** Write the full event description as provided by the source. Do not summarize, truncate, or editorialize. The description is used during report generation for interest matching and Top 3 blurb writing — not during collection. For Songkick specifically, write the first paragraph only; Songkick descriptions are long promotional copy with minimal additional signal after the first paragraph.
+**Description field:** Write the full event description as provided by the source. Do not summarize, truncate, or editorialize. The description is used during report generation for interest matching and Top 3 blurb writing — not during collection.
 
 **Empty sources:** Write the file with an empty events array:
 ```json
@@ -310,17 +308,17 @@ Single-purpose venues with focused, low-prose event listings. Use each source's 
 - `https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page` (400 Ranstead St)
 - `https://www.fandango.com/pfs-east-theater-aandq/theater-page` (125 S. 2nd St)
 
-**Method:** Bash → `python scripts/fetch_page_text.py <url>` on each of the 3 venue pages above (default/"today" view — no `?date=` param needed). Real showtimes with title, rating, runtime, and exact times per screen.
+**Method:** Bash → `python scripts/collect_source.py philadelphia-film-society --source-name "Philadelphia Film Society" --week-start YYYY-MM-DD --week-end YYYY-MM-DD --out {output_directory}/YYYY-MM-DD/philadelphia-film-society.json` — no model parsing step; still needs a real browser (Fandango's showtimes are JS-rendered, see below), but the fetch loop and text parsing are both owned by the script. Fetches each of the 3 venues for 2 sample days (the target week's Wednesday and Saturday), isolating each of the 6 (venue, day) fetches independently — one hanging or erroring no longer takes the whole source down with it. Prints the `[source]: [N] events written. Proceeding.` confirmation line to stderr.
 
-**Why not filmadelphia.org directly:** 🚨 `fetch_page_text.py` is hard-blocked domain-wide on filmadelphia.org — confirmed Jul 2026: returns "Access Denied... request appears similar to malicious requests sent by robots" on every path tried (showtimes page, `/wp-json/`, RSS/iCal guesses), even with a realistic user-agent — a WAF doing client-fingerprint-level blocking, not just a UA check. Don't spend time trying to defeat it further. Fandango's theater pages for the same 3 venues are not behind this WAF and return the same underlying showtime data (PFS sells tickets through Fandango) — use those instead. Confirmed working Jul 2026, including curated/repertory titles (e.g. `L'Avventura (1960)`), with exact per-film times — more reliable than the old v1 method, which needed a manual Chrome-assisted resume and still couldn't confirm exact times (CAPTCHA-blocked calendar view).
+**Why not filmadelphia.org or Agile Ticketing directly:** 🚨 `fetch_page_text.py` is hard-blocked domain-wide on filmadelphia.org — confirmed Jul 2026: a WAF doing client-fingerprint-level blocking, not just a UA check. Agile Ticketing (`agileticketing.net`, PFS's real backend per Fandango's own JSON-LD `branchCode`) is *also* domain-wide blocked — confirmed live 2026-08-01, a different WAF vendor (Incapsula) doing the same thing. Fandango's theater pages for the same 3 venues are not behind either WAF and return the same underlying showtime data (PFS sells tickets through Fandango) — use those. Fandango's raw HTML has no server-rendered showtime data at all though (confirmed live: no JSON-LD `ScreeningEvent`, nothing in the raw response) — a real browser (`fetch_page_text.py`'s `fetch_text()`, called in-process by `collect_source.py`) is unavoidable for this source specifically.
 
-**One fetch per venue is enough:** unlike Do215 (distinct one-off events per day), cinema programming runs in multi-day blocks — a single "today" snapshot per venue typically covers most of the target week's actual titles. Only add `?date=YYYY-MM-DD` fetches for specific days if session time allows and the week spans a Friday (when programming usually rotates).
+**Why 2 sample days, not all 7:** confirmed live 2026-08-01 that PFS's own day-picker calendar skips straight from Sunday to the following Wednesday for weeks further out, suggesting programming runs in Wed-Sun blocks rather than changing daily (inferred from the calendar widget's available-days pattern, not confirmed by directly comparing two same-block days' lineups). Each fetch needs a full browser render (~15-30s observed); 6 fetches (3 venues × 2 days) takes a few minutes rather than the 10+ a full 7-day sweep would cost.
 
-**Descriptions:** the Fandango theater pages above give title/rating/runtime/showtimes only, no synopsis — needed anyway for the report's "why" blurb. Confirmed Jul 2026: a plain WebSearch per **distinct film title** (dedupe across the 3 venues and across the week — PFS often runs the same title at multiple venues/days) reliably returns a synopsis directly in the search result (e.g. searching `"The Odyssey" 2026 movie overview synopsis` returned "Odysseus, king of Ithaca, embarks on a perilous journey..." directly, no extra fetch needed). Don't try to construct a Fandango `/movie-overview` URL yourself — the slug includes an internal ID (e.g. `the-odyssey-2026-241283`) that isn't derivable from the title, and the link only exists in the rendered DOM (JS-populated), not in `fetch_page_text.py`'s plain-text output. One WebSearch per distinct title is simpler and works reliably.
+**This replaces the old "one fetch, today's default view" method**, which had a real, previously-unnoticed gap: Collection runs Sunday 2am ET for the *following* week, so a "today" (Sunday) snapshot showed the wrong day's showtimes entirely — never a day inside the target week. `?date=YYYY-MM-DD` genuinely re-scopes Fandango's listing (confirmed live), which is what makes the sample-day approach work at all.
 
-**🚨 FALLBACK — WebSearch:** If all 3 Fandango pages fail (e.g. Fandango itself changes/blocks): `query: "Philadelphia Film Society" OR "PFS" showtimes [Month] [Year]`, then a second variant `query: site:filmadelphia.org showtimes [week dates]` if the first returns nothing useful. Treat WebSearch results as lower-confidence (may reflect cached/indexed pages, not live listings) — note this in the description field.
+**Descriptions:** the parsed events carry rating + runtime only (`scripts/event_parsers/philadelphia_film_society.py`), no synopsis — Fandango's rendered text doesn't include one. For the report's "why" blurb, a plain WebSearch per **distinct film title** (dedupe across the 3 venues and across the week — PFS often runs the same title at multiple venues/days) reliably returns a synopsis directly in the search result (e.g. searching `"The Odyssey" 2026 movie overview synopsis` returned "Odysseus, king of Ithaca, embarks on a perilous journey..." directly, no extra fetch needed). Don't try to construct a Fandango `/movie-overview` URL yourself — the slug includes an internal ID that isn't derivable from the title, and the link only exists in the rendered DOM (JS-populated).
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py` via Fandango**
+**✅ Confirmed Aug 2026 with `collect_source.py`** (18 events for the week of 2026-08-03 across all 3 venues, both sample days, zero fetch failures — a real week where the prior method reported the whole source `failed`)
 
 ---
 
@@ -488,36 +486,27 @@ These run last. If the session runs short, cut here — these are the broadest a
 
 ---
 
-### 20. Billy Penn
-**URL:** `https://billypenn.com` (search for current week's events calendar post)
-**Method:** WebSearch — `site:billypenn.com events calendar [month] [year]`
-**Notes:** Local nonprofit journalism with strong arts and events coverage. Publishes a weekly events calendar post. Treat similarly to editorial staff picks — good for curated voice on what's worth attending.
+### Dropped: Billy Penn and Songkick
 
-⚠️ **Post not live until Sunday morning** — won't exist on Friday runs. If not found via WebSearch, write an empty events array and proceed.
+Both removed from the active source list (2026-08-01). Neither is collected anymore — do not fetch
+them, and their filenames should not appear in a fresh `_manifest.json`.
 
----
+**Billy Penn** — 0 Top-3 picks and 0 honorable mentions across the entire picks-log history
+(`docs/v1/Data/event-picks-log.csv`). Structurally uncollectable at the scheduled run time besides:
+its weekly events-calendar post publishes Monday morning *of* the target week (confirmed via its
+own WordPress REST API, `billypenn.com/wp-json/wp/v2/posts?slug=...`), and Collection runs Sunday
+2am ET — before that post exists. No parser or method fixes a source that isn't live yet at fetch
+time. Never earned its cost.
 
-### 21. Songkick
-**URL:** `https://www.songkick.com/metro-areas/5202-us-philadelphia/[month-YYYY]`
-**Example:** `https://www.songkick.com/metro-areas/5202-us-philadelphia/june-2026`
-**Method:** **Page 1: Bash → `python scripts/fetch_raw.py https://www.songkick.com/metro-areas/5202-us-philadelphia/[month-YYYY]`** (raw HTML — page 1's event data is fully server-rendered, no JS/browser needed). **Pages 2+ only (if the target week isn't covered by page 1's date range): Bash → `python scripts/fetch_page_text.py <url>?page=N`** (browser required — see note below).
-**Notes:** Broadest music aggregator — 1,252+ events for June 2026 alone. Good for catching shows not on R5, Do215, or Philly Ask A Punk (smaller indie acts on Johnny Brenda's, Ortlieb's, MilkBoy, etc.).
-
-⚠️ **Platform stability risk:** Songkick was acquired by Suno (generative AI) in November 2025. Revalidate this source at each quarterly check.
-
-**Why page 1 uses `fetch_raw.py` but pages 2+ need `fetch_page_text.py`:** confirmed Jul 2026 — page 1's HTML has the full event listing server-rendered (`class="event-listings-element"` blocks with artist name, venue, and `<time datetime="...">`), so a plain HTTP GET returns everything a browser would. But `?page=2` (and beyond) returns `406 Not Acceptable` to a plain `requests`/curl-style client regardless of headers, cookies, or Referer — a CDN-level rule (Fastly) that appears to require a real browser's TLS/client fingerprint specifically on paginated requests. `fetch_page_text.py` still works for these (confirmed — Chromium's actual TLS fingerprint satisfies it). Parsing raw HTML instead of `fetch_page_text.py`'s clean extracted text means picking event title/venue/date out of markup directly — see the `.event-listings-element` structure above.
-
-**Only fetch page 2+ when actually needed** — this keeps `fetch_page_text.py` usage here rare instead of mandatory. Page 1's plain HTTP fetch is ~0.2s; each `fetch_page_text.py` page-2+ fetch can take 30-70+ seconds even though the eventual content is correct, because Songkick's rendered page triggers a large real-time-ad-bidding request storm (confirmed Jul 2026: 200+ distinct third-party ad/tracking domains firing continuously) that `fetch_page_text.py`'s route-interception proxy workaround (docs/COLLECTION_PROXY_ISSUE.md) has to individually round-trip through `requests` rather than Chromium's native concurrent networking — this is what caused this source to time out entirely in a recent run. Needing page 2+ only when the target week falls later in the month (see pagination note below) keeps this cost occasional rather than guaranteed every run.
-
-**Two issues to manage:**
-
-1. **Pagination, capped at 4 pages** — paginates at ~10 events per page. Page 1 (via `fetch_raw.py`) typically covers the first ~3-4 days of the month. For week 2 of the month (Jun 8–14), append `?page=2` for Jun 11–14 (via `fetch_page_text.py`). For weeks 3–4, go to page 3+. **Stop at page 4 regardless of whether the target week is fully covered.** Per V2_IMPLEMENTATION_PLAN.md's Q4 analysis of the real picks log: only 2 of 84 logged Philadelphia Top 3 picks (2.4%) ever came from Songkick, and the specialist sources (Iffy Books, Do215, PhilaMOCA, Ask A Punk, R5) dominate picks — the cap costs essentially nothing.
-
-2. **Geographic scope** — includes wider Philadelphia metro (Allentown, Camden NJ, Atlantic City, Wilkes-Barre). Filter to Philadelphia proper and inner suburbs (King of Prussia, Upper Darby, Ardmore). Discard events at Borgata Atlantic City, Bethlehem PA, etc. unless the act is genuinely unmissable.
-
-**URL construction:** Month name is lowercase, hyphenated: `june-2026`, `july-2026`. If the upcoming week spans two months, fetch both month pages.
-
-**Description:** First paragraph only — Songkick descriptions are long promotional copy with minimal additional signal after the first paragraph.
+**Songkick** — real yield existed (v1: 8 events for a comparison week; 2 of 84 logged Philadelphia
+Top 3 picks historically, 2.4%) but the cost/reliability tradeoff stopped being worth it: page 2+
+requires `fetch_page_text.py` (a plain HTTP client gets a `406` from Songkick's CDN on paginated
+requests), and that fetch intermittently returns `406` even *with* a real browser's TLS fingerprint
+— confirmed live 2026-07-29, tripping unpredictably across otherwise-identical requests and not
+clearing on retry. The specialist sources (Iffy Books, Do215, PhilaMOCA, Ask A Punk, R5) already
+dominate music/DIY picks; Songkick's marginal contribution didn't justify carrying an unreliable,
+occasionally slow (30-70s/page under the proxy workaround, see `docs/COLLECTION_PROXY_ISSUE.md`)
+source in the tier list.
 
 ---
 
@@ -557,7 +546,7 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 | Trakt.tv film releases | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | R5 Productions | `fetch_raw.py` on `/events/` → `parse_events.py r5-productions` | 2 | ✅ Jul 2026 |
 | Hive76 | `fetch_page_text.py` on `/classes/` | 2 | ✅ Jul 2026 |
-| Philadelphia Film Society | `fetch_page_text.py` on 3 Fandango venue pages (filmadelphia.org is WAF-blocked domain-wide; WebSearch is the fallback) | 2 | ✅ Jul 2026 |
+| Philadelphia Film Society | `collect_source.py philadelphia-film-society` (browser required, but per-venue/day isolated) | 2 | ✅ Aug 2026; real yield 18/week, see §8 |
 | Harriet's Bookshop | `fetch_page_text.py` on Eventbrite org page | 2 | ✅ Jul 2026; ⚠️ Main site still broken |
 | Free Library | `fetch_page_text.py` | 2 | ✅ Jul 2026; needs realistic UA (Cloudflare) |
 | PhilaMOCA | `fetch_raw.py` → `parse_events.py philamoca` | 3 | ✅ Jul 2026 |
@@ -569,8 +558,8 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 | Meetup groups (all 8) | `fetch_raw.py` iCal URL → `parse_events.py meetup-ical` | 4 | ✅ Jul 2026 |
 | Philly-Shows.com | `fetch_raw.py` → `parse_events.py philly-shows` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
 | Do215 | `collect_source.py do215` (JSON API, no browser) | 5* | ✅ Jul 2026; real yield is 400+/week, see §19. *Listed under Tier 5 below (unchanged position), but no longer belongs at the expensive end — it's now a single fast API call, no browser. Safe to run earlier if a session is running short. |
-| Billy Penn | WebSearch + fetch | 5 | ⚠️ Sunday morning only |
-| Songkick | `fetch_raw.py` for page 1; `fetch_page_text.py` only for page 2+ if needed, capped at 4 pages | 5 | ✅ Jul 2026; ⚠️ Suno acquisition Nov 2025 |
+| Billy Penn | ⛔ Dropped | — | 2026-08-01: 0 picks ever, structurally uncollectable at run time |
+| Songkick | ⛔ Dropped | — | 2026-08-01: cost/reliability no longer justified vs. marginal contribution |
 | Bandsintown | ⛔ Dropped | — | Current-week only; no fix |
 | Pennhurst Asylum | ⛔ Skip | — | No calendar; Oct/May only |
 

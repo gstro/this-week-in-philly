@@ -8,7 +8,7 @@ from typing import Any
 
 from bs4 import BeautifulSoup
 
-from .base import Event, ParseError, attr, parse_month, text, write_event
+from .base import Event, ParseError, attr, parse_month, resolve_year, text, write_event
 
 
 def parse(html: str, week_start: datetime.date, week_end: datetime.date, **_kwargs: Any) -> list[Event]:  # noqa: ANN401
@@ -27,10 +27,11 @@ def parse(html: str, week_start: datetime.date, week_end: datetime.date, **_kwar
         month = parse_month(date_match.group(2))
         if month is None:
             continue
-        try:
-            event_date = datetime.date(week_start.year, month, int(date_match.group(3)))
-        except ValueError:
-            continue
+        day = int(date_match.group(3))
+        year = resolve_year(month, day, week_start)
+        if year is None:
+            continue  # (month, day) isn't a valid date in any nearby year (e.g. Feb 29)
+        event_date = datetime.date(year, month, day)  # already validated by resolve_year
         if not (week_start <= event_date <= week_end):
             continue
 
