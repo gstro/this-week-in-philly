@@ -14,18 +14,6 @@
       "min_expected": 20,
       "note": "v1 marked this 'partial' (events=8). A real JSON API (/events/YYYY/M/D.json) now backs this source (scripts/event_parsers/do215.py + scripts/collect_source.py) -- confirmed live 2026-07-29 against the real week of 2026-08-03: 467 events, not the 8-60 every prior estimate assumed. Almost all of the volume is legitimate but repetitive (e.g. a museum's daily guided tour re-listed as a distinct dated event on each of its 5 occurrences that week) with no structural field distinguishing it from a genuine one-off -- this is exactly the case event-selection-philosophy's 'Avoid: recurring weekly events' rule exists for, but that rule has never had to operate at this volume from a single source. Floor kept low and deliberately not raised to the true yield, since the real number this source contributes to a week's total_events_after_dedup is now an open question for Selection, not Collection, to absorb."
     },
-    "free-library": {
-      "min_expected": 0,
-      "note": "Chronically blocked by Cloudflare bot check; 0 or failed in every observed run including v1. Not a regression signal until the block is resolved."
-    },
-    "harriets-bookshop": {
-      "min_expected": 0,
-      "note": "v1 marked this 'partial' at 0 events; Eventbrite org page returns no structured data (0 JSON-LD blocks). Chronically unreliable, not newly broken."
-    },
-    "hive76": {
-      "min_expected": 1,
-      "note": "Stable at 1/week across all observed runs (weekly Open House)."
-    },
     "iffy-books": {
       "min_expected": 3,
       "note": "Google Calendar via MCP. Historical range 4-8; floor set with margin since the true minimum in a slow week is unconfirmed."
@@ -47,8 +35,8 @@
     "meetup-philly-hardware": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "meetup-tech-in-motion": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "philadelphia-citizen": {
-      "min_expected": 1,
-      "note": "Stable at 3/week in legitimate runs (v1: 3, v2 run A: 1, v2 HEAD: 3); floor set below the lowest of those."
+      "min_expected": 0,
+      "note": "THE ONE SOURCE collect_week.py does not collect -- its Good Citizen Calendar is freeform prose (a Jan-Dec blog post; date ranges like 'July 29-August 2:' appear mid-paragraph with no per-event markup), which is exactly the case the R5 incident warns against parsing speculatively. Kept in the source list rather than dropped because it earns it: 8 picks-log rows, 3 of which became Top-3 picks including two TOP-1s (West Philly Juneteenth Parade, Ben Franklin Bridge 100th), all free civic/festival events -- and verified still non-redundant, with 'Parks on Tap: Wharton Square Park' matching 0 of do215's 517 events for the same week. Floor lowered to 0 because a scheduled GHA run legitimately won't produce this file at all; it has to be added by a separate manual/model step, so a nonzero floor would fail every automated run."
     },
     "philadelphia-film-society": {
       "min_expected": 6,
