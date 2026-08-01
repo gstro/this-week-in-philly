@@ -11,19 +11,36 @@ its source _selections.json, and confirmed with Greg before building this:
   real v1 output's category order varied day to day (e.g. Markets &
   Outdoors appeared both before and after Tech & Maker across different
   days of the same week) -- not a rule a script should try to reproduce.
-- Venue, cost, and title text render verbatim from the JSON. v1's output
-  contained ad hoc editorial shortening ("The Met Presented by Highmark"
-  -> "The Met", "optional instructor donation (notaflof)" -> "optional
-  donation") with no consistent rule across similar cases -- reproducing
-  it would mean guessing, which the pipeline explicitly avoids elsewhere.
-- The "All Week / Recurring" table is omitted. It requires synthesized
-  prose schedule summaries ("Through July 4, daily from 11am") that don't
-  exist as structured data anywhere in _selections.json.
+- Venue, cost, title, and note text render verbatim from the JSON. v1's
+  output contained ad hoc editorial shortening ("The Met Presented by
+  Highmark" -> "The Met", "optional instructor donation (notaflof)" ->
+  "optional donation") with no consistent rule across similar cases --
+  reproducing it would mean guessing, which the pipeline explicitly avoids
+  elsewhere.
+- The "All Week / Recurring" table is omitted -- _selections.json has no
+  structured field (no end_date/recurrence) a script could use to detect a
+  3+ day span; v1's table cells were synthesized prose. One knock-on: an
+  event that v1 *only* showed in that table (e.g. Franklin's Key) still has
+  its own entry in the day's `events` array, so it now also renders inline
+  as a normal event card -- v1 effectively hid it from its own day listing,
+  v2 does not.
 
-Everything else was validated byte-for-byte against the archive: the
-"multiple showtimes" -> time "+" suffix rule, *(...)* placeholder
-stripping, sold-out handling, Spotify link placement and substring
-matching, and honorable-mention (SOLD OUT) bolding.
+Everything else was validated byte-for-byte against the archive: *(...)*
+placeholder stripping, sold-out handling, Spotify link placement and
+substring matching, and honorable-mention (SOLD OUT) bolding. Two
+exceptions found later, both fixed here rather than left as "deliberate":
+the "multiple showtimes" -> "+" suffix was appending to unparsed
+placeholder text (e.g. "confirm showtimes+"); see display_time. And the
+same-time sort tie-break does NOT match v1's order in any of the 4 real tie
+groups checked (v1's own ordering there looks ad hoc, not a rule) -- v2's
+tie-break (stable, original JSON array order) is kept as the more
+defensible choice, but is not "validated against the archive," despite an
+earlier version of this comment claiming it was.
+
+A related, unfixed gap: only one Spotify link is representable per pick
+(_spotify.json is one matched_text/url per title), so a pick naming two
+acts can only link one. v1's report has 9 links across 8 Top 3 picks; v2
+renders 8 -- see tests/golden/README.md.
 """
 
 import argparse
@@ -45,7 +62,18 @@ WEEKS_DIR = DOCS_DIR / "weeks"
 
 # Fixed footer source list, in display order -- always shown in full
 # regardless of which sources actually contributed events this week.
-# Per events-report-format/SKILL.md's Sources Footer section.
+# events-report-format/SKILL.md's Sources Footer section lists 21 sources
+# (v1's set); this list intentionally diverges from it now that Collection
+# is scripts/collect_week.py, not that spec: dropped Billy Penn and Songkick
+# (bdc8a84, source-decommission precedent), then Free Library, Hive76, and
+# Harriet's Bookshop when the GHA migration dropped them from collection
+# (none had a working deterministic parser and none earned their keep --
+# see the Collection GHA migration plan's source-decision section), and
+# added Philly-Shows.com, which collect_week.py's SIMPLE_SOURCES does
+# collect but v1 never listed. Keep this in sync with collect_week.py's
+# SIMPLE_SOURCES/MEETUP_GROUPS/COLLECTOR_SOURCES registries plus
+# Philadelphia Citizen, the one source collect_week.py does not gather
+# (still model-read; see data/expected_yield.json's note on it).
 SOURCES = [
     ("Do215", "https://do215.com"),
     ("Lightbox Film Center", "https://lightboxfilmcenter.org"),
@@ -53,17 +81,15 @@ SOURCES = [
     ("Philadelphia Film Society", "https://filmadelphia.org"),
     ("PhilaMOCA", "https://philamoca.org"),
     ("Phillygoth.net", "https://phillygoth.net"),
-    ("Harriet's Bookshop", "https://harrietsbookshop.com"),
+    ("Philly-Shows.com", "https://www.philly-shows.com"),
     ("Iffy Books", "https://iffybooks.net"),
     ("Wooden Shoe Books", "https://woodenshoebooks.org"),
     ("The Rotunda", "https://therotunda.org"),
     ("R5 Productions", "https://r5productions.com"),
-    ("Free Library", "https://libwww.freelibrary.org"),
     ("Philadelphia Citizen", "https://thephiladelphiacitizen.org"),
     ("Philly Ask A Punk", "https://philly.askapunk.net"),
     ("The Key by WXPN", "https://xpn.org"),
     ("Meetup", "https://meetup.com"),
-    ("Hive76", "https://hive76.org"),
     ("Luma", "https://lu.ma"),
     ("Google Calendar", "https://calendar.google.com"),
 ]
@@ -78,6 +104,17 @@ def has_multiple_showtimes(note: str) -> bool:
 
 
 def display_time(event_time: str, note: str) -> str:
+    """Falls back to "Various" both when `event_time` is empty AND when it's
+    a *(...)* placeholder -- e.g. "*(confirm showtimes)*" or "*(confirm
+    details -- 7:00 AM listed, possible error)*". Regression guard: an
+    earlier version stripped the placeholder wrapper and displayed the
+    prose inside it verbatim, which produced "confirm showtimes+" (the
+    "multiple showtimes" "+" suffix appended to non-time text) and a full
+    sentence rendered into the narrow time column. Placeholder text belongs
+    in `note`/`why`, not here -- this function should only ever emit an
+    actual time or "Various"."""
+    if common.is_placeholder_cost(event_time):
+        return "Various"
     event_time = common.strip_placeholder_wrapper(event_time)
     if not event_time:
         return "Various"

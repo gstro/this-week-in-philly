@@ -7,7 +7,15 @@ jobs:
   present:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 2 (not the default 1) -- the week-dir derivation below
+      # needs HEAD^ to exist. presentation.yml ran with the default twice
+      # (29652043283, 29702768189) and failed both times because HEAD~1 was
+      # unreachable, WEEK_DIR silently became "", and dirname "" -> "." got
+      # passed to every script as the week dir. collection-check.yml already
+      # sets this for the same reason.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: pip install -r scripts/requirements.txt
@@ -19,12 +27,19 @@ jobs:
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
         run: |
-          WEEK_DIR=$(dirname "$(git diff --name-only HEAD~1 HEAD -- 'data/**/_selections.json' | head -1)")
+          WEEK_DIR=$(dirname "$(git diff --name-only HEAD^ HEAD -- 'data/**/_selections.json' | head -1)")
+          if [ -z "$WEEK_DIR" ] || [ "$WEEK_DIR" = "." ]; then
+            echo "::error::Could not determine week directory from the push diff"
+            exit 1
+          fi
           bash scripts/runner.sh "$WEEK_DIR"
-      - name: Commit and push report + updated log
+      - name: Commit and push report
         run: |
           git config user.name "twip-bot"
           git config user.email "twip-bot@users.noreply.github.com"
-          git add docs/ data/event-picks-log.csv
+          # data/event-picks-log.csv is intentionally not written here --
+          # csv_log.py/attendance_check.py are deferred (see runner.sh);
+          # only add it if a future run reintroduces that stage.
+          git add docs/
           git diff --staged --quiet || git commit -m "Publish report for $(date +%F)"
           git push
