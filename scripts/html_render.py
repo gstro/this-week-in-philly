@@ -65,15 +65,15 @@ WEEKS_DIR = DOCS_DIR / "weeks"
 # events-report-format/SKILL.md's Sources Footer section lists 21 sources
 # (v1's set); this list intentionally diverges from it now that Collection
 # is scripts/collect_week.py, not that spec: dropped Billy Penn and Songkick
-# (bdc8a84, source-decommission precedent), then Free Library, Hive76, and
-# Harriet's Bookshop when the GHA migration dropped them from collection
-# (none had a working deterministic parser and none earned their keep --
-# see the Collection GHA migration plan's source-decision section), and
-# added Philly-Shows.com, which collect_week.py's SIMPLE_SOURCES does
-# collect but v1 never listed. Keep this in sync with collect_week.py's
-# SIMPLE_SOURCES/MEETUP_GROUPS/COLLECTOR_SOURCES registries plus
-# Philadelphia Citizen, the one source collect_week.py does not gather
-# (still model-read; see data/expected_yield.json's note on it).
+# (bdc8a84, source-decommission precedent), then Free Library, Hive76,
+# Harriet's Bookshop, and Philadelphia Citizen when the GHA migration
+# dropped them from collection (none had a working deterministic parser and
+# none earned their keep, or -- for Citizen -- had no home left as a
+# model-read source once nothing upstream of Selection has a model in the
+# loop; see philadelphia-sources/SKILL.md's Dropped section), and added
+# Philly-Shows.com, which collect_week.py's SIMPLE_SOURCES does collect but
+# v1 never listed. Keep this in sync with collect_week.py's
+# SIMPLE_SOURCES/MEETUP_GROUPS/COLLECTOR_SOURCES registries.
 SOURCES = [
     ("Do215", "https://do215.com"),
     ("Lightbox Film Center", "https://lightboxfilmcenter.org"),
@@ -86,7 +86,6 @@ SOURCES = [
     ("Wooden Shoe Books", "https://woodenshoebooks.org"),
     ("The Rotunda", "https://therotunda.org"),
     ("R5 Productions", "https://r5productions.com"),
-    ("Philadelphia Citizen", "https://thephiladelphiacitizen.org"),
     ("Philly Ask A Punk", "https://philly.askapunk.net"),
     ("The Key by WXPN", "https://xpn.org"),
     ("Meetup", "https://meetup.com"),

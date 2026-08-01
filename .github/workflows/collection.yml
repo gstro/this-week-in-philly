@@ -71,6 +71,20 @@ jobs:
       - name: Check yield
         run: python scripts/check_yield.py "${{ steps.week.outputs.dir }}"
 
+      # Deterministic pre-filter for Selection (flatten+tag sources, exact-dup
+      # collapse, recurring-listing grouping -- see the script's docstring).
+      # Runs here, not as its own on:push workflow or inside Selection's own
+      # Routine session, for the same GITHUB_TOKEN-doesn't-retrigger reason
+      # "Check yield" runs inline above: this way its output lands in the
+      # same commit as the rest of the week's data. continue-on-error,
+      # unlike the yield check -- a bug in this derived-artifact step
+      # shouldn't withhold otherwise-good raw Collection data; Selection's
+      # own prerequisite guard already handles a missing _candidates.json
+      # safely (stop and notify).
+      - name: Prepare selection candidates
+        continue-on-error: true
+        run: python scripts/prepare_selection_input.py "${{ steps.week.outputs.dir }}"
+
       - name: Commit and push collected week
         run: |
           git config user.name "twip-bot"

@@ -1,0 +1,24 @@
+{
+  "source": "Some Other Source",
+  "collected_at": "2026-08-03T06:00:45+00:00",
+  "events": [
+    {
+      "title": "Concert Y",
+      "venue": "Venue Z",
+      "date": "2026-08-03",
+      "time": "7:00 PM",
+      "cost": "$15",
+      "url": "https://example.com/concert",
+      "description": "A one-off show."
+    },
+    {
+      "title": "Concert Y",
+      "venue": "Venue Z",
+      "date": "2026-08-03",
+      "time": "",
+      "cost": "",
+      "url": "",
+      "description": ""
+    }
+  ]
+}

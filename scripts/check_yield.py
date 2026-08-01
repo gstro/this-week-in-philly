@@ -55,9 +55,13 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_EXPECTED_YIELD_PATH = REPO_ROOT / "data" / "expected_yield.json"
 
-# Manifest/selections/spotify files live alongside source files in the same
-# week directory but aren't sources themselves.
-NON_SOURCE_FILES = {"_manifest.json", "_selections.json", "_spotify.json"}
+# Manifest/candidates/selections/spotify files live alongside source files in
+# the same week directory but aren't sources themselves. _candidates.json is
+# prepare_selection_input.py's derived output (flattened+deduped candidates
+# for Selection) -- regenerable from _manifest.json + the source files, so it
+# has no manifest entry of its own and would otherwise trip the orphan-file
+# check below.
+NON_SOURCE_FILES = {"_manifest.json", "_candidates.json", "_selections.json", "_spotify.json"}
 
 
 @dataclass

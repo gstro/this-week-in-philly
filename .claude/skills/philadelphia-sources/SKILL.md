@@ -54,7 +54,6 @@ Write all collected events to a dated directory under the `output_directory` spe
 | cinéSPEAK | `cinespeak.json` |
 | Lightbox Film Center | `lightbox-film-center.json` |
 | Phillygoth.net | `phillygoth.json` |
-| Philadelphia Citizen | `philadelphia-citizen.json` |
 | WXPN | `wxpn.json` |
 | Meetup: Philadelphia Horror | `meetup-horror.json` |
 | Meetup: Code & Coffee | `meetup-code-coffee.json` |
@@ -404,18 +403,7 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 
 ---
 
-### 15. The Philadelphia Citizen — Good Citizen Calendar
-**URL:** `https://thephiladelphiacitizen.org/good-citizen-calendar/`
-**Method:** Bash → `python scripts/fetch_raw.py https://thephiladelphiacitizen.org/good-citizen-calendar/` — this is a long-form blog post covering Jan-Dec, fully server-rendered (confirmed Jul 2026: a known event's exact text was found verbatim in the raw HTML).
-**Notes:** Curated picks with editorial voice. Good for community, civic, and arts events with a progressive angle. Structure is prose under month headings (`JULY 2026`, `AUGUST 2026`, ...), not a card/list format — each item is a bolded date range or day (e.g. "July 24-25:") followed by a paragraph description.
-
-⚠️ **Scan the full target week, not just the first match** — this page covers 6 months in one long scroll; a past run stopped after the first in-window item and missed a second one later in the same month's section (a concert listed under a different heading than the first match). Read through the entire month section(s) covering the target week before writing the file.
-
-**✅ Confirmed Jul 2026 with `fetch_raw.py`**
-
----
-
-### 16. The Key by WXPN
+### 15. The Key by WXPN
 **URL (deterministic, use this):** `https://backend.xpn.org/wp-json/wp/v2/event` — WXPN's own WordPress REST API, not the public site.
 **Method:** Bash → `python scripts/collect_source.py wxpn --source-name "WXPN" --week-start YYYY-MM-DD --week-end YYYY-MM-DD --out {output_directory}/YYYY-MM-DD/wxpn.json` — fully deterministic, no model parsing step, no browser. Fetches every page of the API (results are sorted by publish date, not event date, so there's no way to fetch only the relevant pages) and filters client-side. Prints the `[source]: [N] events written. Proceeding.` confirmation line to stderr.
 **Notes:** WXPN (University of Pennsylvania) is one of the best indie/alternative/punk editorial outlets in the country. Good for discovering acts and finding Spotify links.
@@ -436,7 +424,7 @@ All Meetup groups now use the iCal method — no browser sessions required. Empt
 
 ---
 
-### 17. Meetup Groups
+### 16. Meetup Groups
 **Method:** Bash → `python scripts/fetch_raw.py https://www.meetup.com/[group-slug]/events/ical/ | python scripts/parse_events.py meetup-ical --source-name "Meetup: [Display Name]" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/meetup-[filename-slug].json` — deterministic parser (`scripts/parse_events.py`), one run per group. Use the exact `--source-name` values from the table below (must match the Output Directory Structure naming). `parse_events.py` handles the `TZID=America/New_York` timezone (no offset math needed) and the online-vs-address `LOCATION` distinction (empty or `http`-prefixed `LOCATION` → venue `"(online)"`) itself.
 
 **If a group returns no VEVENTs:** `parse_events.py` writes a valid empty `events` array on its own (a well-formed empty iCal calendar isn't an error) — nothing extra to do. Do not retry or navigate to the group page.
@@ -462,7 +450,7 @@ These run last. If the session runs short, cut here — these are the broadest a
 
 ---
 
-### 18. Philly-Shows.com
+### 17. Philly-Shows.com
 **URL:** `https://www.philly-shows.com/`
 **Method:** Bash → `python scripts/fetch_raw.py https://www.philly-shows.com/ | python scripts/parse_events.py philly-shows --source-name "Philly-Shows.com" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/philly-shows.json` — deterministic parser, not manual reading.
 **Notes:** Dedicated Philadelphia hardcore and punk show tracker. Manually maintained. Sparse by design (confirmed Jun 2026 — ~2 shows/week vs. 9+ on Philly Ask A Punk for the same period). Lists prominent/R5-adjacent shows only, not the full DIY calendar. Quick pass only — treat as a supplementary spot-check after Philly Ask A Punk, not a primary source.
@@ -471,7 +459,7 @@ These run last. If the session runs short, cut here — these are the broadest a
 
 ---
 
-### 19. Do215
+### 18. Do215
 **URL pattern (undocumented JSON API):** `https://do215.com/events/YYYY/M/D.json` (no zero-padding on month or day)
 **Method:** Bash → `python scripts/collect_source.py do215 --source-name "Do215" --week-start YYYY-MM-DD --week-end YYYY-MM-DD --out {output_directory}/YYYY-MM-DD/do215.json` — fully deterministic, no model parsing step, no browser. Owns the whole fetch loop itself (one request per day of the target week, paginated as needed, capped at 6 pages/day) and writes the finished JSON file directly; prints the `[source]: [N] events written. Proceeding.` line to stderr, which is exactly the Confirmation Turn Format line for this source.
 **Notes:** Sister site to Do512 — same platform. Covers the wider Philadelphia metro, not just the city proper (confirmed live: Lansdowne, Croydon, Elkton MD have appeared) — no geographic filter is applied in the parser; treat out-of-area venues the same editorial way Songkick's broader listings are treated.
@@ -480,16 +468,16 @@ These run last. If the session runs short, cut here — these are the broadest a
 
 **Two API quirks the parser (`scripts/event_parsers/do215.py`) handles so you don't have to:** (1) `begin_time` carries the wrong UTC offset — the parser always uses `tz_adjusted_begin_date` instead. (2) a day's page can include stale "featured" events from unrelated dates — the parser filters and dedupes on each event's own date and ID, never on which day-URL it came from.
 
-**⚠️ Real yield is much higher than it looks — this is not a bug.** A single week returns 400+ events, most of it legitimate but repetitive: a museum's daily guided tour, for example, is listed as a separate dated entry for each of its 5-6 weekly occurrences, with no structural field distinguishing it from a genuine one-off. `is_ongoing: true` (do215's own recurring-event flag) does **not** catch these — it's reserved for a narrower "every day, indefinitely" case. Apply `event-selection-philosophy`'s existing "Avoid: recurring weekly events... unless something special" rule to this source specifically during Selection; do not expect Collection to have pre-filtered it.
+**⚠️ Real yield is much higher than it looks — this is not a bug.** A single week returns 400+ events, most of it legitimate but repetitive: a museum's daily guided tour, for example, is listed as a separate dated entry for each of its 5-6 weekly occurrences, with no structural field distinguishing it from a genuine one-off. `is_ongoing: true` (do215's own recurring-event flag) does **not** catch these — it's reserved for a narrower "every day, indefinitely" case. `scripts/prepare_selection_input.py` (a `collection.yml` step, not Collection itself) mechanically collapses any same title+venue appearing on 3+ distinct dates in the week into one annotated candidate before Selection ever sees it — Selection still applies `event-selection-philosophy`'s "Avoid: recurring weekly events... unless something special" judgment against that annotation, it just isn't reading 5-7 near-identical raw rows to do it.
 
 **✅ Confirmed Jul 2026 with `collect_source.py`** (467 events for the week of 2026-08-03, cross-checked field-by-field against the live API)
 
 ---
 
-### Dropped: Billy Penn and Songkick
+### Dropped: Billy Penn, Songkick, and Philadelphia Citizen
 
-Both removed from the active source list (2026-08-01). Neither is collected anymore — do not fetch
-them, and their filenames should not appear in a fresh `_manifest.json`.
+None of the three are collected anymore — do not fetch them, and their filenames should not appear in
+a fresh `_manifest.json`.
 
 **Billy Penn** — 0 Top-3 picks and 0 honorable mentions across the entire picks-log history
 (`docs/v1/Data/event-picks-log.csv`). Structurally uncollectable at the scheduled run time besides:
@@ -507,6 +495,16 @@ clearing on retry. The specialist sources (Iffy Books, Do215, PhilaMOCA, Ask A P
 dominate music/DIY picks; Songkick's marginal contribution didn't justify carrying an unreliable,
 occasionally slow (30-70s/page under the proxy workaround, see `docs/COLLECTION_PROXY_ISSUE.md`)
 source in the tier list.
+
+**Philadelphia Citizen** (dropped 2026-08-01) — kept during the initial GHA migration as a deliberate
+model-read holdout: its Good Citizen Calendar is freeform prose with no stable structure (a Jan-Dec
+blog post; date ranges like "July 24-25:" appear mid-paragraph), so it was never a candidate for a
+deterministic parser, but it earned its keep on report value (8 picks-log rows, 2 Top-1 picks, verified
+non-redundant against Do215's volume). Formally dropped once Selection was designed: nothing upstream
+of Selection has a model in the loop anymore, so there was no remaining point in the pipeline positioned
+to do the model-read step, and building a one-off late-add path for a single source (plus the
+`check_yield.py` provenance exception it would have needed, since a late fetch's `collected_at`
+wouldn't fall inside Collection's own run window) wasn't worth it for one source's contribution.
 
 ---
 
@@ -553,13 +551,13 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 | cinéSPEAK | `fetch_raw.py` on `/cinema/` → `parse_events.py cinespeak`; `fetch_page_text.py` fallback if bot-challenge shown | 3 | ✅ Jul 2026 |
 | Lightbox Film Center | `collect_source.py lightbox-film-center` (index + JSON-LD detail pages, no browser) | 3* | ✅ Jul 2026; genuinely 0 some weeks, see §13. *No longer belongs at Tier 3's cost. |
 | Phillygoth.net | `fetch_raw.py` → `parse_events.py phillygoth` | 3 | ✅ Jul 2026 |
-| Philadelphia Citizen | `fetch_raw.py` (manual reading — prose, no stable structure) | 3 | ✅ Jul 2026 |
-| WXPN | `collect_source.py wxpn` (WP REST API, no browser) | 3* | ✅ Jul 2026; real yield ~46/week, see §16. *No longer belongs at Tier 3's cost — a fast API call now, safe to run earlier. |
+| WXPN | `collect_source.py wxpn` (WP REST API, no browser) | 3* | ✅ Jul 2026; real yield ~46/week, see §15. *No longer belongs at Tier 3's cost — a fast API call now, safe to run earlier. |
 | Meetup groups (all 8) | `fetch_raw.py` iCal URL → `parse_events.py meetup-ical` | 4 | ✅ Jul 2026 |
 | Philly-Shows.com | `fetch_raw.py` → `parse_events.py philly-shows` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
-| Do215 | `collect_source.py do215` (JSON API, no browser) | 5* | ✅ Jul 2026; real yield is 400+/week, see §19. *Listed under Tier 5 below (unchanged position), but no longer belongs at the expensive end — it's now a single fast API call, no browser. Safe to run earlier if a session is running short. |
+| Do215 | `collect_source.py do215` (JSON API, no browser) | 5* | ✅ Jul 2026; real yield is 400+/week, see §18. *Listed under Tier 5 below (unchanged position), but no longer belongs at the expensive end — it's now a single fast API call, no browser. Safe to run earlier if a session is running short. |
 | Billy Penn | ⛔ Dropped | — | 2026-08-01: 0 picks ever, structurally uncollectable at run time |
 | Songkick | ⛔ Dropped | — | 2026-08-01: cost/reliability no longer justified vs. marginal contribution |
+| Philadelphia Citizen | ⛔ Dropped | — | 2026-08-01: no remaining model-in-the-loop step to do the read once Selection was designed |
 | Bandsintown | ⛔ Dropped | — | Current-week only; no fix |
 | Pennhurst Asylum | ⛔ Skip | — | No calendar; Oct/May only |
 

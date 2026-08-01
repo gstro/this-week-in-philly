@@ -31,7 +31,7 @@ Tasks are deliberately thin; all domain logic lives in the skill files. Selectio
 
 ## Key contracts (change with care)
 
-- **`_selections.json` schema** — the interface between Selection and everything downstream. Defined with a full example in `docs/v1/Scheduled/philly-events-selection/SKILL.md`. The nine `category` strings are canonical (emoji included, exact match).
+- **`_selections.json` schema** — the interface between Selection and everything downstream. Defined with a full example in `docs/v1/Scheduled/philly-events-selection/SKILL.md` (v1 original, unchanged) and `.claude/skills/philly-events-selection/SKILL.md` (v2's Selection Routine task, adapted for repo-relative paths and `scripts/prepare_selection_input.py`'s pre-deduped `_candidates.json` input — same schema, same nine canonical `category` strings). The nine `category` strings are canonical (emoji included, exact match).
 - **HTML report spec** — `docs/v1/Skills/events-report-format/SKILL.md` is a pixel-level spec (exact colors, sizes, markup). In v2 it becomes `templates/report.html.j2`; the SKILL.md remains the spec of record.
 - **Picks log columns** — `city, week_of, day, date, title, venue, category, source, rank, price_tier, spotify_link, tags, attended`. `csv_log.py` must stay idempotent on week+title.
 - **Week window convention** — every stage covers the Monday immediately following the run date through the Sunday after (computed at runtime, never hardcoded).

@@ -34,10 +34,6 @@
     "meetup-philly-film-club": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "meetup-philly-hardware": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "meetup-tech-in-motion": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
-    "philadelphia-citizen": {
-      "min_expected": 0,
-      "note": "THE ONE SOURCE collect_week.py does not collect -- its Good Citizen Calendar is freeform prose (a Jan-Dec blog post; date ranges like 'July 29-August 2:' appear mid-paragraph with no per-event markup), which is exactly the case the R5 incident warns against parsing speculatively. Kept in the source list rather than dropped because it earns it: 8 picks-log rows, 3 of which became Top-3 picks including two TOP-1s (West Philly Juneteenth Parade, Ben Franklin Bridge 100th), all free civic/festival events -- and verified still non-redundant, with 'Parks on Tap: Wharton Square Park' matching 0 of do215's 517 events for the same week. Floor lowered to 0 because a scheduled GHA run legitimately won't produce this file at all; it has to be added by a separate manual/model step, so a nonzero floor would fail every automated run."
-    },
     "philadelphia-film-society": {
       "min_expected": 6,
       "note": "A resilient collector now backs this source (scripts/event_parsers/philadelphia_film_society.py + scripts/collect_source.py): 3 venues x 2 sample days (Wed+Sat), each fetch isolated so one hanging venue/day no longer fails the whole source -- confirmed live 2026-08-01: 18 events for the week of 2026-08-03, zero fetch failures, replacing a real prior week where the whole source reported status:failed. Still browser-only (Fandango showtimes are JS-rendered; Agile Ticketing, the real backend, is WAF-blocked same as filmadelphia.org). Floor set well below the confirmed 18 since only 2 of 7 days are sampled and yield will vary by what's actually programmed that week."
