@@ -468,24 +468,17 @@ These run last. If the session runs short, cut here — these are the broadest a
 ---
 
 ### 19. Do215
-**URL pattern:** `https://do215.com/events/YYYY/M/D` (no zero-padding on month or day)
-**Method:** Bash → `python scripts/fetch_page_text.py https://do215.com/events/YYYY/M/D` on day-specific URLs
-**Notes:** Sister site to Do512 — same platform, same React rendering, same URL structure.
+**URL pattern (undocumented JSON API):** `https://do215.com/events/YYYY/M/D.json` (no zero-padding on month or day)
+**Method:** Bash → `python scripts/collect_source.py do215 --source-name "Do215" --week-start YYYY-MM-DD --week-end YYYY-MM-DD --out {output_directory}/YYYY-MM-DD/do215.json` — fully deterministic, no model parsing step, no browser. Owns the whole fetch loop itself (one request per day of the target week, paginated as needed, capped at 6 pages/day) and writes the finished JSON file directly; prints the `[source]: [N] events written. Proceeding.` line to stderr, which is exactly the Confirmation Turn Format line for this source.
+**Notes:** Sister site to Do512 — same platform. Covers the wider Philadelphia metro, not just the city proper (confirmed live: Lansdowne, Croydon, Elkton MD have appeared) — no geographic filter is applied in the parser; treat out-of-area venues the same editorial way Songkick's broader listings are treated.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`:** Navigate to each day's URL directly (e.g. `do215.com/events/2026/7/22`) and it returns the full, rich event listing (venue, time, price, title) — no browser session, no URL-provenance workaround needed. Navigate Mon–Sun separately (7 calls). Filter out recurring "EVERY [DAY]" events.
+**Why the JSON API, not `fetch_page_text.py`:** confirmed live 2026-07-29 — the day page's own `.json` suffix (`/events/2026/8/5.json`) returns the exact data `fetch_page_text.py` was extracting by reading rendered text, but as structured JSON, in ~0.2s/page instead of a full Chromium page load. This source was one of several observed writing a plausible-looking empty file under budget pressure (see `check_yield.py`'s module docstring) when it required 7 sequential browser loads; the API-based collector removes that pressure entirely.
 
-This resolves the old `web_fetch`-specific problem: `web_fetch` requires a URL to have appeared in a prior message/search result before it can be retrieved (provenance), and Do215 day URLs aren't linked from the homepage, so the v1 skill previously needed a WebSearch-first workaround to satisfy that. `fetch_page_text.py` (playwright, not `web_fetch`) has no such restriction — navigate directly, no workaround required.
+**Two API quirks the parser (`scripts/event_parsers/do215.py`) handles so you don't have to:** (1) `begin_time` carries the wrong UTC offset — the parser always uses `tz_adjusted_begin_date` instead. (2) a day's page can include stale "featured" events from unrelated dates — the parser filters and dedupes on each event's own date and ID, never on which day-URL it came from.
 
-**🚨 FALLBACK — WebSearch:** If `fetch_page_text.py` fails for a specific day:
-```
-query: "site:do215.com/events/YYYY/M/D" OR "do215.com philadelphia events [Day Month Date 2026]"
-```
+**⚠️ Real yield is much higher than it looks — this is not a bug.** A single week returns 400+ events, most of it legitimate but repetitive: a museum's daily guided tour, for example, is listed as a separate dated entry for each of its 5-6 weekly occurrences, with no structural field distinguishing it from a genuine one-off. `is_ongoing: true` (do215's own recurring-event flag) does **not** catch these — it's reserved for a narrower "every day, indefinitely" case. Apply `event-selection-philosophy`'s existing "Avoid: recurring weekly events... unless something special" rule to this source specifically during Selection; do not expect Collection to have pre-filtered it.
 
-<details>
-<summary>Non-day-specific pages (homepage / <code>/events/</code>) — rarely needed</summary>
-
-The standard day-URL flow above returns everything needed for a normal collection run. If you ever need the Do215 homepage or `/events/` instead (React-rendered, not confirmed against `fetch_page_text.py`), the old Chrome-console JS-extraction approach doesn't apply here (no Chrome), but the same idea works via playwright's `page.evaluate()` if this is ever actually needed -- not written out since the day-URL flow above should always be sufficient.
-</details>
+**✅ Confirmed Jul 2026 with `collect_source.py`** (467 events for the week of 2026-08-03, cross-checked field-by-field against the live API)
 
 ---
 
@@ -569,7 +562,7 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 | WXPN | `fetch_page_text.py` on `xpn.org/concert-and-events/` | 3 | ✅ Jul 2026; thekey.xpn.org cert error, use xpn.org |
 | Meetup groups (all 8) | `fetch_raw.py` iCal URL → `parse_events.py meetup-ical` | 4 | ✅ Jul 2026 |
 | Philly-Shows.com | `fetch_raw.py` → `parse_events.py philly-shows` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
-| Do215 | `fetch_page_text.py` on day URLs | 5 | ✅ Jul 2026; no provenance workaround needed |
+| Do215 | `collect_source.py do215` (JSON API, no browser) | 5* | ✅ Jul 2026; real yield is 400+/week, see §19. *Listed under Tier 5 below (unchanged position), but no longer belongs at the expensive end — it's now a single fast API call, no browser. Safe to run earlier if a session is running short. |
 | Billy Penn | WebSearch + fetch | 5 | ⚠️ Sunday morning only |
 | Songkick | `fetch_raw.py` for page 1; `fetch_page_text.py` only for page 2+ if needed, capped at 4 pages | 5 | ✅ Jul 2026; ⚠️ Suno acquisition Nov 2025 |
 | Bandsintown | ⛔ Dropped | — | Current-week only; no fix |

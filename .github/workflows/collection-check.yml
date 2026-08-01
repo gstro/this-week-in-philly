@@ -1,0 +1,55 @@
+name: Collection Yield Check
+# Guards against the exact failure mode that shipped for the week of
+# 2026-07-27: the Collection Routine wrote 17 source files sharing one
+# fabricated collected_at timestamp instead of running the documented fetch
+# commands, and every one of them reported status: ok. A check the model
+# runs on itself (scripts/check_yield.py, also run as Collection's last
+# step) can be skipped exactly the way those fetches were skipped. This
+# workflow is the version of that check nothing in the Collection Routine's
+# control loop can bypass.
+on:
+  push:
+    paths:
+      - 'data/**/_manifest.json'
+jobs:
+  check-yield:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Check every changed week's manifest
+        run: |
+          set -euo pipefail
+          BEFORE="${{ github.event.before }}"
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            REF_ARGS=()
+          else
+            REF_ARGS=(--check-against-ref "$BEFORE")
+          fi
+
+          mapfile -t CHANGED < <(git diff --name-only "${{ github.event.before }}" "${{ github.event.after }}" -- 'data/**/_manifest.json' || true)
+          if [ "${#CHANGED[@]}" -eq 0 ]; then
+            # fetch-depth: 2 fallback (e.g. force-push, or 'before' unavailable) --
+            # check whatever manifest(s) this commit touched relative to its parent.
+            mapfile -t CHANGED < <(git diff --name-only HEAD^ HEAD -- 'data/**/_manifest.json' || true)
+          fi
+
+          if [ "${#CHANGED[@]}" -eq 0 ]; then
+            echo "No _manifest.json changes detected; nothing to check."
+            exit 0
+          fi
+
+          FAILED=0
+          for manifest_path in "${CHANGED[@]}"; do
+            week_dir="$(dirname "$manifest_path")"
+            echo "::group::check_yield.py $week_dir"
+            if ! python scripts/check_yield.py "$week_dir" "${REF_ARGS[@]}"; then
+              FAILED=1
+            fi
+            echo "::endgroup::"
+          done
+
+          exit "$FAILED"

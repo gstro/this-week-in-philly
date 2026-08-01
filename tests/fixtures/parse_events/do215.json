@@ -1,0 +1,104 @@
+{
+  "events": [
+    {
+      "id": 17482794,
+      "title": "Drink Responsibly",
+      "excerpt": "Strictly 21+\nFree w/ RSVP\nDrink Specials til 7pm\nFood available while supplies last",
+      "tz_adjusted_begin_date": "2026-08-05T18:00:00-04:00",
+      "begin_time": "2026-08-05T18:00:00-05:00",
+      "is_ongoing": false,
+      "is_free": true,
+      "ticket_info": "Free",
+      "permalink": "/events/2026/8/5/drink-responsibly-tickets",
+      "venue": {
+        "title": "Winston On The Water ",
+        "city": null,
+        "state": null
+      }
+    },
+    {
+      "id": 17489762,
+      "title": "Happy Together 2026 Tour",
+      "excerpt": "ALL PATRONS REQUIRE A TICKET\nACCESSIBLE SEATING:\nThe following seat locations are wheelchair spaces: S6, S8, S12, S5, S7, S11, JJ6, JJ8, JJ12, JJ5, JJ7, & JJ11.\nThe following seat locations are companion seats for the closest wheelchair space: S4, S10, S14, S3, S9, S13, JJ4, JJ10, JJ14, JJ3, JJ9, & JJ13.\nThe following seat locations are located on aisles with an arm rest that folds up: Q25, R19, R20, S101, S115, T26, EE1, EE2, GG1, GG25, GG2, GG26.\nAll seats within the theater are on the same level and require no stairs to access.\n(VIP1) HAPPY TOGETHER: Front Row Ticket Bundle\n\u25cf One Premium Reserved In The Front Row\n\u25cf One, VIP Only, Tour Poster Autographed By Graphic Artist / Designer*\n\u25cf Limited Availability\n(VIP2) HAPPY TOGETHER: Rows 2-15 ",
+      "tz_adjusted_begin_date": "2026-08-05T19:00:00-04:00",
+      "begin_time": "2026-08-05T19:00:00-05:00",
+      "is_ongoing": false,
+      "is_free": false,
+      "ticket_info": "",
+      "permalink": "/events/2026/8/5/happy-together-2026-tour-tickets",
+      "venue": {
+        "title": "Lansdowne Theater",
+        "city": "Lansdowne",
+        "state": "PA"
+      }
+    },
+    {
+      "id": 16856608,
+      "title": "KALEO - Way Down We Go Tour",
+      "excerpt": "This is an All Ages Event. Doors open at 7:00 PM. All support acts are subject to change without notice.",
+      "tz_adjusted_begin_date": "2026-08-05T20:00:00-04:00",
+      "begin_time": "2026-08-05T20:00:00-05:00",
+      "is_ongoing": false,
+      "is_free": false,
+      "ticket_info": "",
+      "permalink": "/events/2026/8/5/kaleo-way-down-we-go-tour-tickets",
+      "venue": {
+        "title": "The Fillmore",
+        "city": "Philadelphia",
+        "state": "PA"
+      }
+    },
+    {
+      "id": 17179134,
+      "title": "Philadelphia Chinese Lantern Festival",
+      "excerpt": "The Philadelphia Chinese Lantern Festival illuminates Franklin Square with awe-inspiring, interactive, larger-than-life lanterns!\nThe iconic 200-foot-dragon will soar back to Franklin Square for the summer along with never-before-seen giant lantern displays, more lights, more lanterns, and more wattage than ever before!\nEnjoy live performances, delicious food and drink, the Franklin Square Fountain Show, and Franklin Square attractions.\nTickets will be available April 6 at phillychineselanternfestival.org\nAdults (Ages 14 \u2013 64)\nMonday \u2013 Thursday | $28\nFriday \u2013 Sunday | $32\nChildren (Ages 3-13; 2 and under are free)\nMonday \u2013 Sunday | $16\nSenior (65+), and active military (with I.D.)\nMonday \u2013 Thursday | $25\nFriday \u2013 Sunday | $29\nGroup rates for",
+      "tz_adjusted_begin_date": "2026-06-05T18:00:00-04:00",
+      "begin_time": "2026-06-05T18:00:00-05:00",
+      "is_ongoing": true,
+      "is_free": false,
+      "ticket_info": "$16, $25, $28, $29, $32",
+      "permalink": "/events/2026/6/5/philadelphia-chinese-lantern-festival-tickets",
+      "venue": {
+        "title": "Franklin Square",
+        "city": "Philadelphia",
+        "state": "Pe"
+      }
+    },
+    {
+      "id": 17338941,
+      "title": "Board Game Night - Harleysville",
+      "excerpt": "Every Wednesday! Add some fun to your week with Board Game Night in the taproom!",
+      "tz_adjusted_begin_date": "2026-05-13T19:00:00-04:00",
+      "begin_time": "2026-07-29T19:00:00-05:00",
+      "is_ongoing": false,
+      "is_free": false,
+      "ticket_info": "",
+      "permalink": "/events/weekly/wed/board-game-night-harleysville",
+      "venue": {
+        "title": "Neshaminy Creek Brewing Co",
+        "city": "Croydon",
+        "state": "PA"
+      }
+    },
+    {
+      "id": 17489762,
+      "title": "Happy Together 2026 Tour",
+      "excerpt": "ALL PATRONS REQUIRE A TICKET\nACCESSIBLE SEATING:\nThe following seat locations are wheelchair spaces: S6, S8, S12, S5, S7, S11, JJ6, JJ8, JJ12, JJ5, JJ7, & JJ11.\nThe following seat locations are companion seats for the closest wheelchair space: S4, S10, S14, S3, S9, S13, JJ4, JJ10, JJ14, JJ3, JJ9, & JJ13.\nThe following seat locations are located on aisles with an arm rest that folds up: Q25, R19, R20, S101, S115, T26, EE1, EE2, GG1, GG25, GG2, GG26.\nAll seats within the theater are on the same level and require no stairs to access.\n(VIP1) HAPPY TOGETHER: Front Row Ticket Bundle\n\u25cf One Premium Reserved In The Front Row\n\u25cf One, VIP Only, Tour Poster Autographed By Graphic Artist / Designer*\n\u25cf Limited Availability\n(VIP2) HAPPY TOGETHER: Rows 2-15 ",
+      "tz_adjusted_begin_date": "2026-08-05T19:00:00-04:00",
+      "begin_time": "2026-08-05T19:00:00-05:00",
+      "is_ongoing": false,
+      "is_free": false,
+      "ticket_info": "",
+      "permalink": "/events/2026/8/5/happy-together-2026-tour-tickets",
+      "venue": {
+        "title": "Lansdowne Theater",
+        "city": "Lansdowne",
+        "state": "PA"
+      }
+    }
+  ],
+  "paging": {
+    "total_pages": 1,
+    "current_page": 1
+  }
+}

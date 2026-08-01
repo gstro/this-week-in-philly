@@ -1,0 +1,6 @@
+{
+  "source": "Harriet's Bookshop",
+  "status": "failed",
+  "reason": "fetch_page_text.py timeout",
+  "collected_at": "2026-07-22T20:37:15.173481+00:00"
+}

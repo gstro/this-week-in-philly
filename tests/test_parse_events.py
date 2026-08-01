@@ -23,6 +23,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import parse_events as pe
 from event_parsers import ParseError
+from event_parsers import do215 as do215_parser
 from event_parsers import luma as luma_parser
 from event_parsers import meetup as meetup_parser
 from event_parsers import philamoca as philamoca_parser
@@ -244,6 +245,103 @@ def test_meetup_empty_calendar_returns_empty_list_not_an_error() -> None:
 def test_meetup_raises_when_response_is_not_ical_at_all() -> None:
     with pytest.raises(ParseError):
         meetup_parser.parse("<html><body>404 not found</body></html>", WEEK_START, WEEK_END)
+
+
+# ---------------------------------------------------------------------------
+# do215 -- undocumented JSON API (do215.json fixture trimmed from a real
+# 2026-07-29 fetch of https://do215.com/events/2026/8/5.json)
+# ---------------------------------------------------------------------------
+
+DO215_WEEK_START = datetime.date(2026, 8, 3)
+DO215_WEEK_END = datetime.date(2026, 8, 9)
+
+
+def test_do215_filters_to_target_week() -> None:
+    events = do215_parser.parse(_read("do215.json"), DO215_WEEK_START, DO215_WEEK_END)
+    # Fixture has 3 in-window events (one -- Happy Together -- is duplicated
+    # to test dedup) plus an is_ongoing:true entry and a plain stale entry,
+    # both out of window.
+    assert len(events) == 3
+    assert {e["title"] for e in events} == {
+        "Drink Responsibly",
+        "Happy Together 2026 Tour",
+        "KALEO - Way Down We Go Tour",
+    }
+
+
+def test_do215_dedupes_by_event_id() -> None:
+    # The fixture includes the same event (id 17489762) twice, as real day
+    # pages do when a "featured" listing bleeds across multiple day URLs.
+    events = do215_parser.parse(_read("do215.json"), DO215_WEEK_START, DO215_WEEK_END)
+    titles = [e["title"] for e in events]
+    assert titles.count("Happy Together 2026 Tour") == 1
+
+
+def test_do215_drops_is_ongoing_events_even_when_in_window() -> None:
+    # is_ongoing:true is do215's "every day"-style recurring flag. This
+    # fixture's ongoing entry (Chinese Lantern Festival) is also out of
+    # window by date -- confirm it's absent for the ongoing reason too, by
+    # checking a window that *would* include its date.
+    events = do215_parser.parse(_read("do215.json"), datetime.date(2026, 6, 1), datetime.date(2026, 6, 10))
+    assert events == []
+
+
+def test_do215_drops_stale_entries_outside_window_even_when_not_ongoing() -> None:
+    # Board Game Night (id 17338941, dated 2026-05-13) is stale by date but
+    # is_ongoing: false -- isolates pure date filtering from the is_ongoing
+    # filter, using a window that genuinely excludes its date.
+    events = do215_parser.parse(_read("do215.json"), datetime.date(2026, 5, 20), datetime.date(2026, 5, 26))
+    assert events == []
+
+
+def test_do215_uses_tz_adjusted_date_not_the_mis_offset_begin_time() -> None:
+    events = do215_parser.parse(_read("do215.json"), DO215_WEEK_START, DO215_WEEK_END)
+    happy_together = next(e for e in events if "Happy Together" in e["title"])
+    # tz_adjusted_begin_date is 2026-08-05T19:00:00-04:00; begin_time (wrong
+    # offset, -05:00) would shift this to 8pm if used instead.
+    assert happy_together["date"] == "2026-08-05"
+    assert happy_together["time"] == "7:00 PM"
+
+
+def test_do215_formats_venue_with_city_and_state_when_present() -> None:
+    events = do215_parser.parse(_read("do215.json"), DO215_WEEK_START, DO215_WEEK_END)
+    happy_together = next(e for e in events if "Happy Together" in e["title"])
+    assert happy_together["venue"] == "Lansdowne Theater, Lansdowne, PA"
+
+
+def test_do215_omits_city_when_venue_has_none() -> None:
+    events = do215_parser.parse(_read("do215.json"), DO215_WEEK_START, DO215_WEEK_END)
+    drink_responsibly = next(e for e in events if e["title"] == "Drink Responsibly")
+    assert drink_responsibly["venue"] == "Winston On The Water"
+
+
+def test_do215_marks_free_events_explicitly() -> None:
+    events = do215_parser.parse(_read("do215.json"), DO215_WEEK_START, DO215_WEEK_END)
+    drink_responsibly = next(e for e in events if e["title"] == "Drink Responsibly")
+    assert drink_responsibly["cost"] == "Free"
+
+
+def test_do215_builds_full_url_from_permalink() -> None:
+    events = do215_parser.parse(_read("do215.json"), DO215_WEEK_START, DO215_WEEK_END)
+    happy_together = next(e for e in events if "Happy Together" in e["title"])
+    assert happy_together["url"] == "https://do215.com/events/2026/8/5/happy-together-2026-tour-tickets"
+
+
+def test_do215_raises_when_events_key_missing() -> None:
+    with pytest.raises(ParseError):
+        do215_parser.parse(json.dumps({"paging": {}}), DO215_WEEK_START, DO215_WEEK_END)
+
+
+def test_do215_raises_on_invalid_json() -> None:
+    with pytest.raises(ParseError):
+        do215_parser.parse("not json at all", DO215_WEEK_START, DO215_WEEK_END)
+
+
+def test_do215_empty_events_list_is_not_an_error() -> None:
+    # A day genuinely having nothing scheduled is a normal, valid result --
+    # distinct from the API shape itself being broken (tested above).
+    events = do215_parser.parse(json.dumps({"events": []}), DO215_WEEK_START, DO215_WEEK_END)
+    assert events == []
 
 
 # ---------------------------------------------------------------------------

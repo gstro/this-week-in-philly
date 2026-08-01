@@ -1,0 +1,60 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-07-22T20:37:44.732380+00:00",
+  "events": [
+    {
+      "title": "DJANGO (1966)",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-07-27",
+      "time": "7:00, 7:30",
+      "cost": "$10",
+      "url": "https://www.etix.com/ticket/p/70015252/",
+      "description": ""
+    },
+    {
+      "title": "Being Dead",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-07-28",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/96608000/",
+      "description": ""
+    },
+    {
+      "title": "VIVE LE PUNK",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-07-29",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/77832817",
+      "description": "Featuring Sham 69, 999, Ruts DC and The Boys!"
+    },
+    {
+      "title": "Concourse",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-07-30",
+      "time": "7:00, 7:30",
+      "cost": "$15",
+      "url": "https://www.etix.com/ticket/p/65447611/",
+      "description": ""
+    },
+    {
+      "title": "ROOM TO SWING AN AX \u2013 A SOUTHERN GOTHIC SONG CYCLE & MEMOIRISTIC MONODRAMA",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-07-31",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/34922230",
+      "description": "A new theater piece from the makers of THE DEVIL & DAISY DIRT!"
+    },
+    {
+      "title": "Black Market Clash: Celebrating 50 Years of The Clash",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-01",
+      "time": "7:00, 7:20",
+      "cost": "$20\u2013$25",
+      "url": "https://www.eventbrite.com/e/kepi-ghoulie-ara-jay-of-the-slackers-and-danbert-nobacon-play-the-clash-tickets-1982327830905",
+      "description": "All-Clash sets from Ghetto Defendant (Kepi Ghoulie, Ara and Jay of The Slackers, Vinnie of Doomstompers Plus), Danbert Nobacon, The Droogettes, and The Dracu-Las!"
+    }
+  ]
+}
