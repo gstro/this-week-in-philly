@@ -64,6 +64,67 @@ def test_fetch_text_raises_for_unreachable_url() -> None:
         fpt.fetch_text("https://this-domain-should-not-resolve.invalid/", wait_ms=0, max_chars=1000)
 
 
+# ---------------------------------------------------------------------------
+# Networking mode selection -- which of the two route handlers gets installed
+# ---------------------------------------------------------------------------
+
+
+def test_configured_proxy_returns_none_when_no_proxy_env_set(monkeypatch: pytest.MonkeyPatch) -> None:
+    for var in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy"):
+        monkeypatch.delenv(var, raising=False)
+    assert fpt._configured_proxy() is None
+
+
+def test_configured_proxy_detects_each_supported_var(monkeypatch: pytest.MonkeyPatch) -> None:
+    for var in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy"):
+        for other in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy"):
+            monkeypatch.delenv(other, raising=False)
+        monkeypatch.setenv(var, "http://127.0.0.1:8080")
+        assert fpt._configured_proxy() == "http://127.0.0.1:8080", var
+
+
+def test_block_only_handler_aborts_heavy_subresources() -> None:
+    """The direct-internet handler drops images/media/fonts (we only ever read
+    body text) but hands everything else to Chromium rather than relaying it
+    through `requests` -- that relay is the proxied path's workaround, and
+    using it without a proxy costs HTTP/2, connection reuse and parallelism."""
+    calls: list[str] = []
+
+    class _FakeRequest:
+        def __init__(self, resource_type: str) -> None:
+            self.resource_type = resource_type
+
+    class _FakeRoute:
+        def __init__(self, resource_type: str) -> None:
+            self.request = _FakeRequest(resource_type)
+
+        def abort(self) -> None:
+            calls.append("abort")
+
+        def continue_(self) -> None:
+            calls.append("continue")
+
+    for resource_type in ("image", "media", "font"):
+        calls.clear()
+        fpt._block_only_route_handler(_FakeRoute(resource_type))  # type: ignore[arg-type]
+        assert calls == ["abort"], resource_type
+
+    for resource_type in ("document", "script", "xhr", "fetch", "stylesheet"):
+        calls.clear()
+        fpt._block_only_route_handler(_FakeRoute(resource_type))  # type: ignore[arg-type]
+        assert calls == ["continue"], resource_type
+
+
+def test_default_settle_ms_is_used_when_no_wait_ms_given() -> None:
+    # Regression guard for the networkidle -> domcontentloaded change: the
+    # settle wait is now what gives client-rendered content time to paint, so
+    # it must never silently become 0. Measured 2026-08-01 that 2000ms
+    # reproduces the old networkidle path's parsed output on both live
+    # client-rendered sources (Fandango/PFS, cinespeak.org) while cutting a
+    # real PFS collection from ~3:01 to ~16s.
+    assert fpt._DEFAULT_SETTLE_MS >= 1000
+
+
 def test_main_exits_nonzero_and_reports_failure_on_stderr(capsys: pytest.CaptureFixture) -> None:
     sys.argv = ["fetch_page_text.py", "https://this-domain-should-not-resolve.invalid/"]
     with pytest.raises(SystemExit) as exc_info:
