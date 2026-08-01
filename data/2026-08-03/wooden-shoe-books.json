@@ -1,0 +1,42 @@
+{
+  "source": "Wooden Shoe Books",
+  "collected_at": "2026-08-01T19:01:53.420684+00:00",
+  "events": [
+    {
+      "title": "Solidarity with Young People Movie Night Series",
+      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+      "date": "2026-08-07",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "NLG Know Your Rights Training",
+      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+      "date": "2026-08-05",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "",
+      "description": ""
+    },
+    {
+      "title": "Non-Compliant: A Night of Disabled Queer Poetry",
+      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+      "date": "2026-08-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "",
+      "description": "Come experience a night of the best disabled queer poets in Philly. Doctors hate them! But you'll love 'em. Masks required. Wheelchair accessible."
+    },
+    {
+      "title": "Philly Socialists Reading Group",
+      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+      "date": "2026-08-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "",
+      "description": ""
+    }
+  ]
+}
