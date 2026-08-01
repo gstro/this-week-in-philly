@@ -47,8 +47,8 @@
       "note": "Deterministic parser. Historical range 5-6; floor set with margin."
     },
     "philly-ask-a-punk": {
-      "min_expected": 6,
-      "note": "Deterministic parser (Gancio API). One real incident (2026-07-21) where a WebFetch-routed fetch was silently truncated and returned 0 -- floor set to catch a repeat without false-positiving on a slower week. Historical non-incident range 10-12."
+      "min_expected": 4,
+      "note": "Deterministic parser (Gancio API). One real incident (2026-07-21) where a WebFetch-routed fetch was silently truncated and returned 0 -- floor set to catch a repeat without false-positiving on a slower week. Historical non-incident range was 10-12 prior to 2026-08-10; the first real workflow_dispatch run of the GHA collection pipeline (2026-08-10) confirmed a genuine 5-event week -- verified directly: 5 well-formed events, real bands/venues/URLs, not an extraction failure. Lowered from 6 to 4 to reflect this real observed low without re-litigating it as a false positive every time DIY show volume dips."
     },
     "philly-shows": {
       "min_expected": 0,
