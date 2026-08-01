@@ -6,6 +6,14 @@ on:
 jobs:
   present:
     runs-on: ubuntu-latest
+    # Default GITHUB_TOKEN needs write access to push the report -- confirmed
+    # missing the hard way: a real run (30721803844) got through the whole
+    # pipeline (including a real, unintended calendar_create.py write -- see
+    # git log) and only failed at the final `git push`, with "Permission to
+    # ...git denied to github-actions[bot]" (403). collection.yml already
+    # sets this for the same reason.
+    permissions:
+      contents: write
     steps:
       # fetch-depth: 2 (not the default 1) -- the week-dir derivation below
       # needs HEAD^ to exist. presentation.yml ran with the default twice
