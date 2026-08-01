@@ -121,7 +121,7 @@ def target_week_monday(today: date | None = None) -> date:
     immediately following the run date through the Sunday after, computed at
     runtime and never hardcoded.
     """
-    today = today or date.today()
+    today = today or date.today()  # noqa: DTZ011 -- date-only week window, no time-of-day meaning
     days_ahead = (0 - today.weekday()) % 7  # Monday == 0
     if days_ahead == 0:
         days_ahead = 7

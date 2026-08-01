@@ -23,7 +23,9 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import parse_events as pe
 from event_parsers import ParseError
+from event_parsers import cinespeak as cinespeak_parser
 from event_parsers import do215 as do215_parser
+from event_parsers import lightbox as lightbox_parser
 from event_parsers import luma as luma_parser
 from event_parsers import meetup as meetup_parser
 from event_parsers import philamoca as philamoca_parser
@@ -32,6 +34,7 @@ from event_parsers import philly_shows as philly_shows_parser
 from event_parsers import phillygoth as phillygoth_parser
 from event_parsers import r5_productions as r5_productions_parser
 from event_parsers import the_rotunda as the_rotunda_parser
+from event_parsers import wxpn as wxpn_parser
 
 FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures" / "parse_events"
 WEEK_START = datetime.date(2026, 7, 20)
@@ -341,6 +344,209 @@ def test_do215_empty_events_list_is_not_an_error() -> None:
     # A day genuinely having nothing scheduled is a normal, valid result --
     # distinct from the API shape itself being broken (tested above).
     events = do215_parser.parse(json.dumps({"events": []}), DO215_WEEK_START, DO215_WEEK_END)
+    assert events == []
+
+
+# ---------------------------------------------------------------------------
+# wxpn -- WXPN's own WordPress REST API (wxpn.json fixture trimmed from a
+# real 2026-07-29 fetch of backend.xpn.org/wp-json/wp/v2/event)
+# ---------------------------------------------------------------------------
+
+WXPN_WEEK_START = datetime.date(2026, 8, 3)
+WXPN_WEEK_END = datetime.date(2026, 8, 9)
+
+
+def test_wxpn_filters_to_target_week() -> None:
+    events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
+    # Fixture: 4 in-window, 1 out-of-window (Samantha Fish, Nov), 1 malformed
+    # (no acf.date), 1 in-window with no wp `link` field.
+    assert len(events) == 5
+    assert "Samantha Fish" not in {e["title"] for e in events}
+    assert "Malformed Entry, No Date" not in {e["title"] for e in events}
+
+
+def test_wxpn_unescapes_html_entities_in_title() -> None:
+    events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
+    devin_tuel = next(e for e in events if "Devin Tuel" in e["title"])
+    assert devin_tuel["title"] == "Devin Tuel & Stephen Harms / JR Everhart / Joey Sweeney"
+    assert "&amp;" not in devin_tuel["title"]
+
+
+def test_wxpn_time_is_blank_not_a_fake_midnight() -> None:
+    # acf.date's time portion is always 00:00:00 in the real API (not a real
+    # showtime) -- must not be surfaced as if it were one.
+    events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
+    pinknoise = next(e for e in events if "PINKNOISE" in e["title"])
+    assert pinknoise["time"] == ""
+    assert pinknoise["date"] == "2026-08-03"
+
+
+def test_wxpn_skips_entries_with_no_acf_date() -> None:
+    events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
+    assert all(e["title"] != "Malformed Entry, No Date" for e in events)
+
+
+def test_wxpn_url_falls_back_to_external_link_when_wp_link_missing() -> None:
+    events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
+    no_wp_link = next(e for e in events if "No wp link" in e["title"])
+    assert no_wp_link["url"] == "https://tickets.example.com/no-wp-link"
+
+
+def test_wxpn_description_carries_external_artist() -> None:
+    events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
+    isley = next(e for e in events if "Isley Brothers" in e["title"])
+    assert isley["description"] == "The Isley Brothers / Stephanie Mills"
+
+
+def test_wxpn_raises_when_response_is_not_a_list() -> None:
+    with pytest.raises(ParseError):
+        wxpn_parser.parse(json.dumps({"error": "not found"}), WXPN_WEEK_START, WXPN_WEEK_END)
+
+
+def test_wxpn_raises_on_invalid_json() -> None:
+    with pytest.raises(ParseError):
+        wxpn_parser.parse("not json", WXPN_WEEK_START, WXPN_WEEK_END)
+
+
+def test_wxpn_empty_list_is_not_an_error() -> None:
+    events = wxpn_parser.parse("[]", WXPN_WEEK_START, WXPN_WEEK_END)
+    assert events == []
+
+
+# ---------------------------------------------------------------------------
+# cinespeak -- server-rendered WordPress blocks (cinespeak.html fixture
+# trimmed from a real 2026-07-29 fetch of cinespeak.org/cinema/)
+# ---------------------------------------------------------------------------
+
+CINESPEAK_WEEK_START = datetime.date(2026, 8, 3)
+CINESPEAK_WEEK_END = datetime.date(2026, 8, 9)
+
+
+def test_cinespeak_filters_to_target_week() -> None:
+    events = cinespeak_parser.parse(_read("cinespeak.html"), CINESPEAK_WEEK_START, CINESPEAK_WEEK_END)
+    # Fixture has 4 events total; only Crooklyn (Aug 3) is in the target week.
+    assert len(events) == 1
+    assert events[0]["title"] == "Crooklyn (1994)"
+
+
+def test_cinespeak_parses_venue_from_maps_link_not_ticket_link() -> None:
+    events = cinespeak_parser.parse(_read("cinespeak.html"), CINESPEAK_WEEK_START, CINESPEAK_WEEK_END)
+    assert events[0]["venue"] == "Two Locals Brewing"
+    assert events[0]["url"] == "https://cinespeak.eventive.org/schedule/6a16f9b8b94123950ecaa48d"
+
+
+def test_cinespeak_handles_irregular_whitespace_in_date_string() -> None:
+    # Real markup: "August 3, 2026   @ 7:00  pm" -- multiple spaces around "@".
+    events = cinespeak_parser.parse(_read("cinespeak.html"), CINESPEAK_WEEK_START, CINESPEAK_WEEK_END)
+    assert events[0]["date"] == "2026-08-03"
+    assert events[0]["time"] == "7:00 PM"
+
+
+def test_cinespeak_description_carries_the_tag_when_present() -> None:
+    events = cinespeak_parser.parse(_read("cinespeak.html"), CINESPEAK_WEEK_START, CINESPEAK_WEEK_END)
+    assert events[0]["description"] == "Short Narrative"
+
+
+def test_cinespeak_handles_missing_tag_gracefully() -> None:
+    # "Elio" (Aug 14, outside this test's window but confirms no crash) has no
+    # .wp-block-post-terms element at all -- widen the window to include it.
+    events = cinespeak_parser.parse(_read("cinespeak.html"), datetime.date(2026, 8, 10), datetime.date(2026, 8, 16))
+    elio = next(e for e in events if "Elio" in e["title"])
+    assert elio["description"] == ""
+
+
+def test_cinespeak_preserves_sold_out_marker_in_title() -> None:
+    events = cinespeak_parser.parse(_read("cinespeak.html"), datetime.date(2026, 8, 17), datetime.date(2026, 8, 23))
+    assert any("*SOLD OUT*" in e["title"] for e in events)
+
+
+def test_cinespeak_raises_on_structural_mismatch() -> None:
+    with pytest.raises(ParseError):
+        cinespeak_parser.parse("<html><body>nothing here</body></html>", CINESPEAK_WEEK_START, CINESPEAK_WEEK_END)
+
+
+# ---------------------------------------------------------------------------
+# lightbox-film-center -- two-stage source (lightbox-index.html: a real
+# 2026-07-29 fetch of the homepage, trimmed to 3 of 6 real cards;
+# lightbox.json: the collector-merged candidate+detail_html shape parse()
+# actually consumes, built from real detail-page JSON-LD for the same 3
+# events plus 2 synthetic failure-mode entries)
+# ---------------------------------------------------------------------------
+
+LIGHTBOX_WEEK_START = datetime.date(2026, 7, 27)
+LIGHTBOX_WEEK_END = datetime.date(2026, 8, 2)
+
+
+def test_lightbox_parse_index_extracts_title_and_href() -> None:
+    candidates = lightbox_parser.parse_index(_read("lightbox-index.html"))
+    assert len(candidates) == 3
+    assert candidates[0] == {
+        "title": "O'er the Land & Bestiary",
+        "href": "https://www.lightboxfilmcenter.org/events/oer-the-land-bestiary",
+    }
+
+
+def test_lightbox_parse_index_raises_on_structural_mismatch() -> None:
+    with pytest.raises(ParseError):
+        lightbox_parser.parse_index("<html><body>nothing here</body></html>")
+
+
+def test_lightbox_filters_to_target_week_using_detail_page_jsonld() -> None:
+    events = lightbox_parser.parse(_read("lightbox.json"), LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+    # Fixture has 5 candidates: 2 in-window (real JSON-LD), 1 out-of-window
+    # (Mikey and Nicky, Sep 9), 1 with a failed detail fetch (detail_html:
+    # null), 1 with a detail page that has no JSON-LD Event block at all.
+    assert len(events) == 2
+    assert {e["title"] for e in events} == {"O'er the Land & Bestiary", "Physical Media Fair"}
+
+
+def test_lightbox_uses_authoritative_year_from_detail_jsonld() -> None:
+    # The homepage index never carries a year at all ("Wed, Jul 29") -- this
+    # confirms the parser gets the year from the detail page's startDate,
+    # not by inferring it from the year-less index text.
+    events = lightbox_parser.parse(_read("lightbox.json"), LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+    oer = next(e for e in events if "Bestiary" in e["title"])
+    assert oer["date"] == "2026-07-29"
+    assert oer["time"] == "7:00 PM"
+
+
+def test_lightbox_venue_combines_name_and_address() -> None:
+    events = lightbox_parser.parse(_read("lightbox.json"), LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+    oer = next(e for e in events if "Bestiary" in e["title"])
+    assert oer["venue"] == "Moore College of Art & Design, 1916 Race St, Philadelphia, PA 19103, USA"
+
+
+def test_lightbox_unescapes_html_entities_from_the_templated_jsonld() -> None:
+    events = lightbox_parser.parse(_read("lightbox.json"), LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+    oer = next(e for e in events if "Bestiary" in e["title"])
+    assert oer["title"] == "O'er the Land & Bestiary"
+    assert "&amp;" not in oer["title"]
+
+
+def test_lightbox_skips_candidate_with_failed_detail_fetch() -> None:
+    events = lightbox_parser.parse(_read("lightbox.json"), LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+    assert all(e["title"] != "Broken Detail Fetch" for e in events)
+
+
+def test_lightbox_skips_candidate_with_no_jsonld_on_detail_page() -> None:
+    # Wix returns 200 with its SPA shell even for a broken/unresolved detail
+    # URL (confirmed live) -- this must be a skip, not a crash.
+    events = lightbox_parser.parse(_read("lightbox.json"), LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+    assert all(e["title"] != "Detail Page With No JSON-LD" for e in events)
+
+
+def test_lightbox_raises_on_invalid_top_level_json() -> None:
+    with pytest.raises(ParseError):
+        lightbox_parser.parse("not json", LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+
+
+def test_lightbox_raises_when_not_a_list() -> None:
+    with pytest.raises(ParseError):
+        lightbox_parser.parse(json.dumps({"not": "a list"}), LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+
+
+def test_lightbox_empty_candidate_list_is_not_an_error() -> None:
+    events = lightbox_parser.parse("[]", LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
     assert events == []
 
 

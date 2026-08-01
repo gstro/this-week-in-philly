@@ -76,7 +76,7 @@ def _parse_timestamp(value: str) -> datetime:
     # assumption). Normalize aware timestamps to *UTC*, not the local
     # machine's timezone -- astimezone(tz=None) converts to system local
     # time, which silently corrupts this comparison on any non-UTC machine.
-    dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    dt = datetime.fromisoformat(value)  # py3.11+ handles a trailing "Z" natively
     if dt.tzinfo is not None:
         dt = dt.astimezone(UTC).replace(tzinfo=None)
     return dt

@@ -11,11 +11,11 @@
       "note": "WebSearch source; weekly calendar post isn't live until Sunday morning, after the scheduled 2am ET collection run. 0 is structurally expected most weeks -- not a failure signal for this source."
     },
     "cinespeak": {
-      "min_expected": 1,
-      "note": "Historical range 1-2/week (v1: 2, v2 run A: 2). Server-rendered WordPress; deterministic parser planned."
+      "min_expected": 0,
+      "note": "A deterministic parser now backs this source (scripts/event_parsers/cinespeak.py, plain Gutenberg block markup on /cinema/) -- confirmed live 2026-07-29: 1 event for the real week of 2026-08-03. Historical range is thin and genuinely variable (1-2/week in v1 and v2 run A, 0 confirmed for this specific week) -- kept at 0 rather than 1 to avoid false-positiving on a real single-screening-per-week cadence; the provenance and manifest-agreement checks still cover this source."
     },
     "do215": {
-      "min_expected": 4,
+      "min_expected": 20,
       "note": "v1 marked this 'partial' (events=8). A real JSON API (/events/YYYY/M/D.json) now backs this source (scripts/event_parsers/do215.py + scripts/collect_source.py) -- confirmed live 2026-07-29 against the real week of 2026-08-03: 467 events, not the 8-60 every prior estimate assumed. Almost all of the volume is legitimate but repetitive (e.g. a museum's daily guided tour re-listed as a distinct dated event on each of its 5 occurrences that week) with no structural field distinguishing it from a genuine one-off -- this is exactly the case event-selection-philosophy's 'Avoid: recurring weekly events' rule exists for, but that rule has never had to operate at this volume from a single source. Floor kept low and deliberately not raised to the true yield, since the real number this source contributes to a week's total_events_after_dedup is now an open question for Selection, not Collection, to absorb."
     },
     "free-library": {
@@ -36,7 +36,7 @@
     },
     "lightbox-film-center": {
       "min_expected": 0,
-      "note": "Genuinely 0 some weeks (listings can jump 2+ weeks between screenings, confirmed during investigation), but demonstrably nonzero when the parser lands (2 real events found in a week v2 collected as 0). Kept at 0 until the parser stabilizes true yield -- the provenance check still catches fabrication."
+      "note": "A deterministic two-stage parser now backs this source (scripts/event_parsers/lightbox.py + scripts/collect_source.py: Wix data-hook index -> per-event JSON-LD detail pages) -- confirmed live 2026-07-29: 2 real events for the week of 2026-07-27 (a week v2 had previously collected as 0), and genuinely 0 for the week of 2026-08-03 (listings jump Aug 1 -> Sep 9). Kept at 0 rather than raised, since 0 is a real, frequent, correct result for this source, not evidence of failure -- the provenance and manifest-agreement checks still cover it."
     },
     "luma": {
       "min_expected": 5,
@@ -95,8 +95,8 @@
       "note": "Google Calendar via MCP. Stable at 3/week."
     },
     "wxpn": {
-      "min_expected": 0,
-      "note": "v1 itself marked this 'partial' at 0 events. A real WP REST API (backend.xpn.org/wp-json/wp/v2/event) returned 13-19/week during investigation -- the true floor is well above 0, but kept at 0 here until the parser lands and stabilizes real yield; the provenance check still catches fabrication in the meantime."
+      "min_expected": 15,
+      "note": "v1 marked this 'partial' at 0 events. A deterministic parser now backs this source (scripts/event_parsers/wxpn.py + scripts/collect_source.py, backend.xpn.org's own WordPress REST API) -- confirmed live 2026-07-29 against the real week of 2026-08-03: 46 events in well under a second. Floor raised from 0 to 15, comfortably below that real number but high enough to catch a real regression, now that the source is stable."
     }
   }
 }

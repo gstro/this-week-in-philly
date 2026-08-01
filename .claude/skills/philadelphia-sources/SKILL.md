@@ -373,24 +373,27 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 
 ### 12. cinéSPEAK
 **URL:** `https://cinespeak.org/cinema/`
-**Method:** Bash → `python scripts/fetch_raw.py https://cinespeak.org/cinema/` (primary — this page's listing is server-rendered as normal WordPress post content, no custom event markup to key off, just read the visible text between the markup). **Fallback:** if the raw response contains any of these phrases — `checking your browser`, `just a moment`, `please wait while we verify`, `performing security verification` — it's the intermittent WordPress.com/Jetpack bot-challenge interstitial (see below), not real content: re-fetch with `python scripts/fetch_page_text.py https://cinespeak.org/cinema/` instead, which already self-resolves this challenge by waiting it out in a real browser.
-**Notes:** Arthouse film collective with politically engaged programming. Check for Third Thursdays (activist/documentary series) and other screenings. Events often free or PWYW.
+**Method:** Bash → `python scripts/fetch_raw.py https://cinespeak.org/cinema/ | python scripts/parse_events.py cinespeak --source-name "cinéSPEAK" --week-start YYYY-MM-DD --week-end YYYY-MM-DD > {output_directory}/YYYY-MM-DD/cinespeak.json` — deterministic parser, not manual reading. **Correction to a previous version of this entry:** the page does have stable, keyable markup — a plain Gutenberg block listing, one `li.wp-block-post.event` per screening — it just isn't the site's own custom theme markup, which is what the old "no custom event markup to key off" note meant. Confirmed live 2026-07-29.
+**Fallback:** if the raw response contains any of these phrases — `checking your browser`, `just a moment`, `please wait while we verify`, `performing security verification` — it's the intermittent WordPress.com/Jetpack bot-challenge interstitial (see below), not real content: re-fetch with `python scripts/fetch_page_text.py https://cinespeak.org/cinema/`, wait for it to resolve, then pipe *that* output through `parse_events.py cinespeak` the same way.
+**Notes:** Arthouse film collective with politically engaged programming. Check for Third Thursdays (activist/documentary series) and other screenings. Events often free or PWYW (the parser doesn't extract cost — it isn't present in this markup — so cost is always blank for this source).
 
 ⚠️ **Use `/cinema/` not the homepage** — `cinespeak.org` shows journal posts and mission copy with no event listings. `/events/` and `/screenings/` both 404 (confirmed Jun 2026).
 
-⚠️ **Intermittent bot-challenge interstitial** — cinespeak.org sometimes (not always) shows a WordPress.com "Checking your browser..." page instead of real content, confirmed Jul 2026. A plain HTTP fetch (`fetch_raw.py`) has no way to wait it out the way a browser can — if you see the challenge markers above, use `fetch_page_text.py` for this one fetch instead.
+⚠️ **Intermittent bot-challenge interstitial** — cinespeak.org sometimes (not always) shows a WordPress.com "Checking your browser..." page instead of real content, confirmed Jul 2026. A plain HTTP fetch (`fetch_raw.py`) has no way to wait it out the way a browser can — if you see the challenge markers above, use the fallback.
 
-**✅ Confirmed Jul 2026 with `fetch_raw.py`** (real content — matched known titles exactly in testing)
+**✅ Confirmed Jul 2026 with `fetch_raw.py` + `parse_events.py`** (1 event for the week of 2026-08-03; real content, matched known titles exactly in testing)
 
 ---
 
 ### 13. Lightbox Film Center
 **URL:** `https://www.lightboxfilmcenter.org/`
 **Address:** 1901 S 9th St (Bok Building), Philadelphia, PA 19148
-**Method:** Bash → `python scripts/fetch_page_text.py https://www.lightboxfilmcenter.org/`
-**Notes:** Philadelphia's premier repertory, experimental, documentary, and international cinema. Check weekly programming, series events, and special screenings. Free and low-cost screenings are common.
+**Method:** Bash → `python scripts/collect_source.py lightbox-film-center --source-name "Lightbox Film Center" --week-start YYYY-MM-DD --week-end YYYY-MM-DD --out {output_directory}/YYYY-MM-DD/lightbox-film-center.json` — fully deterministic, no model parsing step, no browser. Two stages, both owned by the collector: (1) the homepage's Wix `data-hook="events-card"` listing gives title + detail-page URL for each upcoming screening (a small, bounded list — 6 observed); (2) every listed detail page is fetched for its `application/ld+json` `Event` block, which has the real date (with year), time, and full venue address the homepage index doesn't carry. Prints the `[source]: [N] events written. Proceeding.` confirmation line to stderr.
+**Notes:** Philadelphia's premier repertory, experimental, documentary, and international cinema. Free and low-cost screenings are common. Some weeks genuinely have 0 screenings in the target window (listings can jump 2+ weeks between programmed events) — that's a real result, not a failure.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
+**Why this two-stage method, not `fetch_page_text.py`:** confirmed live 2026-07-29 — the homepage index alone isn't enough to collect from (no year on its dates, no street address), and Wix's own generated CSS classes are unstable between builds, but its `data-hook` attributes are a stable contract. This source was previously collecting 0 events for weeks that had real screenings (e.g. 2 real events for the week of 2026-07-27, silently collected as 0) — one of several sources observed under-collecting or fabricating an empty result under budget pressure (see `check_yield.py`'s module docstring).
+
+**✅ Confirmed Jul 2026 with `collect_source.py`** (2 events for the week of 2026-07-27; 0 for 2026-08-03, genuinely — both verified against the real site)
 
 ---
 
@@ -415,14 +418,17 @@ Venues and publications with editorial voice or mixed content. More prose per ev
 ---
 
 ### 16. The Key by WXPN
-**URL:** `https://xpn.org/concert-and-events/`
-**Secondary:** `https://xpn.org/feature/concert-previews/`
-**Method:** Bash → `python scripts/fetch_page_text.py https://xpn.org/concert-and-events/`
-**Notes:** WXPN (University of Pennsylvania) is one of the best indie/alternative/punk editorial outlets in the country. Good for discovering acts and finding Spotify links. The concert-previews archive has editorial roundup posts that are better for picks quality than the raw listing.
+**URL (deterministic, use this):** `https://backend.xpn.org/wp-json/wp/v2/event` — WXPN's own WordPress REST API, not the public site.
+**Method:** Bash → `python scripts/collect_source.py wxpn --source-name "WXPN" --week-start YYYY-MM-DD --week-end YYYY-MM-DD --out {output_directory}/YYYY-MM-DD/wxpn.json` — fully deterministic, no model parsing step, no browser. Fetches every page of the API (results are sorted by publish date, not event date, so there's no way to fetch only the relevant pages) and filters client-side. Prints the `[source]: [N] events written. Proceeding.` confirmation line to stderr.
+**Notes:** WXPN (University of Pennsylvania) is one of the best indie/alternative/punk editorial outlets in the country. Good for discovering acts and finding Spotify links.
 
-⚠️ **thekey.xpn.org has a certificate error** (confirmed Jun 2026) — do not use that subdomain. Use `xpn.org` directly. If `/concert-and-events/` output is sparse, try: `site:xpn.org "concert previews" philadelphia [month] [year]`
+**Why the API, not `fetch_page_text.py`:** confirmed live 2026-07-29 — the public `xpn.org/concert-and-events/` page is client-rendered (Next.js RSC payload chunks, zero event data in the raw HTML), which is why it needed a full Chromium render before. The site's own JS bundle calls `backend.xpn.org`'s REST API directly for the same data, faster and without a browser. This source went from writing 0 events for the week of 2026-07-27 (one of several sources observed fabricating an empty result under budget pressure — see `check_yield.py`'s module docstring) to a verified 46 events for a real week in well under a second.
 
-**✅ Confirmed Jul 2026 with `fetch_page_text.py`**
+**One real data quirk:** the API's `acf.date` field always has its time portion zeroed (`00:00:00`) — there's no real showtime in the data, so the parser leaves `time` blank rather than reporting a fake midnight start.
+
+⚠️ **thekey.xpn.org has a certificate error** (confirmed Jun 2026) — irrelevant now that this uses `backend.xpn.org` directly.
+
+**✅ Confirmed Jul 2026 with `collect_source.py`** (46 events for the week of 2026-08-03)
 
 ---
 
@@ -555,11 +561,11 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 | Harriet's Bookshop | `fetch_page_text.py` on Eventbrite org page | 2 | ✅ Jul 2026; ⚠️ Main site still broken |
 | Free Library | `fetch_page_text.py` | 2 | ✅ Jul 2026; needs realistic UA (Cloudflare) |
 | PhilaMOCA | `fetch_raw.py` → `parse_events.py philamoca` | 3 | ✅ Jul 2026 |
-| cinéSPEAK | `fetch_raw.py` on `/cinema/` (manual reading — no stable structure); `fetch_page_text.py` fallback if bot-challenge shown | 3 | ✅ Jul 2026 |
-| Lightbox Film Center | `fetch_page_text.py` | 3 | ✅ Jul 2026 |
+| cinéSPEAK | `fetch_raw.py` on `/cinema/` → `parse_events.py cinespeak`; `fetch_page_text.py` fallback if bot-challenge shown | 3 | ✅ Jul 2026 |
+| Lightbox Film Center | `collect_source.py lightbox-film-center` (index + JSON-LD detail pages, no browser) | 3* | ✅ Jul 2026; genuinely 0 some weeks, see §13. *No longer belongs at Tier 3's cost. |
 | Phillygoth.net | `fetch_raw.py` → `parse_events.py phillygoth` | 3 | ✅ Jul 2026 |
 | Philadelphia Citizen | `fetch_raw.py` (manual reading — prose, no stable structure) | 3 | ✅ Jul 2026 |
-| WXPN | `fetch_page_text.py` on `xpn.org/concert-and-events/` | 3 | ✅ Jul 2026; thekey.xpn.org cert error, use xpn.org |
+| WXPN | `collect_source.py wxpn` (WP REST API, no browser) | 3* | ✅ Jul 2026; real yield ~46/week, see §16. *No longer belongs at Tier 3's cost — a fast API call now, safe to run earlier. |
 | Meetup groups (all 8) | `fetch_raw.py` iCal URL → `parse_events.py meetup-ical` | 4 | ✅ Jul 2026 |
 | Philly-Shows.com | `fetch_raw.py` → `parse_events.py philly-shows` | 5 | ✅ Jul 2026; ⚠️ Sparse (~2/week); spot-check only |
 | Do215 | `collect_source.py do215` (JSON API, no browser) | 5* | ✅ Jul 2026; real yield is 400+/week, see §19. *Listed under Tier 5 below (unchanged position), but no longer belongs at the expensive end — it's now a single fast API call, no browser. Safe to run earlier if a session is running short. |

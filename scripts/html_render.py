@@ -30,7 +30,8 @@ import argparse
 import html
 import sys
 from collections import defaultdict
-from datetime import date, datetime, time as dt_time
+from datetime import date, datetime
+from datetime import time as dt_time
 from pathlib import Path
 
 import jinja2
@@ -129,7 +130,7 @@ def build_honorable_mentions_html(mentions: list) -> str | None:
 
 def _parse_time_for_sort(event_time: str) -> dt_time | None:
     try:
-        return datetime.strptime(event_time, "%I:%M %p").time()
+        return datetime.strptime(event_time, "%I:%M %p").time()  # noqa: DTZ007 -- only .time() is used, no date/tz involved
     except (ValueError, TypeError):
         return None
 

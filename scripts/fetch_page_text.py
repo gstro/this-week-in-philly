@@ -21,10 +21,8 @@ from collections.abc import Callable
 from pathlib import Path
 
 import requests
-from playwright.sync_api import Route
+from playwright.sync_api import Route, sync_playwright
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
-from playwright.sync_api import sync_playwright
-
 from proxy_session import build_session
 
 # Some cloud Routine environments pre-bake a Chromium install at this fixed
@@ -171,7 +169,7 @@ def main() -> None:
 
     try:
         text = fetch_text(args.url, args.wait_ms, args.max_chars)
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001 -- top-level CLI catch-all: clean FAILED message, not a raw traceback
         print(f"FAILED to fetch {args.url}: {exc}", file=sys.stderr)
         sys.exit(1)
 

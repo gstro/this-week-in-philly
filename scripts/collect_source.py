@@ -36,7 +36,7 @@ import sys
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from event_parsers import Event, ParseError, do215
+from event_parsers import Event, ParseError, do215, lightbox, wxpn
 from proxy_session import build_session
 
 _USER_AGENT = (
@@ -50,6 +50,13 @@ _USER_AGENT = (
 # an unbounded loop is its own silent-cost risk (see docs/COLLECTION_PROXY_ISSUE.md
 # for what unbounded pagination cost Songkick under the proxy workaround).
 _MAX_PAGES_PER_DAY = 6
+
+# WXPN's REST API sorts by publish date, not event date, so a page's
+# position tells you nothing about which week it covers -- every page must
+# be fetched to be sure nothing in the target week is missed. Observed live
+# (2026-07-29): 495 total records across 5 pages of 100 (the API's own
+# per_page cap). Capped one page above that observed ceiling.
+_MAX_PAGES_WXPN = 6
 
 
 @dataclass
@@ -95,16 +102,97 @@ def collect_do215(week_start: datetime.date, week_end: datetime.date) -> FetchRe
     return FetchResult(raw_events=all_events, failed_requests=all_failed)
 
 
+_WXPN_API_URL = "https://backend.xpn.org/wp-json/wp/v2/event"
+
+
+def collect_wxpn(_week_start: datetime.date, _week_end: datetime.date) -> FetchResult:
+    # week_start/week_end are unused here -- the API has no server-side date
+    # filter (see wxpn.py's module docstring), so every page must be fetched
+    # regardless of window; filtering happens entirely in the parser.
+    session = build_session()
+    events: list[dict] = []
+    failed: list[str] = []
+    page = 1
+    total_pages = 1
+    while page <= min(total_pages, _MAX_PAGES_WXPN):
+        url = f"{_WXPN_API_URL}?per_page=100&page={page}"
+        try:
+            response = session.get(url, headers={"User-Agent": _USER_AGENT}, timeout=20)
+            response.raise_for_status()
+            payload = response.json()
+            if not isinstance(payload, list):
+                raise TypeError(f"expected a JSON array, got {type(payload).__name__}")
+        except Exception as exc:  # noqa: BLE001 -- any failure here just means "skip this page", not crash the run
+            failed.append(f"{url} ({exc})")
+            page += 1
+            continue
+        events.extend(payload)
+        total_pages = int(response.headers.get("X-WP-TotalPages", page))
+        page += 1
+    return FetchResult(raw_events=events, failed_requests=failed)
+
+
+_LIGHTBOX_HOMEPAGE = "https://www.lightboxfilmcenter.org/"
+
+
+def collect_lightbox(_week_start: datetime.date, _week_end: datetime.date) -> FetchResult:
+    # week_start/week_end are unused here -- the homepage index has no
+    # server-side date filter and only ever lists a small, bounded number of
+    # upcoming events (see lightbox.py's module docstring), so every listed
+    # detail page is fetched; the real date filter runs in the parser
+    # against each detail page's authoritative JSON-LD startDate.
+    session = build_session()
+    try:
+        response = session.get(_LIGHTBOX_HOMEPAGE, headers={"User-Agent": _USER_AGENT}, timeout=20)
+        response.raise_for_status()
+        candidates = lightbox.parse_index(response.text)
+    except ParseError:
+        raise  # structural break in the index itself -- let main() report this as a real failure, not an empty file
+    except Exception as exc:
+        raise ParseError(f"failed to fetch or parse the lightbox-film-center homepage: {exc}") from exc
+
+    events: list[dict] = []
+    failed: list[str] = []
+    for candidate in candidates:
+        url = candidate["href"]
+        try:
+            detail_response = session.get(url, headers={"User-Agent": _USER_AGENT}, timeout=20)
+            detail_response.raise_for_status()
+            detail_html = detail_response.text
+        except Exception as exc:  # noqa: BLE001 -- one candidate's detail fetch failing shouldn't kill the others
+            failed.append(f"{url} ({exc})")
+            detail_html = None
+        events.append({"title": candidate["title"], "href": url, "detail_html": detail_html})
+
+    return FetchResult(raw_events=events, failed_requests=failed)
+
+
 # Each collector fetches its source's raw data (as many requests as needed)
 # and returns it merged into one blob ready for that source's pure parser --
 # adding a new multi-fetch source means adding one entry here, following the
 # same "add a source" shape as event_parsers/__init__.py's PARSERS registry.
 COLLECTORS: dict[str, Callable[[datetime.date, datetime.date], FetchResult]] = {
     "do215": collect_do215,
+    "wxpn": collect_wxpn,
+    "lightbox-film-center": collect_lightbox,
 }
 
 PARSE_FUNCS: dict[str, Callable[..., list[Event]]] = {
     "do215": do215.parse,
+    "wxpn": wxpn.parse,
+    "lightbox-film-center": lightbox.parse,
+}
+
+# Each source's parser expects raw JSON in its own shape (do215: an object
+# with an "events" key, matching its raw API page shape; wxpn: a bare array,
+# matching the WP REST API's own list response) -- this wraps the collector's
+# merged `list[dict]` into whatever shape that source's parser was written
+# to accept, so each parser module can stay a faithful match for its real
+# API response rather than conforming to some artificial common envelope.
+RAW_WRAPPERS: dict[str, Callable[[list[dict]], str]] = {
+    "do215": lambda events: json.dumps({"events": events}),
+    "wxpn": json.dumps,
+    "lightbox-film-center": json.dumps,
 }
 
 
@@ -128,7 +216,15 @@ def main() -> None:
     week_start = datetime.date.fromisoformat(args.week_start)
     week_end = datetime.date.fromisoformat(args.week_end)
 
-    result = COLLECTORS[args.source_key](week_start, week_end)
+    try:
+        result = COLLECTORS[args.source_key](week_start, week_end)
+    except ParseError as exc:
+        # A structural break in the source itself (e.g. lightbox's homepage
+        # index losing its events-card markup entirely) -- not a per-request
+        # network failure, which collectors handle themselves and report via
+        # FetchResult.failed_requests instead.
+        print(f"FAILED to collect {args.source_key}: {exc}", file=sys.stderr)
+        sys.exit(1)
 
     if not result.raw_events and result.failed_requests:
         print(
@@ -139,7 +235,7 @@ def main() -> None:
         )
         sys.exit(1)
 
-    merged_raw = json.dumps({"events": result.raw_events})
+    merged_raw = RAW_WRAPPERS[args.source_key](result.raw_events)
     try:
         events = PARSE_FUNCS[args.source_key](merged_raw, week_start, week_end)
     except ParseError as exc:

@@ -1,0 +1,98 @@
+[
+  {
+    "id": 504384,
+    "title": {
+      "rendered": "PINKNOISE / Deadlands"
+    },
+    "link": "https://xpn.org/event/pinknoise-deadlands/",
+    "acf": {
+      "date": "2026-08-03 00:00:00",
+      "venue": "MilkBoy",
+      "price": null,
+      "external_link": "https://www.tixr.com/groups/milkboy/events/pinknoise-194612",
+      "external_artist": "PINKNOISE / Deadlands"
+    }
+  },
+  {
+    "id": 504488,
+    "title": {
+      "rendered": "Rolling Quartz"
+    },
+    "link": "https://xpn.org/event/rolling-quartz/",
+    "acf": {
+      "date": "2026-08-05 00:00:00",
+      "venue": "PhilaMOCA",
+      "price": null,
+      "external_link": "https://www.leopresents.com/tm-event/rolling-quartz-my-turn-2026-tour-in-philadelphia/",
+      "external_artist": "Rolling Quartz"
+    }
+  },
+  {
+    "id": 491212,
+    "title": {
+      "rendered": "Devin Tuel &amp; Stephen Harms / JR Everhart / Joey Sweeney"
+    },
+    "link": "https://xpn.org/event/devin-tuel-stephen-harms-jr-everhart-joey-sweeney/",
+    "acf": {
+      "date": "2026-08-06 00:00:00",
+      "venue": "Johnny Brenda's",
+      "price": null,
+      "external_link": "https://johnnybrendas.com/event/devin-tuel-stephen-harms/johnny-brendas/philadelphia-pennsylvania/",
+      "external_artist": "Devin Tuel & Stephen Harms / JR Everhart / Joey Sweeney"
+    }
+  },
+  {
+    "id": 504801,
+    "title": {
+      "rendered": "The Isley Brothers / Stephanie Mills"
+    },
+    "link": "https://xpn.org/event/the-isley-brothers-stephanie-mills/",
+    "acf": {
+      "date": "2026-08-06 00:00:00",
+      "venue": "The Dell Music Center",
+      "price": null,
+      "external_link": "https://thedellmusiccenter.com/event/3016-2/",
+      "external_artist": "The Isley Brothers / Stephanie Mills"
+    }
+  },
+  {
+    "id": 504901,
+    "title": {
+      "rendered": "Samantha Fish"
+    },
+    "link": "https://xpn.org/event/samantha-fish/",
+    "acf": {
+      "date": "2026-11-20 00:00:00",
+      "venue": "Keswick Theatre",
+      "price": null,
+      "external_link": "https://www.axs.com/events/1537672/samantha-fish-tickets?skin=keswick&src=AEGLIVE_WROAKDTT030115VEN001",
+      "external_artist": "Samantha Fish"
+    }
+  },
+  {
+    "id": 999001,
+    "title": {
+      "rendered": "Malformed Entry, No Date"
+    },
+    "link": "https://xpn.org/event/malformed-entry/",
+    "acf": {
+      "venue": "Unknown Venue",
+      "price": null,
+      "external_link": null,
+      "external_artist": null
+    }
+  },
+  {
+    "id": 999002,
+    "title": {
+      "rendered": "No wp link, external_link only"
+    },
+    "acf": {
+      "date": "2026-08-04 00:00:00",
+      "venue": "Some Venue",
+      "price": null,
+      "external_link": "https://tickets.example.com/no-wp-link",
+      "external_artist": null
+    }
+  }
+]

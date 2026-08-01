@@ -40,7 +40,7 @@ import json
 import sys
 from typing import Any
 
-from event_parsers import PARSERS, ParseError, Event
+from event_parsers import PARSERS, Event, ParseError
 
 
 def build_output(source_name: str, events: list[Event]) -> dict[str, Any]:

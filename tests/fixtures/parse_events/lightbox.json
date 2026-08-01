@@ -1,0 +1,27 @@
+[
+  {
+    "title": "O'er the Land & Bestiary",
+    "href": "https://www.lightboxfilmcenter.org/events/oer-the-land-bestiary",
+    "detail_html": "<!doctype html><html><head><script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Event\",\"name\":\"O'er the Land &amp; Bestiary\",\"description\":\"Presented in conjunction with American Chimera\",\"startDate\":\"2026-07-29T19:00:00-04:00\",\"endDate\":\"2026-07-29T20:30:00-04:00\",\"eventStatus\":\"https://schema.org/EventScheduled\",\"eventAttendanceMode\":\"https://schema.org/OfflineEventAttendanceMode\",\"location\":{\"@type\":\"Place\",\"url\":\"https://www.lightboxfilmcenter.org/events/oer-the-land-bestiary\",\"name\":\"Moore College of Art & Design\",\"address\":\"1916 Race St, Philadelphia, PA 19103, USA\"},\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://static.wixstatic.com/x.jpg\",\"width\":\"2368\",\"height\":\"1800\"}}</script></head><body></body></html>"
+  },
+  {
+    "title": "Physical Media Fair",
+    "href": "https://www.lightboxfilmcenter.org/events/physical-media-fair",
+    "detail_html": "<!doctype html><html><head><script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Event\",\"name\":\"Physical Media Fair\",\"description\":\"FREE ADMISSION\",\"startDate\":\"2026-08-01T11:00:00-04:00\",\"endDate\":\"2026-08-01T17:00:00-04:00\",\"eventStatus\":\"https://schema.org/EventScheduled\",\"eventAttendanceMode\":\"https://schema.org/OfflineEventAttendanceMode\",\"location\":{\"@type\":\"Place\",\"url\":\"https://www.lightboxfilmcenter.org/events/physical-media-fair\",\"name\":\"Village of Industry & Art\",\"address\":\"320 S Broad St, Philadelphia, PA 19102, USA\"},\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://static.wixstatic.com/y.png\",\"width\":\"1080\",\"height\":\"1350\"}}</script></head><body></body></html>"
+  },
+  {
+    "title": "Mikey and Nicky",
+    "href": "https://www.lightboxfilmcenter.org/events/mikey-and-nicky",
+    "detail_html": "<!doctype html><html><head><script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Event\",\"name\":\"Mikey and Nicky\",\"description\":\"New Restoration\",\"startDate\":\"2026-09-09T19:00:00-04:00\",\"endDate\":\"2026-09-09T21:00:00-04:00\",\"eventStatus\":\"https://schema.org/EventScheduled\",\"eventAttendanceMode\":\"https://schema.org/OfflineEventAttendanceMode\",\"location\":{\"@type\":\"Place\",\"url\":\"https://www.lightboxfilmcenter.org/events/mikey-and-nicky\",\"name\":\"Bok Auditorium\",\"address\":\"800 Mifflin St, Philadelphia, PA 19148, USA\"},\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://static.wixstatic.com/z.jpg\",\"width\":\"1920\",\"height\":\"1037\"}}</script></head><body></body></html>"
+  },
+  {
+    "title": "Broken Detail Fetch",
+    "href": "https://www.lightboxfilmcenter.org/events/broken",
+    "detail_html": null
+  },
+  {
+    "title": "Detail Page With No JSON-LD",
+    "href": "https://www.lightboxfilmcenter.org/events/no-ld",
+    "detail_html": "<!doctype html><html><body>Wix SPA shell, no event data</body></html>"
+  }
+]

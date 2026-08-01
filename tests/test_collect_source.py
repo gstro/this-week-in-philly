@@ -18,19 +18,36 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from collect_source import FetchResult, _fetch_do215_day, build_output, collect_do215  # noqa: E402
+from collect_source import (  # noqa: E402
+    FetchResult,
+    RAW_WRAPPERS,
+    _fetch_do215_day,
+    build_output,
+    collect_do215,
+    collect_lightbox,
+    collect_wxpn,
+)
+from event_parsers import ParseError  # noqa: E402
 
 
 class _FakeResponse:
-    def __init__(self, payload: dict | None = None, status_error: Exception | None = None) -> None:
+    def __init__(
+        self,
+        payload: dict | list | None = None,
+        status_error: Exception | None = None,
+        headers: dict[str, str] | None = None,
+        text: str | None = None,
+    ) -> None:
         self._payload = payload
         self._status_error = status_error
+        self.headers = headers or {}
+        self.text = text or ""
 
     def raise_for_status(self) -> None:
         if self._status_error:
             raise self._status_error
 
-    def json(self) -> dict:
+    def json(self) -> dict | list:
         assert self._payload is not None
         return self._payload
 
@@ -158,3 +175,125 @@ def test_build_output_shape() -> None:
 def test_fetch_result_is_a_plain_dataclass() -> None:
     result = FetchResult(raw_events=[_event(1)], failed_requests=[])
     assert result.raw_events == [_event(1)]
+
+
+# --- collect_wxpn: pagination via X-WP-TotalPages ---
+
+
+def test_collect_wxpn_pages_until_total_pages_header(monkeypatch: pytest.MonkeyPatch) -> None:
+    url1 = "https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=1"
+    url2 = "https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=2"
+    session = _FakeSession(
+        {
+            url1: _FakeResponse([_event(1)], headers={"X-WP-TotalPages": "2"}),
+            url2: _FakeResponse([_event(2)], headers={"X-WP-TotalPages": "2"}),
+        }
+    )
+    monkeypatch.setattr("collect_source.build_session", lambda: session)
+
+    result = collect_wxpn(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    assert [e["id"] for e in result.raw_events] == [1, 2]
+    assert result.failed_requests == []
+
+
+def test_collect_wxpn_respects_max_pages_cap(monkeypatch: pytest.MonkeyPatch) -> None:
+    responses = {}
+    for page in range(1, 10):
+        url = f"https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page={page}"
+        responses[url] = _FakeResponse([_event(page)], headers={"X-WP-TotalPages": "99"})
+    session = _FakeSession(responses)
+    monkeypatch.setattr("collect_source.build_session", lambda: session)
+
+    result = collect_wxpn(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    assert len(result.raw_events) == 6  # _MAX_PAGES_WXPN
+
+
+def test_collect_wxpn_records_failure_when_response_is_not_a_list(monkeypatch: pytest.MonkeyPatch) -> None:
+    url1 = "https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=1"
+    session = _FakeSession({url1: _FakeResponse({"code": "rest_no_route"}, headers={"X-WP-TotalPages": "1"})})
+    monkeypatch.setattr("collect_source.build_session", lambda: session)
+
+    result = collect_wxpn(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    assert result.raw_events == []
+    assert len(result.failed_requests) == 1
+
+
+# --- RAW_WRAPPERS: each source's parser gets the shape it expects ---
+
+
+def test_raw_wrappers_do215_wraps_in_events_object() -> None:
+    wrapped = RAW_WRAPPERS["do215"]([_event(1)])
+    assert json.loads(wrapped) == {"events": [_event(1)]}
+
+
+def test_raw_wrappers_wxpn_is_a_bare_array() -> None:
+    wrapped = RAW_WRAPPERS["wxpn"]([_event(1)])
+    assert json.loads(wrapped) == [_event(1)]
+
+
+# --- collect_lightbox: two-stage index-then-details ---
+
+_LIGHTBOX_HOME = "https://www.lightboxfilmcenter.org/"
+_LIGHTBOX_INDEX_HTML = """
+<li data-hook="events-card">
+  <a data-hook="title" href="https://www.lightboxfilmcenter.org/events/movie-a">Movie A</a>
+</li>
+<li data-hook="events-card">
+  <a data-hook="title" href="https://www.lightboxfilmcenter.org/events/movie-b">Movie B</a>
+</li>
+"""
+
+
+def test_collect_lightbox_fetches_index_then_every_detail_page(monkeypatch: pytest.MonkeyPatch) -> None:
+    session = _FakeSession(
+        {
+            _LIGHTBOX_HOME: _FakeResponse(text=_LIGHTBOX_INDEX_HTML),
+            "https://www.lightboxfilmcenter.org/events/movie-a": _FakeResponse(text="<html>A detail</html>"),
+            "https://www.lightboxfilmcenter.org/events/movie-b": _FakeResponse(text="<html>B detail</html>"),
+        }
+    )
+    monkeypatch.setattr("collect_source.build_session", lambda: session)
+
+    result = collect_lightbox(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    assert len(result.raw_events) == 2
+    assert result.raw_events[0] == {
+        "title": "Movie A",
+        "href": "https://www.lightboxfilmcenter.org/events/movie-a",
+        "detail_html": "<html>A detail</html>",
+    }
+    assert result.failed_requests == []
+
+
+def test_collect_lightbox_raises_parse_error_when_index_structurally_broken(monkeypatch: pytest.MonkeyPatch) -> None:
+    session = _FakeSession({_LIGHTBOX_HOME: _FakeResponse(text="<html><body>no cards here</body></html>")})
+    monkeypatch.setattr("collect_source.build_session", lambda: session)
+
+    with pytest.raises(ParseError):
+        collect_lightbox(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+
+
+def test_collect_lightbox_raises_parse_error_when_index_fetch_fails_entirely(monkeypatch: pytest.MonkeyPatch) -> None:
+    session = _FakeSession({_LIGHTBOX_HOME: ConnectionError("down")})
+    monkeypatch.setattr("collect_source.build_session", lambda: session)
+
+    with pytest.raises(ParseError):
+        collect_lightbox(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+
+
+def test_collect_lightbox_records_failure_for_one_broken_detail_page_but_keeps_going(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    session = _FakeSession(
+        {
+            _LIGHTBOX_HOME: _FakeResponse(text=_LIGHTBOX_INDEX_HTML),
+            "https://www.lightboxfilmcenter.org/events/movie-a": _FakeResponse(text="<html>A detail</html>"),
+            "https://www.lightboxfilmcenter.org/events/movie-b": ConnectionError("timeout"),
+        }
+    )
+    monkeypatch.setattr("collect_source.build_session", lambda: session)
+
+    result = collect_lightbox(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    assert len(result.raw_events) == 2  # both candidates still appear...
+    movie_b = next(e for e in result.raw_events if e["title"] == "Movie B")
+    assert movie_b["detail_html"] is None  # ...but B's detail_html is None, not fabricated content
+    assert len(result.failed_requests) == 1
