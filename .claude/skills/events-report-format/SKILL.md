@@ -112,7 +112,7 @@ Add a table at the bottom of the report for multi-day events spanning 3+ days.
 
 Centered, `0.7rem #bbb`, each source name linked to its URL:
 
-Do215 · Lightbox Film Center · cinéSPEAK · Philadelphia Film Society · PhilaMOCA · Phillygoth.net · Harriet's Bookshop · Iffy Books · Wooden Shoe Books · The Rotunda · R5 Productions · Free Library · Billy Penn · Philadelphia Citizen · Philly Ask A Punk · The Key by WXPN · Meetup · Hive76 · Luma · Songkick · Google Calendar
+Do215 · Lightbox Film Center · cinéSPEAK · Philadelphia Film Society · PhilaMOCA · Phillygoth.net · Harriet's Bookshop · Iffy Books · Wooden Shoe Books · The Rotunda · R5 Productions · Free Library · Philadelphia Citizen · Philly Ask A Punk · The Key by WXPN · Meetup · Hive76 · Luma · Google Calendar
 
 If any sources failed during collection, append below the footer:
 ```html
@@ -135,9 +135,8 @@ For any music act in the Top 3 picks:
 ## Aggregation Notes
 
 **Expected overlap by source tier:**
-- **R5 + PhilaMOCA + Philly Ask A Punk** — significant overlap for punk/hardcore/DIY shows. R5 is authoritative (sold-out status, exact price). Deduplicate against Do215 and Songkick; prefer the R5 entry when merging.
-- **Do215 + Songkick** — broad overlap for mid-size and larger shows. Do215 has better context; Songkick has wider coverage. Merge and prefer whichever has more detail.
-- **Philly Ask A Punk** is the most complete DIY source and rarely overlaps with Songkick/Do215 — treat as additive.
+- **R5 + PhilaMOCA + Philly Ask A Punk** — significant overlap for punk/hardcore/DIY shows. R5 is authoritative (sold-out status, exact price). Deduplicate against Do215; prefer the R5 entry when merging.
+- **Philly Ask A Punk** is the most complete DIY source and rarely overlaps with Do215 — treat as additive.
 
 **General rules:**
 - Prefer the source with the most complete information (venue, time, price) when merging duplicates

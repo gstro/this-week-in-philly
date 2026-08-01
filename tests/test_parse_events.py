@@ -28,6 +28,7 @@ from event_parsers import do215 as do215_parser
 from event_parsers import lightbox as lightbox_parser
 from event_parsers import luma as luma_parser
 from event_parsers import meetup as meetup_parser
+from event_parsers import philadelphia_film_society as philadelphia_film_society_parser
 from event_parsers import philamoca as philamoca_parser
 from event_parsers import philly_ask_a_punk as philly_ask_a_punk_parser
 from event_parsers import philly_shows as philly_shows_parser
@@ -35,6 +36,7 @@ from event_parsers import phillygoth as phillygoth_parser
 from event_parsers import r5_productions as r5_productions_parser
 from event_parsers import the_rotunda as the_rotunda_parser
 from event_parsers import wxpn as wxpn_parser
+from event_parsers.base import resolve_year
 
 FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures" / "parse_events"
 WEEK_START = datetime.date(2026, 7, 20)
@@ -43,6 +45,35 @@ WEEK_END = datetime.date(2026, 7, 26)
 
 def _read(name: str) -> str:
     return (FIXTURES_DIR / name).read_text()
+
+
+# ---------------------------------------------------------------------------
+# base.resolve_year -- shared by r5-productions and phillygoth, both of
+# which parse a source date with no year in the text
+# ---------------------------------------------------------------------------
+
+
+def test_resolve_year_picks_week_starts_own_year_in_the_ordinary_case() -> None:
+    assert resolve_year(7, 22, datetime.date(2026, 7, 20)) == 2026
+
+
+def test_resolve_year_rolls_forward_across_a_dec_jan_boundary() -> None:
+    # week_start is 2026-12-28; "Jan 1" is much closer to 2027-01-01 than
+    # to 2026-01-01 (a year away), so it must resolve to 2027.
+    assert resolve_year(1, 1, datetime.date(2026, 12, 28)) == 2027
+
+
+def test_resolve_year_rolls_backward_across_a_dec_jan_boundary() -> None:
+    # Symmetric case: week_start is 2027-01-01; "Dec 30" is much closer to
+    # 2026-12-30 than to 2027-12-30 (a year away).
+    assert resolve_year(12, 30, datetime.date(2027, 1, 1)) == 2026
+
+
+def test_resolve_year_returns_none_for_feb_29_outside_a_leap_year() -> None:
+    # week_start=2026 means the 3 candidate years are 2025, 2026, 2027 --
+    # none of which is a leap year (2028 is next, but out of range), so
+    # Feb 29 is invalid in all three and there's no date to resolve to.
+    assert resolve_year(2, 29, datetime.date(2026, 6, 1)) is None
 
 
 # ---------------------------------------------------------------------------
@@ -67,6 +98,31 @@ def test_r5_productions_combines_tagline_and_title() -> None:
 def test_r5_productions_raises_on_structural_mismatch() -> None:
     with pytest.raises(ParseError):
         r5_productions_parser.parse("<html><body>no events here</body></html>", WEEK_START, WEEK_END)
+
+
+def test_r5_productions_resolves_year_across_a_dec_jan_boundary() -> None:
+    # Regression test for a real bug: this parser used to assume
+    # week_start.year for every event, since the source's date text never
+    # includes a year ("Fri, Jan 1"). For a week spanning New Year's, that
+    # silently assigned "Jan 1" to the *departing* year (2026) instead of
+    # the correct one (2027) -- either landing the event a year in the
+    # past or (as here) dropping it from the week-window filter entirely.
+    html = """
+    <div class="rhp-event">
+      <div id="eventDate">Fri, Jan 1</div>
+      <div class="rhp-event-info rhp-event__info--list">
+        <a id="eventTitle" href="https://r5productions.com/event/nye-show/"><h2 class="rhp-event__title--list">New Year's Show</h2></a>
+        <span class="rhp-event__time-text--list">8 pm</span>
+        <span class="rhp-event__cost-text--list">$20</span>
+        <a class="venueLink" title="First Unitarian Church">First Unitarian Church</a>
+      </div>
+    </div>
+    """
+    week_start = datetime.date(2026, 12, 28)
+    week_end = datetime.date(2027, 1, 3)
+    events = r5_productions_parser.parse(html, week_start, week_end)
+    assert len(events) == 1
+    assert events[0]["date"] == "2027-01-01"
 
 
 # ---------------------------------------------------------------------------
@@ -111,6 +167,41 @@ def test_phillygoth_extracts_every_event_in_window() -> None:
 def test_phillygoth_raises_on_structural_mismatch() -> None:
     with pytest.raises(ParseError):
         phillygoth_parser.parse("<html><body>nothing</body></html>", WEEK_START, WEEK_END)
+
+
+def test_phillygoth_resolves_year_across_a_dec_jan_boundary_when_year_is_absent() -> None:
+    # Regression test for a real bug: when the date text has no year (the
+    # regex's year group is optional), this parser used to assume
+    # week_start.year for every event. For a week spanning New Year's,
+    # that silently assigned "January 1" to the *departing* year (2026)
+    # instead of the correct one (2027).
+    html = """
+    <div class="em-event em-item">
+      <h3 class="em-item-title"><a href="https://phillygoth.net/events/nye/">New Year's Show</a></h3>
+      <div class="em-event-date">January 1</div>
+      <div class="em-event-location"><a href="https://phillygoth.net/locations/x/">Some Venue</a></div>
+    </div>
+    """
+    week_start = datetime.date(2026, 12, 28)
+    week_end = datetime.date(2027, 1, 3)
+    events = phillygoth_parser.parse(html, week_start, week_end)
+    assert len(events) == 1
+    assert events[0]["date"] == "2027-01-01"
+
+
+def test_phillygoth_trusts_an_explicit_year_when_the_source_provides_one() -> None:
+    # An explicit year in the source text must never be overridden by
+    # resolve_year's nearest-year heuristic.
+    html = """
+    <div class="em-event em-item">
+      <h3 class="em-item-title"><a href="https://phillygoth.net/events/x/">Explicit Year Show</a></h3>
+      <div class="em-event-date">December 30, 2026</div>
+      <div class="em-event-location"><a href="https://phillygoth.net/locations/x/">Some Venue</a></div>
+    </div>
+    """
+    events = phillygoth_parser.parse(html, datetime.date(2026, 12, 28), datetime.date(2027, 1, 3))
+    assert len(events) == 1
+    assert events[0]["date"] == "2026-12-30"
 
 
 # ---------------------------------------------------------------------------
@@ -178,6 +269,30 @@ def test_philly_ask_a_punk_raises_on_non_array_json() -> None:
         philly_ask_a_punk_parser.parse('{"not": "an array"}', WEEK_START, WEEK_END)
 
 
+def test_philly_ask_a_punk_uses_correct_offset_across_the_edt_est_transition() -> None:
+    # Regression test for a real bug: this parser used to hardcode a -4h
+    # (EDT) offset with no DST branch, silently an hour off from
+    # 2026-11-01 (when DST ends) through the following March. Both
+    # timestamps below encode 8pm UTC (1785960000 = 2026-08-05T20:00:00Z,
+    # 1794772800 = 2026-11-15T20:00:00Z); a fixed -4h offset would report
+    # the November event as 4:00 PM instead of the correct 3:00 PM.
+    raw = json.dumps(
+        [
+            {"title": "Summer Show (EDT)", "start_datetime": 1785960000, "place": {"name": "Test Venue"}, "slug": "a"},
+            {"title": "Winter Show (EST)", "start_datetime": 1794772800, "place": {"name": "Test Venue"}, "slug": "b"},
+        ]
+    )
+    edt_events = philly_ask_a_punk_parser.parse(raw, datetime.date(2026, 8, 1), datetime.date(2026, 8, 9))
+    assert len(edt_events) == 1
+    assert edt_events[0]["date"] == "2026-08-05"
+    assert edt_events[0]["time"] == "4:00 PM"  # 20:00 UTC - 4h (EDT)
+
+    est_events = philly_ask_a_punk_parser.parse(raw, datetime.date(2026, 11, 10), datetime.date(2026, 11, 20))
+    assert len(est_events) == 1
+    assert est_events[0]["date"] == "2026-11-15"
+    assert est_events[0]["time"] == "3:00 PM"  # 20:00 UTC - 5h (EST) -- was 4:00 PM under the old hardcoded offset
+
+
 # ---------------------------------------------------------------------------
 # luma (iCal, UTC DTSTART + EDT/EST offset)
 # ---------------------------------------------------------------------------
@@ -208,6 +323,38 @@ def test_luma_empty_calendar_returns_empty_list_not_an_error() -> None:
     # zero container elements in an HTML parser -- must not raise.
     events = luma_parser.parse("BEGIN:VCALENDAR\nEND:VCALENDAR\n", WEEK_START, WEEK_END)
     assert events == []
+
+
+def test_luma_uses_correct_offset_across_the_edt_est_transition() -> None:
+    # Regression test for a real bug: this parser used to hardcode a -4h
+    # (EDT) offset with no DST branch, silently an hour off from
+    # 2026-11-01 (when DST ends) through the following March. 2026-08-05
+    # (EDT, UTC-4) and 2026-11-15 (EST, UTC-5) both encode 8pm UTC in the
+    # feed; a fixed -4h offset would report 2026-11-15 as 4:00 PM instead
+    # of the correct 3:00 PM.
+    ics = (
+        "BEGIN:VCALENDAR\n"
+        "BEGIN:VEVENT\n"
+        "DTSTART:20260805T200000Z\n"
+        "SUMMARY:Summer Show (EDT)\n"
+        "LOCATION:Test Venue\n"
+        "END:VEVENT\n"
+        "BEGIN:VEVENT\n"
+        "DTSTART:20261115T200000Z\n"
+        "SUMMARY:Winter Show (EST)\n"
+        "LOCATION:Test Venue\n"
+        "END:VEVENT\n"
+        "END:VCALENDAR\n"
+    )
+    edt_events = luma_parser.parse(ics, datetime.date(2026, 8, 1), datetime.date(2026, 8, 9))
+    assert len(edt_events) == 1
+    assert edt_events[0]["date"] == "2026-08-05"
+    assert edt_events[0]["time"] == "4:00 PM"  # 20:00 UTC - 4h (EDT)
+
+    est_events = luma_parser.parse(ics, datetime.date(2026, 11, 10), datetime.date(2026, 11, 20))
+    assert len(est_events) == 1
+    assert est_events[0]["date"] == "2026-11-15"
+    assert est_events[0]["time"] == "3:00 PM"  # 20:00 UTC - 5h (EST) -- was 4:00 PM under the old hardcoded offset
 
 
 def test_luma_raises_when_response_is_not_ical_at_all() -> None:
@@ -547,6 +694,92 @@ def test_lightbox_raises_when_not_a_list() -> None:
 
 def test_lightbox_empty_candidate_list_is_not_an_error() -> None:
     events = lightbox_parser.parse("[]", LIGHTBOX_WEEK_START, LIGHTBOX_WEEK_END)
+    assert events == []
+
+
+# ---------------------------------------------------------------------------
+# philadelphia-film-society -- rendered Fandango showtime text, merged
+# per-venue-per-day by the collector (philadelphia-film-society.json
+# fixture: real film/showtime data captured live 2026-08-01 from all 3
+# venues, reassembled into 2 sample days each, plus one failed-fetch entry,
+# one genuinely-dark-day entry, and one out-of-window entry)
+# ---------------------------------------------------------------------------
+
+PFS_WEEK_START = datetime.date(2026, 8, 3)
+PFS_WEEK_END = datetime.date(2026, 8, 9)
+
+
+def test_pfs_filters_to_target_week_and_extracts_all_venues() -> None:
+    events = philadelphia_film_society_parser.parse(
+        _read("philadelphia-film-society.json"), PFS_WEEK_START, PFS_WEEK_END
+    )
+    # 2 (center/wed) + 1 (center/sat) + 1 (bourse/wed) + 0 (bourse/sat, failed)
+    # + 1 (east/wed) + 0 (east/sat, dark) + 0 (out-of-window) = 5
+    assert len(events) == 5
+    titles = {e["title"] for e in events}
+    assert titles == {
+        "Compensation",
+        "The Odyssey (2026)",
+        "Vanishing Point",
+        "Sheep in the Box (2026)",
+        "The Outlaw Josey Wales",
+    }
+
+
+def test_pfs_joins_multiple_showtimes_for_one_film() -> None:
+    events = philadelphia_film_society_parser.parse(
+        _read("philadelphia-film-society.json"), PFS_WEEK_START, PFS_WEEK_END
+    )
+    odyssey = next(e for e in events if "Odyssey" in e["title"])
+    assert odyssey["time"] == "12:00 PM, 3:30 PM, 7:30 PM"
+    assert odyssey["date"] == "2026-08-05"
+
+
+def test_pfs_venue_combines_collector_provided_name_and_address() -> None:
+    events = philadelphia_film_society_parser.parse(
+        _read("philadelphia-film-society.json"), PFS_WEEK_START, PFS_WEEK_END
+    )
+    compensation = next(e for e in events if e["title"] == "Compensation")
+    assert compensation["venue"] == "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102"
+    assert compensation["url"] == "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page"
+
+
+def test_pfs_description_carries_rating_and_runtime() -> None:
+    events = philadelphia_film_society_parser.parse(
+        _read("philadelphia-film-society.json"), PFS_WEEK_START, PFS_WEEK_END
+    )
+    compensation = next(e for e in events if e["title"] == "Compensation")
+    assert compensation["description"] == "Rated Not Rated. Runtime: 1 hr 31 min."
+
+
+def test_pfs_skips_entry_with_failed_fetch() -> None:
+    events = philadelphia_film_society_parser.parse(
+        _read("philadelphia-film-society.json"), PFS_WEEK_START, PFS_WEEK_END
+    )
+    assert all("Sheep in the Box" != e["title"] or e["date"] != "2026-08-08" for e in events)
+
+
+def test_pfs_genuinely_dark_day_is_not_an_error() -> None:
+    # East Theater's Saturday entry has real rendered_text (the venue header
+    # is there) but zero "Rated:" blocks -- a dark day, not a broken fetch.
+    events = philadelphia_film_society_parser.parse(
+        _read("philadelphia-film-society.json"), PFS_WEEK_START, PFS_WEEK_END
+    )
+    assert all(e["venue"] != "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106" or e["date"] != "2026-08-08" for e in events)
+
+
+def test_pfs_raises_on_invalid_json() -> None:
+    with pytest.raises(ParseError):
+        philadelphia_film_society_parser.parse("not json", PFS_WEEK_START, PFS_WEEK_END)
+
+
+def test_pfs_raises_when_not_a_list() -> None:
+    with pytest.raises(ParseError):
+        philadelphia_film_society_parser.parse(json.dumps({"not": "a list"}), PFS_WEEK_START, PFS_WEEK_END)
+
+
+def test_pfs_empty_entry_list_is_not_an_error() -> None:
+    events = philadelphia_film_society_parser.parse("[]", PFS_WEEK_START, PFS_WEEK_END)
     assert events == []
 
 

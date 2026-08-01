@@ -5,10 +5,15 @@ from __future__ import annotations
 import datetime
 import json
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from .base import Event, ParseError, write_event
 
-_UTC_OFFSET_ET = -4 * 3600  # EDT; -5*3600 for EST (Nov-Mar)
+# Was a hardcoded -4h (EDT) offset with no DST branch -- correct roughly
+# March-November, silently an hour off the rest of the year. ZoneInfo
+# resolves the right UTC offset for America/New_York on any given date,
+# including the EDT/EST transition itself, with no manual date math.
+_EASTERN = ZoneInfo("America/New_York")
 
 
 def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_kwargs: Any) -> list[Event]:  # noqa: ANN401
@@ -24,10 +29,10 @@ def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_
         start_ts = item.get("start_datetime")
         if start_ts is None:
             continue
-        event_date = datetime.datetime.fromtimestamp(start_ts + _UTC_OFFSET_ET, tz=datetime.UTC).date()
+        event_date = datetime.datetime.fromtimestamp(start_ts, tz=_EASTERN).date()
         end_ts = item.get("end_datetime")
         if item.get("multidate") and end_ts:
-            end_date = datetime.datetime.fromtimestamp(end_ts + _UTC_OFFSET_ET, tz=datetime.UTC).date()
+            end_date = datetime.datetime.fromtimestamp(end_ts, tz=_EASTERN).date()
             in_week = event_date <= week_end and end_date >= week_start
         else:
             in_week = week_start <= event_date <= week_end
@@ -38,7 +43,7 @@ def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_
         venue_name = place.get("name", "")
         venue_address = place.get("address", "")
         venue = f"{venue_name} ({venue_address})" if venue_address else venue_name
-        event_time = datetime.datetime.fromtimestamp(start_ts + _UTC_OFFSET_ET, tz=datetime.UTC).strftime("%-I:%M %p")
+        event_time = datetime.datetime.fromtimestamp(start_ts, tz=_EASTERN).strftime("%-I:%M %p")
 
         events.append(
             write_event(

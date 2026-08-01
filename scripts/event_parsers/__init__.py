@@ -18,6 +18,7 @@ from . import (
     lightbox,
     luma,
     meetup,
+    philadelphia_film_society,
     philamoca,
     philly_ask_a_punk,
     philly_shows,
@@ -48,6 +49,7 @@ PARSERS: dict[str, Callable[..., list[Event]]] = {
     "wxpn": wxpn.parse,
     "cinespeak": cinespeak.parse,
     "lightbox-film-center": lightbox.parse,
+    "philadelphia-film-society": philadelphia_film_society.parse,
 }
 
 __all__ = ["PARSERS", "Event", "EventParser", "ParseError"]

@@ -6,10 +6,6 @@
     "total_floor": 45
   },
   "sources": {
-    "billy-penn": {
-      "min_expected": 0,
-      "note": "WebSearch source; weekly calendar post isn't live until Sunday morning, after the scheduled 2am ET collection run. 0 is structurally expected most weeks -- not a failure signal for this source."
-    },
     "cinespeak": {
       "min_expected": 0,
       "note": "A deterministic parser now backs this source (scripts/event_parsers/cinespeak.py, plain Gutenberg block markup on /cinema/) -- confirmed live 2026-07-29: 1 event for the real week of 2026-08-03. Historical range is thin and genuinely variable (1-2/week in v1 and v2 run A, 0 confirmed for this specific week) -- kept at 0 rather than 1 to avoid false-positiving on a real single-screening-per-week cadence; the provenance and manifest-agreement checks still cover this source."
@@ -55,8 +51,8 @@
       "note": "Stable at 3/week in legitimate runs (v1: 3, v2 run A: 1, v2 HEAD: 3); floor set below the lowest of those."
     },
     "philadelphia-film-society": {
-      "min_expected": 0,
-      "note": "Browser-only (Fandango showtimes are JS-rendered; no working API found). Currently timing out in both recent v2 runs. Kept at 0 to avoid crying wolf on a source that's known-broken until it's fixed, not newly regressed."
+      "min_expected": 6,
+      "note": "A resilient collector now backs this source (scripts/event_parsers/philadelphia_film_society.py + scripts/collect_source.py): 3 venues x 2 sample days (Wed+Sat), each fetch isolated so one hanging venue/day no longer fails the whole source -- confirmed live 2026-08-01: 18 events for the week of 2026-08-03, zero fetch failures, replacing a real prior week where the whole source reported status:failed. Still browser-only (Fandango showtimes are JS-rendered; Agile Ticketing, the real backend, is WAF-blocked same as filmadelphia.org). Floor set well below the confirmed 18 since only 2 of 7 days are sampled and yield will vary by what's actually programmed that week."
     },
     "philamoca": {
       "min_expected": 4,
@@ -77,10 +73,6 @@
     "r5-productions": {
       "min_expected": 5,
       "note": "Deterministic parser. Stable at 7/week across all observed legitimate runs."
-    },
-    "songkick": {
-      "min_expected": 0,
-      "note": "v1 got 8 (marked 'partial'); a real per-listing JSON-LD route was found during investigation but pagination is rate-limited (intermittent 406, not page-specific) and unfixed as of this baseline. Kept at 0 -- a real fetch failure here should surface as status:failed, not a yield-floor flag, until the parser lands."
     },
     "the-rotunda": {
       "min_expected": 2,

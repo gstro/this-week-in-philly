@@ -74,3 +74,31 @@ _MONTHS = {
 
 def parse_month(name: str) -> int | None:
     return _MONTHS.get(name.strip().lower()[:3])
+
+
+def resolve_year(month: int, day: int, week_start: datetime.date) -> int | None:
+    """Picks whichever nearby year makes (month, day) land closest to
+    week_start, for sources whose date text carries no year at all.
+
+    Naively assuming `week_start.year` (what r5_productions.py and
+    phillygoth.py both did before this existed) breaks specifically when a
+    target week spans a Dec/Jan boundary: week_start=2026-12-28 with a
+    source date of "Jan 3" should resolve to 2027, not 2026 -- assuming
+    2026 either lands the event a year in the past or drops it from the
+    week-window filter entirely, silently.
+
+    Tries week_start's year and both neighbors, so the boundary case is
+    covered without a magic-number day threshold. Returns None only if
+    (month, day) isn't a valid date in any of the three candidate years
+    (e.g. Feb 29 outside a leap year).
+    """
+    candidates = []
+    for year in (week_start.year - 1, week_start.year, week_start.year + 1):
+        try:
+            candidates.append(datetime.date(year, month, day))
+        except ValueError:
+            continue
+    if not candidates:
+        return None
+    closest = min(candidates, key=lambda d: abs((d - week_start).days))
+    return closest.year

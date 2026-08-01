@@ -59,14 +59,12 @@ SOURCES = [
     ("The Rotunda", "https://therotunda.org"),
     ("R5 Productions", "https://r5productions.com"),
     ("Free Library", "https://libwww.freelibrary.org"),
-    ("Billy Penn", "https://billypenn.com"),
     ("Philadelphia Citizen", "https://thephiladelphiacitizen.org"),
     ("Philly Ask A Punk", "https://philly.askapunk.net"),
     ("The Key by WXPN", "https://xpn.org"),
     ("Meetup", "https://meetup.com"),
     ("Hive76", "https://hive76.org"),
     ("Luma", "https://lu.ma"),
-    ("Songkick", "https://songkick.com"),
     ("Google Calendar", "https://calendar.google.com"),
 ]
 
