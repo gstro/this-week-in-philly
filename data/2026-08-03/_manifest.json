@@ -1,7 +1,7 @@
 {
   "week": "2026-08-03",
-  "run_started": "2026-08-01T19:00:00",
-  "run_completed": "2026-08-01T19:09:28.832465",
+  "run_started": "2026-08-01T23:36:36.424123+00:00",
+  "run_completed": "2026-08-01T23:37:07.145187+00:00",
   "sources": {
     "cinespeak": {
       "status": "ok",
@@ -10,18 +10,6 @@
     "do215": {
       "status": "ok",
       "events": 517
-    },
-    "free-library": {
-      "status": "failed",
-      "reason": "Cloudflare bot-check"
-    },
-    "harriets-bookshop": {
-      "status": "ok",
-      "events": 0
-    },
-    "hive76": {
-      "status": "ok",
-      "events": 1
     },
     "iffy-books": {
       "status": "ok",
@@ -66,10 +54,6 @@
     "meetup-tech-in-motion": {
       "status": "ok",
       "events": 0
-    },
-    "philadelphia-citizen": {
-      "status": "ok",
-      "events": 2
     },
     "philadelphia-film-society": {
       "status": "ok",

@@ -1,23 +1,32 @@
 {
   "source": "Wooden Shoe Books",
-  "collected_at": "2026-08-01T19:01:53.420684+00:00",
+  "collected_at": "2026-08-01T23:37:06.876930+00:00",
   "events": [
-    {
-      "title": "Solidarity with Young People Movie Night Series",
-      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
-      "date": "2026-08-07",
-      "time": "6:00 PM",
-      "cost": "",
-      "url": "",
-      "description": ""
-    },
     {
       "title": "NLG Know Your Rights Training",
       "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
       "date": "2026-08-05",
       "time": "6:00 PM",
       "cost": "",
-      "url": "",
+      "url": "https://www.google.com/calendar/event?eid=YzhzNmFjcGtjbGgzMmI5bzY4cWo0YjlrNzFnajBiYjFjb282MmJiMWM5aGplY2I0YzVpNjhjMWhjNF8yMDI2MDgwNVQyMjAwMDBaIHQ4cW1pdmU2M24yN21kajdndDAzbnRjMnU4QGc&ctz=America/New_York",
+      "description": ""
+    },
+    {
+      "title": "Solidarity with Young People Movie Night Series",
+      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+      "date": "2026-08-07",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=NmtyamNlYjRjOHFtNmI5bDZkZ2o4YjlrNmtzamliYjJjcGo2NmI5cGNvczM2cDlrY2xoamFvcGdjY18yMDI2MDgwN1QyMjAwMDBaIHQ4cW1pdmU2M24yN21kajdndDAzbnRjMnU4QGc&ctz=America/New_York",
+      "description": ""
+    },
+    {
+      "title": "Philly Socialists Reading Group",
+      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+      "date": "2026-08-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=NW50ZjhpNXJubHY0N2pzZHBoNTc3Y2ViMmxfMjAyNjA4MDhUMTcwMDAwWiB0OHFtaXZlNjNuMjdtZGo3Z3QwM250YzJ1OEBn&ctz=America/New_York",
       "description": ""
     },
     {
@@ -26,17 +35,8 @@
       "date": "2026-08-08",
       "time": "7:00 PM",
       "cost": "",
-      "url": "",
+      "url": "https://www.google.com/calendar/event?eid=NGFjcW8zdnZ0YjVhY2w5cTNwcGxzdmNzM2EgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&ctz=America/New_York",
       "description": "Come experience a night of the best disabled queer poets in Philly. Doctors hate them! But you'll love 'em. Masks required. Wheelchair accessible."
-    },
-    {
-      "title": "Philly Socialists Reading Group",
-      "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
-      "date": "2026-08-08",
-      "time": "1:00 PM",
-      "cost": "",
-      "url": "",
-      "description": ""
     }
   ]
 }

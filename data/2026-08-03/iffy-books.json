@@ -1,6 +1,6 @@
 {
   "source": "Iffy Books",
-  "collected_at": "2026-08-01T19:01:53.420658+00:00",
+  "collected_at": "2026-08-01T23:37:06.587298+00:00",
   "events": [
     {
       "title": "\u2615\ufe0f Coffee Talk",
@@ -8,7 +8,7 @@
       "date": "2026-08-03",
       "time": "6:00 PM",
       "cost": "",
-      "url": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjRxajBiOWg2c3MzYWRwbzYwbzMwYzFkNjRyamdkOW43MHJqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
       "description": "A social hangout every first and third Monday for trans and non-binary people, their significant others, and allies. We have snacks and coffee."
     },
     {
@@ -17,7 +17,7 @@
       "date": "2026-08-04",
       "time": "5:00 PM",
       "cost": "",
-      "url": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9yajZiOWg2c3MzYWUxbTY4czMwYzFkNjRyamdkOW82c29qZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
       "description": "Come co-work with other writers in three 40-minute units of silent writing. Writers and projects of any type welcome. 10-minute breaks and accountability check-ins between units. BYO coffee, water, computer chargers, notepads, etc."
     },
     {
@@ -26,8 +26,8 @@
       "date": "2026-08-05",
       "time": "10:30 AM",
       "cost": "",
-      "url": "",
-      "description": "Come experiment with VHS tapes and audio cassettes! We'll have equipment on hand for analog-to-digital and digital-to-analog transfers."
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmtwMzJiOWg2c3MzYWU5aTZrczMwYzFkNjRyamdkOXA2Y3BqMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Come experiment with VHS tapes and audio cassettes! We\u2019ll have equipment on hand for analog-to-digital and digital-to-analog transfers. \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailInstructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5\u2013$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit"
     },
     {
       "title": "\ud83d\udd0a DJ Basixxx with Mixxx",
@@ -35,8 +35,8 @@
       "date": "2026-08-05",
       "time": "2:00 PM",
       "cost": "",
-      "url": "",
-      "description": "If you're curious about DJing but don't have money to drop on equipment, this workshop is for you! You'll learn to use Mixxx, a free and open source DJ program for macOS, Windows, and Linux."
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmNvM2FiOWg2c3MzYWU5ajcwcTMwYzFkNjRyamdkOXA2Z3FqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "If you\u2019re curious about DJing but don\u2019t have money to drop on equipment, this workshop is for you! You\u2019ll learn to use Mixxx, a free and open source DJ program for macOS, Windows, and Linux. Mixxx supports a wide range of DJ controller hardware, but to make it more accessible we\u2019re using regular QWERTY keyboards with stickers on the important keys. We\u2019ll teach you to find tracks on the web, load them into Mixxx, and get started with beatmatching. It\u2019s easier then you think! \nYou\u2019ll need to bring your own laptop and headphones for this workshop. We also recommend bringing a separate USB keyboard if you have one, ideally with a row of function keys (F1, F2, F3, etc.). If you have an external audio interface, you\u2019re welcome to bring that too. \nThe DJ controller sticker sheets we\u2019re using are available on our online store. Or print your own\u00a0(4\u2033 x 4\u2033) on sticker paper! \n\u27a1\ufe0f Workshop instructions \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailBuy a sticker sheet (optional)DJ controller keyboard stickers - $2.70(price includes tax)Instructor donation:$0 / donate later$5$10$15$20$25(suggested $5\u2013$15)Credit card info: *CardName on CardComments or questions?Submit  \n \n \nCircuitPython code for turning a Pi Pico board into a USB keyboard"
     },
     {
       "title": "\ud83d\udd0b Beginner Soldering: Li-Ion Battery Pack",
@@ -44,8 +44,8 @@
       "date": "2026-08-06",
       "time": "2:30 PM",
       "cost": "",
-      "url": "",
-      "description": "Make a rechargeable battery pack for your LoRa node, a microcontroller such as an ESP32 or Pi Pico, or anything that runs on 3\u20134 Volts. Perfect for folks who've never soldered before!"
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9vajBiOWg2c3MzY2MxaTZvcjMwYzFkNjRyamdkaGc2Y28zNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Make a rechargeable battery pack for your LoRa node, a microcontroller such as an ESP32 or Pi Pico, or anything that runs on 3\u20134 Volts. Perfect for folks who\u2019ve never soldered before! \nTo complete this project you\u2019ll need to buy a li-ion battery pack kit for $3.99. Here\u2019s what it includes: \n\u2022 18650 battery clip w/ attached wires\n\u2022 TP4056 charge controller board\n\u2022 PH2.5 plug w/ attached wires\n\u2022 1/8\u2033 heat shrink tubing (1.5\u2033 long)\n\u2022 1/2\u2033 heat shrink tubing (1\u2033 long) \nYou\u2019ll also need a lithium-ion 18650 battery, available separately. \nRegister\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailPurchase a kit:Li-Ion Battery Pack Kit - $4.31Flat top 18650 battery (5000 mAh ) - $6.47(prices include sales tax)Instructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5\u2013$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit"
     },
     {
       "title": "\u26a1\ufe0f Beginner Soldering: LED Spinning Top",
@@ -53,8 +53,8 @@
       "date": "2026-08-07",
       "time": "2:00 PM",
       "cost": "",
-      "url": "",
-      "description": "For this class we're building a spinning top toy with LED lights that flash when it spins. No previous soldering experience required!"
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmdwajJiOWg2c3MzY2M5aDY0cDMwYzFkNjRyamdkaGg2NHMzOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "For this class we\u2019re building a spinning top toy with LED lights that flash when it spins. No previous soldering experience required! \n\nRegistration\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailPurchase a kit:LED Top Soldering Kit - $5.39(prices include sales tax)Instructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5\u2013$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit"
     },
     {
       "title": "\ud83d\udcbb Philly 2600 Meetup",
@@ -62,8 +62,8 @@
       "date": "2026-08-07",
       "time": "6:00 PM",
       "cost": "",
-      "url": "",
-      "description": "The Philly 2600 meeting is a monthly gathering of local hackers, phreaks, nerds, geeks, activists, tinkerers, developers, infosec professionals, and other interesting people."
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNxM2liOWg2c3MzY2M5aTZrcjMwYzFkNjRyamdkaGg2Y3AzZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "> The Philly 2600 meeting is a monthly gathering of local hackers, phreaks, nerds, geeks, activists, tinkerers, developers, infosec professionals, and other interesting people."
     },
     {
       "title": "\ud83e\uddf5 Anarchist Sewing Club",
@@ -71,8 +71,8 @@
       "date": "2026-08-09",
       "time": "3:00 PM",
       "cost": "",
-      "url": "",
-      "description": "Interested in learning to sew, mend or make clothes? Already know how and wanna hang out with people while sewing? Come and join us! Sewing supplies and a sewing machine will be available for anyone needing them."
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNyamFiOWg2c3MzY2NobzZzcjMwYzFkNjRyamdkaGk3NHEzZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Interested in learning to sew, mend or make clothes? Already know how and wanna hang out with people while sewing? Come and join us! Sewing supplies and a sewing machine will be available for anyone needing them.\n\u00a0 \nImage credit"
     },
     {
       "title": "\ud83c\udff4 Anarchy Summer Reading Group: 'The Utopia of Rules' by David Graeber (2nd half)",
@@ -80,8 +80,8 @@
       "date": "2026-08-09",
       "time": "6:00 PM",
       "cost": "",
-      "url": "",
-      "description": "We're meeting every two weeks to discuss classics of anarchist literature, starting with Anarchism and Other Essays by Emma Goldman and The Conquest of Bread by Peter Kropotkin."
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjhyajZiOWg2c3MzY2NocDcwcTMwYzFkNjRyamdkaGo2MHFqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "We\u2019re meeting every two weeks to discuss classics of anarchist literature, starting with Anarchism and Other Essays by Emma Goldman and The Conquest of Bread by Peter Kropotkin. \nStay tuned for more details!"
     }
   ]
 }
