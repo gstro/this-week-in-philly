@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "id": "evt-timed-inweek",
+      "status": "confirmed",
+      "summary": "☕️ Coffee Talk",
+      "location": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "description": "A social hangout every first and third Monday for trans and non-binary people, their significant others, and allies. We have snacks and coffee.",
+      "htmlLink": "https://www.google.com/calendar/event?eid=evt-timed-inweek",
+      "start": { "dateTime": "2026-08-03T18:00:00-04:00", "timeZone": "America/New_York" },
+      "end": { "dateTime": "2026-08-03T20:00:00-04:00", "timeZone": "America/New_York" }
+    },
+    {
+      "id": "evt-allday-inweek",
+      "status": "confirmed",
+      "summary": "Super Troopers 3 (2026)",
+      "description": "The mustache rides, again. Again.",
+      "htmlLink": "https://www.google.com/calendar/event?eid=evt-allday-inweek",
+      "start": { "date": "2026-08-07" },
+      "end": { "date": "2026-08-08" }
+    },
+    {
+      "id": "evt-no-location",
+      "status": "confirmed",
+      "summary": "Event With No Location Field",
+      "htmlLink": "https://www.google.com/calendar/event?eid=evt-no-location",
+      "start": { "dateTime": "2026-08-05T19:30:00-04:00" },
+      "end": { "dateTime": "2026-08-05T21:00:00-04:00" }
+    },
+    {
+      "id": "evt-no-htmllink",
+      "status": "confirmed",
+      "summary": "Event With No htmlLink",
+      "start": { "dateTime": "2026-08-06T12:00:00-04:00" },
+      "end": { "dateTime": "2026-08-06T13:00:00-04:00" }
+    },
+    {
+      "id": "evt-cancelled",
+      "status": "cancelled",
+      "summary": "Cancelled Event",
+      "htmlLink": "https://www.google.com/calendar/event?eid=evt-cancelled",
+      "start": { "dateTime": "2026-08-05T18:00:00-04:00" }
+    },
+    {
+      "id": "evt-out-of-window",
+      "status": "confirmed",
+      "summary": "Way Out Of Window",
+      "htmlLink": "https://www.google.com/calendar/event?eid=evt-out-of-window",
+      "start": { "dateTime": "2026-09-15T18:00:00-04:00" }
+    },
+    {
+      "id": "evt-malformed-start",
+      "status": "confirmed",
+      "summary": "Malformed Start",
+      "htmlLink": "https://www.google.com/calendar/event?eid=evt-malformed",
+      "start": {}
+    }
+  ],
+  "venue": "Iffy Books, 404 S. 20th St., Philadelphia, PA 19146",
+  "fallback_url": "https://iffybooks.net/"
+}

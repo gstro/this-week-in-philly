@@ -15,6 +15,7 @@ from collections.abc import Callable
 from . import (
     cinespeak,
     do215,
+    gcal,
     lightbox,
     luma,
     meetup,
@@ -50,6 +51,7 @@ PARSERS: dict[str, Callable[..., list[Event]]] = {
     "cinespeak": cinespeak.parse,
     "lightbox-film-center": lightbox.parse,
     "philadelphia-film-society": philadelphia_film_society.parse,
+    "gcal": gcal.parse,
 }
 
 __all__ = ["PARSERS", "Event", "EventParser", "ParseError"]

@@ -31,15 +31,19 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import functools
 import json
 import sys
 from collections.abc import Callable
 from dataclasses import dataclass
+from typing import Any
+from zoneinfo import ZoneInfo
 
 from event_parsers import (
     Event,
     ParseError,
     do215,
+    gcal,
     lightbox,
     philadelphia_film_society,
     wxpn,
@@ -65,6 +69,11 @@ _MAX_PAGES_PER_DAY = 6
 # (2026-07-29): 495 total records across 5 pages of 100 (the API's own
 # per_page cap). Capped one page above that observed ceiling.
 _MAX_PAGES_WXPN = 6
+
+# Calendar API queries are bounded by wall-clock instants, so the target week's
+# Mon 00:00 -> Sun 23:59 has to be expressed in Philadelphia's timezone, not
+# the runner's UTC -- otherwise a Sunday-evening event lands outside the window.
+_EASTERN = ZoneInfo("America/New_York")
 
 
 @dataclass
@@ -236,6 +245,100 @@ def collect_philadelphia_film_society(week_start: datetime.date, week_end: datet
     return FetchResult(raw_events=entries, failed_requests=failed)
 
 
+# The three venue calendars from philadelphia-sources/SKILL.md's Google
+# Calendar table. These are third-party/public calendars addressed by ID --
+# NOT Greg's own "Curated Events" calendar, so common.get_calendar_id()
+# (which name-searches the authenticated account's calendar list) must not be
+# used here. `venue` and `fallback_url` are per-calendar facts the API's event
+# resources don't carry; the parser uses them to fill gaps.
+_GCAL_CALENDARS = {
+    "iffy-books": {
+        "calendar_id": "uim84nkq226inhhqa44v98foigjak9us@import.calendar.google.com",
+        "venue": "Iffy Books, 404 S. 20th St., Philadelphia, PA 19146",
+        "fallback_url": "https://iffybooks.net/",
+    },
+    "wooden-shoe-books": {
+        "calendar_id": "t8qmive63n27mdj7gt03ntc2u8@group.calendar.google.com",
+        "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+        "fallback_url": "https://woodenshoebooks.org/",
+    },
+    "trakt-film-releases": {
+        "calendar_id": "3c3o7i2bfqmvbss5lckns84vkedh4gqd@import.calendar.google.com",
+        # Theatrical releases aren't tied to a venue; philly-events-selection's
+        # schema notes say to set venue to "Theatrical release" when absent.
+        "venue": "Theatrical release",
+        "fallback_url": "",
+    },
+}
+
+
+def _collect_gcal(source_key: str, week_start: datetime.date, week_end: datetime.date) -> FetchResult:
+    """Reads one venue calendar over the target week via the Calendar API.
+
+    Replaces the `gcal_list_events` MCP tool, which only exists inside a
+    Claude session -- see event_parsers/gcal.py for the data-loss incident
+    that made a tested path here necessary.
+    """
+    import common  # local import: keeps the Google deps off every other collector's path
+
+    config = _GCAL_CALENDARS[source_key]
+    start = datetime.datetime.combine(week_start, datetime.time.min, tzinfo=_EASTERN)
+    end = datetime.datetime.combine(week_end, datetime.time.max, tzinfo=_EASTERN)
+
+    try:
+        service = common.get_calendar_service()
+    except Exception as exc:
+        raise ParseError(f"Google Calendar auth failed: {exc}") from exc
+
+    # list[Any], not list[dict]: google-api-python-client-stubs types the
+    # response's "items" as its own Event TypedDict, which collides with
+    # event_parsers.Event imported above -- and we only pass these straight
+    # through to gcal.parse anyway.
+    items: list[Any] = []
+    failed: list[str] = []
+    page_token = None
+    while True:
+        try:
+            result = (
+                service.events()
+                .list(
+                    calendarId=config["calendar_id"],
+                    timeMin=start.isoformat(),
+                    timeMax=end.isoformat(),
+                    singleEvents=True,
+                    orderBy="startTime",
+                    timeZone=common.CALENDAR_TIMEZONE,
+                    pageToken=page_token,
+                )
+                .execute()
+            )
+        except Exception as exc:  # noqa: BLE001 -- one page failing shouldn't lose the pages already read
+            failed.append(f"{source_key} calendar page (token={page_token}) ({exc})")
+            break
+        items.extend(result.get("items", []))
+        page_token = result.get("nextPageToken")
+        if not page_token:
+            break
+
+    # gcal.parse expects the API's own {"items": [...]} envelope plus the two
+    # per-calendar extras; RAW_WRAPPERS below re-attaches them after the
+    # collector/parser boundary flattens everything to a list.
+    entries = [{"_gcal_meta": {"venue": config["venue"], "fallback_url": config["fallback_url"]}}, *items]
+    return FetchResult(raw_events=entries, failed_requests=failed)
+
+
+def _wrap_gcal(entries: list[dict]) -> str:
+    """Splits the meta marker back out of the flattened collector output."""
+    meta: dict = {}
+    items = []
+    for entry in entries:
+        if "_gcal_meta" in entry:
+            meta = entry["_gcal_meta"]
+        else:
+            items.append(entry)
+    return json.dumps({"items": items, **meta})
+
+
 # Each collector fetches its source's raw data (as many requests as needed)
 # and returns it merged into one blob ready for that source's pure parser --
 # adding a new multi-fetch source means adding one entry here, following the
@@ -245,6 +348,7 @@ COLLECTORS: dict[str, Callable[[datetime.date, datetime.date], FetchResult]] = {
     "wxpn": collect_wxpn,
     "lightbox-film-center": collect_lightbox,
     "philadelphia-film-society": collect_philadelphia_film_society,
+    **{key: functools.partial(_collect_gcal, key) for key in _GCAL_CALENDARS},
 }
 
 PARSE_FUNCS: dict[str, Callable[..., list[Event]]] = {
@@ -252,6 +356,7 @@ PARSE_FUNCS: dict[str, Callable[..., list[Event]]] = {
     "wxpn": wxpn.parse,
     "lightbox-film-center": lightbox.parse,
     "philadelphia-film-society": philadelphia_film_society.parse,
+    **dict.fromkeys(_GCAL_CALENDARS, gcal.parse),
 }
 
 # Each source's parser expects raw JSON in its own shape (do215: an object
@@ -265,6 +370,7 @@ RAW_WRAPPERS: dict[str, Callable[[list[dict]], str]] = {
     "wxpn": json.dumps,
     "lightbox-film-center": json.dumps,
     "philadelphia-film-society": json.dumps,
+    **dict.fromkeys(_GCAL_CALENDARS, _wrap_gcal),
 }
 
 

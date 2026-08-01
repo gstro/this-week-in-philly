@@ -25,6 +25,7 @@ import parse_events as pe
 from event_parsers import ParseError
 from event_parsers import cinespeak as cinespeak_parser
 from event_parsers import do215 as do215_parser
+from event_parsers import gcal as gcal_parser
 from event_parsers import lightbox as lightbox_parser
 from event_parsers import luma as luma_parser
 from event_parsers import meetup as meetup_parser
@@ -780,6 +781,83 @@ def test_pfs_raises_when_not_a_list() -> None:
 
 def test_pfs_empty_entry_list_is_not_an_error() -> None:
     events = philadelphia_film_society_parser.parse("[]", PFS_WEEK_START, PFS_WEEK_END)
+    assert events == []
+
+
+# ---------------------------------------------------------------------------
+# gcal -- Google Calendar API event resources (gcal.json fixture mirrors the
+# real API shape for the 3 venue calendars, including both start variants)
+# ---------------------------------------------------------------------------
+
+GCAL_WEEK_START = datetime.date(2026, 8, 3)
+GCAL_WEEK_END = datetime.date(2026, 8, 9)
+
+
+def test_gcal_every_event_has_a_nonempty_url() -> None:
+    """THE regression guard for this module's reason to exist.
+
+    On 2026-08-01 an improvised one-off conversion script wrote all 15 events
+    across the three calendars with `"url": ""` -- silently, since counts and
+    every other field were right. Nothing in the pipeline noticed.
+    """
+    events = gcal_parser.parse(_read("gcal.json"), GCAL_WEEK_START, GCAL_WEEK_END)
+    assert events, "fixture should yield events"
+    assert all(e["url"] for e in events), [e for e in events if not e["url"]]
+
+
+def test_gcal_filters_to_target_week_and_skips_cancelled_and_malformed() -> None:
+    events = gcal_parser.parse(_read("gcal.json"), GCAL_WEEK_START, GCAL_WEEK_END)
+    titles = {e["title"] for e in events}
+    assert titles == {
+        "☕️ Coffee Talk",
+        "Super Troopers 3 (2026)",
+        "Event With No Location Field",
+        "Event With No htmlLink",
+    }
+    assert "Cancelled Event" not in titles
+    assert "Way Out Of Window" not in titles
+    assert "Malformed Start" not in titles
+
+
+def test_gcal_parses_timed_events_with_local_time() -> None:
+    events = gcal_parser.parse(_read("gcal.json"), GCAL_WEEK_START, GCAL_WEEK_END)
+    coffee = next(e for e in events if "Coffee Talk" in e["title"])
+    assert coffee["date"] == "2026-08-03"
+    assert coffee["time"] == "6:00 PM"
+    assert coffee["url"] == "https://www.google.com/calendar/event?eid=evt-timed-inweek"
+
+
+def test_gcal_all_day_event_gets_blank_time_not_fake_midnight() -> None:
+    events = gcal_parser.parse(_read("gcal.json"), GCAL_WEEK_START, GCAL_WEEK_END)
+    film = next(e for e in events if "Super Troopers" in e["title"])
+    assert film["date"] == "2026-08-07"
+    assert film["time"] == ""
+
+
+def test_gcal_falls_back_to_calendar_venue_when_event_has_no_location() -> None:
+    events = gcal_parser.parse(_read("gcal.json"), GCAL_WEEK_START, GCAL_WEEK_END)
+    no_loc = next(e for e in events if e["title"] == "Event With No Location Field")
+    assert no_loc["venue"] == "Iffy Books, 404 S. 20th St., Philadelphia, PA 19146"
+
+
+def test_gcal_falls_back_to_calendar_url_when_event_has_no_htmllink() -> None:
+    events = gcal_parser.parse(_read("gcal.json"), GCAL_WEEK_START, GCAL_WEEK_END)
+    no_link = next(e for e in events if e["title"] == "Event With No htmlLink")
+    assert no_link["url"] == "https://iffybooks.net/"
+
+
+def test_gcal_raises_when_items_key_missing() -> None:
+    with pytest.raises(ParseError):
+        gcal_parser.parse(json.dumps({"venue": "x"}), GCAL_WEEK_START, GCAL_WEEK_END)
+
+
+def test_gcal_raises_on_invalid_json() -> None:
+    with pytest.raises(ParseError):
+        gcal_parser.parse("not json", GCAL_WEEK_START, GCAL_WEEK_END)
+
+
+def test_gcal_empty_items_is_not_an_error() -> None:
+    events = gcal_parser.parse(json.dumps({"items": []}), GCAL_WEEK_START, GCAL_WEEK_END)
     assert events == []
 
 

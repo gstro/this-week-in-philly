@@ -16,6 +16,7 @@ dependency.
 """
 
 import argparse
+import os
 import sys
 from collections.abc import Callable
 from pathlib import Path
@@ -62,11 +63,49 @@ def _resolve_executable_path() -> str | None:
 # intercept every request via page.route(), fulfilling each one with a
 # response fetched by `requests` (which respects HTTPS_PROXY normally).
 # Real JS still executes locally in the browser -- only the network I/O is
-# rerouted. Falls back to direct (unproxied) requests when HTTPS_PROXY isn't
-# set, e.g. a dev laptop.
+# rerouted.
+#
+# This path is now taken ONLY when a proxy is actually configured (see
+# _configured_proxy). On a direct-internet host -- a GitHub Actions runner or
+# a dev laptop -- Chromium does its own networking and page.route() is used
+# only to drop sub-resources. Measured 2026-08-01: the interception layer is
+# not a speed penalty in itself (it was, accidentally, acting as a circuit
+# breaker against ad-request storms), but it costs HTTP/2, connection reuse,
+# and request parallelism, and hand-rolls header/redirect handling that
+# Chromium already does correctly. Keeping it proxy-conditional rather than
+# deleting it preserves the only configuration in which the Routine sandbox
+# worked at all.
 _BLOCKED_RESOURCE_TYPES = {"image", "media", "font"}
 _STRIP_REQUEST_HEADERS = {"host", "content-length"}
 _STRIP_RESPONSE_HEADERS = {"content-encoding", "content-length", "transfer-encoding", "connection"}
+
+
+def _configured_proxy() -> str | None:
+    """The proxy this environment routes outbound HTTPS through, if any.
+
+    Decides between two networking modes in fetch_text(): the Routine
+    sandbox's route-interception workaround, or Chromium's own (much better)
+    native networking on a direct-internet host like a GitHub Actions runner
+    or a dev laptop.
+    """
+    for var in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy"):
+        value = os.environ.get(var)
+        if value:
+            return value
+    return None
+
+
+def _block_only_route_handler(route: Route) -> None:
+    """Drops heavy sub-resources, lets Chromium fetch everything else itself.
+
+    We only ever read `inner_text("body")`, so images/media/fonts are pure
+    cost. Unlike _make_route_handler this does NOT relay through `requests`
+    -- route.continue_() hands the request back to Chromium's own stack.
+    """
+    if route.request.resource_type in _BLOCKED_RESOURCE_TYPES:
+        route.abort()
+        return
+    route.continue_()
 
 
 def _make_route_handler(session: requests.Session) -> Callable[[Route], None]:
@@ -121,25 +160,56 @@ _CHALLENGE_MARKERS = (
 )
 _CHALLENGE_RETRY_WAIT_MS = 6000
 
+# How long to let a page settle after domcontentloaded before reading text.
+# Since we no longer wait for networkidle (see fetch_text), this is what gives
+# client-rendered content time to paint. 2000ms was verified sufficient on the
+# two live client-rendered sources this script serves -- Fandango/PFS and
+# cinespeak.org -- both producing parsed output identical to the old
+# networkidle path. Callers needing longer pass --wait-ms.
+_DEFAULT_SETTLE_MS = 2000
+
 
 def fetch_text(url: str, wait_ms: int, max_chars: int) -> str:
+    proxy_url = _configured_proxy()
     with sync_playwright() as p:
         executable_path = _resolve_executable_path()
-        browser = p.chromium.launch(executable_path=executable_path, args=["--no-proxy-server"])
+        # --no-proxy-server only matters when we're bypassing Chromium's own
+        # networking (the proxied case below); without a proxy it's a no-op
+        # we may as well not pass.
+        launch_args = ["--no-proxy-server"] if proxy_url else []
+        browser = p.chromium.launch(executable_path=executable_path, args=launch_args)
         page = browser.new_page(user_agent=_USER_AGENT)
-        page.route("**/*", _make_route_handler(build_session()))
+        if proxy_url:
+            # Proxied (Routine) environment: Chromium's own TLS can't traverse
+            # the egress proxy, so every request is fulfilled via `requests`
+            # instead -- see the module comment above and
+            # docs/COLLECTION_PROXY_ISSUE.md.
+            page.route("**/*", _make_route_handler(build_session()))
+        else:
+            # Direct-internet (GitHub Actions, dev laptop): let Chromium do its
+            # own networking -- HTTP/2, connection reuse, parallelism -- and use
+            # routing only to drop the heavy sub-resources we never read.
+            page.route("**/*", _block_only_route_handler)
         try:
-            page.goto(url, wait_until="networkidle", timeout=30_000)
+            # domcontentloaded, NOT networkidle: ad-funded pages (Fandango is
+            # the live example) fire a continuous real-time-bidding request
+            # storm and never reach idle, so networkidle always burned the full
+            # 30s timeout before falling through below. Measured 2026-08-01 on
+            # a real PFS theater page: networkidle 45.2s (timed out) vs
+            # domcontentloaded + settle 2.6s -- and the 2.6s fetch produced
+            # byte-identical parsed output through
+            # event_parsers/philadelphia_film_society.py. The settle wait below
+            # is what actually gives client-rendered content time to paint.
+            page.goto(url, wait_until="domcontentloaded", timeout=30_000)
         except PlaywrightTimeoutError:
-            # Some pages never go fully idle (polling widgets, analytics
-            # beacons, etc.) but did navigate -- fall back to whatever
-            # loaded within the wait budget rather than failing the whole
-            # fetch. Genuine navigation failures (DNS, connection refused)
-            # raise a different (non-Timeout) playwright Error and are
-            # deliberately NOT caught here -- those should propagate.
+            # A page that didn't even reach domcontentloaded in 30s is likely
+            # hung, but it may still have partial content worth reading --
+            # fall through rather than failing the whole fetch. Genuine
+            # navigation failures (DNS, connection refused) raise a different
+            # (non-Timeout) playwright Error and are deliberately NOT caught
+            # here -- those should propagate.
             pass
-        if wait_ms:
-            page.wait_for_timeout(wait_ms)
+        page.wait_for_timeout(wait_ms if wait_ms else _DEFAULT_SETTLE_MS)
         text = page.inner_text("body")
         if any(marker in text.casefold() for marker in _CHALLENGE_MARKERS):
             page.wait_for_timeout(_CHALLENGE_RETRY_WAIT_MS)
@@ -157,7 +227,8 @@ def main() -> None:
         "--wait-ms",
         type=int,
         default=0,
-        help="Extra wait after networkidle, for pages with post-load JS rendering",
+        help=f"Settle wait after page load, for post-load JS rendering "
+        f"(default {_DEFAULT_SETTLE_MS}ms; raise it for a slow client-rendered page)",
     )
     parser.add_argument(
         "--max-chars",

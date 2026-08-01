@@ -1,0 +1,80 @@
+name: Collection
+# Replaces the Claude Code Routine that used to run Collection.
+#
+# The Routine worked, but two real bugs traced directly to having a model in
+# the loop: it improvised a conversion script that silently dropped the `url`
+# field on all 15 Google Calendar events (2026-08-01), and before that it
+# fabricated 17 empty source files sharing one made-up timestamp rather than
+# report running out of budget (2026-07-27). A workflow has no budget to
+# exhaust and no judgment to exercise -- scripts/collect_week.py either
+# completes or fails loudly, per source.
+on:
+  schedule:
+    # GitHub Actions cron is UTC and cannot follow DST. 06:00 UTC is 2am EDT
+    # (Mar-Nov) and 1am EST (Nov-Mar) -- both early Sunday, which is what the
+    # pipeline wants: the target week is the Monday immediately following.
+    # NOTE `0 2 * * 0` would be 10pm *Saturday* ET, collecting a day early.
+    - cron: '0 6 * * 0'
+  workflow_dispatch:
+    inputs:
+      week_start:
+        description: 'Monday of the target week (YYYY-MM-DD). Blank = next upcoming Monday.'
+        required: false
+        type: string
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    # Default GITHUB_TOKEN needs write access to push the collected week.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+
+      # requirements-collection.txt (playwright/requests/beautifulsoup4) has
+      # until now only been installed by lint.yml for type-checking -- this is
+      # the first workflow that installs it to actually *run* collection.
+      # requirements.txt is needed for the Google Calendar sources.
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt -r scripts/requirements-collection.txt
+
+      # Only philadelphia-film-society needs a browser (Fandango's showtimes
+      # are JS-rendered and its real backend is WAF-blocked). Proven working on
+      # ubuntu-latest by lint.yml's pytest job.
+      - name: Install Chromium
+        run: playwright install --with-deps chromium
+
+      - name: Collect
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          if [ -n "${{ inputs.week_start }}" ]; then
+            python scripts/collect_week.py --week-start "${{ inputs.week_start }}"
+          else
+            python scripts/collect_week.py
+          fi
+
+      - name: Determine week directory
+        id: week
+        run: echo "dir=$(ls -d data/*/ | sort | tail -1 | sed 's:/*$::')" >> "$GITHUB_OUTPUT"
+
+      # This MUST run here, not only in collection-check.yml. Commits pushed
+      # with the default GITHUB_TOKEN do not retrigger `on: push` workflows,
+      # so collection-check.yml would never fire for this job's own push --
+      # silently losing the anti-fabrication guard entirely. collection-check
+      # is kept for pushes from any other source (a human commit, a manual
+      # re-collection); this step is what covers the scheduled run.
+      - name: Check yield
+        run: python scripts/check_yield.py "${{ steps.week.outputs.dir }}"
+
+      - name: Commit and push collected week
+        run: |
+          git config user.name "twip-bot"
+          git config user.email "twip-bot@users.noreply.github.com"
+          git add data/
+          git diff --staged --quiet || git commit -m "Collection: week of $(basename "${{ steps.week.outputs.dir }}")"
+          git push
