@@ -1,0 +1,33 @@
+{
+  "source": "Meetup: Code & Coffee",
+  "collected_at": "2026-08-02T08:21:02.051180+00:00",
+  "events": [
+    {
+      "title": "OG Coffee&Code Coding!",
+      "venue": "(online)",
+      "date": "2026-08-05",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/315595369/",
+      "description": "Coffee & Code Philly\n# \u00e2\u0098\u0095 The OG Coffee&Code Meetup\n\n### A Blockspace Community \u00c3\u0097 Coffee&Code Collaboration\n\nBefore the hype. Before the buzzwords. Before \u00e2\u0080\u009cAI-powered everything.\u00e2\u0080\u009d\nThis is **The OG Coffee&Code**\u00e2\u0080\u0094the meetup that started it all, now presented in collaboration with the **Blockspace Community**.\nNo panels. No pitches. No pressure.\nJust good people, good coffee, and focused time to build, learn, and connect.\n\n## What this meetup is\n\nAn open, welcoming space for coders, builders, designers, and curious minds.\nBring your own project, homework, startup, side quest, experiment, or idea. Work at your own pace, meet other builders, ask questions, exchange ideas, or simply enjoy being productive around like-minded people.\nExpect:\n\n* Focused building time\n* Organic conversations\n* Spontaneous debugging\n* Knowledge sharing\n* Genuine community\n\nThis meetup is beginner-friendly, expert-respected, and ego-free.\n\n## What this meetup is not\n\n\u00e2\u009d\u008c A lecture\n\u00e2\u009d\u008c A sales event\n\u00e2\u009d\u008c A recruiting trap\n\u00e2\u009d\u008c A 90-minute presentation\n\n## How it works\n\n1. Show up\n2. Grab coffee \u00e2\u0098\u0095\n3. Open your laptop, notebook, or sketchpad\n4. Work at your own pace\n5. Chat when you want and focus when you need\n6. Leave having made progress\u00e2\u0080\u0094or at least a new friend\n\n## Who should attend\n\n* Software engineers and data professionals\n* Students and self-learners\n* Founders and indie hackers\n* Designers, tinkerers, and technologists\n* Members of the Blockspace and Coffee&Code communities\n* Anyone who enjoys building things with other humans\n\nWhether this is your first Coffee&Code, you are part of the Blockspace Community, or you have been attending since day one, you are welcome.\nThis collaboration brings together two communities around a shared goal: creating a relaxed, supportive space where people can build, learn, and connect.\n\n**Come for the code.**\n**Stay for the community.**\n**Leave caffeinated. \u00e2\u0098\u0095\u00f0\u009f\u009a\u0080**"
+    },
+    {
+      "title": "Claude Code vs. Codex: Loops, Graphs, and Harnesses",
+      "venue": "(online)",
+      "date": "2026-08-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/315893162/",
+      "description": "Coffee & Code Philly\n## Claude Code vs. Codex: Loops, Graphs, and Harnesses\n\nThis is a casual pair-programming meetup for developers experimenting with Claude Code, Codex, and agentic coding workflows.\nThere is no formal presentation and no fixed curriculum. Bring a laptop, a repository, a side project, or a workflow you want to test. We will work in small groups, compare approaches, debug problems, and share what is working.\n\nPossible areas to explore include:\n\n* Building iterative coding-agent loops\n* Comparing Claude Code and Codex on the same task\n* Designing graph-based agent workflows\n* Creating reusable coding harnesses\n* Managing context across large repositories\n* Running tests and validating agent-generated changes\n* Using sandboxes, permissions, and approval steps\n* Coordinating subagents or parallel tasks\n* Measuring latency, token usage, cost, and completion quality\n* Debugging failed or incomplete agent runs\n\nYou do not need to be an expert in either tool. This meetup is for people who want hands-on time to experiment, pair with other developers, and learn through building.\nBring something you are working on, or join someone else\u00e2\u0080\u0099s project.\nHosted by **Coffee & Code Philadelphia**.\n\n**Coffee & Code Philadelphia**\nWebsite: [https://www.codephilly.com](https://www.codephilly.com/)\nMeetup: [https://www.meetup.com/code-coffee-philly/](https://www.meetup.com/code-coffee-philly/)\nLinkedIn: [https://www.linkedin.com/company/code-coffee-philadelphia](https://www.linkedin.com/company/code-coffee-philadelphia)\nInstagram: [https://www.instagram.com/coffeecodephilly](https://www.instagram.com/coffeecodephilly)\nDiscord: [https://discord.gg/2ad8NmvC2](https://discord.gg/2ad8NmvC2)\nLinktree: [https://linktr.ee/codecoffeephilly](https://linktr.ee/codecoffeephilly)\nSubstack: [https://substack.com/@codecoffeephilly](https://substack.com/@codecoffeephilly)"
+    },
+    {
+      "title": "Coding on Localhost; Connecting the Community",
+      "venue": "(online)",
+      "date": "2026-08-09",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/315763537/",
+      "description": "Coffee & Code Philly\nA fun and light code session where tech friends get together in a Game Lounge, and Code! It's a great opportunity to ask questions, share ongoing projects, help each other out, and meet other awesome coders. We're all about the code, we hope to make a space for people who like to build.\n\n**Notes to keep in mind:**\n\n* BYO Food/Bev is ok, just no alcoholic items.\n* The $5.40 tabletop fee will cover use of the Retro Lounge space for 1-4PM and is to be paid individually at the front desk as attendees check-in.\n* Power and guest wireless internet access is available, use of extra monitors is possible but not guaranteed. Attendees will ask venue staff for availability/assistance as it's subject to change with weekend events/business volume.\n\nCome out and work, help, or just hang out!\n\n**Links:**\n**Site:** codephilly.com\n**Donate:** https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia\n**Merch:** https://nol-kky-shop.fourthwall.com/\n**LinkedIn:** https://www.linkedin.com/company/code-coffee-philadelphia\n**Instagram:** https://www.instagram.com/philly_codes/"
+    }
+  ]
+}
