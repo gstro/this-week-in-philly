@@ -257,6 +257,30 @@ def test_events_copy_title_venue_time_cost_url_source_verbatim() -> None:
     assert event["source"] == "Luma"
 
 
+def test_top3_time_defaults_to_the_candidates_verbatim_time() -> None:
+    candidate = _candidate("c0000", "A", "V", "2026-08-03", time="7:00 PM")
+    candidates = _candidates_doc([candidate])
+    annotations = _annotations_doc([_day("2026-08-03", top3=[_top3_pick("c0000")], annotations=[_annotation("c0000")])])
+    result = merge(candidates, annotations)
+    assert result["days"][0]["top3"][0]["time"] == "7:00 PM"
+
+
+def test_top3_time_override_cleans_up_a_genuinely_messy_raw_candidate_time() -> None:
+    """The one exception to verbatim copying: a candidate's raw time can be
+    genuinely malformed straight out of Collection (e.g. "7:00, 7:30", no
+    AM/PM) -- confirmed on 2 of the 5 real 2026-08-03 top3 picks that lost
+    their calendar entry this way. An explicit override on the pick restores
+    Selection's ability to clean it up into calendar_create.py's required
+    single H:MM AM/PM format."""
+    candidate = _candidate("c0000", "A", "V", "2026-08-03", time="7:00, 7:30")
+    candidates = _candidates_doc([candidate])
+    pick = _top3_pick("c0000")
+    pick["time"] = "7:00 PM"
+    annotations = _annotations_doc([_day("2026-08-03", top3=[pick], annotations=[_annotation("c0000")])])
+    result = merge(candidates, annotations)
+    assert result["days"][0]["top3"][0]["time"] == "7:00 PM"
+
+
 def test_top3_titles_resolve_from_the_candidate_not_the_annotation() -> None:
     """Closes the real 62-of-562 drift bug: Selection never gets to retype a
     title -- it can only reference a candidate id, so top3's title always

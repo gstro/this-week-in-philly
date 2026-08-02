@@ -17,8 +17,11 @@ Why a merge step exists at all, rather than Selection writing _selections.json
 directly: Selection re-transcribing title/venue/time/cost/url/source data it
 was just handed in _candidates.json cost ~32k output tokens per run for no
 reason -- see the token-optimization plan. Selection now writes only the
-judgment calls (category, sold_out, note, why, rank, is_music) keyed by a
-candidate's stable `id`; this script reconstructs the rest verbatim.
+judgment calls (category, sold_out, note, why, rank, is_music, address) keyed
+by a candidate's stable `id`; this script reconstructs the rest verbatim. One
+exception: a top3 pick MAY include an explicit `time` override, letting
+Selection still clean up a candidate's genuinely messy raw time (a list, a
+doors/show pair, a range) the way it always could -- see build_top3.
 
 Two consequences of resolving by id instead of Selection re-typing title/venue:
 
@@ -117,7 +120,14 @@ def build_top3(day: dict[str, Any], candidates_by_id: dict[str, dict[str, Any]],
             "title": candidate.get("title", ""),
             "venue": candidate.get("venue", ""),
             **({"address": pick["address"]} if pick.get("address") else {}),
-            "time": candidate.get("time", ""),
+            # `time` normally comes verbatim from the candidate -- an explicit
+            # override on the pick lets Selection still clean up a genuinely
+            # messy raw time (a list, a doors/show pair, a range) into the
+            # single clean start time calendar_create.py's parse_start()
+            # requires, same capability the old re-typed-everything schema
+            # had. Rare in practice (omitted on the overwhelming majority of
+            # picks), so it costs nothing in the common case.
+            "time": pick.get("time", candidate.get("time", "")),
             "cost": candidate.get("cost", ""),
             "url": candidate.get("url", ""),
             "category": pick["category"],
