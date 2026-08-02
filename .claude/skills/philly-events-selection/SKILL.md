@@ -181,6 +181,19 @@ Fewer than 3 qualifying events on a given day is acceptable.
   - `🌿 Markets & Outdoors`
   - `👻 Horror & Occult`
   - `🎪 Festivals & Major Events`
+- `time`: **always a single, cleanly parseable start time** (`H:MM AM/PM`, e.g. `"7:00 PM"`) — never a
+  list, a doors/show pair, or a range, even when the candidate's own `time` or `description` has one.
+  If a candidate genuinely has multiple showtimes, a doors/show split, or a time range, put ONE clean
+  representative start time in `time` and describe the rest as prose in `why`/`note` instead (e.g.
+  `note: "Multiple showtimes: 1pm, 3:50pm, 6:30pm, 9pm."` or `note: "Doors 6:00 PM, show at 7:00 PM."`)
+  — this is the real, established pattern already used throughout the golden 2026-06-22 report (e.g.
+  `BACKROOMS (2026)`: `time: "1:00 PM"`, `note: "...Multiple showtimes: 1pm, 3:50pm, 6:30pm, 9pm."`).
+  `html_render.py`'s `display_time()` already appends a "+" suffix to `time` whenever `note` mentions
+  "multiple showtimes" — that's this field's actual contract, not an incidental convenience.
+  `calendar_create.py`'s `parse_start()` only matches a single `%I:%M %p` string; anything else means
+  that pick's calendar event silently never gets created (confirmed on the real 2026-08-03 week: 5 of
+  21 Top 3 picks lost their calendar entry this way, all from writing multiple times or a doors/show
+  pair straight into `time` instead of following this pattern).
 - `is_music`: true for any act where a Spotify artist page lookup makes sense
 - `sold_out`: true if any source flagged the event as sold out (check the candidate's `description` —
   `prepare_selection_input.py` preserves a sold-out mention found on a discarded duplicate as a
