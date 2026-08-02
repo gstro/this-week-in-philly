@@ -112,7 +112,14 @@ def build_top3(day: dict[str, Any], candidates_by_id: dict[str, dict[str, Any]],
         candidate_id = pick["id"]
         candidate = _resolve_candidate(candidate_id, day_date, candidates_by_id, f"{day_date} top3")
         _require_in_annotations(candidate_id, ann_by_id, day_date, "top3")
-        for field in ("category", "is_music", "sold_out", "why", "rank"):
+        # category, why, and rank have no safe default -- a missing one is a
+        # real Selection bug, fail loudly. is_music/sold_out DO have a safe
+        # default (false), so they're defaulted rather than required: at
+        # ~350 annotated candidates a week, a model omitting an
+        # occasionally-false boolean is exactly the compression that happens
+        # at volume, and requiring it would fail the whole week's report
+        # over a single omitted `false`.
+        for field in ("category", "why", "rank"):
             if field not in pick:
                 raise MergeError(f"{day_date} top3 id {candidate_id!r}: annotation missing required field {field!r}")
         entry = {
@@ -132,8 +139,8 @@ def build_top3(day: dict[str, Any], candidates_by_id: dict[str, dict[str, Any]],
             "url": candidate.get("url", ""),
             "category": pick["category"],
             "source": candidate.get("source", ""),
-            "is_music": pick["is_music"],
-            "sold_out": pick["sold_out"],
+            "is_music": pick.get("is_music", False),
+            "sold_out": pick.get("sold_out", False),
             "why": pick["why"],
         }
         result.append(entry)
@@ -147,7 +154,19 @@ def build_honorable_mentions(day: dict[str, Any], candidates_by_id: dict[str, di
         candidate_id = mention["id"]
         candidate = _resolve_candidate(candidate_id, day_date, candidates_by_id, f"{day_date} honorable_mentions")
         _require_in_annotations(candidate_id, ann_by_id, day_date, "honorable_mentions")
-        result.append({"title": candidate["title"], "venue": candidate["venue"]})
+        title = candidate["title"]
+        # html_render.py's build_honorable_mentions_html() bolds a literal
+        # "(SOLD OUT)" suffix on the title -- restoring that requires
+        # appending it here, since the title now always comes verbatim from
+        # the candidate (which never carries this suffix itself). This
+        # breaks the honorable-mention's exact-title match against
+        # events[] (whose title has no suffix), but csv_log.py's
+        # find_matching_event() already has a fuzzy-match fallback for
+        # exactly this case -- its own docstring names "a (SOLD OUT) suffix
+        # added" as the real, observed reason that fallback exists.
+        if ann_by_id[candidate_id].get("sold_out") and not title.endswith("(SOLD OUT)"):
+            title = f"{title} (SOLD OUT)"
+        result.append({"title": title, "venue": candidate["venue"]})
     return result
 
 
@@ -166,9 +185,10 @@ def build_events(
     day_date = day["date"]
     ann_by_id = {a["id"]: a for a in day.get("annotations", [])}
     for candidate_id, ann in ann_by_id.items():
-        for field in ("category", "sold_out"):
-            if field not in ann:
-                raise MergeError(f"{day_date} annotation id {candidate_id!r}: missing required field {field!r}")
+        # sold_out has a safe default (false) and is deliberately not
+        # required here -- see build_top3's comment on the same tradeoff.
+        if "category" not in ann:
+            raise MergeError(f"{day_date} annotation id {candidate_id!r}: missing required field 'category'")
         if ann["category"] not in common.CATEGORY_ORDER:
             raise MergeError(f"{day_date} annotation id {candidate_id!r}: category {ann['category']!r} is not one of the nine canonical categories")
 
@@ -192,7 +212,7 @@ def build_events(
             "url": candidate.get("url", ""),
             "category": ann["category"],
             "source": candidate.get("source", ""),
-            "sold_out": ann["sold_out"],
+            "sold_out": ann.get("sold_out", False),
             **({"note": ann["note"]} if ann.get("note") else {}),
         }
         events.append(entry)
@@ -208,6 +228,9 @@ def build_events(
 
 
 def merge_day(day: dict[str, Any], candidates_doc: dict[str, Any], candidates_by_id: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    for field in ("date", "day_name"):
+        if field not in day:
+            raise MergeError(f"a day entry is missing required field {field!r}: {day!r}")
     ann_by_id = {a["id"]: a for a in day.get("annotations", [])}
     return {
         "date": day["date"],
@@ -242,6 +265,11 @@ def main() -> None:
     except MergeError as exc:
         print(f"merge_selections: {exc}", file=sys.stderr)
         sys.exit(1)
+
+    # Added here, not inside merge(), so merge() stays a pure function of
+    # its two inputs -- deterministic and easy to test. Purely informational:
+    # grepped every consumer, nothing reads generated_at.
+    result["generated_at"] = datetime.now().isoformat(timespec="seconds")  # noqa: DTZ005 -- informational only, matches the existing untyped local-time convention in real _selections.json files
 
     out_path = args.out or (args.week_dir / "_selections.json")
     out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")

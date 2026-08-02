@@ -191,12 +191,17 @@ not to hide events Greg would want to see — when in doubt, keep the event in.
   category listing (`events[]` in the final `_selections.json`). **Every `top3` id and every
   `honorable_mentions` id must also have an entry here** — the merge step (`merge_selections.py`) fails
   loudly if one doesn't, because that pick would otherwise have no card in its category's listing.
-- `is_music`: true for any Top 3 pick where a Spotify artist page lookup makes sense. Not written for
-  plain `annotations` entries — nothing downstream reads it there.
-- `sold_out`: true if any source flagged the event as sold out (check the candidate's `description` in
-  the per-day file — `prepare_selection_input.py` preserves a sold-out mention found on a discarded
-  duplicate as a `[Note: ...]` prefix, since there's no structured sold-out field at Collection's stage)
-  — still include if worth attending, note in report.
+- `is_music`: **always include on a top3 pick, `true` or `false`** — true for any pick where a Spotify
+  artist page lookup makes sense. Not written for plain `annotations` entries — nothing downstream reads
+  it there. (Omitting it merges as `false` rather than failing, but don't rely on that — write it
+  explicitly.)
+- `sold_out`: **always include, `true` or `false`**, on both `top3` picks and `annotations` entries — true
+  if any source flagged the event as sold out (check the candidate's `description` in the per-day file —
+  `prepare_selection_input.py` preserves a sold-out mention found on a discarded duplicate as a
+  `[Note: ...]` prefix, since there's no structured sold-out field at Collection's stage). Still include
+  the event if worth attending; sold-out is a note, not an exclusion. A sold-out honorable mention gets a
+  `(SOLD OUT)` suffix on its title automatically (bolded by the render step) — don't add the suffix
+  yourself.
 - `address`: full street address for Google Calendar, on `top3` entries only; omit if unknown. Candidates
   never carry an address (Collection's event schema has no address field) — this is written from your own
   knowledge of the venue, same as `why`.

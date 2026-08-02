@@ -199,15 +199,27 @@ def test_annotation_missing_category_raises() -> None:
         assert "category" in str(exc)
 
 
-def test_annotation_missing_sold_out_raises() -> None:
+def test_annotation_missing_sold_out_defaults_to_false_rather_than_raising() -> None:
+    """sold_out has a safe default -- requiring it on every one of the ~350
+    annotations a week would fail the whole merge over a model omitting an
+    occasionally-false boolean, exactly the compression that happens at
+    volume. Only fields with no safe default (category) are required."""
     candidates = _candidates_doc([_candidate("c0000", "A", "V", "2026-08-03")])
     day = _day("2026-08-03", annotations=[{"id": "c0000", "category": MUSIC}])
     annotations = _annotations_doc([day])
-    try:
-        merge(candidates, annotations)
-        raise AssertionError("expected MergeError")
-    except MergeError as exc:
-        assert "sold_out" in str(exc)
+    result = merge(candidates, annotations)
+    assert result["days"][0]["events"][0]["sold_out"] is False
+
+
+def test_top3_missing_sold_out_and_is_music_default_to_false_rather_than_raising() -> None:
+    candidates = _candidates_doc([_candidate("c0000", "A", "V", "2026-08-03")])
+    pick = {"id": "c0000", "rank": 1, "category": MUSIC, "why": "Great show."}
+    day = _day("2026-08-03", top3=[pick], annotations=[_annotation("c0000")])
+    annotations = _annotations_doc([day])
+    result = merge(candidates, annotations)
+    top3 = result["days"][0]["top3"][0]
+    assert top3["sold_out"] is False
+    assert top3["is_music"] is False
 
 
 def test_annotation_non_canonical_category_raises() -> None:
@@ -386,6 +398,41 @@ def test_honorable_mentions_carry_only_title_and_venue() -> None:
     annotations = _annotations_doc([_day("2026-08-03", honorable_mentions=[{"id": "c0000"}], annotations=[_annotation("c0000")])])
     result = merge(candidates, annotations)
     assert result["days"][0]["honorable_mentions"] == [{"title": "HM Event", "venue": "HM Venue"}]
+
+
+def test_honorable_mention_sold_out_gets_the_suffix_html_render_bolds() -> None:
+    """html_render.py's build_honorable_mentions_html() bolds a literal
+    "(SOLD OUT)" suffix -- restoring it here (the title now comes verbatim
+    from the candidate, which never carries this suffix) requires appending
+    it when the resolved annotation says sold_out."""
+    candidates = _candidates_doc([_candidate("c0000", "HM Event", "HM Venue", "2026-08-03")])
+    annotations = _annotations_doc(
+        [_day("2026-08-03", honorable_mentions=[{"id": "c0000"}], annotations=[_annotation("c0000", sold_out=True)])]
+    )
+    result = merge(candidates, annotations)
+    assert result["days"][0]["honorable_mentions"][0]["title"] == "HM Event (SOLD OUT)"
+
+
+def test_honorable_mention_not_sold_out_gets_no_suffix() -> None:
+    candidates = _candidates_doc([_candidate("c0000", "HM Event", "HM Venue", "2026-08-03")])
+    annotations = _annotations_doc(
+        [_day("2026-08-03", honorable_mentions=[{"id": "c0000"}], annotations=[_annotation("c0000", sold_out=False)])]
+    )
+    result = merge(candidates, annotations)
+    assert result["days"][0]["honorable_mentions"][0]["title"] == "HM Event"
+
+
+# --- merge_day ---
+
+
+def test_merge_day_missing_date_raises_merge_error_not_a_bare_keyerror() -> None:
+    candidates = _candidates_doc([])
+    annotations = _annotations_doc([{"day_name": "Monday", "top3": [], "honorable_mentions": [], "annotations": []}])
+    try:
+        merge(candidates, annotations)
+        raise AssertionError("expected MergeError")
+    except MergeError as exc:
+        assert "date" in str(exc)
 
 
 # --- collection_failures passthrough ---
