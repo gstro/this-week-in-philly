@@ -1,8 +1,21 @@
 name: Presentation
 on:
   push:
+    # branches: [main] closes the gap that caused the 2026-08-02 incident: a
+    # scratch-branch push to _selections.json fired this workflow for real,
+    # including a real (unintended) calendar_create.py write, since `on:
+    # push` with no branch filter matches a push to ANY branch.
+    branches: [main]
     paths:
-      - 'data/**/_selections.json'
+      # Selection's own push, not a merge commit's -- the merge that
+      # produces _selections.json now happens inside this workflow (the
+      # "Merge selections" step below), not before it. Selection pushes
+      # _selection_annotations.json with ambient user auth (not the default
+      # GITHUB_TOKEN), so this trigger fires for that push; a workflow that
+      # instead merged-and-pushed _selections.json itself would push with
+      # GITHUB_TOKEN, which doesn't retrigger `on: push` -- see
+      # merge_selections.py's docstring.
+      - 'data/**/_selection_annotations.json'
 jobs:
   present:
     runs-on: ubuntu-latest
@@ -27,6 +40,27 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: pip install -r scripts/requirements.txt
+
+      # Reads off _selection_annotations.json now (Selection's own push),
+      # not _selections.json (which this workflow itself now produces, in
+      # the Merge selections step below).
+      - name: Determine week directory
+        id: week
+        run: |
+          WEEK_DIR=$(dirname "$(git diff --name-only HEAD^ HEAD -- 'data/**/_selection_annotations.json' | head -1)")
+          if [ -z "$WEEK_DIR" ] || [ "$WEEK_DIR" = "." ]; then
+            echo "::error::Could not determine week directory from the push diff"
+            exit 1
+          fi
+          echo "dir=$WEEK_DIR" >> "$GITHUB_OUTPUT"
+
+      # Deterministic merge (_candidates.json + Selection's annotations ->
+      # _selections.json) -- runs here rather than as its own workflow for
+      # the same GITHUB_TOKEN-doesn't-retrigger reason explained in this
+      # trigger's `paths` comment above. See merge_selections.py's docstring.
+      - name: Merge selections
+        run: python scripts/merge_selections.py "${{ steps.week.outputs.dir }}"
+
       - name: Run presentation pipeline
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -34,13 +68,8 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
-        run: |
-          WEEK_DIR=$(dirname "$(git diff --name-only HEAD^ HEAD -- 'data/**/_selections.json' | head -1)")
-          if [ -z "$WEEK_DIR" ] || [ "$WEEK_DIR" = "." ]; then
-            echo "::error::Could not determine week directory from the push diff"
-            exit 1
-          fi
-          bash scripts/runner.sh "$WEEK_DIR"
+        run: bash scripts/runner.sh "${{ steps.week.outputs.dir }}"
+
       - name: Commit and push report
         run: |
           git config user.name "twip-bot"
@@ -48,6 +77,6 @@ jobs:
           # data/event-picks-log.csv is intentionally not written here --
           # csv_log.py/attendance_check.py are deferred (see runner.sh);
           # only add it if a future run reintroduces that stage.
-          git add docs/
+          git add docs/ "${{ steps.week.outputs.dir }}/_selections.json"
           git diff --staged --quiet || git commit -m "Publish report for $(date +%F)"
           git push

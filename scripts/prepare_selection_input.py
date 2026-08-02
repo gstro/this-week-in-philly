@@ -246,12 +246,27 @@ def split_by_day(result: dict[str, Any], week_dir: Path) -> list[Path]:
     even if empty, so a day-agent's "no candidates" case is a real, present
     file rather than a missing one. check_yield.py's orphan check globs
     week_dir non-recursively (week_dir.glob("*.json")), so this subdirectory
-    is invisible to it -- verified, not assumed."""
+    is invisible to it -- verified, not assumed.
+
+    Raises if any candidate's date falls outside the Monday-Sunday window --
+    per-day files are Selection's only input once --split-by-day is used, so
+    a candidate that doesn't land in any of the 7 buckets would otherwise
+    vanish from the report with no trace, the exact silent-drop failure
+    class this project designs against elsewhere (check_yield.py, and
+    merge_selections.py's own fail-loud rules)."""
     monday = date.fromisoformat(result["week"])
     week = common.week_dates(monday)
-    by_date: dict[str, list[dict[str, Any]]] = {d.isoformat(): [] for d in week}
+    valid_dates = {d.isoformat() for d in week}
+    by_date: dict[str, list[dict[str, Any]]] = {d: [] for d in valid_dates}
+    out_of_window = [c for c in result["candidates"] if c.get("date", "") not in valid_dates]
+    if out_of_window:
+        described = ", ".join(f"{c.get('id', '?')} ({c.get('title', '?')!r}, date={c.get('date', '?')!r})" for c in out_of_window)
+        raise ValueError(
+            f"{len(out_of_window)} candidate(s) fall outside the target week "
+            f"{week[0].isoformat()}..{week[-1].isoformat()} and would be silently dropped: {described}"
+        )
     for candidate in result["candidates"]:
-        by_date.setdefault(candidate.get("date", ""), []).append(candidate)
+        by_date[candidate["date"]].append(candidate)
 
     out_dir = week_dir / "_candidates"
     out_dir.mkdir(exist_ok=True)

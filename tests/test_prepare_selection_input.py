@@ -379,6 +379,22 @@ def test_split_by_day_empty_days_still_get_a_file_with_the_shared_metadata(tmp_p
     assert sunday["collection_failures"] == result["collection_failures"]
 
 
+def test_split_by_day_raises_rather_than_silently_dropping_an_out_of_window_candidate(tmp_path: Path) -> None:
+    """A candidate whose date falls outside the target week's Mon-Sun window would
+    otherwise vanish with no trace once per-day files are Selection's only input --
+    the same silent-drop failure class check_yield.py and merge_selections.py both
+    guard against, so this must fail loudly rather than quietly omit the candidate."""
+    import pytest
+
+    result = {
+        "week": "2026-08-03",
+        "collection_failures": [],
+        "candidates": [_event("Stray", "V", "2026-08-20", id="c0000")],
+    }
+    with pytest.raises(ValueError, match="Stray"):
+        split_by_day(result, tmp_path)
+
+
 def test_split_by_day_is_invisible_to_check_yields_non_recursive_orphan_glob(tmp_path: Path) -> None:
     """check_yield.py's _load_week_dir globs week_dir.glob("*.json") non-recursively
     -- verifying that directly, not just assuming it, since a false assumption here

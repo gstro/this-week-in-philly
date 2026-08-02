@@ -60,8 +60,17 @@ DEFAULT_EXPECTED_YIELD_PATH = REPO_ROOT / "data" / "expected_yield.json"
 # prepare_selection_input.py's derived output (flattened+deduped candidates
 # for Selection) -- regenerable from _manifest.json + the source files, so it
 # has no manifest entry of its own and would otherwise trip the orphan-file
-# check below.
-NON_SOURCE_FILES = {"_manifest.json", "_candidates.json", "_selections.json", "_spotify.json"}
+# check below. _selection_annotations.json is Selection's own output (the
+# id-keyed annotations merge_selections.py turns into _selections.json) --
+# same story, no manifest entry, would otherwise trip both the orphan check
+# and provenance (which tries to parse every non-exempt *.json as a source).
+NON_SOURCE_FILES = {
+    "_manifest.json",
+    "_candidates.json",
+    "_selection_annotations.json",
+    "_selections.json",
+    "_spotify.json",
+}
 
 
 @dataclass
