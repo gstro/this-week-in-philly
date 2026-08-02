@@ -1,0 +1,6 @@
+{
+  "source": "Iffy Books",
+  "status": "failed",
+  "reason": "ParseError: Google Calendar auth failed: Missing required env var(s) for Google auth: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN",
+  "collected_at": "2026-08-02T06:14:38.003562+00:00"
+}
