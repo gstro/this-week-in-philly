@@ -16,18 +16,22 @@ manually against data/2026-08-03/, not committed as a test -- see the
 Selection-stage plan's Phase 5 verification.
 """
 
+import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 from prepare_selection_input import (
+    assign_ids,
     build_candidates,
+    cap_descriptions,
     collapse_exact_duplicates,
     collection_failures,
     group_recurring,
     load_candidates_from_sources,
     load_manifest,
+    split_by_day,
 )
 
 FIXTURES = Path(__file__).parent / "fixtures" / "prepare_selection_input"
@@ -261,3 +265,131 @@ def test_collection_failures_sorted_alphabetically() -> None:
         }
     }
     assert collection_failures(manifest) == ["aaa-source (y)", "zzz-source (x)"]
+
+
+# --- assign_ids ---
+
+
+def test_assign_ids_assigns_sequential_c0000_style_ids_in_order() -> None:
+    events = [_event("A", "V", "2026-08-03"), _event("B", "V", "2026-08-04"), _event("C", "V", "2026-08-05")]
+    result = assign_ids(events)
+    assert [c["id"] for c in result] == ["c0000", "c0001", "c0002"]
+
+
+def test_assign_ids_does_not_mutate_the_input_list() -> None:
+    events = [_event("A", "V", "2026-08-03")]
+    assign_ids(events)
+    assert "id" not in events[0]
+
+
+def test_assign_ids_is_stable_across_repeated_calls_on_the_same_order() -> None:
+    events = [_event("A", "V", "2026-08-03"), _event("B", "V", "2026-08-04")]
+    assert assign_ids(events) == assign_ids(events)
+
+
+# --- cap_descriptions ---
+
+
+def test_cap_descriptions_leaves_short_descriptions_unchanged() -> None:
+    events = [_event("A", "V", "2026-08-03", description="short")]
+    result = cap_descriptions(events)
+    assert result[0]["description"] == "short"
+
+
+def test_cap_descriptions_truncates_and_appends_ellipsis() -> None:
+    long_description = "x" * 700
+    events = [_event("A", "V", "2026-08-03", description=long_description)]
+    result = cap_descriptions(events, limit=600)
+    assert len(result[0]["description"]) == 601  # 600 chars + the ellipsis char
+    assert result[0]["description"].endswith("…")
+    assert result[0]["description"][:600] == "x" * 600
+
+
+def test_cap_descriptions_does_not_mutate_the_input() -> None:
+    events = [_event("A", "V", "2026-08-03", description="x" * 700)]
+    cap_descriptions(events, limit=600)
+    assert len(events[0]["description"]) == 700
+
+
+def test_cap_descriptions_handles_a_missing_description_field() -> None:
+    events = [{"title": "A", "venue": "V", "date": "2026-08-03"}]
+    result = cap_descriptions(events)
+    assert result == events
+
+
+# --- build_candidates: id assignment + description cap wired in ---
+
+
+def test_build_candidates_assigns_a_unique_id_to_every_candidate() -> None:
+    result = build_candidates(FIXTURES / "sample-week")
+    ids = [c["id"] for c in result["candidates"]]
+    assert len(ids) == len(set(ids)) == len(result["candidates"])
+    assert all(i.startswith("c") for i in ids)
+
+
+def test_build_candidates_caps_a_long_description(tmp_path: Path) -> None:
+    (tmp_path / "_manifest.json").write_text(
+        json.dumps({"week": "2026-08-03", "sources": {"src": {"status": "ok", "events": 1}}})
+    )
+    (tmp_path / "src.json").write_text(
+        json.dumps({"source": "Some Source", "events": [_event("A", "V", "2026-08-03", description="y" * 900)]})
+    )
+    result = build_candidates(tmp_path)
+    assert len(result["candidates"][0]["description"]) == 601
+
+
+# --- split_by_day ---
+
+
+def test_split_by_day_writes_one_file_per_date_in_the_week(tmp_path: Path) -> None:
+    result = build_candidates(FIXTURES / "sample-week")
+    paths = split_by_day(result, tmp_path)
+    assert len(paths) == 7
+    assert {p.name for p in paths} == {
+        "2026-08-03.json",
+        "2026-08-04.json",
+        "2026-08-05.json",
+        "2026-08-06.json",
+        "2026-08-07.json",
+        "2026-08-08.json",
+        "2026-08-09.json",
+    }
+
+
+def test_split_by_day_places_candidates_on_their_own_date(tmp_path: Path) -> None:
+    """Both sample-week candidates (Museum Tour's earliest occurrence and Concert Y)
+    fall on the Monday (2026-08-03) -- the recurring candidate is grouped to its
+    earliest date by group_recurring() before split_by_day ever sees it, so it
+    appears only in that one day's file, not repeated across all 3 occurrences."""
+    result = build_candidates(FIXTURES / "sample-week")
+    split_by_day(result, tmp_path)
+    monday = json.loads((tmp_path / "_candidates" / "2026-08-03.json").read_text())
+    tuesday = json.loads((tmp_path / "_candidates" / "2026-08-04.json").read_text())
+    assert {c["title"] for c in monday["candidates"]} == {"Museum Tour", "Concert Y"}
+    assert tuesday["candidates"] == []
+
+
+def test_split_by_day_empty_days_still_get_a_file_with_the_shared_metadata(tmp_path: Path) -> None:
+    result = build_candidates(FIXTURES / "sample-week")
+    split_by_day(result, tmp_path)
+    sunday = json.loads((tmp_path / "_candidates" / "2026-08-09.json").read_text())
+    assert sunday["candidates"] == []
+    assert sunday["week"] == "2026-08-03"
+    assert sunday["date"] == "2026-08-09"
+    assert sunday["collection_failures"] == result["collection_failures"]
+
+
+def test_split_by_day_is_invisible_to_check_yields_non_recursive_orphan_glob(tmp_path: Path) -> None:
+    """check_yield.py's _load_week_dir globs week_dir.glob("*.json") non-recursively
+    -- verifying that directly, not just assuming it, since a false assumption here
+    would make every real Collection run fail its own yield check."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+    from check_yield import _load_week_dir
+
+    result = build_candidates(FIXTURES / "sample-week")
+    for name in ("_manifest.json", "do215-like.json", "other-source.json"):
+        (tmp_path / name).write_text((FIXTURES / "sample-week" / name).read_text())
+    split_by_day(result, tmp_path)
+
+    _, _, files_on_disk = _load_week_dir(tmp_path)
+    assert not any("_candidates" in f for f in files_on_disk)
