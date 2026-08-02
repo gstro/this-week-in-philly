@@ -46,21 +46,33 @@ jobs:
       - name: Install Chromium
         run: playwright install --with-deps chromium
 
+      # Computed explicitly and once, BEFORE collection, rather than inferred
+      # afterward from `ls -d data/*/ | sort | tail -1` -- that inference is
+      # what let a stray directory hijack a real run (2026-08-02: an old,
+      # never-decommissioned Collection Routine independently pushed a
+      # mistargeted data/2026-08-04/ straight to main; it happened to sort
+      # after this run's real data/2026-08-03/, so Check yield and Prepare
+      # selection candidates silently ran against the wrong week's data).
+      # Uses common.target_week_monday() -- the same function collect_week.py
+      # itself calls -- rather than re-deriving the date math here, so the two
+      # can't drift apart.
+      - name: Determine target week
+        id: week
+        run: |
+          if [ -n "${{ inputs.week_start }}" ]; then
+            WEEK_START="${{ inputs.week_start }}"
+          else
+            WEEK_START=$(python3 -c "import sys; sys.path.insert(0, 'scripts'); import common; print(common.target_week_monday().isoformat())")
+          fi
+          echo "week_start=$WEEK_START" >> "$GITHUB_OUTPUT"
+          echo "dir=data/$WEEK_START" >> "$GITHUB_OUTPUT"
+
       - name: Collect
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-        run: |
-          if [ -n "${{ inputs.week_start }}" ]; then
-            python scripts/collect_week.py --week-start "${{ inputs.week_start }}"
-          else
-            python scripts/collect_week.py
-          fi
-
-      - name: Determine week directory
-        id: week
-        run: echo "dir=$(ls -d data/*/ | sort | tail -1 | sed 's:/*$::')" >> "$GITHUB_OUTPUT"
+        run: python scripts/collect_week.py --week-start "${{ steps.week.outputs.week_start }}"
 
       # This MUST run here, not only in collection-check.yml. Commits pushed
       # with the default GITHUB_TOKEN do not retrigger `on: push` workflows,
@@ -89,6 +101,10 @@ jobs:
         run: |
           git config user.name "twip-bot"
           git config user.email "twip-bot@users.noreply.github.com"
-          git add data/
+          # Only this run's own week directory -- not `git add data/`, which
+          # would blindly absorb and commit anything else that showed up
+          # under data/ between checkout and here (see the Determine target
+          # week step's comment for exactly this happening).
+          git add "${{ steps.week.outputs.dir }}"
           git diff --staged --quiet || git commit -m "Collection: week of $(basename "${{ steps.week.outputs.dir }}")"
           git push
