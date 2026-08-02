@@ -1,6 +1,0 @@
-{
-  "source": "Trakt.tv film releases",
-  "status": "failed",
-  "reason": "ParseError: Google Calendar auth failed: Missing required env var(s) for Google auth: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN",
-  "collected_at": "2026-08-02T06:14:38.005730+00:00"
-}
