@@ -16,7 +16,9 @@ data/YYYY-MM-DD/_candidates.json, so Selection's Routine reads one correct
 file instead of re-deriving this itself in an LLM session every week.
 
 Three mechanical things docs/v1/Scheduled/philly-events-selection/SKILL.md
-did in prose belong here instead, because they're fully deterministic:
+did in prose belong here instead, because they're fully deterministic. Two
+more (id assignment, description capping) exist purely to cut Selection's
+token usage without changing what it's allowed to decide:
 
 1. Per-event source tagging. A source's `source` name lives at the FILE
    level ({"source": "...", "events": [...]}), not per-event -- naively
@@ -42,6 +44,19 @@ did in prose belong here instead, because they're fully deterministic:
    annotated -- Selection still applies event-selection-philosophy's
    "Avoid: recurring weekly events unless something special" judgment
    itself, just against ~1 entry per series instead of 5+.
+4. Stable `id` assignment (c0000-style strings), after grouping so it's
+   assigned exactly once against the final deduped/grouped list. Selection's
+   annotations and scripts/merge_selections.py key off this id instead of
+   re-matching on title text -- closing a real drift bug where a reworded
+   title in _selections.json silently failed to join back to its candidate.
+5. `description` capped at 600 chars on emit (raw source files untouched).
+   Measured against the real 2026-08-03 week: description was 55% of the
+   candidates file's token count, and p90 was 751 chars, so this keeps full
+   text for ~90% of events while bounding the worst case.
+
+Optionally (--split-by-day) also writes one candidate file per date under
+data/YYYY-MM-DD/_candidates/, so a per-day Selection agent reads only its
+own day's ~7-20k tokens instead of the whole week's ~86k.
 
 Never touches _selections.json's schema and never makes a judgment call --
 scoring, Top 3 selection, and blurb writing stay entirely in Selection's
@@ -56,8 +71,11 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Any
+
+import common
 
 # Lower index = higher priority when merging an exact (title, venue, date)
 # duplicate. Matches docs/v1/Scheduled/philly-events-selection/SKILL.md
@@ -70,6 +88,12 @@ SOURCE_PRIORITY = ["R5 Productions", "PhilaMOCA", "Philly Ask A Punk", "Do215"]
 # SKILL.md's own "3+ days" All Week/Recurring threshold rather than
 # inventing a new number.
 RECURRING_THRESHOLD = 3
+
+# Applied on emit only -- raw source files under data/<week>/ are never
+# touched. Keeps the full text for ~90% of real events (p90 was 751 chars
+# on the 2026-08-03 week); the other ~10% lose detail Selection rarely used
+# anyway (a `why`/`note` blurb draws from the first sentence or two).
+DESCRIPTION_CAP = 600
 
 
 def _priority_rank(source: str) -> int:
@@ -179,6 +203,88 @@ def group_recurring(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return result
 
 
+def assign_ids(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Assigns a stable "c0000"-style string `id` to each candidate, in list
+    order -- called after group_recurring(), the only point the final
+    ordered candidate list exists (both collapse_exact_duplicates and
+    group_recurring keep explicit order, so this is deterministic run to
+    run). String, not int: event_parsers/base.py's Event type is
+    dict[str, str]. This id is what Selection's annotations and
+    merge_selections.py key off of instead of re-matching on title text."""
+    result = []
+    for i, candidate in enumerate(candidates):
+        annotated = dict(candidate)
+        annotated["id"] = f"c{i:04d}"
+        result.append(annotated)
+    return result
+
+
+def cap_descriptions(candidates: list[dict[str, Any]], limit: int = DESCRIPTION_CAP) -> list[dict[str, Any]]:
+    """Truncates each candidate's `description` to `limit` chars with a
+    trailing ellipsis, applied last (after any sold-out note prefix has
+    already been added by collapse_exact_duplicates) since this is purely
+    an emit-time size control, not a data transform."""
+    result = []
+    for candidate in candidates:
+        description = candidate.get("description") or ""
+        if len(description) <= limit:
+            result.append(candidate)
+            continue
+        capped = dict(candidate)
+        capped["description"] = description[:limit].rstrip() + "…"
+        result.append(capped)
+    return result
+
+
+def split_by_day(result: dict[str, Any], week_dir: Path) -> list[Path]:
+    """Writes one candidate file per date in the target week (Monday through
+    Sunday) to <week_dir>/_candidates/<date>.json, so a Selection day-agent
+    reads ~7-20k tokens instead of the whole week's ~86k. A recurring
+    candidate (already collapsed to its earliest occurrence by
+    group_recurring) lands only in that representative date's file -- same
+    as it appears only once in the monolithic file. All 7 dates get a file
+    even if empty, so a day-agent's "no candidates" case is a real, present
+    file rather than a missing one. check_yield.py's orphan check globs
+    week_dir non-recursively (week_dir.glob("*.json")), so this subdirectory
+    is invisible to it -- verified, not assumed.
+
+    Raises if any candidate's date falls outside the Monday-Sunday window --
+    per-day files are Selection's only input once --split-by-day is used, so
+    a candidate that doesn't land in any of the 7 buckets would otherwise
+    vanish from the report with no trace, the exact silent-drop failure
+    class this project designs against elsewhere (check_yield.py, and
+    merge_selections.py's own fail-loud rules)."""
+    monday = date.fromisoformat(result["week"])
+    week = common.week_dates(monday)
+    valid_dates = {d.isoformat() for d in week}
+    by_date: dict[str, list[dict[str, Any]]] = {d: [] for d in valid_dates}
+    out_of_window = [c for c in result["candidates"] if c.get("date", "") not in valid_dates]
+    if out_of_window:
+        described = ", ".join(f"{c.get('id', '?')} ({c.get('title', '?')!r}, date={c.get('date', '?')!r})" for c in out_of_window)
+        raise ValueError(
+            f"{len(out_of_window)} candidate(s) fall outside the target week "
+            f"{week[0].isoformat()}..{week[-1].isoformat()} and would be silently dropped: {described}"
+        )
+    for candidate in result["candidates"]:
+        by_date[candidate["date"]].append(candidate)
+
+    out_dir = week_dir / "_candidates"
+    out_dir.mkdir(exist_ok=True)
+    paths = []
+    for day in week:
+        day_str = day.isoformat()
+        payload = {
+            "week": result["week"],
+            "date": day_str,
+            "collection_failures": result["collection_failures"],
+            "candidates": by_date[day_str],
+        }
+        path = out_dir / f"{day_str}.json"
+        path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+        paths.append(path)
+    return paths
+
+
 def collection_failures(manifest: dict[str, Any]) -> list[str]:
     """Builds the same "{source} ({reason})" shape html_render.py's
     format_failure_note already parses, so Selection can pass this straight
@@ -196,11 +302,13 @@ def build_candidates(week_dir: Path) -> dict[str, Any]:
     raw_events = load_candidates_from_sources(week_dir, manifest)
     deduped = collapse_exact_duplicates(raw_events)
     grouped = group_recurring(deduped)
+    identified = assign_ids(grouped)
+    capped = cap_descriptions(identified)
     return {
         "week": manifest.get("week", week_dir.name),
         "collection_failures": collection_failures(manifest),
         "raw_event_count": len(raw_events),
-        "candidates": grouped,
+        "candidates": capped,
     }
 
 
@@ -208,6 +316,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Flatten, dedupe, and annotate a week's Collection output for Selection")
     parser.add_argument("week_dir", type=Path, help="data/YYYY-MM-DD")
     parser.add_argument("--out", type=Path, default=None, help="Defaults to <week_dir>/_candidates.json")
+    parser.add_argument(
+        "--split-by-day",
+        action="store_true",
+        help="Also write <week_dir>/_candidates/<date>.json, one per day, for per-day Selection agents",
+    )
     args = parser.parse_args()
 
     result = build_candidates(args.week_dir)
@@ -221,6 +334,10 @@ def main() -> None:
         f"{len(result['collection_failures'])} source(s) failed. Written to {out_path}",
         file=sys.stderr,
     )
+
+    if args.split_by_day:
+        day_paths = split_by_day(result, args.week_dir)
+        print(f"Split into {len(day_paths)} per-day file(s) under {args.week_dir / '_candidates'}", file=sys.stderr)
 
 
 if __name__ == "__main__":

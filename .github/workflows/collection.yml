@@ -95,7 +95,7 @@ jobs:
       # safely (stop and notify).
       - name: Prepare selection candidates
         continue-on-error: true
-        run: python scripts/prepare_selection_input.py "${{ steps.week.outputs.dir }}"
+        run: python scripts/prepare_selection_input.py "${{ steps.week.outputs.dir }}" --split-by-day
 
       - name: Commit and push collected week
         run: |
