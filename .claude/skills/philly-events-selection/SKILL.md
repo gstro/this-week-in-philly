@@ -78,17 +78,23 @@ not a retry.
 
 ## Phase 1 — Load
 
-For each of the 7 dates in the target week, read that day's `_candidates/<date>.json` — not the
-monolithic `_candidates.json`. Each per-day file's `candidates` array is a subset of the same
-already-flattened, exact-duplicate-collapsed, recurring-grouped list `_candidates.json` carries (every
-event tagged with `source` and a stable `id`); a recurring listing (`recurrence_count` present) appears
-only in its earliest occurrence's day file, same as it appears only once in the full week's file.
-`collection_failures` is repeated on every per-day file, already in the shape the final output needs.
+**Process all 7 days yourself, sequentially, in this single session. Do not dispatch a subagent per
+day, or fan out in any other way.** For each of the 7 dates in the target week, read that day's
+`_candidates/<date>.json` one at a time — not the monolithic `_candidates.json`, and not by handing a
+day off to a subagent.
 
-If your Routine session dispatches a subagent per day (an established pattern this task's own runs have
-already converged on), each subagent should read only its own day's file — that's the whole point of the
-split. If processing all 7 days in one session, read them one at a time rather than falling back to the
-monolithic `_candidates.json`.
+This is a deliberate reversal of an earlier assumption, not an oversight: an early run of this task
+independently chose to spawn one subagent per day, and it looked like a reasonable way to exploit the
+per-day split. Measuring it for real (`scripts/token_report.py` against real session transcripts, same
+week processed both ways) showed the opposite of what was expected — fan-out cost **~3x more output
+tokens** (189k vs 61k, same 21 top3 picks + 102 annotated candidates) and, even after weighting for
+`cache_read` being far cheaper than `cache_write`/output, **~38% more total cost**. Two reasons, neither
+fixable from inside this skill: each subagent independently pays to establish its own context (system
+prompt, tool definitions, these very skill files) with no sharing between siblings — Claude Code's
+context-sharing mechanism (`fork`) is a CLI-only feature, not available to a Routine's own subagent
+dispatch — and each subagent's response back to its parent tends to narrate its picks in prose on top of
+the compact JSON it's actually supposed to produce. Reading each day's file yourself, in this one
+session, avoids both costs entirely.
 
 ```
 Loaded [N] candidates for [date] ([R] recurring group(s), [F] sources failed during collection).
