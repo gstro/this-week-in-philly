@@ -1,0 +1,758 @@
+{
+  "week": "2026-08-10",
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-08-10",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0438",
+          "rank": 1,
+          "address": "404 S 20th St, Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Learn to build a home page like it's 1999 — Ragman (Richard Green) walks you through the basics of HTML and gets you a static site live on Neocities by the end of the night. No experience necessary, and it's pay-what-you-can ($10–$25 suggested, no one turned away for lack of funds). It's the hands-on, unpretentious tech education that makes Iffy Books one of the city's best-kept secrets."
+        },
+        {
+          "id": "c0010",
+          "rank": 2,
+          "address": "1201 Frankford Ave, Philadelphia, PA 19125",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "NYC noise-rock institution Oneida brings its 17th album, Expensive Air, to Johnny Brenda's alongside fellow genre-benders Kinski — two bands who've spent decades proving a song can be pushed past its structure into something harder and stranger. $25.65, doors at 7."
+        },
+        {
+          "id": "c0025",
+          "rank": 3,
+          "address": "5100 Pine St, Philadelphia, PA 19143",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "One PA's West/Southwest Rising throws its annual cookout in Malcolm X Park, building working-class power in West and Southwest Philly over free food and community. It's the rare organizing event that comes with dinner and a cookout instead of folding chairs in a church basement."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0019"
+        },
+        {
+          "id": "c0031"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0438",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Build a static site on Neocities from scratch — no experience needed, PWYW."
+        },
+        {
+          "id": "c0010",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "NYC noise-rock veterans Oneida play their 17th album alongside Kinski."
+        },
+        {
+          "id": "c0025",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Annual cookout building working-class power in West/Southwest Philly; dinner provided."
+        },
+        {
+          "id": "c0019",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Free author talk on tracing how Adams, Jefferson, and their peers shaped the Declaration of Independence."
+        },
+        {
+          "id": "c0031",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Philly DSA's film-and-drinks social — casual hangout to talk favorite 2026 movies and their best anti-capitalist takedowns."
+        },
+        {
+          "id": "c0000",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "cinéSPEAK screens the 1994 narrative feature at Two Locals Brewing."
+        },
+        {
+          "id": "c0002",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Texas-born singer-songwriter with a Grammy nomination for co-writing John Legend's ‘Conversations in the Dark.’"
+        },
+        {
+          "id": "c0029",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Linocut carving workshop — carve and print your own patches at this community print shop and zine library."
+        },
+        {
+          "id": "c0026",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Monthly community meeting at Kol Tzedek building tenant and neighbor power in West/Southwest Philly; dinner provided."
+        },
+        {
+          "id": "c0036",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Weekly jazz/soul jam session hosted by Richard Hill Jr. and friends at Black Squirrel Club."
+        },
+        {
+          "id": "c0015",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Volunteer stewardship morning pulling invasives and litter at Cobbs Creek Park, plus a short ecology walk and talk."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-11",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0048",
+          "rank": 1,
+          "address": "229 S 45th St, Philadelphia, PA 19104",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A West Philly debut for the new Del Rossi Trio, a solo drone set from Search for the Infinite Light, and a rare solo-voice performance from Kilynn Lunsford — curated by Yoni Kroll in the intimate upstairs room at Abyssinia, with excellent Ethiopian food downstairs. $10–15, 21+, and about as far from a typical Tuesday as it gets."
+        },
+        {
+          "id": "c0066",
+          "rank": 2,
+          "address": "1906 Rittenhouse Square, Philadelphia, PA 19103",
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A reading group digging into Bayard Rustin's ‘Freedom Budget for All Americans’ — the jobs-centric economic vision from the organizer who actually built the March on Washington that MLK spoke at. Free, discussion-driven, and a genuinely different angle on a civil rights figure most people only know from one speech."
+        },
+        {
+          "id": "c0058",
+          "rank": 3,
+          "address": "1400 John F Kennedy Blvd, Philadelphia, PA 19107",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A landlord's letter threatening to sell 925 affordable units in West and Southwest Philly to a private developer could displace thousands of tenants — this rally at City Hall demands the city and owner keep the properties affordable. Free, urgent, and exactly the kind of unglamorous fight that decides whether a neighborhood stays livable."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0064"
+        },
+        {
+          "id": "c0439"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0048",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Drone, improv, and solo voice performances curated by Yoni Kroll at Upstairs Abyssinia."
+        },
+        {
+          "id": "c0066",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Reading group on Bayard Rustin's economic vision, the organizer behind the March on Washington."
+        },
+        {
+          "id": "c0058",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Tenant rally at City Hall against the sale of 925 affordable West/Southwest Philly units."
+        },
+        {
+          "id": "c0064",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Free know-your-rights clinic with one-on-one tenant legal advice from Renters United Philadelphia."
+        },
+        {
+          "id": "c0439",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Silent co-working writing sessions at Iffy Books — three 40-minute units with breaks."
+        },
+        {
+          "id": "c0510",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Weekly in-person Vogue practice session at the Rotunda — recurring fixture, not a one-off."
+        },
+        {
+          "id": "c0065",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Free outdoor concert series at FDR Park's lakes; this week's set is Gumbo Nouveau."
+        },
+        {
+          "id": "c0049",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Bassist Hannah Marks releases her new record with a quartet set at Chris' Jazz Cafe."
+        },
+        {
+          "id": "c0462",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Philadelphia Area Horror Meetup Group streams the beloved body-horror B-movie Basket Case."
+        },
+        {
+          "id": "c0069",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Beginner-friendly swing dance classes rooted in Philly's Lindy Hop community; no partner needed."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0440",
+          "rank": 1,
+          "address": "404 S 20th St, Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Build a tiny solar-powered square-wave synth on a breadboard — no soldering required, just a $12.50 kit and curiosity. It's DIY electronics at its most playful, the kind of low-stakes maker project that turns into a real skill by the end of the night."
+        },
+        {
+          "id": "c0125",
+          "rank": 2,
+          "address": "1412 Chestnut St, Philadelphia, PA 19102",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Kieślowski's towering ten-part meditation on the Ten Commandments gets a rare 4K theatrical run, two parts at a time. Parts 1 and 2 open with a father questioning faith through his son's eyes and a woman torn between a dying husband and an unborn child — as intimate and devastating as cinema gets."
+        },
+        {
+          "id": "c0111",
+          "rank": 3,
+          "address": "5140 Chester Ave, Philadelphia, PA 19143",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philly DSA canvasses West Philly for Chris Rabb, a democratic socialist running for PA-03 on universal healthcare, childcare, and abolishing ICE. No experience needed — new canvassers get trained and paired with a partner, then there's a debrief hang after."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0441"
+        },
+        {
+          "id": "c0122"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0440",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Build a solar-powered square-wave generator on a breadboard, no soldering required."
+        },
+        {
+          "id": "c0125",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Kieślowski's Dekalog, parts 1 & 2, in a rare 4K theatrical run."
+        },
+        {
+          "id": "c0111",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "DSA canvass for democratic socialist congressional candidate Chris Rabb."
+        },
+        {
+          "id": "c0441",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Build a pocket digital notebook with an ESP32 microcontroller and OLED display; no soldering required."
+        },
+        {
+          "id": "c0122",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Antonioni's La Notte, part of PFS's Summer of Trilogies: Alienation Trilogy."
+        },
+        {
+          "id": "c0449",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Low-key biweekly reading social at Indy Hall's coworking clubhouse; bring up to 10 books to swap."
+        },
+        {
+          "id": "c0082",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "A night of improvised and exploratory jazz across three sets at The Perch."
+        },
+        {
+          "id": "c0112",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Free gothic-themed craft hang — bring colored paper, stamps, and buttons for a collage night."
+        },
+        {
+          "id": "c0084",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "All-star student big band led by Joe Bongiovi, drawing top high school and college jazz musicians from the region."
+        },
+        {
+          "id": "c0083",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Electronic/experimental lineup at Ortlieb's; 21+, doors at 7."
+        },
+        {
+          "id": "c0511",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Recurring drop-in improvised music jam session at the Rotunda."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-13",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0204",
+          "rank": 1,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A touring showcase of horror shorts directed, written, or produced by women and non-binary filmmakers, with festival founder Sara Neidorf in attendance. It's horror without the usual victim-camera-fantasy math — messier, weirder, and told from the other side of the knife."
+        },
+        {
+          "id": "c0512",
+          "rank": 2,
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A free double feature of Chilean director Sebastián Silva's Rotting in the Sun and Tyrel at the Rotunda, one of the city's great free/PWYW film venues. Two hours of uncomfortable, funny, formally sharp filmmaking for the price of showing up."
+        },
+        {
+          "id": "c0132",
+          "rank": 3,
+          "address": "1026 Spring Garden St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Progressive post-hardcore quartet Hail the Sun bring their intricate, high-energy sound to Union Transfer — a band that built a decade-plus career on refusing to just scream through intense emotion when a melody would hit harder."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0194"
+        },
+        {
+          "id": "c0443"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0204",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Horror shorts by women and non-binary filmmakers; festival founder Sara Neidorf in attendance."
+        },
+        {
+          "id": "c0512",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Free double feature of two Sebastián Silva films at the Rotunda."
+        },
+        {
+          "id": "c0132",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Progressive post-hardcore quartet Hail the Sun at Union Transfer."
+        },
+        {
+          "id": "c0194",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Julie Dash's Daughters of the Dust, LA Rebellion landmark, in a rare theatrical screening."
+        },
+        {
+          "id": "c0443",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Reading group on Jacques Ellul's The Technological Society, part 1 of 3, virtual option available."
+        },
+        {
+          "id": "c0205",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Godard's anarchic, society-on-the-brink satire, part of PFS's Road Trips series."
+        },
+        {
+          "id": "c0442",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "First-time-solderer-friendly workshop building a rechargeable battery pack for microcontroller projects; kit is $3.99."
+        },
+        {
+          "id": "c0155",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "South African-born, New Zealand-raised vocalist blending soul, jazz, and R&B; two sets."
+        },
+        {
+          "id": "c0165",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Powerhouse gospel vocalist known for anthemic, faith-centered performances."
+        },
+        {
+          "id": "c0148",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Avant-folk Balkan brass band playing protests, weddings, and beer gardens since 2006."
+        },
+        {
+          "id": "c0569",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Stadium-scale rock bill notable for the opener: Philly's own Mannequin Pussy."
+        },
+        {
+          "id": "c0210",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Free riverside outdoor screening of Jaws at sunset; bring a blanket."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-14",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0491",
+          "rank": 1,
+          "address": "291 N Keswick Ave, Glenside, PA 19038",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "time": "8:00 PM",
+          "why": "Filmmaker Alex Cox is in attendance for a screening of his punk sci-fi classic Repo Man, followed by a live set from the actual Circle Jerks — LA hardcore royalty who've been playing since 1979 and share a founding member with Black Flag. Doors 7, film and show 8; this is the rare night where the movie and the band are both the headliner."
+        },
+        {
+          "id": "c0515",
+          "rank": 2,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Red Rabbis run their monthly De-Escalation 101 at Wooden Shoe Books, teaching practical tools for staying grounded and co-regulating through conflict on the ground. Built for organizers and public workers alike; masks required and provided, free."
+        },
+        {
+          "id": "c0288",
+          "rank": 3,
+          "address": "1412 Chestnut St, Philadelphia, PA 19102",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Nicolas Winding Refn's guerrilla 1996 debut — and Mads Mikkelsen's first-ever feature — gets a brand-new 4K restoration as the opener of PFS's full Pusher trilogy retrospective. Copenhagen's underworld has rarely looked this grimy or this good."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0495"
+        },
+        {
+          "id": "c0444"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0491",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Alex Cox in attendance for Repo Man, followed by a live Circle Jerks set."
+        },
+        {
+          "id": "c0515",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Monthly de-escalation training for organizers and community safety at Wooden Shoe Books."
+        },
+        {
+          "id": "c0288",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Refn's guerrilla debut, new 4K restoration, opening PFS's Pusher trilogy retrospective."
+        },
+        {
+          "id": "c0495",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Hardcore punk bill — F.O.D. (Flag of Democracy), Anal Training, Psychopomp — at DIY space Cousin Danny's."
+        },
+        {
+          "id": "c0444",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Build an off-grid GPS/time display device using MicroPython, no internet required."
+        },
+        {
+          "id": "c0286",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Kiyoshi Kurosawa's unsettling factory-worker friendship drama, part of PFS's Terror Trilogy series."
+        },
+        {
+          "id": "c0246",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Philly jazz pianist Orrin Evans leads a CD release show with saxophonist Caleb Curtis and trumpeter Duane Eubanks sitting in."
+        },
+        {
+          "id": "c0238",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Philly-rooted R&B/soul singer whose EP Soulsthetic pays direct homage to The Sound of Philadelphia."
+        },
+        {
+          "id": "c0213",
+          "category": "🎪 Festivals & Major Events",
+          "sold_out": false,
+          "note": "The Philadelphia Folk Festival kicks off its three-day run at Old Pool Farm with Leftover Salmon, Sam Bush, Eddie 9V, and Tom Rush."
+        },
+        {
+          "id": "c0285",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Philly's only video-game jazz fusion quintet plays retro soundtracks while you play retro games; free entry."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-15",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0516",
+          "rank": 1,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "An interactive training on tenant rights and what to actually do in the face of eviction, hosted at Philly's anarchist bookstore. Practical, free, and the kind of skill-building that matters far more than another rally."
+        },
+        {
+          "id": "c0303",
+          "rank": 2,
+          "address": "100 Station Ave, Oaks, PA 19456",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The self-described world's largest traveling oddities show rolls into Oaks with taxidermy, preserved specimens, quack medical devices, skulls, and handmade horror-inspired art from vendors who take the weird seriously. Everything's legal and sustainably sourced — a full day for anyone who'd rather browse bone jewelry than a mall."
+        },
+        {
+          "id": "c0312",
+          "rank": 3,
+          "address": "1248 N Front St, Philadelphia, PA 19122",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Philly's #1 post-punk party for over 15 years — Depeche Mode, Joy Division, New Order, The Smiths, The Cure, and everything post-punk/darkwave/goth adjacent, spun to a packed dance floor with free pretzels while they last. $7 advance, $10 at the door, 10pm start."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0496"
+        },
+        {
+          "id": "c0323"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0516",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Interactive training on tenant rights and eviction response at Wooden Shoe Books."
+        },
+        {
+          "id": "c0303",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "The world's largest traveling oddities show — taxidermy, curiosities, horror-inspired art."
+        },
+        {
+          "id": "c0312",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Philly's longest-running post-punk/darkwave/goth dance party, 15+ years strong."
+        },
+        {
+          "id": "c0496",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Crust/harsh noise/punk gig — MCTDB, Fleshwound, Frog Myst, Syringehead, Diskritik — at Cousin Danny's."
+        },
+        {
+          "id": "c0323",
+          "category": "🎪 Festivals & Major Events",
+          "sold_out": false,
+          "note": "Full day of live jazz, R&B, spoken word, and African dance/drum at the Black Writers Museum."
+        },
+        {
+          "id": "c0497",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Cybergrind/digital hardcore/grindcore album release show at Beautiful World Syndicate."
+        },
+        {
+          "id": "c0390",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "One-night-only 35mm screening of the full cult Sleepaway Camp trilogy at PFS."
+        },
+        {
+          "id": "c0392",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Mads Mikkelsen returns to Copenhagen's underworld fresh out of prison; second entry in PFS's 4K Pusher retrospective."
+        },
+        {
+          "id": "c0396",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "The trilogy closer — a Serbian kingpin's worst 24 hours, in new 4K restoration."
+        },
+        {
+          "id": "c0506",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Outdoor goth DJ picnic at the historic Grumblethorpe house and garden; 21+, $20 advance."
+        },
+        {
+          "id": "c0445",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Quarterly Patreon-supporter bonus workshop building a device to detect nearby Meta smart glasses."
+        },
+        {
+          "id": "c0367",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rare theatrical screening of the Shaw Brothers wuxia classic, part of PFS's Kung Fu Matinees."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-16",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0431",
+          "rank": 1,
+          "address": "1412 Chestnut St, Philadelphia, PA 19102",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Charles Burnett's landmark 1978 portrait of a working-class Black man's life in 1970s LA, blending cinéma vérité with Italian neorealism, gets a rare 4K theatrical screening as part of PFS's LA Rebellion series. One of the most quietly devastating films in American independent cinema, and not one that plays theaters often."
+        },
+        {
+          "id": "c0499",
+          "rank": 2,
+          "address": "5001 Market St, Philadelphia, PA 19139",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Richmond crust/hardcore band Skeksis headlines a stacked DIY bill of hardcore punk at Cousin Danny's, with local support from Nightfall, Sediment, and Diskritik. No frills, no barrier, just a house-show-adjacent room and four bands that mean it."
+        },
+        {
+          "id": "c0405",
+          "rank": 3,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Blood Sick Underground Cinema premieres director Kasper Meltedhair's aggressively strange no-budget sci-fi at PhilaMOCA, the city's home for underground and outsider film. Come for the plot synopsis alone — it will not make more sense after you've seen it, and that's the point."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0446"
+        },
+        {
+          "id": "c0513"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0431",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Charles Burnett's Killer of Sheep, LA Rebellion landmark, in a rare 4K screening."
+        },
+        {
+          "id": "c0499",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Hardcore/crust bill — Skeksis (RVA), Nightfall, Sediment, Diskritik — at Cousin Danny's."
+        },
+        {
+          "id": "c0405",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "World premiere of a no-budget underground sci-fi feature at PhilaMOCA, director in attendance."
+        },
+        {
+          "id": "c0446",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Intro to Meshtastic — send private off-grid text messages using pocket LoRa radios."
+        },
+        {
+          "id": "c0513",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Size- and gender-inclusive clothing swap at the Rotunda, free."
+        },
+        {
+          "id": "c0430",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Kieślowski's Dekalog continues — an affair confronted on Christmas Eve, and a daughter questioning her bond with her father."
+        },
+        {
+          "id": "c0447",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Learn to DJ using free, open-source software and a regular keyboard — no expensive equipment required."
+        },
+        {
+          "id": "c0433",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Phone-free collaging and junk journaling hang using daily scraps — receipts, labels, junk mail — in community."
+        },
+        {
+          "id": "c0402",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Grammy-nominated blues guitar phenom closes out the Concerts Under the Stars series in King of Prussia."
+        }
+      ]
+    }
+  ]
+}
