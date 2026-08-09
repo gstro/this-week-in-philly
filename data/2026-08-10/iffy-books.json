@@ -1,0 +1,96 @@
+{
+  "source": "Iffy Books",
+  "collected_at": "2026-08-09T06:53:40.709548+00:00",
+  "events": [
+    {
+      "title": "\ud83d\udea7 Make Your First Website",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-10",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNzRzamliOWg2c3MzY2NwbzZnczMwYzFkNjRyamdkaGo3NHAzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Make a home page like it\u2019s 1999! Join us at Iffy Books for a new workshop called Make Your First Website, led by Ragman a.k.a. Richard Green. You\u2019ll learn the basics of HTML and create a static site on the free hosting service Neocities. No experience necessary! \nPlease bring a laptop if you have one. We\u2019re suggesting a $10\u2013$25 donation for this workshop, no one turned away for lack of funds. \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailChoose one:I'll bring a laptopI'll use a lab computerInstructor donation:$0 / donate later$5$10$15$20$25$30$35(suggested $10\u2013$25)Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\u270f\ufe0f The Writing Room",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-11",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9yajhiOWg2c3MzY2QxbTZzcjMwYzFkNjRyamdkaGs2c3IzY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Come co-work with other writers in three 40-minute units of silent writing. Writers and projects of any type welcome. 10-minute breaks and accountability check-ins between units. BYO coffee, water, computer chargers, notepads, etc."
+    },
+    {
+      "title": "\u2600\ufe0f Solar Music Synth Workshop",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-12",
+      "time": "10:30 AM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmNzamViOWg2c3MzY2Q5ajYwcjMwYzFkNjRyamdkaGw2Y3JqZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Join us and build a tiny solar-powered square wave generator on a breadboard. No soldering required! The workshop is free to attend, but you\u2019ll need to purchase a kit for $12.50 to complete the project. \nHere\u2019s a link to the how-to zine we\u2019ll use. \nAnd here\u2019s a diagram of the oscillator circuit we\u2019ll build: \n \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailBuy a kit:Solar Synth Kit - $13.50(price includes tax)Instructor donation:$0 / donate later$5$10$15$20$25$30(suggested $5\u2013$15)Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\ud83d\udcd3 DIY Digital Notebook Workshop",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-12",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmNwamNiOWg2c3MzY2Q5bDYwcTMwYzFkNjRyamdkaGw2a3JqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "In this workshop you\u2019ll build a digital notebook, a pocket-sized device for taking notes with a USB keyboard. We\u2019re using affordable, widely available components: a Seeed XIAO ESP32-S3 microcontroller, a 1-inch OLED display, and a microSD card reader, arranged on a solderless breadboard. The ESP32-S3 connects to the display via the I2C (Inter-Integrated Circuit) protocol, and to the microSD card reader uses the SPI (Serial Peripheral Interface) protocol. \nNo soldering required! Cutting and stripping jumper wires requires a degree of manual dexterity. \nPlease bring a laptop if you have one! If not it\u2019s OK. \nInstructions \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailBuy a kit:Digital Notebook Kit - $46.23(price includes tax)Instructor donation:$0 / donate later$5$10$15$20$25$30(suggested $5\u2013$15)Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\ud83d\udd0b Beginner Soldering: Li-Ion Battery Pack",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-13",
+      "time": "2:30 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9vajJiOWg2c3MzY2RoajY0cTMwYzFkNjRyamdkaG02Y3FqMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Make a rechargeable battery pack for your LoRa node, a microcontroller such as an ESP32 or Pi Pico, or anything that runs on 3\u20134 Volts. Perfect for folks who\u2019ve never soldered before! \nTo complete this project you\u2019ll need to buy a li-ion battery pack kit for $3.99. Here\u2019s what it includes: \n\u2022 18650 battery clip w/ attached wires\n\u2022 TP4056 charge controller board\n\u2022 PH2.5 plug w/ attached wires\n\u2022 1/8\u2033 heat shrink tubing (1.5\u2033 long)\n\u2022 1/2\u2033 heat shrink tubing (1\u2033 long) \nYou\u2019ll also need a lithium-ion 18650 battery, available separately. \nRegister\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailPurchase a kit:Li-Ion Battery Pack Kit - $4.31Flat top 18650 battery (5000 mAh ) - $6.47(prices include sales tax)Instructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5\u2013$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\u2699\ufe0f Neo-Luddite Reading Group: 'The Technological Society' by Jacques Ellul (pt. 1 of 3)",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-13",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNzBvMzZiOWg2c3MzY2RoazZrczMwYzFkNjRyamdkaG02a3BqMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "We\u2019re reading the first 1/3 of the book for this month! Check out the full schedule at victorgom.es/neoluddite \n\u27a1\ufe0f Virtual Meetup Link\nDiscord: Email neoluddite@victorgom.es for an invite! \nIf you\u2019re joining for the first time, I\u2019d suggest you read this before anything else for brief context: What the Luddites Really Fought Against by Richard Conniff.The only expectation is that you read the chapter(s) of the book that\u2019s listed for that meeting. You\u2019re still welcome to participate if you haven\u2019t done the readings as long as you are mindful. For each chapter, I\u2019ve also noted some optional readings for context, so I\u2019d suggest checking those out rather than reading ahead in the book. And remember, if you ever find yourself struggling with any of the readings or concepts, reach out! Either directly to me over email or to the entire group over discord."
+    },
+    {
+      "title": "\ud83d\udccd Offline GPS Unit Workshop",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-14",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNmtxajRiOWg2c3MzY2RwaDZvbzMwYzFkNjRyamdkaG42OHBqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "In this workshop you\u2019ll build a device that displays your GPS coordinates and the current time, without connecting to the internet or transmitting anything. 100% passive and off-grid, no internet or cell connection needed! \nWe\u2019ll use the\u00a0MicroPython programming language and the Thonny IDE, following the instructions on\u00a0this page. \nYou\u2019ll need to purchase a kit to complete this project, which includes the following parts: \n\nRP2040 Pi Pico microcontroller unit w/ pre-soldered header pins\n830 tie point solderless breadboard\nNEO-6 GPS unit w/ antenna\n0.96\u2033 OLED display\nSingle-core 22AWG jumper wire (30\u2033)\nrubber band (to attach GPS antenna to breadboard)\n\nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailBuy a kit:Offline GPS Unit Kit - $27.00(price includes tax)Instructor donation:$0 / donate later$5$10$15$20$25(suggested $5\u2013$15)Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\ud83d\udc53 Quarterly Bonus Workshop: ESP32 \"Smart\" Glasses Detector",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-15",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjBwajZiOWg2c3MzY2RwbzcwbzMwYzFkNjRyamdkaG43NHFqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Our quarterly off-site bonus workshop for Patreon supporters. Check out our Patreon page for details! \nFor this one we\u2019re setting up a li\u2019l device that uses ESP32-Glasshole to detect nearby Meta glasses. \n\u2022 ESP32-C3 microcontroller unit\n\u2022 CR2032 coin cell battery (x2)\n\u2022 through-hole push button switch w/washer & nut\n\u2022 plastic bubble w/ hole for switch\n\u2022 SH1.25 port w/ red & black wires\n\u2022 SH1.25 plug w/ red & black wires\n\u2022 1.25mm heat shrink tubing (1/2\u2033 long)\n\u2022 craft tape on parchment paper (3.5\u2033) \nThis project involves wire cutting, stripping, and light soldering. And the list of parts above may change. \nesptool.py --chip esp32c3 --port /dev/abcdefghisomething write_flash 0x0 ~/Downloads/ESP-GlassHole-esp32-c3-v2.0.0.bin\nRegister\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm Email\u2705 Check one:I'm a Patreon supporter at the proper levelI'm signing up now in another tab, I promiseComments or questions?Submit"
+    },
+    {
+      "title": "\ud83d\udce1 Meshtastic 101",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-16",
+      "time": "10:30 AM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9vMzBiOWg2c3MzY2UxbjZvcDMwYzFkNjRyamdkaG83MG9qY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Join us for an introduction to Meshtastic, an application that lets you send private text messages over the air using pocket-sized\u00a0LoRa radio transceivers. We\u2019ll show you how to flash the latest Meshtastic firmware to the device, customize the settings, and start chatting with your friends. \nHere\u2019s a link to our zine on LoRa + Meshtastic.\nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailPurchase a transceiver kit:Portable Heltec Lora32 V3 kit w/ case - $41.04Seeed nRF52840 LoRa node (low power for battery/solar) - $27.00(prices include sales tax)Instructor donation:$0 / donate later$5$10$15$20Recommended $5\u2013$15Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\ud83d\udd0a DJ Basixxx with Mixxx",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-16",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9vamdiOWg2c3MzY2UxcDZvbzMwYzFkNjRyamdkaHA2MHBqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "If you\u2019re curious about DJing but don\u2019t have money to drop on equipment, this workshop is for you! You\u2019ll learn to use Mixxx, a free and open source DJ program for macOS, Windows, and Linux. Mixxx supports a wide range of DJ controller hardware, but to make it more accessible we\u2019re using regular QWERTY keyboards with stickers on the important keys. We\u2019ll teach you to find tracks on the web, load them into Mixxx, and get started with beatmatching. It\u2019s easier then you think! \nYou\u2019ll need to bring your own laptop and headphones for this workshop. We also recommend bringing a separate USB keyboard if you have one, ideally with a row of function keys (F1, F2, F3, etc.). If you have an external audio interface, you\u2019re welcome to bring that too. \nThe DJ controller sticker sheets we\u2019re using are available on our online store. Or print your own\u00a0(4\u2033 x 4\u2033) on sticker paper! \n\u27a1\ufe0f Workshop instructions \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailBuy a sticker sheet (optional)DJ controller keyboard stickers - $2.70(price includes tax)Instructor donation:$0 / donate later$5$10$15$20$25(suggested $5\u2013$20)Credit card info: *CardName on CardComments or questions?Submit  \n \n \nCircuitPython code for turning a Pi Pico board into a USB keyboard"
+    }
+  ]
+}
