@@ -169,7 +169,34 @@ def _parse_time_for_sort(event_time: str) -> dt_time | None:
         return None
 
 
+# Rendered cards per category per day. A category's true count (used for the
+# stats section) is unaffected -- this only bounds what's displayed.
+CATEGORY_DISPLAY_CAP = 10
+
+
+def _priority_key(
+    event: dict, top3_titles: set, hm_titles: set, index: int
+) -> tuple:
+    """Top 3 picks sort first, then Honorable Mentions, then everything else
+    chronological (ties preserve original array order, unparseable/empty
+    times sort last within their tier -- both validated against the
+    archived report, see module docstring). Applied before slicing to
+    CATEGORY_DISPLAY_CAP so a busy category's cap can never silently drop
+    something Selection already vetted -- a plain events[:N] slice would:
+    checked against a real week, truncating Friday's 51 Music listings to
+    the first 10 by start time cuts an actual Top 3 pick."""
+    parsed = _parse_time_for_sort(event.get("time", ""))
+    return (
+        event["title"] not in top3_titles,
+        event["title"] not in hm_titles,
+        parsed is None,
+        parsed or dt_time.min,
+        index,
+    )
+
+
 def build_categories(day: dict, top3_titles: set) -> list[dict]:
+    hm_titles = {mention["title"] for mention in day.get("honorable_mentions", [])}
     by_category = defaultdict(list)
     for event in day["events"]:
         by_category[event["category"]].append(event)
@@ -179,19 +206,13 @@ def build_categories(day: dict, top3_titles: set) -> list[dict]:
         events = by_category.get(label)
         if not events:
             continue
-        # Stable sort by parsed time ascending; unparseable/empty times
-        # sort last, ties preserve original array order (both validated
-        # against the archived report -- see module docstring).
         ordered = sorted(
             enumerate(events),
-            key=lambda pair: (
-                _parse_time_for_sort(pair[1].get("time", "")) is None,
-                _parse_time_for_sort(pair[1].get("time", "")) or dt_time.min,
-                pair[0],
-            ),
+            key=lambda pair: _priority_key(pair[1], top3_titles, hm_titles, pair[0]),
         )
+        displayed = ordered[:CATEGORY_DISPLAY_CAP]
         view_events = []
-        for _, event in ordered:
+        for _, event in displayed:
             is_top3 = event["title"] in top3_titles
             price_class, price_text = price_class_and_text(event)
             view_events.append(
@@ -206,7 +227,7 @@ def build_categories(day: dict, top3_titles: set) -> list[dict]:
                     "price_text": price_text,
                 }
             )
-        categories.append({"label": label, "events": view_events})
+        categories.append({"label": label, "events": view_events, "true_count": len(events)})
     return categories
 
 
