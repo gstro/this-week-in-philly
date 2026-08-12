@@ -244,6 +244,28 @@ Selection complete for [date]. [N] top3, [M] annotated, [K] categories capped.
 
 ---
 
+## Phase 4 — Self-check
+
+Once all 7 days are processed, before assembling the final file, print a short summary so drift is
+visible to you (and to whoever reads the run) at authoring time, when it can still be acted on —
+`scripts/check_selection.py` re-checks the venue cap and a few other things mechanically after this
+task pushes, but that only fires in CI; this catches it here first:
+
+```
+Self-check for week of [YYYY-MM-DD]:
+  Venues (top3, by address): [address]: [count], [address]: [count], ...  — flag any at or above the
+    weekly cap (2)
+  Categories (top3): [category]: [count], ...
+  Sources (top3, by origin `source` field): [source]: [count], ...
+  *(confirm details)* flags: [N]
+```
+
+This is informational, not a gate — nothing here blocks the push. If a venue is at or above the cap,
+double check you actually enforced it per Phase 3 step 4 rather than just noting it here after the
+fact.
+
+---
+
 ## Assemble and write
 
 Once every day (Monday through Sunday) has been processed, combine all 7 days' contributions into one
