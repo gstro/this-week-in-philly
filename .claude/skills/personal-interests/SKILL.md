@@ -11,16 +11,16 @@ honorable-mention material for the weekly event report specifically.
 
 ## Core
 
-- **Leftist politics** — events with progressive, labor, indigenous, anti-capitalist, or social justice themes; readings by authors with political dimensions; community solidarity events
-- **Film** — screenings of any kind, especially independent, foreign, experimental, horror, or noir; film discussion communities; short film showcases; free or PWYW screenings get a bonus
-- **Punk and hardcore music** — punk, post-punk, hardcore, EBM, industrial, noise rock, emo, post-hardcore; local DIY shows; all-ages events; cheap or free entry preferred
+- **Leftist politics** — events with progressive, labor, indigenous, anti-capitalist, or social justice themes; readings by authors with political dimensions; community solidarity events. Political-education programming specifically (e.g. Wooden Shoe Books' ed line) is a strong anchor.
+- **Film** — screenings of any kind, especially independent, foreign, experimental, horror, or noir; film discussion communities; short film showcases; free or PWYW screenings get a bonus. Named anchors: Béla Tarr, Czech New Wave.
+- **Punk and hardcore music** — punk, post-punk, hardcore, EBM, industrial, noise rock, emo, post-hardcore, screamo (e.g. Saetia); local DIY shows; all-ages events; cheap or free entry preferred
 - **Horror and the occult** — horror film screenings, paranormal events, gothic culture, occult/esoteric festivals, dark/strange themed events
-- **Literature** — author readings, book releases, poetry, book clubs, independent bookstores; free library events
+- **Literature** — author readings, book releases, poetry, book clubs, independent bookstores; free library events. Named anchor: Ursula K. Le Guin.
 
 ## Strong
 
 - **DIY electronics** — maker events, hackerspaces, electronics workshops, open-source hardware, hobby electronics
-- **Soul, jazz, R&B, and gospel** — especially rare/archival performances, tribute nights, reissue-related events, tribute and repertory nights; Philly has deep roots here (Philadelphia International Records, TSOP)
+- **Soul, jazz, R&B, and gospel** — not archival-only: rare/archival performances, tribute nights, reissue-related events, and repertory nights are the sweet spot, but a living legacy act at a real venue is also in scope, not a violation of this bullet. Philly has deep roots here (Philadelphia International Records, TSOP), alongside the AACM/free-jazz lineage and Sun Ra.
 - **Software-related events** — discussions, talks, demos, workshops. Topics: functional programming, embedded systems, Scala, Rust, Swift, iOS, AI, agentic
 
 ## Flavor
@@ -34,6 +34,18 @@ restaurant/shop discovery or any other non-event task)*
 - **Bees** — beekeeping, urban agriculture, ecology events
 - **Whiskey and bourbon** — whiskey bars, distillery events, tastings
 - **Independent art and bookstores** — any event at an independent bookstore or gallery; DIY art events
+
+## Named interest intersections
+
+The events that score highest combine two or more interests above. Naming the ones that keep
+recurring gives "multi-interest overlap" (see `event-selection-philosophy`'s Tie-Break Precedence)
+something concrete to check against instead of being judged in the abstract:
+- Film × horror × repertory programming (PhilaMOCA's entire line runs on this)
+- Leftist politics × literature × independent bookstore (a political author reading at Wooden Shoe
+  Books)
+- Punk × benefit/fundraiser × all-ages (a hardcore show raising money for a mutual-aid or
+  community org, all-ages, at a venue like First Unitarian Church)
+- DIY electronics × leftist politics (Iffy Books' workshop-and-politics programming)
 
 ## Hard nos
 
