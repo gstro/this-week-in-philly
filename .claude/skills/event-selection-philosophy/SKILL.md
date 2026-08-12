@@ -7,6 +7,23 @@ description: Selection logic and ranking rules for the weekly This Week in Phila
 
 Apply these rules when evaluating and ranking event candidates for the weekly report.
 
+## Tie-Break Precedence
+
+When candidates are genuinely close on merit, resolve in this order — highest first:
+
+1. Interest-tier alignment (Core > Strong > Flavor; see `personal-interests`)
+2. Uniqueness / easy-to-miss
+3. Community or political stakes
+4. Multi-interest overlap
+5. Free or pay-what-you-wish
+6. Venue Elevation (see below)
+
+This exists because, left unstated, the model has been resolving ties venue-first: across two
+observed weeks, four venues (three of them Venue-Elevation-listed) took 9 of 21 Top 3 slots,
+including one venue at a 75–100% hit rate against its candidate count. **Venue Elevation is the
+last item in this list, not a substitute for it** — it may only decide between candidates already
+essentially tied after 1–5 above; it must never lift a weaker candidate over a stronger one.
+
 ## Prioritize
 
 1. Unique or lesser-known events that are easy to miss — a free library screening, a bookstore reading, a local DIY show
@@ -50,7 +67,8 @@ candidates in sequence, since a violation is only visible once more than one day
 
 ## Venue Elevation
 
-Elevate events at these venues when breaking ties — they consistently produce high-alignment picks:
+Elevate events at these venues **only as the last step in Tie-Break Precedence above** — they
+consistently produce high-alignment picks, but elevation must never override 1–5 of that ordering:
 - **PhilaMOCA** — horror, underground art, weird culture
 - **Iffy Books** — DIY electronics + speculative fiction + leftist politics
 - **Harriet's Bookshop** — politically engaged literary events *(elevate if present — this source
