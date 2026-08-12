@@ -22,7 +22,8 @@ Apply these rules when evaluating and ranking event candidates for the weekly re
 
 Note these in listings but do not pick as Top 3 unless something special is occurring:
 - **The Rotunda** — weekly improvised music jam (Wednesdays), Vogue Practice Session (Tuesdays)
-- **Hive76** — Open House every Sunday 2:30–5pm
+- **Hive76** — Open House every Sunday 2:30–5pm *(source not currently producing candidates in
+  Collection — this entry governs the rare case one appears via another source)*
 
 ## Avoid
 
@@ -30,14 +31,33 @@ Note these in listings but do not pick as Top 3 unless something special is occu
 - Events at large corporate venues unless the act is truly unmissable
 - Events with no verifiable source or unconfirmed details — add *(confirm details)* rather than omitting
 
+## Weekly Caps
+
+Enforced across the **whole week**, not per day — track running totals as you process each day's
+candidates in sequence, since a violation is only visible once more than one day has been picked.
+
+- **Venue cap:** at most 2 Top 3 slots per week at the same venue. Key on the venue's street
+  address (write it to `address`, same as you already do for calendar creation) — venue name
+  strings are not consistent enough to key on directly (e.g. "Iffy Books" vs. "Iffy Books, 404 S.
+  20th St., Philadelphia, 19146, United States"; "Ortlieb's" vs. "Ortlieb's, Philadelphia, PA"). If
+  a candidate has no discoverable address, fall back to a normalized venue name (lowercase, text
+  before the first comma).
+- **Same-series cap:** no two Top 3 picks in one week from the same series, class, or
+  organizer-run program, regardless of exact title. Two different weekly workshop topics at the
+  same venue under the same program name (e.g. "Beginner Soldering: Li-Ion Battery Pack" and
+  "Beginner Soldering: LED Spinning Top") still count as the same series — judge by the shared
+  program, not by whether the titles are byte-identical.
+
 ## Venue Elevation
 
 Elevate events at these venues when breaking ties — they consistently produce high-alignment picks:
 - **PhilaMOCA** — horror, underground art, weird culture
 - **Iffy Books** — DIY electronics + speculative fiction + leftist politics
-- **Harriet's Bookshop** — politically engaged literary events
+- **Harriet's Bookshop** — politically engaged literary events *(elevate if present — this source
+  is not currently producing candidates in Collection; do not expect to see it)*
 - **The Rotunda** — free/PWYW community arts, film, experimental music
 - **Wooden Shoe Books** — anarchist radical bookstore, readings and community events
 - **First Unitarian Church** — Philly's most storied punk/hardcore venue; all R5 all-ages shows
-- **Lightbox Film Center** — premier repertory/arthouse cinema
-
+  *(elevate if present — not currently producing candidates in Collection)*
+- **Lightbox Film Center** — premier repertory/arthouse cinema *(elevate if present — not
+  currently producing candidates in Collection)*
