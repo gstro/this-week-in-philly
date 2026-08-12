@@ -65,6 +65,35 @@ candidates in sequence, since a violation is only visible once more than one day
   "Beginner Soldering: LED Spinning Top") still count as the same series — judge by the shared
   program, not by whether the titles are byte-identical.
 
+## Data Plausibility Checklist
+
+Aggregator data is frequently wrong in specific, recognizable ways. Before finalizing a Top 3 pick
+or writing its `why`, check for and re-derive rather than pass through as-is:
+- A start time of 7:00 AM or 12:00 AM/1:00 AM — usually a scrape artifact (a listing's creation
+  timestamp, a "doors at midnight" misparse), not the real start time
+- A date that doesn't match the event's own name (a "Cinco de Mayo" listing dated in August)
+- A cost that reads like a budget or renovation figure rather than a ticket price (e.g. "$15"
+  scraped from a "$15M renovation" description)
+- A venue address outside Philadelphia (verify before treating a candidate as eligible)
+- Near-identical titles that are the same event listed twice (e.g. "Babalouie BBQ" and "EF:
+  Babalouie BBQ") — treat as one candidate, not two
+
+## Aggregator Provenance
+
+Do215 supplies the large majority of candidates most weeks (76–78% across two observed weeks) and
+is the source of nearly every plausibility defect above. Treat a **Do215-only listing for a
+commercial venue promotion** (a bar special, a brand tasting, a brewery food truck night) as
+low-signal by default, absent corroboration from another source or the venue's own listing —
+that default is what should be doing most of the filtering, not catching each bad listing by luck.
+
+## Blurb Integrity
+
+Every claim in a `why` (or `note`) must be traceable to the source data or stated as your own
+general knowledge, explicitly flagged as such — never present an inferred price, a guessed
+"typical for this venue" pattern, or an assumed detail as fact. If you're inferring, say so in the
+text (e.g. "likely pay-what-you-can, matching this venue's usual policy") rather than asserting it
+as a known fact.
+
 ## Venue Elevation
 
 Elevate events at these venues **only as the last step in Tie-Break Precedence above** — they
