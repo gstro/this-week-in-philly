@@ -22,11 +22,16 @@ honorable-mention material for the weekly event report specifically.
 - **DIY electronics** — maker events, hackerspaces, electronics workshops, open-source hardware, hobby electronics
 - **Soul, jazz, R&B, and gospel** — not archival-only: rare/archival performances, tribute nights, reissue-related events, and repertory nights are the sweet spot, but a living legacy act at a real venue is also in scope, not a violation of this bullet. Philly has deep roots here (Philadelphia International Records, TSOP), alongside the AACM/free-jazz lineage and Sun Ra.
 - **Software-related events** — discussions, talks, demos, workshops. Topics: functional programming, embedded systems, Scala, Rust, Swift, iOS, AI, agentic
+- **Subversive and countercultural nightlife** — drag and queer performance, underground/DIY nightlife, anything that reads as genuinely subversive rather than a branded night out. Shares the anti-corporate throughline of the punk bullet above: the *same* show format (a brunch, a tasting, a class) can be a strong pick or a hard no purely on whether it's community-run or brand-sponsored — see "Hard nos" below.
 
 ## Flavor
 
 *(tie-break and honorable-mention material for the weekly event report; full weight for
 restaurant/shop discovery or any other non-event task)*
+
+For the weekly event report specifically, these interests mostly show up as restaurants and shops
+worth knowing about, not as ticketed weekly events — most matching candidates are commercial venue
+promotions, not something worth a Top 3 slot on their own.
 
 - **Coffee** — events at coffee shops; coffee-adjacent venues
 - **Local cuisine** — must-try and hidden gem local restaurants, food festivals, farmers markets, food trucks, pop-ups, unique food culture
@@ -34,6 +39,20 @@ restaurant/shop discovery or any other non-event task)*
 - **Bees** — beekeeping, urban agriculture, ecology events
 - **Whiskey and bourbon** — whiskey bars, distillery events, tastings
 - **Independent art and bookstores** — any event at an independent bookstore or gallery; DIY art events
+
+**The carve-out that decides Top-3 eligibility for food/drink/market candidates isn't format — a
+tasting, a talk, a brunch, and a market can each go either way — it's whether the event exists to
+sell a brand or is genuinely distinctive:**
+- Eligible even at Flavor weight: a museum- or institution-run tasting or talk (e.g. a spirits
+  history lecture at a museum), a neighborhood community market, a restaurant's signature annual
+  event (not a recurring weekly special) — none of these exist to move product for a sponsor.
+- Not eligible, regardless of format: a spirits- or wine-brand's own promotional tasting, a
+  "presented by [sponsor]" event, a VIP club pickup party, luxury/bottle-service packaging. A
+  liquor brand running a tasting at a bar is corporate sales content wearing the same format as
+  the museum lecture above — don't let the format decide it.
+- The same test applies inside the "subversive nightlife" bullet above: a small-venue drag show is
+  eligible; a bottle-service club's luxury-priced "spectacular show" drag brunch reads as
+  commercial spectacle, not subversion. Judge the individual event, not the label.
 
 ## Named interest intersections
 
@@ -59,6 +78,7 @@ vibes. These are explicit anti-preferences, not just absence of interest:
 - Sports watch parties
 - **Brand-sponsored or sales-oriented content, in any category** — spirits/wine-brand tastings,
   "presented by [sponsor]" promotional events, VIP club pickup parties, luxury/bottle-service
-  packaging. The tell is who the event exists to benefit — a brand's sales, versus the attendee or
-  a community — not what format it takes. A sponsored film screening or a brand-run "maker" event
-  is excluded on the same grounds as a rum tasting.
+  packaging. This is the general form of the Flavor carve-out above: the tell is who the event
+  exists to benefit — a brand's sales, versus the attendee or a community — not what format it
+  takes. A sponsored film screening or a brand-run "maker" event is excluded on the same grounds
+  as a rum tasting.
