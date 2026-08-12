@@ -269,6 +269,22 @@ def test_events_copy_title_venue_time_cost_url_source_verbatim() -> None:
     assert event["source"] == "Luma"
 
 
+def test_top3_cost_defaults_to_not_listed_when_candidate_cost_is_blank() -> None:
+    candidate = _candidate("c0000", "A", "V", "2026-08-03", cost="")
+    candidates = _candidates_doc([candidate])
+    annotations = _annotations_doc([_day("2026-08-03", top3=[_top3_pick("c0000")], annotations=[_annotation("c0000")])])
+    result = merge(candidates, annotations)
+    assert result["days"][0]["top3"][0]["cost"] == "Not listed"
+
+
+def test_event_cost_defaults_to_not_listed_when_candidate_cost_is_blank() -> None:
+    candidate = _candidate("c0000", "A", "V", "2026-08-03", cost="")
+    candidates = _candidates_doc([candidate])
+    annotations = _annotations_doc([_day("2026-08-03", annotations=[_annotation("c0000")])])
+    result = merge(candidates, annotations)
+    assert result["days"][0]["events"][0]["cost"] == "Not listed"
+
+
 def test_top3_time_defaults_to_the_candidates_verbatim_time() -> None:
     candidate = _candidate("c0000", "A", "V", "2026-08-03", time="7:00 PM")
     candidates = _candidates_doc([candidate])
