@@ -61,6 +61,14 @@ jobs:
       - name: Merge selections
         run: python scripts/merge_selections.py "${{ steps.week.outputs.dir }}"
 
+      # Mechanical post-conditions on the merged _selections.json (venue cap,
+      # time-format regression guard, blank-cost regression guard) --
+      # check_yield.py's role for Collection, applied to Selection's output.
+      # Runs after the merge, not after Selection's own push, because title/
+      # venue/cost don't exist until merge_selections.py reconstructs them.
+      - name: Check selection
+        run: python scripts/check_selection.py "${{ steps.week.outputs.dir }}"
+
       - name: Run presentation pipeline
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}

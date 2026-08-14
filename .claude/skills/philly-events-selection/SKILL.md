@@ -131,8 +131,19 @@ Apply `event-selection-philosophy` rules for the day:
 2. Apply Prioritize rules: free/PWYW, unique/easy-to-miss, community/political, multi-interest overlap
 3. Apply Avoid rules: recurring weekly events (including candidates with `recurrence_count`), large
    corporate venues
-4. Apply Venue Elevation for tie-breaking
-5. Note known Philly-specific recurring events (per `event-selection-philosophy`'s "Recurring Events to
+4. Enforce the Weekly Caps (venue cap keyed on `address`, same-series cap) — these are tracked
+   across the whole week, not reset per day. Keep a running tally as you go: for each candidate
+   you're considering for Top 3, check it against every `address` and series you've already used on
+   an earlier day this week, not just against today's picks.
+5. Exclude online-only candidates from Top 3 unless genuinely exceptional — still eligible for the
+   day's category listing
+6. Before finalizing a Top 3 pick: search `[event name] Philadelphia [date] postponed` to catch
+   cancellations; venue websites are more reliable than aggregators for postponement status
+7. For any Top 3 pick at a venue outside Center City / University City, name the neighborhood or
+   note SEPTA/transit access in the `why` blurb
+8. Apply Venue Elevation for tie-breaking, per `event-selection-philosophy`'s Tie-Break Precedence
+   — last resort only, never a substitute for 1–7 above
+9. Note known Philly-specific recurring events (per `event-selection-philosophy`'s "Recurring Events to
    Deprioritize" list) in listings but not Top 3
 
 For each Top 3 pick, write a `why` blurb: 2–3 sentences explaining what makes this worth attending over
@@ -230,6 +241,28 @@ not to hide events Greg would want to see — when in doubt, keep the event in.
 ```
 Selection complete for [date]. [N] top3, [M] annotated, [K] categories capped.
 ```
+
+---
+
+## Phase 4 — Self-check
+
+Once all 7 days are processed, before assembling the final file, print a short summary so drift is
+visible to you (and to whoever reads the run) at authoring time, when it can still be acted on —
+`scripts/check_selection.py` re-checks the venue cap and a few other things mechanically after this
+task pushes, but that only fires in CI; this catches it here first:
+
+```
+Self-check for week of [YYYY-MM-DD]:
+  Venues (top3, by address): [address]: [count], [address]: [count], ...  — flag any at or above the
+    weekly cap (2)
+  Categories (top3): [category]: [count], ...
+  Sources (top3, by origin `source` field): [source]: [count], ...
+  *(confirm details)* flags: [N]
+```
+
+This is informational, not a gate — nothing here blocks the push. If a venue is at or above the cap,
+double check you actually enforced it per Phase 3 step 4 rather than just noting it here after the
+fact.
 
 ---
 

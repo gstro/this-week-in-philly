@@ -53,6 +53,15 @@ are ever read for is_music (html_render.py's Spotify-link lookup,
 spotify_lookup.py's batch lookup, csv_log.py's spotify_link column). No
 consumer reads it off an events[] entry, so omitting it there is a schema
 simplification with zero behavior change, not a feature cut.
+
+`cost` defaults to "Not listed" rather than "" when the candidate has no
+price -- confirmed live on 2026-08-10: 13 of 21 top3 picks rendered a blank
+cost, which is the source data faithfully passed through (Selection can no
+longer write cost at all, so it can't be inventing this), but a blank card
+field reads as broken rather than as "genuinely not listed." The prior
+failure this same field had -- Selection inventing prices like "typical for
+Wooden Shoe programming" before this refactor -- can't recur through this
+path, so this default doesn't reopen it.
 """
 
 from __future__ import annotations
@@ -135,7 +144,7 @@ def build_top3(day: dict[str, Any], candidates_by_id: dict[str, dict[str, Any]],
             # had. Rare in practice (omitted on the overwhelming majority of
             # picks), so it costs nothing in the common case.
             "time": pick.get("time", candidate.get("time", "")),
-            "cost": candidate.get("cost", ""),
+            "cost": candidate.get("cost") or "Not listed",
             "url": candidate.get("url", ""),
             "category": pick["category"],
             "source": candidate.get("source", ""),
@@ -208,7 +217,7 @@ def build_events(
             "title": candidate.get("title", ""),
             "venue": candidate.get("venue", ""),
             "time": candidate.get("time", ""),
-            "cost": candidate.get("cost", ""),
+            "cost": candidate.get("cost") or "Not listed",
             "url": candidate.get("url", ""),
             "category": ann["category"],
             "source": candidate.get("source", ""),
