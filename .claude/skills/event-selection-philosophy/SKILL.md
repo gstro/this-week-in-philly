@@ -15,14 +15,13 @@ When candidates are genuinely close on merit, resolve in this order — highest 
 2. Uniqueness / easy-to-miss
 3. Community or political stakes
 4. Multi-interest overlap
-5. Free or pay-what-you-wish
-6. Venue Elevation (see below)
+5. Venue Elevation (see below)
 
 This exists because, left unstated, the model has been resolving ties venue-first: across two
 observed weeks, four venues (three of them Venue-Elevation-listed) took 9 of 21 Top 3 slots,
 including one venue at a 75–100% hit rate against its candidate count. **Venue Elevation is the
 last item in this list, not a substitute for it** — it may only decide between candidates already
-essentially tied after 1–5 above; it must never lift a weaker candidate over a stronger one.
+essentially tied after 1–4 above; it must never lift a weaker candidate over a stronger one.
 
 ## Prioritize
 
@@ -97,7 +96,7 @@ as a known fact.
 ## Venue Elevation
 
 Elevate events at these venues **only as the last step in Tie-Break Precedence above** — they
-consistently produce high-alignment picks, but elevation must never override 1–5 of that ordering:
+consistently produce high-alignment picks, but elevation must never override 1–4 of that ordering:
 - **PhilaMOCA** — horror, underground art, weird culture
 - **Iffy Books** — DIY electronics + speculative fiction + leftist politics
 - **Harriet's Bookshop** — politically engaged literary events *(elevate if present — this source
