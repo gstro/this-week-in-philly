@@ -23,20 +23,27 @@ Two severities:
     coincidence), where failing the whole week's report over one false
     positive would be worse than the thing being guarded against.
 
+All checks below are currently WARN, including the three (venue cap, time
+format, cost not blank) that are conceptually FAIL-worthy -- these are new
+and unproven against live weekly runs, so a false positive would fail the
+whole report over a check that hasn't earned that yet. Promote individual
+checks to FAIL once they've run clean against a few real weeks.
+
 Checks:
-  1. Venue cap (FAIL) -- event-selection-philosophy's Weekly Caps: at most
-     VENUE_CAP top3 slots per week at the same venue, keyed on `address`
-     (falling back to a normalized venue-name prefix when address is
-     missing, per the same rule).
-  2. Time format (FAIL) -- regression guard for the defect fixed in
-     9bbd592: every top3 pick's `time` must be a single `%I:%M %p` string,
-     never a list, a doors/show pair, or a range. A malformed time means
-     calendar_create.py's parse_start() silently never creates that pick's
-     calendar entry -- confirmed on 5 of 21 real 2026-08-03 picks before the
-     fix.
-  3. Cost not blank (FAIL) -- regression guard for merge_selections.py's
-     "Not listed" default (see its docstring): an empty cost string reaching
-     _selections.json means that default was bypassed somehow.
+  1. Venue cap (WARN, candidate for FAIL) -- event-selection-philosophy's
+     Weekly Caps: at most VENUE_CAP top3 slots per week at the same venue,
+     keyed on `address` (falling back to a normalized venue-name prefix when
+     address is missing, per the same rule).
+  2. Time format (WARN, candidate for FAIL) -- regression guard for the
+     defect fixed in 9bbd592: every top3 pick's `time` must be a single
+     `%I:%M %p` string, never a list, a doors/show pair, or a range. A
+     malformed time means calendar_create.py's parse_start() silently never
+     creates that pick's calendar entry -- confirmed on 5 of 21 real
+     2026-08-03 picks before the fix.
+  3. Cost not blank (WARN, candidate for FAIL) -- regression guard for
+     merge_selections.py's "Not listed" default (see its docstring): an
+     empty cost string reaching _selections.json means that default was
+     bypassed somehow.
   4. Implausible start time (WARN) -- a top3 pick starting between 12:00 AM
      and 5:59 AM is usually a scrape artifact (a listing's creation
      timestamp, a "doors at midnight" misparse), per
@@ -117,7 +124,7 @@ def check_venue_cap(selections: dict) -> list[Issue]:
             issues.append(
                 Issue(
                     "venue_cap",
-                    "fail",
+                    "warn",
                     None,
                     None,
                     f"{venue_key!r} took {len(picks)} top3 slots this week (cap {VENUE_CAP}): {days}",
@@ -134,7 +141,7 @@ def check_time_format(selections: dict) -> list[Issue]:
             issues.append(
                 Issue(
                     "time_format",
-                    "fail",
+                    "warn",
                     day_date,
                     pick.get("title"),
                     f"time {time_value!r} is not a single H:MM AM/PM value -- calendar_create.py's "
@@ -152,7 +159,7 @@ def check_cost_not_blank(selections: dict) -> list[Issue]:
                 issues.append(
                     Issue(
                         "cost_blank",
-                        "fail",
+                        "warn",
                         day.get("date"),
                         pick.get("title"),
                         "top3 pick has a blank cost -- merge_selections.py's 'Not listed' default was bypassed",
@@ -163,7 +170,7 @@ def check_cost_not_blank(selections: dict) -> list[Issue]:
                 issues.append(
                     Issue(
                         "cost_blank",
-                        "fail",
+                        "warn",
                         day.get("date"),
                         event.get("title"),
                         "listed event has a blank cost -- merge_selections.py's 'Not listed' default was bypassed",

@@ -52,7 +52,7 @@ def test_venue_cap_tripped_over_the_cap() -> None:
     selections = _selections([_day("2026-08-03", top3=picks)])
     issues = check_venue_cap(selections)
     assert len(issues) == 1
-    assert issues[0].severity == "fail"
+    assert issues[0].severity == "warn"
     assert "123 chestnut st" in issues[0].message
 
 
@@ -94,7 +94,7 @@ def test_time_format_rejects_a_range() -> None:
     selections = _selections([_day("2026-08-03", top3=[_pick("A", time="7:00, 7:30")])])
     issues = check_time_format(selections)
     assert len(issues) == 1
-    assert issues[0].severity == "fail"
+    assert issues[0].severity == "warn"
 
 
 def test_time_format_rejects_a_doors_show_pair() -> None:
@@ -114,7 +114,7 @@ def test_cost_not_blank_fails_on_empty_top3_cost() -> None:
     selections = _selections([_day("2026-08-03", top3=[_pick("A", cost="")])])
     issues = check_cost_not_blank(selections)
     assert len(issues) == 1
-    assert issues[0].severity == "fail"
+    assert issues[0].severity == "warn"
 
 
 def test_cost_not_blank_fails_on_empty_event_cost() -> None:
