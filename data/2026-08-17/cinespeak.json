@@ -1,0 +1,6 @@
+{
+  "source": "cin\u00e9SPEAK",
+  "status": "failed",
+  "reason": "HTTPError: 429 Client Error: Too Many Requests for url: https://cinespeak.org/cinema/",
+  "collected_at": "2026-08-16T06:35:34.863352+00:00"
+}

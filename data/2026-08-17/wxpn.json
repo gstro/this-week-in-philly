@@ -1,0 +1,483 @@
+{
+  "source": "WXPN",
+  "collected_at": "2026-08-16T06:36:05.808300+00:00",
+  "events": [
+    {
+      "title": "WXPN Free At Noon: KIWI JR.",
+      "venue": "The Music Hall at World Stage",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/wxpn-free-at-noon-kiwi-jr/",
+      "description": "WXPN Free At Noon: KIWI JR."
+    },
+    {
+      "title": "Noah Britton / Nyxy Nyx / Dust From 1000 Years / Hennen",
+      "venue": "Ortlieb's",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/noah-britton-nyxy-nyx-dust-from-1000-years-hennen/",
+      "description": "Noah Britton / Nyxy Nyx / Dust From 1000 Years / Hennen"
+    },
+    {
+      "title": "Godcaster / Fib / Null / Taurus Judge / Sodaseas",
+      "venue": "Ukie Club",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/godcaster-fib-null-taurus-judge-sodaseas/",
+      "description": "Godcaster / Fib / Null / Taurus Judge / Sodaseas"
+    },
+    {
+      "title": "Vundabar / Paper Bee / Beauty",
+      "venue": "Spruce Street Harbor Park",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/vundabar-paper-bee-beauty/",
+      "description": "Vundabar / Paper Bee / Beauty"
+    },
+    {
+      "title": "SloTV / Jeanwilder / Shareholders / Mid Sentence",
+      "venue": "Ruba Club",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/slotv-jeanwilder-shareholders-mid-sentence/",
+      "description": "SloTV / Jeanwilder / Shareholders / Mid Sentence"
+    },
+    {
+      "title": "Jonathan Colman\u2019s Dungeon Crawl",
+      "venue": "Spruce Street Harbor Park",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jonathan-colmans-dungeon-crawl/",
+      "description": "Jonathan Colman's Dungeon Crawl"
+    },
+    {
+      "title": "Black Pontiac / Noshows",
+      "venue": "Ortlieb's",
+      "date": "2026-08-18",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/black-pontiac-noshows/",
+      "description": "Black Pontiac / Noshows"
+    },
+    {
+      "title": "Tim Easton / Max Bartos",
+      "venue": "118 North",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/tim-easton-max-bartos/",
+      "description": "Tim Easton / Max Bartos"
+    },
+    {
+      "title": "Stargazer Lily / The Peace Creeps",
+      "venue": "118 North",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/stargazer-lily-the-peace-creeps/",
+      "description": "Stargazer Lily / The Peace Creeps"
+    },
+    {
+      "title": "John Luther & Wonder House Friends",
+      "venue": "118 North",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/john-luther-wonder-house-friends/",
+      "description": "John Luther & Wonder House Friends"
+    },
+    {
+      "title": "RUSH",
+      "venue": "Xfinity Mobile Arena",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/rush-2/",
+      "description": "RUSH"
+    },
+    {
+      "title": "RUSH",
+      "venue": "Xfinity Mobile Arena",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/rush/",
+      "description": "RUSH"
+    },
+    {
+      "title": "Keith DeStefano",
+      "venue": "Time",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/keith-destefano/",
+      "description": "Keith DeStefano"
+    },
+    {
+      "title": "Aaron Parnell Brown",
+      "venue": "Time",
+      "date": "2026-08-19",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/aaron-parnell-brown/",
+      "description": "Aaron Parnell Brown"
+    },
+    {
+      "title": "Joyce Manor / Glitterer / FFO: Chillin",
+      "venue": "The Queen",
+      "date": "2026-08-18",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/joyce-manor-glitterer-ffo-chillin/",
+      "description": "Joyce Manor / Glitterer / FFO: Chillin"
+    },
+    {
+      "title": "Masego / Lekan",
+      "venue": "The Met",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/masego-lekan/",
+      "description": "Masego / Lekan"
+    },
+    {
+      "title": "Mon Laferte / Silvana Estrada",
+      "venue": "The Met",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/mon-laferte-silvana-estrada/",
+      "description": "Mon Laferte / Silvana Estrada"
+    },
+    {
+      "title": "Chance The Rapper / La Reezy",
+      "venue": "The Fillmore",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/chance-the-rapper-la-reezy/",
+      "description": "Chance The Rapper / La Reezy"
+    },
+    {
+      "title": "Isaiah Rashad / Alemeda",
+      "venue": "The Fillmore",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/isaiah-rashad-alemeda/",
+      "description": "Isaiah Rashad / Alemeda"
+    },
+    {
+      "title": "Moon Poodle / Live Not on Evil / The Heavy Beat",
+      "venue": "The Fallser Club",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/moon-poodle-live-not-on-evil-the-heavy-beat/",
+      "description": "Moon Poodle / Live Not on Evil / The Heavy Beat"
+    },
+    {
+      "title": "Atlantic Starr / S.O.S. Band / Evelyn Champagne King / Klymaxx",
+      "venue": "The Dell Music Center",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/atlantic-starr-s-o-s-band-evelyn-champagne-king-klymaxx/",
+      "description": "Atlantic Starr / S.O.S. Band / Evelyn Champagne King / Klymaxx"
+    },
+    {
+      "title": "Alyson Williams",
+      "venue": "SOUTH Jazz Club",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/alyson-williams/",
+      "description": "Alyson Williams"
+    },
+    {
+      "title": "The Cosmic Microwave Background Radiation / Certain Luck",
+      "venue": "Silk City Diner",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-cosmic-microwave-background-radiation-certain-luck/",
+      "description": "The Cosmic Microwave Background Radiation / Certain Luck"
+    },
+    {
+      "title": "Richard / Groove Merchants",
+      "venue": "Silk City Diner",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/richard-groove-merchants/",
+      "description": "Richard / Groove Merchants"
+    },
+    {
+      "title": "Joey Cash / Gloorp",
+      "venue": "PhilaMOCA",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/joey-cash-gloorp/",
+      "description": "Joey Cash / Gloorp"
+    },
+    {
+      "title": "Chime School / Hurry / Te Vista",
+      "venue": "Philly Typewriter",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/chime-school-hurry-te-vista/",
+      "description": "Chime School / Hurry / Te Vista"
+    },
+    {
+      "title": "Healing Gems",
+      "venue": "PhilaMOCA",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/healing-gems/",
+      "description": "Healing Gems"
+    },
+    {
+      "title": "Pressing Strings / Box Of Books",
+      "venue": "MilkBoy",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/pressing-strings-box-of-books/",
+      "description": "Pressing Strings / Box Of Books"
+    },
+    {
+      "title": "Ukrainian Independence Folk Festival",
+      "venue": "Ukrainian American Sport Center \u2014 Tryzub",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/ukrainian-independence-folk-festival/",
+      "description": "Ukrainian Independence Folk Festival"
+    },
+    {
+      "title": "The Chuck Wood Group",
+      "venue": "Citizens Bank Theater",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-chuck-wood-group/",
+      "description": "The Chuck Wood Group"
+    },
+    {
+      "title": "Times New Viking / Empath",
+      "venue": "Johnny Brenda's",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/times-new-viking-empath/",
+      "description": "Times New Viking / Empath"
+    },
+    {
+      "title": "Kiwi Jr. / 2nd Grade / Log Flume",
+      "venue": "Johnny Brenda's",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/kiwi-jr-2nd-grade-log-flume/",
+      "description": "Kiwi Jr. / 2nd Grade / Log Flume"
+    },
+    {
+      "title": "Jo Passed / Maneka / Powerhouse Of The Cell",
+      "venue": "Johnny Brenda's",
+      "date": "2026-08-18",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jo-passed-maneka-powerhouse-of-the-cell/",
+      "description": "https://johnnybrendas.com/event/percy-jones-pkt-julie-slick-tim-motzer-duo/johnny-brendas/philadelphia-pennsylvania/"
+    },
+    {
+      "title": "Kendra McKinley / Paul Spring",
+      "venue": "Harmonie Hall",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/kendra-mckinley-paul-spring/",
+      "description": "Kendra McKinley / Paul Spring"
+    },
+    {
+      "title": "Hayes Carll",
+      "venue": "Long's Park Amphitheater",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/hayes-carll/",
+      "description": "Hayes Carll"
+    },
+    {
+      "title": "Jeffrey Gaines",
+      "venue": "Mauch Chunk Opera House",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jeffrey-gaines/",
+      "description": "Jeffrey Gaines"
+    },
+    {
+      "title": "Steve Earle",
+      "venue": "Musikfest Caf\u00e9",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/steve-earle-3/",
+      "description": "Steve Earle"
+    },
+    {
+      "title": "Sadie Gust / Michael Tearson",
+      "venue": "Haddon Lake Park",
+      "date": "2026-08-19",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/sadie-gust-michael-tearson/",
+      "description": "Sadie Gust / Michael Tearson"
+    },
+    {
+      "title": "Rhett Miller / The MAKs",
+      "venue": "Eagleview Town Center",
+      "date": "2026-08-18",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/rhett-miller-the-maks/",
+      "description": "Rhett Miller / The MAKs"
+    },
+    {
+      "title": "Delco Chalk Fest",
+      "venue": "12 Reaney St., Chester",
+      "date": "2026-08-23",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/delco-chalk-fest-2/",
+      "description": "Delco Chalk Fest"
+    },
+    {
+      "title": "Delco Chalk Fest",
+      "venue": "12 Reaney St., Chester",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/delco-chalk-fest/",
+      "description": "Delco Chalk Fest"
+    },
+    {
+      "title": "Banda MS",
+      "venue": "Prudential Center",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/banda-ms/",
+      "description": "Banda MS"
+    },
+    {
+      "title": "Johnny Dynamite / Catherine Moan / Torturetwinn",
+      "venue": "PhilaMOCA",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/johnny-dynamite/",
+      "description": "Johnny Dynamite / Catherine Moan / Torturetwinn"
+    },
+    {
+      "title": "Marion Meadows",
+      "venue": "The Mann Center",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/marion-meadows/",
+      "description": "Marion Meadows"
+    },
+    {
+      "title": "Max McNown / The Jack Wharff Band",
+      "venue": "The Fillmore",
+      "date": "2026-08-17",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/max-mcnown-the-jack-wharff-band/",
+      "description": "Max McNown / The Jack Wharff Band"
+    },
+    {
+      "title": "Gregory Alan Isakov with the Philly Pops",
+      "venue": "TD Pavilion at The Mann Center",
+      "date": "2026-08-21",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/gregory-alan-isakov-with-the-philly-pops/",
+      "description": "Gregory Alan Isakov with the Philly Pops"
+    },
+    {
+      "title": "Mat Kearney",
+      "venue": "Keswick Theatre",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/mat-kearney/",
+      "description": "Mat Kearney"
+    },
+    {
+      "title": "Dogstar",
+      "venue": "Hershey Theatre",
+      "date": "2026-08-18",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/dogstar-2/",
+      "description": "Dogstar"
+    },
+    {
+      "title": "Modest Mouse",
+      "venue": "The Fillmore",
+      "date": "2026-08-19",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/modest-mouse-3/",
+      "description": "Modest Mouse"
+    },
+    {
+      "title": "Indigo Girls",
+      "venue": "Ocean City Pier",
+      "date": "2026-08-17",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/indigo-girls-4/",
+      "description": "Indigo Girls"
+    },
+    {
+      "title": "Lynyrd Skynyrd / Foreigner",
+      "venue": "Freedom Mortgage Pavilion",
+      "date": "2026-08-20",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/lynyrd-skynyrd-foreigner/",
+      "description": "Lynyrd Skynyrd / Foreigner"
+    },
+    {
+      "title": "FAT MEZZ",
+      "venue": "The Queen",
+      "date": "2026-08-22",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/fat-mezz/",
+      "description": "FAT MEZZ"
+    },
+    {
+      "title": "The Wiggles",
+      "venue": "Hershey Theatre",
+      "date": "2026-08-19",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-wiggles/",
+      "description": "The Wiggles"
+    }
+  ]
+}

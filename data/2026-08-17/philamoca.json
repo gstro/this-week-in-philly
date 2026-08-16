@@ -1,0 +1,78 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-08-16T06:35:34.724421+00:00",
+  "events": [
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-17",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk."
+    },
+    {
+      "title": "Tim Kasher\u2019s WHO\u2019S WATCHING",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-18",
+      "time": "7:00, 7:30",
+      "cost": "$17",
+      "url": "https://www.etix.com/ticket/p/83495603",
+      "description": "Post-screening Q&A and short acoustic set from the Cursive frontman!"
+    },
+    {
+      "title": "Nora Decker\u2019s METAMORPHOSIS",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-19",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/62294448/",
+      "description": "Screening with Jackson Self\u2019s CHAPS, filmmakers in attendance!"
+    },
+    {
+      "title": "Deviated Instinct & Dropdead",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-20",
+      "time": "7:30, 8:00",
+      "cost": "$25",
+      "url": "https://www.etix.com/ticket/p/48012669",
+      "description": ""
+    },
+    {
+      "title": "Healing Gems",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-21",
+      "time": "7:30, 8:00",
+      "cost": "$15\u2013$20",
+      "url": "https://www.etix.com/ticket/p/50776530/",
+      "description": ""
+    },
+    {
+      "title": "Johnny Dynamite",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-22",
+      "time": "7:30, 8:00",
+      "cost": "$15\u2013$18",
+      "url": "https://www.etix.com/ticket/p/85038536",
+      "description": ""
+    },
+    {
+      "title": "Joey Cash",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-23",
+      "time": "7:30, 8:00",
+      "cost": "$25",
+      "url": "https://www.etix.com/ticket/p/61584620/",
+      "description": ""
+    },
+    {
+      "title": "THE WEIRD KIDZ",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-23",
+      "time": "2:30, 3:00",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/69737607",
+      "description": "From the Executive Producer of RICK & MORTY; filmmaker Zach Passero in attendance!"
+    }
+  ]
+}

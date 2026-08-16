@@ -1,0 +1,42 @@
+{
+  "source": "The Rotunda",
+  "collected_at": "2026-08-16T06:35:36.263887+00:00",
+  "events": [
+    {
+      "title": "In-person! West Philadelphia Sanctuary welcomes you to BOARD GAME NIGHT",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-17",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/west-philadelphia-sanctuary-welcomes-you-to-board-game-night",
+      "description": "In-person! West Philadelphia Sanctuary welcomes you to BOARD GAME NIGHT"
+    },
+    {
+      "title": "In-person! Vogue Practice Session",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-18",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-vogue-practice-session-2026-08-18-18-00-00-0400",
+      "description": "In-person! Vogue Practice Session"
+    },
+    {
+      "title": "In-person! Weekly improvised music drop-in jam session",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-19",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-08-19-12-00-00-0400",
+      "description": "In-person! Weekly improvised music drop-in jam session"
+    },
+    {
+      "title": "In-person! Chaos Goblins' Annual Shareholder Meeting",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-22",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/chaos-goblins-annual-shareholder-meeting",
+      "description": "In-person! Chaos Goblins' Annual Shareholder Meeting"
+    }
+  ]
+}

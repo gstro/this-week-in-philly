@@ -1,0 +1,99 @@
+{
+  "week": "2026-08-17",
+  "run_started": "2026-08-16T06:35:31.293401+00:00",
+  "run_completed": "2026-08-16T06:36:28.765779+00:00",
+  "sources": {
+    "cinespeak": {
+      "status": "failed",
+      "reason": "HTTPError: 429 Client Error: Too Many Requests for url: https://cinespeak.org/cinema/"
+    },
+    "do215": {
+      "status": "ok",
+      "events": 481
+    },
+    "iffy-books": {
+      "status": "ok",
+      "events": 10
+    },
+    "lightbox-film-center": {
+      "status": "ok",
+      "events": 0
+    },
+    "luma": {
+      "status": "ok",
+      "events": 8
+    },
+    "meetup-ai-philly": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-code-coffee": {
+      "status": "ok",
+      "events": 5
+    },
+    "meetup-dc215": {
+      "status": "ok",
+      "events": 2
+    },
+    "meetup-owasp": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-philadelphia-horror-meetup-group": {
+      "status": "ok",
+      "events": 5
+    },
+    "meetup-philly-film-club": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-philly-hardware": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-tech-in-motion": {
+      "status": "ok",
+      "events": 0
+    },
+    "philadelphia-film-society": {
+      "status": "ok",
+      "events": 15
+    },
+    "philamoca": {
+      "status": "ok",
+      "events": 8
+    },
+    "philly-ask-a-punk": {
+      "status": "ok",
+      "events": 5
+    },
+    "philly-shows": {
+      "status": "failed",
+      "reason": "ParseError: no showblock elements found -- markup may have changed"
+    },
+    "phillygoth": {
+      "status": "ok",
+      "events": 6
+    },
+    "r5-productions": {
+      "status": "ok",
+      "events": 4
+    },
+    "the-rotunda": {
+      "status": "ok",
+      "events": 4
+    },
+    "trakt-film-releases": {
+      "status": "ok",
+      "events": 1
+    },
+    "wooden-shoe-books": {
+      "status": "ok",
+      "events": 3
+    },
+    "wxpn": {
+      "status": "ok",
+      "events": 53
+    }
+  }
+}

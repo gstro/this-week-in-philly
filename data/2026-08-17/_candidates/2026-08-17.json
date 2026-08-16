@@ -1,0 +1,382 @@
+{
+  "week": "2026-08-17",
+  "date": "2026-08-17",
+  "collection_failures": [
+    "cinespeak (HTTPError: 429 Client Error: Too Many Requests for url: https://cinespeak.org/cinema/)",
+    "philly-shows (ParseError: no showblock elements found -- markup may have changed)"
+  ],
+  "candidates": [
+    {
+      "title": "Bebel Gilberto - Celebrating the 25th Anniversary of Tanto Tempo",
+      "venue": "City Winery, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/bebel-gilberto-celebrating-the-25th-anniversary-of-tanto-tempo-tickets",
+      "description": "City Winery Philadelphia presents Bebel Gilberto - Celebrating the 25th Anniversary of Tanto Tempo on August 17th at 7:30pm.\nCelebrating the 25th anniversary of the TANTO TEMPO -remastered release, Bebel Gilberto revisits the album that helped define her international career in a refined and intimate live setting.\nAccompanied by guitar, drums, percussion, electronic beats, joined by a local DJ in each city, she brings renewed emotional and sonic depth to the songs that became part of a worldwide musical story.\n We provide food and beverage service directly to your table in the venue. Or, for a…",
+      "source": "Do215",
+      "id": "c0000"
+    },
+    {
+      "title": "Max McNown - The Summer Vacation Tour",
+      "venue": "The Fillmore, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/max-mcnown-the-summer-vacation-tour-tickets",
+      "description": "This is an All Ages Event. Doors open at 7:00 PM. All support acts are subject to change without notice. No Resale Over Face Value Max McNown is using Ticketmaster's Face Value Exchange to help fans get tickets at the original price. Tickets will be non-transferable and can only be resold on Ticketmaster at face value.",
+      "source": "Do215",
+      "id": "c0001"
+    },
+    {
+      "title": "Military Mondays",
+      "venue": "Dave & Buster's, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "11:00 AM",
+      "cost": "All Ages",
+      "url": "https://do215.com/events/2026/8/17/military-mondays-tickets",
+      "description": "At ease — it's time for fun! Every Monday, Dave & Buster's is hooking up ALL vets & active-duty military members with a FREE $10 Power Card + 15% off food and non-alcoholic beverages with valid military ID.\n*Promotional. Active Duty and Retired Military Service Members receive $10 in free game play with valid Military ID at participating locations on Mondays only. 15% Military Discount applies to food and non-alcoholic beverages only. Excludes game play, gift cards, alcohol, past purchases, tax and gratuity. Present ID to Server to redeem. 15% discount is for valid Military ID holder and up to…",
+      "source": "Do215",
+      "id": "c0002"
+    },
+    {
+      "title": "Blossom & Sledges",
+      "venue": "Nikki Lopez, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:00 PM",
+      "cost": "$10804.24",
+      "url": "https://do215.com/events/2026/8/17/blossom-sledges-tickets",
+      "description": "Bar open at 3pm M-F and 11am Saturday and Sunday. Join us for Happy Hour before the show! Monday-Friday till 7pm. $5 drafts, $5 well, $8 signature craft cocktails. $1 hot dogs during all Philly sports home games.",
+      "source": "Do215",
+      "id": "c0003"
+    },
+    {
+      "title": "Karaoke with DJ Rachel Wild",
+      "venue": "Club 624, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/karaoke-with-dj-rachel-wild-tickets",
+      "description": "Step up to the mic and bring your best song for a new karaoke night at Club 624, hosted by DJ Rachel Wild.\nGrab your friends, pick your anthem, and come make Club 624 your new karaoke spot.\nEvery Monday | 7PM - 11PM",
+      "source": "Do215",
+      "id": "c0004"
+    },
+    {
+      "title": "Philly Jazz Club",
+      "venue": "World Stage Live, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "8:00 PM",
+      "cost": "$20-$25.65",
+      "url": "https://do215.com/events/2026/8/17/philly-jazz-club-tickets",
+      "description": "Featuring an all-star lineup:\nBrandon Cordoba\nDavid Otis\nJonah Levine\nBrian Hargrove\nAhmad DuBose-Dawson\nCorbin Jones\nMarlon Spears\nGreg Paul\nVENUE INFO - PLEASE READ!\nThis is a ticketed event. Everyone must have a ticket for entry.\nYou must make a table reservation in addition to your ticket purchase to guarantee seating. Without a reservation, seating will be first-come, first-served if available. There is standing room by the bar area.\nThe Lounge is a full-service restaurant – our full food & drink menu is available when doors open.\nIf you require accessible seating, please contact us at bo…",
+      "source": "Do215",
+      "id": "c0005"
+    },
+    {
+      "title": "Wellness Walks",
+      "venue": "The Farm at Awbury, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/wellness-walks-tickets",
+      "description": "Mondays and Thursdays 7am – 8am\nStart your morning with peace and fresh air! Join wellness coordinator Megan Do Nascimento for a moderately paced stroll through Awbury’s 56-acre landscape—exploring gardens, woodlands, meadows, ponds, and the farm. It’s the perfect way to reset, connect with nature, and begin the day energized.",
+      "source": "Do215",
+      "id": "c0006"
+    },
+    {
+      "title": "We Walk Philly",
+      "venue": "Clark Park, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "8:30 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/we-walk-philly-tickets",
+      "description": "We are proud to announce that as part of our health and wellness programming Clark Park is partnering with We Walk Philadelphia to fund the We Walk Clark Park Program on Monday and Friday Mornings from 8:30 to 9:30 AM throughout the year. The program is free of charge – just show up at the Dickens Statue and walk with us twice for a free T-shirt! We look forward to seeing you there! Contact Frank Chance at chancefl@gmail.com or checkout the Facebook page for further information!",
+      "source": "Do215",
+      "id": "c0008"
+    },
+    {
+      "title": "Michael Jackson Exhibit",
+      "venue": "AMC Fashion District, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "11:00 AM",
+      "cost": "$12.51-$28.52",
+      "url": "https://do215.com/events/2026/8/17/michael-jackson-exhibit-tickets",
+      "description": "Dive into the world of the King of Pop with cool MJ memorabilia and stories you won’t want to miss!",
+      "source": "Do215",
+      "occurrences": [
+        "2026-08-17",
+        "2026-08-18",
+        "2026-08-19",
+        "2026-08-20",
+        "2026-08-21",
+        "2026-08-22",
+        "2026-08-23"
+      ],
+      "recurrence_count": 7,
+      "id": "c0010"
+    },
+    {
+      "title": "Rooms of the Revolution Members Only Tour",
+      "venue": "Philadelphia Art Museum, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "11:30 AM",
+      "cost": "Interested in attending exclusive member events and programs?",
+      "url": "https://do215.com/events/2026/8/17/rooms-of-the-revolution-members-only-tour-tickets",
+      "description": "From charming American parlors to grand English halls, see how a revolution was shaped one room at a time.",
+      "source": "Do215",
+      "id": "c0011"
+    },
+    {
+      "title": "American Art: From the Start",
+      "venue": "Philadelphia Art Museum, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "2:00 PM",
+      "cost": "Free event. Reservations not required.",
+      "url": "https://do215.com/events/2026/8/17/american-art-from-the-start-tickets",
+      "description": "On this guided tour, explore the art of the Americas. Discover how Philadelphia became the young nation's cultural capital, and learn how Black, Indigenous, and Latin American artists contributed to the development of American art.",
+      "source": "Do215",
+      "occurrences": [
+        "2026-08-17",
+        "2026-08-20",
+        "2026-08-22",
+        "2026-08-23"
+      ],
+      "recurrence_count": 4,
+      "id": "c0012"
+    },
+    {
+      "title": "Industry Night at Buttonwood Grill",
+      "venue": "Peddler's Village, Lahaska, PA",
+      "date": "2026-08-17",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/industry-night-at-buttonwood-grill-tickets",
+      "description": "Starting July 6 at 4PM\nEvery Monday, receive 20% off your meal at Buttonwood Grill if you work in the service industry (hairdressers, hotel/restaurant teams, etc.)\n(alcohol excluded; limited time only).",
+      "source": "Do215",
+      "id": "c0013"
+    },
+    {
+      "title": "Borscht & Belt",
+      "venue": "Wissahickon Brewing Company, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/borscht-belt-tickets",
+      "description": "Pastrami, Corned Beef, Brisket & more! See more on our Instagram!",
+      "source": "Do215",
+      "id": "c0014"
+    },
+    {
+      "title": "Mondays @ McCormick's - Weekly Protest Noon 2000 Market",
+      "venue": "Senator McCormicks Philly Ofc.",
+      "date": "2026-08-17",
+      "time": "4:30 PM",
+      "cost": "Free",
+      "url": "https://do215.com/events/2026/8/17/mondays-mccormick-s-weekly-protest-noon-2000-market-tickets",
+      "description": "\"Monday's at McCormick's\" each Monday at noon - rain or shine - Here's why:\nWe are living in a MAGA-republican Coup. We were warned. Now it's here!\nWe now have a true oligarchy in the US and we must fight back!\nThe Trump administration’s illegal actions and relentless efforts to dismantle protections for vulnerable communities — both here in the U.S. and abroad— have made clear we are in the midst of an authoritarian takeover not unlike what has happened in Orban’s Hungary. But look what happened to him!\nWe’re all in danger!\nThe US has never been a perfect democracy. It has a lot of problems,…",
+      "source": "Do215",
+      "id": "c0015"
+    },
+    {
+      "title": "Terrarium Workshop at Manayunk",
+      "venue": "PHS Pop Up Garden at Manayunk, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "6:00 PM",
+      "cost": "General Admission: $55 PHS Members: $50",
+      "url": "https://do215.com/events/2026/8/17/terrarium-workshop-at-manayunk-tickets",
+      "description": "Rooted in the work of Nathaniel Ward, who invented the Wardian case, terrariums are a great way to bring the outdoors in. In this workshop you’ll learn how to create your own miniature garden! Grab a friend and stage the miniature ecosystem of your dreams. In this class we’ll be focusing on “closed terrariums”- sealed glass containers that house water-loving plants.\nPHS members receive a $5 discount for this workshop.\nAll supplies needed are included in the ticket price.\nPlease note: this garden serves alcohol, so a valid, physical state issued ID is required to enter. Anyone under 21 is welco…",
+      "source": "Do215",
+      "id": "c0016"
+    },
+    {
+      "title": "Yoga",
+      "venue": "The People’s Gallery, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "6:00 PM",
+      "cost": "$5",
+      "url": "https://do215.com/events/2026/8/17/yoga-tickets",
+      "description": "Welcome to Yoga at the Gallery! Join us for a relaxing evening of yoga in a unique and intimate setting. Take a break from your busy day and unwind surrounded by beautiful artwork. Bring your mat and get ready to stretch, breathe, and find your inner peace. No experience necessary, all levels are welcome.",
+      "source": "Do215",
+      "id": "c0017"
+    },
+    {
+      "title": "Con Air: A Live Reading",
+      "venue": "Tattooed Moms, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:00 PM",
+      "cost": "$4, $15",
+      "url": "https://do215.com/events/2026/8/17/con-air-a-live-reading-tickets",
+      "description": "Put the bunny back in the box\nNicolas Cage. John Malkovich. Ving Rhames. Mid-Air explosions. What more could you ask for? How about all of it done live and in person at your favorite sticker-clad bar?\nJoin us on August 17th at Tattooed Mom as we witness Nic Cage doing his thing and convicts giving some FBI agents what they probably deserve. So buckle up, put those trays up, and prepare for take off with this absolutely insane 90s action classic.\nMONDAY, AUGUST 17TH\n7PM\nVIP TICKETS: $15\n>> NOTAFLOF Directed by Adam Howard\nFollow Theatre Contra on Instagram.\n***\nWhat’s Up at TMoms:\n Mondays, 4-1…",
+      "source": "Do215",
+      "id": "c0019"
+    },
+    {
+      "title": "Trivia w/ Philthy Phil",
+      "venue": "Morgan's Pier, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/trivia-w-philthy-phil-tickets",
+      "description": "",
+      "source": "Do215",
+      "id": "c0020"
+    },
+    {
+      "title": "The Monday Night Jam Session hosted by Richard Hill Jr. and Friends",
+      "venue": "Black Squirrel Club, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/the-monday-night-jam-session-hosted-by-richard-hill-jr-and-friends-tickets",
+      "description": "",
+      "source": "Do215",
+      "id": "c0021"
+    },
+    {
+      "title": "Piano – Alexander Pierok",
+      "venue": "Midnight & The Wicked, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/piano-alexander-pierok-tickets",
+      "description": "",
+      "source": "Do215",
+      "occurrences": [
+        "2026-08-17",
+        "2026-08-18",
+        "2026-08-19",
+        "2026-08-20",
+        "2026-08-23"
+      ],
+      "recurrence_count": 5,
+      "id": "c0022"
+    },
+    {
+      "title": "EF: Open Mic & Industry Night",
+      "venue": "Wissahickon Brewing Company, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/ef-open-mic-industry-night-tickets",
+      "description": "Calling all musicians, singers, songwriters, comedians, poets, magicians, or anyone with talent... Open Mic at Wiss is BACK! Join us and host Mark Menk every Monday at 8PM.",
+      "source": "Do215",
+      "id": "c0023"
+    },
+    {
+      "title": "Open Mic & Industry Night",
+      "venue": "Wissahickon Brewing Company, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/8/17/open-mic-industry-night-tickets",
+      "description": "Calling all musicians, singers, songwriters, comedians, poets, magicians, or anyone with talent... Open Mic at Wiss is BACK! Join us and host Mark Menk every Monday at 8PM.",
+      "source": "Do215",
+      "id": "c0024"
+    },
+    {
+      "title": "Showcase Supreme",
+      "venue": "Claude's Comedy Club & Bar, Philadelphia, PA",
+      "date": "2026-08-17",
+      "time": "8:00 PM",
+      "cost": "21+",
+      "url": "https://do215.com/events/2026/8/17/showcase-supreme-tickets",
+      "description": "A diverse lineup of Philly’s finest comics!",
+      "source": "Do215",
+      "occurrences": [
+        "2026-08-17",
+        "2026-08-19",
+        "2026-08-20"
+      ],
+      "recurrence_count": 3,
+      "id": "c0025"
+    },
+    {
+      "title": "‘Sing Your Life’ Karaoke by Sara Sherr",
+      "venue": "The 700, Philadelphia, Pe",
+      "date": "2026-08-17",
+      "time": "9:00 PM",
+      "cost": "Free",
+      "url": "https://do215.com/events/2026/8/17/sing-your-life-karaoke-by-sara-sherr-tickets",
+      "description": "Philadelphia’s ‘Queen of Karaoke’, Sara Sherr, brings the best catalog and vibe in the city to Upstairs @ The 700, Philly’s truly unique event space, every Monday night. There’s a different suggested theme every week, but feel free to pick anything from Sara’s awesome library. 21 and over with ID – No cover charge https://www.phillymag.com/business/2020/01/15/philly-karaoke-dj-sara-sherr/",
+      "source": "Do215",
+      "id": "c0026"
+    },
+    {
+      "title": "☕️ Coffee Talk",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-08-17",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjRwM2FiOWg2c3MzY2U5bzc0cjMwYzFkNjRyamdkaHA3NHIzZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "A social hangout every first and third Monday for trans and non-binary people, their significant others, and allies. We have snacks and coffee.",
+      "source": "Iffy Books",
+      "id": "c0422"
+    },
+    {
+      "title": "THE EVIL DEAD (1981)",
+      "venue": "(online)",
+      "date": "2026-08-17",
+      "time": "9:30 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/315942149/",
+      "description": "Philadelphia Area Horror Meetup Group\nCome watch Melissa's Bday Movie Pick, the movie that started it all for the series!!\n\n**The Evil Dead**\n1981 - 1hr 20mins\nHorror/Supernatural horror\nFive friends travel to a cabin in the woods, where they unknowingly release flesh-possessing demons.",
+      "source": "Meetup: Philadelphia Horror",
+      "id": "c0447"
+    },
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-08-17",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk.",
+      "source": "PhilaMOCA",
+      "id": "c0467"
+    },
+    {
+      "title": "Fraternal Twin x Ditch x Lo Fives x Wax Girl",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-08-17",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/fraternal-twin-x-ditch-x-lo-fives-x-wax-girl",
+      "description": "Indie / OUT OF TOWN BAND / garage rock / shoegaze",
+      "source": "Philly Ask A Punk",
+      "id": "c0475"
+    },
+    {
+      "title": "In-person! West Philadelphia Sanctuary welcomes you to BOARD GAME NIGHT",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-17",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/west-philadelphia-sanctuary-welcomes-you-to-board-game-night",
+      "description": "In-person! West Philadelphia Sanctuary welcomes you to BOARD GAME NIGHT",
+      "source": "The Rotunda",
+      "id": "c0490"
+    },
+    {
+      "title": "Max McNown / The Jack Wharff Band",
+      "venue": "The Fillmore",
+      "date": "2026-08-17",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/max-mcnown-the-jack-wharff-band/",
+      "description": "Max McNown / The Jack Wharff Band",
+      "source": "WXPN",
+      "id": "c0542"
+    },
+    {
+      "title": "Indigo Girls",
+      "venue": "Ocean City Pier",
+      "date": "2026-08-17",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/indigo-girls-4/",
+      "description": "Indigo Girls",
+      "source": "WXPN",
+      "id": "c0547"
+    }
+  ]
+}

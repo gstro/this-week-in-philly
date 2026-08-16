@@ -1,0 +1,51 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-08-16T06:35:31.559575+00:00",
+  "events": [
+    {
+      "title": "Fraternal Twin x Ditch x Lo Fives x Wax Girl",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-08-17",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/fraternal-twin-x-ditch-x-lo-fives-x-wax-girl",
+      "description": "Indie / OUT OF TOWN BAND / garage rock / shoegaze"
+    },
+    {
+      "title": "Deviated Instinct / Dropdead / Agonista / Life Abuse",
+      "venue": "PhilaMoca (531 N 12th St)",
+      "date": "2026-08-20",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/deviated-instinct-dropdead-agonista-life-abuse",
+      "description": "Death metal / Powerviolence / crust / grindcore / hardcore punk"
+    },
+    {
+      "title": "Screenings at Sanctuary: Evil Dead 2 & Texas Chainsaw Massacre",
+      "venue": "PhilaMoca (531 N 12th St)",
+      "date": "2026-08-21",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/screenings-at-sanctuary-evil-dead-2-and-texas-chainsaw-massacre",
+      "description": "Horror / chainsaw / hot / movie"
+    },
+    {
+      "title": "4D8K (pvd), Nadafinger, Peaceful Ezy Feeling",
+      "venue": "Grey's Courtyard (5213 Greys)",
+      "date": "2026-08-22",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/4d8k-pvd-nadafinger-peaceful-ezy-feeling",
+      "description": "4D8K / Nadafinger / New band / Peaceful ezy feeling / punk"
+    },
+    {
+      "title": "Viogression (WI), Tombstoner (NY), Spesimin (PHL), Immortal Form (DC)",
+      "venue": "Bonk's Bar (3467 Richmond St. Philadelphia)",
+      "date": "2026-08-22",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/viogression-wi-tombstoner-ny-spesimin-phl-immortal-form-dc",
+      "description": "Death metal / OUT OF TOWN BAND / metal / philadelphia"
+    }
+  ]
+}
