@@ -309,6 +309,39 @@ def test_top3_time_override_cleans_up_a_genuinely_messy_raw_candidate_time() -> 
     assert result["days"][0]["top3"][0]["time"] == "7:00 PM"
 
 
+def test_top3_with_messy_candidate_time_and_no_override_raises() -> None:
+    """Regression test for the real 2026-08-17 defect: two top3 picks
+    ('Philadelphia Psychotronic Film Society' and 'Tim Kasher's WHO'S
+    WATCHING') omitted the `time` override, so the resolved time fell
+    through to the candidate's raw "7:00, 7:30" -- unparseable by
+    calendar_create.py's parse_start(), which silently skipped both
+    picks' calendar entries. check_selection.py flagged this as WARN, so
+    the week published with two silently-missing calendar events. This
+    must now fail the merge instead of shipping quietly."""
+    candidate = _candidate("c0000", "Philadelphia Psychotronic Film Society", "PhilaMOCA", "2026-08-03", time="7:00, 7:30")
+    candidates = _candidates_doc([candidate])
+    annotations = _annotations_doc([_day("2026-08-03", top3=[_top3_pick("c0000")], annotations=[_annotation("c0000")])])
+    try:
+        merge(candidates, annotations)
+        raise AssertionError("expected MergeError")
+    except MergeError as exc:
+        assert "c0000" in str(exc) and "7:00, 7:30" in str(exc)
+
+
+def test_top3_with_blank_candidate_time_and_no_override_raises() -> None:
+    """parse_start() also returns None on an empty string -- the merge
+    guard must cover the omission case, not just the malformed-value
+    case."""
+    candidate = _candidate("c0000", "A", "V", "2026-08-03", time="")
+    candidates = _candidates_doc([candidate])
+    annotations = _annotations_doc([_day("2026-08-03", top3=[_top3_pick("c0000")], annotations=[_annotation("c0000")])])
+    try:
+        merge(candidates, annotations)
+        raise AssertionError("expected MergeError")
+    except MergeError as exc:
+        assert "c0000" in str(exc)
+
+
 def test_top3_titles_resolve_from_the_candidate_not_the_annotation() -> None:
     """Closes the real 62-of-562 drift bug: Selection never gets to retype a
     title -- it can only reference a candidate id, so top3's title always

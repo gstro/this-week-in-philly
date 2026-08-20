@@ -62,12 +62,27 @@ field reads as broken rather than as "genuinely not listed." The prior
 failure this same field had -- Selection inventing prices like "typical for
 Wooden Shoe programming" before this refactor -- can't recur through this
 path, so this default doesn't reopen it.
+
+A top3 pick's resolved `time` (the override if one was given, else the
+candidate's raw value) must parse as a single `%I:%M %p` string, or this
+script raises -- confirmed live on 2026-08-17: two picks (a PhilaMOCA
+double-header) omitted the `time` override, so this fell through to the
+candidate's dirty raw "7:00, 7:30", which calendar_create.py's parse_start()
+silently can't parse -- both picks published with no calendar entry, and
+check_selection.py only caught it as a WARN, so the bad week shipped
+anyway. This is the same invariant class as the required-field checks
+above (a Selection omission that would otherwise silently degrade a
+downstream consumer), just discovered later -- raising here, before
+_selections.json is even written, means the fix is "correct the
+annotation and re-run," not "notice a missing calendar entry after the
+fact."
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime
 from datetime import time as dt_time
@@ -76,6 +91,12 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common
+
+# Matches check_selection.py's TIME_RE -- both enforce the same "single
+# clean H:MM AM/PM start time" contract from 9bbd592, at two different
+# points in the pipeline (this one at merge time, that one as a
+# CI-visible post-condition on the merge's own output).
+_TIME_RE = re.compile(r"^\d{1,2}:\d{2} [AP]M$")
 
 
 class MergeError(Exception):
@@ -131,19 +152,32 @@ def build_top3(day: dict[str, Any], candidates_by_id: dict[str, dict[str, Any]],
         for field in ("category", "why", "rank"):
             if field not in pick:
                 raise MergeError(f"{day_date} top3 id {candidate_id!r}: annotation missing required field {field!r}")
+        # `time` normally comes verbatim from the candidate -- an explicit
+        # override on the pick lets Selection still clean up a genuinely
+        # messy raw time (a list, a doors/show pair, a range) into the
+        # single clean start time calendar_create.py's parse_start()
+        # requires, same capability the old re-typed-everything schema
+        # had. Rare in practice (omitted on the overwhelming majority of
+        # picks), so it costs nothing in the common case -- but when the
+        # candidate's own time IS messy and no override was given, the
+        # resolved value is exactly as unparseable as the raw scrape, and
+        # that must fail loudly rather than silently drop the calendar
+        # entry (see this module's docstring for the real 2026-08-17 case).
+        resolved_time = pick.get("time", candidate.get("time", ""))
+        if not _TIME_RE.match(resolved_time or ""):
+            raise MergeError(
+                f"{day_date} top3 id {candidate_id!r} ({candidate.get('title')!r}): resolved time "
+                f"{resolved_time!r} is not a single H:MM AM/PM value -- calendar_create.py's "
+                f"parse_start() would silently drop this pick's calendar entry. Set a clean `time` "
+                f"override on this pick's annotation (see philly-events-selection/SKILL.md's "
+                f"annotation field notes)."
+            )
         entry = {
             "rank": pick["rank"],
             "title": candidate.get("title", ""),
             "venue": candidate.get("venue", ""),
             **({"address": pick["address"]} if pick.get("address") else {}),
-            # `time` normally comes verbatim from the candidate -- an explicit
-            # override on the pick lets Selection still clean up a genuinely
-            # messy raw time (a list, a doors/show pair, a range) into the
-            # single clean start time calendar_create.py's parse_start()
-            # requires, same capability the old re-typed-everything schema
-            # had. Rare in practice (omitted on the overwhelming majority of
-            # picks), so it costs nothing in the common case.
-            "time": pick.get("time", candidate.get("time", "")),
+            "time": resolved_time,
             "cost": candidate.get("cost") or "Not listed",
             "url": candidate.get("url", ""),
             "category": pick["category"],
