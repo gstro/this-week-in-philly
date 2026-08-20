@@ -4,6 +4,10 @@ description: Source collection instructions for the weekly This Week in Philadel
 output_directory: ~/philly-events
 ---
 
+> **Frozen v1 snapshot — not updated.** This file has diverged substantially (parser fixes, source
+> drops, recalibration) from the live version and is historical reference only. For the current
+> source list, see `.claude/skills/philadelphia-sources/SKILL.md`.
+
 # Philadelphia Events — Source Collection Instructions
 
 This skill documents how to collect events from each source for the weekly This Week in Philadelphia report. Read this before beginning any collection run.
