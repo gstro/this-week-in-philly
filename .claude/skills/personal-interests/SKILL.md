@@ -1,6 +1,6 @@
 ---
 name: personal-interests
-description: Greg's personal interests profile for general purpose curation. Use this skill when any task requires understanding Greg's tastes, preferences, or what to prioritize — including but not limited to event selection, restaurant recommendations, record store discoveries, and content curation. Provides interest categories and preference weights only; for event-specific selection logic see event-selection-philosophy.md.
+description: Greg's personal interests profile for general purpose curation. Use this skill when any task requires understanding Greg's tastes, preferences, or what to prioritize — including but not limited to event selection, restaurant recommendations, record store discoveries, and content curation. Provides interest categories and preference weights only; for event-specific selection logic see event-selection-philosophy/SKILL.md.
 ---
 
 # Greg's Interests Profile
@@ -12,10 +12,10 @@ honorable-mention material for the weekly event report specifically.
 ## Core
 
 - **Leftist politics** — events with progressive, labor, indigenous, anti-capitalist, or social justice themes; readings by authors with political dimensions; community solidarity events. Political-education programming specifically (e.g. Wooden Shoe Books' ed line) is a strong anchor.
-- **Film** — screenings of any kind, especially independent, foreign, experimental, horror, or noir; film discussion communities; short film showcases; free or PWYW screenings get a bonus. Named anchors: Béla Tarr, Czech New Wave.
-- **Punk and hardcore music** — punk, post-punk, hardcore, EBM, industrial, noise rock, emo, post-hardcore, screamo (e.g. Saetia); local DIY shows; all-ages events; cheap or free entry preferred
+- **Film** — screenings of any kind, especially independent, foreign, experimental, horror, or noir; film discussion communities; short film showcases. Named anchors: Béla Tarr, Czech New Wave.
+- **Punk and hardcore music** — punk, post-punk, hardcore, EBM, industrial, noise rock, emo, post-hardcore, screamo (e.g. Saetia); local DIY shows; all-ages events
 - **Horror and the occult** — horror film screenings, paranormal events, gothic culture, occult/esoteric festivals, dark/strange themed events
-- **Literature** — author readings, book releases, poetry, book clubs, independent bookstores; free library events. Named anchor: Ursula K. Le Guin.
+- **Literature** — author readings, book releases, poetry, book clubs, independent bookstores. Named anchor: Ursula K. Le Guin.
 
 ## Strong
 
@@ -82,3 +82,26 @@ vibes. These are explicit anti-preferences, not just absence of interest:
   exists to benefit — a brand's sales, versus the attendee or a community — not what format it
   takes. A sponsored film screening or a brand-run "maker" event is excluded on the same grounds
   as a rum tasting.
+
+## Geography
+
+Home base is **Point Breeze** (South Philly, roughly Washington Ave–Passyunk Ave, Broad St–25th
+St). Nearest transit: the Broad Street Line at Ellsworth–Federal and Tasker–Morris, plus the
+2/7/17/64 buses.
+
+- **No access note needed** for South Philly, Center City, or University City — all comfortably
+  reachable.
+- **Access note required for everything else**, including neighborhoods on the El or the Market–
+  Frankford Line (e.g. Fishtown, Kensington, Northern Liberties) — Point Breeze sits on neither
+  that line nor its walkshed, and getting there is a bus-to-Broad-Street-Line-to-El transfer, not
+  a short hop. Being rail-served doesn't mean it's easy from here; name the neighborhood and the
+  nearest El/BSL/trolley/Regional Rail stop or bus.
+- **Outside Philadelphia city limits** — eligible only at a high bar (something genuinely
+  exceptional), and the `why` must name the travel involved. See
+  `event-selection-philosophy`'s Data Plausibility Checklist and Weekly Caps.
+
+## Timing
+
+Weekday daytime is fine — a Wednesday 10:30 AM or a Thursday 2:30 PM pick is genuinely attendable,
+not a wasted slot. Don't hedge or downweight a candidate for being on a weekday or during working
+hours; judge it on the same merit as any evening or weekend pick.
