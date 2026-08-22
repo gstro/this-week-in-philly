@@ -3,6 +3,10 @@ name: event-selection-philosophy
 description: Selection logic and ranking rules for the weekly This Week in Philadelphia events report. Use this skill when choosing which events to include and how to rank them. Apply after gathering candidates using the philly-sources skill and weighting them against personal-interests. Governs what to prioritize, what to avoid, and how to break ties.
 ---
 
+> **Frozen v1 snapshot — not updated.** This file has diverged from the live version and is
+> historical reference only. For the current judgment logic, see
+> `.claude/skills/event-selection-philosophy/SKILL.md`.
+
 # Event Selection Philosophy
 
 Apply these rules when evaluating and ranking event candidates for the weekly report.

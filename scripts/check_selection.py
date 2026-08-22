@@ -23,27 +23,50 @@ Two severities:
     coincidence), where failing the whole week's report over one false
     positive would be worse than the thing being guarded against.
 
-All checks below are currently WARN, including the three (venue cap, time
-format, cost not blank) that are conceptually FAIL-worthy -- these are new
-and unproven against live weekly runs, so a false positive would fail the
-whole report over a check that hasn't earned that yet. Promote individual
-checks to FAIL once they've run clean against a few real weeks.
+Every check below started life as WARN (per PR #25's review) "until we're
+confident they are tuned appropriately." Two have since run against a real
+week and earned promotion; the rest have not. Per-check status:
+  - cost_blank: FAIL. Promoted once merge_selections.py's "Not listed"
+    default landed (7540385) -- 93 warnings on 2026-08-03, 67 on 2026-08-10,
+    0 on 2026-08-17. Note the honest reading of that trend: post-merge, cost
+    can no longer BE blank (merge_selections.py always fills it), so this is
+    a regression guard on that default, not a judgment call that "ran
+    clean." Still promotable on that basis -- if it ever fires, the default
+    itself broke.
+  - time_format: FAIL. WARN is exactly why a malformed time shipped and
+    published on 2026-08-17 (see the check's own docstring entry below) --
+    the false-positive risk this severity model exists to protect against
+    isn't the failure mode that occurred; a false negative was. Once
+    merge_selections.py also rejects a bad time at merge time (see its
+    docstring), this check becomes unreachable in the normal pipeline --
+    kept anyway as the unit-tested regression guard and as a backstop for
+    any path that writes _selections.json without going through the merge.
+  - venue_cap: still WARN. It has only ever run against un-normalized
+    address keys (see normalize_venue's docstring), so a quiet week is not
+    yet evidence -- promote once it demonstrably trips against a punctuation
+    variant on a known-bad week and stays quiet on a known-good one.
+  - implausible_time, same_series: WARN by design -- both have plausible
+    legitimate exceptions (a real late show; two workshops that share a
+    title prefix by coincidence).
 
 Checks:
-  1. Venue cap (WARN, candidate for FAIL) -- event-selection-philosophy's
-     Weekly Caps: at most VENUE_CAP top3 slots per week at the same venue,
-     keyed on `address` (falling back to a normalized venue-name prefix when
-     address is missing, per the same rule).
-  2. Time format (WARN, candidate for FAIL) -- regression guard for the
-     defect fixed in 9bbd592: every top3 pick's `time` must be a single
-     `%I:%M %p` string, never a list, a doors/show pair, or a range. A
-     malformed time means calendar_create.py's parse_start() silently never
-     creates that pick's calendar entry -- confirmed on 5 of 21 real
-     2026-08-03 picks before the fix.
-  3. Cost not blank (WARN, candidate for FAIL) -- regression guard for
-     merge_selections.py's "Not listed" default (see its docstring): an
-     empty cost string reaching _selections.json means that default was
-     bypassed somehow.
+  1. Venue cap (WARN) -- event-selection-philosophy's Weekly Caps: at most
+     VENUE_CAP top3 slots per week at the same venue, keyed on a normalized
+     `address` (falling back to a normalized venue-name prefix when address
+     is missing, per the same rule). Normalization strips punctuation so
+     "404 S. 20th St.," and "404 S 20th St," count as one venue -- see
+     normalize_venue().
+  2. Time format (FAIL) -- regression guard for the defect fixed in
+     9bbd592: every top3 pick's `time` must be a single `%I:%M %p` string,
+     never a list, a doors/show pair, or a range. A malformed time means
+     calendar_create.py's parse_start() silently never creates that pick's
+     calendar entry -- confirmed on 5 of 21 real 2026-08-03 picks before the
+     fix, and recurred on 2026-08-17 (two picks whose annotations omitted a
+     `time` override, so the merge fell through to the candidate's dirty
+     raw value) after the fix landed but while this check was still WARN.
+  3. Cost not blank (FAIL) -- regression guard for merge_selections.py's
+     "Not listed" default (see its docstring): an empty cost string
+     reaching _selections.json means that default was bypassed somehow.
   4. Implausible start time (WARN) -- a top3 pick starting between 12:00 AM
      and 5:59 AM is usually a scrape artifact (a listing's creation
      timestamp, a "doors at midnight" misparse), per
@@ -56,6 +79,14 @@ Checks:
      belong to the same series. Titles vary more than this catches, which is
      why the SKILL-level rule (Selection's own judgment, tracked live) is
      still the primary enforcement -- this is a backstop, not authoritative.
+  6. Outside Philadelphia (WARN) -- event-selection-philosophy's Data
+     Plausibility Checklist names this rule; nothing previously enforced
+     it. 2026-08-10 shipped two Top 3 picks outside city limits (Glenside,
+     PA and Oaks, PA, ~25 mi). Per Greg's call, out-of-city is allowed at a
+     high bar, not blocked -- so this stays WARN, flagged for review, not
+     failed. Skips picks with no `address` at all (falls back to a venue
+     name, which carries no municipality to check) rather than treating a
+     missing address as "not Philadelphia."
 
 Also prints a venue/category/source histogram unconditionally -- not an
 Issue, informational, the same numbers philly-events-selection/SKILL.md's
@@ -98,6 +129,9 @@ def _iter_top3(selections: dict) -> list[tuple[str, dict]]:
     return picks
 
 
+_NON_ALNUM_RE = re.compile(r"[^a-z0-9]")
+
+
 def normalize_venue(venue: str) -> str:
     """Fallback key for the venue cap when a pick has no `address` -- the
     text before the first comma, lowercased. Matches
@@ -106,10 +140,20 @@ def normalize_venue(venue: str) -> str:
 
 
 def _venue_key(pick: dict) -> str:
+    """Cap key for a pick -- `address` when present, else a normalized
+    venue-name prefix. Selection authors `address` free-hand, and the same
+    venue has appeared three different ways across three real weeks ("404
+    S. 20th St.,", "404 S. 20th St,", "404 S 20th St,") -- on 2026-08-03 that
+    split what was actually 5 top3 slots at Iffy Books into two keys (4 + 1),
+    neither of which tripped the cap. Stripping everything but letters and
+    digits collapses punctuation/whitespace variants onto one key; verified
+    against all 33 distinct top3 addresses across three real weeks to
+    produce exactly that one collapse and no others (e.g. "847 North 3rd
+    Street" and "847 N Franklin St" -- different streets, same number --
+    stay distinct)."""
     address = pick.get("address")
-    if address:
-        return address.strip().lower()
-    return normalize_venue(pick.get("venue", ""))
+    key = address.strip().lower() if address else normalize_venue(pick.get("venue", ""))
+    return _NON_ALNUM_RE.sub("", key)
 
 
 def check_venue_cap(selections: dict) -> list[Issue]:
@@ -124,7 +168,7 @@ def check_venue_cap(selections: dict) -> list[Issue]:
             issues.append(
                 Issue(
                     "venue_cap",
-                    "warn",
+                    "warn",  # still WARN -- see module docstring's per-check status
                     None,
                     None,
                     f"{venue_key!r} took {len(picks)} top3 slots this week (cap {VENUE_CAP}): {days}",
@@ -141,7 +185,7 @@ def check_time_format(selections: dict) -> list[Issue]:
             issues.append(
                 Issue(
                     "time_format",
-                    "warn",
+                    "fail",
                     day_date,
                     pick.get("title"),
                     f"time {time_value!r} is not a single H:MM AM/PM value -- calendar_create.py's "
@@ -159,7 +203,7 @@ def check_cost_not_blank(selections: dict) -> list[Issue]:
                 issues.append(
                     Issue(
                         "cost_blank",
-                        "warn",
+                        "fail",
                         day.get("date"),
                         pick.get("title"),
                         "top3 pick has a blank cost -- merge_selections.py's 'Not listed' default was bypassed",
@@ -170,7 +214,7 @@ def check_cost_not_blank(selections: dict) -> list[Issue]:
                 issues.append(
                     Issue(
                         "cost_blank",
-                        "warn",
+                        "fail",
                         day.get("date"),
                         event.get("title"),
                         "listed event has a blank cost -- merge_selections.py's 'Not listed' default was bypassed",
@@ -236,6 +280,36 @@ def check_same_series(selections: dict) -> list[Issue]:
     return issues
 
 
+def check_outside_philadelphia(selections: dict) -> list[Issue]:
+    """WARN-only: event-selection-philosophy's Data Plausibility Checklist
+    names "a venue address outside Philadelphia" as something to verify
+    before treating a candidate as eligible, but nothing previously
+    enforced it -- 2026-08-10 shipped two Top 3 picks outside city limits
+    (Glenside, PA and Oaks, PA, ~25 mi out). Per Greg's call, out-of-city is
+    allowed at a high bar, not blocked, so this flags for review rather
+    than failing. Skips picks with no `address` at all -- a missing
+    address falls back to a venue-name key with no municipality to check,
+    and treating "no address" as "not Philadelphia" would false-positive on
+    address-less picks like 2026-08-03's "The Dell Music Center"."""
+    issues: list[Issue] = []
+    for day_date, pick in _iter_top3(selections):
+        address = pick.get("address")
+        if not address:
+            continue
+        if "philadelphia" not in address.lower():
+            issues.append(
+                Issue(
+                    "outside_philadelphia",
+                    "warn",
+                    day_date,
+                    pick.get("title"),
+                    f"address {address!r} doesn't name Philadelphia -- confirm this is really "
+                    f"in the city, and that the why explains the travel if it's not",
+                )
+            )
+    return issues
+
+
 def collect_issues(selections: dict) -> list[Issue]:
     return [
         *check_venue_cap(selections),
@@ -243,6 +317,7 @@ def collect_issues(selections: dict) -> list[Issue]:
         *check_cost_not_blank(selections),
         *check_implausible_start_time(selections),
         *check_same_series(selections),
+        *check_outside_philadelphia(selections),
     ]
 
 

@@ -627,3 +627,76 @@ There is no unit test for taste. The check is a re-run against frozen input:
 
 The judgment half cannot be unit-tested. Step 2 is a diff you read, not an assertion that passes —
 the question it answers is whether the new picks are *better*, and only Greg can score that.
+
+---
+---
+
+# Tranche 2 — make the guards bite (shipped)
+
+Tranche 1 shipped as PR #25 (merged `ed320c0`, 12 commits). Then the week of **2026-08-17** ran —
+the first Selection with those skills in place, and the holdout this document never had. Measuring
+it reordered the work: the prose held wherever something mechanical was checking it and drifted
+wherever nothing was, and the one guard that caught a live defect (`time_format`) was set to WARN,
+so the bad report published anyway. Tranche 2, on branch `selection-hardening`, is mechanical
+hardening, not more paragraphs.
+
+**What tranche 1 actually did, measured:**
+
+| | 08-03 | 08-10 | 08-17 | verdict |
+|---|---|---|---|---|
+| Max Top 3 slots at one address | 5 (Iffy) | 3 (PFS) | 2 | held — but by luck (venue_cap's key wasn't normalized) |
+| Blank `cost` warnings | 93 | 67 | 0 | fixed by `7540385` |
+| Categories represented | 6/9 | 6/9 | 7/9 | improved |
+| `time_format` trips | 0 | 0 | 2 | regressed, and shipped |
+| Blurbs with an access term | 2/21 | 3/21 | 3/21 | rule shipped, not followed |
+| Top 3 per day | 3×7 | 3×7 | 3×7 | thinness rule never exercised |
+
+**Two real defects found by measuring 08-17, both fixed:**
+
+- The venue cap never actually fires against real spelling variance — Iffy Books took 5 of 21 top3
+  slots on 08-03, but the address was spelled three ways across the picks, splitting the cap's key
+  4+1 and letting it pass silently. `check_selection.py`'s `_venue_key()` now strips punctuation.
+- Two 08-17 top3 picks (`c0467`, `c0468`, a PhilaMOCA double-header) omitted their `time` override,
+  so the merge fell through to the raw candidate value `"7:00, 7:30"` — unparseable, so both picks
+  silently lost their calendar entry. `check_selection.py` only flagged it as WARN. `merge_selections.py`
+  now raises `MergeError` on an unparseable resolved `time`, before `_selections.json` is even written.
+
+**Severity promotions:** `cost_blank` and `time_format` promoted WARN → FAIL (both have run clean
+against a real week, satisfying PR #25's review condition). `venue_cap` stays WARN — it had never run
+with a normalized key, so a quiet week wasn't yet evidence. `implausible_time` and `same_series` stay
+WARN by design.
+
+**New check:** `check_outside_philadelphia` (WARN) — 08-10 shipped two top3 picks outside city
+limits (Glenside and Oaks, PA, ~25 mi) with nothing flagging it.
+
+**Judgment gaps closed with real answers, not assumptions:** `personal-interests` gained a
+`## Geography` section anchored on Point Breeze (home base) with a proximity-based access-note rule
+(not rail-line-based — Point Breeze isn't on the El/BSL, so an El-served neighborhood like Fishtown
+still needs a note), and a `## Timing` section stating weekday-daytime picks are genuinely
+attendable. The free/PWYW ranking weight was removed from `personal-interests` entirely (Greg: "I no
+longer have this preference") — consistent with `b120fa8` already dropping it from Tie-Break
+Precedence in tranche 1.
+
+**Findings closed with no work needed:** C19 (category coverage) — 🎨 Arts & Workshops and
+🌿 Markets & Outdoors are both Flavor-tier interests after tranche 1's B3 carve-out, so zero Top 3
+slots is the tier system working as designed. C17 (blurb homogeneity) — 08-17 ran 272–526 chars vs
+08-10's 219–390; real variation across two independent weeks. C7 (blank cost) — already closed by
+`7540385`, confirmed by zero warnings on 08-17.
+
+**A4/A5 also landed:** the two dangling cross-references (`event-selection-philosophy.md` →
+`event-selection-philosophy/SKILL.md`; `philly-sources` → `philadelphia-sources`) are fixed, and all
+four `docs/v1/Skills/*/SKILL.md` twins — now genuinely diverged from their live counterparts while
+carrying identical frontmatter `name:` fields — carry a one-line frozen-snapshot banner.
+
+**Verification, actually run:** address-key normalization checked against all 33 distinct top3
+addresses across three real weeks (one correct collapse, no false merges); `check_selection.py`
+re-run against 08-03/08-10/08-17 confirmed `venue_cap` now trips Iffy×5 and PFS×3 while staying
+silent on 08-17, and `cost_blank`/`time_format` FAIL exactly where expected; the merge was replayed
+on a scratch copy of the un-backfilled 08-17 annotations and confirmed to raise `MergeError` naming
+`c0467`. `data/2026-08-17/_selection_annotations.json` was then backfilled with the two missing
+`time` overrides (`"7:30 PM"`, the representative show start) and re-merged in place — the only diff
+in the regenerated `_selections.json` beyond the two `time` fields was `generated_at`. Full test
+suite: 388 passing (was 382; +6 new cases), `ruff` and `mypy` clean on all changed scripts.
+
+**Deferred:** A1, A3, A6, B9–B14, C9, C13–C16 (beyond the thinness note), C21, C22, D3, D4.
+`venue_cap`'s FAIL promotion waits for a clean week under the normalized key.

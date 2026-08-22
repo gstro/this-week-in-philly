@@ -3,6 +3,11 @@ name: events-report-format
 description: Output format specification for the weekly This Week in Philadelphia events report. Use this skill when writing or rendering the final report. Governs HTML structure, Top 3 card format, Spotify linking, category organization, and honorable mentions. Apply after event selection is complete.
 ---
 
+> **Frozen v1 snapshot.** Per `CLAUDE.md`'s "Key contracts" section, this file remains the spec of
+> record for the report's pixel-level HTML format — but it has diverged in minor ways (e.g. source
+> lists) from `.claude/skills/events-report-format/SKILL.md`, the v2 adaptation. Check both if a
+> discrepancy matters.
+
 # Report Format
 
 ## Output

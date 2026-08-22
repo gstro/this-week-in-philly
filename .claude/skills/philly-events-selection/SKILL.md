@@ -139,8 +139,12 @@ Apply `event-selection-philosophy` rules for the day:
    day's category listing
 6. Before finalizing a Top 3 pick: search `[event name] Philadelphia [date] postponed` to catch
    cancellations; venue websites are more reliable than aggregators for postponement status
-7. For any Top 3 pick at a venue outside Center City / University City, name the neighborhood or
-   note SEPTA/transit access in the `why` blurb
+7. Apply `personal-interests`'s Geography section: for any Top 3 pick outside South Philly, Center
+   City, or University City, name the neighborhood and the nearest El/BSL/trolley/Regional Rail
+   stop or bus in the `why` blurb — a real 2026-08-17 week landed only 3 of 21 blurbs with an
+   access note, so treat this as a required field, not a nice-to-have. For a pick outside
+   Philadelphia city limits, this is a high bar (something genuinely exceptional), not a default
+   yes — and the `why` must name the travel involved either way.
 8. Apply Venue Elevation for tie-breaking, per `event-selection-philosophy`'s Tie-Break Precedence
    — last resort only, never a substitute for 1–7 above
 9. Note known Philly-specific recurring events (per `event-selection-philosophy`'s "Recurring Events to
@@ -151,7 +155,14 @@ everything else that day. First sentence: what it is and why it's notable. Secon
 specific to this moment or place. Third (optional): the practical case — cost, access, context. Write
 with personality and specificity — this text goes directly into the rendered report.
 
-Fewer than 3 qualifying events on a given day is acceptable.
+Fewer than 3 qualifying events on a given day is acceptable — this is real permission, not a
+theoretical one. Three real weeks in a row (2026-08-03, -10, -17) each produced exactly 3 Top 3
+picks on all 7 days, which is a much stronger pattern than "occasionally there are only 2 or 3
+good options" would produce by chance. If a day's third-best candidate doesn't clearly clear the
+bar the day's first two did — it's a generic bar special, a recurring weekly with nothing special
+this instance, a candidate that only passes because you need a #3 — ship 2, or 1, or 0. A thin day
+with 1 genuinely good pick and an honest gap is a better report than 3 picks where the third is
+filler.
 
 **Cap: at most 10 annotated candidates per category per day.** Within each category, keep the 10
 highest-alignment candidates by the same qualitative judgment used for scoring — this is a genuine
@@ -231,12 +242,17 @@ not to hide events Greg would want to see — when in doubt, keep the event in.
   step copies the candidate's `time` through verbatim by default. Only include it as an override when the
   candidate's `time` is a list, a doors/show pair, or a range rather than **a single, cleanly parseable
   start time** (`H:MM AM/PM`, e.g. `"7:00 PM"`) — write ONE clean representative start time here and
-  describe the rest as prose in `why` (e.g. "Doors 6:00 PM, show at 7:00 PM."). This matters specifically
-  for Top 3 picks: `calendar_create.py`'s `parse_start()` only matches a single `%I:%M %p` string, and a
-  malformed `time` means that pick's calendar event silently never gets created — confirmed on the real
-  2026-08-03 week (5 of 21 Top 3 picks lost their calendar entry this way). Not applicable to plain
-  `annotations` entries — there's no override field there, and a messy `time` in the category listing is
-  cosmetic, not a silent failure (`html_render.py` just displays it as-is).
+  describe the rest as prose in `why` (e.g. "Doors 6:00 PM, show at 7:00 PM."). Actually check the
+  candidate's raw `time` for every Top 3 pick before moving on — don't assume it's clean. This matters
+  specifically for Top 3 picks: `calendar_create.py`'s `parse_start()` only matches a single `%I:%M %p`
+  string, and a malformed `time` means that pick's calendar event silently never gets created — confirmed
+  twice on real weeks (5 of 21 picks on 2026-08-03; 2 of 21 on 2026-08-17, that time from an omitted
+  override rather than a bad value). **`merge_selections.py` now fails the entire week's merge — no
+  report publishes — if a Top 3 pick's resolved `time` isn't a single clean `H:MM AM/PM` value**, so this
+  is no longer a silent degradation to catch after the fact; get it right here or the push doesn't make
+  it to a report. Not applicable to plain `annotations` entries — there's no override field there, and a
+  messy `time` in the category listing is cosmetic, not a silent failure (`html_render.py` just displays
+  it as-is).
 
 ```
 Selection complete for [date]. [N] top3, [M] annotated, [K] categories capped.

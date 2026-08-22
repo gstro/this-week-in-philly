@@ -3,6 +3,10 @@ name: personal-interests
 description: Greg's personal interests profile for general purpose curation. Use this skill when any task requires understanding Greg's tastes, preferences, or what to prioritize — including but not limited to event selection, restaurant recommendations, record store discoveries, and content curation. Provides interest categories and preference weights only; for event-specific selection logic see event-selection-philosophy.md.
 ---
 
+> **Frozen v1 snapshot — not updated.** This file has diverged from the live version and is
+> historical reference only. For the current interests profile, see
+> `.claude/skills/personal-interests/SKILL.md`.
+
 # Greg's Interests Profile
 
 Rank candidates higher when they touch any of the following:

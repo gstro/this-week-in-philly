@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 from check_selection import (
     check_cost_not_blank,
     check_implausible_start_time,
+    check_outside_philadelphia,
     check_same_series,
     check_time_format,
     check_venue_cap,
@@ -53,7 +54,24 @@ def test_venue_cap_tripped_over_the_cap() -> None:
     issues = check_venue_cap(selections)
     assert len(issues) == 1
     assert issues[0].severity == "warn"
-    assert "123 chestnut st" in issues[0].message
+    assert "123chestnutst" in issues[0].message
+
+
+def test_venue_cap_collapses_punctuation_variants_of_the_same_address() -> None:
+    """Regression test for the real 2026-08-03 miss: Iffy Books took 5 of 21
+    top3 slots that week, but the address was spelled three different ways
+    across the picks ("404 S. 20th St.,", "404 S. 20th St,", "404 S 20th
+    St,"), which split what should have been one venue key into two and let
+    the cap pass silently. The key must collapse punctuation/whitespace
+    variants onto a single venue."""
+    picks = [
+        _pick("A", address="404 S. 20th St., Philadelphia, PA 19146"),
+        _pick("B", address="404 S. 20th St, Philadelphia, PA 19146"),
+        _pick("C", address="404 S 20th St, Philadelphia, PA 19146"),
+    ]
+    selections = _selections([_day("2026-08-03", top3=picks)])
+    issues = check_venue_cap(selections)
+    assert len(issues) == 1
 
 
 def test_venue_cap_counts_across_the_whole_week_not_per_day() -> None:
@@ -74,7 +92,7 @@ def test_venue_cap_falls_back_to_normalized_venue_when_address_missing() -> None
     selections = _selections([_day("2026-08-03", top3=picks)])
     issues = check_venue_cap(selections)
     assert len(issues) == 1
-    assert "iffy books" in issues[0].message
+    assert "iffybooks" in issues[0].message
 
 
 def test_normalize_venue_strips_address_suffix_and_lowercases() -> None:
@@ -94,7 +112,7 @@ def test_time_format_rejects_a_range() -> None:
     selections = _selections([_day("2026-08-03", top3=[_pick("A", time="7:00, 7:30")])])
     issues = check_time_format(selections)
     assert len(issues) == 1
-    assert issues[0].severity == "warn"
+    assert issues[0].severity == "fail"
 
 
 def test_time_format_rejects_a_doors_show_pair() -> None:
@@ -114,7 +132,7 @@ def test_cost_not_blank_fails_on_empty_top3_cost() -> None:
     selections = _selections([_day("2026-08-03", top3=[_pick("A", cost="")])])
     issues = check_cost_not_blank(selections)
     assert len(issues) == 1
-    assert issues[0].severity == "warn"
+    assert issues[0].severity == "fail"
 
 
 def test_cost_not_blank_fails_on_empty_event_cost() -> None:
@@ -171,6 +189,29 @@ def test_same_series_ignores_titles_with_no_separator() -> None:
     picks = [_pick("Palinoia"), _pick("Palinoia Reunion")]
     selections = _selections([_day("2026-08-03", top3=picks)])
     assert check_same_series(selections) == []
+
+
+# --- outside philadelphia ---
+
+
+def test_outside_philadelphia_flags_a_different_municipality() -> None:
+    selections = _selections([_day("2026-08-10", top3=[_pick("A", address="100 Station Ave, Oaks, PA 19456")])])
+    issues = check_outside_philadelphia(selections)
+    assert len(issues) == 1
+    assert issues[0].severity == "warn"
+
+
+def test_outside_philadelphia_does_not_flag_a_philadelphia_address() -> None:
+    selections = _selections([_day("2026-08-10", top3=[_pick("A", address="531 N 12th St, Philadelphia, PA 19123")])])
+    assert check_outside_philadelphia(selections) == []
+
+
+def test_outside_philadelphia_skips_a_pick_with_no_address() -> None:
+    """A pick with no address at all (e.g. 2026-08-03's 'The Dell Music
+    Center', keyed on venue name only) has no municipality to check --
+    treating "no address" as "not Philadelphia" would false-positive here."""
+    selections = _selections([_day("2026-08-03", top3=[_pick("A", venue="The Dell Music Center")])])
+    assert check_outside_philadelphia(selections) == []
 
 
 # --- collect_issues ---
