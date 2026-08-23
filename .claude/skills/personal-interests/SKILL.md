@@ -12,7 +12,7 @@ honorable-mention material for the weekly event report specifically.
 ## Core
 
 - **Leftist politics** — events with progressive, labor, indigenous, anti-capitalist, or social justice themes; readings by authors with political dimensions; community solidarity events. Political-education programming specifically (e.g. Wooden Shoe Books' ed line) is a strong anchor.
-- **Film** — screenings of any kind, especially independent, foreign, experimental, horror, or noir; film discussion communities; short film showcases. Named anchors: Béla Tarr, Czech New Wave.
+- **Film** — screenings of any kind, especially independent, foreign, experimental, horror, or noir; film discussion communities; short film showcases. Named anchors: Wong Kar-Wai, Paul Thomas Anderson, Alejandro González Iñárritu.
 - **Punk and hardcore music** — punk, post-punk, hardcore, EBM, industrial, noise rock, emo, post-hardcore, screamo (e.g. Saetia); local DIY shows; all-ages events
 - **Horror and the occult** — horror film screenings, paranormal events, gothic culture, occult/esoteric festivals, dark/strange themed events
 - **Literature** — author readings, book releases, poetry, book clubs, independent bookstores. Named anchor: Ursula K. Le Guin.
@@ -102,6 +102,8 @@ St). Nearest transit: the Broad Street Line at Ellsworth–Federal and Tasker–
 
 ## Timing
 
-Weekday daytime is fine — a Wednesday 10:30 AM or a Thursday 2:30 PM pick is genuinely attendable,
-not a wasted slot. Don't hedge or downweight a candidate for being on a weekday or during working
-hours; judge it on the same merit as any evening or weekend pick.
+Weekday daytime is fine, not out — a Wednesday 10:30 AM or a Thursday 2:30 PM pick is genuinely
+attendable, not a wasted slot. It carries a slight preference *against* it relative to an equally
+strong evening or weekend candidate (it falls during work hours), but that's a mild tie-break
+nudge, not a reason to exclude or downgrade a pick that's otherwise clearly the best option that
+day.
