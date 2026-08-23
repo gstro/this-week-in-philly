@@ -1,0 +1,735 @@
+{
+  "source": "WXPN",
+  "collected_at": "2026-08-23T06:37:32.632694+00:00",
+  "events": [
+    {
+      "title": "WXPN Free At Noon: GRACE POTTER",
+      "venue": "The Music Hall at World Stage",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/wxpn-free-at-noon-grace-potter/",
+      "description": "WXPN Free At Noon: GRACE POTTER"
+    },
+    {
+      "title": "Jonathan Toubin / No Time / Seely Jurgens Band / The Out-Sect",
+      "venue": "Ruba Club",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jonathan-toubin-no-time-seely-jurgens-band-the-out-sect/",
+      "description": "Jonathan Toubin / No Time / Seely Jurgens Band / The Out-Sect"
+    },
+    {
+      "title": "TFBundy / Carpet Floor / Gre/ay / Call Off Your Dogs",
+      "venue": "Cousin Danny's Lounge",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/tfbundy-carpet-floor-gre-ay-call-off-your-dogs/",
+      "description": "TFBundy / Carpet Floor / Gre/ay / Call Off Your Dogs"
+    },
+    {
+      "title": "Larry & Joe",
+      "venue": "The Colonial Theatre",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/larry-joe/",
+      "description": "Larry & Joe"
+    },
+    {
+      "title": "Jackie Greene",
+      "venue": "City Winery",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jackie-greene/",
+      "description": "Jackie Greene"
+    },
+    {
+      "title": "Mozaic Flow",
+      "venue": "City Winery",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/mozaic-flow/",
+      "description": "Mozaic Flow"
+    },
+    {
+      "title": "Brandon Victor Dixon",
+      "venue": "City Winery",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/brandon-victor-dixon/",
+      "description": "Brandon Victor Dixon"
+    },
+    {
+      "title": "Ariella and Nicolaas",
+      "venue": "City Winery",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/ariella-and-nicolaas/",
+      "description": "Ariella and Nicolaas"
+    },
+    {
+      "title": "Leon & The Peoples",
+      "venue": "City Winery",
+      "date": "2026-08-25",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/leon-the-peoples/",
+      "description": "Leon & The Peoples"
+    },
+    {
+      "title": "Esperanza Spalding",
+      "venue": "City Winery",
+      "date": "2026-08-25",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/esperanza-spalding-2/",
+      "description": "Esperanza Spalding"
+    },
+    {
+      "title": "Shaun Milli",
+      "venue": "City Winery",
+      "date": "2026-08-24",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/shaun-milli/",
+      "description": "Shaun Milli"
+    },
+    {
+      "title": "Levi Rozek & His Quintet",
+      "venue": "Chris' Jazz Cafe",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/levi-rozek-his-quintet/",
+      "description": "Levi Rozek & His Quintet"
+    },
+    {
+      "title": "Ravi Seenarine",
+      "venue": "Chris' Jazz Cafe",
+      "date": "2026-08-25",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/ravi-seenarine/",
+      "description": "Ravi Seenarine"
+    },
+    {
+      "title": "Fattmack",
+      "venue": "Brooklyn Bowl",
+      "date": "2026-08-26",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/fattmack/",
+      "description": "Fattmack"
+    },
+    {
+      "title": "She Fest feat. Sharon Lia Band / The Ladies of SHE / Kat Rivers & the Second Sight",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/she-fest-feat-sharon-lia-band-the-ladies-of-she-kat-rivers-the-second-sight/",
+      "description": "She Fest feat. Sharon Lia Band / The Ladies of SHE / Kat Rivers & the Second Sight"
+    },
+    {
+      "title": "Cloud Nothings / Knifeplay",
+      "venue": "Ruba Club",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/cloud-nothings-knifeplay/",
+      "description": "Cloud Nothings / Knifeplay"
+    },
+    {
+      "title": "Pinkshift / Kulfi Girls / Hit Like A Girl",
+      "venue": "Ukie Club",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/pinkshift-kulfi-girls-hit-like-a-girl/",
+      "description": "Pinkshift / Kulfi Girls / Hit Like A Girl"
+    },
+    {
+      "title": "Halloween / Mopar Stars / Cult Objects / Microgoblet",
+      "venue": "Thunderbird Hall",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/halloween-mopar-stars-cult-objects-microgoblet/",
+      "description": "Halloween / Mopar Stars / Cult Objects / Microgoblet"
+    },
+    {
+      "title": "Good Flying Birds / The Smarthearts / Heatloaf / Ringtone",
+      "venue": "Spruce Street Harbor Park",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/good-flying-birds-the-smarthearts-heatloaf-ringtone/",
+      "description": "Good Flying Birds / The Smarthearts / Heatloaf / Ringtone"
+    },
+    {
+      "title": "DannaH / Bren / Madska",
+      "venue": "Ortlieb's",
+      "date": "2026-08-26",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/dannah-bren-madska/",
+      "description": "DannaH / Bren / Madska"
+    },
+    {
+      "title": "Hiroya Tsukamoto",
+      "venue": "118 North",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/hiroya-tsukamoto/",
+      "description": "Hiroya Tsukamoto"
+    },
+    {
+      "title": "STREET BEANS",
+      "venue": "118 North",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/street-beans/",
+      "description": "STREET BEANS"
+    },
+    {
+      "title": "DB Lambert / Link Hansen",
+      "venue": "118 North",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/db-lambert-link-hansen/",
+      "description": "DB Lambert / Link Hansen"
+    },
+    {
+      "title": "A Thousand Horses / The Warhawks",
+      "venue": "118 North",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/a-thousand-horses-the-warhawks/",
+      "description": "A Thousand Horses / The Warhawks"
+    },
+    {
+      "title": "The 29ers",
+      "venue": "118 North",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-29ers/",
+      "description": "The 29ers"
+    },
+    {
+      "title": "Kehlani / Durand Bernarr / TheARTI$t / WASEEL",
+      "venue": "Freedom Mortgage Pavilion",
+      "date": "2026-08-26",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/kehlani-durand-bernarr-theartit-waseel/",
+      "description": "Kehlani / Durand Bernarr / TheARTI$t / WASEEL"
+    },
+    {
+      "title": "Citizen / Hotline TNT / Anxious / Rocket",
+      "venue": "Union Transfer",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/citizen-hotline-tnt-anxious-rocket/",
+      "description": "Citizen / Hotline TNT / Anxious / Rocket"
+    },
+    {
+      "title": "The All Star Band",
+      "venue": "The Queen",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-all-star-band/",
+      "description": "The All Star Band"
+    },
+    {
+      "title": "TopOppGen",
+      "venue": "The Queen",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/topoppgen/",
+      "description": "TopOppGen"
+    },
+    {
+      "title": "Helmet / Spirit In The Room / Yet It Moves",
+      "venue": "The Queen",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/helmet-spirit-in-the-room-yet-it-moves/",
+      "description": "Helmet / Spirit In The Room / Yet It Moves"
+    },
+    {
+      "title": "Myles Smith / Michael Marcagi",
+      "venue": "The Met",
+      "date": "2026-08-26",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/myles-smith-michael-marcagi/",
+      "description": "Myles Smith / Michael Marcagi"
+    },
+    {
+      "title": "Vacation Manor / Nolie Durham",
+      "venue": "The Foundry",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/vacation-manor-nolie-durham/",
+      "description": "Vacation Manor / Nolie Durham"
+    },
+    {
+      "title": "Meltt / Los Eclipses",
+      "venue": "The Foundry",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/meltt-los-eclipses/",
+      "description": "Meltt / Los Eclipses"
+    },
+    {
+      "title": "Mustard Service / Pity Party (Girls Club) / Manwolves / Chicano Mosh",
+      "venue": "The Foundry",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/mustard-service-pity-party-girls-club-manwolves-chicano-mosh/",
+      "description": "Mustard Service / Pity Party (Girls Club) / Manwolves / Chicano Mosh"
+    },
+    {
+      "title": "greek!",
+      "venue": "The Foundry",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/greek/",
+      "description": "greek!"
+    },
+    {
+      "title": "Nini Camps / Erin Fox",
+      "venue": "The Fallser Club",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/nini-camps-erin-fox/",
+      "description": "Nini Camps / Erin Fox"
+    },
+    {
+      "title": "Patty Jackson\u2019s Party in the Park feat. Jeffrey Osborne / The Whispers / Howard Hewett",
+      "venue": "The Dell Music Center",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/patty-jacksons-party-in-the-park-feat-jeffrey-osborne-the-whispers-howard-hewett/",
+      "description": "Patty Jackson's Party in the Park feat. Jeffrey Osborne / The Whispers / Howard Hewett"
+    },
+    {
+      "title": "Keyshia Cole / Mario",
+      "venue": "The Dell Music Center",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/keyshia-cole-mario/",
+      "description": "Keyshia Cole / Mario"
+    },
+    {
+      "title": "Larry Braggs",
+      "venue": "SOUTH Jazz Club",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/larry-braggs/",
+      "description": "Larry Braggs"
+    },
+    {
+      "title": "Titan to Tachyons",
+      "venue": "Solar Myth",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/titan-to-tachyons/",
+      "description": "Titan to Tachyons"
+    },
+    {
+      "title": "Two Coopers / Monstertruck Firetruck / Tierney Greene Band",
+      "venue": "Silk City Diner",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/two-coopers-monstertruck-firetruck-tierney-greene-band/",
+      "description": "Two Coopers / Monstertruck Firetruck / Tierney Greene Band"
+    },
+    {
+      "title": "Nick Lombardo & The Decent Ok / Nervous Nikki and The Chill Pills / Kat Rivers & The Second Sight",
+      "venue": "Silk City Diner",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/nick-lombardo-the-decent-ok-nervous-nikki-and-the-chill-pills-kat-rivers-the-second-sight/",
+      "description": "Nick Lombardo & The Decent Ok / Nervous Nikki and The Chill Pills / Kat Rivers & The Second Sight"
+    },
+    {
+      "title": "Will Swinton",
+      "venue": "PhilaMOCA",
+      "date": "2026-08-25",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/will-swinton/",
+      "description": "Will Swinton"
+    },
+    {
+      "title": "Fish Out of Water",
+      "venue": "360",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/fish-out-of-water/",
+      "description": "Fish Out of Water"
+    },
+    {
+      "title": "George Thorogood & The Destroyers",
+      "venue": "Xcite Center",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/george-thorogood-the-destroyers/",
+      "description": "George Thorogood & The Destroyers"
+    },
+    {
+      "title": "Dead Tooth",
+      "venue": "Ortlieb's",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/dead-tooth/",
+      "description": "Dead Tooth"
+    },
+    {
+      "title": "Les Greene & The Swayzees",
+      "venue": "MilkBoy",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/les-greene-the-swayzees/",
+      "description": "Les Greene & The Swayzees"
+    },
+    {
+      "title": "Jim Stephens\u2019 Full Tilt Boogie Band / Calico Catbird",
+      "venue": "MilkBoy",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jim-stephens-full-tilt-boogie-band-calico-catbird/",
+      "description": "Jim Stephens' Full Tilt Boogie Band / Calico Catbird"
+    },
+    {
+      "title": "John Gallagher Jr. / Hannah Winkler",
+      "venue": "MilkBoy",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/john-gallagher-jr-hannah-winkler/",
+      "description": "John Gallagher Jr. / Hannah Winkler"
+    },
+    {
+      "title": "Howard Louis / Full Bush",
+      "venue": "MilkBoy",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/howard-louis-full-bush/",
+      "description": "Howard Louis / Full Bush"
+    },
+    {
+      "title": "Gathering Time",
+      "venue": "Citizens Bank Theater",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/gathering-time/",
+      "description": "Gathering Time"
+    },
+    {
+      "title": "Froggy / Pleasure Death / The Angies",
+      "venue": "Johnny Brenda's",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/froggy-pleasure-death-the-angies/",
+      "description": "Froggy / Pleasure Death / The Angies"
+    },
+    {
+      "title": "Mesh / Eraser / Taurus Judge",
+      "venue": "Johnny Brenda's",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/mesh-eraser-taurus-judge/",
+      "description": "Mesh / Eraser / Taurus Judge"
+    },
+    {
+      "title": "Maps & Atlases / Bark Culture / Loadcard",
+      "venue": "Johnny Brenda's",
+      "date": "2026-08-24",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/maps-atlases-bark-culture-loadcard/",
+      "description": "Maps & Atlases / Bark Culture / Loadcard"
+    },
+    {
+      "title": "fSaints / Retroglyphs",
+      "venue": "Dawson Street Pub",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/fsaints-retroglyphs/",
+      "description": "fSaints / Retroglyphs"
+    },
+    {
+      "title": "Sovei/ Moustapha Noumbisi / LARS",
+      "venue": "Johnny Brenda's",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/sovei-moustapha-noumbisi-lars/",
+      "description": "Sovei/ Moustapha Noumbisi / LARS"
+    },
+    {
+      "title": "Brittany Ann Tranbaugh / Nielson Family Band / Liz Fulmer",
+      "venue": "West Art",
+      "date": "2026-08-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/brittany-ann-tranbaugh-nielson-family-band-liz-fulmer/",
+      "description": "Brittany Ann Tranbaugh / Nielson Family Band / Liz Fulmer"
+    },
+    {
+      "title": "The Bleachers / Real Estate / Toadies / Grace Ives / Annie DiRusso / Bike Routes",
+      "venue": "Stone Park Summer Stage",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-bleachers-real-estate-toadies-grace-ives-annie-dirusso-bike-routes/",
+      "description": "The Bleachers / Real Estate / Toadies / Grace Ives / Annie DiRusso / Bike Routes"
+    },
+    {
+      "title": "The Mavericks & Friends",
+      "venue": "Penn's Peak",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-mavericks-friends-2/",
+      "description": "The Mavericks & Friends"
+    },
+    {
+      "title": "Reverend Horton Heat",
+      "venue": "Levitt Pavilion SteelStacks",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/reverend-horton-heat/",
+      "description": "Reverend Horton Heat"
+    },
+    {
+      "title": "Blues Traveler / Gin Blossoms / Spin Doctors",
+      "venue": "Levitt Pavilion SteelStacks",
+      "date": "2026-08-25",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/blues-traveler-gin-blossoms-spin-doctors-2/",
+      "description": "Blues Traveler / Gin Blossoms / Spin Doctors"
+    },
+    {
+      "title": "Will Calhoun",
+      "venue": "Wiggins Park",
+      "date": "2026-08-24",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/will-calhoun/",
+      "description": "Will Calhoun"
+    },
+    {
+      "title": "Nik Greeley & the Operators",
+      "venue": "Tonewood Brewing - Oaklyn, NJ",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/nik-greeley-the-operators/",
+      "description": "Nik Greeley & the Operators"
+    },
+    {
+      "title": "Swervedriver",
+      "venue": "Underground Arts",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/swervedriver/",
+      "description": "Swervedriver"
+    },
+    {
+      "title": "Chris Botti",
+      "venue": "Scottish Rite Auditorium",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/chris-botti/",
+      "description": "Chris Botti"
+    },
+    {
+      "title": "The Mavericks & Friends",
+      "venue": "Lansdowne Theater",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-mavericks-friends/",
+      "description": "The Mavericks & Friends"
+    },
+    {
+      "title": "Brittany Ann Tranbaugh / Shona",
+      "venue": "Johnny Brenda's",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/brittany-ann-tranbaugh-shona/",
+      "description": "Brittany Ann Tranbaugh / Shona"
+    },
+    {
+      "title": "Will Wood",
+      "venue": "Starland Ballroom",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/will-wood/",
+      "description": "Will Wood"
+    },
+    {
+      "title": "Chatham County Line",
+      "venue": "Mauch Chunk Opera House",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/chatham-county-line/",
+      "description": "Chatham County Line"
+    },
+    {
+      "title": "Jonatha Brooke / Liz Longley",
+      "venue": "The Bryn Mawr Gazebo",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jonatha-brooke-liz-longley/",
+      "description": "Jonatha Brooke / Liz Longley"
+    },
+    {
+      "title": "Jesse Malin / Craig Finn / Tommy Stinson",
+      "venue": "The Queen",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jesse-malin/",
+      "description": "Jesse Malin / Craig Finn / Tommy Stinson"
+    },
+    {
+      "title": "Labrinth / The Philly Pops",
+      "venue": "TD Pavilion at The Mann Center",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/labrinth-the-philly-pops/",
+      "description": "Labrinth / The Philly Pops"
+    },
+    {
+      "title": "Jutes / In Color / wilt",
+      "venue": "Theatre of Living Arts",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jutes-in-color-wilt/",
+      "description": "Jutes / In Color / wilt"
+    },
+    {
+      "title": "Lyfe Jennings",
+      "venue": "City Winery",
+      "date": "2026-08-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/lyfe-jennings/",
+      "description": "Lyfe Jennings"
+    },
+    {
+      "title": "Esperanza Spalding",
+      "venue": "City Winery",
+      "date": "2026-08-26",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/esperanza-spalding/",
+      "description": "Esperanza Spalding"
+    },
+    {
+      "title": "Jerry Garcia Symphonic Celebration with The Philly Pops",
+      "venue": "TD Pavilion at The Mann Center",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jerry-garcia-symphonic-celebration-with-the-philly-pops/",
+      "description": "Jerry Garcia Symphonic Celebration with The Philly Pops"
+    },
+    {
+      "title": "Ella Mai / AMA / Girlfriend",
+      "venue": "Skyline Stage at The Mann Center",
+      "date": "2026-08-25",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/ella-mai-ama-girlfriend/",
+      "description": "Ella Mai / AMA / Girlfriend"
+    },
+    {
+      "title": "Grupo Frontera",
+      "venue": "Prudential Center",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/grupo-frontera/",
+      "description": "Grupo Frontera"
+    },
+    {
+      "title": "Chris Stapleton / Carter Faith",
+      "venue": "Freedom Mortgage Pavilion",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/chris-stapleton-carter-faith-2/",
+      "description": "Chris Stapleton / Carter Faith"
+    },
+    {
+      "title": "Chris Stapleton / Carter Faith",
+      "venue": "Freedom Mortgage Pavilion",
+      "date": "2026-08-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/chris-stapleton-carter-faith/",
+      "description": "Chris Stapleton / Carter Faith"
+    },
+    {
+      "title": "Zac Brown Band / Grace Potter",
+      "venue": "TD Pavilion at The Mann Center",
+      "date": "2026-08-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/zac-brown-band-grace-potter/",
+      "description": "Zac Brown Band / Grace Potter"
+    }
+  ]
+}

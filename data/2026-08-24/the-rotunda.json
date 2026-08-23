@@ -1,0 +1,51 @@
+{
+  "source": "The Rotunda",
+  "collected_at": "2026-08-23T06:36:58.778595+00:00",
+  "events": [
+    {
+      "title": "In-person! West Philadelphia Sanctuary singing workshop",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-24",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/west-philadelphia-sanctuary-singing-workshop",
+      "description": "In-person! West Philadelphia Sanctuary singing workshop"
+    },
+    {
+      "title": "In-person! Weekly improvised music drop-in jam session",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-26",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-08-26-12-00-00-0400",
+      "description": "In-person! Weekly improvised music drop-in jam session"
+    },
+    {
+      "title": "In-person! The Gathering",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-27",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/in-person-the-gathering-2026-08-27-20-00-00-0400",
+      "description": "In-person! The Gathering"
+    },
+    {
+      "title": "In-person! Poet-Tree En Motion Pres. its Seasonal Arts Showcase with a Focus on Fire Arts, Music and Dancing",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-29",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/poet-tree-en-motion-pres-its-seasonal-arts-showcase-with-a-focus-on-fire-arts-music-and-dancing",
+      "description": "In-person! Poet-Tree En Motion Pres. its Seasonal Arts Showcase with a Focus on Fire Arts, Music and Dancing"
+    },
+    {
+      "title": "In-person! OUTDOORS ONLY! WEATHER-DEPENDENT! Poet-tree En Motion: Festive Fire Edition",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-08-29",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/poet-tree-en-motion-festive-fire-edition",
+      "description": "In-person! OUTDOORS ONLY! WEATHER-DEPENDENT! Poet-tree En Motion: Festive Fire Edition"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "source": "Philadelphia Film Society",
+  "collected_at": "2026-08-23T06:37:54.428532+00:00",
+  "events": [
+    {
+      "title": "Two-Lane Blacktop",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-08-26",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 42 min."
+    },
+    {
+      "title": "Bright Future",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-08-29",
+      "time": "9:15 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 32 min."
+    },
+    {
+      "title": "Challenge of the Tiger",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-08-29",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 26 min."
+    },
+    {
+      "title": "Penitentiary",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-08-29",
+      "time": "1:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 39 min."
+    },
+    {
+      "title": "Dreams in Nightmares (2024)",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-08-29",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 2 hr 8 min."
+    },
+    {
+      "title": "Nymphomaniac: Volume II",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-08-29",
+      "time": "9:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 2 hr 4 min."
+    },
+    {
+      "title": "Nymphomaniac: Volume I",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-08-29",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 2 hr 25 min."
+    },
+    {
+      "title": "The Samurai and the Prisoner (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-08-26",
+      "time": "4:10 PM, 7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 2 hr 27 min."
+    },
+    {
+      "title": "The Wrong Girls (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-08-26",
+      "time": "6:20 PM, 9:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 39 min."
+    },
+    {
+      "title": "Tony (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-08-26",
+      "time": "3:30 PM, 6:00 PM, 8:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 46 min."
+    },
+    {
+      "title": "Spider-Man: Brand New Day (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-08-26",
+      "time": "3:15 PM, 6:10 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated PG-13. Runtime: 2 hr 25 min."
+    },
+    {
+      "title": "The Odyssey (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-08-26",
+      "time": "3:00 PM, 7:15 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 2 hr 52 min."
+    },
+    {
+      "title": "The Invite (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-08-26",
+      "time": "3:45 PM, 8:40 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 47 min."
+    },
+    {
+      "title": "Coyote vs. Acme",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-08-29",
+      "time": "1:00 PM, 3:30 PM, 6:00 PM, 8:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated PG. Runtime: 1 hr 41 min."
+    },
+    {
+      "title": "Mysterious Skin",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-08-26",
+      "time": "3:45 PM, 8:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated NC-17. Runtime: 1 hr 39 min."
+    },
+    {
+      "title": "Teenage Sex and Death at Camp Miasma (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-08-26",
+      "time": "4:15 PM, 6:15 PM, 7:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 1 hr 46 min."
+    }
+  ]
+}
