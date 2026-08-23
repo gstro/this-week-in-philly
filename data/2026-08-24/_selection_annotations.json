@@ -1,0 +1,829 @@
+{
+  "week": "2026-08-24",
+  "collection_failures": [
+    "philly-shows (ParseError: no showblock elements found -- markup may have changed)"
+  ],
+  "days": [
+    {
+      "date": "2026-08-24",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0505",
+          "rank": 1,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "time": "7:30 PM",
+          "why": "PhilaMOCA screens Dust Devil, Richard Stanley's near-mythic 1992 desert horror about a shapeshifting serial killer stalking the South African wasteland — a film that spent decades in butchered cuts before its restoration made repertory bookings like this one possible. It's the kind of genre deep-cut that made PhilaMOCA's reputation, projected in a former mausoleum showroom instead of a multiplex. Doors 7:00 PM, film at 7:30 PM; $10."
+        },
+        {
+          "id": "c0022",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Little Haiti Chapter hosts a community causerie on immigration and affordable housing, bringing residents, advocates, and local leaders together to compare notes on two of the crises hitting Philadelphia's immigrant communities hardest right now. It's a working conversation rather than a rally — small, substantive, and easy to miss if you're not already plugged into the group. Free."
+        },
+        {
+          "id": "c0008",
+          "rank": 3,
+          "address": "990 Filbert St, Philadelphia, PA 19107",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Shaun Milli brings a soul voice with more depth than his age suggests to City Winery, ahead of a new album he's readying for 2026. He's framed his own project as a throughline to the soul and R&B artists who came before him — a nod worth taking seriously in a city with Philadelphia International Records in its bones. Table service available; note the venue's dinner-show format if you just want the music."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0026"
+        },
+        {
+          "id": "c0025"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0505",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Repertory 35mm-style horror booking at PhilaMOCA; also listed via Do215 (c0007) with a fuller plot synopsis."
+        },
+        {
+          "id": "c0022",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Community dialogue on immigration and housing policy, hosted by the Little Haiti Chapter."
+        },
+        {
+          "id": "c0008",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Rising soul/R&B artist ahead of a 2026 album; also listed via WXPN (c0549)."
+        },
+        {
+          "id": "c0026",
+          "category": "🎪 Festivals & Major Events",
+          "sold_out": false,
+          "note": "Free sampler preview of the 2026 Philadelphia Fringe Festival — dance, theater, circus, and comedy excerpts; runs again Aug 31."
+        },
+        {
+          "id": "c0025",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Riso-printed poetry zine workshop at the Soapbox community print shop and zine library."
+        },
+        {
+          "id": "c0000",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Indie/math-rock bill at Johnny Brenda's with support from Bark Culture and Loadcard. $25.65, 21+."
+        },
+        {
+          "id": "c0015",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "*(confirm details)* Weekly standing protest outside Sen. McCormick's Philadelphia office; recurring, no special guest noted this week."
+        },
+        {
+          "id": "c0029",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Monday night jam session hosted by Richard Hill Jr. and friends at Black Squirrel Club."
+        },
+        {
+          "id": "c0028",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Unamplified classical/acoustic open mic at the Philadelphia Ethical Society; house Steinway available."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0036",
+          "rank": 1,
+          "address": "990 Filbert St, Philadelphia, PA 19107",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Esperanza Spalding — bassist, vocalist, and one of the defining jazz artists of her generation — plays an intimate three-piece set drawing from all eight of her albums plus a preview of new material. It's a rare small-room booking for an artist who usually fills much bigger stages, and 100% of proceeds go to PRISMID Sanctuary, an Indigenous- and Black-led eco-cultural nonprofit. Second and final night of a two-night run (also Aug 26)."
+        },
+        {
+          "id": "c0063",
+          "rank": 2,
+          "address": "1906 Rittenhouse Square, Philadelphia, PA 19103",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A discussion group on Bayard Rustin's overlooked \"Freedom Budget for All Americans\" — the jobs-centric economic vision from the organizer who built the March on Washington but rarely gets credit for the ideas behind it. Led by Paul Prescod, it's political education in the literal sense: reading and arguing through an alternative to austerity politics, not just another lecture. Free, Rittenhouse Square."
+        },
+        {
+          "id": "c0477",
+          "rank": 3,
+          "address": "709 N 2nd St, Philadelphia, PA 19123",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Cursor Philly marks one year since its first meetup with an anniversary gathering at Indy Hall — from a small room talking about a new AI coding tool to one of the city's more active tech communities. Worth catching for the retrospective angle as much as the usual demos and networking. Northern Liberties: nearest stop is the Market-Frankford Line at Girard Ave, about a half-mile walk."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0066"
+        },
+        {
+          "id": "c0046"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0036",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Also listed via WXPN (c0547). Two-night run at City Winery, also playing Aug 26."
+        },
+        {
+          "id": "c0063",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Reading/discussion group on Bayard Rustin's economic organizing legacy."
+        },
+        {
+          "id": "c0477",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "One-year anniversary of Cursor Philly's AI-coding meetup at Indy Hall."
+        },
+        {
+          "id": "c0066",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Philly DSA political education series launches with the Socialist Party of America's 1912 platform."
+        },
+        {
+          "id": "c0046",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Original jazz/soul quartet led by Ravi Seenarine (voice, tenor sax) at Chris' Jazz Cafe; also listed via WXPN (c0551)."
+        },
+        {
+          "id": "c0038",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Reggae-soul fusion act at City Winery; also listed via WXPN (c0546)."
+        },
+        {
+          "id": "c0035",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Grammy-winning R&B artist Ella Mai's tour stop at Highmark Mann (Skyline Stage), with AMA and Girlfriend."
+        },
+        {
+          "id": "c0045",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Free outdoor concert series at FDR Park; this week Greg Moore and the Actual Proof, 5:30-7:30 PM."
+        },
+        {
+          "id": "c0060",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Transit Forward Philadelphia organizing training in support of making Zero Fare transit permanent."
+        },
+        {
+          "id": "c0064",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Author talk at the Mütter Museum on the politicization of medicine during Philadelphia's Yellow Fever epidemics, with book signing. $25."
+        },
+        {
+          "id": "c0470",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Silent co-working writing session at Iffy Books, three 40-minute units."
+        },
+        {
+          "id": "c0065",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Basket-weaving workshop at the Soapbox community print shop and zine library."
+        },
+        {
+          "id": "c0053",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Volunteer stewardship workday and nature walk at Cobbs Creek Park with Fairmount Park Conservancy."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-26",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0510",
+          "rank": 1,
+          "address": "5001 Market St, Philadelphia, PA 19139",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A stacked four-band DIY bill of grindcore, powerviolence, and death metal touches down at Cousin Danny's — Voidhammer down from LA, Harsh Realm from Asheville, plus locals Diuretic and Agonesiac. This is the unfiltered end of the punk/hardcore spectrum: no ticketing platform, no venue website, just a house-show-adjacent DIY space and a wall of noise. West Philadelphia past University City — nearest stop is 46th St on the Market-Frankford Line."
+        },
+        {
+          "id": "c0128",
+          "rank": 2,
+          "address": "1412 Chestnut St, Philadelphia, PA 19102",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Philadelphia Film Society continues its Dekalog Special Series with parts 5 and 6 of Kieślowski's ten-part meditation on the Ten Commandments, screening in 4K — a defense attorney's crisis of conscience over a death-penalty case, paired with a teenager's obsessive fixation on his neighbor. Widely regarded as one of the towering achievements in film history, and a rare chance to see it as intended: on a big screen, in installments. Likely at PFS Film Society Center, based on the day's other PFS repertory booking."
+        },
+        {
+          "id": "c0115",
+          "rank": 3,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philly DSA canvasses Kingsessing for Chris Rabb, a democratic socialist running for PA-03 on universal healthcare, childcare, and abolishing ICE — retail politics for a candidate trying to prove a socialist can actually win a Philadelphia congressional seat. No experience needed; new canvassers are paired with a partner, and there's a debrief after. Kingsessing, Southwest Philadelphia — bus-served (routes 17/64), no nearby rail station."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0090"
+        },
+        {
+          "id": "c0471"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0510",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "DIY grindcore/powerviolence/death metal four-band bill at Cousin Danny's."
+        },
+        {
+          "id": "c0128",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Kieślowski's Dekalog, parts 5 & 6, 4K restoration, part of PFS's ongoing special series."
+        },
+        {
+          "id": "c0115",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Philly DSA canvass for Chris Rabb's PA-03 congressional campaign."
+        },
+        {
+          "id": "c0090",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Ars Nova Workshop presents jazz-metal group Titan to Tachyons at Solar Myth. $30.90, 21+."
+        },
+        {
+          "id": "c0471",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Monthly speculative-fiction reading group at Iffy Books, discussing Louise Erdrich's Future Home of the Living God."
+        },
+        {
+          "id": "c0037",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Esperanza Spalding's second and final City Winery night (also listed via WXPN c0548) — see Tuesday's Top 3 for the first night."
+        },
+        {
+          "id": "c0086",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Philadelphia Jazz Orchestra, an all-star student big band, at Chris' Jazz Cafe."
+        },
+        {
+          "id": "c0125",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Circle Jawn Singers hosts community circle singing (improvised choral tradition popularized by Bobby McFerrin)."
+        },
+        {
+          "id": "c0120",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Monte Hellman's 1971 road film Two Lane Blacktop, part of PFS's Road Trip series; also listed directly by Philadelphia Film Society (c0489)."
+        },
+        {
+          "id": "c0503",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Gregg Araki's Mysterious Skin at PFS East Theater."
+        },
+        {
+          "id": "c0122",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "\"Creative Matchmaking\" artist meetup/speed-networking night at Tattooed Mom, run by Collide Zine and The Adult Art Club."
+        },
+        {
+          "id": "c0108",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Free fishing at Bartram's Garden Community Boathouse, 5:00-7:00 PM."
+        },
+        {
+          "id": "c0113",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Guided tour of PECO's 45,000 sq ft downtown green roof; pre-registration required a week ahead. $10-15."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-27",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0535",
+          "rank": 1,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Collide Zine presents \"Self Creation, Surplus Imagination\" with Stealing Time at Wooden Shoe Books — an anti-capitalist meditation on reclaiming time and imagination from wage work, in zine and discussion form. It's the anarchist bookstore's whole reason for being: political theory that isn't academic, delivered somewhere you can actually talk back. Free, South Street."
+        },
+        {
+          "id": "c0204",
+          "rank": 2,
+          "address": "847 N 3rd St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Evil Pony Productions stages a burlesque tribute to punk music and culture, Riot Grrrl chapter — \"Girls to the Front\" made literal. It's a different register than a straight band show, but the same underlying culture: DIY, feminist, and built around a scene rather than a headliner. Northern Liberties — nearest stop is Girard on the Market-Frankford Line. $15.71-$23.18."
+        },
+        {
+          "id": "c0473",
+          "rank": 3,
+          "address": "404 S 20th St, Philadelphia, PA 19146",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Untitled Medical Collective and Philly SRA teach Bleeding Control Basics at Iffy Books — scene safety, injury assessment, and tourniquet application, the kind of street-medic skills mutual aid networks actually train on. No certification, just information they want as many people as possible to have. Face masks required."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0196"
+        },
+        {
+          "id": "c0472"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0535",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Anti-capitalist zine/discussion event, Collide Zine with Stealing Time, at Wooden Shoe Books."
+        },
+        {
+          "id": "c0196",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Billy Woodberry's 1983 Black-independent classic, PFS LA Rebellion series. Not selected for Top 3 to stay within PFS Film Society Center's weekly venue cap (already used Wed and Fri)."
+        },
+        {
+          "id": "c0473",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Street-medic bleeding control training at Iffy Books, mask required."
+        },
+        {
+          "id": "c0204",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Burlesque tribute to punk and Riot Grrrl culture at Ortlieb's."
+        },
+        {
+          "id": "c0472",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Beginner soldering workshop at Iffy Books, building a Li-Ion battery pack for microcontroller projects."
+        },
+        {
+          "id": "c0187",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Philly DSA electoral committee meeting, building on a recent democratic-socialist congressional win."
+        },
+        {
+          "id": "c0186",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "*(confirm details)* OnePA Frankford Rising monthly community-organizing meeting, dinner provided. Frankford — Market-Frankford Line."
+        },
+        {
+          "id": "c0190",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Free virtual panel on \"Free Henry,\" a formerly enslaved Revolutionary-era Philadelphian, at the African American Museum."
+        },
+        {
+          "id": "c0179",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "SEPTA Board regular meeting, open to the public in person or via Webex."
+        },
+        {
+          "id": "c0185",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Transit-advocacy book club discussing When Driving is Not an Option by Anna Letitia Zivarts."
+        },
+        {
+          "id": "c0511",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Doom/stoner metal bill (Goat Farm, Atomic Lovecraft, Power Doom Smoke Cult) at Little Big Planet."
+        },
+        {
+          "id": "c0519",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "No-cover goth/darkwave/industrial DJ night, Death Disco, at Neon Clown Dream Lounge."
+        },
+        {
+          "id": "c0156",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Trumpeter Levi Rozek & His Quintet at Chris' Jazz Cafe; also listed via WXPN (c0550)."
+        },
+        {
+          "id": "c0137",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "90s shoegaze veterans Swervedriver at Underground Arts, Brooklyn Vegan Presents."
+        },
+        {
+          "id": "c0189",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Free showcase of Drexel senior-thesis and independent short films at Tattooed Mom."
+        },
+        {
+          "id": "c0193",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Intro to Risograph printing workshop at the Soapbox community print shop."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-28",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0287",
+          "rank": 1,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Palestinian Feminist Collective and Progressive International launch \"A Predatory State,\" a 200-page report documenting Israeli sexualized and gendered violence against Palestinians, with a panel featuring Palestinian legal scholar and human rights attorney Noura Erakat. This is a rare chance to hear a leading legal voice on the topic in person rather than through a clip online. Free, RSVP via Action Network. *(confirm exact venue address)*"
+        },
+        {
+          "id": "c0297",
+          "rank": 2,
+          "address": "1412 Chestnut St, Philadelphia, PA 19102",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Kiyoshi Kurosawa's Cure (1997) closes out PFS's Terror Trilogy series in 4K — a detective drawn into a string of murders committed by seemingly ordinary people under a stranger's hypnotic influence. Kurosawa built his reputation turning modern Japan into a landscape of quiet dread, and this is the film critics point to first. Likely at PFS Film Society Center, based on other bookings under this venue listing."
+        },
+        {
+          "id": "c0474",
+          "rank": 3,
+          "address": "404 S 20th St, Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Build a fully offline GPS unit at Iffy Books — a Pi Pico microcontroller, a GPS module, and a tiny OLED display, wired up in MicroPython to show your coordinates and the time with no internet or cell connection at all. It's DIY electronics at its most quietly radical: a gadget that works precisely because it can't be tracked, monetized, or bricked by a company's server going dark. Requires a ~$40-50 parts kit, purchased separately."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0291"
+        },
+        {
+          "id": "c0536"
+        },
+        {
+          "id": "c0236"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0287",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Palestinian Feminist Collective / Progressive International report launch panel with Noura Erakat."
+        },
+        {
+          "id": "c0297",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Kiyoshi Kurosawa's Cure (1997), 4K, PFS Terror Trilogy series."
+        },
+        {
+          "id": "c0474",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Build an offline GPS/time display device at Iffy Books, no internet needed."
+        },
+        {
+          "id": "c0291",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Lars von Trier's Melancholia, part of PFS's Summer of Trilogies: Depression Trilogy."
+        },
+        {
+          "id": "c0536",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Street-medicine training (Narcan, CPR, scans) at Wooden Shoe Books with Philly Action Ready Coalition."
+        },
+        {
+          "id": "c0236",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Philly post-punk band Mesh's record release show for debut LP No Fun At All, at Johnny Brenda's."
+        },
+        {
+          "id": "c0304",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Lars von Trier's Antichrist, PFS Depression Trilogy series."
+        },
+        {
+          "id": "c0288",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Henri-Georges Clouzot's Wages of Fear (1953), 4K, PFS Road Trip series."
+        },
+        {
+          "id": "c0295",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "All-vinyl Haitian konpa/zouk/Caribbean night, Philly debut for selector Patrice Esperant."
+        },
+        {
+          "id": "c0237",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Guitarist Peter Bernstein & His All-Star Quartet at Chris' Jazz Cafe."
+        },
+        {
+          "id": "c0285",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Tony-nominated, Grammy-winning performer Brandon Victor Dixon at City Winery; also listed via WXPN (c0544)."
+        },
+        {
+          "id": "c0244",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Live music, screen-printing, and rarely-seen basement tours at Philadelphia's Magic Gardens."
+        },
+        {
+          "id": "c0281",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Free public archery lessons and open shooting at Bartram's Garden."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-29",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0537",
+          "rank": 1,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Wooden Shoe Books hosts an initial interest meeting for a prisoner-correspondence penpal program serving LGBTQIA+ people currently incarcerated. No commitment required to attend — organizers will explain how the program works, and there's an option to write one-time letters to specific political prisoners if a long-term penpal relationship isn't feasible. Quiet, unglamorous solidarity work of exactly the kind that's easy to walk past."
+        },
+        {
+          "id": "c0516",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A five-band crust/hardcore punk bill headlined by out-of-towners Pray to Be Saved, with locals Sediment, Ln Celestine, Insectoids, and Dystrophy filling out the night. No ticketing platform, no venue website — just a DIY show flyer and a scene that runs on word of mouth. *(confirm venue address before attending)*"
+        },
+        {
+          "id": "c0345",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": false,
+          "sold_out": false,
+          "why": "TEASE returns to Club 624 for its second pop-up, produced with NIGHTBLOOM — a collective of dancers with experience in Philly's strip clubs building something safer and more affirming than the standard club circuit. The night centers Black lesbian, queer, and trans people specifically, and this summer's run is fundraising for organizations supporting Black trans people. Community-run nightlife, not a branded night out."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0376"
+        },
+        {
+          "id": "c0382"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0537",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Prisoner-correspondence penpal program info meeting at Wooden Shoe Books, serving incarcerated LGBTQIA+ community members."
+        },
+        {
+          "id": "c0516",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "*(confirm details)* Five-band DIY crust/hardcore bill, venue location unconfirmed."
+        },
+        {
+          "id": "c0345",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Black Queer pop-up nightlife event at Club 624, produced with dancer collective NIGHTBLOOM, fundraising for Black trans community organizations."
+        },
+        {
+          "id": "c0376",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Jamaa Fanaka's 1979 blaxploitation classic Penitentiary, 4K, PFS LA Rebellion series."
+        },
+        {
+          "id": "c0382",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Samba Traoré (1992), 4K restoration, West African cinema classic from Burkina Faso, PFS Echoes of the Land series."
+        },
+        {
+          "id": "c0360",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Free family day at the National Constitution Center commemorating the 1963 March on Washington."
+        },
+        {
+          "id": "c0343",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Sovei's debut EP release show at Johnny Brenda's with Philly experimental jazz/rock/ambient musicians."
+        },
+        {
+          "id": "c0305",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Post-hardcore/shoegaze band Citizen at Union Transfer; also listed via WXPN (c0565)."
+        },
+        {
+          "id": "c0385",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Antonioni's Red Desert, PFS Film Essentials series."
+        },
+        {
+          "id": "c0406",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Kiyoshi Kurosawa's Bright Future (2002), PFS Terror Trilogy series."
+        },
+        {
+          "id": "c0475",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Cyberdeck-building meetup at Iffy Books — DIY portable computers from single-board computers."
+        },
+        {
+          "id": "c0362",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "*(confirm details)* Phoenixville Punk Rock Flea Market's 11-year anniversary, vinyl DJs and vendors. Oaks, PA — ~25 miles out."
+        },
+        {
+          "id": "c0396",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Long-running Southeast Asian refugee/immigrant community market at FDR Park, 35+ years running."
+        }
+      ]
+    },
+    {
+      "date": "2026-08-30",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0423",
+          "rank": 1,
+          "address": "1201 N Frankford Ave, Philadelphia, PA 19125",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Froggy — a Philly queer punk power trio who started as teenagers in 2020 — headline with New York's PLEASURE DEATH, a queer heavy-grunge duo, and The Angies. Froggy write punchy, melodic songs about the mundane and absurd parts of growing up (711 nachos gets a shoutout), channeling L7, Bikini Kill, and The Dead Milkmen without imitating them. Fishtown — nearest stop is Berks or Girard on the Market-Frankford Line."
+        },
+        {
+          "id": "c0432",
+          "rank": 2,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Scribe Video Center's community-powered Street Movies! joins forces with Black Earth Urban Ag Hub's new documentary series for a screening on urban agriculture, Black agrarian futures, and Philadelphia's legacies of land-based resilience. It's participatory by design — film, conversation, and collective reflection about who gets to shape the city's food systems, not a passive sit-and-watch. *(confirm exact venue location)*"
+        },
+        {
+          "id": "c0444",
+          "rank": 3,
+          "address": "2027 Fairmount Ave, Philadelphia, PA 19130",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Eastern State Penitentiary's monthly ASL-interpreted guide-led tour pairs the site's history with a direct conversation about the role of prisons in society today — full ASL and voice interpretation, welcoming D/deaf, hard-of-hearing, and hearing visitors alike. A rare instance of an already-thoughtful historic-site tour built for genuine accessibility from the ground up. Fairmount — reachable via SEPTA bus (routes 7/32/48), roughly a 15-20 minute walk from the Spring Garden stop on the Broad Street Line."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0462"
+        },
+        {
+          "id": "c0433"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0423",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Queer punk bill: Froggy, PLEASURE DEATH, and The Angies at Johnny Brenda's; also listed via WXPN (c0590)."
+        },
+        {
+          "id": "c0432",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Community film screening and discussion on urban agriculture and Black agrarian futures, Scribe Video Center x Black Earth Urban Ag Hub."
+        },
+        {
+          "id": "c0444",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "ASL-interpreted guide-led tour and discussion on prisons and justice at Eastern State Penitentiary."
+        },
+        {
+          "id": "c0462",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Godard's Weekend (1967), PFS Road Trips series."
+        },
+        {
+          "id": "c0433",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Gospel Sundays series debut with Bryant Pugh & Ashli Rice, jazz-inflected gospel, at South Jazz Club. $45."
+        },
+        {
+          "id": "c0434",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "\"A Jam Without Borders\" with Corey Bernhard and friends at Ortlieb's, a benefit for Juntos Philadelphia."
+        },
+        {
+          "id": "c0420",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Death metal bill headlined by Funebrarum at Underground Arts, with Blood Monolith and Concrete Caveman."
+        },
+        {
+          "id": "c0465",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Free weekly open-mic poetry night, Excalibur Poetry, at Tattooed Mom — explicitly political framing."
+        },
+        {
+          "id": "c0476",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Learn-to-DJ workshop at Iffy Books using free/open-source Mixxx software, no expensive equipment needed."
+        },
+        {
+          "id": "c0463",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Latino Market & Soccer League at FDR Park, weekly outdoor market with Latin American food, art, and culture."
+        }
+      ]
+    }
+  ]
+}
