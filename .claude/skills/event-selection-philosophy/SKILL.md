@@ -1,6 +1,6 @@
 ---
 name: event-selection-philosophy
-description: Selection logic and ranking rules for the weekly This Week in Philadelphia events report. Use this skill when choosing which events to include and how to rank them. Apply after gathering candidates using the philly-sources skill and weighting them against personal-interests. Governs what to prioritize, what to avoid, and how to break ties.
+description: Selection logic and ranking rules for the weekly This Week in Philadelphia events report. Use this skill when choosing which events to include and how to rank them. Apply after gathering candidates using the philadelphia-sources skill and weighting them against personal-interests. Governs what to prioritize, what to avoid, and how to break ties.
 ---
 
 # Event Selection Philosophy
@@ -57,7 +57,12 @@ candidates in sequence, since a violation is only visible once more than one day
   strings are not consistent enough to key on directly (e.g. "Iffy Books" vs. "Iffy Books, 404 S.
   20th St., Philadelphia, 19146, United States"; "Ortlieb's" vs. "Ortlieb's, Philadelphia, PA"). If
   a candidate has no discoverable address, fall back to a normalized venue name (lowercase, text
-  before the first comma).
+  before the first comma). The mechanical check (`scripts/check_selection.py`) normalizes the
+  address key by stripping punctuation/whitespace, so "404 S. 20th St.," and "404 S 20th St," are
+  already treated as one venue there — but don't rely on that as a reason to be loose with spelling
+  here: this cap is tracked live, as you go, well before the check ever runs, and a real 2026-08-03
+  week split 5 Iffy Books slots into 4+1 by spelling the same address two different ways, letting
+  the cap pass unenforced at authoring time.
 - **Same-series cap:** no two Top 3 picks in one week from the same series, class, or
   organizer-run program, regardless of exact title. Two different weekly workshop topics at the
   same venue under the same program name (e.g. "Beginner Soldering: Li-Ion Battery Pack" and
@@ -73,7 +78,10 @@ or writing its `why`, check for and re-derive rather than pass through as-is:
 - A date that doesn't match the event's own name (a "Cinco de Mayo" listing dated in August)
 - A cost that reads like a budget or renovation figure rather than a ticket price (e.g. "$15"
   scraped from a "$15M renovation" description)
-- A venue address outside Philadelphia (verify before treating a candidate as eligible)
+- A venue address outside Philadelphia — allowed only at a high bar (something genuinely
+  exceptional), and the `why` must name the travel involved; see `personal-interests`'s Geography
+  section for the home-base anchor this is judged against. A real 2026-08-10 week shipped two Top 3
+  picks in Glenside and Oaks, PA (~25 mi out) with no such note.
 - Near-identical titles that are the same event listed twice (e.g. "Babalouie BBQ" and "EF:
   Babalouie BBQ") — treat as one candidate, not two
 

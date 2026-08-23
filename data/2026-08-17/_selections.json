@@ -15,7 +15,7 @@
           "title": "Philadelphia Psychotronic Film Society",
           "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
           "address": "531 N 12th St, Philadelphia, PA 19123",
-          "time": "7:00, 7:30",
+          "time": "7:30 PM",
           "cost": "$5 At Door",
           "url": "https://psychotronicphilly.org/",
           "category": "🎬 Film & Cinema",
@@ -189,7 +189,7 @@
           "title": "Tim Kasher’s WHO’S WATCHING",
           "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
           "address": "531 N 12th St, Philadelphia, PA 19123",
-          "time": "7:00, 7:30",
+          "time": "7:30 PM",
           "cost": "$17",
           "url": "https://www.etix.com/ticket/p/83495603",
           "category": "👻 Horror & Occult",
@@ -1293,5 +1293,5 @@
       ]
     }
   ],
-  "generated_at": "2026-08-16T17:54:13"
+  "generated_at": "2026-08-19T23:13:02"
 }
