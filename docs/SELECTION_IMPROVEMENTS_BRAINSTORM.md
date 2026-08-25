@@ -700,3 +700,83 @@ suite: 388 passing (was 382; +6 new cases), `ruff` and `mypy` clean on all chang
 
 **Deferred:** A1, A3, A6, B9–B14, C9, C13–C16 (beyond the thinness note), C21, C22, D3, D4.
 `venue_cap`'s FAIL promotion waits for a clean week under the normalized key.
+
+---
+
+## Tranche 3 — the calendar write guard (shipped)
+
+**Tranche 2's own merge caused a data-loss incident, and this tranche fixes it.**
+
+`presentation.yml` is path-filtered to `data/**/_selection_annotations.json`. Tranche 2's data-repair
+commit `f24dbec` edited `data/2026-08-17/_selection_annotations.json` to backfill two `time`
+overrides. That file matched the filter, so merging PR #26 fired Presentation against a week that had
+already ended: `runner.sh` ran `calendar_create.py` with no `--dry-run`, `clear_target_week()` swept
+every event in the 2026-08-17 window — including the ones Greg had deliberately deleted, which *were*
+the attendance record — and re-inserted all 21 picks. Verified against the live calendar: every event
+in that window carries `created`/`updated` of `2026-08-23T03:38:35Z`–`03:38:45Z`.
+
+`CLAUDE.md` stated the invariant ("clear only the *target* (upcoming) week, never the prior week");
+the code's guard was "clear the week being rendered," which equals the upcoming week **only when the
+run is on-schedule**. This one wasn't. It is also a recurrence — `presentation.yml:22-27` already
+documented a prior unintended calendar write (the 2026-08-02 incident); adding `branches: [main]`
+closed one path, and this was a second through the same door.
+
+**Blast radius, and the call.** Nothing downstream consumed it: `attendance_check.py` and
+`csv_log.py` are deliberately shelved out of `runner.sh:10-16`, and Collection runs only
+`collect_week.py`/`check_yield.py`/`prepare_selection_input.py`. No CSV was corrupted; only the
+calendar is wrong. **08-17 accepted as lost** — recorded, not reconstructed.
+
+**What shipped:**
+- `calendar_create.py` — `week_has_already_begun()`. Refuses when the target Monday is in the past
+  (Eastern, via `today_eastern()`, *not* the runner's UTC date — Actions cron is UTC and can't follow
+  DST). Comparison is `<` not `!=` so a Sunday-evening-Eastern run that has crossed into Monday UTC
+  still passes. The guard runs **before Google auth and before `--dry-run`**, so the exact command
+  that caused the incident cannot reach the network. It returns 0 rather than failing: that same
+  off-schedule run *also* repaired two malformed times in the live 08-17 report, and only the
+  destructive half should be suppressed. `--force-calendar` overrides.
+- `tests/test_calendar_create.py` — 5 new cases (23 total), including the literal incident replay.
+- `presentation.yml` — week derivation no longer `| head -1`-drops a second week silently; the
+  publish commit names the week rather than `$(date +%F)` (which is why `e16d455 "Publish report for
+  2026-08-23"` actually rendered `data/2026-08-17`).
+- `philly-events-selection/SKILL.md:131` — dropped `free/PWYW` from the Prioritize echo. Tranche 2
+  removed that weight everywhere else, leaving Selection instructed to apply a criterion that
+  resolved nowhere. Purely descriptive mentions (The Rotunda's Venue Elevation entry,
+  `philadelphia-sources`' cinespeak note) are correct and stay.
+- `CLAUDE.md` — the attendance-loop paragraph now states what the guard *does*, not just the rule.
+
+### What `data/2026-08-24` says — the first week selected under tranche 2's prose
+
+`check_selection.py`: **0 fail, 0 warn.**
+
+**C12 closes — the Point Breeze rewrite worked.** Blurbs containing an access term, by week:
+
+| 06-22 | 08-03 | 08-10 | 08-17 | **08-24** |
+|---|---|---|---|---|
+| 2/21 | 2/21 | 0/21 | 2/21 | **7/21** |
+
+On the denominator that matters: of the 5 picks on 08-24 genuinely outside the no-note zone (South
+Philly / Center City / University City by ZIP), **4 carry an access note** — ~10% → 80% compliance on
+the picks that need one. This tranche was originally drafted around "two tranches of prose failed to
+move the access note, so it needs a mechanical check." Measuring 08-24 falsified that; no check was
+written. Worth recording as a case where the prose *did* land on its own.
+
+**Two findings recorded, not acted on:**
+- *Cap-hugging.* 08-17 and 08-24 both land on **exactly 2 slots at each of the top four venues** —
+  precisely the cap, twice running — alongside 3×7 Top 3 picks for **five consecutive weeks**. Reads
+  like stated limits being treated as targets, the same tell as the old "exactly 3 honorable mentions
+  every day." Judgment work; needs its own hypothesis.
+- *Degenerate venue keys.* 08-24's cap histogram contains `philadelphia`, `workersunited`,
+  `askapunkaskapunk`, `club624`, `kingsessingrecreationcenter`, `pentridgestation` — fallbacks minted
+  when `address` is missing or junk. `philadelphia` is the dangerous one: two unrelated venues whose
+  address is just the city collide into one cap bucket. Same class as the punctuation split tranche 2
+  fixed, and it also makes `check_outside_philadelphia` trivially satisfiable.
+
+**`venue_cap` stays WARN, now for a better-stated reason.** Its docstring criterion is met several
+times over (trips 06-22 ×5/×4, 08-03 ×5/×3/×3, 08-10 ×3; silent on 08-17 and 08-24). Promotion is
+blocked on two things: the degenerate keys above must be fixed first, and promoting would make
+`06-22`/`08-03`/`08-10` hard-fail — which, given this tranche's finding that historical weeks *do*
+get re-processed, would swap a data-loss trap for a build-breaking trap on the identical trigger.
+
+**Deferred:** everything above plus the standing list — A1, A3, A6, B9–B14, C9, C13, C14, C15, C21,
+C22, D3, D4, and a provenance filter inside `clear_target_week` (real defense-in-depth, but it would
+not have prevented this incident — the events it deleted were its own).

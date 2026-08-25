@@ -128,7 +128,7 @@ Scoring complete for [date]. [E] candidates.
 Apply `event-selection-philosophy` rules for the day:
 
 1. Flag candidates with no verifiable URL as *(confirm details)* — do not exclude
-2. Apply Prioritize rules: free/PWYW, unique/easy-to-miss, community/political, multi-interest overlap
+2. Apply Prioritize rules: unique/easy-to-miss, community/political, multi-interest overlap
 3. Apply Avoid rules: recurring weekly events (including candidates with `recurrence_count`), large
    corporate venues
 4. Enforce the Weekly Caps (venue cap keyed on `address`, same-series cap) — these are tracked
