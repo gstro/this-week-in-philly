@@ -47,8 +47,23 @@ jobs:
       - name: Determine week directory
         id: week
         run: |
-          WEEK_DIR=$(dirname "$(git diff --name-only HEAD^ HEAD -- 'data/**/_selection_annotations.json' | head -1)")
-          if [ -z "$WEEK_DIR" ] || [ "$WEEK_DIR" = "." ]; then
+          TOUCHED=$(git diff --name-only HEAD^ HEAD -- 'data/**/_selection_annotations.json')
+          if [ -z "$TOUCHED" ]; then
+            echo "::error::Could not determine week directory from the push diff"
+            exit 1
+          fi
+          # More than one week in a single push is ambiguous, not routine.
+          # This previously took `| head -1` and silently dropped the rest --
+          # a merge commit touching two weeks' annotations would publish one
+          # and skip the other with no signal. Fail loudly instead.
+          COUNT=$(echo "$TOUCHED" | wc -l | tr -d ' ')
+          if [ "$COUNT" -ne 1 ]; then
+            echo "::error::Push touched $COUNT weeks' annotations; refusing to guess which to publish:"
+            echo "$TOUCHED"
+            exit 1
+          fi
+          WEEK_DIR=$(dirname "$TOUCHED")
+          if [ "$WEEK_DIR" = "." ]; then
             echo "::error::Could not determine week directory from the push diff"
             exit 1
           fi
@@ -86,5 +101,11 @@ jobs:
           # csv_log.py/attendance_check.py are deferred (see runner.sh);
           # only add it if a future run reintroduces that stage.
           git add docs/ "${{ steps.week.outputs.dir }}/_selections.json"
-          git diff --staged --quiet || git commit -m "Publish report for $(date +%F)"
+          # Name the *week*, not the run date. `$(date +%F)` produced
+          # "Publish report for 2026-08-23" for a run that rendered
+          # data/2026-08-17, which cost real time to untangle. The run date
+          # never equals the week anyway -- on-schedule runs fire the Sunday
+          # before. Matches collection.yml's "Collection: week of ...".
+          WEEK=$(basename "${{ steps.week.outputs.dir }}")
+          git diff --staged --quiet || git commit -m "Publish report for week of $WEEK"
           git push
