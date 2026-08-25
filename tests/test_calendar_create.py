@@ -183,3 +183,110 @@ def test_clear_target_week_queries_the_target_week_not_the_prior_week() -> None:
 def test_clear_target_week_returns_zero_when_nothing_to_clear() -> None:
     service = _FakeService([])
     assert cc.clear_target_week(service, "cal-id", date(2026, 6, 22)) == 0  # type: ignore[arg-type]
+
+
+# --- past-week guard ---
+#
+# Regression tests for the 2026-08-23 incident: merging PR #26 pushed a
+# backfill to data/2026-08-17/_selection_annotations.json, which matches
+# presentation.yml's path filter, so Presentation ran calendar_create.py
+# against a week that had already ended. It wiped and recreated all 21
+# entries, destroying the attendance signal for that week.
+
+
+def test_week_has_already_begun_is_true_for_a_past_monday() -> None:
+    assert cc.week_has_already_begun(date(2026, 8, 17), today=date(2026, 8, 23)) is True
+
+
+def test_week_has_already_begun_is_false_for_the_upcoming_week() -> None:
+    """The on-schedule path: Collection/Selection run Sunday for the Monday
+    immediately following. This must never be refused."""
+    assert cc.week_has_already_begun(date(2026, 8, 24), today=date(2026, 8, 23)) is False
+
+
+def test_week_has_already_begun_is_false_on_the_monday_itself() -> None:
+    """`<` not `!=`, deliberately -- a Sunday-evening-Eastern run has already
+    crossed into Monday UTC, and an equality test would refuse it."""
+    assert cc.week_has_already_begun(date(2026, 8, 24), today=date(2026, 8, 24)) is False
+
+
+def _stub_selections(monday: str) -> dict:
+    return {
+        "week": monday,
+        "days": [
+            {
+                "date": monday,
+                "day_name": "Monday",
+                "top3": [
+                    {
+                        "title": "A Show",
+                        "time": "7:00 PM",
+                        "cost": "$10",
+                        "category": cc._MUSIC,
+                        "why": "Because it is a show.",
+                    }
+                ],
+                "honorable_mentions": [],
+                "events": [],
+            }
+        ],
+    }
+
+
+def _run_main(monkeypatch, monday: str, argv_extra: list[str], today: date):  # noqa: ANN001, ANN202
+    """Drive main() with Calendar auth booby-trapped.
+
+    get_calendar_service raises: the guard's whole contract is that a
+    past-week run never reaches the network, so "was it called" is the
+    assertion, and raising makes a regression impossible to miss.
+    """
+    calls: list[str] = []
+
+    def _boom() -> None:
+        calls.append("get_calendar_service")
+        raise AssertionError("calendar_create reached Google auth on a guarded run")
+
+    monkeypatch.setattr(cc.common, "load_selections", lambda _week_dir: _stub_selections(monday))
+    monkeypatch.setattr(cc.common, "get_calendar_service", _boom)
+    monkeypatch.setattr(cc, "today_eastern", lambda: today)
+    monkeypatch.setattr(sys, "argv", ["calendar_create.py", f"data/{monday}", *argv_extra])
+    cc.main()
+    return calls
+
+
+def test_main_refuses_and_touches_nothing_for_a_past_week(monkeypatch, capsys) -> None:  # noqa: ANN001
+    """The incident replay: `calendar_create.py data/2026-08-17` with no flags,
+    run on 2026-08-23. Must refuse before auth and exit normally."""
+    calls = _run_main(monkeypatch, "2026-08-17", [], today=date(2026, 8, 23))
+    assert calls == []
+    out = capsys.readouterr().out
+    assert "REFUSING" in out
+    assert "2026-08-17" in out
+    assert "6 day(s) ago" in out
+
+
+def test_main_refuses_a_past_week_even_with_dry_run(monkeypatch, capsys) -> None:  # noqa: ANN001
+    """The guard precedes --dry-run so the dangerous no-flag command can't
+    reach the network. --dry-run gets refused too; --force-calendar recovers
+    the ability to inspect a historical week."""
+    calls = _run_main(monkeypatch, "2026-08-17", ["--dry-run"], today=date(2026, 8, 23))
+    assert calls == []
+    assert "REFUSING" in capsys.readouterr().out
+
+
+def test_main_allows_the_upcoming_week_through_the_guard(monkeypatch, capsys) -> None:  # noqa: ANN001
+    """The on-schedule path must be untouched -- reaching the dry-run branch
+    proves the guard let it past."""
+    calls = _run_main(monkeypatch, "2026-08-24", ["--dry-run"], today=date(2026, 8, 23))
+    assert calls == []
+    out = capsys.readouterr().out
+    assert "REFUSING" not in out
+    assert "[dry-run]" in out
+
+
+def test_main_force_calendar_overrides_the_guard(monkeypatch, capsys) -> None:  # noqa: ANN001
+    calls = _run_main(monkeypatch, "2026-08-17", ["--dry-run", "--force-calendar"], today=date(2026, 8, 23))
+    assert calls == []
+    out = capsys.readouterr().out
+    assert "REFUSING" not in out
+    assert "[dry-run]" in out
