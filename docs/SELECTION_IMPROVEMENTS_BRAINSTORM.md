@@ -734,10 +734,16 @@ calendar is wrong. **08-17 accepted as lost** — recorded, not reconstructed.
   that caused the incident cannot reach the network. It returns 0 rather than failing: that same
   off-schedule run *also* repaired two malformed times in the live 08-17 report, and only the
   destructive half should be suppressed. `--force-calendar` overrides.
-- `tests/test_calendar_create.py` — 5 new cases (23 total), including the literal incident replay.
-- `presentation.yml` — week derivation no longer `| head -1`-drops a second week silently; the
-  publish commit names the week rather than `$(date +%F)` (which is why `e16d455 "Publish report for
-  2026-08-23"` actually rendered `data/2026-08-17`).
+- `tests/test_calendar_create.py` — 7 new cases (23 total; suite 388 → 395), including the literal
+  incident replay: `calendar_create.py data/2026-08-17` with no flags, on a frozen 2026-08-23, must
+  make zero calls on the injected fake service.
+- `presentation.yml` — week derivation no longer `| head -1`-drops other weeks *silently*: it picks
+  the newest (dir names are `YYYY-MM-DD`, so lexicographic = chronological) and warns with the full
+  list. Deliberately a warning, not a failure — a PR that backfills a historical week while a current
+  week is live is routine (tranche 2's own PR had that shape), and failing there would block the
+  legitimate publish. Publishing a past week is no longer dangerous now that the guard above makes it
+  a report-only re-render. The publish commit also names the week rather than `$(date +%F)` — which
+  is why `e16d455 "Publish report for 2026-08-23"` actually rendered `data/2026-08-17`.
 - `philly-events-selection/SKILL.md:131` — dropped `free/PWYW` from the Prioritize echo. Tranche 2
   removed that weight everywhere else, leaving Selection instructed to apply a criterion that
   resolved nowhere. Purely descriptive mentions (The Rotunda's Venue Elevation entry,

@@ -52,17 +52,23 @@ jobs:
             echo "::error::Could not determine week directory from the push diff"
             exit 1
           fi
-          # More than one week in a single push is ambiguous, not routine.
-          # This previously took `| head -1` and silently dropped the rest --
-          # a merge commit touching two weeks' annotations would publish one
-          # and skip the other with no signal. Fail loudly instead.
+          # This previously took `| head -1`, which silently dropped every
+          # other week a push touched. The problem was the silence, not the
+          # picking: a PR that backfills a historical week while a current
+          # week is live is routine (tranche 2's own PR had that shape), and
+          # failing the job there would block the legitimate publish. So pick
+          # the newest week -- dir names are YYYY-MM-DD, so lexicographic
+          # order is chronological -- and say out loud what was skipped.
+          # Publishing a past week is no longer dangerous anyway:
+          # calendar_create.py's week_has_already_begun() guard makes it a
+          # report-only re-render.
+          WEEK_DIR=$(dirname "$(echo "$TOUCHED" | sort | tail -1)")
           COUNT=$(echo "$TOUCHED" | wc -l | tr -d ' ')
           if [ "$COUNT" -ne 1 ]; then
-            echo "::error::Push touched $COUNT weeks' annotations; refusing to guess which to publish:"
+            echo "::warning::Push touched $COUNT weeks' annotations; publishing only the newest ($WEEK_DIR)."
+            echo "All weeks touched by this push:"
             echo "$TOUCHED"
-            exit 1
           fi
-          WEEK_DIR=$(dirname "$TOUCHED")
           if [ "$WEEK_DIR" = "." ]; then
             echo "::error::Could not determine week directory from the push diff"
             exit 1
