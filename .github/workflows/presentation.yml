@@ -47,8 +47,29 @@ jobs:
       - name: Determine week directory
         id: week
         run: |
-          WEEK_DIR=$(dirname "$(git diff --name-only HEAD^ HEAD -- 'data/**/_selection_annotations.json' | head -1)")
-          if [ -z "$WEEK_DIR" ] || [ "$WEEK_DIR" = "." ]; then
+          TOUCHED=$(git diff --name-only HEAD^ HEAD -- 'data/**/_selection_annotations.json')
+          if [ -z "$TOUCHED" ]; then
+            echo "::error::Could not determine week directory from the push diff"
+            exit 1
+          fi
+          # This previously took `| head -1`, which silently dropped every
+          # other week a push touched. The problem was the silence, not the
+          # picking: a PR that backfills a historical week while a current
+          # week is live is routine (tranche 2's own PR had that shape), and
+          # failing the job there would block the legitimate publish. So pick
+          # the newest week -- dir names are YYYY-MM-DD, so lexicographic
+          # order is chronological -- and say out loud what was skipped.
+          # Publishing a past week is no longer dangerous anyway:
+          # calendar_create.py's week_has_already_begun() guard makes it a
+          # report-only re-render.
+          WEEK_DIR=$(dirname "$(echo "$TOUCHED" | sort | tail -1)")
+          COUNT=$(echo "$TOUCHED" | wc -l | tr -d ' ')
+          if [ "$COUNT" -ne 1 ]; then
+            echo "::warning::Push touched $COUNT weeks' annotations; publishing only the newest ($WEEK_DIR)."
+            echo "All weeks touched by this push:"
+            echo "$TOUCHED"
+          fi
+          if [ "$WEEK_DIR" = "." ]; then
             echo "::error::Could not determine week directory from the push diff"
             exit 1
           fi
@@ -86,5 +107,11 @@ jobs:
           # csv_log.py/attendance_check.py are deferred (see runner.sh);
           # only add it if a future run reintroduces that stage.
           git add docs/ "${{ steps.week.outputs.dir }}/_selections.json"
-          git diff --staged --quiet || git commit -m "Publish report for $(date +%F)"
+          # Name the *week*, not the run date. `$(date +%F)` produced
+          # "Publish report for 2026-08-23" for a run that rendered
+          # data/2026-08-17, which cost real time to untangle. The run date
+          # never equals the week anyway -- on-schedule runs fire the Sunday
+          # before. Matches collection.yml's "Collection: week of ...".
+          WEEK=$(basename "${{ steps.week.outputs.dir }}")
+          git diff --staged --quiet || git commit -m "Publish report for week of $WEEK"
           git push
