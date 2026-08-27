@@ -786,3 +786,129 @@ get re-processed, would swap a data-loss trap for a build-breaking trap on the i
 **Deferred:** everything above plus the standing list — A1, A3, A6, B9–B14, C9, C13, C14, C15, C21,
 C22, D3, D4, and a provenance filter inside `clear_target_week` (real defense-in-depth, but it would
 not have prevented this incident — the events it deleted were its own).
+
+> **Correction (tranche 4).** The `venue_cap` paragraph above is wrong where it says "historical
+> weeks *do* get re-processed." They can't. `presentation.yml` runs **Merge selections → Check
+> selection**, so CI never reads a stale `_selections.json` — it checks a freshly re-merged one. Only
+> 08-10, 08-17 and 08-24 have a `_selection_annotations.json` (the only file that fires the trigger),
+> and all three re-merge to 0 fails. `06-22` and `08-03` cannot fire the workflow at all and would
+> crash at the merge step for missing inputs anyway. `venue_cap` is still deferred, but for the
+> reason given in tranche 4, not this one.
+
+---
+
+## Tranche 4 — cross-source duplicate candidates (shipped)
+
+The first tranche to fix Selection's **input** rather than its judgment or the machinery around it —
+and a defect this document never named.
+
+`prepare_selection_input.py`'s `collapse_exact_duplicates()` keys on `(title, venue, date)`. Sources
+spell the same room differently, so cross-source duplicates never collapsed:
+
+| week | raw | after exact-dup | after cross-source | redundant records |
+|---|---|---|---|---|
+| 2026-08-03 | 642 | 616 | 594 | **22** |
+| 2026-08-10 | 641 | 619 | 589 | **30** |
+| 2026-08-17 | 610 | 589 | 570 | **19** |
+| 2026-08-24 | 677 | 657 | 633 | **24** |
+
+~5% of everything Selection reads was a duplicate of something else it read.
+
+**The safety argument, which is the whole design.** Grouping four real weeks on
+`(date, normalized title)` gives 122 multi-record groups:
+
+| classification | count | disposition |
+|---|---|---|
+| cross-source, venue strings compatible | 66 | collapsed |
+| cross-source, venue strings look unrelated | 29 | collapsed — all 29 inspected, all true duplicates |
+| **same-source**, venue strings differ | **19** | **left alone — genuinely different rooms** |
+| same-source, compatible | 8 | already handled by the exact key |
+
+The 29 "unrelated-looking" ones are one venue under two names (`Philadelphia Film Society` ↔ `PFS
+Film Society Center, 1412 Chestnut Street…`; `Highmark Mann` ↔ `TD Pavilion at The Mann Center`;
+`Upper Merion Township Building Park` ↔ `Concerts Under the Stars`). The 19 dangerous ones — five
+Dave & Buster's locations sharing "1 / 2 Price Games Wednesdays", "Wellness Walks" at two Awbury
+sites, PFS's own Film Society Center vs Bourse Theater — are **all single-source**. Restricting the
+collapse to multi-source groups excludes every one of them. That is why the rule is what it is.
+
+### The motivating defect, and how much of it this actually fixes
+
+`data/2026-08-10` published *REPO MAN X CIRCLE JERKS* with `venue: "PhilaMOCA, 531 N 12th St,
+Philadelphia, PA 19123"` and `address: "291 N Keswick Ave, Glenside, PA 19038"` — **the report card
+named a Philadelphia venue for an event 25 miles away in Glenside, while the calendar entry pointed
+correctly to Glenside.** Three candidate records existed:
+
+| id | source | venue | |
+|---|---|---|---|
+| `c0508` | R5 Productions | `Keswick Theatre` | ✅ |
+| `c0215` | Do215 | `Keswick Theatre, Glenside, Pe` | ✅ |
+| `c0491` | PhilaMOCA | `PhilaMOCA, 531 N 12th St, …` | ❌ self-stamped |
+
+PhilaMOCA's feed stamps its own address onto offsite co-presentations; its own description says "At
+the Keswick Theatre… Presented by … PhilaMOCA". Selection picked that record. Its authored `address`
+was *right* — it read the description and overrode the venue — but `merge_selections.py` copies
+`venue` from the candidate, so the report shipped the wrong one.
+
+**Honest scope: this tranche fixes that group only partially.** `c0215` and `c0508` share a
+normalized title and collapse to R5's correct record. `c0491`'s title is genuinely different
+(`repomanxcirclejerksscreeningperformance` vs `circlejerksxrepoman`), so it survives as a second
+record with the wrong venue — 3 records became 2, not 1. Selection could still pick it. Catching
+that needs fuzzy title matching, which has not been safety-analysed the way exact normalized-title
+matching has, and is not worth guessing at. **The self-stamping parser behaviour is the more direct
+fix and is deferred, not solved here.**
+
+### Findings recorded, not acted on
+
+**Cap-hugging, with a corrected timeline.** Tranche 3 called 08-10 a post-rule week; it isn't.
+`0d19b2f` (the cap rule) landed 2026-08-11 and 08-10's selections were generated 2026-08-09. The real
+split is 3 pre-rule weeks vs 2 post-rule, and the pattern is *starker* than tranche 3 recorded:
+
+| week | rule | Top 3 per venue, sorted | over cap | exactly at cap |
+|---|---|---|---|---|
+| 06-22 | pre | `[5, 4, 2, 1×10]` | 2 | 1 |
+| 08-03 | pre | `[5, 3, 3, 1×10]` | 3 | 0 |
+| 08-10 | pre | `[3, 2, 2, 2, 1×12]` | 1 | 3 |
+| **08-17** | **post** | `[2, 2, 2, 2, 1×13]` | **0** | **4** |
+| **08-24** | **post** | `[2, 2, 2, 2, 1×13]` | **0** | **4** |
+
+Every pre-rule week has an over-cap venue, peaking at 5. Both post-rule weeks land on exactly four
+venues × exactly 2. Supply was not the constraint: on 08-17 PhilaMOCA had 19 candidates and PFS 18;
+on 08-24 City Winery had 23 and PFS 20. These are two independent Selection runs a week apart.
+Alongside it: **five weeks, 35 of 35 days, exactly 3 Top 3 picks** — C16's "real permission, not a
+theoretical one" has never once been exercised. Recorded rather than fixed because the only lever on
+offer is more prose, which is exactly what C16 already tried.
+
+**Venue keys.** No key currently fuses two different venues, but two could: `philadelphia` (Do215
+flattens a venue object whose `title` is literally "Philadelphia" — 11 unrelated events across four
+weeks) and `askapunkaskapunk` (`philly_ask_a_punk.py:44-45`, when `place` carries no real venue).
+Unrealized only because at most one such candidate was ever promoted to Top 3. The inverse also
+happens — one venue splitting across keys (Kingsessing Rec Center → 3 keys, Johnny Brenda's → 3,
+Underground Arts → 2 differing only in ZIP) — though every observed split is *across* weeks, and the
+cap is per-week, so none has actually under-counted. Root cause for all of it: `write_event()` in
+`event_parsers/base.py` flattens away structured venue data several parsers already hold (PFS's
+stable `theater_url` slug, Ask A Punk's `place.name`/`place.address`, Do215's venue object). That is
+the real fix for venue identity and it is a schema change touching every parser — a tranche of its
+own.
+
+**`venue_cap` stays WARN.** Its criterion is met (trips 06-22, 08-03, 08-10; silent on 08-17,
+08-24), and the trap tranche 3 cited doesn't exist (see the correction above). Deferred for a better
+reason: this tranche changes which candidates Selection sees, so promoting a cap check in the same
+PR would make any regression ambiguous. Promote after one clean week under the new candidate pool.
+
+### Known sharp edge, documented rather than fixed
+
+**Re-running Collection for an already-selected week is destructive.** `collection.yml` exposes
+`workflow_dispatch` with a free-text `week_start` and no past-week guard, and `assign_ids` numbers
+positionally (`c{i:04d}`), so ids shift whenever the candidate list changes. Re-collecting a past
+week overwrites its raw source files with whatever the sources return today — likely nothing, for a
+week gone by — and renumbers every id, after which that week's committed
+`_selection_annotations.json` references ids that no longer resolve and `merge_selections.py` raises
+`MergeError: unknown id`. This is **pre-existing**; this tranche widens it (re-running the new dedupe
+over 08-10/08-17 would collapse `c0204`, `c0379`, `c0470`, which their annotations reference). It is
+not reachable from the normal pipeline: `_candidates.json` is written by Collection and frozen, and
+`presentation.yml` only ever re-runs `merge_selections.py` against it. If this needs closing, the fix
+is a past-week guard in `collection.yml` mirroring `calendar_create.py`'s `week_has_already_begun()`.
+
+**Deferred:** the above, plus PhilaMOCA's self-stamping parser, fuzzy cross-source title matching,
+the `event_parsers/base.py` venue-schema expansion, and the standing list — A1, A3, A6, B9–B14, C9,
+C13, C14, C15, C16, C21, C22, D3, D4.

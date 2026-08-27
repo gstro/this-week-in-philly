@@ -34,6 +34,14 @@ token usage without changing what it's allowed to decide:
    priority -> keep the most complete entry. A sold-out mention in a
    discarded entry's description is preserved as a note on the kept entry
    rather than silently lost.
+2b. Cross-source duplicate collapse: same (date, normalized title) from more
+   than one source -> duplicate, resolved by the same source-priority rule
+   as step 2. Step 2 keys on `venue`, which sources spell differently for
+   the same room, so ~5% of the pool (21-30 groups a week) survived it.
+   Single-source groups are left alone -- that is what keeps five distinct
+   Dave & Buster's locations sharing one title from fusing. See
+   collapse_cross_source_duplicates' docstring for the full safety
+   argument and the published wrong-venue defect that motivated it.
 3. Recurring-listing grouping: same (title, venue) appearing on 3+ distinct
    dates this week collapses to one representative (earliest date), with
    an added occurrences/recurrence_count annotation. Reuses
@@ -70,6 +78,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -95,6 +104,9 @@ RECURRING_THRESHOLD = 3
 # anyway (a `why`/`note` blurb draws from the first sentence or two).
 DESCRIPTION_CAP = 600
 
+# Cross-source dedupe title key -- see _normalize_title.
+_NON_ALNUM_RE = re.compile(r"[^a-z0-9]")
+
 
 def _priority_rank(source: str) -> int:
     """Lower is higher priority. A source not in SOURCE_PRIORITY shares the
@@ -113,6 +125,17 @@ def _completeness(event: dict[str, Any]) -> int:
 
 def _mentions_sold_out(description: str | None) -> bool:
     return "sold out" in (description or "").casefold()
+
+
+def _normalize_title(title: str | None) -> str:
+    """Lowercase, letters and digits only -- the cross-source dedupe key.
+
+    Sources punctuate and case the same title differently ("Christone
+    \"Kingfish\" Ingram", "The 36 Th Chamber Of Shaolin"). Never truncated:
+    a prefix match would fuse distinct entries in a numbered series
+    ("Once Upon A Time In China" / "... Ii" / "... Iii" all ran in one week).
+    """
+    return _NON_ALNUM_RE.sub("", (title or "").casefold())
 
 
 def load_manifest(week_dir: Path) -> dict[str, Any]:
@@ -159,18 +182,74 @@ def collapse_exact_duplicates(events: list[dict[str, Any]]) -> list[dict[str, An
 
     collapsed: list[dict[str, Any]] = []
     for key in order:
+        collapsed.append(_best_of_group(groups[key]))
+    return collapsed
+
+
+def _best_of_group(group: list[dict[str, Any]]) -> dict[str, Any]:
+    """Highest-source-priority entry, breaking a priority tie on completeness.
+
+    Shared by both dedupe passes. If any discarded entry's description
+    mentions "sold out" and the kept one's doesn't, prepend a note rather
+    than dropping that signal.
+    """
+    if len(group) == 1:
+        return group[0]
+    best = min(group, key=lambda e: (_priority_rank(e.get("source", "")), -_completeness(e)))
+    others_mention_sold_out = any(e is not best and _mentions_sold_out(e.get("description")) for e in group)
+    if others_mention_sold_out and not _mentions_sold_out(best.get("description")):
+        best = dict(best)
+        best["description"] = (
+            "[Note: at least one other source reports this as sold out.] " + (best.get("description") or "")
+        ).strip()
+    return best
+
+
+def collapse_cross_source_duplicates(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Same (date, normalized title) from DIFFERENT sources = one event.
+
+    collapse_exact_duplicates() keys on `venue`, and sources spell the same
+    room differently ("Philadelphia Film Society" vs "PFS Film Society
+    Center, 1412 Chestnut Street, Philadelphia, PA 19102"), so cross-source
+    duplicates survive it -- 21-30 groups a week, ~5% of the pool, measured
+    over 2026-08-10/-17/-24.
+
+    That cost a published report a wrong venue. 2026-08-10's Top 3 carried
+    "REPO MAN X CIRCLE JERKS" with venue "PhilaMOCA, 531 N 12th St,
+    Philadelphia, PA 19123" for an event at the Keswick Theatre in Glenside,
+    25 miles away: three records existed (R5 Productions and Do215 both said
+    Keswick; PhilaMOCA's own feed self-stamps its address onto offsite
+    co-presentations), and Selection happened to pick the PhilaMOCA one.
+    R5 Productions is first in SOURCE_PRIORITY, so collapsing that group
+    would have handed Selection the correct record.
+
+    **Only groups spanning more than one source collapse**, and that
+    restriction is the whole safety argument, not an optimization. Grouping
+    four real weeks on (date, normalized title) yields 122 multi-record
+    groups. The 19 that pair genuinely different rooms -- five Dave &
+    Buster's locations sharing "1/2 Price Games Wednesdays", "Wellness
+    Walks" at two Awbury sites, PFS's own Film Society Center vs Bourse
+    Theater -- are *all* single-source, so this pass never sees them. All 95
+    cross-source groups were inspected by hand; every one is a true
+    duplicate, including the 29 whose venue strings look unrelated
+    ("Highmark Mann" vs "TD Pavilion at The Mann Center").
+    """
+    groups: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    order: list[tuple[str, str]] = []
+    for event in events:
+        key = (event.get("date", ""), _normalize_title(event.get("title", "")))
+        if key not in groups:
+            groups[key] = []
+            order.append(key)
+        groups[key].append(event)
+
+    collapsed: list[dict[str, Any]] = []
+    for key in order:
         group = groups[key]
-        if len(group) == 1:
-            collapsed.append(group[0])
+        if len({e.get("source", "") for e in group}) < 2:
+            collapsed.extend(group)  # single-source: may be genuinely different venues
             continue
-        best = min(group, key=lambda e: (_priority_rank(e.get("source", "")), -_completeness(e)))
-        others_mention_sold_out = any(e is not best and _mentions_sold_out(e.get("description")) for e in group)
-        if others_mention_sold_out and not _mentions_sold_out(best.get("description")):
-            best = dict(best)
-            best["description"] = (
-                "[Note: at least one other source reports this as sold out.] " + (best.get("description") or "")
-            ).strip()
-        collapsed.append(best)
+        collapsed.append(_best_of_group(group))
     return collapsed
 
 
@@ -301,13 +380,23 @@ def build_candidates(week_dir: Path) -> dict[str, Any]:
     manifest = load_manifest(week_dir)
     raw_events = load_candidates_from_sources(week_dir, manifest)
     deduped = collapse_exact_duplicates(raw_events)
-    grouped = group_recurring(deduped)
+    # Before group_recurring, so recurrence counts see one record per event
+    # rather than one per source.
+    cross_source_deduped = collapse_cross_source_duplicates(deduped)
+    grouped = group_recurring(cross_source_deduped)
     identified = assign_ids(grouped)
     capped = cap_descriptions(identified)
     return {
         "week": manifest.get("week", week_dir.name),
         "collection_failures": collection_failures(manifest),
         "raw_event_count": len(raw_events),
+        # Counted, not inferred: recurring listings stay visible via
+        # recurrence_count, but a collapsed duplicate leaves no trace on the
+        # survivor, so without these two the raw -> candidates drop can't be
+        # reconciled and a dedupe bug would look like a quiet Collection
+        # shortfall. See test_sample_week_end_to_end_reconciles_every_raw_event.
+        "exact_duplicates_collapsed": len(raw_events) - len(deduped),
+        "cross_source_duplicates_collapsed": len(deduped) - len(cross_source_deduped),
         "candidates": capped,
     }
 
@@ -330,7 +419,10 @@ def main() -> None:
     recurring_groups = sum(1 for c in result["candidates"] if c.get("recurrence_count"))
     print(
         f"Candidate prep complete. {result['raw_event_count']} raw events -> "
-        f"{len(result['candidates'])} candidates ({recurring_groups} recurring group(s) collapsed), "
+        f"{len(result['candidates'])} candidates "
+        f"({result['exact_duplicates_collapsed']} exact dup(s), "
+        f"{result['cross_source_duplicates_collapsed']} cross-source dup(s), "
+        f"{recurring_groups} recurring group(s) collapsed), "
         f"{len(result['collection_failures'])} source(s) failed. Written to {out_path}",
         file=sys.stderr,
     )
