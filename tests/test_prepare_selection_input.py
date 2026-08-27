@@ -26,6 +26,7 @@ from prepare_selection_input import (
     assign_ids,
     build_candidates,
     cap_descriptions,
+    collapse_cross_source_duplicates,
     collapse_exact_duplicates,
     collection_failures,
     group_recurring,
@@ -196,6 +197,119 @@ def test_collapse_exact_duplicates_does_not_add_a_redundant_sold_out_note() -> N
     ]
     result = collapse_exact_duplicates(events)
     assert result[0]["description"].count("[Note:") == 0
+
+
+# --- collapse_cross_source_duplicates ---
+#
+# The safety property under test is the SINGLE-SOURCE EXEMPTION. Grouping
+# four real weeks on (date, normalized title) produced 19 groups pairing
+# genuinely different rooms; every one was single-source, so restricting the
+# collapse to multi-source groups excludes all of them. The Dave & Buster's
+# test below is that property, not a curiosity.
+
+
+def test_cross_source_collapses_the_same_event_under_different_venue_spellings() -> None:
+    """The dominant real pattern: an aggregator and the venue's own feed
+    naming one room differently. Exact-duplicate collapse keys on `venue`
+    and so never merged these."""
+    events = [
+        _event("Killer Of Sheep", "Philadelphia Film Society", "2026-08-20", source="Do215"),
+        _event(
+            "Killer Of Sheep",
+            "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+            "2026-08-20",
+            source="Philadelphia Film Society",
+        ),
+    ]
+    result = collapse_cross_source_duplicates(events)
+    assert len(result) == 1
+
+
+def test_cross_source_does_not_collapse_same_source_entries_at_different_venues() -> None:
+    """Regression for the false merge this design exists to avoid: five real
+    Dave & Buster's locations share the title "1 / 2 Price Games Wednesdays"
+    on one date, all from Do215. They are genuinely different rooms and must
+    all survive."""
+    locations = [
+        "Dave & Buster's - Franklin Mills, Philadelphia, PA",
+        "Dave & Buster's - Plymouth Meeting, Plymouth Meeting, PA",
+        "Dave & Buster's - Gloucester, Blackwood, NJ",
+        "Dave & Buster's, Philadelphia, PA",
+        "Dave & Buster's - Philadelphia, Philadelphia, PA",
+    ]
+    events = [_event("1 / 2 Price Games Wednesdays", v, "2026-08-26", source="Do215") for v in locations]
+    assert len(collapse_cross_source_duplicates(events)) == 5
+
+
+def test_cross_source_resolves_by_source_priority() -> None:
+    """R5 Productions outranks Do215, so R5's record survives -- which is what
+    carries the correct venue in the real 2026-08-10 Circle Jerks group."""
+    events = [
+        _event("Circle Jerks x Repo Man", "Keswick Theatre, Glenside, Pe", "2026-08-14", source="Do215"),
+        _event("Circle Jerks x Repo Man", "Keswick Theatre", "2026-08-14", source="R5 Productions"),
+    ]
+    result = collapse_cross_source_duplicates(events)
+    assert len(result) == 1
+    assert result[0]["source"] == "R5 Productions"
+    assert result[0]["venue"] == "Keswick Theatre"
+
+
+def test_cross_source_normalizes_punctuation_and_case_in_titles() -> None:
+    events = [
+        _event('Christone "Kingfish" Ingram', "Upper Merion Township Building Park", "2026-08-13", source="Do215"),
+        _event("christone kingfish ingram", "Concerts Under the Stars", "2026-08-13", source="WXPN"),
+    ]
+    assert len(collapse_cross_source_duplicates(events)) == 1
+
+
+def test_cross_source_keeps_a_numbered_series_distinct() -> None:
+    """Titles are never truncated for the key -- a prefix match would fuse
+    these three, which really did all run in the week of 2026-08-17."""
+    events = [
+        _event(t, "Philadelphia Film Society", "2026-08-19", source="Do215")
+        for t in ("Once Upon A Time In China", "Once Upon A Time In China Ii", "Once Upon A Time In China Iii")
+    ]
+    assert len(collapse_cross_source_duplicates(events)) == 3
+
+
+def test_cross_source_does_not_collapse_different_dates() -> None:
+    events = [
+        _event("Pusher", "Philadelphia Film Society", "2026-08-14", source="Do215"),
+        _event("Pusher", "PFS Film Society Center", "2026-08-15", source="Philadelphia Film Society"),
+    ]
+    assert len(collapse_cross_source_duplicates(events)) == 2
+
+
+def test_cross_source_preserves_a_sold_out_mention_from_the_discarded_entry() -> None:
+    events = [
+        _event("Show", "Venue A", "2026-08-03", source="Do215", description="Tickets are SOLD OUT."),
+        _event("Show", "Venue A Annex", "2026-08-03", source="R5 Productions", description="Doors at 7."),
+    ]
+    result = collapse_cross_source_duplicates(events)
+    assert len(result) == 1
+    assert result[0]["source"] == "R5 Productions"
+    assert "sold out" in result[0]["description"].casefold()
+
+
+def test_cross_source_priority_tie_falls_back_to_completeness() -> None:
+    events = [
+        _event("Gig", "Room One", "2026-08-03", source="Unlisted A"),
+        _event("Gig", "Room Two", "2026-08-03", source="Unlisted B", time="7:00 PM", cost="$10", url="u"),
+    ]
+    result = collapse_cross_source_duplicates(events)
+    assert len(result) == 1
+    assert result[0]["source"] == "Unlisted B"
+
+
+def test_cross_source_preserves_input_order_of_survivors() -> None:
+    events = [
+        _event("Alpha", "V1", "2026-08-03", source="Do215"),
+        _event("Beta", "V2", "2026-08-03", source="Do215"),
+        _event("Beta", "V2 Annex", "2026-08-03", source="WXPN"),
+        _event("Gamma", "V3", "2026-08-03", source="Do215"),
+    ]
+    result = collapse_cross_source_duplicates(events)
+    assert [e["title"] for e in result] == ["Alpha", "Beta", "Gamma"]
 
 
 # --- group_recurring ---
