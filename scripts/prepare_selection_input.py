@@ -382,14 +382,21 @@ def build_candidates(week_dir: Path) -> dict[str, Any]:
     deduped = collapse_exact_duplicates(raw_events)
     # Before group_recurring, so recurrence counts see one record per event
     # rather than one per source.
-    deduped = collapse_cross_source_duplicates(deduped)
-    grouped = group_recurring(deduped)
+    cross_source_deduped = collapse_cross_source_duplicates(deduped)
+    grouped = group_recurring(cross_source_deduped)
     identified = assign_ids(grouped)
     capped = cap_descriptions(identified)
     return {
         "week": manifest.get("week", week_dir.name),
         "collection_failures": collection_failures(manifest),
         "raw_event_count": len(raw_events),
+        # Counted, not inferred: recurring listings stay visible via
+        # recurrence_count, but a collapsed duplicate leaves no trace on the
+        # survivor, so without these two the raw -> candidates drop can't be
+        # reconciled and a dedupe bug would look like a quiet Collection
+        # shortfall. See test_sample_week_end_to_end_reconciles_every_raw_event.
+        "exact_duplicates_collapsed": len(raw_events) - len(deduped),
+        "cross_source_duplicates_collapsed": len(deduped) - len(cross_source_deduped),
         "candidates": capped,
     }
 
@@ -412,7 +419,10 @@ def main() -> None:
     recurring_groups = sum(1 for c in result["candidates"] if c.get("recurrence_count"))
     print(
         f"Candidate prep complete. {result['raw_event_count']} raw events -> "
-        f"{len(result['candidates'])} candidates ({recurring_groups} recurring group(s) collapsed), "
+        f"{len(result['candidates'])} candidates "
+        f"({result['exact_duplicates_collapsed']} exact dup(s), "
+        f"{result['cross_source_duplicates_collapsed']} cross-source dup(s), "
+        f"{recurring_groups} recurring group(s) collapsed), "
         f"{len(result['collection_failures'])} source(s) failed. Written to {out_path}",
         file=sys.stderr,
     )

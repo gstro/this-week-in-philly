@@ -48,8 +48,12 @@ def _event(title: str, venue: str, date: str, **overrides: str) -> dict:
 
 
 def test_sample_week_end_to_end_reconciles_every_raw_event() -> None:
-    """No event should silently disappear -- passthrough candidates plus
-    every recurring group's recurrence_count must sum back to the raw total."""
+    """No event should silently disappear. Every raw event must be accounted
+    for by exactly one of: surviving as a candidate, being consumed into a
+    recurring group, or being collapsed as a duplicate (exact or
+    cross-source). The two duplicate counters exist so this closes -- a
+    collapsed duplicate leaves no trace on the survivor, unlike a recurring
+    group's recurrence_count."""
     result = build_candidates(FIXTURES / "sample-week")
     recurring = [c for c in result["candidates"] if c.get("recurrence_count")]
     passthrough = len(result["candidates"]) - len(recurring)
@@ -59,6 +63,23 @@ def test_sample_week_end_to_end_reconciles_every_raw_event() -> None:
     # 2 exact-duplicate "Concert Y" rows collapse to 1 first, then reconciliation is against
     # the post-dedup total, not the raw total -- dedup and recurrence are independent transforms.
     assert passthrough + consumed == 4
+
+    # The full accounting, including both dedupe passes.
+    assert (
+        passthrough
+        + consumed
+        + result["exact_duplicates_collapsed"]
+        + result["cross_source_duplicates_collapsed"]
+        == result["raw_event_count"]
+    )
+
+
+def test_build_candidates_counts_cross_source_collapses_separately() -> None:
+    """The sample week has an exact duplicate but no cross-source one, so the
+    two counters must not be conflated."""
+    result = build_candidates(FIXTURES / "sample-week")
+    assert result["exact_duplicates_collapsed"] == 1
+    assert result["cross_source_duplicates_collapsed"] == 0
 
 
 def test_sample_week_collapses_the_do215_shaped_recurring_listing() -> None:
