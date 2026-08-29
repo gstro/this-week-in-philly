@@ -912,3 +912,97 @@ is a past-week guard in `collection.yml` mirroring `calendar_create.py`'s `week_
 **Deferred:** the above, plus PhilaMOCA's self-stamping parser, fuzzy cross-source title matching,
 the `event_parsers/base.py` venue-schema expansion, and the standing list — A1, A3, A6, B9–B14, C9,
 C13, C14, C15, C16, C21, C22, D3, D4.
+
+---
+
+## Tranche 5 — stop repeating last week's picks (shipped)
+
+**C22 is closed, and its stated reason for deferral was wrong.** This document deferred cross-week
+anti-repetition with *"the only cross-week store is the picks log, which is broken and unwired."*
+True of v1's CSV; **not** true of v2 — `data/<week>/_selections.json` is committed for every week and
+sits in the repo that both Selection and CI check out. The store has existed since the v2 data layout
+landed. Same shape of falsified premise as tranche 3's "historical weeks get re-processed."
+
+**The rule was already written and was being violated in every report.** `event-selection-philosophy`
+already said *"Recurring weekly events as a Top 3 pick unless there's a special guest or specific
+reason to highlight this instance"* — but nothing had ever looked at a prior week:
+
+| week | Top 3 slots recycled from an earlier report |
+|---|---|
+| 2026-08-03 | 3 / 21 (14%) |
+| 2026-08-10 | 1 / 21 (5%) |
+| 2026-08-17 | **5 / 21 (24%)** |
+| 2026-08-24 | 3 / 21 (14%) |
+
+- **Rustin's Challenge Reading Group** @ Philadelphia Ethical Society — a Top 3 pick in **all four**
+  of the last four reports
+- **West Philly Canvass for Chris Rabb** — three consecutive weeks
+- **Killer Of Sheep** @ PFS — the same film two weeks running
+- **Beginner Soldering: Li-Ion Battery Pack** @ Iffy Books — 08-03 and again 08-17
+- *(out of scope)* Dekalog Parts 1&2 → 3&4 → 5&6 — a series, genuinely different content each week
+
+Why nothing caught it: `group_recurring()` collapses the same `(title, venue)` on **3+ dates within
+one week**, and a weekly event appears exactly once per week, so `recurrence_count` is empty for
+every one of those picks. Verified.
+
+**Shipped:** `check_repeat_of_recent_pick()` (WARN) in `check_selection.py`, reproducing the history
+above exactly; `load_recent_weeks()` counting the 3 most recent prior week *directories* that
+actually have a `_selections.json` (directories, not calendar weeks — `data/` has real gaps, and
+`2026-07-20`/`-07-27` are Collection-only); a `_recent_picks.json` sidecar from
+`prepare_selection_input.py` so Selection doesn't have to open ~1400-line files; and the skill edits
+making the Avoid rule explicitly cross-week.
+
+**A finding that corrected an earlier note in this document.** Tranche 4 recorded that one venue
+splitting across several `_venue_key`s was harmless because "every observed split is *across* weeks,
+and the cap is per-week." True for the cap — **false for this check**, which is cross-week by
+construction. The West Philly canvass ran three consecutive weeks under one identical `venue` string
+but three different model-written addresses (`5140 Chester Ave…`, `4901 Kingsessing Ave…`, and none
+at all), and an address-keyed check missed two of the three repeats. `_repeat_key` therefore keys on
+the **source-derived venue name**, not the model-authored address — the opposite tradeoff from
+`check_venue_cap`, and for the opposite reason. Caught by verifying against real history rather than
+by the unit tests, which is why that case is now a test.
+
+### Recorded for the next tranche
+
+- **The report lists ~14% of what it collects, and the cap meant to prevent over-inclusion has never
+  fired.** `philly-events-selection`'s "at most 10 annotated candidates per category per day"
+  justifies itself against "~640 raw events collected most weeks" — the raw figure checks out
+  (642/641/610/677), but the observed maximum in any category-day is **5**, and output is ~80 listed
+  events from ~570 candidates. The prose guards against over-inclusion while the behaviour is
+  aggressive under-inclusion. Likely upstream of the next two items.
+- **🎨 Arts & Workshops is 0-for-84 Top 3 slots** while carrying listed events every week and being
+  the second-largest supply category; 👻 Horror & Occult took 8 off a smaller pool. Tranche 3 closed
+  C19 because the zero-slot categories were Flavor-tier — that holds for 🌿 Markets & Outdoors but
+  **not** for 🎨, whose scope overlaps Core interests. Reads like a category-boundary problem.
+- **C9 is live.** "Events at large corporate venues unless the act is truly unmissable" still names
+  no venues and sets no bar, and **City Winery — a national chain — took 3 Top 3 slots across four
+  weeks, two of them in 2026-08-24 alone**, sitting exactly at the venue cap.
+- **The sold-out signal is collected and then dropped.** No event has ever been flagged `sold_out` in
+  any week (0 across 84 Top 3, 66 honorable mentions and 726 listed events), yet 8 candidates across
+  four weeks carry "sold out" in their title or description — one titled literally `SOLD OUT – WXPN
+  Homegrown Live!`. None reached a listing. So C13's ranking question is moot for now, but
+  `events-report-format`'s "always note if a show is sold out" asserts an authority the pipeline has
+  never exercised.
+
+### Venue-schema expansion — scoped and deliberately not done
+
+Recorded so it isn't re-scoped from scratch:
+
+- **It would buy key stability, not data correctness.** Where a pick's `venue` string embeds a street
+  number, the model's independently-authored `address` **agrees 21 times and disagrees once** across
+  five weeks — and that one disagreement is the Circle Jerks case where the model was *right*. The
+  model supplies an address on 77 of 84 August picks (92%).
+- **Do215 is the gating unknown.** It supplies ~55% of Top 3 picks, and its API's venue object shows
+  only `{title, city, state}` in the only copy of that payload in the repo — a trimmed fixture.
+  Whether the live API returns a street address decides whether the project covers ~30% of picks or
+  ~85%. Answer that before costing anything.
+- **A venue→address table already exists and is dead.** `philadelphia-sources/SKILL.md:566-583` has a
+  12-row "Venue Address Lookup" that nothing reads: it lives in the Collection skill, but Collection
+  never authors addresses — Selection does, in a stage that never loads that file. It is also
+  Markdown, so no script can consume it, and it duplicates addresses already present as Python
+  constants in `collect_source.py`. The cheap first move is wiring up what is already written down.
+
+**Deferred:** all of the above, plus series-repeats and venue-repeat-dominance (considered and left
+out of scope for this tranche), `venue_cap`'s FAIL promotion, PhilaMOCA's self-stamping parser, the
+degenerate-key guard, a past-week guard for `collection.yml`, and the standing list — A1, A3, A6,
+B9–B14, C9, C13, C14, C15, C16, C21, D3, D4.
