@@ -25,6 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 from prepare_selection_input import (
     assign_ids,
     build_candidates,
+    build_recent_picks,
     cap_descriptions,
     collapse_cross_source_duplicates,
     collapse_exact_duplicates,
@@ -331,6 +332,40 @@ def test_cross_source_preserves_input_order_of_survivors() -> None:
     ]
     result = collapse_cross_source_duplicates(events)
     assert [e["title"] for e in result] == ["Alpha", "Beta", "Gamma"]
+
+
+# --- build_recent_picks (the cross-week sidecar) ---
+
+
+def _prior_week_on_disk(root, name: str, picks: list[tuple[str, str]]) -> None:  # noqa: ANN001
+    d = root / name
+    d.mkdir()
+    days = [{"date": name, "day_name": "Monday", "top3": [{"title": t, "venue": v} for t, v in picks], "honorable_mentions": [], "events": []}]
+    (d / "_selections.json").write_text(json.dumps({"week": name, "days": days}))
+
+
+def test_build_recent_picks_flattens_prior_weeks_top3(tmp_path) -> None:  # noqa: ANN001
+    _prior_week_on_disk(tmp_path, "2026-08-10", [("Killer Of Sheep", "Philadelphia Film Society")])
+    _prior_week_on_disk(tmp_path, "2026-08-17", [("Dekalog: Parts 3 & 4", "Philadelphia Film Society")])
+    (tmp_path / "2026-08-24").mkdir()
+    result = build_recent_picks(tmp_path / "2026-08-24")
+    assert result["week"] == "2026-08-24"
+    assert {p["title"] for p in result["recent_top3"]} == {"Killer Of Sheep", "Dekalog: Parts 3 & 4"}
+    assert {p["week"] for p in result["recent_top3"]} == {"2026-08-10", "2026-08-17"}
+
+
+def test_build_recent_picks_is_empty_for_the_earliest_week(tmp_path) -> None:  # noqa: ANN001
+    (tmp_path / "2026-06-22").mkdir()
+    assert build_recent_picks(tmp_path / "2026-06-22")["recent_top3"] == []
+
+
+def test_build_recent_picks_carries_only_title_venue_week(tmp_path) -> None:  # noqa: ANN001
+    """The whole point is that it stays small enough for Selection to read
+    cheaply -- a full _selections.json runs ~1400 lines."""
+    _prior_week_on_disk(tmp_path, "2026-08-17", [("A Show", "A Venue")])
+    (tmp_path / "2026-08-24").mkdir()
+    entry = build_recent_picks(tmp_path / "2026-08-24")["recent_top3"][0]
+    assert set(entry) == {"title", "venue", "week"}
 
 
 # --- group_recurring ---

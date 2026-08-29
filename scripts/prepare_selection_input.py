@@ -84,6 +84,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+import check_selection
 import common
 
 # Lower index = higher priority when merging an exact (title, venue, date)
@@ -401,6 +402,34 @@ def build_candidates(week_dir: Path) -> dict[str, Any]:
     }
 
 
+def build_recent_picks(week_dir: Path) -> dict[str, Any]:
+    """The recent weeks' Top 3 picks, so Selection can avoid repeating them.
+
+    Selection can't cheaply consult prior weeks itself: each _selections.json
+    runs ~1400 lines, and philly-events-selection/SKILL.md is explicitly
+    token-optimized (it documents a measured 3x regression from an earlier
+    fan-out design). This is the same job as the rest of this module -- read
+    the derived thing once, deterministically, so an LLM session doesn't
+    re-derive it every week.
+
+    Reuses check_selection.load_recent_weeks so the file Selection reads and
+    the file check_selection.py checks against cannot disagree about which
+    weeks count. The import points from this Collection-stage script to a
+    Presentation-stage one, which is backwards from the pipeline's data flow
+    -- accepted because check_selection.py is deliberately dependency-free
+    (unlike common.py, which pulls in the Google client libraries), so this
+    costs nothing, and because one shared definition of "recent weeks" is
+    worth more than tidy layering here.
+    """
+    picks = [
+        {"title": pick.get("title", ""), "venue": pick.get("venue", ""), "week": prior.get("week", "?")}
+        for prior in check_selection.load_recent_weeks(week_dir)
+        for day in prior.get("days", [])
+        for pick in day.get("top3", [])
+    ]
+    return {"week": week_dir.name, "recent_top3": picks}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Flatten, dedupe, and annotate a week's Collection output for Selection")
     parser.add_argument("week_dir", type=Path, help="data/YYYY-MM-DD")
@@ -416,6 +445,15 @@ def main() -> None:
     out_path = args.out or (args.week_dir / "_candidates.json")
     out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
 
+    # Written next to _candidates.json rather than into it: Selection reads
+    # the per-day files, and folding this in there would duplicate it seven
+    # times. A missing _recent_picks.json is a soft miss for Selection by
+    # design -- see philly-events-selection/SKILL.md Phase 1.
+    recent = build_recent_picks(args.week_dir)
+    (args.week_dir / "_recent_picks.json").write_text(
+        json.dumps(recent, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+
     recurring_groups = sum(1 for c in result["candidates"] if c.get("recurrence_count"))
     print(
         f"Candidate prep complete. {result['raw_event_count']} raw events -> "
@@ -423,6 +461,7 @@ def main() -> None:
         f"({result['exact_duplicates_collapsed']} exact dup(s), "
         f"{result['cross_source_duplicates_collapsed']} cross-source dup(s), "
         f"{recurring_groups} recurring group(s) collapsed), "
+        f"{len(recent['recent_top3'])} recent top3 pick(s) recorded, "
         f"{len(result['collection_failures'])} source(s) failed. Written to {out_path}",
         file=sys.stderr,
     )
