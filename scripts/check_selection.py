@@ -156,6 +156,81 @@ def _venue_key(pick: dict) -> str:
     return _NON_ALNUM_RE.sub("", key)
 
 
+def _repeat_key(pick: dict) -> tuple[str, str]:
+    """Identity of an event for cross-week repeat detection: normalized title
+    plus normalized *venue name*.
+
+    Deliberately NOT _venue_key(). That prefers `address`, which Selection
+    writes from its own memory and spells inconsistently across weeks: the
+    West Philly canvass at Kingsessing Recreation Center took a top3 slot in
+    three consecutive weeks under one identical venue string but three
+    different addresses ("5140 Chester Ave...", "4901 Kingsessing Ave...",
+    and none at all), so an address key silently missed two of the three
+    repeats. `venue` comes from the source and is stable week to week, which
+    is what a cross-week comparison needs. (Within one week the tradeoff runs
+    the other way, which is why check_venue_cap still keys on address.)
+
+    Stripping non-alphanumerics also makes 2026-08-17's "\U0001f50b Beginner
+    Soldering: Li-Ion Battery Pack" match 2026-08-03's plain "Beginner
+    Soldering: Li-Ion Battery Pack".
+    """
+    title = _NON_ALNUM_RE.sub("", pick.get("title", "").casefold())
+    venue = _NON_ALNUM_RE.sub("", normalize_venue(pick.get("venue", "")))
+    return (title, venue)
+
+
+def check_repeat_of_recent_pick(selections: dict, prior_weeks: list[dict] | None = None) -> list[Issue]:
+    """WARN: a top3 pick that already held a top3 slot in a recent week.
+
+    event-selection-philosophy's Avoid list already says "Recurring weekly
+    events as a Top 3 pick unless there's a special guest or specific reason
+    to highlight this instance" -- but nothing had ever looked at a prior
+    week, so the rule was unenforceable in the direction that matters.
+    Measured across the five weeks with committed selections, 5-24% of top3
+    slots each week were content that already ran in an earlier report:
+    "Rustin's Challenge Reading Group" took a slot in four consecutive
+    reports, the West Philly canvass three, "Killer Of Sheep" two.
+
+    prepare_selection_input.py's group_recurring() cannot catch this -- it
+    collapses the same (title, venue) on 3+ dates *within one week*, and a
+    weekly event appears exactly once per week, so recurrence_count is empty
+    for every one of those picks.
+
+    Scope is deliberately narrow: only an exact repeat of the same event at
+    the same venue. A new instalment of a series (Dekalog Parts 1&2 -> 3&4)
+    is genuinely different content and is not flagged.
+
+    WARN, not FAIL: a repeat can be legitimate (a special guest, a notable
+    second run). Note this check runs after Selection has already written its
+    annotations, so it detects drift for the following week rather than
+    preventing the repeat -- philly-events-selection/SKILL.md's Phase 3 step
+    is the actual control.
+    """
+    issues: list[Issue] = []
+    seen: dict[tuple[str, str], list[str]] = {}
+    for prior in prior_weeks or []:
+        week = prior.get("week", "?")
+        for _day_date, pick in _iter_top3(prior):
+            seen.setdefault(_repeat_key(pick), []).append(week)
+
+    for day_date, pick in _iter_top3(selections):
+        weeks = seen.get(_repeat_key(pick))
+        if not weeks:
+            continue
+        issues.append(
+            Issue(
+                "repeat_pick",
+                "warn",
+                day_date,
+                pick.get("title"),
+                f"already held a top3 slot in {', '.join(sorted(set(weeks)))} -- "
+                f"event-selection-philosophy's Avoid rule covers recurring events across weeks, "
+                f"not just within one. Drop it, or say in the `why` what makes this instance worth the slot",
+            )
+        )
+    return issues
+
+
 def check_venue_cap(selections: dict) -> list[Issue]:
     issues: list[Issue] = []
     by_venue: dict[str, list[tuple[str, dict]]] = {}
@@ -310,7 +385,44 @@ def check_outside_philadelphia(selections: dict) -> list[Issue]:
     return issues
 
 
-def collect_issues(selections: dict) -> list[Issue]:
+RECENT_WEEKS_LOOKBACK = 3
+
+
+def load_recent_weeks(week_dir: Path, lookback: int = RECENT_WEEKS_LOOKBACK) -> list[dict]:
+    """The `lookback` most recent week directories before `week_dir` that
+    actually contain a _selections.json.
+
+    Counted in *directories*, not calendar weeks: data/ has real gaps
+    (2026-06-22 then 2026-08-03; 2026-07-20 and -07-27 are Collection-only
+    with no selections at all), so a date-window would silently reach back
+    six real weeks whenever the data is sparse. Directory names are
+    YYYY-MM-DD, so lexicographic order is chronological.
+
+    This reads data/ directly and must keep doing so. It deliberately does
+    NOT read _recent_picks.json: that sidecar is a token-saving convenience
+    for Selection, written by a `continue-on-error: true` step in
+    collection.yml, so it can legitimately be missing or stale. Two
+    independent readers of the same source of truth is the point.
+    """
+    parent = week_dir.resolve().parent
+    if not parent.is_dir():
+        return []
+    prior = sorted(d for d in parent.iterdir() if d.is_dir() and d.name < week_dir.resolve().name)
+    weeks = []
+    for d in reversed(prior):
+        path = d / "_selections.json"
+        if not path.is_file():
+            continue  # Collection-only week, no selections to compare against
+        with open(path) as f:
+            weeks.append(json.load(f))
+        if len(weeks) == lookback:
+            break
+    return weeks
+
+
+def collect_issues(selections: dict, prior_weeks: list[dict] | None = None) -> list[Issue]:
+    """`prior_weeks` is optional so every existing caller and test keeps
+    working; the cross-week check simply produces nothing without it."""
     return [
         *check_venue_cap(selections),
         *check_time_format(selections),
@@ -318,6 +430,7 @@ def collect_issues(selections: dict) -> list[Issue]:
         *check_implausible_start_time(selections),
         *check_same_series(selections),
         *check_outside_philadelphia(selections),
+        *check_repeat_of_recent_pick(selections, prior_weeks),
     ]
 
 
@@ -377,7 +490,7 @@ def main() -> None:
     with open(selections_path) as f:
         selections = json.load(f)
 
-    issues = collect_issues(selections)
+    issues = collect_issues(selections, load_recent_weeks(args.week_dir))
     week = selections.get("week", args.week_dir.name)
 
     print(format_report(issues, week))
