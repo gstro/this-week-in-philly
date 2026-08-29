@@ -962,6 +962,13 @@ the **source-derived venue name**, not the model-authored address — the opposi
 `check_venue_cap`, and for the opposite reason. Caught by verifying against real history rather than
 by the unit tests, which is why that case is now a test.
 
+**The week of 2026-08-31 is this tranche's holdout**, the way 2026-08-17 was tranche 2's. Its
+`_recent_picks.json` will carry 08-10/08-17/08-24 — including *Rustin's Challenge Reading Group*,
+now four weeks running. If the 08-31 report still features it, the Phase 3 instruction failed the
+same way C16's thinness note has, and the honest conclusion is that prose alone doesn't move this
+either. Check `check_selection.py`'s `repeat_pick` warnings on that week before assuming the tranche
+worked.
+
 ### Recorded for the next tranche
 
 - **The report lists ~14% of what it collects, and the cap meant to prevent over-inclusion has never
