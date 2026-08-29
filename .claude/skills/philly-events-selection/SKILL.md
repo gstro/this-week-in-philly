@@ -100,6 +100,21 @@ session, avoids both costs entirely.
 Loaded [N] candidates for [date] ([R] recurring group(s), [F] sources failed during collection).
 ```
 
+Then read `data/YYYY-MM-DD/_recent_picks.json` **once** — a short list of `{title, venue, week}` for
+the Top 3 picks of the recent prior weeks, written by `prepare_selection_input.py`. It exists so you
+don't have to open prior weeks' `_selections.json`, which run ~1400 lines each. You'll use it in
+Phase 3 step 5.
+
+**If the file is missing, say so and carry on — do not stop.** Collection's
+`Prepare selection candidates` step is `continue-on-error: true` by design, so a week can legitimately
+have candidates and no `_recent_picks.json`. That is the opposite of the missing-`_candidates.json`
+case in Prerequisites, and deliberately so: without candidates there is no week, but without this
+file you simply have no cross-week memory this run.
+
+```
+Recent picks: [N] from the last [W] week(s). (or: _recent_picks.json not found — skipping the repeat check.)
+```
+
 ---
 
 ## Phase 2 — Score
@@ -135,20 +150,29 @@ Apply `event-selection-philosophy` rules for the day:
    across the whole week, not reset per day. Keep a running tally as you go: for each candidate
    you're considering for Top 3, check it against every `address` and series you've already used on
    an earlier day this week, not just against today's picks.
-5. Exclude online-only candidates from Top 3 unless genuinely exceptional — still eligible for the
+5. **Check every Top 3 pick against `_recent_picks.json` (loaded in Phase 1).** If the same event at
+   the same venue already held a Top 3 slot in a recent week, either pick something else or say in
+   the `why` what makes *this* instance worth the slot — a special guest, a genuinely notable
+   return. This is `event-selection-philosophy`'s "Avoid: recurring weekly events" rule, which spans
+   weeks and not just days. It has been the least-observed rule in the file: across five real weeks
+   5–24% of Top 3 slots went to content that had already run, and "Rustin's Challenge Reading Group"
+   took a slot in **four consecutive reports**. Match on the event, not the series — a new
+   instalment (Dekalog Parts 3 & 4 after Parts 1 & 2) is different content and is fine.
+6. Exclude online-only candidates from Top 3 unless genuinely exceptional — still eligible for the
    day's category listing
-6. Before finalizing a Top 3 pick: search `[event name] Philadelphia [date] postponed` to catch
+7. Before finalizing a Top 3 pick: search `[event name] Philadelphia [date] postponed` to catch
    cancellations; venue websites are more reliable than aggregators for postponement status
-7. Apply `personal-interests`'s Geography section: for any Top 3 pick outside South Philly, Center
+8. Apply `personal-interests`'s Geography section: for any Top 3 pick outside South Philly, Center
    City, or University City, name the neighborhood and the nearest El/BSL/trolley/Regional Rail
-   stop or bus in the `why` blurb — a real 2026-08-17 week landed only 3 of 21 blurbs with an
-   access note, so treat this as a required field, not a nice-to-have. For a pick outside
-   Philadelphia city limits, this is a high bar (something genuinely exceptional), not a default
-   yes — and the `why` must name the travel involved either way.
-8. Apply Venue Elevation for tie-breaking, per `event-selection-philosophy`'s Tie-Break Precedence
-   — last resort only, never a substitute for 1–7 above
-9. Note known Philly-specific recurring events (per `event-selection-philosophy`'s "Recurring Events to
-   Deprioritize" list) in listings but not Top 3
+   stop or bus in the `why` blurb — treat this as a required field, not a nice-to-have. It is
+   working but not yet met: 2026-08-17 landed 4 of 21 blurbs with an access note, and 2026-08-24 —
+   the first week after this rule was rewritten against the Point Breeze anchor — landed 7 of 21.
+   For a pick outside Philadelphia city limits, this is a high bar (something genuinely
+   exceptional), not a default yes — and the `why` must name the travel involved either way.
+9. Apply Venue Elevation for tie-breaking, per `event-selection-philosophy`'s Tie-Break Precedence
+   — last resort only, never a substitute for 1–8 above
+10. Note known Philly-specific recurring events (per `event-selection-philosophy`'s "Recurring Events to
+    Deprioritize" list) in listings but not Top 3
 
 For each Top 3 pick, write a `why` blurb: 2–3 sentences explaining what makes this worth attending over
 everything else that day. First sentence: what it is and why it's notable. Second: what makes it
@@ -156,9 +180,11 @@ specific to this moment or place. Third (optional): the practical case — cost,
 with personality and specificity — this text goes directly into the rendered report.
 
 Fewer than 3 qualifying events on a given day is acceptable — this is real permission, not a
-theoretical one. Three real weeks in a row (2026-08-03, -10, -17) each produced exactly 3 Top 3
-picks on all 7 days, which is a much stronger pattern than "occasionally there are only 2 or 3
-good options" would produce by chance. If a day's third-best candidate doesn't clearly clear the
+theoretical one. **Five real weeks in a row (2026-06-22, -08-03, -10, -17, -24) each produced
+exactly 3 Top 3 picks on all 7 days — 35 of 35 days, no exceptions**, which is a much stronger
+pattern than "occasionally there are only 2 or 3 good options" would produce by chance. 2026-08-24
+was the first week selected *after* this paragraph shipped and it still went 21 for 21, so read this
+as a rule that has never once been exercised rather than one that rarely applies. If a day's third-best candidate doesn't clearly clear the
 bar the day's first two did — it's a generic bar special, a recurring weekly with nothing special
 this instance, a candidate that only passes because you need a #3 — ship 2, or 1, or 0. A thin day
 with 1 genuinely good pick and an honest gap is a better report than 3 picks where the third is

@@ -17,10 +17,12 @@ When candidates are genuinely close on merit, resolve in this order — highest 
 4. Multi-interest overlap
 5. Venue Elevation (see below)
 
-This exists because, left unstated, the model has been resolving ties venue-first: across two
-observed weeks, four venues (three of them Venue-Elevation-listed) took 9 of 21 Top 3 slots,
-including one venue at a 75–100% hit rate against its candidate count. **Venue Elevation is the
-last item in this list, not a substitute for it** — it may only decide between candidates already
+This exists because, left unstated, the model resolved ties venue-first. Across four observed weeks
+the four heaviest venues took **36 of 84** Top 3 slots (Iffy Books 11, PhilaMOCA 9, Wooden Shoe 9,
+Philadelphia Film Society 7), with one venue at a 75–100% hit rate against its candidate count. The
+concentration persists, but the *cap* is now holding: 2026-08-03 and -08-10 each had a venue over
+the 2-slot cap, while 2026-08-17 and -08-24 had none. **Venue Elevation is the last item in this
+list, not a substitute for it** — it may only decide between candidates already
 essentially tied after 1–4 above; it must never lift a weaker candidate over a stronger one.
 
 ## Prioritize
@@ -37,13 +39,23 @@ essentially tied after 1–4 above; it must never lift a weaker candidate over a
 ## Recurring Events to Deprioritize (Philly-Specific)
 
 Note these in listings but do not pick as Top 3 unless something special is occurring:
-- **The Rotunda** — weekly improvised music jam (Wednesdays), Vogue Practice Session (Tuesdays)
-- **Hive76** — Open House every Sunday 2:30–5pm *(source not currently producing candidates in
-  Collection — this entry governs the rare case one appears via another source)*
+- **The Rotunda** — weekly improvised music jam (Wednesdays), Vogue Practice Session (Tuesdays).
+  *This deprioritizes those two named weekly series, not the venue.* The Rotunda also appears under
+  Venue Elevation below, and both entries are correct: elevate the venue's one-off programming,
+  deprioritize its standing weeklies.
+- **Hive76** — Open House every Sunday 2:30–5pm *(no `hive76.json` has appeared in any recent week's
+  Collection output, though `philadelphia-sources` still lists the source as healthy — this entry
+  governs the rare case one appears via another source)*
 
 ## Avoid
 
-- Recurring weekly events as a Top 3 pick unless there's a special guest or specific reason to highlight this instance
+- Recurring events as a Top 3 pick unless there's a special guest or specific reason to highlight
+  this instance. **This spans weeks, not just days.** It was read as a within-week rule for a long
+  time and went unenforced in the direction that matters: across five real weeks, 5–24% of Top 3
+  slots each week went to an event that had already held one, and "Rustin's Challenge Reading Group"
+  took a slot in four consecutive reports. Selection is handed `_recent_picks.json` (recent weeks'
+  Top 3 picks) for exactly this check — see `philly-events-selection`'s Phase 3 step 5. A new
+  instalment of a series is different content and is fine; the same event again is not.
 - Events at large corporate venues unless the act is truly unmissable
 - Events with no verifiable source or unconfirmed details — add *(confirm details)* rather than omitting
 
@@ -87,7 +99,7 @@ or writing its `why`, check for and re-derive rather than pass through as-is:
 
 ## Aggregator Provenance
 
-Do215 supplies the large majority of candidates most weeks (76–78% across two observed weeks) and
+Do215 supplies the large majority of candidates most weeks (75–79% across four observed weeks) and
 is the source of nearly every plausibility defect above. Treat a **Do215-only listing for a
 commercial venue promotion** (a bar special, a brand tasting, a brewery food truck night) as
 low-signal by default, absent corroboration from another source or the venue's own listing —
@@ -109,9 +121,11 @@ consistently produce high-alignment picks, but elevation must never override 1�
 - **Iffy Books** — DIY electronics + speculative fiction + leftist politics
 - **Harriet's Bookshop** — politically engaged literary events *(elevate if present — this source
   is not currently producing candidates in Collection; do not expect to see it)*
-- **The Rotunda** — free/PWYW community arts, film, experimental music
+- **The Rotunda** — free/PWYW community arts, film, experimental music *(its two standing weeklies
+  are deprioritized above; this elevates everything else)*
 - **Wooden Shoe Books** — anarchist radical bookstore, readings and community events
 - **First Unitarian Church** — Philly's most storied punk/hardcore venue; all R5 all-ages shows
-  *(elevate if present — not currently producing candidates in Collection)*
+  *(elevate if present — R5 Productions is a healthy source producing candidates every week; it's
+  this venue that hasn't come up lately, not the source)*
 - **Lightbox Film Center** — premier repertory/arthouse cinema *(elevate if present — not
   currently producing candidates in Collection)*
