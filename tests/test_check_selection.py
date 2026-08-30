@@ -12,8 +12,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 from check_selection import (
+    _venue_key,
+    check_address_conflict,
     check_cost_not_blank,
     check_implausible_start_time,
+    check_missing_address,
     check_outside_philadelphia,
     check_repeat_of_recent_pick,
     check_same_series,
@@ -351,3 +354,98 @@ def test_collect_issues_aggregates_all_checks() -> None:
     assert "cost_blank" in checks
     # implausible_time is suppressed because time_format already caught this malformed time
     assert "implausible_time" not in checks
+
+
+# --- venue key: abbreviation/ZIP folding, source precedence, degenerate keys ---
+
+
+def test_venue_key_folds_abbreviation_variants_of_one_address() -> None:
+    """PFS took 10 top3 slots across 4 weeks but showed as two venues -- "1412
+    Chestnut St" and "1412 Chestnut Street" -- because the old key only
+    stripped punctuation. Same shape for Ortlieb's and Johnny Brenda's."""
+    for a, b in (
+        ("1412 Chestnut St, Philadelphia, PA 19102", "1412 Chestnut Street, Philadelphia, PA 19102"),
+        ("847 N 3rd St, Philadelphia, PA 19123", "847 North 3rd Street, Philadelphia, PA 19123"),
+        ("1201 N Frankford Ave, Philadelphia, PA 19125", "1201 North Frankford Ave, Philadelphia, PA 19125"),
+    ):
+        assert _venue_key({"address": a}) == _venue_key({"address": b}), a
+
+
+def test_venue_key_folds_zip_drift_on_one_address() -> None:
+    """Selection wrote Underground Arts under two different ZIPs for the same
+    street, and Cousin Danny's with and without one."""
+    assert _venue_key({"address": "1200 Callowhill St, Philadelphia, PA 19107"}) == _venue_key(
+        {"address": "1200 Callowhill St, Philadelphia, PA 19123"}
+    )
+    assert _venue_key({"address": "5001 Market St, Philadelphia, PA"}) == _venue_key(
+        {"address": "5001 Market St, Philadelphia, PA 19139"}
+    )
+
+
+def test_venue_key_keeps_same_number_different_street_distinct() -> None:
+    """The false-merge case the normalization must NOT create."""
+    assert _venue_key({"address": "847 N 3rd St, Philadelphia, PA 19123"}) != _venue_key(
+        {"address": "847 N Franklin St, Philadelphia, PA 19123"}
+    )
+
+
+def test_venue_key_is_comparable_across_sources() -> None:
+    """PhilaMOCA reaches top3 via its own source AND via Do215 in the same week
+    (2026-06-22, 2026-08-03). Do215 supplies a bare street where Selection
+    writes the full address; discarding locality is what keeps them one venue
+    rather than splitting the cap."""
+    assert _venue_key({"venue_address": "531 N 12th St"}) == _venue_key(
+        {"address": "531 N 12th St, Philadelphia, PA 19123"}
+    )
+
+
+def test_venue_key_prefers_the_source_address_and_splits_the_false_merge() -> None:
+    """The live 2026-08-31 defect: Selection gave Spruce Street Harbor and
+    Cherry Street Pier the same invented address, pooling two venues. With the
+    source's address preferred they separate."""
+    spruce = {"venue": "Spruce Street Harbor", "address": "301 S Christopher Columbus Blvd, Philadelphia, PA 19106"}
+    cherry = {
+        "venue": "Cherry Street Pier",
+        "address": "301 S Christopher Columbus Blvd, Philadelphia, PA 19106",
+        "venue_address": "121 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+    }
+    assert _venue_key(spruce) == "301schristophercolumbusblvd"
+    assert _venue_key(cherry) == "121nchristophercolumbusblvd"
+    assert _venue_key(spruce) != _venue_key(cherry)
+
+
+def test_venue_key_falls_back_to_the_venue_name_without_any_address() -> None:
+    assert _venue_key({"venue": "Pentridge Station"}) == _venue_key({"venue": "Pentridge Station, Philadelphia, PA"})
+
+
+# --- missing address / address conflict ---
+
+
+def test_missing_address_flags_a_pick_with_no_address_from_either_side() -> None:
+    selections = _selections([_day("2026-08-03", top3=[_pick("A")])])
+    issues = check_missing_address(selections)
+    assert len(issues) == 1
+    assert issues[0].severity == "warn"
+    assert "no location" in issues[0].message
+
+
+def test_missing_address_quiet_when_the_merge_backfilled_one() -> None:
+    picks = [_pick("A", address="304 South St, Philadelphia, PA 19147")]
+    assert check_missing_address(_selections([_day("2026-08-03", top3=picks)])) == []
+
+
+def test_address_conflict_flags_a_real_disagreement() -> None:
+    pick = _pick("Sheer Mag", address="121 N Christopher Columbus Blvd")
+    pick["venue_address"] = "121 N Christopher Columbus Blvd"
+    pick["selection_address"] = "301 S Christopher Columbus Blvd"
+    issues = check_address_conflict(_selections([_day("2026-08-03", top3=[pick])]))
+    assert len(issues) == 1
+    assert issues[0].severity == "warn"
+
+
+def test_address_conflict_ignores_mere_spelling_differences() -> None:
+    """Same place, different abbreviation -- not a conflict worth a warning."""
+    pick = _pick("Show", address="1412 Chestnut St")
+    pick["venue_address"] = "1412 Chestnut St, Philadelphia, PA 19102"
+    pick["selection_address"] = "1412 Chestnut Street, Philadelphia, PA 19102"
+    assert check_address_conflict(_selections([_day("2026-08-03", top3=[pick])])) == []

@@ -551,3 +551,56 @@ def test_main_exits_nonzero_and_prints_a_clean_message_on_merge_error(tmp_path: 
     assert result.returncode == 1
     assert "c9999" in result.stderr
     assert not (week_dir / "_selections.json").exists()
+
+
+# --- address resolution: source venue_address vs Selection's own ---
+
+
+def _merge_one(candidate_overrides: dict, pick_address: str | None) -> dict:
+    candidates = _candidates_doc([_candidate("c0000", "Show", "Venue", "2026-08-03", **candidate_overrides)])
+    annotations = _annotations_doc(
+        [
+            _day(
+                "2026-08-03",
+                top3=[_top3_pick("c0000", address=pick_address)],
+                annotations=[_annotation("c0000", category=MUSIC)],
+            )
+        ]
+    )
+    return merge(candidates, annotations)["days"][0]["top3"][0]
+
+
+def test_merge_prefers_the_sources_venue_address_over_selections() -> None:
+    """The live 2026-08-31 defect: Selection put Cherry Street Pier at "301 S
+    Christopher Columbus Blvd" -- an address it also gave Spruce Street Harbor,
+    pooling two venues and pinning the calendar entry about a mile off. Do215's
+    own venue record says 121 N. The source wins, and the disagreement is kept
+    so check_selection.py can report it."""
+    entry = _merge_one(
+        {"venue_address": "121 N Christopher Columbus Blvd, Philadelphia, PA 19106", "venue_id": "500714"},
+        "301 S Christopher Columbus Blvd, Philadelphia, PA 19106",
+    )
+    assert entry["address"] == "121 N Christopher Columbus Blvd, Philadelphia, PA 19106"
+    assert entry["selection_address"] == "301 S Christopher Columbus Blvd, Philadelphia, PA 19106"
+    assert entry["venue_id"] == "500714"
+
+
+def test_merge_backfills_address_when_selection_omitted_one() -> None:
+    """2026-08-24 shipped 6 of 21 picks with no address, so 6 calendar entries
+    had no location at all. A source address fills that gap."""
+    entry = _merge_one({"venue_address": "304 South St, Philadelphia, PA 19147"}, None)
+    assert entry["address"] == "304 South St, Philadelphia, PA 19147"
+    assert "selection_address" not in entry
+
+
+def test_merge_keeps_selections_address_when_the_source_has_none() -> None:
+    entry = _merge_one({}, "2125 Chestnut St")
+    assert entry["address"] == "2125 Chestnut St"
+    # nothing to disagree with, so no duplicate copy is recorded
+    assert "selection_address" not in entry
+
+
+def test_merge_omits_address_entirely_when_neither_side_has_one() -> None:
+    entry = _merge_one({}, None)
+    assert "address" not in entry
+    assert "venue_address" not in entry
