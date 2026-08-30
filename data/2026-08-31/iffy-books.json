@@ -1,0 +1,60 @@
+{
+  "source": "Iffy Books",
+  "collected_at": "2026-08-30T13:36:28.133091+00:00",
+  "events": [
+    {
+      "title": "\u270f\ufe0f The Writing Room",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-09-01",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9yamViOWg2c3MzZ2NobzY4bzMwYzFkNjRyamdlMWk3NG9qMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Come co-work with other writers in three 40-minute units of silent writing. Writers and projects of any type welcome. 10-minute breaks and accountability check-ins between units. BYO coffee, water, computer chargers, notepads, etc."
+    },
+    {
+      "title": "\ud83d\udcfc Analog A/V Session",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-09-02",
+      "time": "10:30 AM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9xamFiOWg2c3MzZ2NwazZrbzMwYzFkNjRyamdlMWo2a3AzNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Come experiment with VHS tapes and audio cassettes! We\u2019ll have equipment on hand for analog-to-digital and digital-to-analog transfers. \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailInstructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5\u2013$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\ud83d\udd0b Beginner Soldering: Li-Ion Battery Pack",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-09-03",
+      "time": "2:30 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9vajhiOWg2c3MzZ2QxazZrczMwYzFkNjRyamdlMWs2Z3NqOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Make a rechargeable battery pack for your LoRa node, a microcontroller such as an ESP32 or Pi Pico, or anything that runs on 3\u20134 Volts. Perfect for folks who\u2019ve never soldered before! \nTo complete this project you\u2019ll need to buy a li-ion battery pack kit for $3.99. Here\u2019s what it includes: \n\u2022 18650 battery clip w/ attached wires\n\u2022 TP4056 charge controller board\n\u2022 PH2.5 plug w/ attached wires\n\u2022 1/8\u2033 heat shrink tubing (1.5\u2033 long)\n\u2022 1/2\u2033 heat shrink tubing (1\u2033 long) \nYou\u2019ll also need a lithium-ion 18650 battery, available separately. \nRegister\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailPurchase a kit:Li-Ion Battery Pack Kit - $4.31Flat top 18650 battery (5000 mAh ) - $6.47(prices include sales tax)Instructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5\u2013$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\ud83d\udcbb Philly 2600 Meetup",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-09-04",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNxajBiOWg2c3MzZ2Q5azZnczMwYzFkNjRyamdlMWw2a3AzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "> The Philly 2600 meeting is a monthly gathering of local hackers, phreaks, nerds, geeks, activists, tinkerers, developers, infosec professionals, and other interesting people."
+    },
+    {
+      "title": "\ud83d\udce1 Meshtastic 101",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-09-05",
+      "time": "10:30 AM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNzM2liOWg2c3MzZ2RoZzZncDMwYzFkNjRyamdlMW02MHNqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Join us for an introduction to Meshtastic, an application that lets you send private text messages over the air using pocket-sized\u00a0LoRa radio transceivers. We\u2019ll show you how to flash the latest Meshtastic firmware to the device, customize the settings, and start chatting with your friends. \nHere\u2019s a link to our zine on LoRa + Meshtastic.\nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailPurchase a transceiver kit:Portable Heltec Lora32 V3 kit w/ case - $41.04Seeed nRF52840 LoRa node (low power for battery/solar) - $27.00(prices include sales tax)Instructor donation:$0 / donate later$5$10$15$20Recommended $5\u2013$15Credit card info: *CardName on CardComments or questions?Submit"
+    },
+    {
+      "title": "\ud83c\udfe0 IndieWeb Homebrew Website Club",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-09-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNmNxM2FiOWg2c3MzZ2RwaDZzcjMwYzFkNjRyamdlMW42OHEzZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Homebrew Website Club is a growing world-wide network of meetups for everyone who wants to take back their web experience from social media silos, and own their online identities & content, or just want support with blogging!"
+    }
+  ]
+}

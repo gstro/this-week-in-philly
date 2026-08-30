@@ -1,0 +1,141 @@
+{
+  "source": "Philadelphia Film Society",
+  "collected_at": "2026-08-30T13:36:27.833770+00:00",
+  "events": [
+    {
+      "title": "The Hole (1962)",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-02",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 15 min."
+    },
+    {
+      "title": "Amores perros (2000)",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-05",
+      "time": "12:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 2 hr 33 min."
+    },
+    {
+      "title": "Once Upon a Time in China",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-05",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 35 min."
+    },
+    {
+      "title": "Once Upon a Time in China II",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-05",
+      "time": "3:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 48 min."
+    },
+    {
+      "title": "Once Upon a Time in China III",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-05",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 45 min."
+    },
+    {
+      "title": "The Fisher King",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-05",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 2 hr 17 min."
+    },
+    {
+      "title": "Popcorn (1991)",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-05",
+      "time": "9:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 31 min."
+    },
+    {
+      "title": "Star Trek II: The Wrath of Khan",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-05",
+      "time": "8:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated PG. Runtime: 1 hr 53 min."
+    },
+    {
+      "title": "The Birds (1963)",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-09-05",
+      "time": "3:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated PG-13. Runtime: 1 hr 59 min."
+    },
+    {
+      "title": "The Samurai and the Prisoner (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-09-02",
+      "time": "4:00 PM, 7:15 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 2 hr 27 min."
+    },
+    {
+      "title": "Buddy (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-09-02",
+      "time": "4:10 PM, 6:45 PM, 9:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 35 min."
+    },
+    {
+      "title": "Coyote vs. Acme",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-09-02",
+      "time": "3:30 PM, 6:00 PM, 8:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated PG. Runtime: 1 hr 41 min."
+    },
+    {
+      "title": "It Ends (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-09-02",
+      "time": "4:20 PM, 7:00 PM, 9:10 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 29 min."
+    },
+    {
+      "title": "Tony (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-09-02",
+      "time": "3:45 PM, 6:15 PM, 8:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 46 min."
+    },
+    {
+      "title": "Teenage Sex and Death at Camp Miasma (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-09-02",
+      "time": "4:00 PM, 5:30 PM, 7:00 PM, 8:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 1 hr 46 min."
+    }
+  ]
+}

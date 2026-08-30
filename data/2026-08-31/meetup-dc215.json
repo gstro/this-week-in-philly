@@ -1,0 +1,33 @@
+{
+  "source": "Meetup: DC 215",
+  "collected_at": "2026-08-30T13:35:58.683838+00:00",
+  "events": [
+    {
+      "title": "Hacker Show & Tell",
+      "venue": "(online)",
+      "date": "2026-09-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/316272331/",
+      "description": "DC215\nJust got back from the cons? Still buzzing from the talks, the badges, and the hallway conversations? Bring it all to DC215's Hacker Show & Tell. Demo your latest project, show off your haul from BlackHat, Def Con, or HOPE, swap stickers, and share your stories from the floor. Whether you built something, bought something, or just survived the badge lines, we want to hear about it!"
+    },
+    {
+      "title": "Open House",
+      "venue": "(online)",
+      "date": "2026-09-04",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/316133629/",
+      "description": "DC215\nJoin us at Ex Machina Parlor and Reclaimers Hall as we celebrate the hacker spirit! Show off your latest toy or project. Whether it's your war driving rig or your shiny new Flipper Zero we want to see what you're doing! Or just come chill, grab a drink, and enjoy whatever's playing on the big screen."
+    },
+    {
+      "title": "Study Hall / Work on CTFs",
+      "venue": "(online)",
+      "date": "2026-09-05",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/315839468/",
+      "description": "DC215\nTime to get together and work on or just discuss the CTF."
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "week": "2026-08-31",
+  "run_started": "2026-08-30T13:35:52.017945+00:00",
+  "run_completed": "2026-08-30T13:36:28.714772+00:00",
+  "sources": {
+    "cinespeak": {
+      "status": "ok",
+      "events": 0
+    },
+    "do215": {
+      "status": "ok",
+      "events": 373
+    },
+    "iffy-books": {
+      "status": "ok",
+      "events": 6
+    },
+    "lightbox-film-center": {
+      "status": "ok",
+      "events": 0
+    },
+    "luma": {
+      "status": "ok",
+      "events": 2
+    },
+    "meetup-ai-philly": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-code-coffee": {
+      "status": "ok",
+      "events": 4
+    },
+    "meetup-dc215": {
+      "status": "ok",
+      "events": 3
+    },
+    "meetup-owasp": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-philadelphia-horror-meetup-group": {
+      "status": "ok",
+      "events": 4
+    },
+    "meetup-philly-film-club": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-philly-hardware": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-tech-in-motion": {
+      "status": "ok",
+      "events": 1
+    },
+    "philadelphia-film-society": {
+      "status": "ok",
+      "events": 15
+    },
+    "philamoca": {
+      "status": "ok",
+      "events": 5
+    },
+    "philly-ask-a-punk": {
+      "status": "ok",
+      "events": 4
+    },
+    "philly-shows": {
+      "status": "ok",
+      "events": 0
+    },
+    "phillygoth": {
+      "status": "ok",
+      "events": 6
+    },
+    "r5-productions": {
+      "status": "ok",
+      "events": 1
+    },
+    "the-rotunda": {
+      "status": "ok",
+      "events": 7
+    },
+    "trakt-film-releases": {
+      "status": "ok",
+      "events": 1
+    },
+    "wooden-shoe-books": {
+      "status": "ok",
+      "events": 4
+    },
+    "wxpn": {
+      "status": "ok",
+      "events": 36
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-08-30T13:35:52.232384+00:00",
+  "events": [
+    {
+      "title": "NYX DIVISION, EX TRADITION, NRG, SUBTLE BODY",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-09-03",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/nyx-division-ex-tradition-nrg-subtle-body",
+      "description": "OUT OF TOWN BAND / experimental / philadelphia / post-punk / punk"
+    },
+    {
+      "title": "No Human Is Illegal - Benefit Show",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-09-04",
+      "time": "8:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/no-human-is-illegal-benefit-show",
+      "description": ""
+    },
+    {
+      "title": "Red Brick, Power Doom Smoke Cult, Psychopomp, Sarkic",
+      "venue": "ask a punk (ask a punk)",
+      "date": "2026-09-05",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/red-brick-power-doom-smoke-cult-psychopomp-sarkic",
+      "description": ""
+    },
+    {
+      "title": "SHEER MAG, GRIPPER, REAL SHOCKS",
+      "venue": "Spruce Street Harbour Park (301 S Christopher Columbus Blvd, Philadelphia, PA 19106)",
+      "date": "2026-09-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/sheer-mag-gripper-real-shocks",
+      "description": ""
+    }
+  ]
+}

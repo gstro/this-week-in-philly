@@ -1,0 +1,51 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-08-30T13:35:55.890109+00:00",
+  "events": [
+    {
+      "title": "40 WATTS FROM NOWHERE",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-02",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/43464769/",
+      "description": ""
+    },
+    {
+      "title": "GYPSY 83: THE DIRECTOR\u2019S CUT",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-03",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/92955687/",
+      "description": "New restoration/reimagination of Todd Stephens\u2019 2001 goth cult classic!"
+    },
+    {
+      "title": "Cut//Slack",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-04",
+      "time": "7:30, 8:00",
+      "cost": "$12\u2013$15",
+      "url": "https://www.etix.com/ticket/p/40941622",
+      "description": ""
+    },
+    {
+      "title": "Farewell Days",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-05",
+      "time": "7:30, 8:00",
+      "cost": "$15\u2013$20",
+      "url": "https://www.etix.com/ticket/p/98332314",
+      "description": ""
+    },
+    {
+      "title": "MEMORIALS",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-06",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/93281064/",
+      "description": ""
+    }
+  ]
+}
