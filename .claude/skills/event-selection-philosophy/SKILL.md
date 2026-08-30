@@ -59,22 +59,24 @@ Note these in listings but do not pick as Top 3 unless something special is occu
 - Events at large corporate venues unless the act is truly unmissable
 - Events with no verifiable source or unconfirmed details — add *(confirm details)* rather than omitting
 
-## Weekly Caps
+## Weekly Patterns
 
-Enforced across the **whole week**, not per day — track running totals as you process each day's
-candidates in sequence, since a violation is only visible once more than one day has been picked.
+Judged across the **whole week**, not per day — track running totals as you process each day's
+candidates in sequence, since these are only visible once more than one day has been picked.
 
-- **Venue cap:** at most 2 Top 3 slots per week at the same venue. Key on the venue's street
-  address (write it to `address`, same as you already do for calendar creation) — venue name
-  strings are not consistent enough to key on directly (e.g. "Iffy Books" vs. "Iffy Books, 404 S.
-  20th St., Philadelphia, 19146, United States"; "Ortlieb's" vs. "Ortlieb's, Philadelphia, PA"). If
-  a candidate has no discoverable address, fall back to a normalized venue name (lowercase, text
-  before the first comma). The mechanical check (`scripts/check_selection.py`) normalizes the
-  address key by stripping punctuation/whitespace, so "404 S. 20th St.," and "404 S 20th St," are
-  already treated as one venue there — but don't rely on that as a reason to be loose with spelling
-  here: this cap is tracked live, as you go, well before the check ever runs, and a real 2026-08-03
-  week split 5 Iffy Books slots into 4+1 by spelling the same address two different ways, letting
-  the cap pass unenforced at authoring time.
+- **Venue repetition: notice it, don't cap it.** There is deliberately **no numeric limit** on how
+  many Top 3 slots one venue can take in a week. Across every report published so far, Iffy Books
+  took 16 slots, PhilaMOCA 14 and Wooden Shoe 13 — 34% of all Top 3 slots between three venues — and
+  that is *not* treated as a defect: they are an anarchist bookstore, a DIY cinema and a radical
+  bookshop, which is to say they genuinely program a large share of what Greg cares about. A venue
+  is not a proxy for event quality in either direction.
+
+  What to do instead: when several of a week's picks land at one venue, take that as a prompt to
+  re-check each one on its own merits — did this event earn the slot, or did it get there because
+  the venue is familiar? If it earned it, keep it. **Never drop a better event to even out the
+  venues,** and never hold back a strong week from one room in favour of a weaker spread.
+  `scripts/check_selection.py` reports per-venue slot counts as a WARN so the pattern is visible
+  after the fact; it is an observation, not a rule, and it will never fail a build.
 - **Same-series cap:** no two Top 3 picks in one week from the same series, class, or
   organizer-run program, regardless of exact title. Two different weekly workshop topics at the
   same venue under the same program name (e.g. "Beginner Soldering: Li-Ion Battery Pack" and
