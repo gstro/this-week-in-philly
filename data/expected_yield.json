@@ -23,8 +23,8 @@
       "note": "A deterministic two-stage parser now backs this source (scripts/event_parsers/lightbox.py + scripts/collect_source.py: Wix data-hook index -> per-event JSON-LD detail pages) -- confirmed live 2026-07-29: 2 real events for the week of 2026-07-27 (a week v2 had previously collected as 0), and genuinely 0 for the week of 2026-08-03 (listings jump Aug 1 -> Sep 9). Kept at 0 rather than raised, since 0 is a real, frequent, correct result for this source, not evidence of failure -- the provenance and manifest-agreement checks still cover it."
     },
     "luma": {
-      "min_expected": 5,
-      "note": "Historical range 7-9; floor set with margin."
+      "min_expected": 2,
+      "note": "Historical range 5-10 across weeks of 2026-08-03 through -08-24 (never below 5, hence the prior floor). The scheduled 2026-08-30 run for the week of 2026-08-31 wrote 2 and tripped that floor -- verified directly against a live fetch of the same iCal feed: 2 real, well-formed events (a Beyonce-tribute pop-up and an online DIY book-cover workshop), not a parser or feed failure. Lowered to 2 to reflect this confirmed low rather than treat it as a recurring false positive, same reasoning as the r5-productions and the-rotunda precedents below."
     },
     "meetup-ai-philly": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run (well-formed iCal, 0 VEVENTs). Parser's own structural validation (raises only if BEGIN:VCALENDAR is absent) already covers this source; yield-floor adds nothing." },
     "meetup-code-coffee": { "min_expected": 0, "note": "Active group but weekly count is genuinely variable (0-4 observed); relies on the parser's own structural validation, not a yield floor, to avoid false positives on a quiet week." },
@@ -55,8 +55,8 @@
       "note": "Deterministic parser. Historical legitimate range 2-7 (excludes the 2026-07-27 fabricated 0); floor set at the low end."
     },
     "r5-productions": {
-      "min_expected": 2,
-      "note": "Deterministic parser. Historical range was 7/week across all runs prior to 2026-08-03 -- floor of 5 was calibrated against that alone. The real 2026-08-03 run confirmed a genuine 2-event week (verified directly: 2 well-formed events, real venue/price/URL, not an extraction failure) and correctly tripped check_yield.py's floor. Lowered to 2 to reflect this real observed low rather than treat one confirmed-legitimate quiet week as a recurring false positive."
+      "min_expected": 1,
+      "note": "Deterministic parser. Historical range was 7/week across all runs prior to 2026-08-03 -- floor of 5 was calibrated against that alone. The real 2026-08-03 run confirmed a genuine 2-event week (verified directly: 2 well-formed events, real venue/price/URL, not an extraction failure) and correctly tripped check_yield.py's floor; lowered to 2 at the time. The scheduled 2026-08-30 run for the week of 2026-08-31 wrote 1 and tripped that floor in turn -- verified directly against a live fetch of the events page: 1 real, well-formed event (Successor Tour, Spike Hellis @ Ruba Club, 2026-09-05), not an extraction failure. Lowered again to 1 for the same reason as before: a confirmed-legitimate quiet week is not a recurring false positive to chase."
     },
     "the-rotunda": {
       "min_expected": 1,

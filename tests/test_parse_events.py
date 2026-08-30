@@ -223,6 +223,16 @@ def test_philly_shows_raises_on_structural_mismatch() -> None:
         philly_shows_parser.parse("<html><body>nothing</body></html>", WEEK_START, WEEK_END)
 
 
+def test_philly_shows_returns_empty_on_the_sites_own_confirmed_empty_marker() -> None:
+    """Regression for a real 2026-08-30 site change: philly-shows.com's
+    Webflow CMS collection now renders `div.w-dyn-empty` with no
+    `div.showblock` anywhere on the page when it has zero shows listed --
+    verified against a live fetch. That is the site confirming its own list
+    is empty, not markup we fail to recognize, so it must not raise."""
+    events = philly_shows_parser.parse(_read("philly-shows-empty-collection.html"), WEEK_START, WEEK_END)
+    assert events == []
+
+
 # ---------------------------------------------------------------------------
 # the-rotunda
 # ---------------------------------------------------------------------------
