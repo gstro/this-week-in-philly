@@ -5,6 +5,7 @@ the check functions are pure functions over already-parsed JSON, matching
 tests/test_merge_selections.py's precedent.
 """
 
+import json
 import sys
 from pathlib import Path
 
@@ -14,10 +15,12 @@ from check_selection import (
     check_cost_not_blank,
     check_implausible_start_time,
     check_outside_philadelphia,
+    check_repeat_of_recent_pick,
     check_same_series,
     check_time_format,
     check_venue_cap,
     collect_issues,
+    load_recent_weeks,
     normalize_venue,
 )
 
@@ -214,7 +217,129 @@ def test_outside_philadelphia_skips_a_pick_with_no_address() -> None:
     assert check_outside_philadelphia(selections) == []
 
 
+# --- repeat of a recent pick ---
+
+
+def test_repeat_pick_flags_the_same_event_in_a_prior_week() -> None:
+    prior = _selections([_day("2026-08-10", top3=[_pick("Killer Of Sheep", venue="Philadelphia Film Society")])], week="2026-08-10")
+    current = _selections([_day("2026-08-20", top3=[_pick("Killer Of Sheep", venue="Philadelphia Film Society")])], week="2026-08-17")
+    issues = check_repeat_of_recent_pick(current, [prior])
+    assert len(issues) == 1
+    assert issues[0].severity == "warn"
+    assert "2026-08-10" in issues[0].message
+
+
+def test_repeat_pick_matches_across_an_inconsistent_model_written_address() -> None:
+    """Regression for the real West Philly canvass case: three consecutive
+    weeks at one venue string, but Selection wrote a different `address` each
+    time (and none at all the third week). Keying on `address` the way
+    check_venue_cap does silently missed two of the three repeats, which is
+    why _repeat_key uses the source-derived venue name instead."""
+    prior = _selections(
+        [_day("2026-08-12", top3=[_pick("West Philly Canvass", venue="Kingsessing Recreation Center", address="5140 Chester Ave, Philadelphia, PA 19143")])],
+        week="2026-08-10",
+    )
+    current = _selections(
+        [_day("2026-08-19", top3=[_pick("West Philly Canvass", venue="Kingsessing Recreation Center", address="4901 Kingsessing Ave, Philadelphia, PA 19143")])],
+        week="2026-08-17",
+    )
+    assert len(check_repeat_of_recent_pick(current, [prior])) == 1
+
+
+def test_repeat_pick_normalizes_an_emoji_prefixed_title() -> None:
+    """2026-08-17 titled it '🔋 Beginner Soldering: Li-Ion Battery Pack';
+    2026-08-03 used the plain title. Same event."""
+    prior = _selections([_day("2026-08-06", top3=[_pick("Beginner Soldering: Li-Ion Battery Pack", venue="Iffy Books")])], week="2026-08-03")
+    current = _selections([_day("2026-08-20", top3=[_pick("\U0001f50b Beginner Soldering: Li-Ion Battery Pack", venue="Iffy Books")])], week="2026-08-17")
+    assert len(check_repeat_of_recent_pick(current, [prior])) == 1
+
+
+def test_repeat_pick_does_not_flag_the_same_title_at_a_different_venue() -> None:
+    prior = _selections([_day("2026-08-10", top3=[_pick("Open Mic", venue="Tattooed Mom")])], week="2026-08-10")
+    current = _selections([_day("2026-08-17", top3=[_pick("Open Mic", venue="Ortlieb's")])], week="2026-08-17")
+    assert check_repeat_of_recent_pick(current, [prior]) == []
+
+
+def test_repeat_pick_does_not_flag_a_new_instalment_of_a_series() -> None:
+    """Out of scope by design: Dekalog Parts 1&2 -> 3&4 is genuinely
+    different content, unlike the same film shown twice."""
+    prior = _selections([_day("2026-08-12", top3=[_pick("Dekalog: Parts 1 & 2", venue="Philadelphia Film Society")])], week="2026-08-10")
+    current = _selections([_day("2026-08-19", top3=[_pick("Dekalog: Parts 3 & 4", venue="Philadelphia Film Society")])], week="2026-08-17")
+    assert check_repeat_of_recent_pick(current, [prior]) == []
+
+
+def test_repeat_pick_reports_every_prior_week_it_appeared_in() -> None:
+    priors = [
+        _selections([_day("2026-08-04", top3=[_pick("Reading Group", venue="Ethical Society")])], week="2026-08-03"),
+        _selections([_day("2026-08-11", top3=[_pick("Reading Group", venue="Ethical Society")])], week="2026-08-10"),
+    ]
+    current = _selections([_day("2026-08-18", top3=[_pick("Reading Group", venue="Ethical Society")])], week="2026-08-17")
+    issues = check_repeat_of_recent_pick(current, priors)
+    assert len(issues) == 1
+    assert "2026-08-03" in issues[0].message
+    assert "2026-08-10" in issues[0].message
+
+
+def test_repeat_pick_is_silent_with_no_prior_weeks() -> None:
+    """The earliest week in the repo, and the no-sidecar/no-history case."""
+    current = _selections([_day("2026-08-17", top3=[_pick("Anything")])])
+    assert check_repeat_of_recent_pick(current, []) == []
+    assert check_repeat_of_recent_pick(current, None) == []
+
+
+# --- load_recent_weeks (the one check that touches disk) ---
+
+
+def _week_on_disk(root, name: str, *, with_selections: bool = True) -> None:  # noqa: ANN001
+    d = root / name
+    d.mkdir()
+    if with_selections:
+        (d / "_selections.json").write_text(json.dumps(_selections([_day(name)], week=name)))
+
+
+def test_load_recent_weeks_returns_the_most_recent_priors_newest_first(tmp_path) -> None:  # noqa: ANN001
+    for name in ("2026-08-03", "2026-08-10", "2026-08-17", "2026-08-24"):
+        _week_on_disk(tmp_path, name)
+    weeks = load_recent_weeks(tmp_path / "2026-08-24", lookback=2)
+    assert [w["week"] for w in weeks] == ["2026-08-17", "2026-08-10"]
+
+
+def test_load_recent_weeks_skips_collection_only_weeks(tmp_path) -> None:  # noqa: ANN001
+    """data/2026-07-20 and -07-27 are real Collection-only dirs with no
+    _selections.json. They must be stepped over, not counted or crashed on."""
+    _week_on_disk(tmp_path, "2026-07-13")
+    _week_on_disk(tmp_path, "2026-07-20", with_selections=False)
+    _week_on_disk(tmp_path, "2026-07-27", with_selections=False)
+    _week_on_disk(tmp_path, "2026-08-03")
+    weeks = load_recent_weeks(tmp_path / "2026-08-03", lookback=3)
+    assert [w["week"] for w in weeks] == ["2026-07-13"]
+
+
+def test_load_recent_weeks_returns_empty_for_the_earliest_week(tmp_path) -> None:  # noqa: ANN001
+    _week_on_disk(tmp_path, "2026-06-22")
+    assert load_recent_weeks(tmp_path / "2026-06-22") == []
+
+
+def test_load_recent_weeks_never_looks_forward(tmp_path) -> None:  # noqa: ANN001
+    _week_on_disk(tmp_path, "2026-08-17")
+    _week_on_disk(tmp_path, "2026-08-24")
+    assert load_recent_weeks(tmp_path / "2026-08-17") == []
+
+
 # --- collect_issues ---
+
+
+def test_collect_issues_omits_the_repeat_check_when_no_priors_are_passed() -> None:
+    """collect_issues' prior_weeks argument is optional so every existing
+    caller keeps working; the cross-week check just produces nothing."""
+    selections = _selections([_day("2026-08-17", top3=[_pick("A")])])
+    assert "repeat_pick" not in {i.check for i in collect_issues(selections)}
+
+
+def test_collect_issues_includes_the_repeat_check_when_priors_are_passed() -> None:
+    prior = _selections([_day("2026-08-10", top3=[_pick("A")])], week="2026-08-10")
+    selections = _selections([_day("2026-08-17", top3=[_pick("A")])])
+    assert "repeat_pick" in {i.check for i in collect_issues(selections, [prior])}
 
 
 def test_collect_issues_aggregates_all_checks() -> None:

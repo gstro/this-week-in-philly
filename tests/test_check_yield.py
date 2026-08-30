@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 from check_yield import (
+    NON_SOURCE_FILES,
     check_manifest_file_agreement,
     check_non_destructive,
     check_provenance,
@@ -176,6 +177,19 @@ def test_file_agreement_clean_case() -> None:
     manifest = {"sources": {"do215": {"status": "ok", "events": 1}}}
     source_files = {"do215": {"events": [{"title": "x"}]}}
     assert check_manifest_file_agreement(manifest, source_files, {"do215.json"}) == []
+
+
+def test_file_agreement_exempts_every_derived_artifact() -> None:
+    """Derived outputs live in the week directory but have no manifest entry,
+    so each must be exempt or it reads as an orphaned source file. This is a
+    real regression: _recent_picks.json was added without the exemption and
+    made check_yield.py exit 1 against a completed week -- which
+    collection-check.yml re-runs on any push touching _manifest.json, the
+    same commit the sidecar ships in."""
+    manifest = {"sources": {"do215": {"status": "ok", "events": 1}}}
+    source_files = {"do215": {"events": [{"title": "x"}]}}
+    on_disk = {"do215.json", *NON_SOURCE_FILES}
+    assert check_manifest_file_agreement(manifest, source_files, on_disk) == []
 
 
 # --- Non-destructive re-collection (the 71c6645 incident) ---

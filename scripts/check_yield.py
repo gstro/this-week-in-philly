@@ -64,9 +64,14 @@ DEFAULT_EXPECTED_YIELD_PATH = REPO_ROOT / "data" / "expected_yield.json"
 # id-keyed annotations merge_selections.py turns into _selections.json) --
 # same story, no manifest entry, would otherwise trip both the orphan check
 # and provenance (which tries to parse every non-exempt *.json as a source).
+# _recent_picks.json is prepare_selection_input.py's other derived output (the
+# recent weeks' top3 picks, so Selection can avoid repeating them) -- same
+# story again, and it ships in the same Collection commit as _manifest.json,
+# which is exactly what collection-check.yml triggers on.
 NON_SOURCE_FILES = {
     "_manifest.json",
     "_candidates.json",
+    "_recent_picks.json",
     "_selection_annotations.json",
     "_selections.json",
     "_spotify.json",
