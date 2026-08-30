@@ -1,0 +1,342 @@
+{
+  "week": "2026-08-31",
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-08-31",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0000",
+          "rank": 1,
+          "address": "1026 Spring Garden St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Arlo Parks brings her Ambiguous Desire tour to Union Transfer for a rare Philly headline stop from the Mercury Prize-winning UK artist, touring the nocturnal, dancefloor-inflected material off her third album. It's the kind of visit that's genuinely easy to miss on a quiet Monday and would be talked about after. Union Transfer sits in Callowhill just north of Center City — Broad Street Line to Spring Garden station is a five-minute walk; doors 7, show 8."
+        },
+        {
+          "id": "c0029",
+          "rank": 2,
+          "address": "304 South St, Philadelphia, PA 19147",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philly DSA and Solidarity Cinema present 5 Broken Cameras, the Oscar-nominated, Sundance-winning documentary shot over five years by a Palestinian farmer defending his village from settlement expansion. It's free programming with real political stakes, paired with a screening space built for conversation rather than passive watching. Suggested donation $6–12; South Street, easy walk from Point Breeze — heads up there's a flight of stairs to the main room."
+        },
+        {
+          "id": "c0379",
+          "rank": 3,
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "category": "🎨 Arts & Workshops",
+          "is_music": false,
+          "sold_out": false,
+          "why": "West Philadelphia Sanctuary hosts a free, no-experience-necessary clay art-making session at The Rotunda — a low-key communal drop-in built explicitly to give the West Philly community a judgment-free shared space, not to sell a class. University City; the Rotunda sits right off the 34/40 trolley and the Market-Frankford Line's 40th St station."
+        }
+      ],
+      "annotations": [
+        { "id": "c0000", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Desire Tour stop, doors 7 / show 8." },
+        { "id": "c0029", "category": "🎬 Film & Cinema", "sold_out": false, "note": "DSA/Solidarity Cinema screening, free with suggested donation." },
+        { "id": "c0379", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Free community clay workshop, no experience needed." },
+        { "id": "c0027", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Weekly jam session hosted by Richard Hill Jr. and Friends; standing weekly, listed for the regulars." },
+        { "id": "c0030", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Weekly punk-themed karaoke at Tattooed Mom, free, no cover." },
+        { "id": "c0018", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Free-drinks meetup for Fringe Festival artists at FringeArts, co-hosted with Broad Street Review this week." },
+        { "id": "c0024", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Free sampler of Fringe Festival acts at FringeArts; lineup announced night-of." },
+        { "id": "c0011", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Free guided tour of PMA's Impressionist and Post-Impressionist galleries." },
+        { "id": "c0012", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Pay-what-you-wish guided tour of the Rodin Museum's collection." },
+        { "id": "c0013", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Free PMA tour on the diversity of American artists and artisans." },
+        { "id": "c0015", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Free PMA tour tracing Black, Indigenous, and Latin American contributions to American art." },
+        { "id": "c0010", "category": "🤝 Community & Politics", "sold_out": false, "note": "Weekly noon protest outside Sen. McCormick's district office; ongoing anti-administration demonstration." },
+        { "id": "c0005", "category": "🎵 Music & Concerts", "sold_out": false, "note": "21+ show at MilkBoy, doors 7 / show 8." },
+        { "id": "c0026", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Solo piano set at Midnight & The Wicked." }
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0049",
+          "rank": 1,
+          "address": "1400 John F Kennedy Blvd, Philadelphia, PA 19107",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Gaza Children's Shroud — a global memorial where mourners hand-write the names of Gaza's more than 20,000 killed children onto a communal shroud — launches its year-long tour of witness right here in Philadelphia before heading to the UN in New York and then Washington. It's a five-hour community signing (1–6 PM) organized by an interfaith coalition, not a passive rally — you can add a name yourself. City Hall, steps from the Broad Street Line."
+        },
+        {
+          "id": "c0038",
+          "rank": 2,
+          "address": "304 South St, Philadelphia, PA 19147",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Pharmakon (Margaret Chardiet) headlines a stacked underground noise/industrial bill with Relay For Death, Jacob Winans, $5000, and Patrick Gallagher — the kind of harsh, confrontational lineup that barely surfaces on mainstream listings. This is the DIY noise scene at its most uncompromising, in a small room built for exactly that. $19.49, 21+, South Street — an easy walk from Point Breeze."
+        },
+        {
+          "id": "c0034",
+          "rank": 3,
+          "address": "1200 Callowhill St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Quicksand — post-hardcore forebears who bridged Revelation Records-era hardcore with '90s alt-rock — tour with Bane, straight-edge hardcore heavyweights, for a genuinely heavy double bill at Underground Arts. Both carry real weight in hardcore history rather than trading on nostalgia. Callowhill, just north of Center City — Broad Street Line to Spring Garden is the easy route in. $39.30–$45, 21+, doors 6:30."
+        }
+      ],
+      "annotations": [
+        { "id": "c0049", "category": "🤝 Community & Politics", "sold_out": false, "note": "Gaza Children's Shroud community signing, 1–6 PM." },
+        { "id": "c0038", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Noise/industrial bill, 21+." },
+        { "id": "c0034", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Post-hardcore/hardcore double bill, 21+." },
+        { "id": "c0035", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Mega-tour stadium stop at the Linc; not a Top 3 pick given the corporate-stadium scale, but a genuinely rare Philadelphia stop." },
+        { "id": "c0039", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Emo/pop-punk tour stop at The Foundry, all ages." },
+        { "id": "c0041", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Vibraphone jazz trio doing standards at Chris' Jazz Cafe, sets at 7:30 & 9." },
+        { "id": "c0056", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Standing weekly listening-session series; this month curated by Friends of Jerry." },
+        { "id": "c0052", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Free live bluegrass at Cartesian Brewing, East Passyunk." },
+        { "id": "c0336", "category": "📚 Literary", "sold_out": false, "note": "Silent co-working writing sessions at Iffy Books." },
+        { "id": "c0343", "category": "💻 Tech & Maker", "sold_out": false, "note": "First Philadelphia session of Rust Tuesdays, online; agentic robotics & physical AI focus." },
+        { "id": "c0046", "category": "🌿 Markets & Outdoors", "sold_out": false, "note": "Free volunteer workday restoring Rockland Mansion's grounds in East Fairmount Park." }
+      ],
+      "honorable_mentions": [ { "id": "c0035" }, { "id": "c0039" } ]
+    },
+    {
+      "date": "2026-09-02",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0086",
+          "rank": 1,
+          "address": "22 South 22nd Street, Philadelphia, PA 19103",
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philadelphia DSA hosts investigative reporter Seth Harp for a reading and Q&A on The Fort Bragg Cartel, his exposé of narcotics trafficking, institutional cover-ups, and unsolved deaths tied to elite U.S. Army special-ops units. Harp is a war veteran turned journalist, so the reporting carries firsthand institutional knowledge rather than outside speculation. Free, Workers United hall on South 22nd Street, Center City — RSVP via Action Network."
+        },
+        {
+          "id": "c0387",
+          "rank": 2,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The National Lawyers Guild runs a Know Your Rights training at Wooden Shoe Books — practical legal grounding on interacting with police and ICE at a moment when that knowledge is in real demand, not abstract civics. Wooden Shoe is Philly's anchor anarchist bookstore, and this is exactly the political-education programming it exists for. Free, South Street, easy walk from Point Breeze."
+        },
+        {
+          "id": "c0100",
+          "rank": 3,
+          "address": "1412 Chestnut Street, Philadelphia, PA 19102",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Kieślowski's Dekalog continues with Parts 7 and 8 — a custody kidnapping and a wrenching Holocaust-era ethics-class confrontation — the latest chapters in the Philadelphia Film Society's run through one of cinema's great achievements. New installments each week keep this fresh even for readers already following along. 4K restoration, Film Society Center, Center City."
+        }
+      ],
+      "annotations": [
+        { "id": "c0086", "category": "📚 Literary", "sold_out": false, "note": "DSA-hosted reading and Q&A, free, RSVP required." },
+        { "id": "c0387", "category": "🤝 Community & Politics", "sold_out": false, "note": "NLG Know Your Rights training, free." },
+        { "id": "c0100", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Dekalog: Parts 7 & 8, 4K restoration." },
+        { "id": "c0090", "category": "🤝 Community & Politics", "sold_out": false, "note": "Ongoing weekly DSA field campaign canvass for Chris Rabb (PA-03)." },
+        { "id": "c0355", "category": "🎬 Film & Cinema", "sold_out": false, "note": "*(confirm details)* — listed runtime (15 min) looks like a data error for this 1962 French classic." },
+        { "id": "c0103", "category": "🎬 Film & Cinema", "sold_out": false, "note": "New 35mm print of Tsai Ming-liang's 1998 Taiwanese arthouse film." },
+        { "id": "c0381", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Free screening of an indie sci-fi thriller at The Rotunda." },
+        { "id": "c0380", "category": "🎵 Music & Concerts", "sold_out": false, "note": "The Rotunda's standing Wednesday improvised-music jam; deprioritized weekly." },
+        { "id": "c0337", "category": "💻 Tech & Maker", "sold_out": false, "note": "Analog VHS/cassette experimentation session at Iffy Books, donation-based." },
+        { "id": "c0062", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Swedish doom/stoner trio at Underground Arts, 21+." },
+        { "id": "c0077", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Jazz residency continuation at Chris' Jazz Cafe." },
+        { "id": "c0068", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Reggae/roots set from Bob Marley's cousin at City Winery." },
+        { "id": "c0365", "category": "👻 Horror & Occult", "sold_out": false, "note": "New horror-comedy release screening multiple times at PFS East." }
+      ],
+      "honorable_mentions": [ { "id": "c0103" } ]
+    },
+    {
+      "date": "2026-09-03",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0149",
+          "rank": 1,
+          "address": "1412 Chestnut Street, Philadelphia, PA 19102",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Alejandro González Iñárritu's blistering feature debut gets a new 4K restoration as part of the Philadelphia Film Society's Director Series on him — three interlocking Mexico City stories collided by a car crash, still one of the most kinetic pieces of filmmaking of its era. Paired with a second Iñárritu work in the series, this is a rare chance to see his early work restored on a big screen rather than streamed. Film Society Center, Chestnut Street, Center City."
+        },
+        {
+          "id": "c0126",
+          "rank": 2,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Todd Stephens' 2001 goth road-trip cult classic gets a genuine restoration event: a new 4K transfer from the original negative, re-edited with over 40 minutes of previously unseen footage and additional goth soundtrack cues, expanding it from 95 to 138 minutes. PhilaMOCA is exactly the room for this — the city's home base for weird, underground, and gothic film culture. Callowhill, just north of Center City; doors 7, film 7:30.",
+          "time": "7:30 PM"
+        },
+        {
+          "id": "c0138",
+          "rank": 3,
+          "address": "5116 Pentridge St, Philadelphia, PA 19143",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A community-run, costume-encouraged night of Beyoncé's full catalog, from Dangerously in Love through Cowboy Carter, built as a fundraiser for Philly's Black queer community. It opens with a physical-media swap — vinyl and CDs from her catalog as prizes — so there's a record-collecting hook alongside the dance party. Pentridge Station, Kingsessing — a bus ride or BSL-to-bus transfer from Point Breeze, not walkable."
+        }
+      ],
+      "annotations": [
+        { "id": "c0149", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Amores Perros, 4K restoration, Iñárritu Director Series." },
+        { "id": "c0126", "category": "👻 Horror & Occult", "sold_out": false, "note": "Gypsy 83: The Director's Cut, new 4K restoration." },
+        { "id": "c0138", "category": "🤝 Community & Politics", "sold_out": false, "note": "Beyoncé-themed fundraiser for the Black queer community, with a vinyl swap." },
+        { "id": "c0153", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Dogfight, part of the Philadelphia Film Society's 1991 limited series." },
+        { "id": "c0368", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Post-punk/experimental/punk bill at Cousin Danny's." },
+        { "id": "c0148", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Croatian-Philadelphian experimental music collaboration, pay-what-you-can." },
+        { "id": "c0125", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Experimental/avant chamber bill at The Perch." },
+        { "id": "c0155", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Philadelphia's longest-running drag show, weekly." },
+        { "id": "c0143", "category": "🤝 Community & Politics", "sold_out": false, "note": "Monthly online tenant-organizing meeting, Renters United Philadelphia." },
+        { "id": "c0338", "category": "💻 Tech & Maker", "sold_out": false, "note": "Beginner soldering workshop at Iffy Books, DIY battery packs." },
+        { "id": "c0119", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Blackened metal bill, 21+." },
+        { "id": "c0382", "category": "🎵 Music & Concerts", "sold_out": false, "note": "One-off show at The Rotunda." }
+      ],
+      "honorable_mentions": [ { "id": "c0153" } ]
+    },
+    {
+      "date": "2026-09-04",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0369",
+          "rank": 1,
+          "address": "5001 Market St, Philadelphia, PA 19139",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A DIY punk bill at Cousin Danny's raising funds and visibility for immigrant rights under the banner \"No Human Is Illegal\" — exactly the punk-meets-solidarity intersection this scene does best. *(confirm details)* — Ask A Punk's listing is thin on lineup specifics and door price beyond the title. West Philly, 50th & Market, right at the Market-Frankford Line's 50th Street station."
+        },
+        {
+          "id": "c0383",
+          "rank": 2,
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Rotunda's queer pop-up film series returns with a genuinely fun double bill — Twister and Jurassic Park — reclaiming '90s blockbusters as camp classics for a queer crowd rather than treating repertory as arthouse-only territory. Free, all ages, exactly the kind of community film night The Rotunda does best. University City, off the 34/40 trolley and the Market-Frankford Line's 40th Street station."
+        },
+        {
+          "id": "c0201",
+          "rank": 3,
+          "address": "1201 N Frankford Ave, Philadelphia, PA 19125",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Philly's long-running Depeche Mode night gets a real reason to step outside the recurring-event pile this time: Blood Handsome, a Cincinnati/LA darkwave and post-punk project, joins DJ Baby Berlin for a live set alongside the usual synth-pop and goth catalog spins. Fishtown, Frankford Ave — Market-Frankford Line to Girard, then a walk, or a Broad-Street-Line transfer from Point Breeze."
+        }
+      ],
+      "annotations": [
+        { "id": "c0369", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Immigrant-rights benefit punk show." },
+        { "id": "c0383", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Queer Cult Classics pop-up: Twister & Jurassic Park, free." },
+        { "id": "c0201", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Depeche Mode dance party with live guest Blood Handsome." },
+        { "id": "c0224", "category": "🎬 Film & Cinema", "sold_out": false, "note": "The Silence of the Lambs, 4K, part of the Film Society's 1991 series." },
+        { "id": "c0161", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Legendary punk band Dwarves, 21+." },
+        { "id": "c0169", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Indie/punk bill at Ortlieb's, 21+." },
+        { "id": "c0175", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Hardcore/deathcore bill at Kung Fu Necktie, 21+." },
+        { "id": "c0166", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Local record-release show at PhilaMOCA." },
+        { "id": "c0339", "category": "💻 Tech & Maker", "sold_out": false, "note": "Monthly Philly 2600 hacker meetup at Iffy Books." },
+        { "id": "c0388", "category": "🤝 Community & Politics", "sold_out": false, "note": "*(confirm details)* — sparse listing at Wooden Shoe Books, likely political programming." },
+        { "id": "c0190", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Guthrie Ramsey performs American song history at the Barnes' First Friday." },
+        { "id": "c0198", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Jazz vocalist Declan Cashman with the Oliver Mayman Trio." },
+        { "id": "c0220", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "First Friday opening at independent gallery Arch Enemy Arts, Old City." }
+      ],
+      "honorable_mentions": [ { "id": "c0224" }, { "id": "c0161" } ]
+    },
+    {
+      "date": "2026-09-05",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0233",
+          "rank": 1,
+          "address": "1131 S Broad St, Philadelphia, PA 19147",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Ars Nova Workshop brings John Zorn's new power trio Flatlands to Solar Myth — a rare Philly stop from one of the most restlessly inventive figures in avant-garde and free-jazz composition, spanning six-plus decades of boundary-erasing work. Zorn doesn't tour constantly, so a trio built specifically for this project is worth catching live rather than waiting for the record. Solar Myth is right on South Broad, an easy walk from Point Breeze."
+        },
+        {
+          "id": "c0232",
+          "rank": 2,
+          "address": "301 S Christopher Columbus Blvd, Philadelphia, PA 19106",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Titus Andronicus — New Jersey punk lifers known for sprawling, politically charged rock records like The Monitor — play a completely free, all-ages set on the Delaware waterfront. Free shows from a band with this kind of national following are genuinely rare and easy to miss. *(confirm details)* — the listing is thin beyond time and price. Spruce Street Harbor Park, Penn's Landing."
+        },
+        {
+          "id": "c0378",
+          "rank": 3,
+          "address": "416 Green St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "LA minimal-EBM duo Spike Hellis bring their new album Successor to Ruba Club — pulsing, ferocious electronic body music with real post-punk and industrial teeth. It's a genuine tour stop rather than a local recurring night, booked by R5 Productions. Northern Liberties, Green Street — a bus or Broad-Street-Line-plus-walk from Point Breeze, not a quick trip.",
+          "time": "8:00 PM"
+        }
+      ],
+      "annotations": [
+        { "id": "c0233", "category": "🎵 Music & Concerts", "sold_out": false, "note": "John Zorn's Flatlands, Ars Nova Workshop presents." },
+        { "id": "c0232", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Free all-ages Titus Andronicus set." },
+        { "id": "c0378", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Spike Hellis Successor tour stop." },
+        { "id": "c0284", "category": "🎬 Film & Cinema", "sold_out": false, "note": "The Fisher King, 4K, part of the Film Society's 1991 series." },
+        { "id": "c0290", "category": "👻 Horror & Occult", "sold_out": false, "note": "Popcorn (1991), slasher screening in the Film Society's 1991 series." },
+        { "id": "c0359", "category": "👻 Horror & Occult", "sold_out": false, "note": "Hitchcock's The Birds, repertory screening." },
+        { "id": "c0274", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Once Upon a Time in China, Jet Li martial-arts epic, Summer of Trilogies series." },
+        { "id": "c0370", "category": "👻 Horror & Occult", "sold_out": false, "note": "*(confirm details)* — occult-themed doom/black metal bill, venue unconfirmed for this date." },
+        { "id": "c0384", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Album release show at The Rotunda." },
+        { "id": "c0389", "category": "📚 Literary", "sold_out": false, "note": "*(confirm details)* — recurring reading group at Wooden Shoe Books, no description given." },
+        { "id": "c0281", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Artist collective exhibition opening at independent gallery Allens Lane Art Center." },
+        { "id": "c0375", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Darkwave/post-punk/witch house goth night at Club 624." }
+      ],
+      "honorable_mentions": [ { "id": "c0274" } ]
+    },
+    {
+      "date": "2026-09-06",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0299",
+          "rank": 1,
+          "address": "301 S Christopher Columbus Blvd, Philadelphia, PA 19106",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Sheer Mag — one of Philly's most acclaimed punk-adjacent rock exports, all analog crunch and populist songwriting — headlines a free, all-ages waterfront show as part of the Summer Sounds series. A free set from a band with this kind of national critical reputation, headlining on its own terms, is exactly the thing worth building a Sunday around. Spruce Street Harbor Park, Penn's Landing waterfront."
+        },
+        {
+          "id": "c0390",
+          "rank": 2,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "West Coast solarfunk band the pleasant uprising bring their \"Banned in Amerikkka\" Turtle Island tour to Wooden Shoe Books — political framing baked into the tour name itself, at exactly the anarchist bookstore built for that kind of booking. The listing promises \"solidarity and solarfunk vibes\" for an unusually theatrical Sunday-afternoon set. Free, South Street, easy walk from Point Breeze."
+        },
+        {
+          "id": "c0341",
+          "rank": 3,
+          "address": "404 S 20th St, Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Homebrew Website Club is a genuinely global, decades-spanning movement — its name borrows from the 1970s Homebrew Computer Club — for people building and owning their own corner of the web instead of renting space from social platforms. Real anti-corporate tech politics, not just a coding meetup, and Iffy Books is exactly the space for it. Free, South Philly, an easy walk from Point Breeze."
+        }
+      ],
+      "annotations": [
+        { "id": "c0299", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Sheer Mag free waterfront show, Summer Sounds series." },
+        { "id": "c0390", "category": "🎵 Music & Concerts", "sold_out": false, "note": "the pleasant uprising, political framing, free." },
+        { "id": "c0341", "category": "💻 Tech & Maker", "sold_out": false, "note": "IndieWeb Homebrew Website Club, free." },
+        { "id": "c0325", "category": "🎪 Festivals & Major Events", "sold_out": false, "note": "Brazilian Day Philadelphia, free cultural festival running since 2014." },
+        { "id": "c0330", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Challenge of the Tiger, Kung Fu Matinees limited series." },
+        { "id": "c0154", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Dogfight, part of the Film Society's 1991 limited series." },
+        { "id": "c0304", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Metalcore bill at Ukie Club, all ages." },
+        { "id": "c0335", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Monthly neo-soul DJ set at 48 Record Bar." }
+      ],
+      "honorable_mentions": [ { "id": "c0325" } ]
+    }
+  ]
+}
