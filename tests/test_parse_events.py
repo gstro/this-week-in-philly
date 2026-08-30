@@ -476,6 +476,60 @@ def test_do215_omits_city_when_venue_has_none() -> None:
     assert drink_responsibly["venue"] == "Winston On The Water"
 
 
+# do215 venue objects -- a separate fixture (do215-venue-objects.json) rather
+# than extra entries in do215.json, so the count assertions above keep testing
+# what they were written to test. Shapes are all real: venue 511812 is the
+# "Nikki Lopez" record whose title is a person's name, 500714 Cherry Street
+# Pier's address is bare street, 514514 restates its own title, 502134 Spruce
+# Street Harbor has address:null, 510458 has address:"".
+
+
+def _venue_events() -> dict[str, dict]:
+    events = do215_parser.parse(_read("do215-venue-objects.json"), DO215_WEEK_START, DO215_WEEK_END)
+    return {e["title"]: e for e in events}
+
+
+def test_do215_appends_address_to_venue_title_rather_than_replacing_it() -> None:
+    """The junk-title case. venue 511812 is titled "Nikki Lopez" -- a person,
+    not a room -- and two of its shows shipped as Top 3 cards reading "Nikki
+    Lopez, Philadelphia, PA". Preferring address over title would repair that
+    one record by wrecking every good one (Union Transfer, Johnny Brenda's,
+    City Winery all carry addresses too), and no available signal separates a
+    bad title from a good one. Appending is the only lossless move."""
+    event = _venue_events()["Address already carries locality"]
+    assert event["venue"] == "Nikki Lopez, 304 South St, Philadelphia, PA 19147"
+    assert event["venue_address"] == "304 South St, Philadelphia, PA 19147"
+    assert event["venue_id"] == "511812"
+
+
+def test_do215_composes_locality_onto_a_bare_street_address() -> None:
+    """Bare streets must not reach check_selection.py's
+    check_outside_philadelphia(), which deliberately skips address-less picks
+    to avoid guessing -- a bare street would become a false warning."""
+    event = _venue_events()["Bare street address"]
+    assert event["venue_address"] == "121 N Christopher Columbus Blvd, Philadelphia, PA 19106"
+    assert event["venue"] == "Cherry Street Pier, 121 N Christopher Columbus Blvd, Philadelphia, PA 19106"
+
+
+def test_do215_does_not_repeat_a_venue_name_that_is_also_its_address() -> None:
+    event = _venue_events()["Address restates the title"]
+    assert event["venue"] == "Upper Merion Township Building Park"
+
+
+def test_do215_treats_null_and_blank_addresses_as_absent() -> None:
+    """Both shapes occur: venue 502134 has address:null, 510458 has "". Each
+    falls back to the old city/state display and emits no venue_address."""
+    events = _venue_events()
+    for title in ("Null address falls back to city and state", "Empty and padded address"):
+        event = events[title]
+        assert "venue_address" not in event, title
+        assert event["venue"].endswith(", Philadelphia, PA"), title
+
+
+def test_do215_omits_venue_id_when_the_object_has_none() -> None:
+    assert "venue_id" not in _venue_events()["Venue object has no id at all"]
+
+
 def test_do215_marks_free_events_explicitly() -> None:
     events = do215_parser.parse(_read("do215.json"), DO215_WEEK_START, DO215_WEEK_END)
     drink_responsibly = next(e for e in events if e["title"] == "Drink Responsibly")

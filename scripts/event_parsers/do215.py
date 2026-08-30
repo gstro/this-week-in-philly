@@ -18,6 +18,24 @@ Two API quirks this parser exists specifically to handle:
   reliable, so every event is filtered on its own `tz_adjusted_begin_date`,
   never on which day-page it came from.
 
+`venue` is a full object, not a string -- confirmed live 2026-08-30:
+
+    {"id": 511812, "title": "Nikki Lopez", "permalink": "/venues/nikki-lopez",
+     "address": "304 South St, Philadelphia, PA 19147", "city": "Philadelphia",
+     "state": "PA", "zip": "19147", "latitude": null, "capacity": false}
+
+Every prior estimate in this repo assumed it carried only {title, city, state}
+-- the only copy of the payload here was a trimmed fixture -- and that
+assumption is why venue identity was deferred three times as unaffordable. It
+isn't: `id` is always present and is address-stable (0 of 145 ids varied across
+one real week), and `address` is present for ~78% of venues. See _venue_address
+for the shape hazards (`null`, "", padded, ALL-CAPS, doubled `full_address`).
+
+What the object does NOT carry is any quality signal: `latitude` was null on
+145/145 venues, `capacity` false on 145/145, `popularity` 1.0 on 142/145. There
+is no API-side marker separating a real room from a stub, which is why the
+junk-title case is handled by appending rather than by classifying (see parse).
+
 `is_ongoing: true` marks recurring "every day"-style listings, which the
 source's own prior model-driven instructions already filtered out by hand;
 this parser drops them the same way, deterministically.
@@ -33,9 +51,44 @@ from __future__ import annotations
 
 import datetime
 import json
+import re
 from typing import Any
 
 from .base import Event, ParseError, write_event
+
+
+def _venue_address(venue: dict[str, Any]) -> str:
+    """A single display-and-key-ready street address from the venue object, or "".
+
+    The API's `address` is inconsistent: absent entirely, `null` (venue 502134,
+    Spruce Street Harbor), the empty string (510458), bare street with no
+    locality ("1200 Callowhill St"), already locality-bearing ("304 South St,
+    Philadelphia, PA 19147"), space-padded, or ALL-CAPS. `city`/`state`/`zip`
+    are separate fields and are usually present even when `address` is not.
+
+    So: use `address` as-is when it already carries locality, otherwise append
+    whichever of city/state/zip exist. Deliberately NOT `full_address`, which
+    doubles the locality when `address` already has it -- venue 511812's is
+    "304 South St, Philadelphia, PA 19147, Philadelphia, PA, 19147".
+
+    Composing locality in (rather than emitting a bare street) matters
+    downstream: check_selection.py's check_outside_philadelphia() skips
+    address-less picks on purpose to avoid guessing, and feeding it bare
+    streets would turn those deliberate skips into false warnings.
+    """
+    raw = str(venue.get("address") or "").strip()
+    if not raw:
+        return ""
+    zip_code = str(venue.get("zip") or "").strip()
+    state = str(venue.get("state") or "").strip()
+    city = str(venue.get("city") or "").strip()
+    has_locality = bool(zip_code and zip_code in raw) or bool(
+        state and re.search(rf"\b{re.escape(state)}\b", raw, re.IGNORECASE)
+    )
+    if has_locality:
+        return raw
+    tail = ", ".join(part for part in (city, f"{state} {zip_code}".strip()) if part)
+    return f"{raw}, {tail}" if tail else raw
 
 
 def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_kwargs: Any) -> list[Event]:  # noqa: ANN401
@@ -80,14 +133,45 @@ def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_
 
         venue = item.get("venue") or {}
         venue_title = str(venue.get("title", "")).strip()
-        city = venue.get("city")
-        state = venue.get("state")
-        if city and state:
-            venue_str = f"{venue_title}, {city}, {state}"
-        elif city:
-            venue_str = f"{venue_title}, {city}"
+        venue_address = _venue_address(venue)
+        if venue_address:
+            # Append the address rather than replace the title. The title is
+            # sometimes not a room at all -- venue id 511812 is titled "Nikki
+            # Lopez", a person's name, and covers six unrelated shows at 304
+            # South St; two of them shipped as Top 3 cards on the live
+            # 2026-08-31 report reading "Nikki Lopez, Philadelphia, PA".
+            #
+            # Preferring the address over the title would "fix" that one record
+            # by destroying every good one: City Winery, FDR Park, Kung Fu
+            # Necktie, Union Transfer, Johnny Brenda's and Underground Arts all
+            # carry a real address in the same object. And there is no test that
+            # separates a bad title from a good one -- the API carries no
+            # quality signal (latitude null and capacity false on all 145
+            # venues of one real week, popularity 1.0 on 142), and a lexical
+            # "looks like a person's name" rule fires on 57 of 312 real venue
+            # strings including Spruce Street Harbor itself.
+            #
+            # Appending is the only move that cannot make a card worse: it is
+            # occasionally redundant, never wrong, and it makes the junk-title
+            # case locatable, which is the actual harm.
+            #
+            # Skip the prepend when the address just restates the title --
+            # some records set both to the same string (venue 514514, "Upper
+            # Merion Township Building Park"), which would otherwise render
+            # the name twice.
+            if not venue_title or venue_address.casefold().startswith(venue_title.casefold()):
+                venue_str = venue_address
+            else:
+                venue_str = f"{venue_title}, {venue_address}"
         else:
-            venue_str = venue_title
+            city = venue.get("city")
+            state = venue.get("state")
+            if city and state:
+                venue_str = f"{venue_title}, {city}, {state}"
+            elif city:
+                venue_str = f"{venue_title}, {city}"
+            else:
+                venue_str = venue_title
 
         if item.get("is_free"):
             cost = "Free"
@@ -106,6 +190,8 @@ def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_
                 cost=cost,
                 url=url,
                 description=str(item.get("excerpt") or ""),
+                venue_address=venue_address,
+                venue_id=str(venue.get("id") or ""),
             )
         )
 

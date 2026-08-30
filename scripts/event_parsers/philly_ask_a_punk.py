@@ -40,9 +40,18 @@ def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_
             continue
 
         place = item.get("place") or {}
-        venue_name = place.get("name", "")
-        venue_address = place.get("address", "")
-        venue = f"{venue_name} ({venue_address})" if venue_address else venue_name
+        venue_name = str(place.get("name") or "").strip()
+        venue_address = str(place.get("address") or "").strip()
+        # When the feed has no real place it sets both fields to its own name,
+        # which used to render as "ask a punk (ask a punk)" and, with no
+        # Selection-authored address to key on, collapsed to the degenerate
+        # venue key `askapunkaskapunk` in check_selection.py. Emit the name
+        # once in that case; a useless key is better than a misleading one.
+        if venue_address and venue_address.casefold() != venue_name.casefold():
+            venue = f"{venue_name} ({venue_address})"
+        else:
+            venue = venue_name
+            venue_address = ""
         event_time = datetime.datetime.fromtimestamp(start_ts, tz=_EASTERN).strftime("%-I:%M %p")
 
         events.append(
@@ -54,6 +63,7 @@ def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_
                 cost="",
                 url=f"https://philly.askapunk.net/{item.get('slug', '')}",
                 description=" / ".join(item.get("tags", [])),
+                venue_address=venue_address,
             )
         )
     return events
