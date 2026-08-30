@@ -15,6 +15,21 @@ def parse(html: str, week_start: datetime.date, week_end: datetime.date, **_kwar
     soup = BeautifulSoup(html, "html.parser")
     containers = soup.select("div.showblock")
     if not containers:
+        # As of 2026-08-30 the site's Webflow CMS collection renders zero
+        # items with its own confirmed-empty marker (`<div class="w-dyn-empty">
+        # <div>No items found.</div></div>`) rather than any `div.showblock`
+        # -- a real change from the markup this parser was written against
+        # (div.showblock/p.showdatevenue are absent from the page entirely
+        # now, not just empty). Treated as a genuine zero, matching this
+        # source's documented min_expected of 0, rather than raised as a
+        # structural break -- the site is telling us its own list is empty,
+        # which is different from "we don't recognize this page at all."
+        # NOTE: no populated example of the new markup has been observed
+        # since this change. If items ever appear again, confirm the new
+        # item-template selector before trusting this parser's output --
+        # it currently only knows how to recognize "empty."
+        if soup.select_one("div.w-dyn-empty"):
+            return []
         raise ParseError("no showblock elements found -- markup may have changed")
 
     events: list[Event] = []
