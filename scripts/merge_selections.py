@@ -297,6 +297,19 @@ def build_events(
             "source": candidate.get("source", ""),
             "sold_out": ann.get("sold_out", False),
             **({"note": ann["note"]} if ann.get("note") else {}),
+            # Recurrence, carried from the candidate so html_render.py can
+            # build the "All Week / Recurring" table. group_recurring() in
+            # prepare_selection_input.py has emitted these since the v2 data
+            # layout landed -- they just never survived this merge, which is
+            # why html_render.py's docstring long claimed _selections.json had
+            # "no structured field a script could use to detect a 3+ day span"
+            # and the spec'd table never rendered once in six published weeks.
+            #
+            # `occurrences` is ONLY the dates the series falls on inside the
+            # collected week. It is not the run's real start or end and must
+            # never be rendered as one -- see html_render.build_all_week.
+            **({"recurrence_count": candidate["recurrence_count"]} if candidate.get("recurrence_count") else {}),
+            **({"occurrences": candidate["occurrences"]} if candidate.get("occurrences") else {}),
         }
         events.append(entry)
 

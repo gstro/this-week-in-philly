@@ -28,6 +28,14 @@ CALENDAR_NAME = "Curated Events"
 CALENDAR_SCOPES = ["https://www.googleapis.com/auth/calendar"]
 CALENDAR_TIMEZONE = "America/New_York"
 
+# Distinct dates a same-(title, venue) series must hit inside the target week
+# before prepare_selection_input.py collapses it to one candidate carrying
+# `occurrences`/`recurrence_count`, and before html_render.py routes it into
+# the "All Week / Recurring" table instead of a day's category block. Shared
+# here rather than duplicated because the collapser and the renderer must
+# agree on it -- the same reason CATEGORY_ORDER lives here.
+RECURRING_THRESHOLD = 3
+
 # The nine canonical category strings (emoji included, exact match), in
 # report display order. See docs/v1/Skills/events-report-format/SKILL.md.
 CATEGORY_ORDER = [

@@ -63,8 +63,7 @@
     .price-paid { font-size: 0.7rem; color: #999; }
     .sold-out { font-size: 0.7rem; color: #c0392b; font-weight: 600; }
 
-    /* ── All Week table (unused by v2 -- CSS kept for spec fidelity; see
-       html_render.py's module docstring for why the table isn't rendered) ── */
+    /* ── All Week table ── */
     .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
     .allweek-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
     .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
@@ -72,6 +71,8 @@
     .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eee; color: #555; vertical-align: top; }
     .allweek-table tr:last-child td { border-bottom: none; }
     .allweek-table td strong { color: #1c1c1c; }
+
+    .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
     .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
@@ -293,6 +294,7 @@
       <div class="price-paid">confirm details</div>
     </div>
   </div>
+  <p class="cat-omitted">+ 2 more not shown</p>
 
   <div class="cat-label">🤝 Community &amp; Politics</div>
   <div class="event-card">

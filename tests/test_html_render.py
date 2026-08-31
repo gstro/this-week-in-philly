@@ -255,3 +255,105 @@ def test_render_report_matches_the_golden_v2_artifact() -> None:
     expected = (GOLDEN_DIR / "actual-2026-06-22.html").read_text(encoding="utf-8")
     actual = hr.render_report(REAL_WEEK_DIR)
     assert actual == expected
+
+
+# --- All Week / Recurring table ---
+
+MUSIC_CAT = "\U0001f3b5 Music & Concerts"
+
+
+def _rec_event(title: str, venue: str = "A Venue", occurrences: list | None = None, **extra: object) -> dict:
+    ev = {
+        "title": title,
+        "venue": venue,
+        "time": "7:00 PM",
+        "cost": "$10",
+        "url": "",
+        "category": MUSIC_CAT,
+        "source": "Do215",
+        "sold_out": False,
+    }
+    if occurrences:
+        ev["occurrences"] = occurrences
+        ev["recurrence_count"] = len(occurrences)
+    ev.update(extra)
+    return ev
+
+
+def _rec_day(date_str: str, events: list, top3: list | None = None) -> dict:
+    return {
+        "date": date_str,
+        "day_name": "Monday",
+        "top3": top3 or [],
+        "honorable_mentions": [],
+        "events": events,
+    }
+
+
+def test_all_week_collects_recurring_events_one_row_per_series() -> None:
+    days = [
+        _rec_day("2026-09-01", [_rec_event("Rent", occurrences=["2026-09-01", "2026-09-02", "2026-09-03"])]),
+        _rec_day("2026-09-02", [_rec_event("One-off Show")]),
+    ]
+    rows = hr.build_all_week(days, {})
+    assert len(rows) == 1
+    assert rows[0]["title"] == "Rent"
+    assert rows[0]["venue"] == "A Venue"
+
+
+def test_all_week_lists_this_weeks_days_and_makes_no_claim_about_the_real_run() -> None:
+    """`occurrences` only ever holds dates inside the collected week, so a
+    museum exhibit running through December still shows 3-7 dates. Rendering
+    a first-last span would state a run length manufactured by the collection
+    window as fact -- the same class of error as the invented cost strings and
+    the guessed venue address this project has already had to undo."""
+    days = [_rec_day("2026-09-01", [_rec_event("Standing Exhibit", occurrences=["2026-09-01", "2026-09-03", "2026-09-05"])])]
+    rows = hr.build_all_week(days, {})
+    assert rows[0]["days"] == "Tue, Thu, Sat"
+    assert "-" not in rows[0]["days"] and "–" not in rows[0]["days"]
+
+
+def test_all_week_ignores_events_below_the_recurring_threshold() -> None:
+    days = [_rec_day("2026-09-01", [_rec_event("Twice Only", occurrences=["2026-09-01", "2026-09-02"])])]
+    assert hr.build_all_week(days, {}) == []
+
+
+def test_all_week_leaves_a_recurring_top3_pick_in_its_own_day() -> None:
+    """A pick vanishing from the day it was chosen for -- with a `why` written
+    about that day -- would be worse than listing it twice."""
+    event = _rec_event("Special Run", occurrences=["2026-09-01", "2026-09-02", "2026-09-03"])
+    days = [_rec_day("2026-09-01", [event], top3=[{"title": "Special Run"}])]
+    top3_by_date = {"2026-09-01": {"Special Run"}}
+    assert hr.build_all_week(days, top3_by_date) == []
+    categories = hr.build_categories(days[0], {"Special Run"})
+    assert any(e["name_html"] for c in categories for e in c["events"])
+
+
+def test_recurring_events_are_removed_from_the_day_category_blocks() -> None:
+    days = _rec_day(
+        "2026-09-01",
+        [
+            _rec_event("Rent", occurrences=["2026-09-01", "2026-09-02", "2026-09-03"]),
+            _rec_event("One-off Show"),
+        ],
+    )
+    categories = hr.build_categories(days, set())
+    titles = [e["name_html"] for c in categories for e in c["events"]]
+    assert len(titles) == 1
+    assert "One-off Show" in titles[0]
+
+
+def test_category_block_reports_how_many_the_display_cap_dropped() -> None:
+    """data/2026-06-22 has a 12-event Film bucket, so the published report for
+    that week silently omitted 2 vetted events. "No silent caps" is this
+    project's own rule."""
+    events = [_rec_event(f"Show {i}", time="7:00 PM") for i in range(12)]
+    categories = hr.build_categories(_rec_day("2026-09-01", events), set())
+    assert categories[0]["true_count"] == 12
+    assert len(categories[0]["events"]) == hr.CATEGORY_DISPLAY_CAP
+    assert categories[0]["omitted"] == 2
+
+
+def test_category_block_omitted_is_none_when_nothing_was_dropped() -> None:
+    categories = hr.build_categories(_rec_day("2026-09-01", [_rec_event("Only Show")]), set())
+    assert categories[0]["omitted"] is None
