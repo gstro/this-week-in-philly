@@ -478,10 +478,10 @@ def test_do215_omits_city_when_venue_has_none() -> None:
 
 # do215 venue objects -- a separate fixture (do215-venue-objects.json) rather
 # than extra entries in do215.json, so the count assertions above keep testing
-# what they were written to test. Shapes are all real: venue 511812 is the
-# "Nikki Lopez" record whose title is a person's name, 500714 Cherry Street
-# Pier's address is bare street, 514514 restates its own title, 502134 Spruce
-# Street Harbor has address:null, 510458 has address:"".
+# what they were written to test. Shapes are all real: venue 511812 is
+# "Nikki Lopez", a real DIY venue whose name reads like a person's, 500714
+# Cherry Street Pier's address is bare street, 514514 restates its own title,
+# 502134 Spruce Street Harbor has address:null, 510458 has address:"".
 
 
 def _venue_events() -> dict[str, dict]:
@@ -490,12 +490,13 @@ def _venue_events() -> dict[str, dict]:
 
 
 def test_do215_appends_address_to_venue_title_rather_than_replacing_it() -> None:
-    """The junk-title case. venue 511812 is titled "Nikki Lopez" -- a person,
-    not a room -- and two of its shows shipped as Top 3 cards reading "Nikki
-    Lopez, Philadelphia, PA". Preferring address over title would repair that
-    one record by wrecking every good one (Union Transfer, Johnny Brenda's,
-    City Winery all carry addresses too), and no available signal separates a
-    bad title from a good one. Appending is the only lossless move."""
+    """venue 511812 is titled "Nikki Lopez" -- reads like a person's name, but
+    is a real DIY venue that's appeared as a plain venue name in this
+    project's own real weekly reports since 2026-06-10. Preferring address
+    over title would "fix" a name that was never broken by wrecking every
+    other good one (Union Transfer, Johnny Brenda's, City Winery all carry
+    addresses too), and no available signal separates an unusually-named real
+    venue from an actually bad title. Appending is the only lossless move."""
     event = _venue_events()["Address already carries locality"]
     assert event["venue"] == "Nikki Lopez, 304 South St, Philadelphia, PA 19147"
     assert event["venue_address"] == "304 South St, Philadelphia, PA 19147"

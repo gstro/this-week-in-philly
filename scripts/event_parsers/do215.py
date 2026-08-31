@@ -33,8 +33,12 @@ for the shape hazards (`null`, "", padded, ALL-CAPS, doubled `full_address`).
 
 What the object does NOT carry is any quality signal: `latitude` was null on
 145/145 venues, `capacity` false on 145/145, `popularity` 1.0 on 142/145. There
-is no API-side marker separating a real room from a stub, which is why the
-junk-title case is handled by appending rather than by classifying (see parse).
+is no API-side marker separating a genuinely bad title from an unusual-sounding
+real one -- venue 511812's "Nikki Lopez" reads like a person's name but is a
+real DIY venue at 304 South St (it's appeared as a plain venue name in this
+project's own real weekly reports since 2026-06-10, per
+docs/v1/Data/event-picks-log.csv), which is exactly why titles are appended to
+rather than classified or replaced (see parse).
 
 `is_ongoing: true` marks recurring "every day"-style listings, which the
 source's own prior model-driven instructions already filtered out by hand;
@@ -135,25 +139,28 @@ def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_
         venue_title = str(venue.get("title", "")).strip()
         venue_address = _venue_address(venue)
         if venue_address:
-            # Append the address rather than replace the title. The title is
-            # sometimes not a room at all -- venue id 511812 is titled "Nikki
-            # Lopez", a person's name, and covers six unrelated shows at 304
-            # South St; two of them shipped as Top 3 cards on the live
-            # 2026-08-31 report reading "Nikki Lopez, Philadelphia, PA".
+            # Append the address rather than replace the title. Some Do215
+            # titles read as odd or ambiguous out of context -- venue 511812 is
+            # titled "Nikki Lopez" and covers six unrelated shows at 304 South
+            # St -- but that is a real, distinctively-named DIY venue, not a
+            # data defect: it's appeared as a plain venue name in this
+            # project's own real weekly reports since 2026-06-10 with no
+            # confusion, the same category as "Johnny Brenda's" or "Ortlieb's".
             #
-            # Preferring the address over the title would "fix" that one record
-            # by destroying every good one: City Winery, FDR Park, Kung Fu
-            # Necktie, Union Transfer, Johnny Brenda's and Underground Arts all
-            # carry a real address in the same object. And there is no test that
-            # separates a bad title from a good one -- the API carries no
+            # There is no test that reliably tells an unusually-named real
+            # venue apart from an actually bad title: the API carries no
             # quality signal (latitude null and capacity false on all 145
             # venues of one real week, popularity 1.0 on 142), and a lexical
             # "looks like a person's name" rule fires on 57 of 312 real venue
-            # strings including Spruce Street Harbor itself.
+            # strings, including "Nikki Lopez" itself and Spruce Street Harbor.
+            # A classifier tuned to catch junk would just as often mangle a
+            # real venue's name.
             #
-            # Appending is the only move that cannot make a card worse: it is
-            # occasionally redundant, never wrong, and it makes the junk-title
-            # case locatable, which is the actual harm.
+            # Preferring the address over the title outright is worse still --
+            # it would erase real, recognizable names (City Winery, Union
+            # Transfer, Johnny Brenda's, Underground Arts) on every record that
+            # happens to carry an address. Appending is the only move that
+            # cannot make a card worse: at most it is occasionally redundant.
             #
             # Skip the prepend when the address just restates the title --
             # some records set both to the same string (venue 514514, "Upper

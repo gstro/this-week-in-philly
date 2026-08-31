@@ -1072,7 +1072,7 @@ was a trimmed fixture showing `{title, city, state}`, which is why the project l
 What the object does *not* carry is any quality signal — `latitude` null 145/145, `capacity` false
 145/145, `popularity` 1.0 on 142/145. "Nikki Lopez" is metadata-identical to Union Transfer.
 
-## Three defects, all shipped
+## Three defects, all shipped (plus one non-defect, corrected below)
 
 **Wrong calendar pin (false merge).** Selection authored "301 S Christopher Columbus Blvd" for *both*
 Spruce Street Harbor and Cherry Street Pier on 08-31 — one key for two venues, and wrong for Cherry
@@ -1089,9 +1089,17 @@ calendar entries had no location at all, and the cap fell back to venue names �
 (from Do215's "Philadelphia, Philadelphia, Pe", which covers 11 unrelated events across four weeks),
 `askapunkaskapunk`, `workersunited`.
 
-**A person's name published as a venue.** Do215 venue 511812 is titled "Nikki Lopez" and covers six
-unrelated shows; two shipped as Top 3 cards. Not a cap defect — those two picks really are the same
-room (304 South St) — a display defect only.
+**Not a defect, corrected during review.** A draft of this tranche described Do215 venue 511812
+("Nikki Lopez", covering six shows at 304 South St, two of which shipped as Top 3 cards) as "a
+person's name published as a venue" — the assumption behind D4 below and the append-not-replace
+parser design. Greg caught this on the PR: Nikki Lopez is a real, distinctively-named DIY venue, not
+junk data — it's appeared as a plain venue name in this project's own real weekly reports since
+2026-06-10 (`docs/v1/Data/event-picks-log.csv`) with no confusion, the same category as "Johnny
+Brenda's" or "Ortlieb's". There was never a display defect to fix here. The append-not-replace design
+itself is unaffected — its real justification is that no signal (API-side or lexical) reliably tells
+an unusually-named real venue apart from an actually bad title, so replacing risks erasing a good
+name to "fix" one that was never broken — but the specific example was wrong and has been corrected
+everywhere it appeared (`event_parsers/do215.py`, `tests/test_parse_events.py`).
 
 ## What shipped
 
@@ -1106,9 +1114,12 @@ Two design points worth not re-deriving:
   in the same week (06-22, 08-03); an id-based key would split it. Discarding locality is what keeps
   a bare source street ("531 N 12th St") comparable with Selection's full address. Verified: 126
   picks 57→52 keys, 51 distinct addresses 51→44, seven merges, all correct, zero false.
-- **The junk display name is not classifiable.** No API signal exists, and a lexical person-name rule
-  fires on 57 of 312 real venue strings including *Spruce Street Harbor*. The parser appends the
-  address to the title instead — never wrong, occasionally redundant.
+- **A bad venue title is not reliably classifiable, so titles are never replaced, only appended to.**
+  No API signal exists, and a lexical "looks like a person's name" rule fires on 57 of 312 real venue
+  strings — including *Nikki Lopez itself* and *Spruce Street Harbor*, both real venues. Corrected
+  during review (see above): there is no known example of an actually-bad Do215 title in this data —
+  the design choice is precautionary, not a fix for a confirmed defect. Appending is still the safer
+  default because it cannot erase a real, unusual venue name to "fix" a title that was never broken.
 - **Selection never sees the new fields.** `split_by_day()` strips them, because Selection reads the
   per-day files while the merge reads the monolithic one. That keeps the skill's "candidates never
   carry an address" accurate, keeps the token-optimized payloads from growing, and — the real reason —
