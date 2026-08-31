@@ -1013,3 +1013,134 @@ Recorded so it isn't re-scoped from scratch:
 out of scope for this tranche), `venue_cap`'s FAIL promotion, PhilaMOCA's self-stamping parser, the
 degenerate-key guard, a past-week guard for `collection.yml`, and the standing list — A1, A3, A6,
 B9–B14, C9, C13, C14, C15, C16, C21, D3, D4.
+
+---
+
+# Tranche 6 — venue identity as data quality (and no hard venue cap)
+
+## The 2026-08-31 holdout
+
+First week selected under **both** tranche 4's cross-source dedupe and tranche 5's cross-week repeat
+check. `check_selection.py`: **0 fail, 0 warn**.
+
+| | 08-10 | 08-17 | 08-24 | **08-31** |
+|---|---|---|---|---|
+| `repeat_pick` warnings | 1 | 4 | 2 | **0** |
+| Top 3 picks with no `address` | 0 | 0 | 6 | **0** |
+| candidates (raw → deduped) | 641→570 | 610→551 | 677→619 | **472→415** |
+
+**Tranche 5 worked on its first live week.** "Rustin's Challenge Reading Group" — a Top 3 pick in
+**four consecutive reports** — is gone, as is the Chris Rabb canvass (three straight). Zero repeats.
+🎨 Arts & Workshops also took its **first-ever Top 3 slot** after 0-for-84.
+
+## The venue cap: cancelled, not deferred
+
+Measuring the key to cash in tranche 4's promotion precondition produced the number that settles it.
+Over all 126 published Top 3 slots: **Iffy Books 16, PhilaMOCA 14, Wooden Shoe 13 — three venues hold
+34% of every slot ever published.**
+
+**Greg's call: that is fine when the events are good, and no hard cap should exist.** Those three are
+an anarchist bookstore, a DIY cinema and a radical bookshop — Core-tier interests per
+`personal-interests`. A venue is not a proxy for event quality in either direction.
+
+So `venue_cap` stays **WARN permanently**, recorded as a decision in `check_selection.py`'s docstring
+so it isn't reopened on mechanical grounds a fifth time. The hard-cap prose is removed from
+`event-selection-philosophy` (its "Weekly Caps" section is now "Weekly Patterns") and replaced by a
+softly-worded nudge in `philly-events-selection` Phase 3: notice venue repetition, re-check that each
+pick earned its slot on the event, and **never drop a better event to even out the venues**. The
+prose deliberately states no number — tranche 4 measured the model treating stated limits as targets
+(five straight weeks of exactly 3×7 picks; two of exactly-2-at-four-venues).
+
+**This tranche is therefore about venue data being *correct*, not about limiting anything.**
+
+## Tranche 5's gating unknown, answered
+
+Tranche 5 deferred all venue-identity work on one question: whether Do215's API returns a real
+address. It does. Fetched live 2026-08-30:
+
+```json
+{"id": 511812, "title": "Nikki Lopez", "permalink": "/venues/nikki-lopez",
+ "address": "304 South St, Philadelphia, PA 19147", "city": "Philadelphia",
+ "state": "PA", "zip": "19147", "latitude": null, "capacity": false}
+```
+
+`id` is always present and address-stable (0 of 145 ids varied across one week); `address` is present
+on ~78% of venues but can be `null`, `""`, padded or ALL-CAPS. The repo's only copy of the payload
+was a trimmed fixture showing `{title, city, state}`, which is why the project looked unaffordable.
+**Do215 is 48.4% of all 126 Top 3 picks.**
+
+What the object does *not* carry is any quality signal — `latitude` null 145/145, `capacity` false
+145/145, `popularity` 1.0 on 142/145. "Nikki Lopez" is metadata-identical to Union Transfer.
+
+## Three defects, all shipped (plus one non-defect, corrected below)
+
+**Wrong calendar pin (false merge).** Selection authored "301 S Christopher Columbus Blvd" for *both*
+Spruce Street Harbor and Cherry Street Pier on 08-31 — one key for two venues, and wrong for Cherry
+Street Pier, which Do215 puts at **121 N**. The live calendar entry for that Sheer Mag show pins
+about a mile away, at the wrong pier.
+
+**Hidden false split.** "1412 Chestnut St" and "1412 Chestnut Street" were two keys, so PFS's real
+**10 slots across 4 weeks** showed as 7 and 3. Same for Ortlieb's, Johnny Brenda's, Underground Arts
+(one street under two ZIPs) and Cousin Danny's. Every venue number computed before this fix was
+undercounted.
+
+**Unpinned entries and degenerate keys.** 08-24 shipped **6 of 21** picks with no address, so six
+calendar entries had no location at all, and the cap fell back to venue names — minting `philadelphia`
+(from Do215's "Philadelphia, Philadelphia, Pe", which covers 11 unrelated events across four weeks),
+`askapunkaskapunk`, `workersunited`.
+
+**Not a defect, corrected during review.** A draft of this tranche described Do215 venue 511812
+("Nikki Lopez", covering six shows at 304 South St, two of which shipped as Top 3 cards) as "a
+person's name published as a venue" — the assumption behind D4 below and the append-not-replace
+parser design. Greg caught this on the PR: Nikki Lopez is a real, distinctively-named DIY venue, not
+junk data — it's appeared as a plain venue name in this project's own real weekly reports since
+2026-06-10 (`docs/v1/Data/event-picks-log.csv`) with no confusion, the same category as "Johnny
+Brenda's" or "Ortlieb's". There was never a display defect to fix here. The append-not-replace design
+itself is unaffected — its real justification is that no signal (API-side or lexical) reliably tells
+an unusually-named real venue apart from an actually bad title, so replacing risks erasing a good
+name to "fix" one that was never broken — but the specific example was wrong and has been corrected
+everywhere it appeared (`event_parsers/do215.py`, `tests/test_parse_events.py`).
+
+## What shipped
+
+`write_event()` gains optional keyword-only `venue_address`/`venue_id`, omitted when empty so no other
+parser changes. Populated from Do215 and Ask A Punk. `merge_selections.py` resolves a pick's `address`
+as **source first, Selection second**, and `check_selection.py`'s `_street_key()` folds abbreviation
+and ZIP variants while discarding locality.
+
+Two design points worth not re-deriving:
+
+- **The key must never be the venue id.** PhilaMOCA reaches Top 3 via its own source *and* via Do215
+  in the same week (06-22, 08-03); an id-based key would split it. Discarding locality is what keeps
+  a bare source street ("531 N 12th St") comparable with Selection's full address. Verified: 126
+  picks 57→52 keys, 51 distinct addresses 51→44, seven merges, all correct, zero false.
+- **A bad venue title is not reliably classifiable, so titles are never replaced, only appended to.**
+  No API signal exists, and a lexical "looks like a person's name" rule fires on 57 of 312 real venue
+  strings — including *Nikki Lopez itself* and *Spruce Street Harbor*, both real venues. Corrected
+  during review (see above): there is no known example of an actually-bad Do215 title in this data —
+  the design choice is precautionary, not a fix for a confirmed defect. Appending is still the safer
+  default because it cannot erase a real, unusual venue name to "fix" a title that was never broken.
+- **Selection never sees the new fields.** `split_by_day()` strips them, because Selection reads the
+  per-day files while the merge reads the monolithic one. That keeps the skill's "candidates never
+  carry an address" accurate, keeps the token-optimized payloads from growing, and — the real reason —
+  keeps Selection's address an *independent* second opinion rather than an echo, which is what makes
+  the new `address_conflict` WARN worth anything.
+
+Verified end to end by joining a live re-fetch of the 08-31 week onto its committed candidates: the
+two piers separate, and `address_conflict` fires exactly once, on the real defect.
+
+**Known and accepted false merge:** Moshulu and Spirit of Philadelphia are two boats at 401 S Columbus
+Blvd. Of 5 Do215 key collisions in 108, the other 4 are genuine repairs. At WARN it costs a line.
+
+## Deferred
+
+The three findings tranche 5 nominated — under-inclusion (~14% of collected events listed), the 🎨
+Arts & Workshops category boundary (weakened by 08-31's first slot), and C9's unnamed "large corporate
+venues". Plus: the dead `philadelphia-sources/SKILL.md:566-583` venue table (**explicitly out of
+scope**, so it isn't re-scoped a third time), C16 thinness, PhilaMOCA's self-stamping parser, a
+past-week guard for `collection.yml`, and the standing list — A1, A3, A6, B9–B14, C13, C14, C15, C21,
+D3, D4.
+
+**Recorded, not acted on:** 🎵 Music & Concerts took **10 of 21** slots on 08-31 (48%; Friday and
+Saturday were entirely music) against 6–7 in prior weeks. One week is not a trend — if it recurs it is
+a category-balance question, not a venue one.

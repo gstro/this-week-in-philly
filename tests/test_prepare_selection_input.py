@@ -313,6 +313,40 @@ def test_cross_source_preserves_a_sold_out_mention_from_the_discarded_entry() ->
     assert "sold out" in result[0]["description"].casefold()
 
 
+def test_cross_source_carries_venue_fields_forward_from_the_discarded_entry() -> None:
+    """The tranche's load-bearing case. Only do215 and philly_ask_a_punk emit
+    venue_address/venue_id, and Do215 sits 4th in SOURCE_PRIORITY -- so
+    whenever a higher-priority source also carries the event (the real
+    PhilaMOCA-via-two-sources shape, ~95 groups over four measured weeks) the
+    winner is the record WITHOUT the address. Without field-level carry-forward
+    merge_selections.py sees nothing and the whole change silently no-ops."""
+    events = [
+        _event(
+            "Show",
+            "Venue A",
+            "2026-08-03",
+            source="Do215",
+            venue_address="531 N 12th St, Philadelphia, PA 19123",
+            venue_id="489700",
+        ),
+        _event("Show", "Venue A Annex", "2026-08-03", source="R5 Productions"),
+    ]
+    result = collapse_cross_source_duplicates(events)
+    assert len(result) == 1
+    assert result[0]["source"] == "R5 Productions"
+    assert result[0]["venue_address"] == "531 N 12th St, Philadelphia, PA 19123"
+    assert result[0]["venue_id"] == "489700"
+
+
+def test_cross_source_does_not_overwrite_venue_fields_the_winner_already_has() -> None:
+    events = [
+        _event("Show", "Venue A", "2026-08-03", source="Do215", venue_address="111 Loser St"),
+        _event("Show", "Venue A Annex", "2026-08-03", source="R5 Productions", venue_address="222 Winner St"),
+    ]
+    result = collapse_cross_source_duplicates(events)
+    assert result[0]["venue_address"] == "222 Winner St"
+
+
 def test_cross_source_priority_tie_falls_back_to_completeness() -> None:
     events = [
         _event("Gig", "Room One", "2026-08-03", source="Unlisted A"),
@@ -524,6 +558,40 @@ def test_split_by_day_writes_one_file_per_date_in_the_week(tmp_path: Path) -> No
         "2026-08-08.json",
         "2026-08-09.json",
     }
+
+
+def test_split_by_day_withholds_structured_venue_fields_from_selection(tmp_path: Path) -> None:
+    """Selection's ONLY input is the per-day files; merge_selections.py reads
+    the monolithic _candidates.json. Keeping venue_address/venue_id out of the
+    per-day files is what lets the source's address reach the merge without
+    reaching the model -- so philly-events-selection/SKILL.md's "candidates
+    never carry an address ... written from your own memory" stays true, the
+    token-optimized payloads don't grow, and the model's address stays an
+    independent second opinion instead of an echo of the source's."""
+    result = {
+        "week": "2026-08-03",
+        "collection_failures": [],
+        "candidates": [
+            _event(
+                "Concert",
+                "Venue",
+                "2026-08-03",
+                id="c0001",
+                venue_address="304 South St, Philadelphia, PA 19147",
+                venue_id="511812",
+            )
+        ],
+    }
+    split_by_day(result, tmp_path)
+    monday = json.loads((tmp_path / "_candidates" / "2026-08-03.json").read_text())
+    candidate = monday["candidates"][0]
+    assert "venue_address" not in candidate
+    assert "venue_id" not in candidate
+    # everything else still rides through untouched
+    assert candidate["title"] == "Concert"
+    assert candidate["id"] == "c0001"
+    # ...and the monolithic result the merge reads is NOT mutated by the strip
+    assert result["candidates"][0]["venue_address"] == "304 South St, Philadelphia, PA 19147"
 
 
 def test_split_by_day_places_candidates_on_their_own_date(tmp_path: Path) -> None:

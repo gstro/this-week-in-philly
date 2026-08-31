@@ -41,21 +41,37 @@ week and earned promotion; the rest have not. Per-check status:
     docstring), this check becomes unreachable in the normal pipeline --
     kept anyway as the unit-tested regression guard and as a backstop for
     any path that writes _selections.json without going through the merge.
-  - venue_cap: still WARN. It has only ever run against un-normalized
-    address keys (see normalize_venue's docstring), so a quiet week is not
-    yet evidence -- promote once it demonstrably trips against a punctuation
-    variant on a known-bad week and stays quiet on a known-good one.
+  - venue_cap: WARN permanently -- a decision, not a pending promotion, and
+    the tranches that kept deferring it were asking the wrong question. Over
+    all 126 published top3 slots, Iffy Books took 16, PhilaMOCA 14 and Wooden
+    Shoe 13: three venues, 34% of every slot ever published. Greg's call is
+    that this is fine when the events are good, and those three are an
+    anarchist bookstore, a DIY cinema and a radical bookshop -- Core-tier
+    interests per personal-interests. A venue is not a proxy for event
+    quality in either direction, so no threshold should fail a build over
+    one. What replaces the cap as a control is a softly-worded nudge at
+    Selection time (philly-events-selection/SKILL.md's Phase 3), where the
+    question "am I leaning on one room this week?" can be weighed against
+    the actual events. This check's job is drift detection only: it reports
+    what happened and names the venues pooled under each key. Do not promote
+    it; do not reintroduce a number in the prose either.
   - implausible_time, same_series: WARN by design -- both have plausible
     legitimate exceptions (a real late show; two workshops that share a
     title prefix by coincidence).
+  - outside_philadelphia, repeat_pick, missing_address, address_conflict:
+    WARN by design. Each surfaces a judgement call with legitimate
+    exceptions -- a genuinely worth-the-trip suburban show, a repeat with a
+    real reason, an online event with no address, a case where Selection's
+    address beat the source's (2026-08-10's Keswick screening is the one
+    recorded instance).
 
 Checks:
-  1. Venue cap (WARN) -- event-selection-philosophy's Weekly Caps: at most
-     VENUE_CAP top3 slots per week at the same venue, keyed on a normalized
-     `address` (falling back to a normalized venue-name prefix when address
-     is missing, per the same rule). Normalization strips punctuation so
-     "404 S. 20th St.," and "404 S 20th St," count as one venue -- see
-     normalize_venue().
+  1. Venue cap (WARN) -- reports when more than VENUE_CAP top3 slots in a
+     week land at one venue. Keyed by _venue_key(): the source's structured
+     `venue_address` first, then Selection's `address`, then a normalized
+     venue-name prefix. _street_key() folds abbreviation and ZIP variants, so
+     "1412 Chestnut St" and "1412 Chestnut Street" are one venue. Advisory --
+     see the per-check status above for why this stays WARN.
   2. Time format (FAIL) -- regression guard for the defect fixed in
      9bbd592: every top3 pick's `time` must be a single `%I:%M %p` string,
      never a list, a doors/show pair, or a range. A malformed time means
@@ -87,6 +103,14 @@ Checks:
      failed. Skips picks with no `address` at all (falls back to a venue
      name, which carries no municipality to check) rather than treating a
      missing address as "not Philadelphia."
+  7. Repeat pick (WARN) -- a top3 pick that already held a top3 slot in one
+     of the RECENT_WEEKS_LOOKBACK prior weeks with selections. See
+     check_repeat_of_recent_pick().
+  8. Missing address (WARN) -- a top3 pick with no address from either the
+     source or Selection: no Calendar location, and a degenerate cap key.
+  9. Address conflict (WARN) -- the source's structured venue address and
+     Selection's disagree. merge_selections.py prefers the source's; this is
+     what makes that precedence auditable.
 
 Also prints a venue/category/source histogram unconditionally -- not an
 Issue, informational, the same numbers philly-events-selection/SKILL.md's
@@ -100,6 +124,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -139,21 +164,105 @@ def normalize_venue(venue: str) -> str:
     return venue.split(",")[0].strip().lower()
 
 
+# Whole-token synonyms, applied before the alphanumeric strip. Selection
+# authors addresses free-hand and spells the same one several ways across
+# weeks; without this, one venue mints several keys.
+_ADDRESS_SYNONYMS = {
+    "street": "st", "str": "st", "avenue": "ave", "av": "ave", "boulevard": "blvd",
+    "road": "rd", "drive": "dr", "place": "pl", "court": "ct", "lane": "ln",
+    "square": "sq", "terrace": "ter", "parkway": "pkwy", "highway": "hwy",
+    "circle": "cir", "saint": "st",
+    "north": "n", "south": "s", "east": "e", "west": "w",
+    "northeast": "ne", "northwest": "nw", "southeast": "se", "southwest": "sw",
+}
+_UNIT_NOISE = frozenset({"suite", "ste", "unit", "apt", "floor", "fl", "rear", "bldg", "usa", "us"})
+_ZIP_RE = re.compile(r"^\d{5}(-\d{4})?$")
+
+
+def _street_key(text: str) -> str:
+    """Normalize one address string to a comparable street key.
+
+    Deliberately discards locality (city/state/ZIP) and unit noise, keeping
+    only house number + street. That is what makes the key comparable ACROSS
+    SOURCES, which is the property the whole venue cap rests on: PhilaMOCA
+    reaches top3 via its own source AND via Do215 in the same week (2026-06-22,
+    2026-08-03), and Do215 supplies a bare "531 N 12th St" where Selection
+    writes "531 N 12th St, Philadelphia, PA 19123". Keying on the full string
+    would split one venue in two.
+
+    The cost is that two identical house-number+street pairs in different
+    municipalities would pool. Zero occurrences across 51 real top3 addresses,
+    and check_outside_philadelphia() surfaces non-Philly picks independently.
+
+    Guiding asymmetry, since several calls here are judgement: a false SPLIT
+    fails open (a venue is under-counted, the report still ships) while a false
+    MERGE fails closed (a warning about venues that aren't the same room).
+    Resolve anything ambiguous toward splitting.
+    """
+    cleaned = unicodedata.normalize("NFKD", text or "").encode("ascii", "ignore").decode()
+    # Take the text before the first comma only when it starts with a house
+    # number -- that is what makes a bare source address ("1200 Callowhill St")
+    # comparable with Selection's fuller one, and what defuses Do215's doubled
+    # full_address shape ("304 South St, Philadelphia, PA 19147, Philadelphia,
+    # PA, 19147").
+    head = cleaned.split(",")[0].strip()
+    if head and head[0].isdigit():
+        cleaned = head
+    tokens = [t for t in re.split(r"[^A-Za-z0-9]+", cleaned.lower()) if t]
+    out = [
+        _ADDRESS_SYNONYMS.get(t, t)
+        for t in tokens
+        if not _ZIP_RE.match(t) and t not in _UNIT_NOISE
+    ]
+    return "".join(out)
+
+
 def _venue_key(pick: dict) -> str:
-    """Cap key for a pick -- `address` when present, else a normalized
-    venue-name prefix. Selection authors `address` free-hand, and the same
-    venue has appeared three different ways across three real weeks ("404
-    S. 20th St.,", "404 S. 20th St,", "404 S 20th St,") -- on 2026-08-03 that
-    split what was actually 5 top3 slots at Iffy Books into two keys (4 + 1),
-    neither of which tripped the cap. Stripping everything but letters and
-    digits collapses punctuation/whitespace variants onto one key; verified
-    against all 33 distinct top3 addresses across three real weeks to
-    produce exactly that one collapse and no others (e.g. "847 North 3rd
-    Street" and "847 N Franklin St" -- different streets, same number --
-    stay distinct)."""
-    address = pick.get("address")
-    key = address.strip().lower() if address else normalize_venue(pick.get("venue", ""))
-    return _NON_ALNUM_RE.sub("", key)
+    """Cap key for a pick: the source's venue address, else Selection's
+    `address`, else a normalized venue-name prefix.
+
+    Selection authors `address` free-hand and spells one venue several ways.
+    An earlier version stripped everything but letters and digits, which fixed
+    punctuation ("404 S. 20th St.," / "404 S 20th St,", the 2026-08-03 Iffy
+    Books case that split 5 slots into 4+1) but not abbreviations or ZIP drift.
+    That version's docstring claimed it had been "verified against all 33
+    distinct top3 addresses to produce exactly one collapse and no others";
+    that claim is now false -- see the false merge below.
+
+    _street_key adds whole-token synonyms and drops ZIPs. Verified over every
+    committed week: across all 126 published top3 picks, 57 keys -> 52; across
+    the 51 distinct top3 ADDRESS strings, 51 -> 44. Exactly seven groups merge
+    and every one is a real venue that was previously double-counted:
+      Iffy Books        three punctuation variants of 404 S 20th St
+      PFS               1412 Chestnut St / 1412 Chestnut Street
+      Ortlieb's         847 N 3rd St / 847 North 3rd Street
+      Johnny Brenda's   1201 N / 1201 North Frankford Ave
+      Underground Arts  1200 Callowhill St under ZIPs 19107 and 19123
+      Cousin Danny's    5001 Market St with and without a ZIP
+      Pentridge Station venue-name fallback, with and without the city
+    Zero false merges. "847 N 3rd St" and "847 N Franklin St" stay distinct --
+    same house number, different street -- the case the old docstring worried
+    about.
+
+    Source address first is what fixes a real false merge: on 2026-08-31
+    Selection authored "301 S Christopher Columbus Blvd" for BOTH Spruce Street
+    Harbor and Cherry Street Pier, pooling two different venues under one key
+    (and pinning a calendar entry a mile off -- Do215 puts Cherry Street Pier
+    at 121 N). See merge_selections.py's build_top3 for the full precedence
+    argument.
+
+    One known and accepted false merge remains: Moshulu and Spirit of
+    Philadelphia are two different boats at 401 S Columbus Blvd. Under a
+    locality-stripped street key 5 of 108 Do215 venue keys pool distinct venue
+    ids, and the other 4 are genuine repairs (FringeArts/FRINGE BAR, Perelman
+    inside Kimmel, and two pairs of duplicate venue records). Documented rather
+    than engineered around: venue_cap is a WARN, so it costs a line of output.
+    """
+    for source_field in ("venue_address", "address"):
+        value = pick.get(source_field)
+        if value and value.strip():
+            return _street_key(value)
+    return _NON_ALNUM_RE.sub("", normalize_venue(pick.get("venue", "")))
 
 
 def _repeat_key(pick: dict) -> tuple[str, str]:
@@ -240,13 +349,80 @@ def check_venue_cap(selections: dict) -> list[Issue]:
     for venue_key, picks in by_venue.items():
         if len(picks) > VENUE_CAP:
             days = ", ".join(f"{d} ({p.get('title', '?')!r})" for d, p in picks)
+            # Name the venues and ids pooled under this key, so a false merge
+            # (two rooms sharing a street address -- see _venue_key's Moshulu
+            # note) is visible in the output instead of looking like real
+            # concentration.
+            pooled = sorted({p.get("venue", "?") for _, p in picks})
+            ids = sorted({p["venue_id"] for _, p in picks if p.get("venue_id")})
+            detail = f" [{'; '.join(pooled)}]" + (f" ids={','.join(ids)}" if ids else "")
             issues.append(
                 Issue(
                     "venue_cap",
-                    "warn",  # still WARN -- see module docstring's per-check status
+                    "warn",  # WARN permanently, by decision -- see module docstring
                     None,
                     None,
-                    f"{venue_key!r} took {len(picks)} top3 slots this week (cap {VENUE_CAP}): {days}",
+                    f"{venue_key!r} took {len(picks)} top3 slots this week: {days}{detail}",
+                )
+            )
+    return issues
+
+
+def check_missing_address(selections: dict) -> list[Issue]:
+    """A top3 pick with no address at all, from either the source or Selection.
+
+    Two consequences, both real: calendar_create.py omits `location` entirely,
+    so the entry is unpinned (6 of 21 picks on 2026-08-24, all six unpinned);
+    and _venue_key falls back to the venue name, which mints keys like
+    'philadelphia' -- Do215's "Philadelphia, Philadelphia, Pe" string, which
+    covers 11 unrelated events across four weeks and would pool them all.
+
+    WARN, not FAIL: an online event legitimately has no address, and 2026-08-24
+    is already published with six of them -- failing the build on data that
+    cannot be repaired (its raw payloads aren't persisted, so backfill is
+    impossible) would block a re-render for no gain.
+    """
+    issues = []
+    for day_date, pick in _iter_top3(selections):
+        if not (pick.get("address") or "").strip():
+            issues.append(
+                Issue(
+                    "missing_address",
+                    "warn",
+                    day_date,
+                    pick.get("title"),
+                    "top3 pick has no address -- its Google Calendar entry will have no location, "
+                    "and the venue cap falls back to keying on the venue name",
+                )
+            )
+    return issues
+
+
+def check_address_conflict(selections: dict) -> list[Issue]:
+    """Selection's address disagrees with the source's structured one.
+
+    merge_selections.py prefers the source's, so this is what makes that
+    precedence auditable rather than silent: the one recorded case of the model
+    beating the source (2026-08-10's Keswick screening) means a disagreement is
+    not automatically the model being wrong.
+
+    It is also the check that would have caught the live 2026-08-31 defect --
+    Selection put Cherry Street Pier at "301 S Christopher Columbus Blvd" when
+    Do215 says 121 N, pinning the calendar entry at the wrong pier.
+    """
+    issues = []
+    for day_date, pick in _iter_top3(selections):
+        source_address = (pick.get("venue_address") or "").strip()
+        model_address = (pick.get("selection_address") or "").strip()
+        if source_address and model_address and _street_key(source_address) != _street_key(model_address):
+            issues.append(
+                Issue(
+                    "address_conflict",
+                    "warn",
+                    day_date,
+                    pick.get("title"),
+                    f"source says {source_address!r}, Selection wrote {model_address!r} -- "
+                    f"the source's is used for the calendar pin; check which is right",
                 )
             )
     return issues
@@ -431,6 +607,8 @@ def collect_issues(selections: dict, prior_weeks: list[dict] | None = None) -> l
         *check_same_series(selections),
         *check_outside_philadelphia(selections),
         *check_repeat_of_recent_pick(selections, prior_weeks),
+        *check_missing_address(selections),
+        *check_address_conflict(selections),
     ]
 
 

@@ -43,8 +43,39 @@ class EventParser(Protocol):
     ) -> list[Event]: ...
 
 
-def write_event(title: str, venue: str, date: str, time: str, cost: str, url: str, description: str) -> Event:
-    return {
+def write_event(
+    title: str,
+    venue: str,
+    date: str,
+    time: str,
+    cost: str,
+    url: str,
+    description: str,
+    *,
+    venue_address: str = "",
+    venue_id: str = "",
+) -> Event:
+    """The seven positional fields are the contract every parser writes.
+
+    `venue_address` and `venue_id` are optional structured venue data, for the
+    few sources whose upstream actually supplies it (do215's venue object,
+    philly_ask_a_punk's `place`). They are **omitted from the returned dict
+    when empty** rather than written as "" -- adding two always-present keys
+    would change the output shape of all ~20 parsers and churn every exact-dict
+    assertion in tests/test_parse_events.py to record that a source has no
+    venue metadata, which is the normal case and not worth stating.
+
+    Keyword-only so no existing parser call site changes, and `str` (not int)
+    for `venue_id` to keep `Event = dict[str, str]` -- same reasoning as
+    assign_ids' string candidate ids in prepare_selection_input.py.
+
+    Consumer: merge_selections.py, which reads these off the monolithic
+    _candidates.json to fill a pick's `address` when Selection didn't author
+    one and to compare against it when Selection did. Deliberately NOT visible
+    to Selection itself -- prepare_selection_input.py's split_by_day() strips
+    both from the per-day payloads, which are Selection's only input.
+    """
+    event = {
         "title": title.strip(),
         "venue": venue.strip(),
         "date": date,
@@ -53,6 +84,11 @@ def write_event(title: str, venue: str, date: str, time: str, cost: str, url: st
         "url": url.strip(),
         "description": description.strip(),
     }
+    if venue_address.strip():
+        event["venue_address"] = venue_address.strip()
+    if venue_id.strip():
+        event["venue_id"] = venue_id.strip()
+    return event
 
 
 def text(el: Tag | None) -> str:

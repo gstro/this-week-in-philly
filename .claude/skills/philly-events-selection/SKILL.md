@@ -146,11 +146,18 @@ Apply `event-selection-philosophy` rules for the day:
 2. Apply Prioritize rules: unique/easy-to-miss, community/political, multi-interest overlap
 3. Apply Avoid rules: recurring weekly events (including candidates with `recurrence_count`), large
    corporate venues
-4. Enforce the Weekly Caps (venue cap keyed on `address`, same-series cap) — these are tracked
-   across the whole week, not reset per day. Keep a running tally as you go: for each candidate
-   you're considering for Top 3, check it against every `address` and series you've already used on
-   an earlier day this week, not just against today's picks.
-5. **Check every Top 3 pick against `_recent_picks.json` (loaded in Phase 1).** If the same event at
+4. Enforce the same-series cap across the whole week, not reset per day — keep a running tally, and
+   check each Top 3 candidate against every series you've already used on an earlier day, not just
+   against today's picks.
+5. **Venue repetition: a prompt to re-check, not a limit.** Keep a running tally of `address` values
+   too, but there is deliberately **no cap**. If several picks land at one venue, use that as a cue
+   to ask whether each one earned its slot on the event itself, or got there because the venue is
+   familiar. If it earned it, keep it — Iffy Books, PhilaMOCA and Wooden Shoe genuinely program a
+   large share of what Greg cares about, and three venues hold 34% of every Top 3 slot published so
+   far without that being a problem. **Never drop a better event to even out the venues**, and never
+   trade a strong week from one room for a weaker spread. See `event-selection-philosophy`'s
+   "Venue repetition: notice it, don't cap it."
+6. **Check every Top 3 pick against `_recent_picks.json` (loaded in Phase 1).** If the same event at
    the same venue already held a Top 3 slot in a recent week, either pick something else or say in
    the `why` what makes *this* instance worth the slot — a special guest, a genuinely notable
    return. This is `event-selection-philosophy`'s "Avoid: recurring weekly events" rule, which spans
@@ -158,20 +165,20 @@ Apply `event-selection-philosophy` rules for the day:
    5–24% of Top 3 slots went to content that had already run, and "Rustin's Challenge Reading Group"
    took a slot in **four consecutive reports**. Match on the event, not the series — a new
    instalment (Dekalog Parts 3 & 4 after Parts 1 & 2) is different content and is fine.
-6. Exclude online-only candidates from Top 3 unless genuinely exceptional — still eligible for the
+7. Exclude online-only candidates from Top 3 unless genuinely exceptional — still eligible for the
    day's category listing
-7. Before finalizing a Top 3 pick: search `[event name] Philadelphia [date] postponed` to catch
+8. Before finalizing a Top 3 pick: search `[event name] Philadelphia [date] postponed` to catch
    cancellations; venue websites are more reliable than aggregators for postponement status
-8. Apply `personal-interests`'s Geography section: for any Top 3 pick outside South Philly, Center
+9. Apply `personal-interests`'s Geography section: for any Top 3 pick outside South Philly, Center
    City, or University City, name the neighborhood and the nearest El/BSL/trolley/Regional Rail
    stop or bus in the `why` blurb — treat this as a required field, not a nice-to-have. It is
    working but not yet met: 2026-08-17 landed 4 of 21 blurbs with an access note, and 2026-08-24 —
    the first week after this rule was rewritten against the Point Breeze anchor — landed 7 of 21.
    For a pick outside Philadelphia city limits, this is a high bar (something genuinely
    exceptional), not a default yes — and the `why` must name the travel involved either way.
-9. Apply Venue Elevation for tie-breaking, per `event-selection-philosophy`'s Tie-Break Precedence
+10. Apply Venue Elevation for tie-breaking, per `event-selection-philosophy`'s Tie-Break Precedence
    — last resort only, never a substitute for 1–8 above
-10. Note known Philly-specific recurring events (per `event-selection-philosophy`'s "Recurring Events to
+11. Note known Philly-specific recurring events (per `event-selection-philosophy`'s "Recurring Events to
     Deprioritize" list) in listings but not Top 3
 
 For each Top 3 pick, write a `why` blurb: 2–3 sentences explaining what makes this worth attending over
@@ -256,9 +263,20 @@ not to hide events Greg would want to see — when in doubt, keep the event in.
   the event if worth attending; sold-out is a note, not an exclusion. A sold-out honorable mention gets a
   `(SOLD OUT)` suffix on its title automatically (bolded by the render step) — don't add the suffix
   yourself.
-- `address`: full street address for Google Calendar, on `top3` entries only; omit if unknown. Candidates
-  never carry an address (Collection's event schema has no address field) — this is written from your own
-  knowledge of the venue, same as `why`.
+- `address`: full street address for Google Calendar, on `top3` entries only. Candidates as you see them
+  never carry an address — this is written from your own knowledge of the venue, same as `why`.
+
+  **Omit it rather than guess.** A wrong address is worse than a missing one: it becomes the Google
+  Calendar entry's location and sends Greg to the wrong place, while a missing one just leaves the
+  entry unpinned. This is not hypothetical — the 2026-08-31 report put Cherry Street Pier at "301 S
+  Christopher Columbus Blvd" (it's at 121 N), about a mile off, and gave the same invented address to
+  Spruce Street Harbor. If you're confident, write it; if you're reconstructing it from a venue name
+  you don't actually know, leave it out.
+
+  For a few sources Collection does capture the venue's real address, and `merge_selections.py` fills
+  it in when you omit one — and prefers it over yours when both exist, reporting any disagreement.
+  That data is deliberately kept out of your per-day files: it would double their size, and your
+  address is more useful as an independent check on the source's than as an echo of it.
 - `honorable_mentions`: id only — 2–3 max per day, omit array if none.
 - `why`: 2–3 sentences for Top 3 picks only — more substantial than `note`.
 - `note`: 1–2 sentences, on `annotations` entries — carry from the candidate's `description` if useful,
@@ -290,21 +308,21 @@ Selection complete for [date]. [N] top3, [M] annotated, [K] categories capped.
 
 Once all 7 days are processed, before assembling the final file, print a short summary so drift is
 visible to you (and to whoever reads the run) at authoring time, when it can still be acted on —
-`scripts/check_selection.py` re-checks the venue cap and a few other things mechanically after this
-task pushes, but that only fires in CI; this catches it here first:
+`scripts/check_selection.py` re-checks these and a few other things mechanically after this task
+pushes, but that only fires in CI; this catches it here first:
 
 ```
 Self-check for week of [YYYY-MM-DD]:
-  Venues (top3, by address): [address]: [count], [address]: [count], ...  — flag any at or above the
-    weekly cap (2)
+  Venues (top3, by address): [address]: [count], [address]: [count], ...
   Categories (top3): [category]: [count], ...
   Sources (top3, by origin `source` field): [source]: [count], ...
+  Top 3 picks with no address: [N]
   *(confirm details)* flags: [N]
 ```
 
-This is informational, not a gate — nothing here blocks the push. If a venue is at or above the cap,
-double check you actually enforced it per Phase 3 step 4 rather than just noting it here after the
-fact.
+This is informational, not a gate — nothing here blocks the push, and there is **no venue count that
+is too high**. If one venue holds several slots, re-read those picks and confirm each earned its slot
+on the event itself (Phase 3 step 5); if they did, that is a good week, not a problem to fix.
 
 ---
 

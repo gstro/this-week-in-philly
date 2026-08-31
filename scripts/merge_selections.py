@@ -172,11 +172,51 @@ def build_top3(day: dict[str, Any], candidates_by_id: dict[str, dict[str, Any]],
                 f"override on this pick's annotation (see philly-events-selection/SKILL.md's "
                 f"annotation field notes)."
             )
+        # `address` becomes the Google Calendar entry's `location`
+        # (calendar_create.py), so a wrong one sends you to the wrong place and
+        # a missing one leaves the entry unpinned. Two candidate answers exist:
+        # the source's structured venue address and Selection's, authored from
+        # memory. Prefer the source's.
+        #
+        # That precedence is measured, not assumed. Joining a live re-fetch of
+        # the 2026-08-31 week onto its committed do215.json (373/373 events
+        # matched on permalink) and recomputing that week's 21 top3 venue keys
+        # both ways: with Selection's address first, Spruce Street Harbor and
+        # Cherry Street Pier collapse into one key at "301 S Christopher
+        # Columbus Blvd" -- an address Selection invented for both, and wrong
+        # for Cherry Street Pier, which Do215 puts at 121 N. With the source's
+        # address first they separate correctly and the calendar entry points
+        # at the right pier.
+        #
+        # The counter-precedent (2026-08-10, where the model overrode PhilaMOCA
+        # and was right that the show was at the Keswick) does not apply: that
+        # was a bad venue DISPLAY STRING from PhilaMOCA's own feed
+        # self-stamping its address onto an offsite show, not a structured
+        # per-event venue record. Do215 supplies the latter and has no such
+        # failure mode. Deliberately not extended to philamoca.py or
+        # the_rotunda.py, whose hardcoded addresses ARE that self-stamp.
+        #
+        # Nothing is lost silently when the model was right: check_selection.py's
+        # address_conflict warns whenever the two disagree.
+        resolved_address = candidate.get("venue_address") or pick.get("address") or ""
         entry = {
             "rank": pick["rank"],
             "title": candidate.get("title", ""),
             "venue": candidate.get("venue", ""),
-            **({"address": pick["address"]} if pick.get("address") else {}),
+            **({"address": resolved_address} if resolved_address else {}),
+            # Carried for check_selection.py, which only ever sees
+            # _selections.json -- without them it cannot compare the two
+            # addresses or report which venues a cap bucket actually pooled.
+            **({"venue_address": candidate["venue_address"]} if candidate.get("venue_address") else {}),
+            **({"venue_id": candidate["venue_id"]} if candidate.get("venue_id") else {}),
+            # Only when BOTH exist, i.e. only when there is a disagreement to
+            # audit. With no source address, `address` above already is
+            # Selection's and recording it twice is pure duplication.
+            **(
+                {"selection_address": pick["address"]}
+                if pick.get("address") and candidate.get("venue_address")
+                else {}
+            ),
             "time": resolved_time,
             "cost": candidate.get("cost") or "Not listed",
             "url": candidate.get("url", ""),

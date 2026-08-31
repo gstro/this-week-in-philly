@@ -193,6 +193,17 @@ def _best_of_group(group: list[dict[str, Any]]) -> dict[str, Any]:
     Shared by both dedupe passes. If any discarded entry's description
     mentions "sold out" and the kept one's doesn't, prepend a note rather
     than dropping that signal.
+
+    Structured venue fields are salvaged the same way, and for a sharper
+    reason: only do215 and philly_ask_a_punk emit venue_address/venue_id, and
+    do215 sits 4th in SOURCE_PRIORITY. So in every cross-source group where R5
+    Productions, PhilaMOCA or Ask A Punk also carries the event -- ~95 groups
+    over four measured weeks, and exactly the PhilaMOCA-via-two-sources case --
+    the winner is the record WITHOUT the address, and merge_selections.py would
+    silently see nothing. Carrying the fields forward field-by-field is what
+    makes this tranche work at all. Safe here because these groups are already
+    established true duplicates: see collapse_cross_source_duplicates' note
+    that all 95 were hand-inspected.
     """
     if len(group) == 1:
         return group[0]
@@ -203,6 +214,12 @@ def _best_of_group(group: list[dict[str, Any]]) -> dict[str, Any]:
         best["description"] = (
             "[Note: at least one other source reports this as sold out.] " + (best.get("description") or "")
         ).strip()
+    for field in ("venue_address", "venue_id"):
+        if not best.get(field):
+            donor = next((e.get(field) for e in group if e is not best and e.get(field)), None)
+            if donor:
+                best = dict(best)
+                best[field] = donor
     return best
 
 
@@ -316,6 +333,21 @@ def cap_descriptions(candidates: list[dict[str, Any]], limit: int = DESCRIPTION_
     return result
 
 
+# Structured venue data written by do215/philly_ask_a_punk for
+# merge_selections.py's benefit, deliberately withheld from Selection.
+#
+# Selection's only input is the per-day files; merge_selections.py reads the
+# monolithic _candidates.json. Because they are different files, the source's
+# address can reach the merge without reaching the model -- which keeps three
+# things true at once: philly-events-selection/SKILL.md's "candidates never
+# carry an address ... written from your own memory" stays accurate and
+# Selection needs no reworking; the per-day payloads this task is
+# token-optimized around don't grow; and the model's address stays an
+# INDEPENDENT second opinion rather than an echo of the source's, which is
+# what makes check_selection.py's address_conflict warning worth anything.
+_SELECTION_HIDDEN_FIELDS = frozenset({"venue_address", "venue_id"})
+
+
 def split_by_day(result: dict[str, Any], week_dir: Path) -> list[Path]:
     """Writes one candidate file per date in the target week (Monday through
     Sunday) to <week_dir>/_candidates/<date>.json, so a Selection day-agent
@@ -346,7 +378,7 @@ def split_by_day(result: dict[str, Any], week_dir: Path) -> list[Path]:
             f"{week[0].isoformat()}..{week[-1].isoformat()} and would be silently dropped: {described}"
         )
     for candidate in result["candidates"]:
-        by_date[candidate["date"]].append(candidate)
+        by_date[candidate["date"]].append({k: v for k, v in candidate.items() if k not in _SELECTION_HIDDEN_FIELDS})
 
     out_dir = week_dir / "_candidates"
     out_dir.mkdir(exist_ok=True)

@@ -1,0 +1,110 @@
+{
+  "events": [
+    {
+      "id": 90000001,
+      "title": "Address already carries locality",
+      "excerpt": "",
+      "tz_adjusted_begin_date": "2026-08-03T19:00:00-04:00",
+      "is_ongoing": false,
+      "is_free": false,
+      "ticket_info": "$20",
+      "permalink": "/events/2026/8/3/locality-present",
+      "venue": {
+        "id": 511812,
+        "title": "Nikki Lopez",
+        "address": "304 South St, Philadelphia, PA 19147",
+        "city": "Philadelphia",
+        "state": "PA",
+        "zip": "19147",
+        "full_address": "304 South St, Philadelphia, PA 19147, Philadelphia, PA, 19147"
+      }
+    },
+    {
+      "id": 90000002,
+      "title": "Bare street address",
+      "excerpt": "",
+      "tz_adjusted_begin_date": "2026-08-04T19:00:00-04:00",
+      "is_ongoing": false,
+      "is_free": false,
+      "ticket_info": "$15",
+      "permalink": "/events/2026/8/4/bare-street",
+      "venue": {
+        "id": 500714,
+        "title": "Cherry Street Pier",
+        "address": "121 N Christopher Columbus Blvd",
+        "city": "Philadelphia",
+        "state": "PA",
+        "zip": "19106"
+      }
+    },
+    {
+      "id": 90000003,
+      "title": "Address restates the title",
+      "excerpt": "",
+      "tz_adjusted_begin_date": "2026-08-05T19:00:00-04:00",
+      "is_ongoing": false,
+      "is_free": true,
+      "ticket_info": "Free",
+      "permalink": "/events/2026/8/5/restates-title",
+      "venue": {
+        "id": 514514,
+        "title": "Upper Merion Township Building Park",
+        "address": "Upper Merion Township Building Park",
+        "city": null,
+        "state": null,
+        "zip": null
+      }
+    },
+    {
+      "id": 90000004,
+      "title": "Null address falls back to city and state",
+      "excerpt": "",
+      "tz_adjusted_begin_date": "2026-08-06T19:00:00-04:00",
+      "is_ongoing": false,
+      "is_free": true,
+      "ticket_info": "Free",
+      "permalink": "/events/2026/8/6/null-address",
+      "venue": {
+        "id": 502134,
+        "title": "Spruce Street Harbor",
+        "address": null,
+        "city": "Philadelphia",
+        "state": "PA",
+        "zip": "19106"
+      }
+    },
+    {
+      "id": 90000005,
+      "title": "Empty and padded address",
+      "excerpt": "",
+      "tz_adjusted_begin_date": "2026-08-07T19:00:00-04:00",
+      "is_ongoing": false,
+      "is_free": true,
+      "ticket_info": "Free",
+      "permalink": "/events/2026/8/7/empty-address",
+      "venue": {
+        "id": 510458,
+        "title": "PFS Film Society Center",
+        "address": "   ",
+        "city": "Philadelphia",
+        "state": "PA",
+        "zip": "19102"
+      }
+    },
+    {
+      "id": 90000006,
+      "title": "Venue object has no id at all",
+      "excerpt": "",
+      "tz_adjusted_begin_date": "2026-08-08T19:00:00-04:00",
+      "is_ongoing": false,
+      "is_free": true,
+      "ticket_info": "Free",
+      "permalink": "/events/2026/8/8/no-id",
+      "venue": {
+        "title": "Some Room",
+        "city": "Philadelphia",
+        "state": "PA"
+      }
+    }
+  ]
+}
