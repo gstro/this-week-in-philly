@@ -98,7 +98,7 @@ St). Nearest transit: the Broad Street Line at Ellsworth–Federal and Tasker–
   nearest El/BSL/trolley/Regional Rail stop or bus.
 - **Outside Philadelphia city limits** — eligible only at a high bar (something genuinely
   exceptional), and the `why` must name the travel involved. See
-  `event-selection-philosophy`'s Data Plausibility Checklist and Weekly Caps.
+  `event-selection-philosophy`'s Data Plausibility Checklist.
 
 ## Timing
 

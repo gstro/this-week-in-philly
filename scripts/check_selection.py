@@ -160,7 +160,7 @@ _NON_ALNUM_RE = re.compile(r"[^a-z0-9]")
 def normalize_venue(venue: str) -> str:
     """Fallback key for the venue cap when a pick has no `address` -- the
     text before the first comma, lowercased. Matches
-    event-selection-philosophy/SKILL.md's Weekly Caps fallback rule."""
+    event-selection-philosophy/SKILL.md's Weekly Patterns fallback rule."""
     return venue.split(",")[0].strip().lower()
 
 

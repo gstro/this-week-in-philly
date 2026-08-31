@@ -56,6 +56,11 @@ Note these in listings but do not pick as Top 3 unless something special is occu
   took a slot in four consecutive reports. Selection is handed `_recent_picks.json` (recent weeks'
   Top 3 picks) for exactly this check — see `philly-events-selection`'s Phase 3 step 5. A new
   instalment of a series is different content and is fine; the same event again is not.
+  **This rule governs Top 3 slots only — it is not a reason to leave a recurring event out of the
+  report.** It was read that way, and 0 of 20 recurring candidates across 2026-08-24 and -08-31 were
+  listed anywhere: standing museum exhibits, gallery tours, a theatre run, a bluegrass festival.
+  Those belong in the report's All Week / Recurring table (see `philly-events-selection`'s Phase 2),
+  which costs no listing slot in any day.
 - Events at large corporate venues unless the act is truly unmissable
 - Events with no verifiable source or unconfirmed details — add *(confirm details)* rather than omitting
 
