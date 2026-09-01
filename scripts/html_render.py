@@ -17,13 +17,16 @@ its source _selections.json, and confirmed with Greg before building this:
   "optional donation") with no consistent rule across similar cases --
   reproducing it would mean guessing, which the pipeline explicitly avoids
   elsewhere.
-- The "All Week / Recurring" table is omitted -- _selections.json has no
-  structured field (no end_date/recurrence) a script could use to detect a
-  3+ day span; v1's table cells were synthesized prose. One knock-on: an
-  event that v1 *only* showed in that table (e.g. Franklin's Key) still has
-  its own entry in the day's `events` array, so it now also renders inline
-  as a normal event card -- v1 effectively hid it from its own day listing,
-  v2 does not.
+- The "All Week / Recurring" table renders again. It was omitted for six
+  published weeks on the grounds that _selections.json carried "no structured
+  field a script could use to detect a 3+ day span" -- which was true of
+  _selections.json but not of the pipeline: prepare_selection_input.py's
+  group_recurring() has always emitted `occurrences`/`recurrence_count`, they
+  just never survived merge_selections.py. They do now, so build_all_week()
+  reads them directly rather than synthesizing prose the way v1 did.
+  Recurring events are routed OUT of their day's category block and into the
+  table (see is_all_week), which restores v1's behaviour of not also listing
+  them inline -- with one deliberate exception for Top 3 picks.
 
 Everything else was validated byte-for-byte against the archive: *(...)*
 placeholder stripping, sold-out handling, Spotify link placement and
@@ -195,10 +198,26 @@ def _priority_key(
     )
 
 
+def is_all_week(event: dict, top3_titles: set) -> bool:
+    """True when this event belongs in the All Week table instead of a day's
+    category block.
+
+    A Top 3 pick is deliberately excluded even when it recurs: a pick
+    disappearing from the day it was chosen for -- with a `why` blurb written
+    about that day -- would be a worse bug than listing it twice. Such an
+    event stays in its day and is simply absent from the table.
+    """
+    if event["title"] in top3_titles:
+        return False
+    return int(event.get("recurrence_count") or 0) >= common.RECURRING_THRESHOLD
+
+
 def build_categories(day: dict, top3_titles: set) -> list[dict]:
     hm_titles = {mention["title"] for mention in day.get("honorable_mentions", [])}
     by_category = defaultdict(list)
     for event in day["events"]:
+        if is_all_week(event, top3_titles):
+            continue
         by_category[event["category"]].append(event)
 
     categories = []
@@ -227,8 +246,68 @@ def build_categories(day: dict, top3_titles: set) -> list[dict]:
                     "price_text": price_text,
                 }
             )
-        categories.append({"label": label, "events": view_events, "true_count": len(events)})
+        # Say out loud when the cap actually dropped something. This is not
+        # hypothetical: data/2026-06-22 has a 12-event Film & Cinema bucket,
+        # so the published report for that week silently omitted 2 events
+        # Selection had vetted, with nothing on the page to say so. "No
+        # silent caps" is this project's own rule; surfacing the remainder
+        # is the cheapest way to keep it.
+        omitted = len(events) - len(displayed)
+        categories.append(
+            {
+                "label": label,
+                "events": view_events,
+                "true_count": len(events),
+                "omitted": omitted or None,
+            }
+        )
     return categories
+
+
+def build_all_week(days: list[dict], top3_titles_by_date: dict[str, set]) -> list[dict]:
+    """Rows for the "All Week / Recurring" table (events-report-format's
+    spec section of the same name).
+
+    One row per series, not per occurrence: a candidate is already collapsed
+    to its earliest date by prepare_selection_input.py's group_recurring, but
+    dedupe on (title, venue) anyway so a series that somehow survives on more
+    than one day still yields a single row.
+
+    **The dates column is only this week's occurrences and must never be
+    rendered as the run's real span.** `occurrences` comes from
+    group_recurring, which only ever saw the 7 days of the collected week --
+    a museum exhibit running through December shows up with 3-7 dates here.
+    Printing "Sep 2 - Sep 6" would state a run length manufactured by the
+    collection window as though it were fact, the same class of error as the
+    invented cost strings and the guessed venue address this project has
+    already had to undo twice. Hence a "This week" column listing weekday
+    abbreviations, and no start/end claim anywhere.
+    """
+    rows: dict[tuple[str, str], dict] = {}
+    for day in days:
+        top3_titles = top3_titles_by_date.get(day["date"], set())
+        for event in day["events"]:
+            if not is_all_week(event, top3_titles):
+                continue
+            key = (event["title"], event["venue"])
+            if key in rows:
+                continue
+            occurrences = event.get("occurrences") or [day["date"]]
+            weekdays = []
+            for iso in occurrences:
+                try:
+                    weekdays.append(date.fromisoformat(iso).strftime("%a"))
+                except ValueError:
+                    continue
+            _, price_text = price_class_and_text(event)
+            rows[key] = {
+                "title": event["title"],
+                "venue": event["venue"],
+                "category": event["category"],
+                "days": ", ".join(weekdays),
+                "price_text": price_text,
+            }
+    return list(rows.values())
 
 
 def build_day_viewmodel(day: dict, spotify: dict) -> dict:
@@ -298,6 +377,10 @@ def render_report(week_dir: Path) -> str:
     date_range = format_date_range(monday, sunday)
 
     days = [build_day_viewmodel(day, spotify) for day in selections["days"]]
+    top3_titles_by_date = {
+        day["date"]: {pick["title"] for pick in day["top3"]} for day in selections["days"]
+    }
+    all_week = build_all_week(selections["days"], top3_titles_by_date)
     collection_failure_notes = [
         format_failure_note(f) for f in selections.get("collection_failures", [])
     ]
@@ -306,6 +389,7 @@ def render_report(week_dir: Path) -> str:
     return template.render(
         date_range=date_range,
         days=days,
+        all_week=all_week,
         sources=[{"name": name, "url": url} for name, url in SOURCES],
         collection_failure_notes=collection_failure_notes,
     )

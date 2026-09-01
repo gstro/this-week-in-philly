@@ -96,8 +96,9 @@ SOURCE_PRIORITY = ["R5 Productions", "PhilaMOCA", "Philly Ask A Punk", "Do215"]
 # Same (title, venue) on this many distinct dates in the target week or
 # more counts as a recurring listing -- reuses events-report-format/
 # SKILL.md's own "3+ days" All Week/Recurring threshold rather than
-# inventing a new number.
-RECURRING_THRESHOLD = 3
+# inventing a new number. Lives in common.py because html_render.py now
+# routes these same events into that table and the two must not drift.
+RECURRING_THRESHOLD = common.RECURRING_THRESHOLD
 
 # Applied on emit only -- raw source files under data/<week>/ are never
 # touched. Keeps the full text for ~90% of real events (p90 was 751 chars

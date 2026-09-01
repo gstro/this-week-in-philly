@@ -125,12 +125,24 @@ low-alignment candidates qualitatively — **no numeric scores**.
 **Trakt.tv releases:** Set venue to `Theatrical release` if none present. Eligible for Top 3 if they
 match horror/occult interests.
 
-**Recurring-group candidates** (`recurrence_count` present): this is exactly the case
-`event-selection-philosophy`'s "Avoid: recurring weekly events... unless something special is
-occurring" rule exists for. `recurrence_count`/`occurrences` tells you the series repeats this many
-times this week — apply the judgment yourself; the annotation is a signal, not a verdict. A recurring
-series that's still worth a Top 3 slot (a genuinely special single occurrence) should say so in its
-`why` blurb.
+**Recurring-group candidates** (`recurrence_count` present): a standing museum exhibit, a gallery
+tour, a theatre run, a multi-day festival. `recurrence_count`/`occurrences` tells you the series
+falls on that many days of this week.
+
+**Annotate these. Do not drop them.** The Avoid rule in `event-selection-philosophy` is scoped to
+*Top 3 picks* — a recurring series is a poor Top 3 pick absent a genuinely special occurrence, and
+that judgment is yours to make. But it was being read as a reason to exclude them from the report
+altogether, and that is wrong: **0 of 20 recurring candidates across 2026-08-24 and -08-31 were
+listed anywhere.** Dropped that way: the Michael Jackson exhibit, *Impressionism & Beyond*, Rodin's
+Hands, the Esherick tour, *Rent*, the 54th Delaware Valley Bluegrass Festival.
+
+An annotated recurring candidate does **not** compete for a slot in a day's category listing —
+`html_render.py` routes it into the report's **All Week / Recurring** table at the bottom instead, one
+row per series. So annotating one costs a line, not a listing slot, and a weekly guide that never
+mentions what's on at the museums all week is failing at something basic. When in doubt, annotate it.
+
+A recurring series that *is* worth a Top 3 slot (a genuinely special single occurrence) should say so
+in its `why`; it then stays in its day rather than moving to the table.
 
 ```
 Scoring complete for [date]. [E] candidates.
@@ -186,16 +198,16 @@ everything else that day. First sentence: what it is and why it's notable. Secon
 specific to this moment or place. Third (optional): the practical case — cost, access, context. Write
 with personality and specificity — this text goes directly into the rendered report.
 
-Fewer than 3 qualifying events on a given day is acceptable — this is real permission, not a
-theoretical one. **Five real weeks in a row (2026-06-22, -08-03, -10, -17, -24) each produced
-exactly 3 Top 3 picks on all 7 days — 35 of 35 days, no exceptions**, which is a much stronger
-pattern than "occasionally there are only 2 or 3 good options" would produce by chance. 2026-08-24
-was the first week selected *after* this paragraph shipped and it still went 21 for 21, so read this
-as a rule that has never once been exercised rather than one that rarely applies. If a day's third-best candidate doesn't clearly clear the
-bar the day's first two did — it's a generic bar special, a recurring weekly with nothing special
-this instance, a candidate that only passes because you need a #3 — ship 2, or 1, or 0. A thin day
-with 1 genuinely good pick and an honest gap is a better report than 3 picks where the third is
-filler.
+Fewer than 3 qualifying events on a given day is acceptable: if a day's third-best candidate doesn't
+clear the bar the first two did — a generic bar special, a recurring weekly with nothing special this
+instance, a candidate that only passes because you need a #3 — ship 2, or 1. Don't pad.
+
+That said, **don't go looking for thin days.** Six weeks have now run 3 picks on all 42 days, and two
+earlier revisions of this paragraph escalated the wording on the assumption that meant padding. Read
+against the actual rank-3 picks, it didn't: bleeding-control training and an offline-GPS workshop at
+Iffy Books, Quicksand + Bane, *Dekalog Parts 7 & 8*, a Black queer pop-up, Spike Hellis at Ruba. None
+of that is filler — Philadelphia just supplies three good things most days. The rule is here for the
+day that genuinely doesn't, not as a target to hit.
 
 **Cap: at most 10 annotated candidates per category per day.** Within each category, keep the 10
 highest-alignment candidates by the same qualitative judgment used for scoring — this is a genuine
@@ -204,6 +216,12 @@ always annotated regardless of this cap** — if one would otherwise fall outsid
 annotate it anyway (a category can end up with 11+ annotated candidates when that happens). The cap
 exists so the rendered report's category listings stay readable at ~640 raw events collected most weeks,
 not to hide events Greg would want to see — when in doubt, keep the event in.
+
+**In practice this cap has never come close to binding, so don't treat it as a target.** The largest
+(day, category) bucket across four measured weeks was 8, and most are 1–3; days run 8–16 listed events
+total across all nine categories. If a category genuinely has 10 worth listing on one day, list them.
+`html_render.py` caps *display* at 10 as well, and now prints "+ N more not shown" when it does, so
+nothing you annotate disappears silently.
 
 **Write your day's contribution** in this shape (an in-progress `_selection_annotations.json` — see
 "Assemble and write" below for the full-week file):

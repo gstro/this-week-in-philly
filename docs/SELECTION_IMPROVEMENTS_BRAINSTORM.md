@@ -1144,3 +1144,81 @@ D3, D4.
 **Recorded, not acted on:** 🎵 Music & Concerts took **10 of 21** slots on 08-31 (48%; Friday and
 Saturday were entirely music) against 6–7 in prior weeks. One week is not a trend — if it recurs it is
 a category-balance question, not a venue one.
+
+---
+
+# Tranche 7 — restore the All Week / Recurring listing
+
+## A spec'd report section that never rendered
+
+`events-report-format/SKILL.md:105-108` specifies an **All Week / Recurring** table at the bottom of
+the report. `templates/report.html.j2` carried its complete CSS labelled *"unused by v2"*. Six
+published weeks, zero tables.
+
+`html_render.py` gave the reason as `_selections.json` having *"no structured field a script could
+use to detect a 3+ day span."* True of `_selections.json`, false of the pipeline:
+`prepare_selection_input.py`'s `group_recurring()` has emitted `occurrences` and `recurrence_count`
+since the v2 data layout landed — they just never survived `merge_selections.py`. Exactly the shape
+of tranche 6's `venue_address`: the data existed upstream and was dropped at the merge.
+
+**And Selection was discarding the candidates outright: 0 of 20 across 2026-08-24 and -08-31.** The
+Michael Jackson exhibit, *Impressionism & Beyond*, Rodin's Hands, the Esherick tour, *Rent*, the 54th
+Delaware Valley Bluegrass Festival. `event-selection-philosophy`'s Avoid rule says recurring events
+are a poor **Top 3 pick** — it never said don't list them. Both skills now scope it explicitly, and
+an annotated recurring candidate costs no day-listing slot because the renderer routes it to the
+table.
+
+**One design point worth not re-deriving:** the table's dates column lists this week's weekdays and
+deliberately renders **no first–last span**. `occurrences` only holds dates inside the collected
+week, so an exhibit running through December shows 3–7 dates; a span would state a run length
+manufactured by the collection window as fact — the same class of error as the invented `cost`
+strings (tranche 1) and the guessed Cherry Street Pier address (tranche 6).
+
+## A silent cap that had already shipped
+
+`html_render.py` computed `true_count` per category and never surfaced it. This was assumed latent.
+It wasn't: **`data/2026-06-22` has a 12-event 🎬 Film bucket**, so `CATEGORY_DISPLAY_CAP = 10` dropped
+*WILDWOOD, NJ (1994)* (PhilaMOCA) and *SHOWGIRLS (1995)* (PFS) from that published report with
+nothing on the page to say so. Category blocks now end with "+ N more not shown". This is the only
+reason the golden moved, and its diff is exactly that line plus two CSS lines.
+
+## Findings measured and recorded, not acted on
+
+- **A subagent's under-inclusion claim did not survive checking, and the correction matters.** It
+  reported the report drops on-profile events wholesale, citing *Amores perros* (Iñárritu is a named
+  anchor), *Circle Jerks x Repo Man*, and *Deviated Instinct / Dropdead*. All three are **duplicate
+  copies of events that were listed** — "Amores Perros" (Do215) was a rank-1 Top 3 pick; the
+  PhilaMOCA and R5 records of the other two made the report. The dramatic version of under-inclusion
+  is not established.
+- **Cross-source dedupe under-matches, but only slightly.** Tranche 4 keys on `(date, normalized
+  title)`, so "Amores Perros" vs "Amores perros (2000)" escapes it. Token-overlap matching puts it at
+  **57 of 1804 dropped candidates (3%)**. Real, small, and a fuzzier key risks false merges.
+- **Per-source listing rates are lopsided (verified independently).** Wooden Shoe **100%** (12/12),
+  Iffy **91%**, Ask A Punk 61%, Rotunda 55%, PhilaMOCA 33% — against Do215 14%, PFS 19%, Phillygoth
+  **11%**, Code & Coffee 6%, WXPN **4%** (211→8), Meetup DC 215 **0%**. Spot-checking the drops, most
+  are defensible (out-of-town, `(online)`, commercial filler), but a residue of in-Philly goth nights
+  is dropped from listings. Worth its own tranche once this one's effect is visible.
+- **C16 (thinness) closes — its premise was wrong.** 42 of 42 days ran exactly 3 picks and two
+  tranches escalated the prose assuming that meant padding. Reading the actual rank-3 picks:
+  bleeding-control training and an offline-GPS workshop at Iffy, Quicksand + Bane, *Dekalog 7 & 8*, a
+  Black queer pop-up, Spike Hellis. Not filler. The escalating paragraph is replaced with a short
+  rule plus an explicit "don't go looking for thin days".
+- **Honorable mentions did start varying** (2026-08-31: 0,2,1,1,2,1,1 — the first `0`), so the model
+  varies counts when it genuinely judges. Only the Top 3 count never moves, and it is the one whose
+  *name* is the quota.
+
+## On 🎨 Arts & Workshops — stated narrowly on purpose
+
+🎨 has taken **1 Top 3 slot in 105**. The recurring filter does **not** explain that: 🎨 is already
+listed every week (4/6/5/10 across four weeks) and still never converts. What it plausibly explains
+is why 🎨 isn't listed *more*, since museum and gallery programming is mostly recurring. Because this
+tranche routes recurring events into a bottom table rather than the day listings, it should be
+expected to raise 🎨's **listed** count and **not** its Top 3 count. Judge it on that.
+
+## Deferred
+
+Per-source listing imbalance; fuzzy cross-source dedupe; PhilaMOCA's self-stamping parser (still a
+real 1-in-42 defect — and note it is *more* dangerous after tranche 6, since a `venue_address` from a
+self-stamping parser would override Selection's correct override, so do **not** add `venue_address=`
+to `philamoca.py` or `the_rotunda.py`); a past-week guard for `collection.yml`; C9's unnamed
+corporate venues; and the standing list — A1, A3, A6, B9–B14, C13, C14, C15, C21, D3, D4.

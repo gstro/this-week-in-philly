@@ -604,3 +604,33 @@ def test_merge_omits_address_entirely_when_neither_side_has_one() -> None:
     entry = _merge_one({}, None)
     assert "address" not in entry
     assert "venue_address" not in entry
+
+
+# --- recurrence carried through for the All Week table ---
+
+
+def test_merge_carries_recurrence_fields_onto_listed_events() -> None:
+    """group_recurring() has emitted occurrences/recurrence_count since the v2
+    data layout landed; they never survived this merge, which is why the
+    spec'd All Week table never rendered in six published weeks."""
+    candidates = _candidates_doc(
+        [_candidate("c0000", "Rent", "Playhouse", "2026-08-03",
+                    recurrence_count=6,
+                    occurrences=["2026-08-03", "2026-08-04", "2026-08-05"])]
+    )
+    annotations = _annotations_doc(
+        [_day("2026-08-03", annotations=[_annotation("c0000", category=MUSIC)])]
+    )
+    event = merge(candidates, annotations)["days"][0]["events"][0]
+    assert event["recurrence_count"] == 6
+    assert event["occurrences"] == ["2026-08-03", "2026-08-04", "2026-08-05"]
+
+
+def test_merge_omits_recurrence_fields_for_a_normal_one_off_event() -> None:
+    candidates = _candidates_doc([_candidate("c0000", "One Night", "Venue", "2026-08-03")])
+    annotations = _annotations_doc(
+        [_day("2026-08-03", annotations=[_annotation("c0000", category=MUSIC)])]
+    )
+    event = merge(candidates, annotations)["days"][0]["events"][0]
+    assert "recurrence_count" not in event
+    assert "occurrences" not in event
