@@ -254,8 +254,17 @@ def sync_playlist(
     if playlist_id:
         sp.playlist_change_details(playlist_id, name=name, description=description)
     else:
-        created = sp.user_playlist_create(
-            user_id, name, public=True, description=description
+        # current_user_playlist_create, NOT user_playlist_create: the latter
+        # posts to POST /users/{user_id}/playlists, which Spotify's February
+        # 2026 Development Mode changes removed outright in favor of
+        # POST /me/playlists (spotipy's own docstring already flags
+        # user_playlist_create as deprecated, for the same reason, though not
+        # by that date). Confirmed directly: the old path 403s with no detail
+        # regardless of scope, token freshness, or Spotify Developer
+        # Dashboard User Management state -- all things this bug's error
+        # message could easily be, and none of which it actually was.
+        created = sp.current_user_playlist_create(
+            name, public=True, description=description
         )
         playlist_id = created["id"]
 

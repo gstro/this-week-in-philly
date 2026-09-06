@@ -93,13 +93,16 @@ class FakeSpotify:
     def next(self, result: dict) -> dict | None:
         return None
 
-    def user_playlist_create(
-        self, user_id: str, name: str, public: bool = True, description: str = ""
+    def current_user_playlist_create(
+        self, name: str, public: bool = True, collaborative: bool = False, description: str = ""
     ) -> dict:
+        # POST /me/playlists -- not user_playlist_create's POST
+        # /users/{user_id}/playlists, which Spotify's February 2026
+        # Development Mode changes removed. See sync_playlist's comment.
         created = {
             "id": f"new-{len(self.created)}",
             "name": name,
-            "owner": {"id": user_id},
+            "owner": {"id": self.user_id},
             "public": public,
             "description": description,
         }
