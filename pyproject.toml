@@ -18,7 +18,12 @@ check_untyped_defs = true
 # instead of being suppressed here -- see scripts/common.py's TYPE_CHECKING
 # import for the real Calendar v3 types.
 [[tool.mypy.overrides]]
-module = ["spotipy", "spotipy.oauth2", "google_auth_oauthlib.flow"]
+module = [
+    "spotipy",
+    "spotipy.oauth2",
+    "spotipy.cache_handler",
+    "google_auth_oauthlib.flow",
+]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

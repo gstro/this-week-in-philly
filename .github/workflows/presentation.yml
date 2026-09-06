@@ -97,6 +97,11 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          # spotify_playlist.py only -- user auth, which spotify_lookup.py's
+          # app-only Client Credentials flow can't provide. Absent these, that
+          # step prints why and exits 0; the report still publishes.
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+          SPOTIFY_REDIRECT_URI: ${{ secrets.SPOTIFY_REDIRECT_URI }}
         run: bash scripts/runner.sh "${{ steps.week.outputs.dir }}"
 
       - name: Commit and push report
@@ -106,7 +111,17 @@ jobs:
           # data/event-picks-log.csv is intentionally not written here --
           # csv_log.py/attendance_check.py are deferred (see runner.sh);
           # only add it if a future run reintroduces that stage.
+          # _playlist.json must be staged: it carries the week's Spotify
+          # playlist id, and without it committed, the next run for this week
+          # can't find the playlist by id and would risk creating a duplicate.
+          # `git add` on a path that doesn't exist is an error, so it's only
+          # added when spotify_playlist.py actually wrote one (it exits 0
+          # without writing when Spotify auth fails).
           git add docs/ "${{ steps.week.outputs.dir }}/_selections.json"
+          PLAYLIST_JSON="${{ steps.week.outputs.dir }}/_playlist.json"
+          if [ -f "$PLAYLIST_JSON" ]; then
+            git add "$PLAYLIST_JSON"
+          fi
           # Name the *week*, not the run date. `$(date +%F)` produced
           # "Publish report for 2026-08-23" for a run that rendered
           # data/2026-08-17, which cost real time to untangle. The run date

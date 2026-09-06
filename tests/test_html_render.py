@@ -243,6 +243,51 @@ def test_render_report_degrades_gracefully_without_spotify_file(tmp_path: Path) 
     assert real_selections["days"][0]["top3"]
 
 
+# --- render_report: the optional playlist header link ---
+
+
+def test_render_report_omits_the_playlist_link_without_playlist_file(tmp_path: Path) -> None:
+    """spotify_playlist.py exits 0 without writing _playlist.json when Spotify
+    auth fails, so the header link must be absent rather than broken. This is
+    also the state of every week rendered before the playlist step existed."""
+    import shutil
+
+    shutil.copy(REAL_WEEK_DIR / "_selections.json", tmp_path / "_selections.json")
+    # deliberately no _playlist.json in tmp_path
+
+    html_out = hr.render_report(tmp_path)
+    # The class is always defined in the stylesheet; it's the element that
+    # must be absent.
+    assert '<div class="header-playlist">' not in html_out
+    assert "open.spotify.com/playlist" not in html_out
+
+
+def test_render_report_puts_the_playlist_link_in_the_header(tmp_path: Path) -> None:
+    import json
+    import shutil
+
+    shutil.copy(REAL_WEEK_DIR / "_selections.json", tmp_path / "_selections.json")
+    (tmp_path / "_playlist.json").write_text(
+        json.dumps(
+            {
+                "name": "2026-06-22: This Week in Philly",
+                "playlist_id": "abc123",
+                "playlist_url": "https://open.spotify.com/playlist/abc123",
+            }
+        )
+    )
+
+    html_out = hr.render_report(tmp_path)
+    link_html = (
+        '<div class="header-playlist">'
+        '<a href="https://open.spotify.com/playlist/abc123">'
+        "♫ This week's picks on Spotify</a></div>"
+    )
+    assert link_html in html_out
+    # It belongs in the site header, above the first day, not buried in content
+    assert html_out.index(link_html) < html_out.index('class="day-header"')
+
+
 # --- Golden test ---
 
 

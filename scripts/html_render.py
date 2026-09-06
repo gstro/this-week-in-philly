@@ -371,6 +371,10 @@ def _jinja_env() -> jinja2.Environment:
 def render_report(week_dir: Path) -> str:
     selections = common.load_selections(week_dir)
     spotify = common.load_spotify(week_dir)
+    # Optional by design: spotify_playlist.py exits 0 without writing
+    # _playlist.json when Spotify auth or the API fails, and the header link
+    # is simply omitted rather than the report failing to render.
+    playlist_url = common.load_playlist(week_dir).get("playlist_url")
 
     monday = date.fromisoformat(selections["days"][0]["date"])
     sunday = date.fromisoformat(selections["days"][-1]["date"])
@@ -388,6 +392,7 @@ def render_report(week_dir: Path) -> str:
     template = _jinja_env().get_template("report.html.j2")
     return template.render(
         date_range=date_range,
+        playlist_url=playlist_url,
         days=days,
         all_week=all_week,
         sources=[{"name": name, "url": url} for name, url in SOURCES],
