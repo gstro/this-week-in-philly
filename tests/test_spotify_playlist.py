@@ -9,8 +9,21 @@ are behavioural, not return-value: that a re-run *replaces* rather than
 appends (the 2026-08-23 duplicate-write shape), that a stored id is preferred
 over a name search, and that a deleted playlist falls through to creation
 instead of raising.
+
+Track source note: this originally targeted GET /v1/artists/{id}/top-tracks.
+That endpoint 403'd for every artist tried the first time this ran for real
+(including a global megastar, under both auth flows) and is now marked
+Deprecated on Spotify's own reference page -- see spotify_playlist.py's
+module docstring. FakeSpotify below models artist_albums/album_tracks
+instead, verified against this project's real 2026-09-07 matched artists
+before being adopted (not just a celebrity, whose results turned out not to
+be representative of the small DIY acts this pipeline actually surfaces).
+test_track_source_endpoints_still_work is the one test in this file that
+hits the real network (network-marked, excluded by default) -- specifically
+to catch it if Spotify deprecates this source too.
 """
 
+import os
 import sys
 from datetime import date
 from pathlib import Path
@@ -22,6 +35,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import spotify_playlist as sp_mod
 
 
+def _album(album_id: str, release_date: str, album_type: str = "album") -> dict:
+    return {"id": album_id, "release_date": release_date, "album_type": album_type}
+
+
+def _track(uri: str) -> dict:
+    return {"uri": uri}
+
+
 class FakeSpotify:
     """Minimal stand-in for the spotipy client surface this script uses."""
 
@@ -29,11 +50,13 @@ class FakeSpotify:
         self,
         user_id: str = "greg",
         playlists: list[dict] | None = None,
-        top_tracks: dict[str, list[str]] | None = None,
+        albums_by_artist: dict[str, list[dict]] | None = None,
+        tracks_by_album: dict[str, list[dict]] | None = None,
     ) -> None:
         self.user_id = user_id
         self.playlists = playlists or []
-        self.top_tracks = top_tracks or {}
+        self.albums_by_artist = albums_by_artist or {}
+        self.tracks_by_album = tracks_by_album or {}
         self.replaced: list[tuple[str, list[str]]] = []
         self.added: list[tuple[str, list[str]]] = []
         self.created: list[dict] = []
@@ -42,9 +65,21 @@ class FakeSpotify:
     def current_user(self) -> dict:
         return {"id": self.user_id}
 
-    def artist_top_tracks(self, artist_id: str, country: str = "US") -> dict:
-        uris = self.top_tracks.get(artist_id, [])
-        return {"tracks": [{"uri": uri} for uri in uris]}
+    def artist_albums(
+        self,
+        artist_id: str,
+        album_type: str | None = None,
+        include_groups: str | None = None,
+        country: str | None = None,
+        limit: int = 20,
+        offset: int = 0,
+    ) -> dict:
+        return {"items": self.albums_by_artist.get(artist_id, [])}
+
+    def album_tracks(
+        self, album_id: str, limit: int = 50, offset: int = 0, market: str | None = None
+    ) -> dict:
+        return {"items": self.tracks_by_album.get(album_id, [])[:limit]}
 
     def playlist(self, playlist_id: str, fields: str | None = None) -> dict:
         for playlist in self.playlists:
@@ -180,33 +215,105 @@ def test_matched_artist_ids_dedupes_an_artist_playing_twice_in_a_week() -> None:
     assert sp_mod.matched_artist_ids(selections, spotify) == ["aaa"]
 
 
-# --- top_track_uris ---
+# --- track_uris_for_artist ---
 
 
-def test_top_track_uris_slices_to_the_requested_limit() -> None:
-    sp = FakeSpotify(top_tracks={"aaa": [f"uri:{i}" for i in range(10)]})
-    assert sp_mod.top_track_uris(sp, "aaa", 3) == ["uri:0", "uri:1", "uri:2"]
+def test_track_uris_for_artist_takes_from_the_newest_release_first() -> None:
+    sp = FakeSpotify(
+        albums_by_artist={
+            "aaa": [
+                _album("old", "2020-01-01"),
+                _album("new", "2026-05-08"),
+            ]
+        },
+        tracks_by_album={
+            "old": [_track("uri:old1")],
+            "new": [_track("uri:new1"), _track("uri:new2")],
+        },
+    )
+    assert sp_mod.track_uris_for_artist(sp, "aaa", 3) == ["uri:new1", "uri:new2", "uri:old1"]
 
 
-def test_top_track_uris_returns_empty_when_the_lookup_raises() -> None:
+def test_track_uris_for_artist_does_not_trust_artist_albums_result_order() -> None:
+    """artist_albums' own ordering isn't documented as guaranteed, so the
+    newest-first behavior must come from re-sorting by release_date, not from
+    relying on whatever order the API happens to return."""
+    sp = FakeSpotify(
+        albums_by_artist={
+            "aaa": [
+                _album("new", "2026-05-08"),  # returned FIRST by the fake API
+                _album("old", "2020-01-01"),
+            ]
+        },
+        tracks_by_album={
+            "old": [_track("uri:old1")],
+            "new": [_track("uri:new1")],
+        },
+    )
+    assert sp_mod.track_uris_for_artist(sp, "aaa", 2) == ["uri:new1", "uri:old1"]
+
+
+def test_track_uris_for_artist_returns_empty_for_an_artist_with_no_albums() -> None:
+    """No albums/singles is a normal outcome, not an error -- distinct from
+    an API call raising, which collect_track_uris treats very differently."""
+    sp = FakeSpotify()
+    assert sp_mod.track_uris_for_artist(sp, "no-releases", 3) == []
+
+
+def test_track_uris_for_artist_stops_once_the_limit_is_reached() -> None:
+    sp = FakeSpotify(
+        albums_by_artist={"aaa": [_album("a", "2026-01-01")]},
+        tracks_by_album={"a": [_track(f"uri:{i}") for i in range(10)]},
+    )
+    assert sp_mod.track_uris_for_artist(sp, "aaa", 3) == ["uri:0", "uri:1", "uri:2"]
+
+
+def test_track_uris_for_artist_dedupes_a_track_repeated_across_releases() -> None:
+    sp = FakeSpotify(
+        albums_by_artist={
+            "aaa": [_album("single", "2026-05-08"), _album("album", "2026-01-01")]
+        },
+        tracks_by_album={
+            "single": [_track("uri:shared")],
+            "album": [_track("uri:shared"), _track("uri:unique")],
+        },
+    )
+    assert sp_mod.track_uris_for_artist(sp, "aaa", 3) == ["uri:shared", "uri:unique"]
+
+
+# --- collect_track_uris ---
+
+
+def test_collect_track_uris_concatenates_across_artists_in_order() -> None:
+    sp = FakeSpotify(
+        albums_by_artist={
+            "aaa": [_album("a", "2026-01-01")],
+            "bbb": [_album("b", "2026-01-01")],
+        },
+        tracks_by_album={"a": [_track("uri:a")], "b": [_track("uri:b")]},
+    )
+    assert sp_mod.collect_track_uris(sp, ["aaa", "bbb"], 3) == ["uri:a", "uri:b"]
+
+
+def test_collect_track_uris_propagates_a_failure_immediately() -> None:
+    """A raised exception means the API call itself is broken (auth, rate
+    limit, a dead endpoint) -- almost certainly true for every remaining
+    artist too. This must NOT be swallowed into an empty result for that one
+    artist and continue; it must stop the whole batch immediately, exactly
+    once, rather than repeating the same failure across every artist."""
+
     class Broken(FakeSpotify):
-        def artist_top_tracks(self, artist_id: str, country: str = "US") -> dict:
-            raise RuntimeError("rate limited")
-
-    assert sp_mod.top_track_uris(Broken(), "aaa", 3) == []
-
-
-def test_one_artist_failing_does_not_lose_the_other_artists_tracks() -> None:
-    class PartlyBroken(FakeSpotify):
-        def artist_top_tracks(self, artist_id: str, country: str = "US") -> dict:
+        def artist_albums(self, artist_id: str, **kwargs: object) -> dict:
             if artist_id == "bbb":
-                raise RuntimeError("boom")
-            return super().artist_top_tracks(artist_id, country)
+                raise RuntimeError("410 Gone -- deprecated endpoint")
+            return super().artist_albums(artist_id, **kwargs)
 
-    sp = PartlyBroken(top_tracks={"aaa": ["uri:a"], "ccc": ["uri:c"]})
-    result = sp_mod.build_playlist(sp, date(2026, 9, 7), ["aaa", "bbb", "ccc"], 3)
-    assert result["track_count"] == 2
-    assert sp.replaced[0][1] == ["uri:a", "uri:c"]
+    sp = Broken(
+        albums_by_artist={"aaa": [_album("a", "2026-01-01")], "ccc": [_album("c", "2026-01-01")]},
+        tracks_by_album={"a": [_track("uri:a")], "c": [_track("uri:c")]},
+    )
+    with pytest.raises(RuntimeError, match="deprecated endpoint"):
+        sp_mod.collect_track_uris(sp, ["aaa", "bbb", "ccc"], 3)
 
 
 # --- find_existing_playlist ---
@@ -274,30 +381,12 @@ def test_set_playlist_tracks_chunks_past_the_100_item_api_cap() -> None:
     assert sp.added == [("pid", uris[100:200]), ("pid", uris[200:])]
 
 
-# --- build_playlist ---
+# --- sync_playlist ---
 
 
-def test_build_playlist_refuses_to_empty_a_playlist_when_every_lookup_fails() -> None:
-    """Total top-tracks failure (rate limit, outage) must not be mistaken for
-    "this week has no music": replacing with [] would clear the existing
-    playlist and then publish a report linking to an empty one. Partial
-    failure is fine -- see test_one_artist_failing_... above."""
-
-    class AllBroken(FakeSpotify):
-        def artist_top_tracks(self, artist_id: str, country: str = "US") -> dict:
-            raise RuntimeError("rate limited")
-
-    sp = AllBroken(playlists=[_owned("pid", "2026-09-07: This Week in Philly")])
-    with pytest.raises(RuntimeError, match="refusing to replace"):
-        sp_mod.build_playlist(sp, date(2026, 9, 7), ["aaa", "bbb"], 3, stored_id="pid")
-
-    assert sp.replaced == []
-    assert sp.created == []
-
-
-def test_build_playlist_creates_a_public_playlist_when_none_exists() -> None:
-    sp = FakeSpotify(top_tracks={"aaa": ["uri:1", "uri:2", "uri:3", "uri:4"]})
-    result = sp_mod.build_playlist(sp, date(2026, 9, 7), ["aaa"], 3)
+def test_sync_playlist_creates_a_public_playlist_when_none_exists() -> None:
+    sp = FakeSpotify()
+    result = sp_mod.sync_playlist(sp, date(2026, 9, 7), ["uri:1", "uri:2", "uri:3"], 1)
 
     assert len(sp.created) == 1
     assert sp.created[0]["public"] is True
@@ -307,24 +396,47 @@ def test_build_playlist_creates_a_public_playlist_when_none_exists() -> None:
     assert result["playlist_url"] == f"https://open.spotify.com/playlist/{result['playlist_id']}"
 
 
-def test_build_playlist_reuses_the_stored_playlist_instead_of_creating_a_second() -> None:
-    sp = FakeSpotify(
-        playlists=[_owned("pid", "2026-09-07: This Week in Philly")],
-        top_tracks={"aaa": ["uri:1"]},
-    )
-    result = sp_mod.build_playlist(sp, date(2026, 9, 7), ["aaa"], 3, stored_id="pid")
+def test_sync_playlist_reuses_the_stored_playlist_instead_of_creating_a_second() -> None:
+    sp = FakeSpotify(playlists=[_owned("pid", "2026-09-07: This Week in Philly")])
+    result = sp_mod.sync_playlist(sp, date(2026, 9, 7), ["uri:1"], 1, stored_id="pid")
 
     assert sp.created == []
     assert result["playlist_id"] == "pid"
     assert sp.replaced == [("pid", ["uri:1"])]
 
 
-def test_build_playlist_refreshes_the_description_of_an_existing_playlist() -> None:
-    sp = FakeSpotify(
-        playlists=[_owned("pid", "2026-09-07: This Week in Philly")],
-        top_tracks={"aaa": ["uri:1"]},
-    )
-    sp_mod.build_playlist(sp, date(2026, 9, 7), ["aaa"], 3, stored_id="pid")
+def test_sync_playlist_refreshes_the_description_of_an_existing_playlist() -> None:
+    sp = FakeSpotify(playlists=[_owned("pid", "2026-09-07: This Week in Philly")])
+    sp_mod.sync_playlist(sp, date(2026, 9, 7), ["uri:1"], 1, stored_id="pid")
 
     assert sp.details_changed[0]["id"] == "pid"
     assert "September 7-13, 2026" in sp.details_changed[0]["description"]
+
+
+# --- live network canary ---
+#
+# Excluded by default (pytest -m network runs it). Its whole job is to fail
+# loudly and specifically if Spotify deprecates artist_albums/album_tracks
+# the way it already deprecated artist_top_tracks -- see the module
+# docstring for that history. Needs SPOTIFY_CLIENT_ID/SECRET in the
+# environment; Client Credentials is enough since these are read endpoints.
+
+
+@pytest.mark.network
+def test_track_source_endpoints_still_work() -> None:
+    client_id = os.environ.get("SPOTIFY_CLIENT_ID")
+    client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
+    if not client_id or not client_secret:
+        pytest.skip("SPOTIFY_CLIENT_ID/SECRET not set")
+
+    import spotipy
+    from spotipy.oauth2 import SpotifyClientCredentials
+
+    sp = spotipy.Spotify(
+        auth_manager=SpotifyClientCredentials(
+            client_id=client_id, client_secret=client_secret
+        )
+    )
+    # Social Distortion -- a real, working artist id, not hardcoded fixture data.
+    uris = sp_mod.track_uris_for_artist(sp, "16nn7kCHPWIB6uK09GQCNI", 3)
+    assert len(uris) >= 1

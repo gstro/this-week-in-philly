@@ -2,15 +2,28 @@
 """Builds a public Spotify playlist from a week's Top 3 music picks.
 
 Reads data/YYYY-MM-DD/_spotify.json (spotify_lookup.py's output) and
-_selections.json, takes the top N tracks for every matched artist, and
-replaces the contents of a per-week playlist named
-"YYYY-MM-DD: This Week in Philly" -- date first so that a truncated title in
-Spotify's sidebar still sorts and reads chronologically. The playlist's id and
-URL are written to data/YYYY-MM-DD/_playlist.json, which html_render.py reads
-to put a link in the report header.
+_selections.json, takes a handful of recent tracks for every matched artist,
+and replaces the contents of a per-week playlist named "YYYY-MM-DD: This Week
+in Philly" -- date first so that a truncated title in Spotify's sidebar still
+sorts and reads chronologically. The playlist's id and URL are written to
+data/YYYY-MM-DD/_playlist.json, which html_render.py reads to put a link in
+the report header.
 
 Runs between spotify_lookup.py and html_render.py in runner.sh: it needs the
 former's artist matches, and the latter needs its URL.
+
+Track source: an artist's most recent album or single's tracks, NOT their
+"top tracks." That endpoint (GET /v1/artists/{id}/top-tracks) is what this
+script was originally built against; it returned 403 for every artist tried
+-- including a global megastar, under both Client Credentials and a fully
+user-authorized token -- and Spotify's own reference page for it now reads
+"Deprecated." Search's `track` results lost their `popularity` field in the
+same pass, ruling out the other obvious replacement (search + sort by
+popularity). artist_albums()/album_tracks() were verified working against
+this project's actual 2026-09-07 matched artists (not just a celebrity) before
+being adopted here -- see the PR discussion for the comparison. This may not
+be the last such change; if artist_albums/album_tracks also go, the fallback
+is the same shape (any endpoint returning track URIs for a known artist_id).
 
 Auth is NOT spotify_lookup.py's. That script uses Client Credentials, which
 is app-only and cannot touch a user's playlists; this one uses the
@@ -55,8 +68,14 @@ REPORT_BASE_URL = "https://gstro.github.io/this-week-in-philly/weeks"
 # Spotify's playlist-items endpoints cap each call at 100 URIs.
 _MAX_ITEMS_PER_CALL = 100
 
-# artist_top_tracks is market-scoped; without a market it returns nothing.
+# Both artist_albums and album_tracks are market-scoped; without one, results
+# can be incomplete or empty for an artist not licensed everywhere.
 _MARKET = "US"
+
+# How many of an artist's most recent albums/singles to consider before
+# giving up on finding enough tracks. Plenty for --tracks-per-artist's
+# default of 3 -- most artists fill that from their single latest release.
+_ALBUMS_TO_CONSIDER = 10
 
 
 def playlist_name(monday: date) -> str:
@@ -111,15 +130,63 @@ def matched_artist_ids(selections: dict, spotify: dict) -> list[str]:
     return ids
 
 
-def top_track_uris(sp: spotipy.Spotify, artist_id: str, limit: int) -> list[str]:
-    """Up to `limit` of an artist's top tracks. A failure for one artist is
-    printed and skipped rather than losing the whole playlist."""
-    try:
-        result = sp.artist_top_tracks(artist_id, country=_MARKET)
-    except Exception as exc:  # noqa: BLE001 -- one artist failing shouldn't sink the rest
-        print(f"  Top-tracks lookup failed for artist {artist_id}: {exc}", file=sys.stderr)
-        return []
-    return [track["uri"] for track in result.get("tracks", [])[:limit]]
+def track_uris_for_artist(sp: spotipy.Spotify, artist_id: str, limit: int) -> list[str]:
+    """Up to `limit` track URIs from an artist's most recent albums/singles,
+    newest release first.
+
+    include_groups="album,single" excludes compilations and "appears on"
+    credits -- the latter would otherwise pull in tracks from tribute albums,
+    festival samplers, etc. that don't represent the artist's own work.
+    artist_albums' own result order isn't documented as guaranteed, so
+    release_date is re-sorted client-side rather than trusted as-is; dates of
+    mixed precision (a bare year vs a full YYYY-MM-DD) can sort slightly out
+    of true order against each other, an accepted rough edge rather than a
+    reason to hand-parse partial ISO dates none of this project's other code
+    has needed to.
+
+    An artist with zero albums/singles simply yields [] -- a normal outcome
+    (handled by the caller topping up from other artists), not an error.
+    Genuine API failures (auth, rate limit, a now-deprecated endpoint -- see
+    the module docstring) are deliberately NOT caught here: they propagate to
+    collect_track_uris, which stops immediately rather than repeating the
+    same failure over every remaining artist.
+    """
+    albums = sp.artist_albums(
+        artist_id, include_groups="album,single", country=_MARKET, limit=_ALBUMS_TO_CONSIDER
+    )
+    ordered = sorted(albums["items"], key=lambda a: a.get("release_date", ""), reverse=True)
+
+    uris: list[str] = []
+    seen: set[str] = set()
+    for album in ordered:
+        if len(uris) >= limit:
+            break
+        tracks = sp.album_tracks(album["id"], market=_MARKET, limit=limit)
+        for track in tracks["items"]:
+            if track["uri"] not in seen:
+                seen.add(track["uri"])
+                uris.append(track["uri"])
+            if len(uris) >= limit:
+                break
+    return uris
+
+
+def collect_track_uris(sp: spotipy.Spotify, artist_ids: list[str], limit: int) -> list[str]:
+    """Track URIs for every matched artist, in order, concatenated.
+
+    Deliberately no per-artist try/except: track_uris_for_artist raising
+    means the underlying API call itself failed (not "this artist has no
+    tracks," which is a normal empty list, not an exception) -- almost always
+    something systemic (auth, rate limit, a dead endpoint) that will recur
+    identically for every remaining artist. Stopping at the first failure
+    turns what would otherwise be N nearly-identical stack traces in the logs
+    into one, and hands the real error straight to main()'s catch-all rather
+    than losing it under a wall of repeats.
+    """
+    uris: list[str] = []
+    for artist_id in artist_ids:
+        uris.extend(track_uris_for_artist(sp, artist_id, limit))
+    return uris
 
 
 def find_existing_playlist(sp: spotipy.Spotify, user_id: str, name: str, stored_id: str | None) -> str | None:
@@ -168,30 +235,19 @@ def set_playlist_tracks(sp: spotipy.Spotify, playlist_id: str, uris: list[str]) 
         sp.playlist_add_items(playlist_id, uris[start : start + _MAX_ITEMS_PER_CALL])
 
 
-def build_playlist(
+def sync_playlist(
     sp: spotipy.Spotify,
     monday: date,
-    artist_ids: list[str],
-    tracks_per_artist: int,
+    uris: list[str],
+    artist_count: int,
     stored_id: str | None = None,
 ) -> dict:
+    """Find-or-create the week's playlist and replace its contents with
+    `uris` (already resolved by collect_track_uris). Separated from track
+    resolution so main() can run the (read-only, safe) resolution step under
+    --dry-run without ever reaching these mutating calls."""
     name = playlist_name(monday)
     description = playlist_description(monday)
-
-    uris: list[str] = []
-    for artist_id in artist_ids:
-        uris.extend(top_track_uris(sp, artist_id, tracks_per_artist))
-
-    # Zero tracks from a non-empty artist list means every top-tracks lookup
-    # failed (rate limit, outage) -- not that the week has no music. Replacing
-    # with [] there would CLEAR an existing playlist and then publish a report
-    # linking to it. top_track_uris swallows per-artist failures by design, so
-    # this is the only place that total failure is distinguishable.
-    if not uris:
-        raise RuntimeError(
-            f"No tracks resolved for any of {len(artist_ids)} matched artist(s) -- "
-            "refusing to replace the playlist with an empty one"
-        )
 
     user_id = sp.current_user()["id"]
     playlist_id = find_existing_playlist(sp, user_id, name, stored_id)
@@ -209,7 +265,7 @@ def build_playlist(
         "name": name,
         "playlist_id": playlist_id,
         "playlist_url": f"https://open.spotify.com/playlist/{playlist_id}",
-        "artist_count": len(artist_ids),
+        "artist_count": artist_count,
         "track_count": len(uris),
     }
 
@@ -223,7 +279,7 @@ def main() -> None:
         "--tracks-per-artist",
         type=int,
         default=3,
-        help="Top tracks to take per matched artist (default: 3)",
+        help="Recent tracks to take per matched artist (default: 3)",
     )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
@@ -237,26 +293,53 @@ def main() -> None:
         print("No matched music artists this week; no playlist to build.")
         return
 
+    # Every Spotify-facing failure is non-fatal on purpose: an expired refresh
+    # token, a dead endpoint, or an outage must not stop the report from
+    # rendering and publishing. Same shape as calendar_create.py's past-week
+    # skip -- say why loudly, exit 0, let the rest of runner.sh proceed.
+    # html_render.py treats a missing _playlist.json as "no link", so the
+    # report simply omits it.
+    #
+    # Track resolution happens here, inside this try, for BOTH --dry-run and
+    # a real run -- it's read-only, so --dry-run gains nothing by skipping
+    # it, and skipping it is exactly how an earlier version of this script
+    # passed --dry-run against a now-deprecated endpoint with a clean "would
+    # sync N tracks" message that a real run then couldn't back up at all.
+    try:
+        sp = common.get_spotify_user_client()
+        uris = collect_track_uris(sp, artist_ids, args.tracks_per_artist)
+    except Exception as exc:  # noqa: BLE001 -- must not block the report; see above
+        print(
+            f"spotify_playlist: SKIPPING playlist build -- {exc}\n"
+            f"  The report will render without a playlist link.",
+            file=sys.stderr,
+        )
+        return
+
+    # Zero tracks from a non-empty artist list means every lookup failed to
+    # turn up anything (or collect_track_uris would have raised already on a
+    # hard API error) -- not that the week has no music. Replacing with []
+    # would CLEAR an existing playlist and then publish a report linking to
+    # it, so refuse instead of proceeding.
+    if not uris:
+        print(
+            f"spotify_playlist: SKIPPING playlist build -- no tracks found for "
+            f"any of {len(artist_ids)} matched artist(s).\n"
+            f"  The report will render without a playlist link.",
+            file=sys.stderr,
+        )
+        return
+
     if args.dry_run:
         print(
             f"[dry-run] Would sync playlist {playlist_name(monday)!r} with "
-            f"up to {len(artist_ids) * args.tracks_per_artist} tracks from "
-            f"{len(artist_ids)} artists."
+            f"{len(uris)} tracks from {len(artist_ids)} artists."
         )
         return
 
     stored_id = common.load_playlist(args.week_dir).get("playlist_id")
-
-    # Every Spotify-facing failure is non-fatal on purpose: an expired refresh
-    # token or a Spotify outage must not stop the report from rendering and
-    # publishing. Same shape as calendar_create.py's past-week skip -- say why
-    # loudly, exit 0, let the rest of runner.sh proceed. html_render.py treats
-    # a missing _playlist.json as "no link", so the report simply omits it.
     try:
-        sp = common.get_spotify_user_client()
-        result = build_playlist(
-            sp, monday, artist_ids, args.tracks_per_artist, stored_id
-        )
+        result = sync_playlist(sp, monday, uris, len(artist_ids), stored_id)
     except Exception as exc:  # noqa: BLE001 -- must not block the report; see above
         print(
             f"spotify_playlist: SKIPPING playlist build -- {exc}\n"

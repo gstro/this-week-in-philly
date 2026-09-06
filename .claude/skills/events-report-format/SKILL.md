@@ -142,7 +142,7 @@ directly below the subtitle line:
 - `color: #c9a84c` (the same gold accent as inline Spotify links), `font-size: 0.75rem`, no underline until hover
 - **Omit the whole element** when there's no playlist — `scripts/spotify_playlist.py` skips silently (no `_playlist.json`) when Spotify auth fails or no music act matched, and the report must render normally without it
 - The playlist itself is public and named `YYYY-MM-DD: This Week in Philly` — date first so a title truncated in Spotify's sidebar still sorts and reads chronologically
-- It holds the top 3 tracks for each matched Top 3 music act. Its contents therefore inherit the two limits above: honorable-mention acts are absent, and a multi-act bill contributes only the headliner
+- It holds 3 recent tracks (the matched act's latest album or single) for each matched Top 3 music act -- not an official "top tracks" list, which Spotify deprecated. Its contents therefore inherit the two limits above: honorable-mention acts are absent, and a multi-act bill contributes only the headliner
 
 ---
 
