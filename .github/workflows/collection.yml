@@ -108,3 +108,35 @@ jobs:
           git add "${{ steps.week.outputs.dir }}"
           git diff --staged --quiet || git commit -m "Collection: week of $(basename "${{ steps.week.outputs.dir }}")"
           git push
+
+      # Fires Selection's API trigger the moment this run's data is actually
+      # on main, instead of relying solely on Selection's own fixed cron (30
+      # min after this workflow's schedule) to guess when Collection is done.
+      # That guess failed for real on 2026-09-06: GitHub Actions delayed this
+      # scheduled run by over four hours, so Selection's cron fired first,
+      # found no _candidates.json yet, and correctly no-op'd via its own
+      # prerequisite guard (.claude/skills/philly-events-selection/SKILL.md)
+      # -- safe, but it left Selection needing a manual re-trigger afterward.
+      # Selection's fixed cron stays as-is, now a true fallback rather than
+      # the only mechanism: its own guard makes a redundant fire here
+      # harmless ("already selected this week" -> stop, don't overwrite).
+      # continue-on-error, like the step above -- a failed trigger call
+      # shouldn't fail an otherwise-successful Collection run, and the
+      # fallback cron covers it.
+      #
+      # Needs SELECTION_ROUTINE_ID (repo variable) and SELECTION_ROUTINE_TOKEN
+      # (repo secret), both from the Selection routine's API trigger (added at
+      # claude.ai/code/routines -- Edit routine > Select a trigger > API).
+      # Unset until that trigger exists, at which point this starts working
+      # with no further code change. /fire ships under an experimental beta
+      # header (per Claude Code's routines docs) -- request/response shape and
+      # header version may change.
+      - name: Trigger Selection routine
+        continue-on-error: true
+        run: |
+          curl -sf -X POST "https://api.anthropic.com/v1/claude_code/routines/${{ vars.SELECTION_ROUTINE_ID }}/fire" \
+            -H "Authorization: Bearer ${{ secrets.SELECTION_ROUTINE_TOKEN }}" \
+            -H "anthropic-beta: experimental-cc-routine-2026-04-01" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "Content-Type: application/json" \
+            -d '{}'
