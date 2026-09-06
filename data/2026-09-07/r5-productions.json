@@ -1,0 +1,42 @@
+{
+  "source": "R5 Productions",
+  "collected_at": "2026-09-06T10:15:04.915021+00:00",
+  "events": [
+    {
+      "title": "Nice Strong Arm",
+      "venue": "Johnny Brenda\u2019s",
+      "date": "2026-09-08",
+      "time": "Doors: 7 pm | Show: 8 pm",
+      "cost": "$22.90",
+      "url": "https://r5productions.com/event/nice-strong-arm/johnny-brendas/philadelphia-pennsylvania/",
+      "description": ""
+    },
+    {
+      "title": "Shudder To Think",
+      "venue": "The First Unitarian Church",
+      "date": "2026-09-11",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$42.29",
+      "url": "https://r5productions.com/event/shudder-to-think/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": ""
+    },
+    {
+      "title": "What's Left Now? Tour | Death Lens",
+      "venue": "PhilaMOCA",
+      "date": "2026-09-12",
+      "time": "Doors: 7 pm | Show: 7:30 pm",
+      "cost": "$22.22",
+      "url": "https://r5productions.com/event/death-lens/philamoca/philadelphia-pennsylvania/",
+      "description": "What's Left Now? Tour"
+    },
+    {
+      "title": "Chanel Beads",
+      "venue": "The First Unitarian Church",
+      "date": "2026-09-12",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$25.81",
+      "url": "https://r5productions.com/event/chanel-beads/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": ""
+    }
+  ]
+}

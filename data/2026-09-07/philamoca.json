@@ -1,0 +1,78 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-09-06T10:15:11.830910+00:00",
+  "events": [
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-07",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk."
+    },
+    {
+      "title": "Richard Perez presents I HAVE TO DO THIS",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-08",
+      "time": "7:30, 8:00",
+      "cost": "$20\u2013$25",
+      "url": "https://www.etix.com/ticket/p/37241432/",
+      "description": ""
+    },
+    {
+      "title": "2026 Sundance Film Festival Short Film Tour",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-10",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/92147304",
+      "description": "Six short films straight out of Sundance 2026!"
+    },
+    {
+      "title": "iluvboyband",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-11",
+      "time": "7:30, 8:00",
+      "cost": "$10",
+      "url": "https://www.etix.com/ticket/p/74586949",
+      "description": ""
+    },
+    {
+      "title": "Death Lens",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-12",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/54913550",
+      "description": ""
+    },
+    {
+      "title": "Philly Record Freak Out",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-12",
+      "time": "10:00",
+      "cost": "$5\u2013$10",
+      "url": "https://www.instagram.com/recordfreakout/",
+      "description": "Early $10 admission at 10 AM, $5 from 11-4 PM!"
+    },
+    {
+      "title": "2026 Sundance Film Festival Short Film Tour",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-13",
+      "time": "2:30, 3:00",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/69694923/",
+      "description": "Six short films straight out of Sundance 2026!"
+    },
+    {
+      "title": "LEAVE A COMMENT \u2013 Screening and Discussion with Michael Burns",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-13",
+      "time": "7:00, 7:30",
+      "cost": "$15",
+      "url": "https://www.etix.com/ticket/p/98252185/",
+      "description": ""
+    }
+  ]
+}
