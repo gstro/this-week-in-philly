@@ -1,0 +1,356 @@
+{
+  "week": "2026-09-07",
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-09-07",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0692",
+          "rank": 1,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A discussion of the 2026 organizing pamphlet \"Naming the Moment: Revolutionary Strategy in a Time of Crisis,\" with project participant Matthew N. Lyons unpacking how an ad hoc group of radical organizers is thinking through resistance to the current administration. It's the kind of political-education night Wooden Shoe does better than almost anywhere else in the city — small room, serious conversation, free to attend."
+        },
+        {
+          "id": "c0670",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A stacked hardcore bill at a DIY spot that doesn't show up on the usual aggregators — Animated Violence, Early Grave, and Krot trading sets in what's billed as the first of two Courtyard shows this week. This is the unglamorous, ears-ringing end of the punk spectrum that's easy to miss if you're not already plugged into the scene. *(confirm details — exact neighborhood and full address aren't given by the listing; check the venue's socials before heading out.)*"
+        },
+        {
+          "id": "c0002",
+          "rank": 3,
+          "address": "1026 Spring Garden St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Joy Division and New Order's original bassist has spent over a decade touring his old bands' catalog album by album, and this stop lands on the Substance-era material. It's about as close as anyone gets to hearing that low end played by the person who wrote it — post-punk history, not a tribute act."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0030" },
+        { "id": "c0029" }
+      ],
+      "annotations": [
+        { "id": "c0692", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0670", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0002", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0030", "category": "📚 Literary", "sold_out": false, "note": "A recurring classics book club at the Ethical Society — this cycle takes on how great novels have grappled with injustice and upheaval that still resonates." },
+        { "id": "c0029", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "A free monthly craft circle exploring paper, hosted at the Soapbox community print shop and zine library in Kingsessing." },
+        { "id": "c0021", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Recurring museum tour, on 3 days this week — see All Week / Recurring." },
+        { "id": "c0022", "category": "🤝 Community & Politics", "sold_out": false, "note": "Weekly noon protest outside a state senator's office; standing weekly, not a one-off." },
+        { "id": "c0026", "category": "🤝 Community & Politics", "sold_out": false, "note": "DSA housing committee's monthly meeting." },
+        { "id": "c0620", "category": "🤝 Community & Politics", "sold_out": false, "note": "A social hangout for trans and non-binary people and allies, first and third Mondays at Iffy Books." },
+        { "id": "c0643", "category": "👻 Horror & Occult", "sold_out": false, "note": "Online watch-along of the 1990 IT miniseries, a Tim Curry tribute — Meetup: Philadelphia Horror." },
+        { "id": "c0664", "category": "👻 Horror & Occult", "sold_out": false, "note": "PhilaMOCA's weekly psychotronic film series; specific film not named in this week's listing." },
+        { "id": "c0031", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Weekly jazz jam session hosted by Richard Hill Jr. at Black Squirrel Club." },
+        { "id": "c0003", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0005", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Long-running prog/hard rock veterans, 40+ years in." },
+        { "id": "c0009", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Philly soul singer Robert Gee with his backing band Press Play." }
+      ]
+    },
+    {
+      "date": "2026-09-08",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0034",
+          "rank": 1,
+          "address": "858 N Broad St, Philadelphia, PA 19130",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Social Distortion headlines a genuinely stacked punk bill with Descendents and The Chats — three generations of foundational and current punk in one room. Mike Ness and company rarely swing through on a night like this without an arena price tag attached. North Broad Street; the Broad Street Line's Girard Ave stop is a few blocks' walk."
+        },
+        {
+          "id": "c0628",
+          "rank": 2,
+          "address": "1900 Benjamin Franklin Pkwy, Philadelphia, PA 19103",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philly Science Action and Green Philly are rallying to pressure Drexel into keeping the 200-year-old Academy of Natural Sciences open past this September — a genuinely time-sensitive fight to save an institution, not a recurring protest. On the Ben Franklin Parkway, about a 15-minute walk from Center City or reachable via the 32/38 bus."
+        },
+        {
+          "id": "c0072",
+          "rank": 3,
+          "address": "1201 Frankford Ave, Philadelphia, PA 19125",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "time": "8:00 PM",
+          "why": "Nice Strong Arm were a foundational NYC noise-rock band in the '80s underground, and this is a rare reunion date alongside Shadow Riot and Heavenly Bodies. If you like your rock abrasive and pedigreed, this is the show. Fishtown, at Frankford and Girard — a half-mile walk from the MFL's Girard station, or take the 15 trolley."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0053" },
+        { "id": "c0102" }
+      ],
+      "annotations": [
+        { "id": "c0034", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0628", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0072", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0053", "category": "🤝 Community & Politics", "sold_out": false, "note": "Daniel Fish (Oklahoma!) directs a dramatization of the 1993 televised clash between Anthony Fauci and AIDS activist Larry Kramer. Fringe run, 4 days — see All Week / Recurring." },
+        { "id": "c0102", "category": "🤝 Community & Politics", "sold_out": false, "note": "Free know-your-rights workshop with Renters United Philadelphia, includes one-on-one tenant legal advice." },
+        { "id": "c0039", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Portland-based Latin skacore band with political lyrics, at Kung Fu Necktie." },
+        { "id": "c0621", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Silent co-working writing sessions at Iffy Books." },
+        { "id": "c0100", "category": "🤝 Community & Politics", "sold_out": false, "note": "Eastern State Penitentiary's Justice 101 talk series, this session on rehabilitation." },
+        { "id": "c0101", "category": "🤝 Community & Politics", "sold_out": false, "note": "Eastern State Penitentiary's Justice 101 series, this session on the erasure of queer history." },
+        { "id": "c0066", "category": "🤝 Community & Politics", "sold_out": false, "note": "Political drama about Puerto Rican independence, set on Puerto Rican Independence Day. Fringe run — see All Week / Recurring." },
+        { "id": "c0060", "category": "🤝 Community & Politics", "sold_out": false, "note": "Circus-dance production about resistance and rebuilding power. Fringe run — see All Week / Recurring." }
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0165",
+          "rank": 1,
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A companion piece to last year's The Watcher Sleeps, this Fringe show frames an intimate author reading as a slow-building horror ritual about grief and being watched — three stories that curdle a cozy book event into something unsettling. Small room, single night, exactly the crossover of horror and literature worth seeking out."
+        },
+        {
+          "id": "c0627",
+          "rank": 2,
+          "address": "800 Mifflin St, Philadelphia, PA 19148",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Lightbox Film Center screens a new restoration of Elaine May's 1976 Mikey and Nicky, with Peter Falk and John Cassavetes improvising their way through one very bad night for a low-level mobster. It's one of the great underseen American films of the '70s, and this is a rare chance to see it on a real screen. Right in Point Breeze, at the Bok Building."
+        },
+        {
+          "id": "c0672",
+          "rank": 3,
+          "address": "4215 Baltimore Ave, Philadelphia, PA 19143",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "An experimental/noise-rock/punk bill at a West Philly house venue — four bands built around feedback and dissonance rather than hooks. This is the kind of show that only exists because someone's willing to run a PA out of their living room. Baltimore Ave near 42nd St, in the Cedar Park corridor near University City."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0152" },
+        { "id": "c0176" },
+        { "id": "c0622" }
+      ],
+      "annotations": [
+        { "id": "c0165", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0627", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0672", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0152", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Drag legend Lady Bunny's one-woman show of pop parodies and Drag Race commentary, at City Winery." },
+        { "id": "c0176", "category": "🤝 Community & Politics", "sold_out": false, "note": "PA Gov. Josh Shapiro and Utah Gov. Spencer Cox in a free fireside chat on the First Amendment and civil dialogue, presented by the National Constitution Center and Knight Foundation. *(confirm details — venue listed inconsistently as Kimmel Center vs. National Constitution Center.)*" },
+        { "id": "c0622", "category": "💻 Tech & Maker", "sold_out": false, "note": "Bi-monthly Permacomputing + Solarpunk meetup at Iffy Books — sustainable-tech discussion with a DIY-electronics bent." },
+        { "id": "c0117", "category": "🎵 Music & Concerts", "sold_out": true, "note": "Gothic indie-folk artist Aldous Harding, WXPN Welcomes." },
+        { "id": "c0120", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Danish thrash veterans Artillery, formed in the tape-trading scene that helped launch Metallica and Anthrax." },
+        { "id": "c0645", "category": "👻 Horror & Occult", "sold_out": false, "note": "Online watch-along of 2016 Korean horror The Wailing, Meetup: Philadelphia Horror." },
+        { "id": "c0630", "category": "📚 Literary", "sold_out": false, "note": "Low-key BYO-book reading club, 2nd and 4th Wednesdays at Indy Hall." },
+        { "id": "c0179", "category": "🤝 Community & Politics", "sold_out": false, "note": "Recurring canvass for DSA-backed congressional candidate Chris Rabb; a repeat from recent weeks." },
+        { "id": "c0189", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Guided tour of Wharton Esherick's handbuilt studio, out in Malvern. Recurring — see All Week / Recurring." }
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0686",
+          "rank": 1,
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "People's Media Fund presents an evening of ritual and storytelling centered on diaspora communities reclaiming their own narratives — community-made media, not a lecture. The Rotunda's non-standing programming is consistently worth catching, and this is exactly the kind of one-off it exists for."
+        },
+        {
+          "id": "c0210",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A free, all-ages show on the waterfront featuring Glitterer, Ned Russin's project since Title Fight went on hiatus — hooky, melancholic songwriting with real post-hardcore roots. Free and all-ages is rare for a bill this good. *(confirm details — exact stage/address at Spruce Street Harbor Park isn't given by the listing.)*"
+        },
+        {
+          "id": "c0623",
+          "rank": 3,
+          "address": "404 S. 20th St, Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The second of three sessions working through Jacques Ellul's The Technological Society, a founding text of tech-critical thought, hosted at Iffy Books — exactly the anarchist-bookstore-meets-hackerspace pairing of DIY-electronics skepticism and leftist politics this venue does best. Newcomers who missed part one are welcome; the group only asks that you come having read what's assigned."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0228" },
+        { "id": "c0227" }
+      ],
+      "annotations": [
+        { "id": "c0686", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0210", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0623", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0228", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Fire-as-symbol performance piece by Red Rae grappling with dismantling systems of power — late capitalism, transphobia, white supremacy, patriarchy." },
+        { "id": "c0227", "category": "🎵 Music & Concerts", "sold_out": false, "note": "DIY punk fest at Pentridge Station with Nympho, Giant, The Slads, Shampoo, Evil Weevil, plus zine/craft vendors." },
+        { "id": "c0290", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Hitchcock's The Birds, presented with VHS Club, at Philadelphia Film Society." },
+        { "id": "c0299", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Kenyan sci-fi feature Memory of Princess Mumbi, presented with Be Reel Black Cinema Club." },
+        { "id": "c0233", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "International Black and Indigenous Circus Week, a festival-within-a-festival at Cannonball. Recurring — see All Week / Recurring." }
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0324",
+          "rank": 1,
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "DC's storied post-hardcore outfit Shudder To Think — Dischord-adjacent art-punk that never sounded like anyone else in that scene — plays Philly's most important all-ages punk room. It's a genuinely rare stop for a band this influential and this infrequently touring."
+        },
+        {
+          "id": "c0384",
+          "rank": 2,
+          "address": "1714 Delancey St, Philadelphia, PA 19103",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A queer, feminist, postcolonial reimagining of Sheridan Le Fanu's 1872 vampire novella Carmilla — the actors playing predator and prey swap roles each performance, keeping the power dynamic genuinely unstable rather than settled going in. Gothic horror with real literary bones, for one night only."
+        },
+        {
+          "id": "c0693",
+          "rank": 3,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A hands-on training in de-escalation practices for keeping each other safe at protests and in community spaces, run by the Red Rabbis every second Friday. This is skills-building, not a rally — practical organizing infrastructure that rarely gets its own event listing. Masks required and provided."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0354" },
+        { "id": "c0679" }
+      ],
+      "annotations": [
+        { "id": "c0324", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0384", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0693", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0354", "category": "📚 Literary", "sold_out": false, "note": "NYT bestselling author R.F. Kuang (Babel, Yellowface) on her new novel Taipei Story. *(confirm details — venue listed inconsistently as Miller Theater vs. Perelman Theater.)*" },
+        { "id": "c0679", "category": "👻 Horror & Occult", "sold_out": false, "note": "FLINTA* goth fetish dance party at Val's Lesbian Bar." },
+        { "id": "c0332", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Local black/death metal band Blasphemous headlines with Slaughtersun, Necrosexual, and Weald and Woe." },
+        { "id": "c0359", "category": "🎵 Music & Concerts", "sold_out": false, "note": "NAH — solo percussionist working DIY punk, noise, avant jazz, and hip-hop into one set." },
+        { "id": "c0355", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Ars Nova Workshop premieres a new Craig Taborn/PRISM Saxophone Quartet commission at Solar Myth." },
+        { "id": "c0674", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Hardcore punk bill — Nightfall, Nuclear Addicts, Filth Of Society — at Cousin Danny's." },
+        { "id": "c0335", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Missouri Executive Order 44, Prize, and Lila at Ortlieb's." },
+        { "id": "c0337", "category": "🤝 Community & Politics", "sold_out": false, "note": "The Monthly Fund's roaming benefit series, this stop raising money for Musicopia." },
+        { "id": "c0366", "category": "🤝 Community & Politics", "sold_out": false, "note": "25th-anniversary 9/11 remembrance tribute along the Schuylkill River Trail." }
+      ]
+    },
+    {
+      "date": "2026-09-12",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0423",
+          "rank": 1,
+          "address": "1 Lemon Hill Drive, Philadelphia, PA 19130",
+          "category": "🎪 Festivals & Major Events",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A pay-as-you-wish, one-day DIY music and arts festival on Lemon Hill celebrating Philly's homegrown creative underground — the anti-corporate, community-run answer to the city's bigger ticketed festivals. In East Fairmount Park; no direct train service, but SEPTA bus 32 runs along Kelly Drive nearby, or it's about a mile walk or bike up from the Art Museum."
+        },
+        {
+          "id": "c0676",
+          "rank": 2,
+          "address": "844 N Broad St, Philadelphia, PA 19130",
+          "category": "👻 Horror & Occult",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Tagged \"experimental / goblin / nightmare / noise rock / puppet show\" by the show's own listing, which tells you most of what you need to know — unhinged, handmade, and not going to look or sound like anything else this week. North Broad Street; the Broad Street Line's Spring Garden stop is a few blocks south."
+        },
+        {
+          "id": "c0440",
+          "rank": 3,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A hardcore/punk triple bill at PhilaMOCA, the city's best small room for exactly this kind of night — Death Lens headlining their \"What's Left Now?\" tour with Destiny Bond and Nave in support. Loud, cheap, and a few blocks from Chinatown."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0497" },
+        { "id": "c0434" }
+      ],
+      "annotations": [
+        { "id": "c0423", "category": "🎪 Festivals & Major Events", "sold_out": false },
+        { "id": "c0676", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0440", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0497", "category": "🤝 Community & Politics", "sold_out": false, "note": "Joint canvass for Mark Pinsley and Ce-Ce Gerlach, running for State Senate and State House." },
+        { "id": "c0434", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Chanel Beads at First Unitarian Church, with Mechatok and Ivy Knight." },
+        { "id": "c0446", "category": "🌿 Markets & Outdoors", "sold_out": false, "note": "Philadelphia Honey Festival at Wyck, with the Philadelphia Beekeepers Guild — tastings, extractions, and a mead garden." },
+        { "id": "c0668", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Philly Record Freak Out, a vinyl-collector fair at PhilaMOCA." },
+        { "id": "c0462", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Descendanze: In Full Effect! — a cross-cultural dance collaboration at the Clef Club, with African and Native American dancers." },
+        { "id": "c0450", "category": "🌿 Markets & Outdoors", "sold_out": false, "note": "Stock Market Flea, a curated vintage/artist market at Craft Hall." },
+        { "id": "c0507", "category": "🤝 Community & Politics", "sold_out": false, "note": "Genealogy workshop connecting family histories to the wider African diaspora, at the African American Museum in Philadelphia." }
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0548",
+          "rank": 1,
+          "address": "847 N 3rd St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A DC hardcore supergroup built from members of Dag Nasty, Girls Against Boys, and Government Issue, playing the kind of tight, riff-forward hardcore that made that scene matter in the first place. In Northern Liberties; the MFL's Spring Garden or Girard station is about a half-mile walk, or take the 57 bus."
+        },
+        {
+          "id": "c0560",
+          "rank": 2,
+          "address": "140 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A restaging of Anna Halprin's 1967 Blank Placard Dance, in which a silent procession carries empty protest signs through the city and turns the question of what to protest back on the passersby who ask. It's a genuinely strange, pointed piece of protest art performed as a march that starts at FringeArts and moves through Center City — free, and about the closest thing the anti-war art movement of the '60s has left to living history."
+        },
+        {
+          "id": "c0694",
+          "rank": 3,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A free screening of The Mauritanian, adapted from Mohamedou Ould Slahi's memoir of 14 years of extrajudicial detention and torture at Guantánamo, timed to the 25th anniversary of the War on Terror. Organizers are framing this explicitly as commemoration and critique, not just a movie night — exactly the political specificity Wooden Shoe does well."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0550" },
+        { "id": "c0626" }
+      ],
+      "annotations": [
+        { "id": "c0548", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0560", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0694", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0550", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Strawberry Hands (Jacob Brunner) previews his debut wide release, with poets Doll Spirit Vessel and Myene Trimble Yanu." },
+        { "id": "c0626", "category": "📚 Literary", "sold_out": false, "note": "Poetry reading with Kristen Waters and Saralee Gallien at Iffy Books." },
+        { "id": "c0625", "category": "🎨 Arts & Workshops", "sold_out": false, "note": "Anarchist Sewing Club — drop-in mending and sewing at Iffy Books, machines and supplies provided." },
+        { "id": "c0587", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Five-band matinee — For Lack of a Term, Holodeck, Sewn Away, Altarboy, Paths2 Glory — at Broken Goblet." },
+        { "id": "c0563", "category": "🤝 Community & Politics", "sold_out": false, "note": "New Member 101, DSA's monthly orientation call for new and prospective members." },
+        { "id": "c0677", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Noise punk/grindcore bill — Diuretic, Agita, Be My Friend, Odette, Forge The Chains — at Cousin Danny's." },
+        { "id": "c0608", "category": "🤝 Community & Politics", "sold_out": false, "note": "A solo piece on the Night of the Long Knives and the Nazi purge of gay SA members — queer history rarely told." }
+      ]
+    }
+  ]
+}
