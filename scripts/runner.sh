@@ -48,6 +48,12 @@ else
 fi
 
 # The calling workflow (presentation.yml) commits and pushes:
-#   docs/weeks/*.html, docs/index.html, and the week's _selections.json and
-#   _playlist.json. _playlist.json MUST be committed -- it's what makes a
-#   re-run reuse the week's playlist instead of creating a duplicate.
+#   docs/weeks/*.html, docs/index.html, and the week's _selections.json,
+#   _spotify.json, and _playlist.json. This comment previously named only
+#   _selections.json here, which was never true of _spotify.json either --
+#   confirmed on the real 2026-09-07 run, where _spotify.json existed on the
+#   runner's disk (spotify_lookup.py ran, html_render.py used it) but was
+#   never committed, so it doesn't exist in this repo for that week despite
+#   the published report having working Spotify links. _playlist.json is the
+#   one that MUST be committed for correctness -- it's what makes a re-run
+#   reuse the week's playlist instead of creating a duplicate.

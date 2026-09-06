@@ -111,14 +111,33 @@ jobs:
           # data/event-picks-log.csv is intentionally not written here --
           # csv_log.py/attendance_check.py are deferred (see runner.sh);
           # only add it if a future run reintroduces that stage.
-          # _playlist.json must be staged: it carries the week's Spotify
-          # playlist id, and without it committed, the next run for this week
-          # can't find the playlist by id and would risk creating a duplicate.
-          # `git add` on a path that doesn't exist is an error, so it's only
-          # added when spotify_playlist.py actually wrote one (it exits 0
-          # without writing when Spotify auth fails).
+          # _spotify.json and _playlist.json must both be staged, and were
+          # not: this step's `git add` never named either, so both files
+          # existed only on the runner's ephemeral disk and were discarded
+          # when the job ended -- this comment's own claim to the contrary
+          # (below) was never true. Confirmed on the real 2026-09-07 run:
+          # runner.sh's spotify_lookup.py wrote _spotify.json and
+          # html_render.py used it (the published report has working Spotify
+          # links), but data/2026-09-07/_spotify.json never made it to main.
+          #
+          # _playlist.json matters even more: without it committed, the next
+          # run for this week can't find the playlist by id and would risk
+          # creating a duplicate.
+          #
+          # `git add` on a path that doesn't exist is an error, so both are
+          # guarded. _spotify.json is written unconditionally by
+          # spotify_lookup.py (even {} when there's no music this week) --
+          # the guard here is defense in depth, not the expected path, since
+          # runner.sh's `set -euo pipefail` means a hard failure there (e.g.
+          # missing SPOTIFY_CLIENT_ID/SECRET) stops the job before this step
+          # ever runs. _playlist.json is genuinely optional: spotify_playlist.py
+          # exits 0 without writing one when Spotify user auth fails.
           git add docs/ "${{ steps.week.outputs.dir }}/_selections.json"
+          SPOTIFY_JSON="${{ steps.week.outputs.dir }}/_spotify.json"
           PLAYLIST_JSON="${{ steps.week.outputs.dir }}/_playlist.json"
+          if [ -f "$SPOTIFY_JSON" ]; then
+            git add "$SPOTIFY_JSON"
+          fi
           if [ -f "$PLAYLIST_JSON" ]; then
             git add "$PLAYLIST_JSON"
           fi
