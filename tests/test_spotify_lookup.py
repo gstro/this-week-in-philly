@@ -141,7 +141,9 @@ def test_candidate_names_strips_a_trailing_venue_suffix() -> None:
 
 def test_candidate_names_tries_both_with_and_without_a_trailing_parenthetical() -> None:
     title = "DoYeon Kim Quartet (Ars Nova Workshop)"
-    assert candidate_names(title) == [title, "DoYeon Kim Quartet"]
+    candidates = candidate_names(title)
+    assert candidates[0] == title
+    assert "DoYeon Kim Quartet" in candidates
 
     title2 = "SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK"
     candidates = candidate_names(title2)
@@ -168,6 +170,55 @@ def test_candidate_names_filters_generic_boilerplate_words_via_stop_list() -> No
     assert "Taurus Judge" in candidates
     assert "More" not in candidates
     assert "& More" not in candidates
+
+
+def test_candidate_names_splits_on_the_boundary_after_a_parenthetical_tag() -> None:
+    """"VOIDHAMMER (LA) HARSH REALM (AVL) DIURETIC" has no separator between
+    acts at all beyond a "(city)" tag on each -- the whitespace right after
+    each closing paren is the only signal an act ended."""
+    title = "VOIDHAMMER (LA) HARSH REALM (AVL) DIURETIC + AGONESIAC @ Cousin Dannys"
+    candidates = candidate_names(title)
+    assert "VOIDHAMMER" in candidates
+    assert "HARSH REALM" in candidates
+    assert "DIURETIC" in candidates
+    assert "AGONESIAC" in candidates
+
+
+def test_candidate_names_paren_boundary_defers_to_a_connector_word() -> None:
+    """"Foo (bar) with Baz" must still resolve to a clean "Baz" via the
+    normal " with " separator, not a stray "with Baz" from a premature
+    paren-boundary split."""
+    candidates = candidate_names("Foo (bar) with Baz")
+    assert "Baz" in candidates
+    assert "with Baz" not in candidates
+
+
+def test_candidate_names_paren_boundary_defers_to_a_symbol_separator() -> None:
+    """"(Denton) / Sweepers" must still resolve to a clean "Sweepers" via
+    the normal "/" separator, not a stray "/ Sweepers"."""
+    title = "Gay Cum Daddies (Denton) / Sweepers / Good Pollution / Gr3yboy"
+    candidates = candidate_names(title)
+    assert "Sweepers" in candidates
+    assert "/ Sweepers" not in candidates
+
+
+def test_candidate_names_no_paren_boundary_split_on_a_lone_trailing_parenthetical() -> None:
+    """Nothing follows the paren in "DoYeon Kim Quartet (Ars Nova Workshop)"
+    -- the paren-boundary rule must not fire when there's no next act."""
+    title = "DoYeon Kim Quartet (Ars Nova Workshop)"
+    assert candidate_names(title) == [title, "DoYeon Kim Quartet", "DoYeon Kim"]
+
+
+def test_candidate_names_strips_a_trailing_ensemble_size_word() -> None:
+    assert candidate_names("DoYeon Kim Quartet") == ["DoYeon Kim Quartet", "DoYeon Kim"]
+
+
+def test_candidate_names_does_not_strip_band_or_orchestra() -> None:
+    """"Band"/"Orchestra" are routinely part of a real act's exact Spotify
+    name (e.g. a "Dave Matthews Band" distinct from "Dave Matthews") --
+    stripping them risks linking the wrong artist, so they're deliberately
+    excluded from the ensemble-suffix list."""
+    assert candidate_names("Dave Matthews Band") == ["Dave Matthews Band"]
 
 
 def test_candidate_names_preserves_a_period_in_an_initialism_act_name() -> None:
@@ -201,6 +252,8 @@ def test_candidate_names_every_candidate_is_a_substring_of_the_raw_title() -> No
         "DoYeon Kim Quartet (Ars Nova Workshop)",
         "SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK",
         "M.I.A. @ Union Transfer",
+        "VOIDHAMMER (LA) HARSH REALM (AVL) DIURETIC + AGONESIAC @ Cousin Dannys",
+        "Foo (bar) with Baz",
     ]
     for title in titles:
         for candidate in candidate_names(title):

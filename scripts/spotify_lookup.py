@@ -61,6 +61,30 @@ _TRAILING_PUNCT_PATTERN = re.compile(r"[!?\s]+$")
 # presenter/city noise, and there's no way to tell which without guessing.
 _TRAILING_PAREN_PATTERN = re.compile(r"(?:\s*\([^()]*\))+$")
 
+# DIY show flyers often list several acts back to back with no separator
+# between them beyond a "(origin city)" tag on each ("VOIDHAMMER (LA) HARSH
+# REALM (AVL) DIURETIC") -- the whitespace right after a closing paren, when
+# followed by the start of another word, marks the boundary between two
+# acts. Guarded on both sides: the negative lookahead defers to " with "/
+# "w/"/" and "/"&" (a real connector, not a boundary -- "Foo (bar) with Baz"
+# stays for _SEPARATOR_PATTERN to split cleanly into "Foo (bar)"/"Baz"
+# rather than a stray "with Baz"), and requiring an alnum start defers to
+# any symbol-led separator starting at the same whitespace ("(Denton) /
+# Sweepers" stays for the "/" separator, not a stray "/ Sweepers").
+_PAREN_BOUNDARY_PATTERN = re.compile(
+    r"(?<=\))\s+(?!with\b|w/|and\b|&)(?=[A-Za-z0-9])", re.IGNORECASE
+)
+
+# A trailing ensemble-size word ("DoYeon Kim Quartet" -> also try "DoYeon
+# Kim") -- jazz/classical listings often name the configuration, not just
+# the artist. Deliberately excludes words like "Band"/"Orchestra" that are
+# routinely part of a real Spotify act's exact name (e.g. "Dave Matthews
+# Band" is its own distinct artist from "Dave Matthews") -- stripping those
+# risks linking the wrong one.
+_ENSEMBLE_SUFFIX_PATTERN = re.compile(
+    r"\s+(?:Quartet|Trio|Duo|Quintet|Sextet|Septet|Ensemble)\s*$", re.IGNORECASE
+)
+
 # Bounds worst-case Spotify calls per pick (a long comma-separated bill).
 _MAX_CANDIDATES = 8
 
@@ -124,16 +148,23 @@ def candidate_names(title: str) -> list[str]:
         segments = [before.strip(), after.strip()]
 
     for segment in segments:
-        for piece in _SEPARATOR_PATTERN.split(segment):
-            piece = piece.strip()
-            if not piece:
-                continue
-            add(piece)
-            stripped = _TRAILING_PAREN_PATTERN.sub("", piece).strip()
-            if stripped and stripped != piece:
-                add(stripped)
-            if len(candidates) >= _MAX_CANDIDATES:
-                return candidates[:_MAX_CANDIDATES]
+        for chunk in _PAREN_BOUNDARY_PATTERN.split(segment):
+            for piece in _SEPARATOR_PATTERN.split(chunk):
+                piece = piece.strip()
+                if not piece:
+                    continue
+                add(piece)
+                variants = [piece]
+                stripped = _TRAILING_PAREN_PATTERN.sub("", piece).strip()
+                if stripped and stripped != piece:
+                    add(stripped)
+                    variants.append(stripped)
+                for variant in variants:
+                    suffix_stripped = _ENSEMBLE_SUFFIX_PATTERN.sub("", variant).strip()
+                    if suffix_stripped and suffix_stripped != variant:
+                        add(suffix_stripped)
+                if len(candidates) >= _MAX_CANDIDATES:
+                    return candidates[:_MAX_CANDIDATES]
     return candidates
 
 
