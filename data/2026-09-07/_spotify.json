@@ -1,11 +1,20 @@
 {
-  "ANIMATED VIOLENCE (Cali), EARLY GRAVE,  KROT (FIRST SHOW)": null,
+  "ANIMATED VIOLENCE (Cali), EARLY GRAVE,  KROT (FIRST SHOW)": {
+    "matched_text": "ANIMATED VIOLENCE",
+    "spotify_url": "https://open.spotify.com/artist/4kpEm6atHT9uZIQA19o9Vt"
+  },
   "Death Lens, with Destiny Bond, Nave": {
     "matched_text": "Death Lens",
     "spotify_url": "https://open.spotify.com/artist/4WqVsCKvGiqrgF9v27Dsa8"
   },
-  "EVIL SWORD / HAPPPY ACCCCDENT": null,
-  "Gay Cum Daddies (Denton) / Sweepers / Good Pollution / Gr3yboy": null,
+  "EVIL SWORD / HAPPPY ACCCCDENT": {
+    "matched_text": "EVIL SWORD",
+    "spotify_url": "https://open.spotify.com/artist/0jjiHZrSzHB5ep4ZjOpZHa"
+  },
+  "Gay Cum Daddies (Denton) / Sweepers / Good Pollution / Gr3yboy": {
+    "matched_text": "Gay Cum Daddies",
+    "spotify_url": "https://open.spotify.com/artist/6IuqF1yRbN4UXOAI8LvRNO"
+  },
   "Glitterer, Bleary Eyed, and Guttered": {
     "matched_text": "Glitterer",
     "spotify_url": "https://open.spotify.com/artist/2bTjArGDYivNxnYFH5jUcj"

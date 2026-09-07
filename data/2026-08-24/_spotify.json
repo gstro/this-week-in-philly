@@ -1,11 +1,20 @@
 {
-  "Froggy, PLEASURE DEATH & The Angies": null,
-  "Pray to be Saved (MD/DC), Sediment, Ln Celestine, Insectoids, Dystrophy": null,
+  "Froggy, PLEASURE DEATH & The Angies": {
+    "matched_text": "Froggy",
+    "spotify_url": "https://open.spotify.com/artist/56XPNd00el3UReEbg94ynV"
+  },
+  "Pray to be Saved (MD/DC), Sediment, Ln Celestine, Insectoids, Dystrophy": {
+    "matched_text": "Pray to be Saved",
+    "spotify_url": "https://open.spotify.com/artist/3jbx3ge5eHlIEMYVvvrSeG"
+  },
   "Shaun Milli": {
     "matched_text": "Shaun Milli",
     "spotify_url": "https://open.spotify.com/artist/1e8UewEEe0Oo7CxwVC4Y04"
   },
-  "VOIDHAMMER (LA) HARSH REALM (AVL) DIURETIC + AGONESIAC @ Cousin Dannys": null,
+  "VOIDHAMMER (LA) HARSH REALM (AVL) DIURETIC + AGONESIAC @ Cousin Dannys": {
+    "matched_text": "VOIDHAMMER",
+    "spotify_url": "https://open.spotify.com/artist/0NZicW7Rj0LWQpcMSOuDwM"
+  },
   "esperanza spalding": {
     "matched_text": "esperanza spalding",
     "spotify_url": "https://open.spotify.com/artist/5bepW5vcdRzheNc0F8lHJ5"

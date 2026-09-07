@@ -1,5 +1,8 @@
 {
-  "Benefit Show w/ Godcaster, Fib, Taurus Judge, & More!": null,
+  "Benefit Show w/ Godcaster, Fib, Taurus Judge, & More!": {
+    "matched_text": "Godcaster",
+    "spotify_url": "https://open.spotify.com/artist/0Vk7eJGOn9jys3qDnSPzaZ"
+  },
   "Black Pontiac and Noshows": {
     "matched_text": "Black Pontiac",
     "spotify_url": "https://open.spotify.com/artist/7p24SkpCc94fUK8rPK3JHm"
@@ -12,7 +15,10 @@
     "matched_text": "Faetooth",
     "spotify_url": "https://open.spotify.com/artist/6bAM7jeIX4pI5lZ0QoSZjt"
   },
-  "Fraternal Twin x Ditch x Lo Fives x Wax Girl": null,
+  "Fraternal Twin x Ditch x Lo Fives x Wax Girl": {
+    "matched_text": "Fraternal Twin",
+    "spotify_url": "https://open.spotify.com/artist/3Q9iGL0GMpQIIr9iZKo8wQ"
+  },
   "Tim Kasher’s WHO’S WATCHING": null,
   "Times New Viking": {
     "matched_text": "Times New Viking",

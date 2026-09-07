@@ -8,7 +8,16 @@
     "matched_text": "Oneida",
     "spotify_url": "https://open.spotify.com/artist/6If4kQp0rhfVgAZDNudjjS"
   },
-  "Pocket Dimensions- Search for Infinite Light, Del Rossi Trio, Kilynn Lunsford": null,
-  "REPO MAN X CIRCLE JERKS – Screening & Performance": null,
-  "SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK": null
+  "Pocket Dimensions- Search for Infinite Light, Del Rossi Trio, Kilynn Lunsford": {
+    "matched_text": "Kilynn Lunsford",
+    "spotify_url": "https://open.spotify.com/artist/6MeS4S0qKW7VVJoTH7Ecw1"
+  },
+  "REPO MAN X CIRCLE JERKS – Screening & Performance": {
+    "matched_text": "REPO MAN",
+    "spotify_url": "https://open.spotify.com/artist/2zGRmikZTswz8uBALilpbl"
+  },
+  "SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK": {
+    "matched_text": "SKEKSIS",
+    "spotify_url": "https://open.spotify.com/artist/72Qd9lYXejCqsXmNDzfrqq"
+  }
 }
