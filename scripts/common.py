@@ -12,8 +12,11 @@ from datetime import date, timedelta
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+import spotipy
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+from spotipy.cache_handler import MemoryCacheHandler
+from spotipy.oauth2 import SpotifyOAuth
 
 if TYPE_CHECKING:
     # Stub-only (google-api-python-client-stubs); doesn't exist at runtime,
@@ -27,6 +30,21 @@ DATA_DIR = REPO_ROOT / "data"
 CALENDAR_NAME = "Curated Events"
 CALENDAR_SCOPES = ["https://www.googleapis.com/auth/calendar"]
 CALENDAR_TIMEZONE = "America/New_York"
+
+# Two scopes, and both are load-bearing:
+#
+# playlist-modify-public -- the playlists are public, because the report is
+#   served on GitHub Pages and a private playlist link would be dead for every
+#   reader but Greg. That's what makes this the right scope rather than
+#   playlist-modify-private.
+# playlist-read-private -- required by GET /v1/me/playlists, which backs
+#   spotify_playlist.py's find-by-name fallback. modify-public does NOT cover
+#   reading the user's playlist list, and without this the fallback raises,
+#   gets swallowed, and the step silently never builds a playlist.
+#
+# Scope is fixed at consent time: changing this string means re-running
+# scripts/spotify_oauth_bootstrap.py and re-issuing SPOTIFY_REFRESH_TOKEN.
+SPOTIFY_PLAYLIST_SCOPE = "playlist-modify-public playlist-read-private"
 
 # Distinct dates a same-(title, venue) series must hit inside the target week
 # before prepare_selection_input.py collapses it to one candidate carrying
@@ -166,6 +184,70 @@ def load_spotify(week_dir: Path) -> dict:
     if not path.exists():
         return {}
     return load_json(path)
+
+
+def load_playlist(week_dir: Path) -> dict:
+    """Returns {} if _playlist.json doesn't exist yet (spotify_playlist.py
+    hasn't run, or ran without credentials). The report renders fine without
+    it -- the playlist link is optional by design."""
+    path = Path(week_dir) / "_playlist.json"
+    if not path.exists():
+        return {}
+    return load_json(path)
+
+
+def get_spotify_user_client() -> spotipy.Spotify:
+    """A *user-authorized* Spotify client, rebuilt from env vars each run (G3).
+
+    Distinct from spotify_lookup.py's SpotifyClientCredentials client on
+    purpose. Client Credentials is app-only: it has no user context and
+    therefore cannot create or modify playlists. Only the Authorization Code
+    flow can, which needs a user refresh token obtained once, by hand, via
+    scripts/spotify_oauth_bootstrap.py. spotify_lookup.py deliberately stays
+    on the app-only flow -- it only searches, and having no refresh token to
+    expire is a feature there.
+
+    Required: SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN,
+    SPOTIFY_REDIRECT_URI. The redirect URI is never actually visited here, but
+    SpotifyOAuth requires it at construction and it must byte-match one
+    registered on the Spotify app, since it's sent with the refresh request.
+
+    MemoryCacheHandler is not optional. spotipy's default CacheFileHandler
+    writes a `.cache` token file into the CWD -- that's exactly what the
+    gitignored `.cache` in this repo root is, left by a local spotify_lookup.py
+    run. Actions runners and Routines have no durable home directory (G3), so
+    anything that depends on a cache file on disk is broken by construction.
+    """
+    client_id = os.environ.get("SPOTIFY_CLIENT_ID")
+    client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
+    refresh_token = os.environ.get("SPOTIFY_REFRESH_TOKEN")
+    redirect_uri = os.environ.get("SPOTIFY_REDIRECT_URI")
+    missing = [
+        name
+        for name, val in [
+            ("SPOTIFY_CLIENT_ID", client_id),
+            ("SPOTIFY_CLIENT_SECRET", client_secret),
+            ("SPOTIFY_REFRESH_TOKEN", refresh_token),
+            ("SPOTIFY_REDIRECT_URI", redirect_uri),
+        ]
+        if not val
+    ]
+    if missing:
+        raise RuntimeError(
+            f"Missing required env var(s) for Spotify user auth: {', '.join(missing)}. "
+            "Run scripts/spotify_oauth_bootstrap.py once to get "
+            "SPOTIFY_REFRESH_TOKEN."
+        )
+
+    auth_manager = SpotifyOAuth(
+        client_id=client_id,
+        client_secret=client_secret,
+        redirect_uri=redirect_uri,
+        scope=SPOTIFY_PLAYLIST_SCOPE,
+        cache_handler=MemoryCacheHandler(),
+    )
+    token = auth_manager.refresh_access_token(refresh_token)
+    return spotipy.Spotify(auth=token["access_token"])
 
 
 def get_calendar_credentials() -> Credentials:

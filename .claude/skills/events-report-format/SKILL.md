@@ -130,6 +130,20 @@ For any music act in the Top 3 picks:
 - If no confident match is found, omit the link rather than guessing
 - For non-music Top 3 picks (readings, screenings, etc.), link to the event page or venue URL instead
 
+## Weekly Playlist Link
+
+When a playlist was built for the week, the header carries a link to it,
+directly below the subtitle line:
+
+```html
+<div class="header-playlist"><a href="[playlist url]">♫ This week's picks on Spotify</a></div>
+```
+
+- `color: #c9a84c` (the same gold accent as inline Spotify links), `font-size: 0.75rem`, no underline until hover
+- **Omit the whole element** when there's no playlist — `scripts/spotify_playlist.py` skips silently (no `_playlist.json`) when Spotify auth fails or no music act matched, and the report must render normally without it
+- The playlist itself is public and named `YYYY-MM-DD: This Week in Philly` — date first so a title truncated in Spotify's sidebar still sorts and reads chronologically
+- It holds 3 recent tracks (the matched act's latest album or single) for each matched Top 3 music act -- not an official "top tracks" list, which Spotify deprecated. Its contents therefore inherit the two limits above: honorable-mention acts are absent, and a multi-act bill contributes only the headliner
+
 ---
 
 ## Aggregation Notes
