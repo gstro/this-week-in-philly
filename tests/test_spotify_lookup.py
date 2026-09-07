@@ -4,10 +4,20 @@ find_spotify_match takes `sp` as a parameter, so it's tested against a fake
 Spotify client with a `.search()` method -- zero network, following the
 _FakeSession dependency-injection precedent used elsewhere in this repo's
 tests rather than mocking spotipy internals.
+
+The one exception is the @pytest.mark.network canary at the bottom (real
+Spotify API, `pytest -m network`, excluded from the default run per
+pyproject.toml's addopts) -- it re-runs the live matcher against real
+historical null titles to empirically confirm this file's candidate-
+generation and limit=5 changes actually recover matches, not just that the
+offline logic behaves as designed.
 """
 
+import os
 import sys
 from pathlib import Path
+
+import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
@@ -22,27 +32,40 @@ def test_candidate_names_always_includes_the_full_title() -> None:
 
 def test_candidate_names_splits_on_a_leading_colon_prefix() -> None:
     """"Gothic night: Die Sexual, Ronnie Stone & DJ Baby Berlin" -> the act
-    list follows the colon, and the head of THAT segment (split on the next
-    comma) is the headliner -- "Die Sexual", not "Gothic night"."""
+    list follows the colon, and every act in it is tried, in order --
+    "Die Sexual" first (it's listed first), not just "Gothic night"."""
     title = "Gothic night: Die Sexual, Ronnie Stone & DJ Baby Berlin"
     candidates = candidate_names(title)
-    assert candidates == [title, "Gothic night", "Die Sexual"]
+    assert candidates == [
+        title,
+        "Gothic night",
+        "Die Sexual",
+        "Ronnie Stone",
+        "DJ Baby Berlin",
+    ]
 
 
 def test_candidate_names_splits_on_a_trailing_colon_subtitle() -> None:
     """"LAYER MEAT, SPECTRAL FORCES: A Benefit Show" -- here the act list
-    precedes the colon, so the pre-colon segment's head ("LAYER MEAT") is
-    the useful candidate, not the post-colon subtitle."""
+    precedes the colon, so both pre-colon acts are useful candidates, not
+    just the post-colon subtitle."""
     title = "LAYER MEAT, SPECTRAL FORCES: A Benefit Show"
     candidates = candidate_names(title)
     assert "LAYER MEAT" in candidates
+    assert "SPECTRAL FORCES" in candidates
     assert candidates[0] == title
 
 
 def test_candidate_names_splits_on_comma_without_a_colon() -> None:
     title = "CONTRACHARGE (chi), AGONESIAC, DISCLAIM"
     candidates = candidate_names(title)
-    assert candidates == [title, "CONTRACHARGE (chi)"]
+    assert candidates == [
+        title,
+        "CONTRACHARGE (chi)",
+        "CONTRACHARGE",
+        "AGONESIAC",
+        "DISCLAIM",
+    ]
 
 
 def test_candidate_names_does_not_duplicate_an_identical_head_from_both_sides() -> None:
@@ -51,14 +74,137 @@ def test_candidate_names_does_not_duplicate_an_identical_head_from_both_sides() 
 
 
 def test_candidate_names_splits_on_ampersand_and_and_and_slash_variants() -> None:
-    assert candidate_names("Die Sexual & The Rest")[1] == "Die Sexual"
-    assert candidate_names("Die Sexual and The Rest")[1] == "Die Sexual"
-    assert candidate_names("Die Sexual w/ The Rest")[1] == "Die Sexual"
-    assert candidate_names("Die Sexual with The Rest")[1] == "Die Sexual"
+    for sep in (" & ", " and ", " w/ ", " with "):
+        candidates = candidate_names(f"Die Sexual{sep}The Rest")
+        assert candidates[1] == "Die Sexual"
+        assert "The Rest" in candidates
 
 
 def test_candidate_names_no_separator_returns_only_the_full_title() -> None:
     assert candidate_names("Just One Act") == ["Just One Act"]
+
+
+# --- new separators: +, x/X, /, | ---
+
+
+def test_candidate_names_splits_on_plus() -> None:
+    title = "Quicksand + Bane"
+    assert candidate_names(title) == [title, "Quicksand", "Bane"]
+
+
+def test_candidate_names_splits_on_x_case_insensitive_multi_way() -> None:
+    title = "Fraternal Twin x Ditch x Lo Fives x Wax Girl"
+    candidates = candidate_names(title)
+    assert candidates == [
+        title,
+        "Fraternal Twin",
+        "Ditch",
+        "Lo Fives",
+        "Wax Girl",
+    ]
+
+
+def test_candidate_names_splits_on_slash_but_not_inside_a_real_name() -> None:
+    title = "Gay Cum Daddies (Denton) / Sweepers / Good Pollution / Gr3yboy"
+    candidates = candidate_names(title)
+    assert candidates == [
+        title,
+        "Gay Cum Daddies (Denton)",
+        "Gay Cum Daddies",
+        "Sweepers",
+        "Good Pollution",
+        "Gr3yboy",
+    ]
+    assert candidate_names("AC/DC") == ["AC/DC"]
+
+
+def test_candidate_names_splits_on_pipe_but_not_inside_a_real_name() -> None:
+    title = "Successor Tour | Spike Hellis"
+    assert candidate_names(title) == [title, "Successor Tour", "Spike Hellis"]
+    assert candidate_names("BIG|BRAVE") == ["BIG|BRAVE"]
+
+
+def test_candidate_names_comma_then_connector_word_does_not_leave_a_stray_fragment() -> None:
+    title = "The Body, with BIG|BRAVE, Carnivorous Bells"
+    candidates = candidate_names(title)
+    assert candidates == [title, "The Body", "BIG|BRAVE", "Carnivorous Bells"]
+    assert "with BIG|BRAVE" not in candidates
+
+
+# --- venue/punctuation/parenthetical stripping ---
+
+
+def test_candidate_names_strips_a_trailing_venue_suffix() -> None:
+    title = "the pleasant uprising @ Wooden Shoe Books!!!!!"
+    assert candidate_names(title) == [title, "the pleasant uprising"]
+
+
+def test_candidate_names_tries_both_with_and_without_a_trailing_parenthetical() -> None:
+    title = "DoYeon Kim Quartet (Ars Nova Workshop)"
+    assert candidate_names(title) == [title, "DoYeon Kim Quartet"]
+
+    title2 = "SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK"
+    candidates = candidate_names(title2)
+    assert candidates.index("SKEKSIS (RVA)") < candidates.index("SKEKSIS")
+    assert "NIGHTFALL" in candidates
+    assert "SEDIMENT" in candidates
+    assert "DISKRITIK" in candidates
+
+
+def test_candidate_names_strips_dash_boilerplate_and_splits_on_x() -> None:
+    title = "REPO MAN X CIRCLE JERKS – Screening & Performance"
+    candidates = candidate_names(title)
+    assert "REPO MAN" in candidates
+    assert "CIRCLE JERKS" in candidates
+    assert "Screening" not in candidates
+    assert "Performance" not in candidates
+
+
+def test_candidate_names_filters_generic_boilerplate_words_via_stop_list() -> None:
+    title = "Benefit Show w/ Godcaster, Fib, Taurus Judge, & More!"
+    candidates = candidate_names(title)
+    assert "Godcaster" in candidates
+    assert "Fib" in candidates
+    assert "Taurus Judge" in candidates
+    assert "More" not in candidates
+    assert "& More" not in candidates
+
+
+def test_candidate_names_preserves_a_period_in_an_initialism_act_name() -> None:
+    title = "M.I.A. @ Union Transfer"
+    assert candidate_names(title) == [title, "M.I.A."]
+
+
+def test_candidate_names_caps_the_total_number_of_candidates() -> None:
+    title = ", ".join(f"Act{i}" for i in range(10))
+    candidates = candidate_names(title)
+    assert len(candidates) == 8
+
+
+def test_candidate_names_every_candidate_is_a_substring_of_the_raw_title() -> None:
+    """html_render.py links a pick by title.find(matched_text) and falls back
+    to a plain link when that's -1 -- every candidate must be a real,
+    contiguous substring of the original title for that link path to fire."""
+    titles = [
+        "Gothic night: Die Sexual, Ronnie Stone & DJ Baby Berlin",
+        "LAYER MEAT, SPECTRAL FORCES: A Benefit Show",
+        "CONTRACHARGE (chi), AGONESIAC, DISCLAIM",
+        "Foo: Foo",
+        "Quicksand + Bane",
+        "Fraternal Twin x Ditch x Lo Fives x Wax Girl",
+        "Gay Cum Daddies (Denton) / Sweepers / Good Pollution / Gr3yboy",
+        "AC/DC",
+        "BIG|BRAVE",
+        "Successor Tour | Spike Hellis",
+        "The Body, with BIG|BRAVE, Carnivorous Bells",
+        "the pleasant uprising @ Wooden Shoe Books!!!!!",
+        "DoYeon Kim Quartet (Ars Nova Workshop)",
+        "SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK",
+        "M.I.A. @ Union Transfer",
+    ]
+    for title in titles:
+        for candidate in candidate_names(title):
+            assert candidate in title, f"{candidate!r} not a substring of {title!r}"
 
 
 # --- music_titles ---
@@ -142,6 +288,18 @@ def test_find_spotify_match_returns_none_when_no_candidate_matches() -> None:
     assert find_spotify_match(sp, "Totally Unknown Act") is None  # type: ignore[arg-type]
 
 
+def test_find_spotify_match_checks_all_returned_results_not_just_the_top_one() -> None:
+    """Spotify's own ranking can put a fuzzy/unrelated same-named result
+    above the real exact-name match -- the exact-match requirement is
+    unchanged, but it must be checked against more than just items[0]."""
+    sp = _FakeSpotify(
+        {"The Body": [_artist("The Body (Karaoke Tribute)"), _artist("The Body")]}
+    )
+    match = find_spotify_match(sp, "The Body")  # type: ignore[arg-type]
+    assert match is not None
+    assert match["matched_text"] == "The Body"
+
+
 def test_find_spotify_match_continues_past_a_failed_candidate_search() -> None:
     """A search failure for one candidate must not abort the whole lookup --
     later candidates still get tried."""
@@ -155,3 +313,63 @@ def test_find_spotify_match_continues_past_a_failed_candidate_search() -> None:
     match = find_spotify_match(sp, title)  # type: ignore[arg-type]
     assert match is not None
     assert match["matched_text"] == "Die Sexual"
+
+
+# --- live canary: real historical nulls against the real Spotify API ---
+
+# Real Top 3 music-pick titles that came back null from spotify_lookup.py
+# in production, and were judged plausibly recoverable by better candidate
+# extraction (excludes obscure/local acts, titles with no artist name at
+# all, and possessive-project-name titles -- see the implementation plan's
+# "Accepted gaps" for why those are left out). Not read from data/*/_spotify.json
+# since most of those weeks' files aren't on this branch.
+_REAL_HISTORICAL_NULLS = [
+    "Kinetic Orbital Strike Record Release w/ Nightfall, Condumb, Durex (mtl), Filth of Society",
+    "The Body, with BIG|BRAVE, Carnivorous Bells",
+    "SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK",
+    "Benefit Show w/ Godcaster, Fib, Taurus Judge, & More!",
+    "Fraternal Twin x Ditch x Lo Fives x Wax Girl",
+    "Quicksand + Bane",
+    "A Black Celebration - Philly's Favorite Depeche Mode Dance Party",
+    "Gay Cum Daddies (Denton) / Sweepers / Good Pollution / Gr3yboy",
+    "Froggy, PLEASURE DEATH & The Angies",
+    "VOIDHAMMER (LA) HARSH REALM (AVL) DIURETIC + AGONESIAC @ Cousin Dannys",
+    "DoYeon Kim Quartet (Ars Nova Workshop)",
+    "REPO MAN X CIRCLE JERKS – Screening & Performance",
+    "Successor Tour | Spike Hellis",
+    "the pleasant uprising @ Wooden Shoe Books!!!!!",
+]
+
+
+@pytest.mark.network
+@pytest.mark.skipif(
+    not (os.environ.get("SPOTIFY_CLIENT_ID") and os.environ.get("SPOTIFY_CLIENT_SECRET")),
+    reason="requires SPOTIFY_CLIENT_ID/SPOTIFY_CLIENT_SECRET",
+)
+def test_matcher_recovers_a_meaningful_fraction_of_real_historical_nulls() -> None:
+    """Empirical check against the real Spotify API: live search results
+    drift over time (see tests/golden/README.md), so this pins an aggregate
+    improvement threshold, not exact per-title matches, which would be
+    flaky by design."""
+    import spotipy
+    from spotipy.oauth2 import SpotifyClientCredentials
+
+    sp = spotipy.Spotify(
+        auth_manager=SpotifyClientCredentials(
+            client_id=os.environ["SPOTIFY_CLIENT_ID"],
+            client_secret=os.environ["SPOTIFY_CLIENT_SECRET"],
+        )
+    )
+
+    hits = 0
+    for title in _REAL_HISTORICAL_NULLS:
+        match = find_spotify_match(sp, title)
+        if match:
+            hits += 1
+            print(f"MATCHED  {title!r} -> {match['matched_text']!r} ({match['spotify_url']})")
+        else:
+            print(f"null     {title!r}")
+
+    assert hits >= len(_REAL_HISTORICAL_NULLS) // 3, (
+        f"only {hits}/{len(_REAL_HISTORICAL_NULLS)} recovered -- expected at least a third"
+    )
