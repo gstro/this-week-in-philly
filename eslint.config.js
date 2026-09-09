@@ -31,7 +31,10 @@ export default tseslint.config(
       // Mirrors ruff's ANN rule from pyproject.toml: explicit types at
       // function boundaries.
       "@typescript-eslint/explicit-function-return-type": "error",
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
     },
   },
   {
