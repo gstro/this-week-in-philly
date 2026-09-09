@@ -29,8 +29,8 @@ export default tseslint.config(
     },
     rules: {
       // Mirrors ruff's ANN rule from pyproject.toml: explicit types at
-      // function boundaries, not enforced on every local variable.
-      "@typescript-eslint/explicit-function-return-type": "off",
+      // function boundaries.
+      "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     },
   },
