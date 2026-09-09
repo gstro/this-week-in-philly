@@ -10,15 +10,24 @@
     "matched_text": "Pharmakon",
     "spotify_url": "https://open.spotify.com/artist/1ix1aDOd7GSOeT9iqNh5KO"
   },
-  "Quicksand + Bane": null,
+  "Quicksand + Bane": {
+    "matched_text": "Quicksand",
+    "spotify_url": "https://open.spotify.com/artist/1GDjwZ2zwNZizuNJPmH3mE"
+  },
   "Rising Sun Presents: Sheer Mag w/ Gripper + Real Shocks": {
     "matched_text": "Sheer Mag",
     "spotify_url": "https://open.spotify.com/artist/58ehndX799ZV9Jcv6IefJ1"
   },
-  "Successor Tour | Spike Hellis": null,
+  "Successor Tour | Spike Hellis": {
+    "matched_text": "Spike Hellis",
+    "spotify_url": "https://open.spotify.com/artist/4V1L5GIDmdRihhI9R7wMsG"
+  },
   "Titus Andronicus": {
     "matched_text": "Titus Andronicus",
     "spotify_url": "https://open.spotify.com/artist/5lJ4XQ2hlPlxACN7q3xKL1"
   },
-  "the pleasant uprising @ Wooden Shoe Books!!!!!": null
+  "the pleasant uprising @ Wooden Shoe Books!!!!!": {
+    "matched_text": "the pleasant uprising",
+    "spotify_url": "https://open.spotify.com/artist/2hdSCh92g5RfoFBaAkiWhN"
+  }
 }
