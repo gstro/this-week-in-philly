@@ -63,3 +63,8 @@ __pycache__/
 .venv/
 .cache
 .pytest_cache/
+
+### TypeScript rewrite (G3, never committable) ###
+node_modules/
+dist/
+*.tsbuildinfo
