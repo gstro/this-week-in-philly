@@ -141,6 +141,26 @@ def collect_rotunda(
     return len(merged)
 
 
+_MAX_FAILURES_SHOWN_IN_NOTE = 3
+
+
+def partial_failure_note(failed_requests: list[str]) -> str | None:
+    """A `partial` source's failed-request reasons were previously discarded
+    after the run -- printed nowhere, written nowhere -- leaving no way to
+    tell a transient blip from a real regression after the fact (see the
+    2026-09-13 trakt-film-releases yield-check failure this was written to
+    debug). Surfaced here, in the manifest `note` field, capped so a source
+    with many failed requests (do215's per-day loop can in principle fail
+    every one of a week's 7 days) doesn't blow up the committed manifest."""
+    if not failed_requests:
+        return None
+    shown = failed_requests[:_MAX_FAILURES_SHOWN_IN_NOTE]
+    detail = "; ".join(shown)
+    if len(failed_requests) > _MAX_FAILURES_SHOWN_IN_NOTE:
+        detail += f"; +{len(failed_requests) - _MAX_FAILURES_SHOWN_IN_NOTE} more"
+    return f"partial -- {len(failed_requests)} request(s) failed: {detail}"
+
+
 def collect_via_collector(
     out_dir: Path, stem: str, source_name: str, key: str,
     week_start: datetime.date, week_end: datetime.date,
@@ -226,8 +246,7 @@ def main() -> None:
             count, failed_requests = collect_via_collector(
                 out_dir, stem, source_name, key, week_start, week_end
             )
-            note = f"partial -- {len(failed_requests)} request(s) failed" if failed_requests else None
-            record_ok(stem, count, note)
+            record_ok(stem, count, partial_failure_note(failed_requests))
         except Exception as exc:  # noqa: BLE001
             record_failed(stem, source_name, exc)
 
