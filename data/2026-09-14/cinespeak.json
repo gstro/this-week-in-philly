@@ -1,0 +1,42 @@
+{
+  "source": "cin\u00e9SPEAK",
+  "collected_at": "2026-09-13T20:59:15.995178+00:00",
+  "events": [
+    {
+      "title": "Selah & The Spades",
+      "venue": "Two Locals Brewing",
+      "date": "2026-09-14",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://cinespeak.eventive.org/schedule/6a55009312d4540340e6b0f0",
+      "description": "Narrative Feature"
+    },
+    {
+      "title": "Fringe Fest: Amish Country Queer",
+      "venue": "Asian Arts Initative",
+      "date": "2026-09-17",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://cinespeak.eventive.org/schedule/6a6237599265b87cc9232346",
+      "description": "LGBTQIA+"
+    },
+    {
+      "title": "Fringe Fest: Amish Country Queer",
+      "venue": "Asian Arts Initiative",
+      "date": "2026-09-17",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://cinespeak.eventive.org/schedule/6a6237bfb9b341f237821272",
+      "description": "LGBTQIA+"
+    },
+    {
+      "title": "cin\u00e9KIDZ Season Kick-Off",
+      "venue": "Cobbs Creek Library",
+      "date": "2026-09-19",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://cinespeak.eventive.org/schedule/6a68c45985d312b0a37a50e0",
+      "description": "Experimental"
+    }
+  ]
+}

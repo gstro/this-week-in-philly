@@ -1,0 +1,66 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-09-13T20:59:12.174931+00:00",
+  "events": [
+    {
+      "title": "ULTIMATE DISASTER, NIGHTFALL, THE BROOD, SEDIMENT",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-09-14",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/ultimate-disaster-nightfall-the-brood-sediment",
+      "description": "OUT OF TOWN BAND / hardcore / hardcore punk / noise not music / philadelphia / punk",
+      "venue_address": "5001 Market Street"
+    },
+    {
+      "title": "The Spine (Record Release Show), NRG, and B\u00e1n Sidhe Dogs",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-09-17",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/the-spine-record-release-show-nrg-and-ban-sidhe-dogs",
+      "description": "experimental / goth / philadelphia / post-punk / punk",
+      "venue_address": "5001 Market Street"
+    },
+    {
+      "title": "PHANTOM PIKE // AGITA // DISKRITIK",
+      "venue": "The Courtyard (IYKYK)",
+      "date": "2026-09-18",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/phantom-pike-agita-diskritik",
+      "description": "Dbeat / OUT OF TOWN BAND / hardcore punk / philadelphia / punk",
+      "venue_address": "IYKYK"
+    },
+    {
+      "title": "Screenings At Sanctuary: 9 to 5 & Rocky Horror Picture Show",
+      "venue": "Sanctuary (West Philly)",
+      "date": "2026-09-18",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/screenings-at-sanctuary-9-to-5-and-rocky-horror-picture-show",
+      "description": "Screening / experimental rock / meatloaf / movie",
+      "venue_address": "West Philly"
+    },
+    {
+      "title": "ASPHALT SAVANNAHS, DOUBLE DOSE, ANAL TRAINING",
+      "venue": "God's Automatic Body (5522 Baltimore Ave.)",
+      "date": "2026-09-19",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/asphalt-savannahs-double-dose-anal-training",
+      "description": "alternative / electronic / experimental / hardcore / punk",
+      "venue_address": "5522 Baltimore Ave."
+    },
+    {
+      "title": "TORINO DEATH RIDE (VA), HOT MANANA, THIS TEMPER, STEEL NEEDLE",
+      "venue": "The Pouch (4215 Baltimore Ave Philadelphia)",
+      "date": "2026-09-19",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/torino-death-ride-va-hot-manana-this-temper-steel-needle",
+      "description": "OUT OF TOWN BAND / experimental / noise / noise rock / post-punk / punk",
+      "venue_address": "4215 Baltimore Ave Philadelphia"
+    }
+  ]
+}

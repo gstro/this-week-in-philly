@@ -1,0 +1,24 @@
+{
+  "source": "Lightbox Film Center",
+  "collected_at": "2026-09-13T20:59:33.893194+00:00",
+  "events": [
+    {
+      "title": "Mare's Nest",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-09-16",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/mares-nest",
+      "description": "Philadelphia Premiere"
+    },
+    {
+      "title": "Gandahar",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-09-20",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/gandahar",
+      "description": "New Restoration"
+    }
+  ]
+}
