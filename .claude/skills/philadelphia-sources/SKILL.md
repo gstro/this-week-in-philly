@@ -44,7 +44,6 @@ Write all collected events to a dated directory under the `output_directory` spe
 | The Rotunda | `the-rotunda.json` |
 | Iffy Books | `iffy-books.json` |
 | Wooden Shoe Books | `wooden-shoe-books.json` |
-| Trakt.tv film releases | `trakt-film-releases.json` |
 | R5 Productions | `r5-productions.json` |
 | Hive76 | `hive76.json` |
 | Philadelphia Film Society | `philadelphia-film-society.json` |
@@ -522,7 +521,6 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 
 | Calendar | ID | Filename | Category | Status |
 |----------|----|----------|----------|--------|
-| Trakt.tv film releases | `3c3o7i2bfqmvbss5lckns84vkedh4gqd@import.calendar.google.com` | `trakt-film-releases.json` | Film | ✅ Confirmed |
 | Iffy Books | `uim84nkq226inhhqa44v98foigjak9us@import.calendar.google.com` | `iffy-books.json` | DIY / Literature | ✅ Confirmed Jun 2026 |
 | Wooden Shoe Books | `t8qmive63n27mdj7gt03ntc2u8@group.calendar.google.com` | `wooden-shoe-books.json` | Literature / Politics | ✅ Confirmed Jun 2026 |
 
@@ -541,7 +539,6 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 | The Rotunda | `fetch_raw.py` on `/events?date=YYYY-MM-DD` → `parse_events.py the-rotunda` (needs `--context-date`) | 1 | ✅ Jul 2026 |
 | Iffy Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | Wooden Shoe Books | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
-| Trakt.tv film releases | `gcal_list_events` MCP | 1 | ✅ Jun 2026 |
 | R5 Productions | `fetch_raw.py` on `/events/` → `parse_events.py r5-productions` | 2 | ✅ Jul 2026 |
 | Hive76 | `fetch_page_text.py` on `/classes/` | 2 | ✅ Jul 2026 |
 | Philadelphia Film Society | `collect_source.py philadelphia-film-society` (browser required, but per-venue/day isolated) | 2 | ✅ Aug 2026; real yield 18/week, see §8 |
@@ -560,6 +557,7 @@ Run all calendar sources in the Tier 1 pass alongside Philly Ask A Punk and Luma
 | Philadelphia Citizen | ⛔ Dropped | — | 2026-08-01: no remaining model-in-the-loop step to do the read once Selection was designed |
 | Bandsintown | ⛔ Dropped | — | Current-week only; no fix |
 | Pennhurst Asylum | ⛔ Skip | — | No calendar; Oct/May only |
+| Trakt.tv film releases | ⛔ Dropped | — | 2026-09-13: Trakt removed iCal/RSS export entirely in its V3 web redesign (confirmed on Trakt's own forums, no official replacement); the imported Google Calendar this source read from (`3c3o7i2bfqmvbss5lckns84vkedh4gqd@import.calendar.google.com`) went 404, and there's no first-party feed left to re-point at |
 
 ---
 

@@ -3,7 +3,8 @@
     "description": "Hand-maintained expected-yield baseline for scripts/check_yield.py. min_expected is a conservative floor -- comfortably below the lowest legitimate weekly count seen for that source -- not a target, so it doesn't false-positive on a genuinely quiet week. A source at status 'ok' with events below its floor gets flagged. Sources with min_expected: 0 are known to have genuinely empty weeks (confirmed against v1's dual-write run, which predates v2's under-collection) and are excluded from the yield-floor check entirely -- only the provenance and manifest/file-agreement checks apply to them.",
     "baseline_source": "git show 728633b:data/2026-07-20/_manifest.json (v1 Mac dual-write, the last known-complete collection of a real week before v2's Collection Routine began silently zeroing sources under budget pressure -- see docs/COLLECTION_YIELD_INVESTIGATION.md)",
     "revisit": "Each quarterly source-revalidation pass (see philadelphia-sources/SKILL.md Maintenance section) and whenever a source gains a deterministic parser -- raise min_expected once real yield is confirmed stable under the new method.",
-    "total_floor": 45
+    "total_floor": 44,
+    "total_floor_note": "Lowered from 45 to 44 on 2026-09-13 when trakt-film-releases was retired (Trakt.tv removed iCal/RSS export entirely, no replacement -- see philadelphia-sources/SKILL.md's dropped-sources table). The baseline_source manifest above had this source at 2 events; the floor is reduced only by its own former min_expected (1), not its full historical count, to keep the aggregate check conservative rather than mechanically replaying the baseline's arithmetic."
   },
   "sources": {
     "cinespeak": {
@@ -61,10 +62,6 @@
     "the-rotunda": {
       "min_expected": 1,
       "note": "Deterministic parser. Historical range was 3-5/week across all runs prior to 2026-08-03 -- floor of 2 was calibrated against that alone. The real 2026-08-03 run confirmed a genuine 1-event week (verified directly: a real, well-formed event) and correctly tripped check_yield.py's floor. Lowered to 1 to reflect this real observed low rather than treat one confirmed-legitimate quiet week as a recurring false positive."
-    },
-    "trakt-film-releases": {
-      "min_expected": 1,
-      "note": "Google Calendar via MCP. Stable at 2/week."
     },
     "wooden-shoe-books": {
       "min_expected": 2,
