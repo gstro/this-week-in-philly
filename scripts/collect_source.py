@@ -262,13 +262,12 @@ _GCAL_CALENDARS = {
         "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
         "fallback_url": "https://woodenshoebooks.org/",
     },
-    "trakt-film-releases": {
-        "calendar_id": "3c3o7i2bfqmvbss5lckns84vkedh4gqd@import.calendar.google.com",
-        # Theatrical releases aren't tied to a venue; philly-events-selection's
-        # schema notes say to set venue to "Theatrical release" when absent.
-        "venue": "Theatrical release",
-        "fallback_url": "",
-    },
+    # trakt-film-releases (a Google Calendar imported from a Trakt.tv iCal
+    # feed) retired 2026-09-13: Trakt removed iCal/RSS export entirely in
+    # its V3 redesign with no official replacement, and the underlying
+    # calendar started 404ing once Google's periodic re-fetch of the dead
+    # import subscription finally gave up. See philadelphia-sources/
+    # SKILL.md's dropped-sources table.
 }
 
 

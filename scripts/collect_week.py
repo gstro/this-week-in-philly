@@ -83,7 +83,8 @@ COLLECTOR_SOURCES: list[tuple[str, str, str]] = [
     ("philadelphia-film-society", "Philadelphia Film Society", "philadelphia-film-society"),
     ("iffy-books", "Iffy Books", "iffy-books"),
     ("wooden-shoe-books", "Wooden Shoe Books", "wooden-shoe-books"),
-    ("trakt-film-releases", "Trakt.tv film releases", "trakt-film-releases"),
+    # trakt-film-releases retired 2026-09-13 -- see collect_source.py's
+    # _GCAL_CALENDARS comment and philadelphia-sources/SKILL.md.
 ]
 
 _MAX_FETCH_CHARS = 200_000
