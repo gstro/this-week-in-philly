@@ -1,0 +1,1502 @@
+{
+  "week": "2026-09-14",
+  "total_events_after_dedup": 842,
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-09-14",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "In-person! Fringe Festival! Ginsburg’s Howl, as read by James Dalton with the Ginsburg Beat Connection",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.therotunda.org/event/fringe-festival-ginsburg-s-howl-as-read-by-james-dalton-with-the-ginsburg-beat-connection",
+          "category": "📚 Literary",
+          "source": "The Rotunda",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Ginsberg's Howl, read by James Dalton backed by the Ginsberg Beat Connection's revolving Philly/NY/NJ ensemble, sets the poem to jazz, blues, and noise to mark the 100th anniversary of Allen Ginsberg's birth. It's part of this year's Fringe Festival at the Rotunda, the West Philly arts space with the city's strongest track record for free/PWYW literary and experimental programming. $15."
+        },
+        {
+          "rank": 2,
+          "title": "CICADA: I WAS A TEENAGE HORROR MOVIE (1997) + THE VIOLENCE MOVIE (1988)",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "address": "531 N. 12th St, Philadelphia, PA 19123",
+          "venue_address": "531 N. 12th St, Philadelphia, PA 19123",
+          "venue_id": "489686",
+          "selection_address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:00 PM",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/86690867/cicadai-was-a-teenage-horror-movie-1997the-violence-movie-1998-philadelphia-philamoca",
+          "category": "👻 Horror & Occult",
+          "source": "PhilaMOCA",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A double feature of two obscure horror oddities — I Was a Teenage Horror Movie (1997) at 7:00, followed by The Violence Movie (1988) at 7:30 — with the filmmakers in the room for Q&A afterward. PhilaMOCA's repertory horror programming is the city's best for exactly this kind of deep-cut, and a filmmaker visit is what makes this instance worth catching over a normal rep screening. $12."
+        },
+        {
+          "rank": 3,
+          "title": "Trans Rights and Bodily Autonomy PowerPoint Party",
+          "venue": "Nikki Lopez, 304 South St, Philadelphia, PA 19147",
+          "address": "304 South St, Philadelphia, PA 19147",
+          "venue_address": "304 South St, Philadelphia, PA 19147",
+          "venue_id": "511812",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/14/trans-rights-and-bodily-autonomy-powerpoint-party-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A PowerPoint-party format built around trans rights and bodily autonomy — a lighthearted structure (short slide decks, wide participation) wrapped around real political stakes. It's participatory rather than a passive rally, and Nikki Lopez has become one of the city's steadier small rooms for this kind of organizing. Free, RSVP via the event's Action Network page."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "ULTIMATE DISASTER, NIGHTFALL, THE BROOD, SEDIMENT",
+          "venue": "Cousin Danny's (5001 Market Street)"
+        },
+        {
+          "title": "🚧 Make Your First Website",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States"
+        }
+      ],
+      "events": [
+        {
+          "title": "The Rasmus",
+          "venue": "Union Transfer, 1026 Spring Garden St., Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/14/the-rasmus-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Finnish alt-rock act The Rasmus (“In the Shadows”) at Union Transfer."
+        },
+        {
+          "title": "The Belair Lip Bombs",
+          "venue": "Johnny Brenda's, 1201 Frankford Ave, Philadelphia, PA 19125",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/14/the-belair-lip-bombs-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "WXPN-presented Australian indie-rock band The Belair Lip Bombs at Johnny Brenda's."
+        },
+        {
+          "title": "ULTIMATE DISASTER, NIGHTFALL, THE BROOD, SEDIMENT",
+          "venue": "Cousin Danny's (5001 Market Street)",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/ultimate-disaster-nightfall-the-brood-sediment",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "sold_out": false,
+          "note": "Out-of-town hardcore/noise punk bill at Cousin Danny's DIY space."
+        },
+        {
+          "title": "Selah & The Spades",
+          "venue": "Two Locals Brewing",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://cinespeak.eventive.org/schedule/6a55009312d4540340e6b0f0",
+          "category": "🎬 Film & Cinema",
+          "source": "cinéSPEAK",
+          "sold_out": false,
+          "note": "cinéSPEAK screening of the indie feature Selah & The Spades at Two Locals Brewing."
+        },
+        {
+          "title": "In-person! Fringe Festival! Ginsburg’s Howl, as read by James Dalton with the Ginsburg Beat Connection",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.therotunda.org/event/fringe-festival-ginsburg-s-howl-as-read-by-james-dalton-with-the-ginsburg-beat-connection",
+          "category": "📚 Literary",
+          "source": "The Rotunda",
+          "sold_out": false,
+          "note": "Ginsberg centennial reading with a live jazz/blues/noise ensemble; part of Fringe Festival."
+        },
+        {
+          "title": "Mondays @ McCormick's Special Edition - Mamas",
+          "venue": "Senator McCormick's Philadelphia Office",
+          "time": "12:00 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/14/mondays-mccormick-s-special-edition-mamas-mccormicks-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Weekly rally outside Sen. Dave McCormick's Philly office, this edition pressing for full IDEA (disability education) funding."
+        },
+        {
+          "title": "West/Southwest Rising Annual Cookout",
+          "venue": "Malcolm X Park, 5100 Pine St, Philadelphia, PA 19143",
+          "time": "5:45 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/14/west-southwest-rising-annual-cookout-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "One PA West/Southwest Rising's annual community cookout at Malcolm X Park."
+        },
+        {
+          "title": "Socialism 101",
+          "venue": "Nikki Lopez, 304 South St, Philadelphia, PA 19147",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/14/socialism-101-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Beginner-friendly political education night on socialism at Nikki Lopez."
+        },
+        {
+          "title": "Trans Rights and Bodily Autonomy PowerPoint Party",
+          "venue": "Nikki Lopez, 304 South St, Philadelphia, PA 19147",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/14/trans-rights-and-bodily-autonomy-powerpoint-party-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Community PowerPoint party on trans rights and bodily autonomy."
+        },
+        {
+          "title": "Let Freedom Ring",
+          "venue": "Cherry Street Pier, 121 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+          "time": "9:00 AM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/14/let-freedom-ring-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Interactive public sculpture at Cherry Street Pier — pull a lever to complete the unfinished final note of “My Country 'Tis of Thee,” a civic-engagement metaphor. Through 9/18.",
+          "recurrence_count": 5,
+          "occurrences": [
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18"
+          ]
+        },
+        {
+          "title": "Bartram’s Garden Photo Exhibit at Studio 34",
+          "venue": "Studio 34, 4522 Baltimore Avenue, Philadelphia, PA 19143",
+          "time": "5:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/14/bartram-s-garden-photo-exhibit-at-studio-34-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Bartram's Garden photo exhibit at Studio 34, running through 9/17.",
+          "recurrence_count": 4,
+          "occurrences": [
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17"
+          ]
+        },
+        {
+          "title": "The Performance Lounge",
+          "venue": "Prism Arts Philadelphia, 1021 Hamilton Street, FL 2, Philadelphia, PA 19123",
+          "time": "6:00 PM",
+          "cost": "$15",
+          "url": "https://do215.com/events/2026/9/14/the-performance-lounge-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Immersive variety night — painting, puppetry, rotating performances — from 20 East Coast artists; runs through 9/16.",
+          "recurrence_count": 3,
+          "occurrences": [
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16"
+          ]
+        },
+        {
+          "title": "Lady Laughs Philly: Open Mic Night",
+          "venue": "Tattooed Moms, 530 South Street, Philadelphia, PA 19147",
+          "time": "6:00 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/14/lady-laughs-philly-open-mic-night-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Monthly all-women and queer open mic comedy night at Tattooed Moms, free, no cover."
+        },
+        {
+          "title": "The Incel of the Basement",
+          "venue": "Queer House",
+          "time": "8:00 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/14/the-incel-of-the-basement-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Experimental one-man musical parody at Queer House, running through 9/16 — Metro Philly called it “THE piece of experimental theater to see.”",
+          "recurrence_count": 3,
+          "occurrences": [
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16"
+          ]
+        },
+        {
+          "title": "🚧 Make Your First Website",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjBvMzBiOWg2c3MzaWQxZzcwczMwYzFkNjRyamdlOWs2NHIzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "sold_out": false,
+          "note": "Beginner HTML/Neocities workshop at Iffy Books, $10–$25 suggested donation, no one turned away."
+        },
+        {
+          "title": "September Plant Swap at Manayunk Pop Up Garden",
+          "venue": "PHS Pop Up Garden at Manayunk, 106 Jamestown Avenue, Philadelphia, PA 19127",
+          "time": "6:00 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/14/september-plant-swap-at-manayunk-pop-up-garden-tickets",
+          "category": "🌿 Markets & Outdoors",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Free one-for-one plant swap at the Manayunk Pop Up Garden."
+        },
+        {
+          "title": "Bog Man",
+          "venue": "Plays and Players Skinner Studio",
+          "time": "7:30 PM",
+          "cost": "$15",
+          "url": "https://do215.com/events/2026/9/14/bog-man-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "One-person show about an actress haunted (maybe) by a bog spirit while performing in Ireland; runs through 9/20.",
+          "recurrence_count": 3,
+          "occurrences": [
+            "2026-09-14",
+            "2026-09-19",
+            "2026-09-20"
+          ]
+        },
+        {
+          "title": "CICADA: I WAS A TEENAGE HORROR MOVIE (1997) + THE VIOLENCE MOVIE (1988)",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:00, 7:30",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/86690867/cicadai-was-a-teenage-horror-movie-1997the-violence-movie-1998-philadelphia-philamoca",
+          "category": "👻 Horror & Occult",
+          "source": "PhilaMOCA",
+          "sold_out": false,
+          "note": "Obscure horror double feature with filmmakers in attendance for Q&A."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Nai Palm (of Hiatus Kaiyote)",
+          "venue": "Ardmore Music Hall, 23 E Lancaster Ave, Ardmore, Pe 19003",
+          "address": "23 E Lancaster Ave, Ardmore, Pe 19003",
+          "venue_address": "23 E Lancaster Ave, Ardmore, Pe 19003",
+          "venue_id": "492413",
+          "selection_address": "23 E Lancaster Ave, Ardmore, PA 19003",
+          "time": "7:30 PM",
+          "cost": "$30-$59, 21+",
+          "url": "https://do215.com/events/2026/9/15/nai-palm-of-hiatus-kaiyote-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Naomi Saalfield — Nai Palm, the three-time Grammy-nominated voice behind Hiatus Kaiyote — plays a rare solo-leaning date drawing from her intuitive, jazz-soaked songwriting. It's the kind of soul-and-jazz-rooted performance the touring circuit rarely brings this close to Philly. Ardmore Music Hall is a Main Line venue about 8 miles out; the Paoli/Thorndale Regional Rail line runs straight to Ardmore station, a short walk from the door. 21+, $30–$59."
+        },
+        {
+          "rank": 2,
+          "title": "Free Renters Rights Clinic",
+          "venue": "Philadelphia, Philadelphia, Pe",
+          "venue_id": "493639",
+          "time": "6:00 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/15/free-renters-rights-clinic-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A free one-on-one tenant rights clinic — Renters United Philadelphia pairs attendees with a lawyer for real legal advice and walks through know-your-rights training before opening the floor to organizing. It's tenant power-building, not just information: One PA's Renters United treats this as a step toward collective action, not a one-off service. Free, 6–8 PM."
+        },
+        {
+          "rank": 3,
+          "title": "Poem Club",
+          "venue": "The Soapbox: Community Print Shop & Zine Library, 4700 Kingsessing Ave, Philadelphia, PA 19143",
+          "address": "4700 Kingsessing Ave, Philadelphia, PA 19143",
+          "venue_address": "4700 Kingsessing Ave, Philadelphia, PA 19143",
+          "venue_id": "517601",
+          "selection_address": "4700 Kingsessing Ave, Philadelphia, PA 19143",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/15/poem-club-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A brand-new pay-what-you-want poetry-writing evening at The Soapbox, the Kingsessing print shop and zine library that's become one of West Philly's steadiest DIY literary spaces — bring a notebook, no experience required. It's low-key and unpolished by design, the kind of easy-to-miss community writing night that doesn't get promoted beyond its own neighborhood. West Philly's Kingsessing neighborhood; reachable via the 13 trolley on Chester Ave or nearby bus routes."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Justice 101: Justice, Reentry, and Civic Power",
+          "venue": "Eastern State Penitentiary, 2027 Fairmount Ave, Philadelphia, Pe 19130"
+        },
+        {
+          "title": "Wherever You Are",
+          "venue": "Roxborough Pocket Park"
+        }
+      ],
+      "events": [
+        {
+          "title": "Vader w/ Jungle Rot, Fleshcrawl, and Trash Panda",
+          "venue": "Broken Goblet Brewing, 2500 State Rd. unit d, Bensalem, PA 19020",
+          "time": "6:00 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/15/vader-w-jungle-rot-fleshcrawl-and-trash-panda-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Polish death metal veterans Vader headline a four-decade-anniversary tour stop at Broken Goblet Brewing in Bensalem, about 18 miles outside the city — car or long transit trip required."
+        },
+        {
+          "title": "Rufus Wainwright",
+          "venue": "City Winery, 990 Filbert St, Philadelphia, PA 19107",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/15/rufus-wainwright-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Rufus Wainwright at City Winery, first of a three-night run (through 9/17).",
+          "recurrence_count": 3,
+          "occurrences": [
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17"
+          ]
+        },
+        {
+          "title": "Nai Palm (of Hiatus Kaiyote)",
+          "venue": "Ardmore Music Hall, 23 E Lancaster Ave, Ardmore, Pe 19003",
+          "time": "7:30 PM",
+          "cost": "$30-$59, 21+",
+          "url": "https://do215.com/events/2026/9/15/nai-palm-of-hiatus-kaiyote-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Grammy-nominated Hiatus Kaiyote vocalist Nai Palm, solo-leaning set at Ardmore Music Hall."
+        },
+        {
+          "title": "Sababa 5 w/ DJ FUZZYTOWN",
+          "venue": "PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "$22.99",
+          "url": "https://do215.com/events/2026/9/15/sababa-5-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Paris-based Middle Eastern psych/Mediterranean funk band Sababa 5 at PhilaMOCA. $22.99."
+        },
+        {
+          "title": "✏️ The Writing Room",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "5:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9yamliOWg2c3MzaWQxcDY0cjMwYzFkNjRyamdlOWw2MG8zY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "📚 Literary",
+          "source": "Iffy Books",
+          "sold_out": false,
+          "note": "Silent co-working writing session at Iffy Books, three 40-minute units with check-ins."
+        },
+        {
+          "title": "Poem Club",
+          "venue": "The Soapbox: Community Print Shop & Zine Library, 4700 Kingsessing Ave, Philadelphia, PA 19143",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/15/poem-club-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "New PWYW poetry-writing night at The Soapbox print shop and zine library."
+        },
+        {
+          "title": "Voter Registration: Tattooed Mom",
+          "venue": "Tattooed Mom, 530 South Street, Philadelphia, PA 19147",
+          "time": "4:00 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/15/voter-registration-tattooed-mom-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "National Voter Registration Day volunteer/registration drive at Tattooed Mom."
+        },
+        {
+          "title": "Justice 101: Justice, Reentry, and Civic Power",
+          "venue": "Eastern State Penitentiary, 2027 Fairmount Ave, Philadelphia, Pe 19130",
+          "time": "5:30 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/15/justice-101-justice-reentry-and-civic-power-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Talk on justice, reentry, and civic power at Eastern State Penitentiary; free, details still being finalized by the venue."
+        },
+        {
+          "title": "Rep. Tarik Khan and Rep. Mary Jo Daley Town Hall with Guest Speaker from the Holocaust Awareness Museum and Education Center",
+          "venue": "The Fallser Club, 3721 Midvale Ave, Philadelphia, PA 19129",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/15/rep-tarik-khan-and-rep-mary-jo-daley-town-hall-with-guest-speaker-from-the-holocaust-awareness-museum-and-education-center-ticke",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Town hall with state Reps. Tarik Khan and Mary Jo Daley, featuring a guest speaker from the Holocaust Awareness Museum."
+        },
+        {
+          "title": "Free Renters Rights Clinic",
+          "venue": "Philadelphia, Philadelphia, Pe",
+          "time": "6:00 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/15/free-renters-rights-clinic-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Free tenant rights legal clinic and know-your-rights training."
+        },
+        {
+          "title": "Avalanche of ‘No’",
+          "venue": "Icebox Project Space Gallery",
+          "time": "5:30 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/15/avalanche-of-no-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Solo Fringe piece weaving Shakespeare, Afropessimism, and Basquiat imagery at Icebox Project Space."
+        },
+        {
+          "title": "Wherever You Are",
+          "venue": "Roxborough Pocket Park",
+          "time": "7:00 PM",
+          "cost": "$15",
+          "url": "https://do215.com/events/2026/9/15/wherever-you-are-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Site-specific immersive outdoor sound piece at a Roxborough pocket park — each listener hears a different mix depending on where they stand. $15; Roxborough is farther from Center City, check transit before heading out."
+        },
+        {
+          "title": "The Suppliants",
+          "venue": "Asian Arts Initiative Third Floor",
+          "time": "8:45 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/15/the-suppliants-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "New ensemble piece inspired by Aeschylus's The Suppliants, reframing refuge and belonging through Appalachian folklore."
+        },
+        {
+          "title": "Quirq'y Workshop: Building & Running AI Agents",
+          "venue": "(online)",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/code-coffee-philly/events/316146274/",
+          "category": "💻 Tech & Maker",
+          "source": "Meetup: Code & Coffee",
+          "sold_out": false,
+          "note": "Online hands-on workshop building and running AI agents, hosted by Coffee & Code Philly."
+        },
+        {
+          "title": "Park after Dark: Moonwalk + Stargazing",
+          "venue": "Lemon Hill Drive & Sedgely Drive",
+          "time": "6:30 PM",
+          "cost": "$15",
+          "url": "https://do215.com/events/2026/9/15/park-after-dark-moonwalk-stargazing-tickets",
+          "category": "🌿 Markets & Outdoors",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Guided moonwalk and telescope stargazing session in East Fairmount Park. $15."
+        },
+        {
+          "title": "DEAD BY DAWN (2025) - Polish slasher!",
+          "venue": "(online)",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/316484501/",
+          "category": "👻 Horror & Occult",
+          "source": "Meetup: Philadelphia Horror",
+          "sold_out": false,
+          "note": "Online watch-along of Polish slasher/giallo film Dead by Dawn (2025), via the Philadelphia Horror Meetup."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "The Enemy at Hand",
+          "venue": "Asian Arts Initiative Project Space",
+          "address": "1219 Vine St, Philadelphia, PA 19102",
+          "venue_id": "534330",
+          "time": "7:30 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/16/the-enemy-at-hand-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Fringe solo show recounting the 1934 Night of the Long Knives — specifically the purge of Ernst Röhm and other queer members of the Sturmabteilung, including an 18-year-old paramilitary found in bed with an SA leader during the raid. A historical-political piece, not genre horror, using a fifty-minute solo frame to dig into a corner of Nazi-era history that rarely gets this kind of direct attention."
+        },
+        {
+          "rank": 2,
+          "title": "Mare's Nest",
+          "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+          "address": "800 Mifflin St, Philadelphia, PA 19148",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.lightboxfilmcenter.org/events/mares-nest",
+          "category": "🎬 Film & Cinema",
+          "source": "Lightbox Film Center",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Lightbox Film Center brings a Philadelphia premiere to Bok Auditorium — the arthouse/repertory programmer that consistently runs the city's most adventurous film calendar on the rare week it turns up in Collection's data at all. No plot details surfaced beyond “Philadelphia Premiere,” so this is a bet on Lightbox's curation as much as the film itself."
+        },
+        {
+          "rank": 3,
+          "title": "Ariel Delgado Dixon / SOURLAND",
+          "venue": "The Head & The Hand Books, 2230 Frankford Ave, Philadelphia, PA 19125",
+          "address": "2230 Frankford Ave, Philadelphia, PA 19125",
+          "venue_address": "2230 Frankford Ave, Philadelphia, PA 19125",
+          "venue_id": "518310",
+          "selection_address": "2230 Frankford Ave, Philadelphia, PA 19125",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/16/ariel-delgado-dixon-sourland-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Ariel Delgado Dixon reads from and discusses Sourland, her new suspense novel, at The Head & The Hand — a small Fishtown press-and-bookstore built for exactly this kind of intimate author event. Fishtown; a few blocks from the York-Dauphin stop on the Market-Frankford Line."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Gender Minorities in the Sciences Panel",
+          "venue": "Science History Institute"
+        },
+        {
+          "title": "Dekalog: Parts 9 & 10",
+          "venue": "Philadelphia Film Society"
+        }
+      ],
+      "events": [
+        {
+          "title": "Beck - Ride Lonesome :: Listening Session",
+          "venue": "The Sound Lounge, 1700 N Front Street, Philadelphia, PA 19122",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/16/beck-ride-lonesome-listening-session-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Intimate listening session for Beck's upcoming album Ride Lonesome, two days ahead of release."
+        },
+        {
+          "title": "Container, Gloorp, and Echotracer",
+          "venue": "Ortlieb's, 847 N 3rd St, Philadelphia, PA 19123",
+          "time": "7:00 PM",
+          "cost": "$18.39, 21+",
+          "url": "https://do215.com/events/2026/9/16/container-gloorp-and-echotracer-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Container, Gloorp, and Echotracer — noise/experimental electronic bill at Ortlieb's."
+        },
+        {
+          "title": "Angine de Poitrine **SOLD OUT**",
+          "venue": "Underground Arts, 1200 Callowhill St, Philadelphia, PA 19107",
+          "time": "8:00 PM",
+          "cost": "$34-$39.50, 21+",
+          "url": "https://do215.com/events/2026/9/16/angine-de-poitrine-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": true,
+          "note": "Angine de Poitrine's dissonant space-rock set at Underground Arts — sold out."
+        },
+        {
+          "title": "The Fisher King",
+          "venue": "Philadelphia Film Society",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/16/the-fisher-king-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "35mm-era Terry Gilliam fantasy The Fisher King (1991), part of PFS's It's the Year 1991! retrospective."
+        },
+        {
+          "title": "Mare's Nest",
+          "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.lightboxfilmcenter.org/events/mares-nest",
+          "category": "🎬 Film & Cinema",
+          "source": "Lightbox Film Center",
+          "sold_out": false,
+          "note": "Philadelphia premiere programmed by Lightbox Film Center at Bok Auditorium."
+        },
+        {
+          "title": "Dekalog: Parts 9 & 10",
+          "venue": "Philadelphia Film Society",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/16/dekalog-parts-9-10-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Philadelphia Film Society's Dekalog Special Series continues with Parts 9 & 10, Kieślowski's Polish TV masterwork."
+        },
+        {
+          "title": "Ariel Delgado Dixon / SOURLAND",
+          "venue": "The Head & The Hand Books, 2230 Frankford Ave, Philadelphia, PA 19125",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/16/ariel-delgado-dixon-sourland-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Author reading and discussion of the new novel Sourland at The Head & The Hand Books."
+        },
+        {
+          "title": "West Philly Canvass for Chris Rabb",
+          "venue": "Kingsessing Recreation Center",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/16/west-philly-canvass-for-chris-rabb-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Philly DSA door-knocking canvass for democratic socialist congressional candidate Chris Rabb."
+        },
+        {
+          "title": "Echoes of Dammām",
+          "venue": "Icebox Project Space Gallery",
+          "time": "5:30 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/16/echoes-of-dammam-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Multimedia performance built around dammam, a ritual drumming practice from Bushehr, Iran, tracing grief and resistance."
+        },
+        {
+          "title": "Khe Calor: A Latinx Dance Party with pop-up Drag & Burlesque Show",
+          "venue": "Franky Bradley's | B.West, 1320 Chancellor St, Philadelphia, PA 19107",
+          "time": "7:00 PM",
+          "cost": "$12.51",
+          "url": "https://do215.com/events/2026/9/16/khe-calor-a-latinx-dance-party-with-pop-up-drag-burlesque-show-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Latinx dance party with a pop-up drag and burlesque show featuring RuPaul's Drag Race alum DD Fuego."
+        },
+        {
+          "title": "The Enemy at Hand",
+          "venue": "Asian Arts Initiative Project Space",
+          "time": "7:30 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/16/the-enemy-at-hand-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Fringe solo show recounting the 1934 Night of the Long Knives purge of Ernst Röhm and other queer SA members inside the Nazi party — a historical-political piece, not genre horror despite the subject matter."
+        },
+        {
+          "title": "Gender Minorities in the Sciences Panel",
+          "venue": "Science History Institute",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/16/gender-minorities-in-the-sciences-panel-tickets",
+          "category": "💻 Tech & Maker",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Panel of scientists on gender equity and inclusion across STEM fields, at the Science History Institute. Free."
+        },
+        {
+          "title": "LIGEIA by Edgar Allan Poe (part of the Philadelphia Fringe Festival)",
+          "venue": "Asian Arts Initiative 1219 Vine St",
+          "time": "",
+          "cost": "Not listed",
+          "url": "https://phillygoth.net/events/ligeia-by-edgar-allan-poe-part-of-the-philadelphia-fringe-festival/",
+          "category": "👻 Horror & Occult",
+          "source": "Phillygoth.net",
+          "sold_out": false,
+          "note": "Physical-theatre adaptation of Poe's Ligeia, part of the Fringe Festival's Cannonball Festival; runs through 9/19."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Bad Activist",
+          "venue": "Practice Gallery",
+          "venue_id": "536460",
+          "time": "7:30 PM",
+          "cost": "$15",
+          "url": "https://do215.com/events/2026/9/17/bad-activist-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Mai Khôi — once dubbed Vietnam's “Lady Gaga” — left pop stardom to become an internationally recognized human rights activist, including a stint in Hanoi police detention and the Václav Havel Prize for Creative Dissent. Bad Activist is her own telling of that arc: a cabaret-style multimedia autobiography with live music, projections, and archival footage, not a sanitized talk. $15."
+        },
+        {
+          "rank": 2,
+          "title": "Birdman",
+          "venue": "Philadelphia Film Society",
+          "venue_id": "510458",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/17/birdman-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Philadelphia Film Society's director series on Alejandro González Iñárritu — one of this house's named film anchors — closes with Birdman, Iñárritu's loud, meta backstage comedy about a washed-up superhero actor staging a Raymond Carver play. Michael Keaton, Zach Galifianakis, and Edward Norton co-star."
+        },
+        {
+          "rank": 3,
+          "title": "Seated Stick Fighting",
+          "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+          "address": "704 South St, Philadelphia, PA 19147",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=NjBraDdoZGZrYXE2azVsdXY2b21qNTloaDQgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&ctz=America/New_York",
+          "category": "🎨 Arts & Workshops",
+          "source": "Wooden Shoe Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Strange Fox Fighting Arts teaches a seated adaptation of bataireacht (Irish stick/shillelagh fighting) built specifically for people who can't stand at all or for long — disability justice framed as genuine self-defense instruction, not a token accommodation. Trans folks are prioritized to the front and welcome throughout; bring a cane if you have one, sticks are provided. Free, at Wooden Shoe Books, the anarchist bookstore that consistently runs this kind of accessible, community-first programming."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "The Spine (Record Release Show), NRG, and Bán Sidhe Dogs",
+          "venue": "Cousin Danny's (5001 Market Street)"
+        },
+        {
+          "title": "My Carmilla",
+          "venue": "Plays and Players Skinner Studio"
+        }
+      ],
+      "events": [
+        {
+          "title": "The Spine (Record Release Show), NRG, and Bán Sidhe Dogs",
+          "venue": "Cousin Danny's (5001 Market Street)",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/the-spine-record-release-show-nrg-and-ban-sidhe-dogs",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "sold_out": false,
+          "note": "Post-punk/goth record release show for The Spine, with NRG and Bán Sidhe Dogs, at DIY space Cousin Danny's."
+        },
+        {
+          "title": "Amish Country Queer: A Night of Film, Art & Drag",
+          "venue": "Asian Arts Initiative Black Box Theater",
+          "time": "5:00 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/17/amish-country-queer-a-night-of-film-art-drag-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Documentary on Lancaster's queer nightlife and drag culture, paired with a photo exhibition on rural LGBTQ+ life and a homegrown drag show."
+        },
+        {
+          "title": "Birdman",
+          "venue": "Philadelphia Film Society",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/17/birdman-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Birdman (2014) closes PFS's Iñárritu director series."
+        },
+        {
+          "title": "Baggage From BaghDAD: Becoming My Father’s Daughter",
+          "venue": "Asian Arts Initiative Third Floor",
+          "time": "7:15 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/17/baggage-from-baghdad-becoming-my-father-s-daughter-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Award-winning solo memoir on a Middle Eastern Jewish family's flight from Iraq's 1941 Farhud pogrom."
+        },
+        {
+          "title": "RECKON Stage Reading",
+          "venue": "Taller Puertorriqueno",
+          "time": "7:30 PM",
+          "cost": "$20",
+          "url": "https://do215.com/events/2026/9/17/reckon-stage-reading-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Stage reading of RECKON, a hybrid memoir mixing essay, poetry, and screenplay about Tombstone, AZ and Western mythology."
+        },
+        {
+          "title": "Helen Keller Wasn’t Real",
+          "venue": "The Louis Bluver Theatre at the Drake",
+          "time": "7:00 PM",
+          "cost": "$20",
+          "url": "https://do215.com/events/2026/9/17/helen-keller-wasn-t-real-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "New solo play on media literacy and family estrangement after a mother's radicalization on Facebook; runs through 9/20.",
+          "recurrence_count": 3,
+          "occurrences": [
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-20"
+          ]
+        },
+        {
+          "title": "Bad Activist",
+          "venue": "Practice Gallery",
+          "time": "7:30 PM",
+          "cost": "$15",
+          "url": "https://do215.com/events/2026/9/17/bad-activist-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Cabaret-style multimedia autobiography from exiled Vietnamese activist and former pop star Mai Khôi."
+        },
+        {
+          "title": "Seated Stick Fighting",
+          "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=NjBraDdoZGZrYXE2azVsdXY2b21qNTloaDQgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&ctz=America/New_York",
+          "category": "🎨 Arts & Workshops",
+          "source": "Wooden Shoe Books",
+          "sold_out": false,
+          "note": "Seated Irish stick-fighting workshop at Wooden Shoe Books, designed for people who can't stand for long; trans folks prioritized."
+        },
+        {
+          "title": "Miss Lisa Lisa's Drag Show",
+          "venue": "Bob & Barbara's Lounge, 1509 South St, Philadelphia, PA 19146",
+          "time": "7:30 PM",
+          "cost": "$27.45-$53.07",
+          "url": "https://do215.com/events/2026/9/17/miss-lisa-lisa-s-drag-show-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Philadelphia's longest-running drag show, weekly at Bob & Barbara's Lounge."
+        },
+        {
+          "title": "14th Philly Hardware Meetup @ Delve!",
+          "venue": "(online)",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/philly-hardware/events/316377206/",
+          "category": "💻 Tech & Maker",
+          "source": "Meetup: Philly Hardware",
+          "sold_out": false,
+          "note": "14th Philly Hardware Meetup, in person at Delve's Arch Street office — guest speakers plus open mic for whatever's on your desk."
+        },
+        {
+          "title": "🤔 FAFIO Beginner Tech Meetup",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNzRxamNiOWg2c3MzaWRobTc0czMwYzFkNjRyamdlOW02c3JqMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "sold_out": false,
+          "note": "No-instructor, learn-by-doing tech meetup at Iffy Books."
+        },
+        {
+          "title": "My Carmilla",
+          "venue": "Plays and Players Skinner Studio",
+          "time": "5:30 PM",
+          "cost": "$15",
+          "url": "https://do215.com/events/2026/9/17/my-carmilla-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Queer, feminist, postcolonial folk-horror retelling of the 1872 vampire novella Carmilla; the two leads alternate predator/prey roles each performance."
+        },
+        {
+          "title": "Not So Silent Cinema Presents: <i>The Lodger</i>",
+          "venue": "Mütter Museum, 19 S 22nd Street, Philadelphia, PA 19103",
+          "time": "6:00 PM",
+          "cost": "$20",
+          "url": "https://do215.com/events/2026/9/17/not-so-silent-cinema-presents-i-the-lodger-i-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Hitchcock's 1927 silent thriller The Lodger with a live score, kicking off the Mütter Museum's spooky season."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Bikini Kill",
+          "venue": "Union Transfer, 1026 Spring Garden St., Philadelphia, PA 19123",
+          "address": "1026 Spring Garden St., Philadelphia, PA 19123",
+          "venue_address": "1026 Spring Garden St., Philadelphia, PA 19123",
+          "venue_id": "489588",
+          "selection_address": "1026 Spring Garden St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/18/bikini-kill-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": true,
+          "why": "Bikini Kill — the Olympia, WA band that effectively started the Riot Grrrl movement, Kathleen Hanna's confrontational lyrics and zine-driven politics setting the template for a generation of feminist punk — reunite for a rare tour stop. This is as close as the current touring circuit gets to the actual originators of the sound, not a tribute or a revival act. Sold out as of this writing; worth checking the venue for a resale or day-of list."
+        },
+        {
+          "rank": 2,
+          "title": "Historic Drama “These Shining Lives” Opens at The Stagecrafters Theater",
+          "venue": "Chestnut Hill, Philadelphia, PA",
+          "venue_id": "520235",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/18/historical-drama-set-to-open-at-the-stagecrafters-theater-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "These Shining Lives dramatizes the real story of the “Radium Girls” — women at the Radium Dial Company in the 1920s–30s who were poisoned by the glow-in-the-dark paint they were told was safe, and who fought the company for recognition and justice. It's the opening night of the Stagecrafters' 97th season. Chestnut Hill; reachable via SEPTA's Chestnut Hill East or West Regional Rail lines."
+        },
+        {
+          "rank": 3,
+          "title": "“Say it Loud, I’m Black and I’m Proud”",
+          "venue": "The Colored Girls Museum, 4613 Newhall St, Philadelphia, PA 19144",
+          "address": "4613 Newhall St, Philadelphia, PA 19144",
+          "venue_address": "4613 Newhall St, Philadelphia, PA 19144",
+          "venue_id": "504458",
+          "selection_address": "4613 Newhall St, Philadelphia, PA 19144",
+          "time": "6:00 PM",
+          "cost": "$20",
+          "url": "https://do215.com/events/2026/9/18/say-it-loud-i-m-black-and-i-m-proud-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Citizen artist vanessa german transforms two rooms of this historic Germantown rowhouse-turned-museum into an immersive black-box installation for the museum's Semiquincentennial-tied Act Two — sculptural work, soundscape, and site-specific staging built around the idea of “the ordinary colored girl.” Germantown; reachable via SEPTA's Chestnut Hill East Regional Rail or the 23 bus. $20."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Joe Lally / Jerry Busher / Yanni / Sun Within / Applied Knowledge",
+          "venue": "Khyber Pass Pub, 56 S 2nd St, Philadelphia, PA 19106"
+        },
+        {
+          "title": "Pansy Division / Teenage Halloween / Hot Seat",
+          "venue": "PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123"
+        }
+      ],
+      "events": [
+        {
+          "title": "Joe Lally / Jerry Busher / Yanni / Sun Within / Applied Knowledge",
+          "venue": "Khyber Pass Pub, 56 S 2nd St, Philadelphia, PA 19106",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/18/joe-lally-jerry-busher-yanni-sun-within-applied-knowledge-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "“A night of Dischord in Philly” — Joe Lally, Jerry Busher, and Yanni (all ex-Fugazi) plus Sun Within and Applied Knowledge at Khyber Pass Pub."
+        },
+        {
+          "title": "Bikini Kill",
+          "venue": "Union Transfer, 1026 Spring Garden St., Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/18/bikini-kill-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": true,
+          "note": "Riot Grrrl originators Bikini Kill at Union Transfer — a rare reunion tour stop. Sold out."
+        },
+        {
+          "title": "Pansy Division / Teenage Halloween / Hot Seat",
+          "venue": "PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "$18.15",
+          "url": "https://do215.com/events/2026/9/18/pansy-division-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Pansy Division — pioneering openly gay punk band since 1991 — with Teenage Halloween and Hot Seat at PhilaMOCA."
+        },
+        {
+          "title": "Outdoor Programming",
+          "venue": "Lest We Forget Museum of Slavery",
+          "time": "5:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/18/outdoor-programming-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Outdoor book reading with refreshments at the Lest We Forget Museum of Slavery."
+        },
+        {
+          "title": "Jane Eyre Wasn’t a Whore",
+          "venue": "Plays and Players Skinner Studio",
+          "time": "6:00 PM",
+          "cost": "$15",
+          "url": "https://do215.com/events/2026/9/18/jane-eyre-wasn-t-a-whore-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Brontë-obsessed rom-com solo show, fresh off runs at Edinburgh Fringe and NYC's The Rat."
+        },
+        {
+          "title": "Voynich",
+          "venue": "Asian Arts Initiative Black Box Theater",
+          "time": "7:00 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/18/voynich-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "New work inspired by the real, undeciphered 15th-century Voynich Manuscript."
+        },
+        {
+          "title": "“Say it Loud, I’m Black and I’m Proud”",
+          "venue": "The Colored Girls Museum, 4613 Newhall St, Philadelphia, PA 19144",
+          "time": "6:00 PM",
+          "cost": "$20",
+          "url": "https://do215.com/events/2026/9/18/say-it-loud-i-m-black-and-i-m-proud-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Immersive art installation on Black womanhood and the Semiquincentennial at The Colored Girls Museum."
+        },
+        {
+          "title": "Love Abide With You, The Birthplace Quilts",
+          "venue": "Kensington Corridor Trust Garden",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/18/love-abide-with-you-the-birthplace-quilts-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Community quilting project on the idea of “birthplace,” tied to the 250th anniversary of American independence, at Kensington Corridor Trust Garden."
+        },
+        {
+          "title": "Tell Me Your Name",
+          "venue": "Asian Arts Initiative Third Floor",
+          "time": "7:15 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/18/tell-me-your-name-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Comedic clowning piece built on the archetype of a Korean shaman who channels deceased pets, exploring generational trauma."
+        },
+        {
+          "title": "Historic Drama “These Shining Lives” Opens at The Stagecrafters Theater",
+          "venue": "Chestnut Hill, Philadelphia, PA",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/18/historical-drama-set-to-open-at-the-stagecrafters-theater-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Opening night of Stagecrafters' 97th season with a drama about the Radium Girls labor case."
+        },
+        {
+          "title": "returned, iridescent",
+          "venue": "The Proscenium at The Drake",
+          "time": "7:30 PM",
+          "cost": "$30",
+          "url": "https://do215.com/events/2026/9/18/returned-iridescent-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "New play about a trans couple's love across time, at The Proscenium at The Drake."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Plow United, with The Ergs!, Chris Gethard, Crossed Keys",
+          "venue": "First Unitarian Church, 2125 Chestnut St, Philadelphia, PA 19103",
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "venue_address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "venue_id": "489685",
+          "selection_address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "time": "6:30 PM",
+          "cost": "$37.14",
+          "url": "https://do215.com/events/2026/9/19/plow-united-with-the-ergs-chris-gethard-crossed-keys-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Plow United reunite to play their landmark pop-punk album Goodnight Sellout front to back, with The Ergs!, Chris Gethard, and Crossed Keys filling out the bill at First Unitarian Church — Philly's most storied punk and hardcore room. This is the kind of full-album anniversary show that doesn't repeat; catch it now or wait for the next reunion. $37.14."
+        },
+        {
+          "rank": 2,
+          "title": "The David Liebe Hart Experience w/ Sound of Jeb + Ecology: HomeStones",
+          "venue": "PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123",
+          "address": "531 N. 12th St, Philadelphia, PA 19123",
+          "venue_address": "531 N. 12th St, Philadelphia, PA 19123",
+          "venue_id": "489686",
+          "selection_address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "$18.15",
+          "url": "https://do215.com/events/2026/9/19/the-david-liebe-hart-experience-w-sound-of-jeb-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "David Liebe Hart — the outsider musician, puppeteer, and UFOlogist best known from Tim & Eric Awesome Show, Great Job! — brings his raw, unfiltered, one-of-a-kind live show to PhilaMOCA, the city's home base for exactly this kind of gleeful weirdness. Expect songs about aliens, food, and failed relationships performed with total sincerity. $18.15."
+        },
+        {
+          "rank": 3,
+          "title": "Fall Open House",
+          "venue": "The Rosenbach Museum and Library, 2008-2010 Delancey St",
+          "address": "2008-2010 Delancey St",
+          "venue_address": "2008-2010 Delancey St",
+          "venue_id": "504403",
+          "selection_address": "2008-2010 Delancey St, Philadelphia, PA 19103",
+          "time": "10:30 AM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/19/fall-open-house-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A free, self-guided fall kickoff at the Rosenbach — tour the permanent collection, see rare items from their Dracula, vampire, and Gothic holdings, and walk through a specially built spooky, Halloween-inspired audio-scape. Also a low-key way to preview their fall programming lineup before committing to a ticketed event. Free."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Soji and Friends Fight Back II feat. Soji, The Angies, In Jest, and Good Teal (Benefit for Serenity House)",
+          "venue": "Ortlieb's, 847 N 3rd St, Philadelphia, PA 19123"
+        },
+        {
+          "title": "Earlybirds Club",
+          "venue": "Brooklyn Bowl Philadelphia, 1009 Canal St, Philadelphia, PA 19123"
+        }
+      ],
+      "events": [
+        {
+          "title": "Plow United, with The Ergs!, Chris Gethard, Crossed Keys",
+          "venue": "First Unitarian Church, 2125 Chestnut St, Philadelphia, PA 19103",
+          "time": "6:30 PM",
+          "cost": "$37.14",
+          "url": "https://do215.com/events/2026/9/19/plow-united-with-the-ergs-chris-gethard-crossed-keys-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Plow United plays Goodnight Sellout in full, with The Ergs!, Chris Gethard, and Crossed Keys, at First Unitarian Church."
+        },
+        {
+          "title": "Soji and Friends Fight Back II feat. Soji, The Angies, In Jest, and Good Teal (Benefit for Serenity House)",
+          "venue": "Ortlieb's, 847 N 3rd St, Philadelphia, PA 19123",
+          "time": "7:00 PM",
+          "cost": "$18.39, 21+",
+          "url": "https://do215.com/events/2026/9/19/soji-and-friends-fight-back-ii-feat-soji-the-angies-in-jest-and-good-teal-benefit-for-serenity-house-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Punk/hardcore benefit bill — Soji, The Angies, In Jest, Good Teal — raising funds for Serenity House, at Ortlieb's."
+        },
+        {
+          "title": "Rogê ~ Ensemble Novo",
+          "venue": "Silk City, 435 Spring Garden St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "21+",
+          "url": "https://do215.com/events/2026/9/19/roge-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Latin Grammy-nominated Brazilian singer-songwriter Rogê, blending samba, soul, funk, and MPB, at Silk City."
+        },
+        {
+          "title": "Frankford Fall Festival",
+          "venue": "Frankford Pause Park",
+          "time": "12:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/19/frankford-fall-festival-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Transit Forward Philadelphia tables at the Frankford Fall Festival, organizing for better SEPTA service."
+        },
+        {
+          "title": "Earlybirds Club",
+          "venue": "Brooklyn Bowl Philadelphia, 1009 Canal St, Philadelphia, PA 19123",
+          "time": "6:00 PM",
+          "cost": "21+",
+          "url": "https://do215.com/events/2026/9/19/earlybirds-club-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Dance party for women and gender-expansive folks, 6–10pm; proceeds benefit the Susie Lee Legacy Fund."
+        },
+        {
+          "title": "All The World Wondered",
+          "venue": "Arch Street Meeting House",
+          "time": "7:00 PM",
+          "cost": "$10",
+          "url": "https://do215.com/events/2026/9/19/all-the-world-wondered-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Indie theater piece about an archaeology team searching for meaning amid mass extinction, inspired by Thoreau and Tennyson."
+        },
+        {
+          "title": "The David Liebe Hart Experience w/ Sound of Jeb + Ecology: HomeStones",
+          "venue": "PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "$18.15",
+          "url": "https://do215.com/events/2026/9/19/the-david-liebe-hart-experience-w-sound-of-jeb-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Outsider musician/puppeteer David Liebe Hart (Tim & Eric) at PhilaMOCA."
+        },
+        {
+          "title": "Fall Open House",
+          "venue": "The Rosenbach Museum and Library, 2008-2010 Delancey St",
+          "time": "10:30 AM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/19/fall-open-house-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Free fall open house at the Rosenbach, featuring their Dracula/vampire/Gothic holdings and a spooky audio-scape."
+        },
+        {
+          "title": "Conshohocken’s Biggest Free Festival Yet Returns 9/19",
+          "venue": "Conshohocken Funfest, Fayette Street between First and Fifth Avenues, Conshohocken, PA 19428",
+          "time": "12:00 PM",
+          "cost": "Free",
+          "url": "https://do215.com/events/2026/9/19/conshohocken-s-biggest-free-festival-yet-returns-9-19-tickets",
+          "category": "🎪 Festivals & Major Events",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "33rd Conshohocken Funfest, a free nine-block street festival with 140 vendors and live music — about 13 miles outside the city, best reached by car or Regional Rail to Conshohocken station."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Liz Phair & Sleater‐Kinney: The Flannel and The Fury 2026",
+          "venue": "Franklin Music Hall, 421 N. 7th Street, Philadelphia, PA 19123",
+          "address": "421 N. 7th Street, Philadelphia, PA 19123",
+          "venue_address": "421 N. 7th Street, Philadelphia, PA 19123",
+          "venue_id": "489481",
+          "selection_address": "421 N 7th St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/20/liz-phair-sleater-kinney-the-flannel-and-the-fury-2026-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Liz Phair and Sleater-Kinney co-headline “The Flannel and The Fury” — two of the defining voices of '90s feminist indie rock and Riot Grrrl-adjacent punk sharing one bill, both still writing and touring with the same edge that made Exile in Guyville and Dig Me Out era-defining records. A genuinely rare pairing, not a legacy-act victory lap."
+        },
+        {
+          "rank": 2,
+          "title": "David Lynch's BLUE VELVET (1986) - 40th Anniversary Screening",
+          "venue": "PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123",
+          "address": "531 N. 12th St, Philadelphia, PA 19123",
+          "venue_address": "531 N. 12th St, Philadelphia, PA 19123",
+          "venue_id": "489686",
+          "selection_address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "$13.20",
+          "url": "https://do215.com/events/2026/9/20/david-lynch-s-blue-velvet-1986-40th-anniversary-screening-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A 40th-anniversary screening of David Lynch's Blue Velvet — the film that codified Lynch's whole unsettling small-town-noir mode, with Kyle MacLachlan, Laura Dern, and Isabella Rossellini. PhilaMOCA's repertory programming is the right room for it. $13.20."
+        },
+        {
+          "rank": 3,
+          "title": "Lady Sarkazym",
+          "venue": "City Winery, 990 Filbert St, Philadelphia, PA 19107",
+          "address": "990 Filbert St, Philadelphia, PA 19107",
+          "venue_address": "990 Filbert St, Philadelphia, PA 19107",
+          "venue_id": "489705",
+          "selection_address": "990 Filbert St, Philadelphia, PA 19107",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/20/lady-sarkazym-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Let's Build brings a curated set of poets — Lady Sarkazym joined by Lady Syren, Sam I Am, Jay Smoov, and E The Poet-Emcee — through single, resonant pieces on love, trust, healing, and self-worth, each followed by open conversation rather than a quick set change. It's City Winery's dinner-show polish applied to a genuinely community-built spoken-word night, not a commercial booking."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Negative Approach ~ School Drugs ~ Impact Driver ~ Brainwashed",
+          "venue": "Kung Fu Necktie, 1248 N Front St, Philadelphia, PA 19122"
+        },
+        {
+          "title": "South Philly Food Co-op - Harvest Jawn 2026",
+          "venue": "South Philly Food Co Op"
+        }
+      ],
+      "events": [
+        {
+          "title": "Negative Approach ~ School Drugs ~ Impact Driver ~ Brainwashed",
+          "venue": "Kung Fu Necktie, 1248 N Front St, Philadelphia, PA 19122",
+          "time": "7:00 PM",
+          "cost": "$23.75 to $25.53, All Ages",
+          "url": "https://do215.com/events/2026/9/20/negative-approach-school-drugs-impact-driver-brainwashed-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Detroit hardcore pioneers Negative Approach (since 1981) with School Drugs, Impact Driver, and Brainwashed at Kung Fu Necktie. All ages."
+        },
+        {
+          "title": "Liz Phair & Sleater‐Kinney: The Flannel and The Fury 2026",
+          "venue": "Franklin Music Hall, 421 N. 7th Street, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/20/liz-phair-sleater-kinney-the-flannel-and-the-fury-2026-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Liz Phair and Sleater-Kinney co-headline The Flannel and The Fury tour at Franklin Music Hall."
+        },
+        {
+          "title": "Eihwar",
+          "venue": "Underground Arts, 1200 Callowhill St, Philadelphia, PA 19107",
+          "time": "8:00 PM",
+          "cost": "$34.48-$40, 21+",
+          "url": "https://do215.com/events/2026/9/20/eihwar-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Eihwar's Nordic Ritual Nights tour brings Viking-themed ritual metal to Underground Arts."
+        },
+        {
+          "title": "David Lynch's BLUE VELVET (1986) - 40th Anniversary Screening",
+          "venue": "PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "$13.20",
+          "url": "https://do215.com/events/2026/9/20/david-lynch-s-blue-velvet-1986-40th-anniversary-screening-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "40th-anniversary screening of David Lynch's Blue Velvet (1986) at PhilaMOCA."
+        },
+        {
+          "title": "My Friend, Ithamar",
+          "venue": "Asian Arts Initiative Project Space",
+          "time": "6:30 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/20/my-friend-ithamar-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Intimate horror author reading, companion piece to The Watcher Sleeps; signing after."
+        },
+        {
+          "title": "Lady Sarkazym",
+          "venue": "City Winery, 990 Filbert St, Philadelphia, PA 19107",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/20/lady-sarkazym-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Curated spoken-word poetry showcase, “Let's Build,” hosted by Lady Sarkazym."
+        },
+        {
+          "title": "Meat Cute",
+          "venue": "Asian Arts Initiative Black Box Theater",
+          "time": "4:45 PM",
+          "cost": "$25",
+          "url": "https://do215.com/events/2026/9/20/meat-cute-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Double feature of short plays examining the modern American meat industry and its toll on workers."
+        },
+        {
+          "title": "Dark Side Burlesque's Tales of Bra Sing Se: A Tribute to Avatar The Last Airbender",
+          "venue": "Franky Bradley's, 1320 Chancellor St, Philadelphia, PA 19107",
+          "time": "8:00 PM",
+          "cost": "$15-30; age 21+",
+          "url": "https://do215.com/events/2026/9/20/dark-side-burlesque-s-tales-of-bra-sing-se-a-tribute-to-avatar-the-last-airbender-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Avatar: The Last Airbender-themed burlesque and drag tribute at Franky Bradley's."
+        },
+        {
+          "title": "South Philly Food Co-op - Harvest Jawn 2026",
+          "venue": "South Philly Food Co Op",
+          "time": "12:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/9/20/south-philly-food-co-op-harvest-jawn-2026-tickets",
+          "category": "🌿 Markets & Outdoors",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "South Philly Food Co-op's third annual Harvest Jawn — food trucks, craft fair, live music, pie-eating contest. Free."
+        },
+        {
+          "title": "Zombied",
+          "venue": "Yellow Bicycle Theater",
+          "time": "6:30 PM",
+          "cost": "$16",
+          "url": "https://do215.com/events/2026/9/20/zombied-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Gothic supernatural thriller about bodily autonomy, framed through queer and disabled experience."
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-09-13T22:23:01"
+}
