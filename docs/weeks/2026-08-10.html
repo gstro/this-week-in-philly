@@ -6,7 +6,10 @@
   <title>This Week in Philadelphia — August 10–16, 2026</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; }
+    /* overflow-wrap inherits, so this one declaration keeps every long string
+       (venues carry full street addresses -- 130 chars is real) inside its
+       column instead of forcing the page to scroll sideways. */
+    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; overflow-wrap: break-word; }
 
     /* ── Header ── */
     .site-header { background: #111; width: 100%; }
@@ -15,6 +18,9 @@
     h1 { color: #fff; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
     h1 span { color: #c9a84c; }
     .subtitle { color: #888; font-size: 0.82rem; }
+    .header-playlist { margin-top: 0.6rem; font-size: 0.75rem; }
+    .header-playlist a { color: #c9a84c; text-decoration: none; }
+    .header-playlist a:hover { text-decoration: underline; }
 
     /* ── Content wrapper ── */
     .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
@@ -38,7 +44,10 @@
     .pick-name a:hover { text-decoration: underline; }
     .pick-name a.event-link { color: #fff; }
     .pick-why { color: #999; font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
-    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; }
+    /* max-width caps the flex-shrink: 0 column: a venue carrying a full street
+       address (130 chars is real) otherwise sizes to its own content and starves
+       .pick-main down to one letter per line. */
+    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
 
@@ -56,15 +65,14 @@
     .event-name a { color: inherit; text-decoration: none; }
     .event-name a:hover { text-decoration: underline; }
     .event-note { font-size: 0.73rem; color: #999; margin-top: 0.15rem; line-height: 1.4; }
-    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; }
+    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; max-width: 50%; }
     .event-venue { font-size: 0.78rem; font-weight: 700; color: #444; }
     .event-time { font-size: 0.7rem; color: #999; margin-top: 0.1rem; }
     .price-free { font-size: 0.7rem; color: #2d7a3a; }
     .price-paid { font-size: 0.7rem; color: #999; }
     .sold-out { font-size: 0.7rem; color: #c0392b; font-weight: 600; }
 
-    /* ── All Week table (unused by v2 -- CSS kept for spec fidelity; see
-       html_render.py's module docstring for why the table isn't rendered) ── */
+    /* ── All Week table ── */
     .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
     .allweek-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
     .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
@@ -73,11 +81,57 @@
     .allweek-table tr:last-child td { border-bottom: none; }
     .allweek-table td strong { color: #1c1c1c; }
 
+    .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
+
     /* ── Sources footer ── */
     .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
     .sources a { color: #bbb; text-decoration: none; }
     .sources a:hover { color: #888; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
+
+    /* ── Narrow screens ──
+       Every card above is a desktop flex row with a fixed-width, right-aligned
+       meta column (130px / 120px). Below ~600px those columns eat a third of a
+       phone screen and squeeze the title into a ribbon, so each card wraps its
+       meta column onto its own full-width line and left-aligns it. The All Week
+       table -- four columns, unfittable at 375px -- becomes stacked cards that
+       label themselves from the td data-label attributes. */
+    @media (max-width: 600px) {
+      .site-header-inner { padding: 1.1rem 1rem 1.2rem; }
+      h1 { font-size: 1.5rem; }
+      .content { padding: 1.35rem 1rem 2.5rem; }
+
+      .day-header { gap: 0.5rem; }
+      .day-date { font-size: 1.1rem; }
+
+      .top3-card { padding: 0.9rem 1rem; }
+      .top3-pick { flex-wrap: wrap; }
+      /* 1.85rem = .pick-num's 1.1rem min-width + .top3-pick's 0.75rem gap, so
+         the meta line hangs under the title rather than under the number. It has
+         to be padding, not margin: flex-basis 100% + a left margin would put the
+         venue 1.85rem past the card's right edge. */
+      .pick-meta { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; margin: 0.3rem 0 0; padding-left: 1.85rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      .pick-venue { flex-basis: 100%; }
+      .pick-time-cost { margin-top: 0; }
+
+      .event-card { flex-wrap: wrap; gap: 0.15rem; }
+      .event-right { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      /* Venue on its own line so the time and price below it don't read as a
+         continuation of the address. */
+      .event-venue { flex-basis: 100%; }
+      .event-time { margin-top: 0; }
+      /* :not(:empty) -- clean_cost() legitimately yields "" (53 of them in the
+         week of 2026-08-10 alone), and the separator must not dangle after the
+         time with no price behind it. */
+      .event-time + div:not(:empty)::before { content: "·"; color: #ccc; margin-right: 0.4rem; }
+
+      .allweek-table, .allweek-table tbody, .allweek-table tr, .allweek-table td { display: block; width: 100%; }
+      .allweek-table thead { display: none; }
+      .allweek-table tr { background: #fff; border-radius: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
+      .allweek-table td { border-bottom: none; padding: 0.1rem 0; }
+      .allweek-table td::before { content: attr(data-label) ": "; color: #999; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      .allweek-table td:first-child::before { content: none; }
+    }
   </style>
 </head>
 <body>
@@ -87,6 +141,7 @@
     <div class="eyebrow">Weekly Guide</div>
     <h1>This Week in <span>Philadelphia</span></h1>
     <div class="subtitle">August 10–16, 2026 &nbsp;·&nbsp; Compiled Sunday</div>
+    <div class="header-playlist"><a href="https://open.spotify.com/playlist/4s7G6VrnMQLAELu3Dbgrpv">♫ This week's picks on Spotify</a></div>
   </div>
 </header>
 
@@ -139,6 +194,17 @@
   <div class="cat-label">🎵 Music &amp; Concerts</div>
   <div class="event-card">
     <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/8/10/oneida-kinski-tickets">⭐ Oneida &amp; Kinski</a></div>
+      <div class="event-note">NYC noise-rock veterans Oneida play their 17th album alongside Kinski.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda&#39;s, Philadelphia, PA</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$25.65</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/10/the-monday-night-jam-session-hosted-by-richard-hill-jr-and-friends-tickets">The Monday Night Jam Session hosted by Richard Hill Jr. and Friends</a></div>
       <div class="event-note">Weekly jazz/soul jam session hosted by Richard Hill Jr. and friends at Black Squirrel Club.</div>
     </div>
@@ -157,17 +223,6 @@
       <div class="event-venue">Union Transfer, Philadelphia, PA</div>
       <div class="event-time">8:00 PM</div>
       <div class="price-paid"></div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/10/oneida-kinski-tickets">⭐ Oneida &amp; Kinski</a></div>
-      <div class="event-note">NYC noise-rock veterans Oneida play their 17th album alongside Kinski.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">Johnny Brenda&#39;s, Philadelphia, PA</div>
-      <div class="event-time">8:00 PM</div>
-      <div class="price-paid">$25.65</div>
     </div>
   </div>
 
@@ -211,17 +266,6 @@
   </div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/10/west-southwest-rising-community-meeting-tickets">West/Southwest Rising Community Meeting</a></div>
-      <div class="event-note">Monthly community meeting at Kol Tzedek building tenant and neighbor power in West/Southwest Philly; dinner provided.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">Kol Tzedek</div>
-      <div class="event-time">5:45 PM</div>
-      <div class="price-free">Free</div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/10/happy-hour-cinema-with-comrades-tickets">Happy Hour - Cinema with Comrades</a></div>
       <div class="event-note">Philly DSA&#39;s film-and-drinks social — casual hangout to talk favorite 2026 movies and their best anti-capitalist takedowns.</div>
     </div>
@@ -229,6 +273,17 @@
       <div class="event-venue">Glory Beer</div>
       <div class="event-time">6:00 PM</div>
       <div class="price-paid"></div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/8/10/west-southwest-rising-community-meeting-tickets">West/Southwest Rising Community Meeting</a></div>
+      <div class="event-note">Monthly community meeting at Kol Tzedek building tenant and neighbor power in West/Southwest Philly; dinner provided.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kol Tzedek</div>
+      <div class="event-time">5:45 PM</div>
+      <div class="price-free">Free</div>
     </div>
   </div>
 
@@ -282,7 +337,7 @@
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
-        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/8/11/pocket-dimensions-search-for-infinite-light-del-rossi-trio-kilynn-lunsford-tickets">Pocket Dimensions- Search for Infinite Light, Del Rossi Trio, Kilynn Lunsford</a></div>
+        <div class="pick-name">Pocket Dimensions- Search for Infinite Light, Del Rossi Trio, <a href="https://open.spotify.com/artist/6MeS4S0qKW7VVJoTH7Ecw1">Kilynn Lunsford</a></div>
         <div class="pick-why">A West Philly debut for the new Del Rossi Trio, a solo drone set from Search for the Infinite Light, and a rare solo-voice performance from Kilynn Lunsford — curated by Yoni Kroll in the intimate upstairs room at Abyssinia, with excellent Ethiopian food downstairs. $10–15, 21+, and about as far from a typical Tuesday as it gets.</div>
       </div>
       <div class="pick-meta">
@@ -319,17 +374,6 @@
   <div class="cat-label">🎵 Music &amp; Concerts</div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/11/not-just-jazz-free-music-concerts-tickets">Not just JAZZ free music concerts</a></div>
-      <div class="event-note">Free outdoor concert series at FDR Park&#39;s lakes; this week&#39;s set is Gumbo Nouveau.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">FDR Park, Philadelphia, PA</div>
-      <div class="event-time">6:00 PM</div>
-      <div class="price-free">Free</div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/11/pocket-dimensions-search-for-infinite-light-del-rossi-trio-kilynn-lunsford-tickets">⭐ Pocket Dimensions- Search for Infinite Light, Del Rossi Trio, Kilynn Lunsford</a></div>
       <div class="event-note">Drone, improv, and solo voice performances curated by Yoni Kroll at Upstairs Abyssinia.</div>
     </div>
@@ -337,6 +381,17 @@
       <div class="event-venue">Upstairs Abyssinia</div>
       <div class="event-time">7:30 PM</div>
       <div class="price-paid">$10-15, 21+</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/8/11/not-just-jazz-free-music-concerts-tickets">Not just JAZZ free music concerts</a></div>
+      <div class="event-note">Free outdoor concert series at FDR Park&#39;s lakes; this week&#39;s set is Gumbo Nouveau.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">FDR Park, Philadelphia, PA</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-free">Free</div>
     </div>
   </div>
   <div class="event-card">
@@ -354,23 +409,23 @@
   <div class="cat-label">📚 Literary</div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9yajhiOWg2c3MzY2QxbTZzcjMwYzFkNjRyamdkaGs2c3IzY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">✏️ The Writing Room</a></div>
-      <div class="event-note">Silent co-working writing sessions at Iffy Books — three 40-minute units with breaks.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
-      <div class="event-time">5:00 PM</div>
-      <div class="price-paid"></div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/11/rustin-s-challenge-reading-group-tickets">⭐ Rustin's Challenge Reading Group</a></div>
       <div class="event-note">Reading group on Bayard Rustin&#39;s economic vision, the organizer behind the March on Washington.</div>
     </div>
     <div class="event-right">
       <div class="event-venue">Philadelphia Ethical Society, Philadelphia, PA</div>
       <div class="event-time">6:00 PM</div>
+      <div class="price-paid"></div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9yajhiOWg2c3MzY2QxbTZzcjMwYzFkNjRyamdkaGs2c3IzY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">✏️ The Writing Room</a></div>
+      <div class="event-note">Silent co-working writing sessions at Iffy Books — three 40-minute units with breaks.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">5:00 PM</div>
       <div class="price-paid"></div>
     </div>
   </div>
@@ -530,23 +585,23 @@
   <div class="cat-label">🎬 Film &amp; Cinema</div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/12/la-notte-tickets">La Notte</a></div>
-      <div class="event-note">Antonioni&#39;s La Notte, part of PFS&#39;s Summer of Trilogies: Alienation Trilogy.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">Philadelphia Film Society</div>
-      <div class="event-time">7:00 PM</div>
-      <div class="price-paid"></div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/12/dekalog-parts-1-2-tickets">⭐ Dekalog: Parts 1 &amp; 2</a></div>
       <div class="event-note">Kieślowski&#39;s Dekalog, parts 1 &amp; 2, in a rare 4K theatrical run.</div>
     </div>
     <div class="event-right">
       <div class="event-venue">Philadelphia Film Society</div>
       <div class="event-time">7:30 PM</div>
+      <div class="price-paid"></div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/8/12/la-notte-tickets">La Notte</a></div>
+      <div class="event-note">Antonioni&#39;s La Notte, part of PFS&#39;s Summer of Trilogies: Alienation Trilogy.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia Film Society</div>
+      <div class="event-time">7:00 PM</div>
       <div class="price-paid"></div>
     </div>
   </div>
@@ -662,17 +717,6 @@
   <div class="cat-label">🎵 Music &amp; Concerts</div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/13/thu-aug-13-andrea-lisa-6-30pm-and-9-00pm-show-tickets">THU, AUG 13 | ANDRÉA LISA | 6:30pm and 9:00pm Show</a></div>
-      <div class="event-note">South African-born, New Zealand-raised vocalist blending soul, jazz, and R&amp;B; two sets.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">SOUTH Jazz Club (Unscripted Jazz), Philadelphia, PA</div>
-      <div class="event-time">6:30 PM</div>
-      <div class="price-paid">$40 and $35</div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/13/hail-the-sun-tickets">⭐ Hail The Sun</a></div>
       <div class="event-note">Progressive post-hardcore quartet Hail the Sun at Union Transfer.</div>
     </div>
@@ -680,6 +724,17 @@
       <div class="event-venue">Union Transfer, Philadelphia, PA</div>
       <div class="event-time">7:30 PM</div>
       <div class="price-paid"></div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/8/13/thu-aug-13-andrea-lisa-6-30pm-and-9-00pm-show-tickets">THU, AUG 13 | ANDRÉA LISA | 6:30pm and 9:00pm Show</a></div>
+      <div class="event-note">South African-born, New Zealand-raised vocalist blending soul, jazz, and R&amp;B; two sets.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">SOUTH Jazz Club (Unscripted Jazz), Philadelphia, PA</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">$40 and $35</div>
     </div>
   </div>
   <div class="event-card">
@@ -719,22 +774,22 @@
   <div class="cat-label">🎬 Film &amp; Cinema</div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/13/daughters-of-the-dust-tickets">Daughters Of The Dust</a></div>
-      <div class="event-note">Julie Dash&#39;s Daughters of the Dust, LA Rebellion landmark, in a rare theatrical screening.</div>
+      <div class="event-name"><a href="https://www.therotunda.org/event/two-films-from-chilean-director-sebastian-silva">⭐ BRIGHT BULB SCREENINGS, Free Screening Series pres. Two Films From Chilean Director Sebastián Silva! ROTTING IN THE SUN (2023, dir. Sebastián Silva, 109 min., Chile/Mexico) TYREL (2018, dir. Sebastián Silva 86 min. Chile/U.S.)</a></div>
+      <div class="event-note">Free double feature of two Sebastián Silva films at the Rotunda.</div>
     </div>
     <div class="event-right">
-      <div class="event-venue">Philadelphia Film Society</div>
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
       <div class="event-time">7:00 PM</div>
       <div class="price-paid"></div>
     </div>
   </div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://www.therotunda.org/event/two-films-from-chilean-director-sebastian-silva">⭐ BRIGHT BULB SCREENINGS, Free Screening Series pres. Two Films From Chilean Director Sebastián Silva! ROTTING IN THE SUN (2023, dir. Sebastián Silva, 109 min., Chile/Mexico) TYREL (2018, dir. Sebastián Silva 86 min. Chile/U.S.)</a></div>
-      <div class="event-note">Free double feature of two Sebastián Silva films at the Rotunda.</div>
+      <div class="event-name"><a href="https://do215.com/events/2026/8/13/daughters-of-the-dust-tickets">Daughters Of The Dust</a></div>
+      <div class="event-note">Julie Dash&#39;s Daughters of the Dust, LA Rebellion landmark, in a rare theatrical screening.</div>
     </div>
     <div class="event-right">
-      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-venue">Philadelphia Film Society</div>
       <div class="event-time">7:00 PM</div>
       <div class="price-paid"></div>
     </div>
@@ -812,7 +867,7 @@
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
-        <div class="pick-name"><a class="event-link" href="https://www.axs.com/events/1474781/circle-jerks-x-repo-man-tickets">REPO MAN X CIRCLE JERKS – Screening &amp; Performance</a></div>
+        <div class="pick-name"><a href="https://open.spotify.com/artist/2zGRmikZTswz8uBALilpbl">REPO MAN</a> X CIRCLE JERKS – Screening &amp; Performance</div>
         <div class="pick-why">Filmmaker Alex Cox is in attendance for a screening of his punk sci-fi classic Repo Man, followed by a live set from the actual Circle Jerks — LA hardcore royalty who&#39;ve been playing since 1979 and share a founding member with Black Flag. Doors 7, film and show 8; this is the rare night where the movie and the band are both the headliner.</div>
       </div>
       <div class="pick-meta">
@@ -849,6 +904,28 @@
   <div class="cat-label">🎵 Music &amp; Concerts</div>
   <div class="event-card">
     <div class="event-left">
+      <div class="event-name"><a href="https://www.axs.com/events/1474781/circle-jerks-x-repo-man-tickets">⭐ REPO MAN X CIRCLE JERKS – Screening &amp; Performance</a></div>
+      <div class="event-note">Alex Cox in attendance for Repo Man, followed by a live Circle Jerks set.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00, 8:00</div>
+      <div class="price-paid">$40–$110</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/fod-flag-of-democracy-anal-training-and-psychopomp">F.O.D. (FLAG OF DEMOCRACY), ANAL TRAINING &amp; PSYCHOPOMP</a></div>
+      <div class="event-note">Hardcore punk bill — F.O.D. (Flag of Democracy), Anal Training, Psychopomp — at DIY space Cousin Danny&#39;s.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Cousin Danny&#39;s (5001 Market Street)</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid"></div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/14/r-b-after-dark-presents-carla-gamble-tickets">R&amp;B After Dark Presents: CARLA GAMBLE</a></div>
       <div class="event-note">Philly-rooted R&amp;B/soul singer whose EP Soulsthetic pays direct homage to The Sound of Philadelphia.</div>
     </div>
@@ -871,17 +948,6 @@
   </div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://philly.askapunk.net/fod-flag-of-democracy-anal-training-and-psychopomp">F.O.D. (FLAG OF DEMOCRACY), ANAL TRAINING &amp; PSYCHOPOMP</a></div>
-      <div class="event-note">Hardcore punk bill — F.O.D. (Flag of Democracy), Anal Training, Psychopomp — at DIY space Cousin Danny&#39;s.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">Cousin Danny&#39;s (5001 Market Street)</div>
-      <div class="event-time">7:30 PM</div>
-      <div class="price-paid"></div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/14/player-one-the-mad-catz-an-interactive-video-game-jazz-experience-tickets">Player One &amp; The Mad Catz: An Interactive Video Game Jazz Experience</a></div>
       <div class="event-note">Philly&#39;s only video-game jazz fusion quintet plays retro soundtracks while you play retro games; free entry.</div>
     </div>
@@ -891,30 +957,8 @@
       <div class="price-paid"></div>
     </div>
   </div>
-  <div class="event-card">
-    <div class="event-left">
-      <div class="event-name"><a href="https://www.axs.com/events/1474781/circle-jerks-x-repo-man-tickets">⭐ REPO MAN X CIRCLE JERKS – Screening &amp; Performance</a></div>
-      <div class="event-note">Alex Cox in attendance for Repo Man, followed by a live Circle Jerks set.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
-      <div class="event-time">7:00, 8:00</div>
-      <div class="price-paid">$40–$110</div>
-    </div>
-  </div>
 
   <div class="cat-label">🎬 Film &amp; Cinema</div>
-  <div class="event-card">
-    <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/14/bright-future-tickets">Bright Future</a></div>
-      <div class="event-note">Kiyoshi Kurosawa&#39;s unsettling factory-worker friendship drama, part of PFS&#39;s Terror Trilogy series.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">Philadelphia Film Society</div>
-      <div class="event-time">9:15 PM</div>
-      <div class="price-paid"></div>
-    </div>
-  </div>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/14/pusher-tickets">⭐ Pusher</a></div>
@@ -923,6 +967,17 @@
     <div class="event-right">
       <div class="event-venue">Philadelphia Film Society</div>
       <div class="event-time">10:00 PM</div>
+      <div class="price-paid"></div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/8/14/bright-future-tickets">Bright Future</a></div>
+      <div class="event-note">Kiyoshi Kurosawa&#39;s unsettling factory-worker friendship drama, part of PFS&#39;s Terror Trilogy series.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia Film Society</div>
+      <div class="event-time">9:15 PM</div>
       <div class="price-paid"></div>
     </div>
   </div>
@@ -1014,6 +1069,17 @@
   <div class="cat-label">🎵 Music &amp; Concerts</div>
   <div class="event-card">
     <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/8/15/djsc-tickets">⭐ Djsc</a></div>
+      <div class="event-note">Philly&#39;s longest-running post-punk/darkwave/goth dance party, 15+ years strong.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kung Fu Necktie, Philadelphia, PA</div>
+      <div class="event-time">10:00 PM</div>
+      <div class="price-paid">$9.71</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
       <div class="event-name"><a href="https://philly.askapunk.net/punk-noise-gig-mctdb-fleshwound-frog-myst-syringehead-diskritik">Punk Noise Gig (MCTDB, Fleshwound, Frog Myst, Syringehead, Diskritik)</a></div>
       <div class="event-note">Crust/harsh noise/punk gig — MCTDB, Fleshwound, Frog Myst, Syringehead, Diskritik — at Cousin Danny&#39;s.</div>
     </div>
@@ -1032,17 +1098,6 @@
       <div class="event-venue">Beautiful World Syndicate (1619 E. Passyunk Ave)</div>
       <div class="event-time">7:00 PM</div>
       <div class="price-paid"></div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/15/djsc-tickets">⭐ Djsc</a></div>
-      <div class="event-note">Philly&#39;s longest-running post-punk/darkwave/goth dance party, 15+ years strong.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">Kung Fu Necktie, Philadelphia, PA</div>
-      <div class="event-time">10:00 PM</div>
-      <div class="price-paid">$9.71</div>
     </div>
   </div>
 
@@ -1177,7 +1232,7 @@
     <div class="top3-pick">
       <div class="pick-num">2</div>
       <div class="pick-main">
-        <div class="pick-name"><a class="event-link" href="https://philly.askapunk.net/skeksis-rva-nightfall-sediment-diskritik">SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK</a></div>
+        <div class="pick-name"><a href="https://open.spotify.com/artist/72Qd9lYXejCqsXmNDzfrqq">SKEKSIS</a> (RVA), NIGHTFALL, SEDIMENT, DISKRITIK</div>
         <div class="pick-why">Richmond crust/hardcore band Skeksis headlines a stacked DIY bill of hardcore punk at Cousin Danny&#39;s, with local support from Nightfall, Sediment, and Diskritik. No frills, no barrier, just a house-show-adjacent room and four bands that mean it.</div>
       </div>
       <div class="pick-meta">
@@ -1203,17 +1258,6 @@
   <div class="cat-label">🎵 Music &amp; Concerts</div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/16/christone-kingfish-ingram-tickets">Christone "Kingfish" Ingram</a></div>
-      <div class="event-note">Grammy-nominated blues guitar phenom closes out the Concerts Under the Stars series in King of Prussia.</div>
-    </div>
-    <div class="event-right">
-      <div class="event-venue">Upper Merion Township Building Park, King of Prussia, PA</div>
-      <div class="event-time">6:00 PM</div>
-      <div class="price-paid">$36-$80, 0+</div>
-    </div>
-  </div>
-  <div class="event-card">
-    <div class="event-left">
       <div class="event-name"><a href="https://philly.askapunk.net/skeksis-rva-nightfall-sediment-diskritik">⭐ SKEKSIS (RVA), NIGHTFALL, SEDIMENT, DISKRITIK</a></div>
       <div class="event-note">Hardcore/crust bill — Skeksis (RVA), Nightfall, Sediment, Diskritik — at Cousin Danny&#39;s.</div>
     </div>
@@ -1223,19 +1267,19 @@
       <div class="price-paid"></div>
     </div>
   </div>
-
-  <div class="cat-label">🎬 Film &amp; Cinema</div>
   <div class="event-card">
     <div class="event-left">
-      <div class="event-name"><a href="https://do215.com/events/2026/8/16/dekalog-parts-3-4-tickets">Dekalog: Parts 3 &amp; 4</a></div>
-      <div class="event-note">Kieślowski&#39;s Dekalog continues — an affair confronted on Christmas Eve, and a daughter questioning her bond with her father.</div>
+      <div class="event-name"><a href="https://do215.com/events/2026/8/16/christone-kingfish-ingram-tickets">Christone "Kingfish" Ingram</a></div>
+      <div class="event-note">Grammy-nominated blues guitar phenom closes out the Concerts Under the Stars series in King of Prussia.</div>
     </div>
     <div class="event-right">
-      <div class="event-venue">Philadelphia Film Society</div>
-      <div class="event-time">4:00 PM</div>
-      <div class="price-paid"></div>
+      <div class="event-venue">Upper Merion Township Building Park, King of Prussia, PA</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">$36-$80, 0+</div>
     </div>
   </div>
+
+  <div class="cat-label">🎬 Film &amp; Cinema</div>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/8/16/killer-of-sheep-tickets">⭐ Killer Of Sheep</a></div>
@@ -1244,6 +1288,17 @@
     <div class="event-right">
       <div class="event-venue">Philadelphia Film Society</div>
       <div class="event-time">6:30 PM</div>
+      <div class="price-paid"></div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/8/16/dekalog-parts-3-4-tickets">Dekalog: Parts 3 &amp; 4</a></div>
+      <div class="event-note">Kieślowski&#39;s Dekalog continues — an affair confronted on Christmas Eve, and a daughter questioning her bond with her father.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia Film Society</div>
+      <div class="event-time">4:00 PM</div>
       <div class="price-paid"></div>
     </div>
   </div>

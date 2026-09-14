@@ -6,7 +6,10 @@
   <title>This Week in Philadelphia — September 7–13, 2026</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; }
+    /* overflow-wrap inherits, so this one declaration keeps every long string
+       (venues carry full street addresses -- 130 chars is real) inside its
+       column instead of forcing the page to scroll sideways. */
+    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; overflow-wrap: break-word; }
 
     /* ── Header ── */
     .site-header { background: #111; width: 100%; }
@@ -15,6 +18,9 @@
     h1 { color: #fff; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
     h1 span { color: #c9a84c; }
     .subtitle { color: #888; font-size: 0.82rem; }
+    .header-playlist { margin-top: 0.6rem; font-size: 0.75rem; }
+    .header-playlist a { color: #c9a84c; text-decoration: none; }
+    .header-playlist a:hover { text-decoration: underline; }
 
     /* ── Content wrapper ── */
     .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
@@ -38,7 +44,10 @@
     .pick-name a:hover { text-decoration: underline; }
     .pick-name a.event-link { color: #fff; }
     .pick-why { color: #999; font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
-    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; }
+    /* max-width caps the flex-shrink: 0 column: a venue carrying a full street
+       address (130 chars is real) otherwise sizes to its own content and starves
+       .pick-main down to one letter per line. */
+    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
 
@@ -56,7 +65,7 @@
     .event-name a { color: inherit; text-decoration: none; }
     .event-name a:hover { text-decoration: underline; }
     .event-note { font-size: 0.73rem; color: #999; margin-top: 0.15rem; line-height: 1.4; }
-    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; }
+    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; max-width: 50%; }
     .event-venue { font-size: 0.78rem; font-weight: 700; color: #444; }
     .event-time { font-size: 0.7rem; color: #999; margin-top: 0.1rem; }
     .price-free { font-size: 0.7rem; color: #2d7a3a; }
@@ -79,6 +88,50 @@
     .sources a { color: #bbb; text-decoration: none; }
     .sources a:hover { color: #888; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
+
+    /* ── Narrow screens ──
+       Every card above is a desktop flex row with a fixed-width, right-aligned
+       meta column (130px / 120px). Below ~600px those columns eat a third of a
+       phone screen and squeeze the title into a ribbon, so each card wraps its
+       meta column onto its own full-width line and left-aligns it. The All Week
+       table -- four columns, unfittable at 375px -- becomes stacked cards that
+       label themselves from the td data-label attributes. */
+    @media (max-width: 600px) {
+      .site-header-inner { padding: 1.1rem 1rem 1.2rem; }
+      h1 { font-size: 1.5rem; }
+      .content { padding: 1.35rem 1rem 2.5rem; }
+
+      .day-header { gap: 0.5rem; }
+      .day-date { font-size: 1.1rem; }
+
+      .top3-card { padding: 0.9rem 1rem; }
+      .top3-pick { flex-wrap: wrap; }
+      /* 1.85rem = .pick-num's 1.1rem min-width + .top3-pick's 0.75rem gap, so
+         the meta line hangs under the title rather than under the number. It has
+         to be padding, not margin: flex-basis 100% + a left margin would put the
+         venue 1.85rem past the card's right edge. */
+      .pick-meta { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; margin: 0.3rem 0 0; padding-left: 1.85rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      .pick-venue { flex-basis: 100%; }
+      .pick-time-cost { margin-top: 0; }
+
+      .event-card { flex-wrap: wrap; gap: 0.15rem; }
+      .event-right { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      /* Venue on its own line so the time and price below it don't read as a
+         continuation of the address. */
+      .event-venue { flex-basis: 100%; }
+      .event-time { margin-top: 0; }
+      /* :not(:empty) -- clean_cost() legitimately yields "" (53 of them in the
+         week of 2026-08-10 alone), and the separator must not dangle after the
+         time with no price behind it. */
+      .event-time + div:not(:empty)::before { content: "·"; color: #ccc; margin-right: 0.4rem; }
+
+      .allweek-table, .allweek-table tbody, .allweek-table tr, .allweek-table td { display: block; width: 100%; }
+      .allweek-table thead { display: none; }
+      .allweek-table tr { background: #fff; border-radius: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
+      .allweek-table td { border-bottom: none; padding: 0.1rem 0; }
+      .allweek-table td::before { content: attr(data-label) ": "; color: #999; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      .allweek-table td:first-child::before { content: none; }
+    }
   </style>
 </head>
 <body>
@@ -88,6 +141,7 @@
     <div class="eyebrow">Weekly Guide</div>
     <h1>This Week in <span>Philadelphia</span></h1>
     <div class="subtitle">September 7–13, 2026 &nbsp;·&nbsp; Compiled Sunday</div>
+    <div class="header-playlist"><a href="https://open.spotify.com/playlist/6Jzl0s4L4Hcgr6b2P2546f">♫ This week's picks on Spotify</a></div>
   </div>
 </header>
 
@@ -114,7 +168,7 @@
     <div class="top3-pick">
       <div class="pick-num">2</div>
       <div class="pick-main">
-        <div class="pick-name"><a class="event-link" href="https://philly.askapunk.net/animated-violence-cali-early-grave-krot-first-show">ANIMATED VIOLENCE (Cali), EARLY GRAVE,  KROT (FIRST SHOW)</a></div>
+        <div class="pick-name"><a href="https://open.spotify.com/artist/4kpEm6atHT9uZIQA19o9Vt">ANIMATED VIOLENCE</a> (Cali), EARLY GRAVE,  KROT (FIRST SHOW)</div>
         <div class="pick-why">A stacked hardcore bill at a DIY spot that doesn&#39;t show up on the usual aggregators — Animated Violence, Early Grave, and Krot trading sets in what&#39;s billed as the first of two Courtyard shows this week. This is the unglamorous, ears-ringing end of the punk spectrum that&#39;s easy to miss if you&#39;re not already plugged into the scene. *(confirm details — exact neighborhood and full address aren&#39;t given by the listing; check the venue&#39;s socials before heading out.)*</div>
       </div>
       <div class="pick-meta">
@@ -477,7 +531,7 @@
     <div class="top3-pick">
       <div class="pick-num">3</div>
       <div class="pick-main">
-        <div class="pick-name"><a class="event-link" href="https://philly.askapunk.net/gay-cum-daddies-denton-sweepers-good-pollution-gr3yboy">Gay Cum Daddies (Denton) / Sweepers / Good Pollution / Gr3yboy</a></div>
+        <div class="pick-name"><a href="https://open.spotify.com/artist/6IuqF1yRbN4UXOAI8LvRNO">Gay Cum Daddies</a> (Denton) / Sweepers / Good Pollution / Gr3yboy</div>
         <div class="pick-why">An experimental/noise-rock/punk bill at a West Philly house venue — four bands built around feedback and dissonance rather than hooks. This is the kind of show that only exists because someone&#39;s willing to run a PA out of their living room. Baltimore Ave near 42nd St, in the Cedar Park corridor near University City.</div>
       </div>
       <div class="pick-meta">
@@ -963,7 +1017,7 @@
     <div class="top3-pick">
       <div class="pick-num">2</div>
       <div class="pick-main">
-        <div class="pick-name"><a class="event-link" href="https://philly.askapunk.net/evil-sword-happpy-accccdent">EVIL SWORD / HAPPPY ACCCCDENT</a></div>
+        <div class="pick-name"><a href="https://open.spotify.com/artist/0jjiHZrSzHB5ep4ZjOpZHa">EVIL SWORD</a> / HAPPPY ACCCCDENT</div>
         <div class="pick-why">Tagged &#34;experimental / goblin / nightmare / noise rock / puppet show&#34; by the show&#39;s own listing, which tells you most of what you need to know — unhinged, handmade, and not going to look or sound like anything else this week. North Broad Street; the Broad Street Line&#39;s Spring Garden stop is a few blocks south.</div>
       </div>
       <div class="pick-meta">
@@ -1270,30 +1324,30 @@
   <!-- ALL WEEK / RECURRING -->
   <div class="allweek-label">All Week / Recurring</div>
   <table class="allweek-table">
-    <tr><th>Event</th><th>Venue</th><th>This week</th><th>Price</th></tr>
+    <thead><tr><th>Event</th><th>Venue</th><th>This week</th><th>Price</th></tr></thead>
     <tr>
-      <td><strong>Highlights of the Museum</strong></td>
-      <td>Philadelphia Art Museum, 2600 Benjamin Franklin Pkwy, Philadelphia, PA 19130</td>
-      <td>Mon, Thu, Sun</td>
-      <td>Free with museum admission. Reservations not required.</td>
+      <td data-label="Event"><strong>Highlights of the Museum</strong></td>
+      <td data-label="Venue">Philadelphia Art Museum, 2600 Benjamin Franklin Pkwy, Philadelphia, PA 19130</td>
+      <td data-label="This week">Mon, Thu, Sun</td>
+      <td data-label="Price">Free with museum admission. Reservations not required.</td>
     </tr>
     <tr>
-      <td><strong>Kramer / Fauci</strong></td>
-      <td>FringeArts, 140 N Christopher Columbus Blvd, Philadelphia, PA 19106</td>
-      <td>Tue, Wed, Thu, Fri</td>
-      <td>$50</td>
+      <td data-label="Event"><strong>Kramer / Fauci</strong></td>
+      <td data-label="Venue">FringeArts, 140 N Christopher Columbus Blvd, Philadelphia, PA 19106</td>
+      <td data-label="This week">Tue, Wed, Thu, Fri</td>
+      <td data-label="Price">$50</td>
     </tr>
     <tr>
-      <td><strong>Anarchy!</strong></td>
-      <td>Icebox Project Space Gallery</td>
-      <td>Tue, Wed, Sat</td>
-      <td>$25</td>
+      <td data-label="Event"><strong>Anarchy!</strong></td>
+      <td data-label="Venue">Icebox Project Space Gallery</td>
+      <td data-label="This week">Tue, Wed, Sat</td>
+      <td data-label="Price">$25</td>
     </tr>
     <tr>
-      <td><strong>Experiencing Esherick Tour</strong></td>
-      <td>Wharton Esherick Museum, 1520 Horseshoe Trail, Malvern, PA 19355</td>
-      <td>Wed, Thu, Fri, Sun</td>
-      <td>Not listed</td>
+      <td data-label="Event"><strong>Experiencing Esherick Tour</strong></td>
+      <td data-label="Venue">Wharton Esherick Museum, 1520 Horseshoe Trail, Malvern, PA 19355</td>
+      <td data-label="This week">Wed, Thu, Fri, Sun</td>
+      <td data-label="Price">Not listed</td>
     </tr>
   </table>
 
