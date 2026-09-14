@@ -26,6 +26,40 @@ Example: `this-week-in-philadelphia-jun08-jun14-2026.html`
 
 ---
 
+## Responsive Behaviour
+
+Every card in this spec is a desktop flex row with a fixed-width, right-aligned
+meta column. Those columns need two guards, both in `templates/report.html.j2`:
+
+**At every width** — the meta columns (`.pick-meta`, `.event-right`) are
+`flex-shrink: 0`, so they size to their own content. Venue strings carry full
+street addresses (130 characters is real, unshortened by design), which on
+desktop starved the title column down to one letter per line. They are capped at
+`max-width: 50%`, and `body` sets `overflow-wrap: break-word` (it inherits) so no
+single long token can force the page wider than the viewport.
+
+**Below `600px`** (`@media (max-width: 600px)`) — each card wraps its meta column
+onto its own full-width line, left-aligned, and drops the `max-width` cap:
+
+- `.top3-pick` / `.event-card` gain `flex-wrap: wrap`; `.pick-meta` /
+  `.event-right` get `flex-basis: 100%`, `text-align: left`. `.pick-meta` is
+  indented `1.85rem` (`.pick-num`'s `1.1rem` + the row's `0.75rem` gap) so it
+  hangs under the title, not under the number.
+- Venue takes its own line within the meta block; time and price sit beneath it
+  on one line, separated by a `·` pseudo-element.
+- The All Week table becomes stacked cards: `thead` hidden, each `tr` a white
+  card, each `td` a block labelled from its `data-label` attribute. (This is the
+  spec's one piece of required markup beyond the table itself — the `<td>`s must
+  carry `data-label="Event|Venue|This week|Price"`.)
+- Type and padding tighten: `h1` to `1.5rem`, header/content side padding to
+  `1rem`, `.day-date` to `1.1rem`.
+
+The gate is horizontal overflow, not appearance: at 320/375/390/414/768/1024 px,
+`document.documentElement.scrollWidth` must not exceed `clientWidth`. Before this
+section existed, a 320px viewport rendered a 755px-wide page.
+
+---
+
 ## Day Header
 
 ```html

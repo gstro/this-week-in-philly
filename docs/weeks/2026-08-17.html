@@ -6,7 +6,10 @@
   <title>This Week in Philadelphia — August 17–23, 2026</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; }
+    /* overflow-wrap inherits, so this one declaration keeps every long string
+       (venues carry full street addresses -- 130 chars is real) inside its
+       column instead of forcing the page to scroll sideways. */
+    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; overflow-wrap: break-word; }
 
     /* ── Header ── */
     .site-header { background: #111; width: 100%; }
@@ -15,6 +18,9 @@
     h1 { color: #fff; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
     h1 span { color: #c9a84c; }
     .subtitle { color: #888; font-size: 0.82rem; }
+    .header-playlist { margin-top: 0.6rem; font-size: 0.75rem; }
+    .header-playlist a { color: #c9a84c; text-decoration: none; }
+    .header-playlist a:hover { text-decoration: underline; }
 
     /* ── Content wrapper ── */
     .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
@@ -38,7 +44,10 @@
     .pick-name a:hover { text-decoration: underline; }
     .pick-name a.event-link { color: #fff; }
     .pick-why { color: #999; font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
-    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; }
+    /* max-width caps the flex-shrink: 0 column: a venue carrying a full street
+       address (130 chars is real) otherwise sizes to its own content and starves
+       .pick-main down to one letter per line. */
+    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
 
@@ -56,15 +65,14 @@
     .event-name a { color: inherit; text-decoration: none; }
     .event-name a:hover { text-decoration: underline; }
     .event-note { font-size: 0.73rem; color: #999; margin-top: 0.15rem; line-height: 1.4; }
-    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; }
+    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; max-width: 50%; }
     .event-venue { font-size: 0.78rem; font-weight: 700; color: #444; }
     .event-time { font-size: 0.7rem; color: #999; margin-top: 0.1rem; }
     .price-free { font-size: 0.7rem; color: #2d7a3a; }
     .price-paid { font-size: 0.7rem; color: #999; }
     .sold-out { font-size: 0.7rem; color: #c0392b; font-weight: 600; }
 
-    /* ── All Week table (unused by v2 -- CSS kept for spec fidelity; see
-       html_render.py's module docstring for why the table isn't rendered) ── */
+    /* ── All Week table ── */
     .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
     .allweek-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
     .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
@@ -73,11 +81,57 @@
     .allweek-table tr:last-child td { border-bottom: none; }
     .allweek-table td strong { color: #1c1c1c; }
 
+    .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
+
     /* ── Sources footer ── */
     .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
     .sources a { color: #bbb; text-decoration: none; }
     .sources a:hover { color: #888; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
+
+    /* ── Narrow screens ──
+       Every card above is a desktop flex row with a fixed-width, right-aligned
+       meta column (130px / 120px). Below ~600px those columns eat a third of a
+       phone screen and squeeze the title into a ribbon, so each card wraps its
+       meta column onto its own full-width line and left-aligns it. The All Week
+       table -- four columns, unfittable at 375px -- becomes stacked cards that
+       label themselves from the td data-label attributes. */
+    @media (max-width: 600px) {
+      .site-header-inner { padding: 1.1rem 1rem 1.2rem; }
+      h1 { font-size: 1.5rem; }
+      .content { padding: 1.35rem 1rem 2.5rem; }
+
+      .day-header { gap: 0.5rem; }
+      .day-date { font-size: 1.1rem; }
+
+      .top3-card { padding: 0.9rem 1rem; }
+      .top3-pick { flex-wrap: wrap; }
+      /* 1.85rem = .pick-num's 1.1rem min-width + .top3-pick's 0.75rem gap, so
+         the meta line hangs under the title rather than under the number. It has
+         to be padding, not margin: flex-basis 100% + a left margin would put the
+         venue 1.85rem past the card's right edge. */
+      .pick-meta { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; margin: 0.3rem 0 0; padding-left: 1.85rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      .pick-venue { flex-basis: 100%; }
+      .pick-time-cost { margin-top: 0; }
+
+      .event-card { flex-wrap: wrap; gap: 0.15rem; }
+      .event-right { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      /* Venue on its own line so the time and price below it don't read as a
+         continuation of the address. */
+      .event-venue { flex-basis: 100%; }
+      .event-time { margin-top: 0; }
+      /* :not(:empty) -- clean_cost() legitimately yields "" (53 of them in the
+         week of 2026-08-10 alone), and the separator must not dangle after the
+         time with no price behind it. */
+      .event-time + div:not(:empty)::before { content: "·"; color: #ccc; margin-right: 0.4rem; }
+
+      .allweek-table, .allweek-table tbody, .allweek-table tr, .allweek-table td { display: block; width: 100%; }
+      .allweek-table thead { display: none; }
+      .allweek-table tr { background: #fff; border-radius: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
+      .allweek-table td { border-bottom: none; padding: 0.1rem 0; }
+      .allweek-table td::before { content: attr(data-label) ": "; color: #999; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      .allweek-table td:first-child::before { content: none; }
+    }
   </style>
 </head>
 <body>
@@ -87,6 +141,7 @@
     <div class="eyebrow">Weekly Guide</div>
     <h1>This Week in <span>Philadelphia</span></h1>
     <div class="subtitle">August 17–23, 2026 &nbsp;·&nbsp; Compiled Sunday</div>
+    <div class="header-playlist"><a href="https://open.spotify.com/playlist/5u3LQGHP3MWMZ454pttGPi">♫ This week's picks on Spotify</a></div>
   </div>
 </header>
 
@@ -124,7 +179,7 @@
     <div class="top3-pick">
       <div class="pick-num">3</div>
       <div class="pick-main">
-        <div class="pick-name"><a class="event-link" href="https://philly.askapunk.net/fraternal-twin-x-ditch-x-lo-fives-x-wax-girl">Fraternal Twin x Ditch x Lo Fives x Wax Girl</a></div>
+        <div class="pick-name"><a href="https://open.spotify.com/artist/3Q9iGL0GMpQIIr9iZKo8wQ">Fraternal Twin</a> x Ditch x Lo Fives x Wax Girl</div>
         <div class="pick-why">A DIY garage-rock/shoegaze bill at Cousin Danny&#39;s, the scrappy West Philly lounge that punches above its size for touring indie acts. Fraternal Twin and Ditch are passing through on a broader tour (they&#39;d just played Pittsburgh), backed by locals Lo Fives and Wax Girl — a genuinely easy-to-miss weeknight show off the big-venue circuit.</div>
       </div>
       <div class="pick-meta">
@@ -1008,7 +1063,7 @@
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
-        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/8/22/benefit-show-w-godcaster-fib-taurus-judge-more-tickets">Benefit Show w/ Godcaster, Fib, Taurus Judge, &amp; More!</a></div>
+        <div class="pick-name">Benefit Show w/ <a href="https://open.spotify.com/artist/0Vk7eJGOn9jys3qDnSPzaZ">Godcaster</a>, Fib, Taurus Judge, &amp; More!</div>
         <div class="pick-why">A five-band, all-ages benefit show at the Ukie Club — the Ukrainian American Citizens&#39; Association&#39;s basement DIY room in Northern Liberties — with every dollar going to Savage Sisters, the Kensington harm-reduction org. Godcaster headline; Fib, Null, Taurus Judge, and Sodaseas round out the bill. Punk as mutual aid, not just a genre.</div>
       </div>
       <div class="pick-meta">
