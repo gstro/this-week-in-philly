@@ -336,6 +336,33 @@ def test_top3_pick_keeps_its_cost_when_not_sold_out() -> None:
     assert pick["time_display"] == "8:00 PM"
 
 
+def test_day_viewmodel_slug_is_the_weekday() -> None:
+    """A report covers exactly one Mon-Sun span, so the weekday is unique
+    within the page -- and "#saturday" survives being typed from memory in a
+    way an ISO date doesn't."""
+    assert hr.build_day_viewmodel(_one_pick_day(), {})["slug"] == "monday"
+
+
+def test_day_index_count_is_the_true_count_before_the_display_cap() -> None:
+    """The day index is the one place stating real scale, so it counts what
+    Selection listed, not what the cap left standing."""
+    day = _one_pick_day()
+    day["events"] = [
+        {
+            "title": f"Event {i}",
+            "url": "https://example.com",
+            "venue": "V",
+            "category": "🎵 Music & Concerts",
+            "time": "8:00 PM",
+            "cost": "",
+        }
+        for i in range(hr.CATEGORY_DISPLAY_CAP + 3)
+    ]
+    view = hr.build_day_viewmodel(day, {})
+    assert view["event_count"] == hr.CATEGORY_DISPLAY_CAP + 3
+    assert len(view["categories"][0]["events"]) == hr.CATEGORY_DISPLAY_CAP
+
+
 def test_top3_pick_gets_a_map_link_only_when_it_has_an_address() -> None:
     with_address = hr.build_day_viewmodel(
         _one_pick_day(address="404 S. 20th St., Philadelphia, PA 19146"), {}

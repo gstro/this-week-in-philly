@@ -26,6 +26,46 @@ Example: `this-week-in-philadelphia-jun08-jun14-2026.html`
 
 ---
 
+## Colour Tokens and Dark Mode
+
+Every colour in `templates/report.html.j2` is a custom property on `:root`, so
+`@media (prefers-color-scheme: dark)` restates the palette and nothing else.
+System preference only — no toggle, matching `templates/index.html.j2`.
+
+Dark is **not** a mechanical inversion. In light, the Top 3 card is the darkest
+thing on a pale page; inverting that would sink it into the background, so in
+dark it becomes the most *elevated* surface instead — page `#1a1815` < event
+card `#26231f` < Top 3 card `#2e2a25` — keeping "raised means important" true in
+both themes. The gold accent (`--gold`) lightens to `#d7b75f` to hold up
+against the darker ground.
+
+Every foreground/background pair in the **dark** palette clears WCAG AA (4.5:1),
+measured rather than eyeballed. The light palette does not and is otherwise
+unchanged here; a contrast pass over it is its own slice. The one light value
+this spec moved is `--feature-meta` (`.pick-time-cost`), which was `#666` on the
+`#1c1c1c` card — 2.97:1, the only outright unreadable pair — and is now `#848484`
+at 4.56:1, still dimmer than `--feature-why` so the card's hierarchy holds.
+
+---
+
+## Day Index
+
+A zero-JS `<nav class="day-index">` directly below the header: one link per day,
+`#<weekday>` (lowercased, e.g. `#saturday`), each followed by that day's event
+count. Each `.day-header` carries the matching `id`.
+
+The weekday is the anchor rather than the ISO date because a report covers
+exactly one Mon–Sun span, so it's unique within the page and survives being
+typed from memory. The counts are **true counts, before the display cap** — this
+is the one place on the page that states real scale, which is why category
+headers don't repeat it.
+
+Deliberately not built: a sticky day bar or a back-to-top control. The page runs
+roughly 11 cards a day across 7 days; both would cost more than they return at
+that size.
+
+---
+
 ## Responsive Behaviour
 
 Every card in this spec is a desktop flex row with a fixed-width, right-aligned
@@ -144,9 +184,25 @@ Add a table at the bottom of the report for multi-day events spanning 3+ days.
 
 ## Sources Footer
 
-Centered, `0.7rem #bbb`, each source name linked to its URL:
+Centered, `0.7rem`, derived from the week's own events — **not** a fixed list.
+`html_render.py`'s `build_sources()` is the implementation.
 
-Do215 · Lightbox Film Center · cinéSPEAK · Philadelphia Film Society · PhilaMOCA · Phillygoth.net · Harriet's Bookshop · Iffy Books · Wooden Shoe Books · The Rotunda · R5 Productions · Free Library · Philadelphia Citizen · Philly Ask A Punk · The Key by WXPN · Meetup · Hive76 · Luma · Google Calendar
+- Every source in `SOURCES` renders every week, in that list's order. A source
+  that contributed carries its event count; one that was watched but silent is
+  dimmed (`--source-silent`) and carries no count. The footer used to be a
+  hardcoded list, which meant it claimed credit for sources that sent nothing
+  and stayed silent about ones that did.
+- Counts come from each event's `source` field, normalized by
+  `normalize_source_name()`. Three shapes matter, all of them real: an event
+  can name more than one source separated by **either** `/` or `,`
+  (`Do215 / WXPN`, `Do215, WXPN` — both credit both); Meetup arrives per-group
+  (`Meetup: Code & Coffee`) and collapses onto the single `Meetup` entry; and
+  `WXPN` is the publication `SOURCES` lists as `The Key by WXPN`.
+- A source that contributed but has no `SOURCES` entry renders **unlinked,
+  after the known list, never dropped**. This is the retired-source case
+  (`Songkick`, `Free Library`, `Hive76`, `Philadelphia Citizen`,
+  `Trakt.tv film releases`): they're absent from collection now but still
+  present in published weeks, which get re-rendered.
 
 If any sources failed during collection, append below the footer:
 ```html

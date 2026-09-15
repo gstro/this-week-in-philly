@@ -419,14 +419,23 @@ def build_day_viewmodel(day: dict, spotify: dict) -> dict:
             }
         )
 
+    categories = build_categories(day, top3_titles)
     return {
         "day_name": day["day_name"],
+        # Weekday, not the ISO date: a report covers exactly one Mon-Sun span,
+        # so "#saturday" is unambiguous within the page and survives being
+        # typed from memory in a way "#2026-09-19" doesn't.
+        "slug": day["day_name"].casefold(),
         "date_display": day_date.strftime("%B %-d"),
+        # The day index shows true counts, before the display cap: it's the one
+        # place on the page that states real scale, which is what made a "10 of
+        # 51 shown" suffix on every category header unnecessary.
+        "event_count": sum(category["true_count"] for category in categories),
         "top3": top3,
         "honorable_mentions_html": build_honorable_mentions_html(
             day.get("honorable_mentions", [])
         ),
-        "categories": build_categories(day, top3_titles),
+        "categories": categories,
     }
 
 
