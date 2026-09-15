@@ -49,7 +49,12 @@
        .pick-main down to one letter per line. */
     .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+    /* The listed-event .sold-out red (#c0392b) is tuned for white cards and
+       goes muddy on the #1c1c1c Top 3 card, so it lightens here. */
+    .pick-time-cost .sold-out { color: #e06a5c; font-size: inherit; }
 
     /* ── Honorable mentions ── */
     p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
@@ -84,9 +89,12 @@
     .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
-    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
-    .sources a { color: #bbb; text-decoration: none; }
-    .sources a:hover { color: #888; }
+    .sources { text-align: center; font-size: 0.7rem; color: #999; margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: #999; text-decoration: none; }
+    .sources a:hover { color: #666; }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: #c3bfb8; }
+    .source-count { color: #c3bfb8; font-size: 0.62rem; margin-left: 0.2rem; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
 
     /* ── Narrow screens ──
@@ -161,7 +169,7 @@
         <div class="pick-why">Learn to build a home page like it&#39;s 1999 — Ragman (Richard Green) walks you through the basics of HTML and gets you a static site live on Neocities by the end of the night. No experience necessary, and it&#39;s pay-what-you-can ($10–$25 suggested, no one turned away for lack of funds). It&#39;s the hands-on, unpretentious tech education that makes Iffy Books one of the city&#39;s best-kept secrets.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S+20th+St%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
         <div class="pick-time-cost">6:00 PM</div>
       </div>
     </div>
@@ -172,7 +180,7 @@
         <div class="pick-why">NYC noise-rock institution Oneida brings its 17th album, Expensive Air, to Johnny Brenda&#39;s alongside fellow genre-benders Kinski — two bands who&#39;ve spent decades proving a song can be pushed past its structure into something harder and stranger. $25.65, doors at 7.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Johnny Brenda&#39;s, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1201+Frankford+Ave%2C+Philadelphia%2C+PA+19125">Johnny Brenda&#39;s, Philadelphia, PA</a></div>
         <div class="pick-time-cost">8:00 PM · $25.65</div>
       </div>
     </div>
@@ -183,7 +191,7 @@
         <div class="pick-why">One PA&#39;s West/Southwest Rising throws its annual cookout in Malcolm X Park, building working-class power in West and Southwest Philly over free food and community. It&#39;s the rare organizing event that comes with dinner and a cookout instead of folding chairs in a church basement.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Malcolm X Park, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5100+Pine+St%2C+Philadelphia%2C+PA+19143">Malcolm X Park, Philadelphia, PA</a></div>
         <div class="pick-time-cost">5:30 PM · Free</div>
       </div>
     </div>
@@ -341,7 +349,7 @@
         <div class="pick-why">A West Philly debut for the new Del Rossi Trio, a solo drone set from Search for the Infinite Light, and a rare solo-voice performance from Kilynn Lunsford — curated by Yoni Kroll in the intimate upstairs room at Abyssinia, with excellent Ethiopian food downstairs. $10–15, 21+, and about as far from a typical Tuesday as it gets.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Upstairs Abyssinia</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=229+S+45th+St%2C+Philadelphia%2C+PA+19104">Upstairs Abyssinia</a></div>
         <div class="pick-time-cost">7:30 PM · $10-15, 21+</div>
       </div>
     </div>
@@ -352,7 +360,7 @@
         <div class="pick-why">A reading group digging into Bayard Rustin&#39;s ‘Freedom Budget for All Americans’ — the jobs-centric economic vision from the organizer who actually built the March on Washington that MLK spoke at. Free, discussion-driven, and a genuinely different angle on a civil rights figure most people only know from one speech.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Ethical Society, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1906+Rittenhouse+Square%2C+Philadelphia%2C+PA+19103">Philadelphia Ethical Society, Philadelphia, PA</a></div>
         <div class="pick-time-cost">6:00 PM</div>
       </div>
     </div>
@@ -363,7 +371,7 @@
         <div class="pick-why">A landlord&#39;s letter threatening to sell 925 affordable units in West and Southwest Philly to a private developer could displace thousands of tenants — this rally at City Hall demands the city and owner keep the properties affordable. Free, urgent, and exactly the kind of unglamorous fight that decides whether a neighborhood stays livable.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia City Hall, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1400+John+F+Kennedy+Blvd%2C+Philadelphia%2C+PA+19107">Philadelphia City Hall, Philadelphia, PA</a></div>
         <div class="pick-time-cost">1:00 PM · Free</div>
       </div>
     </div>
@@ -506,7 +514,7 @@
         <div class="pick-why">Build a tiny solar-powered square-wave synth on a breadboard — no soldering required, just a $12.50 kit and curiosity. It&#39;s DIY electronics at its most playful, the kind of low-stakes maker project that turns into a real skill by the end of the night.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S+20th+St%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
         <div class="pick-time-cost">10:30 AM</div>
       </div>
     </div>
@@ -517,7 +525,7 @@
         <div class="pick-why">Kieślowski&#39;s towering ten-part meditation on the Ten Commandments gets a rare 4K theatrical run, two parts at a time. Parts 1 and 2 open with a father questioning faith through his son&#39;s eyes and a woman torn between a dying husband and an unborn child — as intimate and devastating as cinema gets.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+St%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">7:30 PM</div>
       </div>
     </div>
@@ -528,7 +536,7 @@
         <div class="pick-why">Philly DSA canvasses West Philly for Chris Rabb, a democratic socialist running for PA-03 on universal healthcare, childcare, and abolishing ICE. No experience needed — new canvassers get trained and paired with a partner, then there&#39;s a debrief hang after.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Kingsessing Recreation Center</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5140+Chester+Ave%2C+Philadelphia%2C+PA+19143">Kingsessing Recreation Center</a></div>
         <div class="pick-time-cost">6:00 PM</div>
       </div>
     </div>
@@ -684,7 +692,7 @@
         <div class="pick-why">A touring showcase of horror shorts directed, written, or produced by women and non-binary filmmakers, with festival founder Sara Neidorf in attendance. It&#39;s horror without the usual victim-camera-fantasy math — messier, weirder, and told from the other side of the knife.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · $14.52</div>
       </div>
     </div>
@@ -695,7 +703,7 @@
         <div class="pick-why">A free double feature of Chilean director Sebastián Silva&#39;s Rotting in the Sun and Tyrel at the Rotunda, one of the city&#39;s great free/PWYW film venues. Two hours of uncomfortable, funny, formally sharp filmmaking for the price of showing up.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
         <div class="pick-time-cost">7:00 PM</div>
       </div>
     </div>
@@ -706,7 +714,7 @@
         <div class="pick-why">Progressive post-hardcore quartet Hail the Sun bring their intricate, high-energy sound to Union Transfer — a band that built a decade-plus career on refusing to just scream through intense emotion when a melody would hit harder.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Union Transfer, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1026+Spring+Garden+St%2C+Philadelphia%2C+PA+19123">Union Transfer, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM</div>
       </div>
     </div>
@@ -871,7 +879,7 @@
         <div class="pick-why">Filmmaker Alex Cox is in attendance for a screening of his punk sci-fi classic Repo Man, followed by a live set from the actual Circle Jerks — LA hardcore royalty who&#39;ve been playing since 1979 and share a founding member with Black Flag. Doors 7, film and show 8; this is the rare night where the movie and the band are both the headliner.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=291+N+Keswick+Ave%2C+Glenside%2C+PA+19038">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">8:00 PM · $40–$110</div>
       </div>
     </div>
@@ -882,7 +890,7 @@
         <div class="pick-why">The Red Rabbis run their monthly De-Escalation 101 at Wooden Shoe Books, teaching practical tools for staying grounded and co-regulating through conflict on the ground. Built for organizers and public workers alike; masks required and provided, free.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">7:00 PM</div>
       </div>
     </div>
@@ -893,7 +901,7 @@
         <div class="pick-why">Nicolas Winding Refn&#39;s guerrilla 1996 debut — and Mads Mikkelsen&#39;s first-ever feature — gets a brand-new 4K restoration as the opener of PFS&#39;s full Pusher trilogy retrospective. Copenhagen&#39;s underworld has rarely looked this grimy or this good.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+St%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">10:00 PM</div>
       </div>
     </div>
@@ -1036,7 +1044,7 @@
         <div class="pick-why">An interactive training on tenant rights and what to actually do in the face of eviction, hosted at Philly&#39;s anarchist bookstore. Practical, free, and the kind of skill-building that matters far more than another rally.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">2:00 PM</div>
       </div>
     </div>
@@ -1047,7 +1055,7 @@
         <div class="pick-why">The self-described world&#39;s largest traveling oddities show rolls into Oaks with taxidermy, preserved specimens, quack medical devices, skulls, and handmade horror-inspired art from vendors who take the weird seriously. Everything&#39;s legal and sustainably sourced — a full day for anyone who&#39;d rather browse bone jewelry than a mall.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Greater Philadelphia Expo Center at Oaks, Oaks, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=100+Station+Ave%2C+Oaks%2C+PA+19456">Greater Philadelphia Expo Center at Oaks, Oaks, PA</a></div>
         <div class="pick-time-cost">10:00 AM</div>
       </div>
     </div>
@@ -1058,7 +1066,7 @@
         <div class="pick-why">Philly&#39;s #1 post-punk party for over 15 years — Depeche Mode, Joy Division, New Order, The Smiths, The Cure, and everything post-punk/darkwave/goth adjacent, spun to a packed dance floor with free pretzels while they last. $7 advance, $10 at the door, 10pm start.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Kung Fu Necktie, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1248+N+Front+St%2C+Philadelphia%2C+PA+19122">Kung Fu Necktie, Philadelphia, PA</a></div>
         <div class="pick-time-cost">10:00 PM · $9.71</div>
       </div>
     </div>
@@ -1225,7 +1233,7 @@
         <div class="pick-why">Charles Burnett&#39;s landmark 1978 portrait of a working-class Black man&#39;s life in 1970s LA, blending cinéma vérité with Italian neorealism, gets a rare 4K theatrical screening as part of PFS&#39;s LA Rebellion series. One of the most quietly devastating films in American independent cinema, and not one that plays theaters often.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+St%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">6:30 PM</div>
       </div>
     </div>
@@ -1236,7 +1244,7 @@
         <div class="pick-why">Richmond crust/hardcore band Skeksis headlines a stacked DIY bill of hardcore punk at Cousin Danny&#39;s, with local support from Nightfall, Sediment, and Diskritik. No frills, no barrier, just a house-show-adjacent room and four bands that mean it.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Cousin Danny&#39;s (5001 Market Street)</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5001+Market+St%2C+Philadelphia%2C+PA+19139">Cousin Danny&#39;s (5001 Market Street)</a></div>
         <div class="pick-time-cost">7:00 PM</div>
       </div>
     </div>
@@ -1247,7 +1255,7 @@
         <div class="pick-why">Blood Sick Underground Cinema premieres director Kasper Meltedhair&#39;s aggressively strange no-budget sci-fi at PhilaMOCA, the city&#39;s home for underground and outsider film. Come for the plot synopsis alone — it will not make more sense after you&#39;ve seen it, and that&#39;s the point.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · $14.52</div>
       </div>
     </div>
@@ -1368,22 +1376,22 @@
 
   <!-- SOURCES FOOTER -->
   <div class="sources">
-    <a href="https://do215.com">Do215</a> ·
-    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a> ·
-    <a href="https://cinesp.net">cinéSPEAK</a> ·
-    <a href="https://filmadelphia.org">Philadelphia Film Society</a> ·
-    <a href="https://philamoca.org">PhilaMOCA</a> ·
-    <a href="https://phillygoth.net">Phillygoth.net</a> ·
-    <a href="https://www.philly-shows.com">Philly-Shows.com</a> ·
-    <a href="https://iffybooks.net">Iffy Books</a> ·
-    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a> ·
-    <a href="https://therotunda.org">The Rotunda</a> ·
-    <a href="https://r5productions.com">R5 Productions</a> ·
-    <a href="https://philly.askapunk.net">Philly Ask A Punk</a> ·
-    <a href="https://xpn.org">The Key by WXPN</a> ·
-    <a href="https://meetup.com">Meetup</a> ·
-    <a href="https://lu.ma">Luma</a> ·
-    <a href="https://calendar.google.com">Google Calendar</a>
+    <a href="https://do215.com">Do215</a><span class="source-count">49</span> ·
+    <a href="https://lightboxfilmcenter.org" class="source-silent">Lightbox Film Center</a> ·
+    <a href="https://cinesp.net">cinéSPEAK</a><span class="source-count">1</span> ·
+    <a href="https://filmadelphia.org" class="source-silent">Philadelphia Film Society</a> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">1</span> ·
+    <a href="https://phillygoth.net">Phillygoth.net</a><span class="source-count">1</span> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">10</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">2</span> ·
+    <a href="https://therotunda.org">The Rotunda</a><span class="source-count">4</span> ·
+    <a href="https://r5productions.com" class="source-silent">R5 Productions</a> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">4</span> ·
+    <a href="https://xpn.org">The Key by WXPN</a><span class="source-count">1</span> ·
+    <a href="https://meetup.com">Meetup</a><span class="source-count">1</span> ·
+    <a href="https://lu.ma">Luma</a><span class="source-count">1</span> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a>
   </div>
 
 </div>

@@ -49,7 +49,12 @@
        .pick-main down to one letter per line. */
     .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+    /* The listed-event .sold-out red (#c0392b) is tuned for white cards and
+       goes muddy on the #1c1c1c Top 3 card, so it lightens here. */
+    .pick-time-cost .sold-out { color: #e06a5c; font-size: inherit; }
 
     /* ── Honorable mentions ── */
     p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
@@ -84,9 +89,12 @@
     .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
-    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
-    .sources a { color: #bbb; text-decoration: none; }
-    .sources a:hover { color: #888; }
+    .sources { text-align: center; font-size: 0.7rem; color: #999; margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: #999; text-decoration: none; }
+    .sources a:hover { color: #666; }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: #c3bfb8; }
+    .source-count { color: #c3bfb8; font-size: 0.62rem; margin-left: 0.2rem; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
 
     /* ── Narrow screens ──
@@ -161,7 +169,7 @@
         <div class="pick-why">PhilaMOCA&#39;s Psychotronic Film Society hits its regular first/third-Monday slot with a night of deliberately deranged programming — the kind of gonzo, grindhouse-adjacent bill you won&#39;t find at a multiplex. It&#39;s $5 at the door, no advance ticket needed, in the tiny mausoleum-turned-microcinema on N. 12th St. The exact film is kept loose by design (the venue just warns of &#39;extreme subject matter&#39;) — part of the appeal is not knowing until you&#39;re in the seat.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">7:30 PM · $5 At Door</div>
       </div>
     </div>
@@ -172,7 +180,7 @@
         <div class="pick-why">A standing first-and-third-Monday hangout for trans and non-binary people (plus partners and allies) at Iffy Books, the anarchist bookstore that&#39;s become one of the city&#39;s steadiest queer-community anchors. No RSVP, no cover — just snacks, coffee, and a room built explicitly to be safe. Small and recurring, but exactly the kind of low-visibility community infrastructure that&#39;s easy to overlook and worth knowing about.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St.%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -183,7 +191,7 @@
         <div class="pick-why">A DIY garage-rock/shoegaze bill at Cousin Danny&#39;s, the scrappy West Philly lounge that punches above its size for touring indie acts. Fraternal Twin and Ditch are passing through on a broader tour (they&#39;d just played Pittsburgh), backed by locals Lo Fives and Wax Girl — a genuinely easy-to-miss weeknight show off the big-venue circuit.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Cousin Danny&#39;s (5001 Market Street)</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5001+Market+St%2C+Philadelphia%2C+PA+19139">Cousin Danny&#39;s (5001 Market Street)</a></div>
         <div class="pick-time-cost">7:30 PM · Not listed</div>
       </div>
     </div>
@@ -326,7 +334,7 @@
         <div class="pick-why">Cursive frontman Tim Kasher&#39;s directorial feature gets a rare theatrical stop at PhilaMOCA — an advance screening of his psychological horror-thriller &#39;Who&#39;s Watching,&#39; about a metalhead&#39;s obsessive fixation on a coworker, ahead of its wider September release. Kasher sticks around after for a Q&amp;A and a short acoustic set, which is the real reason to go: a one-night convergence of horror-film-nerd and indie-rock-fan Philly, not something you can catch next month. $17 at the tiny mausoleum-turned-microcinema on N. 12th St.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">7:30 PM · $17</div>
       </div>
     </div>
@@ -337,7 +345,7 @@
         <div class="pick-why">Vancouver&#39;s Black Pontiac bring their self-described &#39;DIY or die&#39; melodic garage-rock and indie-pop to Ortlieb&#39;s, with Sunderstar and Philly&#39;s own Noshows opening. A real touring bill at a real Northern Liberties room, not a hometown filler night. $20.55, 21+, doors at 8.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Ortlieb&#39;s, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=847+North+3rd+Street%2C+Philadelphia%2C+PA+19123">Ortlieb&#39;s, Philadelphia, PA</a></div>
         <div class="pick-time-cost">8:00 PM · $20.55, 21+</div>
       </div>
     </div>
@@ -348,7 +356,7 @@
         <div class="pick-why">A free, in-person discussion of &#39;Rustin&#39;s Challenge&#39; — the book reframing Bayard Rustin, the organizer who actually built the March on Washington, around his &#39;Freedom Budget for All Americans&#39; — led with Paul Prescod at the Ethical Society. Political education in the same lineage as Wooden Shoe&#39;s ed line: history read for what it can teach an organizing movement right now, not trivia about a famous speech.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Ethical Society, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1906+Rittenhouse+Square%2C+Philadelphia%2C+PA+19103">Philadelphia Ethical Society, Philadelphia, PA</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -535,7 +543,7 @@
         <div class="pick-why">Dave Zirin&#39;s new biography of Howard Zinn gets a stop at Wooden Shoe, the city&#39;s anarchist bookstore and the natural home for it — &#39;The People&#39;s Historian&#39; traces how the author of &#39;A People&#39;s History of the United States&#39; became one of the 20th century&#39;s defining radical intellectuals. Exactly the kind of political-education programming Wooden Shoe&#39;s ed line exists for: history read as a toolkit, not nostalgia.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -546,7 +554,7 @@
         <div class="pick-why">Philly DSA canvasses West Philly for Chris Rabb, the democratic-socialist candidate running for PA-03 on universal healthcare, childcare, and abolishing ICE. No experience required — new canvassers get trained and paired with a partner, then the group debriefs together after. Direct electoral organizing, and a chance to talk to actual neighbors about actual policy.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Kingsessing Recreation Center</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4901+Kingsessing+Ave%2C+Philadelphia%2C+PA+19143">Kingsessing Recreation Center</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -557,7 +565,7 @@
         <div class="pick-why">Kieślowski&#39;s Dekalog — ten hour-long films loosely built around the Ten Commandments, among the towering achievements of world cinema — gets a rare theatrical run at the Film Society Center, screened two parts a night across a special series (tonight: 3 &amp; 4, in a 4K restoration). Not a streaming-queue watch: genuinely different on a big screen, and not a presentation you&#39;ll see return soon.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+St%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">7:30 PM · Not listed</div>
       </div>
     </div>
@@ -711,7 +719,7 @@
         <div class="pick-why">Charles Burnett&#39;s 1978 landmark of Black independent cinema — a loose, lyrical portrait of a slaughterhouse worker in 1970s Watts — gets a rare 4K theatrical screening as part of the Film Society Center&#39;s LA Rebellion series. One of the foundational texts of American independent film, and it essentially never plays theatrically; a genuine chance to see it as intended, not on a laptop.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+St%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -722,7 +730,7 @@
         <div class="pick-why">A hands-on, no-experience-required soldering class at Iffy Books: you leave with a working rechargeable battery pack for a microcontroller project (ESP32, Pi Pico, LoRa node), not just notes. $3.99 for the kit plus your own battery — about as low-stakes as DIY electronics gets, and exactly the kind of practical-skills programming that makes Iffy Books more than just a bookstore.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St.%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
         <div class="pick-time-cost">2:30 PM · Not listed</div>
       </div>
     </div>
@@ -733,7 +741,7 @@
         <div class="pick-why">A free, no-cover queer social mixer built specifically for trans, non-binary, and gender non-conforming Philadelphians, running Thursdays at Tattooed Mom. &#39;We won&#39;t be erased. We&#39;ve always been here&#39; — community space as its own quiet political statement, not a themed party.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Tattooed Moms, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=530+South+St%2C+Philadelphia%2C+PA+19147">Tattooed Moms, Philadelphia, PA</a></div>
         <div class="pick-time-cost">6:00 PM · Free</div>
       </div>
     </div>
@@ -911,7 +919,7 @@
         <div class="pick-why">DC215&#39;s monthly Third-Friday lockpicking night returns to Wooden Shoe Books — bring your own picks or borrow a set, no experience needed, novices and seasoned safecrackers side by side. The kind of hands-on, no-gatekeeping skill-share that fits Wooden Shoe&#39;s whole ethos: knowledge as something you&#39;re handed, not sold.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -922,7 +930,7 @@
         <div class="pick-why">Philly&#39;s own purveyors of hot jazz and vaudeville revive the Black Squirrel Club&#39;s speakeasy bones with a set of Roaring Twenties and pre-war swing. Come early — doors are pushed up to 5:30 for a World Cup match on the back-room TV — and stay for a band that treats the genre as a living thing, not a museum piece. $18.50 advance, $20 at the door.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Black Squirrel Club, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1049+Sarah+St%2C+Philadelphia%2C+PA+19125">Black Squirrel Club, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · $0-$25</div>
       </div>
     </div>
@@ -933,7 +941,7 @@
         <div class="pick-why">Free closing celebration for the Association of African American Museums&#39; national conference, marking 50 years since AAMP became the first museum built and funded by a major U.S. city specifically to preserve Black history. Expect a performance from the Marian Anderson Choir and an interactive AAMP Disruption showcase — a genuinely rare night where the museum itself is the event, not just the backdrop.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The African American Museum in Philadelphia, Philadelphia, Pe</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=701+Arch+St%2C+Philadelphia%2C+PA+19106">The African American Museum in Philadelphia, Philadelphia, Pe</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -1067,7 +1075,7 @@
         <div class="pick-why">A five-band, all-ages benefit show at the Ukie Club — the Ukrainian American Citizens&#39; Association&#39;s basement DIY room in Northern Liberties — with every dollar going to Savage Sisters, the Kensington harm-reduction org. Godcaster headline; Fib, Null, Taurus Judge, and Sodaseas round out the bill. Punk as mutual aid, not just a genre.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Ukie Club, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=847+N+Franklin+St%2C+Philadelphia%2C+PA+19123">Ukie Club, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · $23.79</div>
       </div>
     </div>
@@ -1078,7 +1086,7 @@
         <div class="pick-why">Iffy Books tables at Highmark Mann&#39;s free, campus-wide 50th-anniversary community day — build a solar-powered synthesizer, learn open-source DJ software Mixxx, browse zines by donation — folded into a day of hands-on programming tracing pivotal moments in Philadelphia history. Free, family-friendly, and a rare chance to get DIY-electronics programming somewhere other than a bookstore basement.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Highmark Mann Center, 5201 Parkside Ave, Philadelphia, PA, 19131, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5201+Parkside+Ave%2C+Philadelphia%2C+PA+19131">Highmark Mann Center, 5201 Parkside Ave, Philadelphia, PA, 19131, United States</a></div>
         <div class="pick-time-cost">11:00 AM · Not listed</div>
       </div>
     </div>
@@ -1089,7 +1097,7 @@
         <div class="pick-why">The 4th annual Philadelphia Bookstore Crawl — nearly 60 independent shops across the city, one day only — closes out at Head &amp; The Hand with a 7pm panel of four debut authors: Samantha Paige Rosen, Yu-Mei Balasingamchow, Kat Stoddard, and Kim Narby. Hit any of the day&#39;s stops for stickers, discounts, and giveaways, but this is the one with a fixed time and an actual conversation.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Head &amp; The Hand Books, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2230+Frankford+Ave%2C+Philadelphia%2C+PA+19125">The Head &amp; The Hand Books, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -1245,7 +1253,7 @@
         <div class="pick-why">Luis Marrero&#39;s touring poetry open mic returns to the Loft at City Winery — a raffle-style open mic, a spotlight performance, a featured poet, a live DJ, and a painter working in real time, all built around storytelling and community rather than the venue&#39;s usual wine-list programming. A rare case of City Winery hosting something that isn&#39;t a legacy-act nostalgia tour.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">City Winery, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=990+Filbert+St%2C+Philadelphia%2C+PA+19107">City Winery, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -1256,7 +1264,7 @@
         <div class="pick-why">Faetooth call it &#39;fairy-doom metal&#39; — doom and sludge slowed down further, shot through with shoegaze haze and post-metal weight, built around folklore and the uncanny. They&#39;ve been racking up real momentum (a KEXP session, a new headlining tour) without losing the DIY grime. All ages, $22-25.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Underground Arts, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1200+Callowhill+St%2C+Philadelphia%2C+PA+19107">Underground Arts, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · $22-$25, 0+</div>
       </div>
     </div>
@@ -1267,7 +1275,7 @@
         <div class="pick-why">The Columbus lo-fi legends who helped define the mid-2000s &#39;shitgaze&#39; scene — blown-out, tape-hiss noise pop that somehow still hits like a pop song — are back on the road. A genuine reunion-era rarity for anyone who spent 2008 with &#39;Rip It Off&#39; on repeat, at one of the city&#39;s best mid-size rooms.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Johnny Brenda&#39;s, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1201+Frankford+Ave%2C+Philadelphia%2C+PA+19125">Johnny Brenda&#39;s, Philadelphia, PA</a></div>
         <div class="pick-time-cost">8:00 PM · $27.65</div>
       </div>
     </div>
@@ -1395,22 +1403,23 @@
 
   <!-- SOURCES FOOTER -->
   <div class="sources">
-    <a href="https://do215.com">Do215</a> ·
-    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a> ·
-    <a href="https://cinesp.net">cinéSPEAK</a> ·
-    <a href="https://filmadelphia.org">Philadelphia Film Society</a> ·
-    <a href="https://philamoca.org">PhilaMOCA</a> ·
-    <a href="https://phillygoth.net">Phillygoth.net</a> ·
-    <a href="https://www.philly-shows.com">Philly-Shows.com</a> ·
-    <a href="https://iffybooks.net">Iffy Books</a> ·
-    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a> ·
-    <a href="https://therotunda.org">The Rotunda</a> ·
-    <a href="https://r5productions.com">R5 Productions</a> ·
-    <a href="https://philly.askapunk.net">Philly Ask A Punk</a> ·
-    <a href="https://xpn.org">The Key by WXPN</a> ·
-    <a href="https://meetup.com">Meetup</a> ·
-    <a href="https://lu.ma">Luma</a> ·
-    <a href="https://calendar.google.com">Google Calendar</a>
+    <a href="https://do215.com">Do215</a><span class="source-count">48</span> ·
+    <a href="https://lightboxfilmcenter.org" class="source-silent">Lightbox Film Center</a> ·
+    <a href="https://cinesp.net" class="source-silent">cinéSPEAK</a> ·
+    <a href="https://filmadelphia.org" class="source-silent">Philadelphia Film Society</a> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">5</span> ·
+    <a href="https://phillygoth.net" class="source-silent">Phillygoth.net</a> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">7</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">3</span> ·
+    <a href="https://therotunda.org">The Rotunda</a><span class="source-count">1</span> ·
+    <a href="https://r5productions.com" class="source-silent">R5 Productions</a> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">4</span> ·
+    <a href="https://xpn.org">The Key by WXPN</a><span class="source-count">2</span> ·
+    <a href="https://meetup.com">Meetup</a><span class="source-count">5</span> ·
+    <a href="https://lu.ma">Luma</a><span class="source-count">2</span> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a> ·
+    <span>Trakt.tv film releases</span><span class="source-count">1</span>
   </div>
   <p class="sources-failure">⚠️ cinespeak unavailable this week (HTTPError: 429 Client Error: Too Many Requests for url: https://cinespeak.org/cinema/) — events from that source may be missing.</p>
   <p class="sources-failure">⚠️ philly-shows unavailable this week (ParseError: no showblock elements found -- markup may have changed) — events from that source may be missing.</p>

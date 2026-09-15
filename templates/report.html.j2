@@ -49,7 +49,12 @@
        .pick-main down to one letter per line. */
     .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+    /* The listed-event .sold-out red (#c0392b) is tuned for white cards and
+       goes muddy on the #1c1c1c Top 3 card, so it lightens here. */
+    .pick-time-cost .sold-out { color: #e06a5c; font-size: inherit; }
 
     /* ── Honorable mentions ── */
     p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
@@ -84,9 +89,12 @@
     .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
-    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
-    .sources a { color: #bbb; text-decoration: none; }
-    .sources a:hover { color: #888; }
+    .sources { text-align: center; font-size: 0.7rem; color: #999; margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: #999; text-decoration: none; }
+    .sources a:hover { color: #666; }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: #c3bfb8; }
+    .source-count { color: #c3bfb8; font-size: 0.62rem; margin-left: 0.2rem; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
 
     /* ── Narrow screens ──
@@ -168,8 +176,8 @@
         <div class="pick-why">{{ pick.why }}</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">{{ pick.venue }}</div>
-        <div class="pick-time-cost">{{ pick.time_cost }}</div>
+        <div class="pick-venue">{% if pick.map_url %}<a href="{{ pick.map_url }}">{{ pick.venue }}</a>{% else %}{{ pick.venue }}{% endif %}</div>
+        <div class="pick-time-cost">{{ pick.time_display }}{% if pick.cost_text %} · {% if pick.sold_out %}<span class="sold-out">{{ pick.cost_text }}</span>{% else %}{{ pick.cost_text }}{% endif %}{% endif %}</div>
       </div>
     </div>
 {% endfor %}
@@ -221,7 +229,11 @@
   <!-- SOURCES FOOTER -->
   <div class="sources">
 {% for source in sources %}
-    <a href="{{ source.url }}">{{ source.name }}</a>{{ " ·" if not loop.last else "" }}
+{% if source.url %}
+    <a href="{{ source.url }}"{% if not source.count %} class="source-silent"{% endif %}>{{ source.name }}</a>{% if source.count %}<span class="source-count">{{ source.count }}</span>{% endif %}{{ " ·" if not loop.last else "" }}
+{% else %}
+    <span>{{ source.name }}</span><span class="source-count">{{ source.count }}</span>{{ " ·" if not loop.last else "" }}
+{% endif %}
 {% endfor %}
   </div>
 {% for failure in collection_failure_notes %}

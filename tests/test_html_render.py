@@ -199,6 +199,151 @@ def test_build_categories_marks_top3_events_with_star_prefix() -> None:
     assert "⭐ " in categories[0]["events"][0]["name_html"]
 
 
+# --- source normalization / derived footer ---
+#
+# Every shape asserted here was taken from the real archive, not invented:
+# `Do215 / WXPN` and `Do215, WXPN` both occur (two separators, same meaning),
+# six distinct `Meetup: <group>` values appear, and five retired sources still
+# sit in already-published weeks with no SOURCES entry to link them to.
+
+
+def test_split_source_field_splits_on_slash() -> None:
+    assert hr.split_source_field("Do215 / WXPN") == ["Do215", "WXPN"]
+
+
+def test_split_source_field_splits_on_comma() -> None:
+    assert hr.split_source_field("Do215, WXPN") == ["Do215", "WXPN"]
+
+
+def test_split_source_field_handles_three_way_attribution() -> None:
+    assert hr.split_source_field("Do215 / PhilaMOCA / R5 Productions") == [
+        "Do215",
+        "PhilaMOCA",
+        "R5 Productions",
+    ]
+
+
+def test_split_source_field_is_empty_for_a_missing_source() -> None:
+    assert hr.split_source_field(None) == []
+
+
+def test_normalize_source_name_collapses_every_meetup_group() -> None:
+    assert hr.normalize_source_name("Meetup: Code & Coffee") == "Meetup"
+    assert hr.normalize_source_name("Meetup: Philadelphia Horror") == "Meetup"
+
+
+def test_normalize_source_name_maps_wxpn_to_its_footer_name() -> None:
+    assert hr.normalize_source_name("WXPN") == "The Key by WXPN"
+
+
+def test_normalize_source_name_passes_through_an_unaliased_name() -> None:
+    assert hr.normalize_source_name("Iffy Books") == "Iffy Books"
+
+
+def _sources_by_name(days: list[dict]) -> dict[str, dict]:
+    return {row["name"]: row for row in hr.build_sources(days)}
+
+
+def test_build_sources_counts_a_contributor_and_leaves_silent_ones_at_zero() -> None:
+    days = [{"events": [{"source": "Iffy Books"}, {"source": "Iffy Books"}]}]
+    rows = _sources_by_name(days)
+    assert rows["Iffy Books"]["count"] == 2
+    assert rows["Do215"]["count"] == 0
+
+
+def test_build_sources_credits_both_halves_of_a_shared_attribution() -> None:
+    days = [{"events": [{"source": "Do215 / WXPN"}]}]
+    rows = _sources_by_name(days)
+    assert rows["Do215"]["count"] == 1
+    assert rows["The Key by WXPN"]["count"] == 1
+
+
+def test_build_sources_sums_meetup_groups_into_one_entry() -> None:
+    days = [
+        {
+            "events": [
+                {"source": "Meetup: Code & Coffee"},
+                {"source": "Meetup: DC 215"},
+            ]
+        }
+    ]
+    assert _sources_by_name(days)["Meetup"]["count"] == 2
+
+
+def test_build_sources_keeps_a_retired_source_unlinked_rather_than_dropping_it() -> None:
+    """Songkick was removed from SOURCES (bdc8a84) but still appears in the
+    published 2026-06-22 week. Dropping it would misreport that week just as
+    badly as the hardcoded list misreported this one."""
+    days = [{"events": [{"source": "Songkick"}]}]
+    row = _sources_by_name(days)["Songkick"]
+    assert row["count"] == 1
+    assert row["url"] is None
+
+
+def test_build_sources_lists_known_sources_before_retired_ones() -> None:
+    days = [{"events": [{"source": "Songkick"}, {"source": "Do215"}]}]
+    names = [row["name"] for row in hr.build_sources(days)]
+    assert names.index("Do215") < names.index("Songkick")
+    assert names[: len(hr.SOURCES)] == [name for name, _ in hr.SOURCES]
+
+
+# --- build_map_url ---
+
+
+def test_build_map_url_encodes_the_address() -> None:
+    assert hr.build_map_url("404 S. 20th St., Philadelphia, PA 19146") == (
+        "https://www.google.com/maps/search/?api=1&query="
+        "404+S.+20th+St.%2C+Philadelphia%2C+PA+19146"
+    )
+
+
+def test_build_map_url_is_none_without_an_address() -> None:
+    """2 of 21 picks in the golden week carry no address at all, and non-Top-3
+    events never do -- the venue has to render as plain text there."""
+    assert hr.build_map_url(None) is None
+    assert hr.build_map_url("   ") is None
+
+
+# --- Top 3 pick view model: sold-out and map link ---
+
+
+def _one_pick_day(**pick_overrides: object) -> dict:
+    pick = {
+        "rank": 1,
+        "title": "A Show",
+        "url": "https://example.com/show",
+        "why": "Because.",
+        "venue": "A Venue",
+        "time": "8:00 PM",
+        "cost": "$25",
+    }
+    pick.update(pick_overrides)
+    return {"date": "2026-06-22", "day_name": "Monday", "top3": [pick], "events": []}
+
+
+def test_top3_pick_shows_sold_out_instead_of_its_ticket_price() -> None:
+    """The same event in the day's category block already rendered SOLD OUT in
+    red; the pick above it advertised "$25" as though seats were left."""
+    pick = hr.build_day_viewmodel(_one_pick_day(sold_out=True), {})["top3"][0]
+    assert pick["sold_out"] is True
+    assert pick["cost_text"] == "SOLD OUT"
+
+
+def test_top3_pick_keeps_its_cost_when_not_sold_out() -> None:
+    pick = hr.build_day_viewmodel(_one_pick_day(), {})["top3"][0]
+    assert pick["sold_out"] is False
+    assert pick["cost_text"] == "$25"
+    assert pick["time_display"] == "8:00 PM"
+
+
+def test_top3_pick_gets_a_map_link_only_when_it_has_an_address() -> None:
+    with_address = hr.build_day_viewmodel(
+        _one_pick_day(address="404 S. 20th St., Philadelphia, PA 19146"), {}
+    )["top3"][0]
+    assert with_address["map_url"].startswith("https://www.google.com/maps/search/")
+    assert hr.build_day_viewmodel(_one_pick_day(), {})["top3"][0]["map_url"] is None
+
+
 # --- format_failure_note / format_date_range ---
 
 

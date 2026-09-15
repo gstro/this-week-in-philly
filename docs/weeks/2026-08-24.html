@@ -49,7 +49,12 @@
        .pick-main down to one letter per line. */
     .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+    /* The listed-event .sold-out red (#c0392b) is tuned for white cards and
+       goes muddy on the #1c1c1c Top 3 card, so it lightens here. */
+    .pick-time-cost .sold-out { color: #e06a5c; font-size: inherit; }
 
     /* ── Honorable mentions ── */
     p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
@@ -84,9 +89,12 @@
     .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
-    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
-    .sources a { color: #bbb; text-decoration: none; }
-    .sources a:hover { color: #888; }
+    .sources { text-align: center; font-size: 0.7rem; color: #999; margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: #999; text-decoration: none; }
+    .sources a:hover { color: #666; }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: #c3bfb8; }
+    .source-count { color: #c3bfb8; font-size: 0.62rem; margin-left: 0.2rem; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
 
     /* ── Narrow screens ──
@@ -161,7 +169,7 @@
         <div class="pick-why">PhilaMOCA screens Dust Devil, Richard Stanley&#39;s near-mythic 1992 desert horror about a shapeshifting serial killer stalking the South African wasteland — a film that spent decades in butchered cuts before its restoration made repertory bookings like this one possible. It&#39;s the kind of genre deep-cut that made PhilaMOCA&#39;s reputation, projected in a former mausoleum showroom instead of a multiplex. Doors 7:00 PM, film at 7:30 PM; $10.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">7:30 PM · $10</div>
       </div>
     </div>
@@ -183,7 +191,7 @@
         <div class="pick-why">Shaun Milli brings a soul voice with more depth than his age suggests to City Winery, ahead of a new album he&#39;s readying for 2026. He&#39;s framed his own project as a throughline to the soul and R&amp;B artists who came before him — a nod worth taking seriously in a city with Philadelphia International Records in its bones. Table service available; note the venue&#39;s dinner-show format if you just want the music.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">City Winery, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=990+Filbert+St%2C+Philadelphia%2C+PA+19107">City Winery, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · Not listed</div>
       </div>
     </div>
@@ -315,7 +323,7 @@
         <div class="pick-why">Esperanza Spalding — bassist, vocalist, and one of the defining jazz artists of her generation — plays an intimate three-piece set drawing from all eight of her albums plus a preview of new material. It&#39;s a rare small-room booking for an artist who usually fills much bigger stages, and 100% of proceeds go to PRISMID Sanctuary, an Indigenous- and Black-led eco-cultural nonprofit. Second and final night of a two-night run (also Aug 26).</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">City Winery, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=990+Filbert+St%2C+Philadelphia%2C+PA+19107">City Winery, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · Not listed</div>
       </div>
     </div>
@@ -326,7 +334,7 @@
         <div class="pick-why">A discussion group on Bayard Rustin&#39;s overlooked &#34;Freedom Budget for All Americans&#34; — the jobs-centric economic vision from the organizer who built the March on Washington but rarely gets credit for the ideas behind it. Led by Paul Prescod, it&#39;s political education in the literal sense: reading and arguing through an alternative to austerity politics, not just another lecture. Free, Rittenhouse Square.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Ethical Society, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1906+Rittenhouse+Square%2C+Philadelphia%2C+PA+19103">Philadelphia Ethical Society, Philadelphia, PA</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -337,7 +345,7 @@
         <div class="pick-why">Cursor Philly marks one year since its first meetup with an anniversary gathering at Indy Hall — from a small room talking about a new AI coding tool to one of the city&#39;s more active tech communities. Worth catching for the retrospective angle as much as the usual demos and networking. Northern Liberties: nearest stop is the Market-Frankford Line at Girard Ave, about a half-mile walk.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Indy Hall Clubhouse at 709 N 2nd St, 709 N 2nd St 3rd Floor, Philadelphia, PA 19123, USA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=709+N+2nd+St%2C+Philadelphia%2C+PA+19123">Indy Hall Clubhouse at 709 N 2nd St, 709 N 2nd St 3rd Floor, Philadelphia, PA 19123, USA</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -515,7 +523,7 @@
         <div class="pick-why">A stacked four-band DIY bill of grindcore, powerviolence, and death metal touches down at Cousin Danny&#39;s — Voidhammer down from LA, Harsh Realm from Asheville, plus locals Diuretic and Agonesiac. This is the unfiltered end of the punk/hardcore spectrum: no ticketing platform, no venue website, just a house-show-adjacent DIY space and a wall of noise. West Philadelphia past University City — nearest stop is 46th St on the Market-Frankford Line.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Cousin Dannys (5001 Market St)</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5001+Market+St%2C+Philadelphia%2C+PA+19139">Cousin Dannys (5001 Market St)</a></div>
         <div class="pick-time-cost">8:00 PM · Not listed</div>
       </div>
     </div>
@@ -526,7 +534,7 @@
         <div class="pick-why">The Philadelphia Film Society continues its Dekalog Special Series with parts 5 and 6 of Kieślowski&#39;s ten-part meditation on the Ten Commandments, screening in 4K — a defense attorney&#39;s crisis of conscience over a death-penalty case, paired with a teenager&#39;s obsessive fixation on his neighbor. Widely regarded as one of the towering achievements in film history, and a rare chance to see it as intended: on a big screen, in installments. Likely at PFS Film Society Center, based on the day&#39;s other PFS repertory booking.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+St%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">7:30 PM · Not listed</div>
       </div>
     </div>
@@ -715,7 +723,7 @@
         <div class="pick-why">Collide Zine presents &#34;Self Creation, Surplus Imagination&#34; with Stealing Time at Wooden Shoe Books — an anti-capitalist meditation on reclaiming time and imagination from wage work, in zine and discussion form. It&#39;s the anarchist bookstore&#39;s whole reason for being: political theory that isn&#39;t academic, delivered somewhere you can actually talk back. Free, South Street.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -726,7 +734,7 @@
         <div class="pick-why">Evil Pony Productions stages a burlesque tribute to punk music and culture, Riot Grrrl chapter — &#34;Girls to the Front&#34; made literal. It&#39;s a different register than a straight band show, but the same underlying culture: DIY, feminist, and built around a scene rather than a headliner. Northern Liberties — nearest stop is Girard on the Market-Frankford Line. $15.71-$23.18.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Ortlieb&#39;s, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=847+N+3rd+St%2C+Philadelphia%2C+PA+19123">Ortlieb&#39;s, Philadelphia, PA</a></div>
         <div class="pick-time-cost">8:00 PM · $15.71-$23.18</div>
       </div>
     </div>
@@ -737,7 +745,7 @@
         <div class="pick-why">Untitled Medical Collective and Philly SRA teach Bleeding Control Basics at Iffy Books — scene safety, injury assessment, and tourniquet application, the kind of street-medic skills mutual aid networks actually train on. No certification, just information they want as many people as possible to have. Face masks required.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S+20th+St%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -961,7 +969,7 @@
         <div class="pick-why">Kiyoshi Kurosawa&#39;s Cure (1997) closes out PFS&#39;s Terror Trilogy series in 4K — a detective drawn into a string of murders committed by seemingly ordinary people under a stranger&#39;s hypnotic influence. Kurosawa built his reputation turning modern Japan into a landscape of quiet dread, and this is the film critics point to first. Likely at PFS Film Society Center, based on other bookings under this venue listing.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+St%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">10:00 PM · Not listed</div>
       </div>
     </div>
@@ -972,7 +980,7 @@
         <div class="pick-why">Build a fully offline GPS unit at Iffy Books — a Pi Pico microcontroller, a GPS module, and a tiny OLED display, wired up in MicroPython to show your coordinates and the time with no internet or cell connection at all. It&#39;s DIY electronics at its most quietly radical: a gadget that works precisely because it can&#39;t be tracked, monetized, or bricked by a company&#39;s server going dark. Requires a ~$40-50 parts kit, purchased separately.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S+20th+St%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
         <div class="pick-time-cost">2:00 PM · Not listed</div>
       </div>
     </div>
@@ -1152,7 +1160,7 @@
         <div class="pick-why">Wooden Shoe Books hosts an initial interest meeting for a prisoner-correspondence penpal program serving LGBTQIA+ people currently incarcerated. No commitment required to attend — organizers will explain how the program works, and there&#39;s an option to write one-time letters to specific political prisoners if a long-term penpal relationship isn&#39;t feasible. Quiet, unglamorous solidarity work of exactly the kind that&#39;s easy to walk past.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">2:00 PM · Not listed</div>
       </div>
     </div>
@@ -1354,7 +1362,7 @@
         <div class="pick-why">Froggy — a Philly queer punk power trio who started as teenagers in 2020 — headline with New York&#39;s PLEASURE DEATH, a queer heavy-grunge duo, and The Angies. Froggy write punchy, melodic songs about the mundane and absurd parts of growing up (711 nachos gets a shoutout), channeling L7, Bikini Kill, and The Dead Milkmen without imitating them. Fishtown — nearest stop is Berks or Girard on the Market-Frankford Line.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Johnny Brenda&#39;s, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1201+N+Frankford+Ave%2C+Philadelphia%2C+PA+19125">Johnny Brenda&#39;s, Philadelphia, PA</a></div>
         <div class="pick-time-cost">8:00 PM · $22.90</div>
       </div>
     </div>
@@ -1376,7 +1384,7 @@
         <div class="pick-why">Eastern State Penitentiary&#39;s monthly ASL-interpreted guide-led tour pairs the site&#39;s history with a direct conversation about the role of prisons in society today — full ASL and voice interpretation, welcoming D/deaf, hard-of-hearing, and hearing visitors alike. A rare instance of an already-thoughtful historic-site tour built for genuine accessibility from the ground up. Fairmount — reachable via SEPTA bus (routes 7/32/48), roughly a 15-20 minute walk from the Spring Garden stop on the Broad Street Line.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Eastern State Penitentiary, Philadelphia, Pe</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2027+Fairmount+Ave%2C+Philadelphia%2C+PA+19130">Eastern State Penitentiary, Philadelphia, Pe</a></div>
         <div class="pick-time-cost">11:00 AM · Not listed</div>
       </div>
     </div>
@@ -1508,22 +1516,22 @@
 
   <!-- SOURCES FOOTER -->
   <div class="sources">
-    <a href="https://do215.com">Do215</a> ·
-    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a> ·
-    <a href="https://cinesp.net">cinéSPEAK</a> ·
-    <a href="https://filmadelphia.org">Philadelphia Film Society</a> ·
-    <a href="https://philamoca.org">PhilaMOCA</a> ·
-    <a href="https://phillygoth.net">Phillygoth.net</a> ·
-    <a href="https://www.philly-shows.com">Philly-Shows.com</a> ·
-    <a href="https://iffybooks.net">Iffy Books</a> ·
-    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a> ·
-    <a href="https://therotunda.org">The Rotunda</a> ·
-    <a href="https://r5productions.com">R5 Productions</a> ·
-    <a href="https://philly.askapunk.net">Philly Ask A Punk</a> ·
-    <a href="https://xpn.org">The Key by WXPN</a> ·
-    <a href="https://meetup.com">Meetup</a> ·
-    <a href="https://lu.ma">Luma</a> ·
-    <a href="https://calendar.google.com">Google Calendar</a>
+    <a href="https://do215.com">Do215</a><span class="source-count">70</span> ·
+    <a href="https://lightboxfilmcenter.org" class="source-silent">Lightbox Film Center</a> ·
+    <a href="https://cinesp.net" class="source-silent">cinéSPEAK</a> ·
+    <a href="https://filmadelphia.org">Philadelphia Film Society</a><span class="source-count">1</span> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">1</span> ·
+    <a href="https://phillygoth.net">Phillygoth.net</a><span class="source-count">1</span> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">7</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">3</span> ·
+    <a href="https://therotunda.org" class="source-silent">The Rotunda</a> ·
+    <a href="https://r5productions.com" class="source-silent">R5 Productions</a> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">3</span> ·
+    <a href="https://xpn.org" class="source-silent">The Key by WXPN</a> ·
+    <a href="https://meetup.com" class="source-silent">Meetup</a> ·
+    <a href="https://lu.ma">Luma</a><span class="source-count">1</span> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a>
   </div>
   <p class="sources-failure">⚠️ philly-shows unavailable this week (ParseError: no showblock elements found -- markup may have changed) — events from that source may be missing.</p>
 

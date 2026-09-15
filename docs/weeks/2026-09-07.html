@@ -49,7 +49,12 @@
        .pick-main down to one letter per line. */
     .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+    /* The listed-event .sold-out red (#c0392b) is tuned for white cards and
+       goes muddy on the #1c1c1c Top 3 card, so it lightens here. */
+    .pick-time-cost .sold-out { color: #e06a5c; font-size: inherit; }
 
     /* ── Honorable mentions ── */
     p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
@@ -84,9 +89,12 @@
     .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
-    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
-    .sources a { color: #bbb; text-decoration: none; }
-    .sources a:hover { color: #888; }
+    .sources { text-align: center; font-size: 0.7rem; color: #999; margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: #999; text-decoration: none; }
+    .sources a:hover { color: #666; }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: #c3bfb8; }
+    .source-count { color: #c3bfb8; font-size: 0.62rem; margin-left: 0.2rem; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
 
     /* ── Narrow screens ──
@@ -161,7 +169,7 @@
         <div class="pick-why">A discussion of the 2026 organizing pamphlet &#34;Naming the Moment: Revolutionary Strategy in a Time of Crisis,&#34; with project participant Matthew N. Lyons unpacking how an ad hoc group of radical organizers is thinking through resistance to the current administration. It&#39;s the kind of political-education night Wooden Shoe does better than almost anywhere else in the city — small room, serious conversation, free to attend.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -172,7 +180,7 @@
         <div class="pick-why">A stacked hardcore bill at a DIY spot that doesn&#39;t show up on the usual aggregators — Animated Violence, Early Grave, and Krot trading sets in what&#39;s billed as the first of two Courtyard shows this week. This is the unglamorous, ears-ringing end of the punk spectrum that&#39;s easy to miss if you&#39;re not already plugged into the scene. *(confirm details — exact neighborhood and full address aren&#39;t given by the listing; check the venue&#39;s socials before heading out.)*</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Courtyard (IYKYK)</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=IYKYK">The Courtyard (IYKYK)</a></div>
         <div class="pick-time-cost">8:00 PM · Not listed</div>
       </div>
     </div>
@@ -183,7 +191,7 @@
         <div class="pick-why">Joy Division and New Order&#39;s original bassist has spent over a decade touring his old bands&#39; catalog album by album, and this stop lands on the Substance-era material. It&#39;s about as close as anyone gets to hearing that low end played by the person who wrote it — post-punk history, not a tribute act.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Union Transfer, 1026 Spring Garden St., Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1026+Spring+Garden+St.%2C+Philadelphia%2C+PA+19123">Union Transfer, 1026 Spring Garden St., Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">8:00 PM · Not listed</div>
       </div>
     </div>
@@ -366,7 +374,7 @@
         <div class="pick-why">Social Distortion headlines a genuinely stacked punk bill with Descendents and The Chats — three generations of foundational and current punk in one room. Mike Ness and company rarely swing through on a night like this without an arena price tag attached. North Broad Street; the Broad Street Line&#39;s Girard Ave stop is a few blocks&#39; walk.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Met, 858 N Broad St, Philadelphia, PA 19130</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=858+N+Broad+St%2C+Philadelphia%2C+PA+19130">The Met, 858 N Broad St, Philadelphia, PA 19130</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -377,7 +385,7 @@
         <div class="pick-why">Philly Science Action and Green Philly are rallying to pressure Drexel into keeping the 200-year-old Academy of Natural Sciences open past this September — a genuinely time-sensitive fight to save an institution, not a recurring protest. On the Ben Franklin Parkway, about a 15-minute walk from Center City or reachable via the 32/38 bus.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Academy of Natural Sciences of Drexel University, 1900 Benjamin Franklin Pkwy, Philadelphia, PA 19103, USA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1900+Benjamin+Franklin+Pkwy%2C+Philadelphia%2C+PA+19103">The Academy of Natural Sciences of Drexel University, 1900 Benjamin Franklin Pkwy, Philadelphia, PA 19103, USA</a></div>
         <div class="pick-time-cost">10:00 AM · Not listed</div>
       </div>
     </div>
@@ -388,7 +396,7 @@
         <div class="pick-why">Nice Strong Arm were a foundational NYC noise-rock band in the &#39;80s underground, and this is a rare reunion date alongside Shadow Riot and Heavenly Bodies. If you like your rock abrasive and pedigreed, this is the show. Fishtown, at Frankford and Girard — a half-mile walk from the MFL&#39;s Girard station, or take the 15 trolley.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Johnny Brenda’s</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1201+Frankford+Ave%2C+Philadelphia%2C+PA+19125">Johnny Brenda’s</a></div>
         <div class="pick-time-cost">8:00 PM · $22.90</div>
       </div>
     </div>
@@ -524,7 +532,7 @@
         <div class="pick-why">Lightbox Film Center screens a new restoration of Elaine May&#39;s 1976 Mikey and Nicky, with Peter Falk and John Cassavetes improvising their way through one very bad night for a low-level mobster. It&#39;s one of the great underseen American films of the &#39;70s, and this is a rare chance to see it on a real screen. Right in Point Breeze, at the Bok Building.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=800+Mifflin+St%2C+Philadelphia%2C+PA+19148">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -535,7 +543,7 @@
         <div class="pick-why">An experimental/noise-rock/punk bill at a West Philly house venue — four bands built around feedback and dissonance rather than hooks. This is the kind of show that only exists because someone&#39;s willing to run a PA out of their living room. Baltimore Ave near 42nd St, in the Cedar Park corridor near University City.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Pouch (4215 Baltimore Ave Philadelphia)</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4215+Baltimore+Ave+Philadelphia">The Pouch (4215 Baltimore Ave Philadelphia)</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -688,7 +696,7 @@
         <div class="pick-why">People&#39;s Media Fund presents an evening of ritual and storytelling centered on diaspora communities reclaiming their own narratives — community-made media, not a lecture. The Rotunda&#39;s non-standing programming is consistently worth catching, and this is exactly the kind of one-off it exists for.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -710,7 +718,7 @@
         <div class="pick-why">The second of three sessions working through Jacques Ellul&#39;s The Technological Society, a founding text of tech-critical thought, hosted at Iffy Books — exactly the anarchist-bookstore-meets-hackerspace pairing of DIY-electronics skepticism and leftist politics this venue does best. Newcomers who missed part one are welcome; the group only asks that you come having read what&#39;s assigned.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
         <div class="pick-time-cost">6:30 PM · Not listed</div>
       </div>
     </div>
@@ -828,7 +836,7 @@
         <div class="pick-why">DC&#39;s storied post-hardcore outfit Shudder To Think — Dischord-adjacent art-punk that never sounded like anyone else in that scene — plays Philly&#39;s most important all-ages punk room. It&#39;s a genuinely rare stop for a band this influential and this infrequently touring.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">First Unitarian Church, 2125 Chestnut St, Philadelphia, PA 19103</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2125+Chestnut+St%2C+Philadelphia%2C+PA+19103">First Unitarian Church, 2125 Chestnut St, Philadelphia, PA 19103</a></div>
         <div class="pick-time-cost">8:00 PM · $42.29</div>
       </div>
     </div>
@@ -839,7 +847,7 @@
         <div class="pick-why">A queer, feminist, postcolonial reimagining of Sheridan Le Fanu&#39;s 1872 vampire novella Carmilla — the actors playing predator and prey swap roles each performance, keeping the power dynamic genuinely unstable rather than settled going in. Gothic horror with real literary bones, for one night only.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Plays and Players Skinner Studio</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1714+Delancey+St%2C+Philadelphia%2C+PA+19103">Plays and Players Skinner Studio</a></div>
         <div class="pick-time-cost">5:30 PM · $15</div>
       </div>
     </div>
@@ -850,7 +858,7 @@
         <div class="pick-why">A hands-on training in de-escalation practices for keeping each other safe at protests and in community spaces, run by the Red Rabbis every second Friday. This is skills-building, not a rally — practical organizing infrastructure that rarely gets its own event listing. Masks required and provided.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -1010,7 +1018,7 @@
         <div class="pick-why">A pay-as-you-wish, one-day DIY music and arts festival on Lemon Hill celebrating Philly&#39;s homegrown creative underground — the anti-corporate, community-run answer to the city&#39;s bigger ticketed festivals. In East Fairmount Park; no direct train service, but SEPTA bus 32 runs along Kelly Drive nearby, or it&#39;s about a mile walk or bike up from the Art Museum.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Lemon Hill, 1 Lemon Hill Drive, Philadelphia, PA 19130</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1+Lemon+Hill+Drive%2C+Philadelphia%2C+PA+19130">Lemon Hill, 1 Lemon Hill Drive, Philadelphia, PA 19130</a></div>
         <div class="pick-time-cost">12:00 PM · Not listed</div>
       </div>
     </div>
@@ -1021,7 +1029,7 @@
         <div class="pick-why">Tagged &#34;experimental / goblin / nightmare / noise rock / puppet show&#34; by the show&#39;s own listing, which tells you most of what you need to know — unhinged, handmade, and not going to look or sound like anything else this week. North Broad Street; the Broad Street Line&#39;s Spring Garden stop is a few blocks south.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Space 1026 (844 N. Broad Street)</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=844+N.+Broad+Street">Space 1026 (844 N. Broad Street)</a></div>
         <div class="pick-time-cost">8:00 PM · Not listed</div>
       </div>
     </div>
@@ -1032,7 +1040,7 @@
         <div class="pick-why">A hardcore/punk triple bill at PhilaMOCA, the city&#39;s best small room for exactly this kind of night — Death Lens headlining their &#34;What&#39;s Left Now?&#34; tour with Destiny Bond and Nave in support. Loud, cheap, and a few blocks from Chinatown.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N.+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">8:00 PM · $22.22</div>
       </div>
     </div>
@@ -1174,7 +1182,7 @@
         <div class="pick-why">A DC hardcore supergroup built from members of Dag Nasty, Girls Against Boys, and Government Issue, playing the kind of tight, riff-forward hardcore that made that scene matter in the first place. In Northern Liberties; the MFL&#39;s Spring Garden or Girard station is about a half-mile walk, or take the 57 bus.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Ortlieb&#39;s, 847 N 3rd St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=847+N+3rd+St%2C+Philadelphia%2C+PA+19123">Ortlieb&#39;s, 847 N 3rd St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">7:00 PM · $21.63, 21+</div>
       </div>
     </div>
@@ -1185,7 +1193,7 @@
         <div class="pick-why">A restaging of Anna Halprin&#39;s 1967 Blank Placard Dance, in which a silent procession carries empty protest signs through the city and turns the question of what to protest back on the passersby who ask. It&#39;s a genuinely strange, pointed piece of protest art performed as a march that starts at FringeArts and moves through Center City — free, and about the closest thing the anti-war art movement of the &#39;60s has left to living history.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">FringeArts, 140 N Christopher Columbus Blvd, Philadelphia, PA 19106</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=140+N+Christopher+Columbus+Blvd%2C+Philadelphia%2C+PA+19106">FringeArts, 140 N Christopher Columbus Blvd, Philadelphia, PA 19106</a></div>
         <div class="pick-time-cost">11:00 AM · Not listed</div>
       </div>
     </div>
@@ -1196,7 +1204,7 @@
         <div class="pick-why">A free screening of The Mauritanian, adapted from Mohamedou Ould Slahi&#39;s memoir of 14 years of extrajudicial detention and torture at Guantánamo, timed to the 25th anniversary of the War on Terror. Organizers are framing this explicitly as commemoration and critique, not just a movie night — exactly the political specificity Wooden Shoe does well.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">6:30 PM · Not listed</div>
       </div>
     </div>
@@ -1353,22 +1361,22 @@
 
   <!-- SOURCES FOOTER -->
   <div class="sources">
-    <a href="https://do215.com">Do215</a> ·
-    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a> ·
-    <a href="https://cinesp.net">cinéSPEAK</a> ·
-    <a href="https://filmadelphia.org">Philadelphia Film Society</a> ·
-    <a href="https://philamoca.org">PhilaMOCA</a> ·
-    <a href="https://phillygoth.net">Phillygoth.net</a> ·
-    <a href="https://www.philly-shows.com">Philly-Shows.com</a> ·
-    <a href="https://iffybooks.net">Iffy Books</a> ·
-    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a> ·
-    <a href="https://therotunda.org">The Rotunda</a> ·
-    <a href="https://r5productions.com">R5 Productions</a> ·
-    <a href="https://philly.askapunk.net">Philly Ask A Punk</a> ·
-    <a href="https://xpn.org">The Key by WXPN</a> ·
-    <a href="https://meetup.com">Meetup</a> ·
-    <a href="https://lu.ma">Luma</a> ·
-    <a href="https://calendar.google.com">Google Calendar</a>
+    <a href="https://do215.com">Do215</a><span class="source-count">54</span> ·
+    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a><span class="source-count">1</span> ·
+    <a href="https://cinesp.net" class="source-silent">cinéSPEAK</a> ·
+    <a href="https://filmadelphia.org" class="source-silent">Philadelphia Film Society</a> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">2</span> ·
+    <a href="https://phillygoth.net">Phillygoth.net</a><span class="source-count">1</span> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">6</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">3</span> ·
+    <a href="https://therotunda.org">The Rotunda</a><span class="source-count">1</span> ·
+    <a href="https://r5productions.com">R5 Productions</a><span class="source-count">1</span> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">5</span> ·
+    <a href="https://xpn.org" class="source-silent">The Key by WXPN</a> ·
+    <a href="https://meetup.com">Meetup</a><span class="source-count">2</span> ·
+    <a href="https://lu.ma">Luma</a><span class="source-count">2</span> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a>
   </div>
 
 </div>

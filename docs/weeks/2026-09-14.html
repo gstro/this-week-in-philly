@@ -49,7 +49,12 @@
        .pick-main down to one letter per line. */
     .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
     .pick-venue { color: #bbb; font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
     .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+    /* The listed-event .sold-out red (#c0392b) is tuned for white cards and
+       goes muddy on the #1c1c1c Top 3 card, so it lightens here. */
+    .pick-time-cost .sold-out { color: #e06a5c; font-size: inherit; }
 
     /* ── Honorable mentions ── */
     p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
@@ -84,9 +89,12 @@
     .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
-    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
-    .sources a { color: #bbb; text-decoration: none; }
-    .sources a:hover { color: #888; }
+    .sources { text-align: center; font-size: 0.7rem; color: #999; margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: #999; text-decoration: none; }
+    .sources a:hover { color: #666; }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: #c3bfb8; }
+    .source-count { color: #c3bfb8; font-size: 0.62rem; margin-left: 0.2rem; }
     .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
 
     /* ── Narrow screens ──
@@ -161,7 +169,7 @@
         <div class="pick-why">Ginsberg&#39;s Howl, read by James Dalton backed by the Ginsberg Beat Connection&#39;s revolving Philly/NY/NJ ensemble, sets the poem to jazz, blues, and noise to mark the 100th anniversary of Allen Ginsberg&#39;s birth. It&#39;s part of this year&#39;s Fringe Festival at the Rotunda, the West Philly arts space with the city&#39;s strongest track record for free/PWYW literary and experimental programming. $15.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -172,7 +180,7 @@
         <div class="pick-why">A double feature of two obscure horror oddities — I Was a Teenage Horror Movie (1997) at 7:00, followed by The Violence Movie (1988) at 7:30 — with the filmmakers in the room for Q&amp;A afterward. PhilaMOCA&#39;s repertory horror programming is the city&#39;s best for exactly this kind of deep-cut, and a filmmaker visit is what makes this instance worth catching over a normal rep screening. $12.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N.+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">7:00 PM · $12</div>
       </div>
     </div>
@@ -183,7 +191,7 @@
         <div class="pick-why">A PowerPoint-party format built around trans rights and bodily autonomy — a lighthearted structure (short slide decks, wide participation) wrapped around real political stakes. It&#39;s participatory rather than a passive rally, and Nikki Lopez has become one of the city&#39;s steadier small rooms for this kind of organizing. Free, RSVP via the event&#39;s Action Network page.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Nikki Lopez, 304 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=304+South+St%2C+Philadelphia%2C+PA+19147">Nikki Lopez, 304 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">8:00 PM · Not listed</div>
       </div>
     </div>
@@ -365,7 +373,7 @@
         <div class="pick-why">Naomi Saalfield — Nai Palm, the three-time Grammy-nominated voice behind Hiatus Kaiyote — plays a rare solo-leaning date drawing from her intuitive, jazz-soaked songwriting. It&#39;s the kind of soul-and-jazz-rooted performance the touring circuit rarely brings this close to Philly. Ardmore Music Hall is a Main Line venue about 8 miles out; the Paoli/Thorndale Regional Rail line runs straight to Ardmore station, a short walk from the door. 21+, $30–$59.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Ardmore Music Hall, 23 E Lancaster Ave, Ardmore, Pe 19003</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=23+E+Lancaster+Ave%2C+Ardmore%2C+Pe+19003">Ardmore Music Hall, 23 E Lancaster Ave, Ardmore, Pe 19003</a></div>
         <div class="pick-time-cost">7:30 PM · $30-$59, 21+</div>
       </div>
     </div>
@@ -387,7 +395,7 @@
         <div class="pick-why">A brand-new pay-what-you-want poetry-writing evening at The Soapbox, the Kingsessing print shop and zine library that&#39;s become one of West Philly&#39;s steadiest DIY literary spaces — bring a notebook, no experience required. It&#39;s low-key and unpolished by design, the kind of easy-to-miss community writing night that doesn&#39;t get promoted beyond its own neighborhood. West Philly&#39;s Kingsessing neighborhood; reachable via the 13 trolley on Chester Ave or nearby bus routes.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Soapbox: Community Print Shop &amp; Zine Library, 4700 Kingsessing Ave, Philadelphia, PA 19143</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4700+Kingsessing+Ave%2C+Philadelphia%2C+PA+19143">The Soapbox: Community Print Shop &amp; Zine Library, 4700 Kingsessing Ave, Philadelphia, PA 19143</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -589,7 +597,7 @@
         <div class="pick-why">Fringe solo show recounting the 1934 Night of the Long Knives — specifically the purge of Ernst Röhm and other queer members of the Sturmabteilung, including an 18-year-old paramilitary found in bed with an SA leader during the raid. A historical-political piece, not genre horror, using a fifty-minute solo frame to dig into a corner of Nazi-era history that rarely gets this kind of direct attention.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Asian Arts Initiative Project Space</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1219+Vine+St%2C+Philadelphia%2C+PA+19102">Asian Arts Initiative Project Space</a></div>
         <div class="pick-time-cost">7:30 PM · $25</div>
       </div>
     </div>
@@ -600,7 +608,7 @@
         <div class="pick-why">Lightbox Film Center brings a Philadelphia premiere to Bok Auditorium — the arthouse/repertory programmer that consistently runs the city&#39;s most adventurous film calendar on the rare week it turns up in Collection&#39;s data at all. No plot details surfaced beyond “Philadelphia Premiere,” so this is a bet on Lightbox&#39;s curation as much as the film itself.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=800+Mifflin+St%2C+Philadelphia%2C+PA+19148">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -611,7 +619,7 @@
         <div class="pick-why">Ariel Delgado Dixon reads from and discusses Sourland, her new suspense novel, at The Head &amp; The Hand — a small Fishtown press-and-bookstore built for exactly this kind of intimate author event. Fishtown; a few blocks from the York-Dauphin stop on the Market-Frankford Line.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Head &amp; The Hand Books, 2230 Frankford Ave, Philadelphia, PA 19125</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2230+Frankford+Ave%2C+Philadelphia%2C+PA+19125">The Head &amp; The Hand Books, 2230 Frankford Ave, Philadelphia, PA 19125</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -813,7 +821,7 @@
         <div class="pick-why">Strange Fox Fighting Arts teaches a seated adaptation of bataireacht (Irish stick/shillelagh fighting) built specifically for people who can&#39;t stand at all or for long — disability justice framed as genuine self-defense instruction, not a token accommodation. Trans folks are prioritized to the front and welcome throughout; bring a cane if you have one, sticks are provided. Free, at Wooden Shoe Books, the anarchist bookstore that consistently runs this kind of accessible, community-first programming.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -982,8 +990,8 @@
         <div class="pick-why">Bikini Kill — the Olympia, WA band that effectively started the Riot Grrrl movement, Kathleen Hanna&#39;s confrontational lyrics and zine-driven politics setting the template for a generation of feminist punk — reunite for a rare tour stop. This is as close as the current touring circuit gets to the actual originators of the sound, not a tribute or a revival act. Sold out as of this writing; worth checking the venue for a resale or day-of list.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Union Transfer, 1026 Spring Garden St., Philadelphia, PA 19123</div>
-        <div class="pick-time-cost">8:00 PM · Not listed</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1026+Spring+Garden+St.%2C+Philadelphia%2C+PA+19123">Union Transfer, 1026 Spring Garden St., Philadelphia, PA 19123</a></div>
+        <div class="pick-time-cost">8:00 PM · <span class="sold-out">SOLD OUT</span></div>
       </div>
     </div>
     <div class="top3-pick">
@@ -1004,7 +1012,7 @@
         <div class="pick-why">Citizen artist vanessa german transforms two rooms of this historic Germantown rowhouse-turned-museum into an immersive black-box installation for the museum&#39;s Semiquincentennial-tied Act Two — sculptural work, soundscape, and site-specific staging built around the idea of “the ordinary colored girl.” Germantown; reachable via SEPTA&#39;s Chestnut Hill East Regional Rail or the 23 bus. $20.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Colored Girls Museum, 4613 Newhall St, Philadelphia, PA 19144</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4613+Newhall+St%2C+Philadelphia%2C+PA+19144">The Colored Girls Museum, 4613 Newhall St, Philadelphia, PA 19144</a></div>
         <div class="pick-time-cost">6:00 PM · $20</div>
       </div>
     </div>
@@ -1156,7 +1164,7 @@
         <div class="pick-why">Plow United reunite to play their landmark pop-punk album Goodnight Sellout front to back, with The Ergs!, Chris Gethard, and Crossed Keys filling out the bill at First Unitarian Church — Philly&#39;s most storied punk and hardcore room. This is the kind of full-album anniversary show that doesn&#39;t repeat; catch it now or wait for the next reunion. $37.14.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">First Unitarian Church, 2125 Chestnut St, Philadelphia, PA 19103</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2125+Chestnut+St%2C+Philadelphia%2C+PA+19103">First Unitarian Church, 2125 Chestnut St, Philadelphia, PA 19103</a></div>
         <div class="pick-time-cost">6:30 PM · $37.14</div>
       </div>
     </div>
@@ -1167,7 +1175,7 @@
         <div class="pick-why">David Liebe Hart — the outsider musician, puppeteer, and UFOlogist best known from Tim &amp; Eric Awesome Show, Great Job! — brings his raw, unfiltered, one-of-a-kind live show to PhilaMOCA, the city&#39;s home base for exactly this kind of gleeful weirdness. Expect songs about aliens, food, and failed relationships performed with total sincerity. $18.15.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N.+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">8:00 PM · $18.15</div>
       </div>
     </div>
@@ -1178,7 +1186,7 @@
         <div class="pick-why">A free, self-guided fall kickoff at the Rosenbach — tour the permanent collection, see rare items from their Dracula, vampire, and Gothic holdings, and walk through a specially built spooky, Halloween-inspired audio-scape. Also a low-key way to preview their fall programming lineup before committing to a ticketed event. Free.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Rosenbach Museum and Library, 2008-2010 Delancey St</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2008-2010+Delancey+St">The Rosenbach Museum and Library, 2008-2010 Delancey St</a></div>
         <div class="pick-time-cost">10:30 AM · Not listed</div>
       </div>
     </div>
@@ -1310,7 +1318,7 @@
         <div class="pick-why">Liz Phair and Sleater-Kinney co-headline “The Flannel and The Fury” — two of the defining voices of &#39;90s feminist indie rock and Riot Grrrl-adjacent punk sharing one bill, both still writing and touring with the same edge that made Exile in Guyville and Dig Me Out era-defining records. A genuinely rare pairing, not a legacy-act victory lap.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Franklin Music Hall, 421 N. 7th Street, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=421+N.+7th+Street%2C+Philadelphia%2C+PA+19123">Franklin Music Hall, 421 N. 7th Street, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">7:30 PM · Not listed</div>
       </div>
     </div>
@@ -1321,7 +1329,7 @@
         <div class="pick-why">A 40th-anniversary screening of David Lynch&#39;s Blue Velvet — the film that codified Lynch&#39;s whole unsettling small-town-noir mode, with Kyle MacLachlan, Laura Dern, and Isabella Rossellini. PhilaMOCA&#39;s repertory programming is the right room for it. $13.20.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N.+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">7:30 PM · $13.20</div>
       </div>
     </div>
@@ -1332,7 +1340,7 @@
         <div class="pick-why">Let&#39;s Build brings a curated set of poets — Lady Sarkazym joined by Lady Syren, Sam I Am, Jay Smoov, and E The Poet-Emcee — through single, resonant pieces on love, trust, healing, and self-worth, each followed by open conversation rather than a quick set change. It&#39;s City Winery&#39;s dinner-show polish applied to a genuinely community-built spoken-word night, not a commercial booking.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">City Winery, 990 Filbert St, Philadelphia, PA 19107</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=990+Filbert+St%2C+Philadelphia%2C+PA+19107">City Winery, 990 Filbert St, Philadelphia, PA 19107</a></div>
         <div class="pick-time-cost">7:30 PM · Not listed</div>
       </div>
     </div>
@@ -1512,22 +1520,22 @@
 
   <!-- SOURCES FOOTER -->
   <div class="sources">
-    <a href="https://do215.com">Do215</a> ·
-    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a> ·
-    <a href="https://cinesp.net">cinéSPEAK</a> ·
-    <a href="https://filmadelphia.org">Philadelphia Film Society</a> ·
-    <a href="https://philamoca.org">PhilaMOCA</a> ·
-    <a href="https://phillygoth.net">Phillygoth.net</a> ·
-    <a href="https://www.philly-shows.com">Philly-Shows.com</a> ·
-    <a href="https://iffybooks.net">Iffy Books</a> ·
-    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a> ·
-    <a href="https://therotunda.org">The Rotunda</a> ·
-    <a href="https://r5productions.com">R5 Productions</a> ·
-    <a href="https://philly.askapunk.net">Philly Ask A Punk</a> ·
-    <a href="https://xpn.org">The Key by WXPN</a> ·
-    <a href="https://meetup.com">Meetup</a> ·
-    <a href="https://lu.ma">Luma</a> ·
-    <a href="https://calendar.google.com">Google Calendar</a>
+    <a href="https://do215.com">Do215</a><span class="source-count">76</span> ·
+    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a><span class="source-count">1</span> ·
+    <a href="https://cinesp.net">cinéSPEAK</a><span class="source-count">1</span> ·
+    <a href="https://filmadelphia.org" class="source-silent">Philadelphia Film Society</a> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">1</span> ·
+    <a href="https://phillygoth.net">Phillygoth.net</a><span class="source-count">1</span> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">3</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">1</span> ·
+    <a href="https://therotunda.org">The Rotunda</a><span class="source-count">1</span> ·
+    <a href="https://r5productions.com" class="source-silent">R5 Productions</a> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">2</span> ·
+    <a href="https://xpn.org" class="source-silent">The Key by WXPN</a> ·
+    <a href="https://meetup.com">Meetup</a><span class="source-count">3</span> ·
+    <a href="https://lu.ma" class="source-silent">Luma</a> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a>
   </div>
 
 </div>
