@@ -48,6 +48,7 @@ renders 8 -- see tests/golden/README.md.
 
 import argparse
 import html
+import itertools
 import re
 import sys
 import urllib.parse
@@ -59,6 +60,7 @@ from pathlib import Path
 import jinja2
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import check_yield
 import common
 
 TEMPLATES_DIR = common.REPO_ROOT / "templates"
@@ -101,8 +103,6 @@ SOURCES = [
     ("Google Calendar", "https://calendar.google.com"),
 ]
 
-
-SOURCE_URLS = dict(SOURCES)
 
 # An event's `source` names the site it came from, not always under the name
 # the footer uses for it. Only one such alias exists in the real data: events
@@ -393,6 +393,126 @@ def build_all_week(days: list[dict], top3_titles_by_date: dict[str, set]) -> lis
     return list(rows.values())
 
 
+def build_stats(selections: dict, manifest: dict, expected: dict) -> dict:
+    """The "Week in Numbers" section: the collection funnel, per-category hit
+    rate, source concentration, and a collection-health line.
+
+    Three of the four blocks read `_selections.json` alone. Only the funnel's
+    first stage and the health line need `_manifest.json`, and both are simply
+    absent when it is (data/2026-06-22 predates v2 and has none) -- the section
+    still renders, one tile shorter.
+    """
+    listed: Counter[str] = Counter()
+    picks: Counter[str] = Counter()
+    for day in selections["days"]:
+        top3_titles = {pick["title"] for pick in day["top3"]}
+        for category in build_categories(day, top3_titles):
+            # true_count, not len(category["events"]) -- the display cap is a
+            # rendering decision and must not shrink the number that reports
+            # how much Selection actually listed.
+            listed[category["label"]] += category["true_count"]
+        for pick in day["top3"]:
+            picks[pick["category"]] += 1
+
+    # All Week / Recurring events are routed out of the day category blocks, so
+    # build_categories() doesn't see them. They are still listed events of their
+    # category -- just rendered in the table at the bottom rather than under a
+    # day -- so they count toward both the funnel total and their category's
+    # bar. Counting them in only one of the two is what an independent
+    # re-derivation of these numbers caught: the bars summed to 83 while the
+    # funnel directly above them said 90.
+    top3_titles_by_date = {
+        day["date"]: {pick["title"] for pick in day["top3"]}
+        for day in selections["days"]
+    }
+    all_week_rows = build_all_week(selections["days"], top3_titles_by_date)
+    for row in all_week_rows:
+        listed[row["category"]] += 1
+
+    category_rows: list[dict] = []
+    max_listed = max(listed.values(), default=0)
+    for label in common.CATEGORY_ORDER:
+        count = listed.get(label, 0)
+        if not count:
+            continue
+        top3 = picks.get(label, 0)
+        category_rows.append(
+            {
+                "label": label,
+                "listed": count,
+                "top3": top3,
+                # Percentages of the widest row, so bar length is comparable
+                # across categories on one shared scale -- the magnitude story
+                # a per-category waffle normalized to a fixed total destroys.
+                "listed_pct": 100.0 * count / max_listed,
+                "top3_pct": 100.0 * top3 / max_listed,
+            }
+        )
+    category_rows.sort(key=lambda row: (-row["listed"], row["label"]))
+
+    source_rows = [row for row in build_sources(selections["days"]) if row["count"]]
+    source_rows.sort(key=lambda row: (-row["count"], row["name"]))
+    max_source = source_rows[0]["count"] if source_rows else 0
+    for row in source_rows:
+        row["pct"] = 100.0 * row["count"] / max_source
+
+    # `listed` already includes the All Week rows, so the category bars sum to
+    # exactly this number -- the invariant test_build_stats_category_bars_sum_to
+    # _the_funnel_listed_total pins.
+    listed_total = sum(listed.values())
+    stages: list[dict] = []
+    manifest_sources = manifest.get("sources") or {}
+    if manifest_sources:
+        stages.append(
+            {
+                "label": "Collected",
+                "value": sum(s.get("events") or 0 for s in manifest_sources.values()),
+            }
+        )
+    stages.append({"label": "Candidates", "value": selections.get("total_events_after_dedup")})
+    stages.append({"label": "Listed", "value": listed_total})
+    stages.append({"label": "Top 3 picks", "value": sum(picks.values())})
+    stages = [stage for stage in stages if stage["value"] is not None]
+    for stage in stages:
+        # Set explicitly, including on the first stage: an absent key is Undefined
+        # in Jinja, and `Undefined is not none` is true, so a missing drop_pct
+        # renders the delta line instead of skipping it.
+        stage["drop_pct"] = None
+        stage["drop_from"] = None
+        stage["display"] = f"{stage['value']:,}"
+    for previous, stage in itertools.pairwise(stages):
+        if previous["value"]:
+            stage["drop_pct"] = round(
+                100.0 * (previous["value"] - stage["value"]) / previous["value"]
+            )
+            stage["drop_from"] = previous["label"].lower()
+
+    health = None
+    if manifest_sources:
+        # check_yield.py is the authority on what "too few" means, floors and
+        # all. Reusing it keeps the report from inventing a second rule -- and
+        # crucially it exempts sources documented with min_expected: 0, so a
+        # Meetup group that simply had no events this week is not reported as a
+        # failure. A bare zero-yield count would cry wolf every single week.
+        below_floor = check_yield.check_yield_floor(manifest, expected)
+        contributed = sum(1 for s in manifest_sources.values() if s.get("events"))
+        health = {
+            "source_count": len(manifest_sources),
+            "contributed": contributed,
+            "below_floor": sorted(
+                issue.source for issue in below_floor if issue.source
+            ),
+            "run_level_shortfall": any(issue.source is None for issue in below_floor),
+        }
+
+    return {
+        "stages": stages,
+        "categories": category_rows,
+        "sources": source_rows,
+        "health": health,
+    }
+
+
 def build_day_viewmodel(day: dict, spotify: dict) -> dict:
     day_date = date.fromisoformat(day["date"])
     top3_titles = {pick["title"] for pick in day["top3"]}
@@ -489,6 +609,9 @@ def render_report(week_dir: Path) -> str:
         playlist_url=playlist_url,
         days=days,
         all_week=all_week,
+        stats=build_stats(
+            selections, common.load_manifest(week_dir), common.load_expected_yield()
+        ),
         sources=build_sources(selections["days"]),
         collection_failure_notes=collection_failure_notes,
     )

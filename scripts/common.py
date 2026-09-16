@@ -196,6 +196,28 @@ def load_playlist(week_dir: Path) -> dict:
     return load_json(path)
 
 
+def load_manifest(week_dir: Path) -> dict:
+    """Returns {} if _manifest.json doesn't exist for this week.
+
+    Every week Collection has ever run has one, but data/2026-06-22 predates
+    v2 entirely (it was imported from v1's archive), so the report's stats
+    section has to render without it rather than refuse the week."""
+    path = Path(week_dir) / "_manifest.json"
+    if not path.exists():
+        return {}
+    return load_json(path)
+
+
+def load_expected_yield() -> dict:
+    """The hand-maintained per-source floors check_yield.py enforces in CI.
+    Returns {} if the file is missing, so the report degrades the same way it
+    does for a missing manifest."""
+    path = DATA_DIR / "expected_yield.json"
+    if not path.exists():
+        return {}
+    return load_json(path)
+
+
 def get_spotify_user_client() -> spotipy.Spotify:
     """A *user-authorized* Spotify client, rebuilt from env vars each run (G3).
 

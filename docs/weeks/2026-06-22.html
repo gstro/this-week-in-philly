@@ -46,6 +46,11 @@
       --sold-out-feature: #e06a5c;
       --table-fg: #555;
       --source-silent: #c3bfb8;
+      /* The de-emphasis neutral for chart fills: everything that isn't a
+         Top 3 pick. Re-stepped from a paler grey, which sat 14.0 ΔE from
+         --gold -- under the 15 normal-vision floor, i.e. hard to tell apart
+         even with full colour vision. */
+      --stat-bar: #7d7568;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -74,6 +79,7 @@
         --sold-out-feature: #ff9d8f;
         --table-fg: #cfc8bd;
         --source-silent: #8a8279;
+        --stat-bar: #8a8279;
       }
       /* The subtitle sits on --header-bg, which stays near-black in both
          themes, so it needs its own value rather than --muted-strong. */
@@ -170,6 +176,58 @@
     .allweek-table td strong { color: var(--page-fg); }
 
     .cat-omitted { font-size: 0.7rem; color: var(--muted-faint); font-style: italic; margin: 0.15rem 0 0 0.75rem; }
+
+    /* ── Week in Numbers ──
+       Two marks only: --gold for what won a Top 3 slot, --stat-bar for
+       everything else. That's an emphasis pair (one accent + a de-emphasis
+       neutral), not a categorical palette, which is why the pair clears the
+       two checks that decide whether adjacent segments can be told apart --
+       CVD separation 19.0 light / 19.3 dark, normal-vision 20.2 / 20.4 -- while
+       "failing" the chroma floor, whose complaint is that --stat-bar reads
+       gray. It is supposed to read gray. Gold sits just outside the dark
+       lightness band for the same reason it always has: it's the report's
+       existing brand accent, not a slot chosen for this chart. Gold's low
+       contrast against the light paper (1.96:1) is what makes the per-row
+       count labels mandatory rather than decorative. */
+    .stats-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.9rem; }
+    .stats-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
+
+    /* Funnel: a KPI row, not a chart -- four headline numbers. Proportional
+       figures, not tabular: these don't align in a column. */
+    .funnel { display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem; margin-bottom: 1.6rem; }
+    .funnel-value { font-size: 1.15rem; font-weight: 700; color: var(--page-fg); line-height: 1.2; }
+    .funnel-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; margin-top: 0.1rem; }
+    .funnel-drop { font-size: 0.62rem; color: var(--muted-faint); margin-top: 0.1rem; }
+
+    .stats-block { margin-bottom: 1.5rem; }
+    .stats-block-title { font-size: 0.7rem; font-weight: 700; color: var(--card-venue); margin-bottom: 0.1rem; }
+    .stats-legend { font-size: 0.65rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .stats-legend .swatch { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 2px; margin-right: 0.25rem; vertical-align: baseline; }
+    .swatch-top3 { background: var(--gold); }
+    .swatch-listed { background: var(--stat-bar); }
+
+    .statbar-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem; font-size: 0.72rem; }
+    .statbar-name { flex: 0 0 8.5rem; color: var(--page-fg); min-width: 0; }
+    .statbar-track { flex: 1; min-width: 0; display: flex; align-items: center; }
+    /* <= 24px thick, square at the baseline, 4px rounded at the data end. The
+       gold segment leads so Top 3 counts align across rows; the 2px right
+       margin is the surface gap that separates the two fills -- a gap, never a
+       border drawn around the mark. */
+    /* min-width so the smallest real value still reads as a mark: a single
+       event is 1.3% of Do215's 76 and would otherwise render as a 1px sliver
+       indistinguishable from nothing at all. */
+    .statbar-fill { height: 9px; min-width: 6px; }
+    .statbar-top3 { background: var(--gold); border-radius: 2px 0 0 2px; margin-right: 2px; }
+    .statbar-rest { background: var(--stat-bar); border-radius: 0 4px 4px 0; }
+    .statbar-top3:only-child { border-radius: 2px 4px 4px 0; margin-right: 0; }
+    .statbar-rest:only-child { border-radius: 2px 4px 4px 2px; }
+    /* Outside the bar end, never inside it: a count inside a 1-event bar would
+       be clipped. tabular-nums here because these DO align in a column. */
+    .statbar-value { flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .statbar-value strong { color: var(--page-fg); font-weight: 700; }
+
+    .stats-health { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+    .stats-health .below-floor { color: var(--sold-out); font-weight: 600; }
 
     /* ── Sources footer ── */
     .sources { text-align: center; font-size: 0.7rem; color: var(--muted); margin-top: 3rem; line-height: 2.2; }
@@ -1583,6 +1641,223 @@
       <div class="event-venue">Warehouse on Watts, 923 N. Watts St</div>
       <div class="event-time">9:00 PM</div>
       <div class="price-paid">$15</div>
+    </div>
+  </div>
+
+  <!-- WEEK IN NUMBERS -->
+  <div class="stats-label">Week in Numbers</div>
+
+  <div class="funnel">
+    <div class="funnel-stage">
+      <div class="funnel-value">90</div>
+      <div class="funnel-label">Candidates</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-value">88</div>
+      <div class="funnel-label">Listed</div>
+      <div class="funnel-drop">−2% from candidates</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-value">21</div>
+      <div class="funnel-label">Top 3 picks</div>
+      <div class="funnel-drop">−76% from listed</div>
+    </div>
+  </div>
+
+  <div class="stats-block">
+    <div class="stats-block-title">By category</div>
+    <div class="stats-legend"><span class="swatch swatch-top3"></span>Top 3 pick <span class="swatch swatch-listed"></span>listed, not picked</div>
+    <div class="statbar-row" title="🎵 Music &amp; Concerts: 12 of 34 listed events became a Top 3 pick">
+      <div class="statbar-name">🎵 Music &amp; Concerts</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 35.3%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 64.7%"></span>
+      </div>
+      <div class="statbar-value"><strong>12</strong> / 34</div>
+    </div>
+    <div class="statbar-row" title="🎬 Film &amp; Cinema: 2 of 19 listed events became a Top 3 pick">
+      <div class="statbar-name">🎬 Film &amp; Cinema</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 5.9%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 50.0%"></span>
+      </div>
+      <div class="statbar-value"><strong>2</strong> / 19</div>
+    </div>
+    <div class="statbar-row" title="💻 Tech &amp; Maker: 2 of 8 listed events became a Top 3 pick">
+      <div class="statbar-name">💻 Tech &amp; Maker</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 5.9%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 17.6%"></span>
+      </div>
+      <div class="statbar-value"><strong>2</strong> / 8</div>
+    </div>
+    <div class="statbar-row" title="🎨 Arts &amp; Workshops: 0 of 7 listed events became a Top 3 pick">
+      <div class="statbar-name">🎨 Arts &amp; Workshops</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 20.6%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 7</div>
+    </div>
+    <div class="statbar-row" title="🤝 Community &amp; Politics: 2 of 6 listed events became a Top 3 pick">
+      <div class="statbar-name">🤝 Community &amp; Politics</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 5.9%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 11.8%"></span>
+      </div>
+      <div class="statbar-value"><strong>2</strong> / 6</div>
+    </div>
+    <div class="statbar-row" title="📚 Literary: 2 of 5 listed events became a Top 3 pick">
+      <div class="statbar-name">📚 Literary</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 5.9%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 8.8%"></span>
+      </div>
+      <div class="statbar-value"><strong>2</strong> / 5</div>
+    </div>
+    <div class="statbar-row" title="👻 Horror &amp; Occult: 0 of 4 listed events became a Top 3 pick">
+      <div class="statbar-name">👻 Horror &amp; Occult</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 11.8%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 4</div>
+    </div>
+    <div class="statbar-row" title="🎪 Festivals &amp; Major Events: 1 of 3 listed events became a Top 3 pick">
+      <div class="statbar-name">🎪 Festivals &amp; Major Events</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 2.9%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 5.9%"></span>
+      </div>
+      <div class="statbar-value"><strong>1</strong> / 3</div>
+    </div>
+    <div class="statbar-row" title="🌿 Markets &amp; Outdoors: 0 of 2 listed events became a Top 3 pick">
+      <div class="statbar-name">🌿 Markets &amp; Outdoors</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 5.9%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 2</div>
+    </div>
+  </div>
+
+  <div class="stats-block">
+    <div class="stats-block-title">By source</div>
+    <div class="statbar-row" title="Do215 supplied 14 of this week's listed events">
+      <div class="statbar-name">Do215</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 100.0%"></span>
+      </div>
+      <div class="statbar-value">14</div>
+    </div>
+    <div class="statbar-row" title="Philadelphia Film Society supplied 13 of this week's listed events">
+      <div class="statbar-name">Philadelphia Film Society</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 92.9%"></span>
+      </div>
+      <div class="statbar-value">13</div>
+    </div>
+    <div class="statbar-row" title="Iffy Books supplied 9 of this week's listed events">
+      <div class="statbar-name">Iffy Books</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 64.3%"></span>
+      </div>
+      <div class="statbar-value">9</div>
+    </div>
+    <div class="statbar-row" title="Philly Ask A Punk supplied 8 of this week's listed events">
+      <div class="statbar-name">Philly Ask A Punk</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 57.1%"></span>
+      </div>
+      <div class="statbar-value">8</div>
+    </div>
+    <div class="statbar-row" title="Luma supplied 7 of this week's listed events">
+      <div class="statbar-name">Luma</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 50.0%"></span>
+      </div>
+      <div class="statbar-value">7</div>
+    </div>
+    <div class="statbar-row" title="Phillygoth.net supplied 6 of this week's listed events">
+      <div class="statbar-name">Phillygoth.net</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 42.9%"></span>
+      </div>
+      <div class="statbar-value">6</div>
+    </div>
+    <div class="statbar-row" title="The Rotunda supplied 6 of this week's listed events">
+      <div class="statbar-name">The Rotunda</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 42.9%"></span>
+      </div>
+      <div class="statbar-value">6</div>
+    </div>
+    <div class="statbar-row" title="Meetup supplied 5 of this week's listed events">
+      <div class="statbar-name">Meetup</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 35.7%"></span>
+      </div>
+      <div class="statbar-value">5</div>
+    </div>
+    <div class="statbar-row" title="The Key by WXPN supplied 5 of this week's listed events">
+      <div class="statbar-name">The Key by WXPN</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 35.7%"></span>
+      </div>
+      <div class="statbar-value">5</div>
+    </div>
+    <div class="statbar-row" title="PhilaMOCA supplied 3 of this week's listed events">
+      <div class="statbar-name">PhilaMOCA</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 21.4%"></span>
+      </div>
+      <div class="statbar-value">3</div>
+    </div>
+    <div class="statbar-row" title="R5 Productions supplied 3 of this week's listed events">
+      <div class="statbar-name">R5 Productions</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 21.4%"></span>
+      </div>
+      <div class="statbar-value">3</div>
+    </div>
+    <div class="statbar-row" title="Free Library supplied 2 of this week's listed events">
+      <div class="statbar-name">Free Library</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 14.3%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="Philadelphia Citizen supplied 2 of this week's listed events">
+      <div class="statbar-name">Philadelphia Citizen</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 14.3%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="Wooden Shoe Books supplied 2 of this week's listed events">
+      <div class="statbar-name">Wooden Shoe Books</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 14.3%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="Hive76 supplied 1 of this week's listed events">
+      <div class="statbar-name">Hive76</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 7.1%"></span>
+      </div>
+      <div class="statbar-value">1</div>
+    </div>
+    <div class="statbar-row" title="Songkick supplied 1 of this week's listed events">
+      <div class="statbar-name">Songkick</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 7.1%"></span>
+      </div>
+      <div class="statbar-value">1</div>
+    </div>
+    <div class="statbar-row" title="Trakt.tv film releases supplied 1 of this week's listed events">
+      <div class="statbar-name">Trakt.tv film releases</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 7.1%"></span>
+      </div>
+      <div class="statbar-value">1</div>
     </div>
   </div>
 
