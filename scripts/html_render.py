@@ -48,8 +48,10 @@ renders 8 -- see tests/golden/README.md.
 
 import argparse
 import html
+import re
 import sys
-from collections import defaultdict
+import urllib.parse
+from collections import Counter, defaultdict
 from datetime import date, datetime
 from datetime import time as dt_time
 from pathlib import Path
@@ -63,8 +65,11 @@ TEMPLATES_DIR = common.REPO_ROOT / "templates"
 DOCS_DIR = common.REPO_ROOT / "docs"
 WEEKS_DIR = DOCS_DIR / "weeks"
 
-# Fixed footer source list, in display order -- always shown in full
-# regardless of which sources actually contributed events this week.
+# The full set of sources the pipeline watches, in display order. The footer
+# renders all of them every week, but build_sources() now marks which ones
+# actually contributed (with counts) and dims the rest -- the list alone used
+# to claim credit for sources that sent nothing and stayed silent about ones
+# that did; see build_sources.
 # events-report-format/SKILL.md's Sources Footer section lists 21 sources
 # (v1's set); this list intentionally diverges from it now that Collection
 # is scripts/collect_week.py, not that spec: dropped Billy Penn and Songkick
@@ -95,6 +100,84 @@ SOURCES = [
     ("Luma", "https://lu.ma"),
     ("Google Calendar", "https://calendar.google.com"),
 ]
+
+
+SOURCE_URLS = dict(SOURCES)
+
+# An event's `source` names the site it came from, not always under the name
+# the footer uses for it. Only one such alias exists in the real data: events
+# say "WXPN", the footer says "The Key by WXPN" (the publication, which is
+# what SOURCES links to).
+SOURCE_ALIASES = {"WXPN": "The Key by WXPN"}
+
+# Two separators appear in the wild for multi-source attribution, sometimes in
+# the same week: "Do215 / WXPN" and "Do215, WXPN". Both mean the same thing --
+# the event was seen on both -- so both credit both.
+SOURCE_SPLIT_RE = re.compile(r"[/,]")
+
+
+def split_source_field(raw: str | None) -> list[str]:
+    return [part.strip() for part in SOURCE_SPLIT_RE.split(raw or "") if part.strip()]
+
+
+def normalize_source_name(raw: str) -> str:
+    """Maps one source token onto its footer name.
+
+    Meetup arrives per-group ("Meetup: Code & Coffee", "Meetup: DC 215",
+    "Meetup: Philadelphia Horror" -- six distinct groups across the archive)
+    and all of them collapse to the single "Meetup" footer entry, since that's
+    what SOURCES lists and links.
+    """
+    name = raw.strip()
+    if name.casefold().startswith("meetup:"):
+        return "Meetup"
+    return SOURCE_ALIASES.get(name, name)
+
+
+def build_sources(days: list[dict]) -> list[dict]:
+    """The footer, derived from the week's own events rather than asserted.
+
+    Every known source still renders -- a silent week for a source is worth
+    seeing -- but only contributors carry a count, and the rest are dimmed.
+
+    Sources that contributed but aren't in SOURCES render unlinked rather than
+    being dropped. That case is entirely historical: `Trakt.tv film releases`,
+    `Free Library`, `Hive76`, `Philadelphia Citizen`, and `Songkick` were all
+    retired from collection and removed from SOURCES, but they're still in the
+    archived weeks this renderer re-renders, and a footer that silently omitted
+    them would misreport those weeks in the opposite direction from the bug
+    this function fixes.
+    """
+    counts: Counter[str] = Counter()
+    for day in days:
+        for event in day["events"]:
+            for part in split_source_field(event.get("source")):
+                counts[normalize_source_name(part)] += 1
+
+    rows = []
+    for name, url in SOURCES:
+        rows.append({"name": name, "url": url, "count": counts.pop(name, 0)})
+    for name in sorted(counts):
+        rows.append({"name": name, "url": None, "count": counts[name]})
+    return rows
+
+
+def build_map_url(address: str | None) -> str | None:
+    """A Google Maps search link for a Top 3 pick's address.
+
+    `address` is the only geography in the system -- no coordinates, no
+    neighborhood, and non-Top-3 events don't carry it at all -- and it was
+    loaded and dropped until now. The `search/?api=1&query=` form is the
+    documented cross-platform one: it opens the native app on iOS and Android
+    and the web map elsewhere, so it needs no per-platform branching.
+    """
+    address = (address or "").strip()
+    if not address:
+        return None
+    return (
+        "https://www.google.com/maps/search/?api=1&query="
+        + urllib.parse.quote_plus(address)
+    )
 
 
 def clean_cost(cost: str) -> str:
@@ -317,31 +400,42 @@ def build_day_viewmodel(day: dict, spotify: dict) -> dict:
     top3 = []
     for pick in day["top3"]:
         spotify_entry = spotify.get(pick["title"]) if pick.get("is_music") else None
+        # price_class_and_text is the same helper the listed-event cards use:
+        # it already makes sold_out override cost, which is exactly the
+        # inconsistency this fixes -- a sold-out pick used to render its ticket
+        # price as though seats were still available, while the very same event
+        # in the day's category block below said SOLD OUT in red.
+        _, cost_text = price_class_and_text(pick)
         top3.append(
             {
                 "rank": pick["rank"],
                 "name_html": build_pick_name_html(pick, spotify_entry),
                 "why": pick["why"],
                 "venue": pick["venue"],
-                "time_cost": " · ".join(
-                    part
-                    for part in [
-                        display_time(pick.get("time", ""), ""),
-                        clean_cost(pick.get("cost", "")),
-                    ]
-                    if part
-                ),
+                "map_url": build_map_url(pick.get("address")),
+                "time_display": display_time(pick.get("time", ""), ""),
+                "cost_text": cost_text or None,
+                "sold_out": bool(pick.get("sold_out")),
             }
         )
 
+    categories = build_categories(day, top3_titles)
     return {
         "day_name": day["day_name"],
+        # Weekday, not the ISO date: a report covers exactly one Mon-Sun span,
+        # so "#saturday" is unambiguous within the page and survives being
+        # typed from memory in a way "#2026-09-19" doesn't.
+        "slug": day["day_name"].casefold(),
         "date_display": day_date.strftime("%B %-d"),
+        # The day index shows true counts, before the display cap: it's the one
+        # place on the page that states real scale, which is what made a "10 of
+        # 51 shown" suffix on every category header unnecessary.
+        "event_count": sum(category["true_count"] for category in categories),
         "top3": top3,
         "honorable_mentions_html": build_honorable_mentions_html(
             day.get("honorable_mentions", [])
         ),
-        "categories": build_categories(day, top3_titles),
+        "categories": categories,
     }
 
 
@@ -395,7 +489,7 @@ def render_report(week_dir: Path) -> str:
         playlist_url=playlist_url,
         days=days,
         all_week=all_week,
-        sources=[{"name": name, "url": url} for name, url in SOURCES],
+        sources=build_sources(selections["days"]),
         collection_failure_notes=collection_failure_notes,
     )
 

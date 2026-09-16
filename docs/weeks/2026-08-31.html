@@ -5,89 +5,180 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>This Week in Philadelphia — August 31 – September 6, 2026</title>
   <style>
+    /* ── Palette ──
+       Every colour in this stylesheet is a token so the dark block below can
+       restate the palette and nothing else. The light values are the report's
+       original ones, unchanged -- with one exception noted at --feature-meta.
+
+       Dark is not a mechanical inversion. In light the Top 3 card is the
+       darkest thing on a pale page; inverting that would sink it into the
+       background, so in dark it becomes the most *elevated* surface instead
+       (page < card < feature), keeping "raised means important" true in both
+       themes. Every dark pair clears WCAG AA (4.5:1) -- measured, not
+       eyeballed; the light theme does not, and fixing that is its own slice. */
+    :root {
+      --page-bg: #f0ede8;
+      --page-fg: #1c1c1c;
+      --rule: #d8d4ce;
+      --rule-soft: #eee;
+      --muted: #999;
+      --muted-strong: #888;
+      --muted-faint: #bbb;
+      --gold: #c9a84c;
+      --header-bg: #111;
+      --header-fg: #fff;
+      --card-bg: #fff;
+      --card-fg: #1c1c1c;
+      --card-venue: #444;
+      --card-shadow: rgba(0,0,0,0.06);
+      --feature-bg: #1c1c1c;
+      --feature-fg: #fff;
+      --feature-why: #999;
+      --feature-venue: #bbb;
+      /* Was #666, the one light value this change moves: 2.97:1 on the Top 3
+         card, the only outright unreadable pair in the light theme. #848484
+         clears AA at 4.56:1 and stays dimmer than --feature-why, so the
+         card's hierarchy is unchanged. */
+      --feature-meta: #848484;
+      --free: #2d7a3a;
+      --sold-out: #c0392b;
+      /* The card red, lightened for the dark Top 3 card where #c0392b muddies. */
+      --sold-out-feature: #e06a5c;
+      --table-fg: #555;
+      --source-silent: #c3bfb8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page-bg: #1a1815;
+        --page-fg: #ece8e1;
+        --rule: #3a352e;
+        --rule-soft: #2e2a25;
+        --muted: #a8a29a;
+        --muted-strong: #b5afa6;
+        --muted-faint: #918a80;
+        --gold: #d7b75f;
+        --header-bg: #100f0d;
+        --header-fg: #f3efe8;
+        --card-bg: #26231f;
+        --card-fg: #ece8e1;
+        --card-venue: #cfc8bd;
+        --card-shadow: rgba(0,0,0,0.45);
+        --feature-bg: #2e2a25;
+        --feature-fg: #f5f1ea;
+        --feature-why: #b9b2a8;
+        --feature-venue: #d0c9be;
+        --feature-meta: #a59e94;
+        --free: #7ec98b;
+        --sold-out: #ff8a7a;
+        --sold-out-feature: #ff9d8f;
+        --table-fg: #cfc8bd;
+        --source-silent: #8a8279;
+      }
+      /* The subtitle sits on --header-bg, which stays near-black in both
+         themes, so it needs its own value rather than --muted-strong. */
+      .subtitle { color: #9b948b; }
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     /* overflow-wrap inherits, so this one declaration keeps every long string
        (venues carry full street addresses -- 130 chars is real) inside its
        column instead of forcing the page to scroll sideways. */
-    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; overflow-wrap: break-word; }
+    body { background: var(--page-bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--page-fg); overflow-wrap: break-word; }
 
     /* ── Header ── */
-    .site-header { background: #111; width: 100%; }
+    .site-header { background: var(--header-bg); width: 100%; }
     .site-header-inner { max-width: 800px; margin: 0 auto; padding: 1.4rem 1.5rem 1.5rem; }
-    .eyebrow { font-size: 0.62rem; text-transform: uppercase; color: #c9a84c; letter-spacing: 0.12em; margin-bottom: 0.45rem; }
-    h1 { color: #fff; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
-    h1 span { color: #c9a84c; }
-    .subtitle { color: #888; font-size: 0.82rem; }
+    .eyebrow { font-size: 0.62rem; text-transform: uppercase; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 0.45rem; }
+    h1 { color: var(--header-fg); font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+    h1 span { color: var(--gold); }
+    .subtitle { color: var(--muted-strong); font-size: 0.82rem; }
     .header-playlist { margin-top: 0.6rem; font-size: 0.75rem; }
-    .header-playlist a { color: #c9a84c; text-decoration: none; }
+    .header-playlist a { color: var(--gold); text-decoration: none; }
     .header-playlist a:hover { text-decoration: underline; }
 
     /* ── Content wrapper ── */
     .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
-    hr.day-sep { border: none; border-top: 1px solid #d8d4ce; margin: 2.25rem 0; }
+    hr.day-sep { border: none; border-top: 1px solid var(--rule); margin: 2.25rem 0; }
+
+    /* ── Day index ──
+       Seven links, no JS. The page runs ~11 cards a day across 7 days, which
+       is short enough that a sticky bar or a back-to-top button would cost
+       more than they return (REPORT_IMPROVEMENTS_BRAINSTORM.md #16, #24, both
+       dropped on those grounds) but long enough to want one jump per day. */
+    .day-index { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; margin-bottom: 1.75rem; font-size: 0.72rem; }
+    .day-index a { color: var(--page-fg); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 0.1rem; }
+    .day-index a:hover { border-bottom-color: var(--gold); }
+    .day-index .day-index-count { color: var(--muted); margin-left: 0.25rem; }
 
     /* ── Day header ── */
-    .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
-    .day-name { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.1em; flex-shrink: 0; }
-    .day-date { font-size: 1.25rem; font-weight: 700; color: #1c1c1c; flex-shrink: 0; }
-    .day-rule { flex: 1; height: 1px; background: #d8d4ce; }
+    .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; scroll-margin-top: 0.75rem; }
+    .day-name { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; flex-shrink: 0; }
+    .day-date { font-size: 1.25rem; font-weight: 700; color: var(--page-fg); flex-shrink: 0; }
+    .day-rule { flex: 1; height: 1px; background: var(--rule); }
 
     /* ── Top 3 card ── */
-    .top3-card { background: #1c1c1c; border-radius: 7px; padding: 1rem 1.25rem; margin-bottom: 0.65rem; }
-    .top3-label { font-size: 0.62rem; text-transform: uppercase; color: #c9a84c; letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    .top3-card { background: var(--feature-bg); border-radius: 7px; padding: 1rem 1.25rem; margin-bottom: 0.65rem; }
+    .top3-label { font-size: 0.62rem; text-transform: uppercase; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
     .top3-pick { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.9rem; }
     .top3-pick:last-child { margin-bottom: 0; }
-    .pick-num { color: #c9a84c; font-weight: 700; font-size: 0.9rem; min-width: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; }
+    .pick-num { color: var(--gold); font-weight: 700; font-size: 0.9rem; min-width: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; }
     .pick-main { flex: 1; min-width: 0; }
-    .pick-name { color: #fff; font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
-    .pick-name a { color: #c9a84c; text-decoration: none; }
+    .pick-name { color: var(--feature-fg); font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
+    .pick-name a { color: var(--gold); text-decoration: none; }
     .pick-name a:hover { text-decoration: underline; }
-    .pick-name a.event-link { color: #fff; }
-    .pick-why { color: #999; font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
+    .pick-name a.event-link { color: var(--feature-fg); }
+    .pick-why { color: var(--feature-why); font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
     /* max-width caps the flex-shrink: 0 column: a venue carrying a full street
        address (130 chars is real) otherwise sizes to its own content and starves
        .pick-main down to one letter per line. */
     .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
-    .pick-venue { color: #bbb; font-size: 0.76rem; }
-    .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+    .pick-venue { color: var(--feature-venue); font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
+    .pick-time-cost { color: var(--feature-meta); font-size: 0.68rem; margin-top: 0.15rem; }
+    .pick-time-cost .sold-out { color: var(--sold-out-feature); font-size: inherit; }
 
     /* ── Honorable mentions ── */
-    p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
+    p.hm { font-size: 0.77rem; color: var(--muted); font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
 
     /* ── Category header ── */
-    .cat-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; margin-top: 1.1rem; }
-    .cat-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
+    .cat-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; margin-top: 1.1rem; }
+    .cat-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
 
     /* ── Event cards ── */
-    .event-card { background: #fff; border-radius: 5px; padding: 0.5rem 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.06); display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; }
+    .event-card { background: var(--card-bg); border-radius: 5px; padding: 0.5rem 0.75rem; box-shadow: 0 1px 2px var(--card-shadow); display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; }
     .event-left { flex: 1; min-width: 0; }
-    .event-name { font-size: 0.85rem; font-weight: 700; color: #1c1c1c; line-height: 1.3; }
+    .event-name { font-size: 0.85rem; font-weight: 700; color: var(--card-fg); line-height: 1.3; }
     .event-name a { color: inherit; text-decoration: none; }
     .event-name a:hover { text-decoration: underline; }
-    .event-note { font-size: 0.73rem; color: #999; margin-top: 0.15rem; line-height: 1.4; }
+    .event-note { font-size: 0.73rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4; }
     .event-right { text-align: right; flex-shrink: 0; min-width: 120px; max-width: 50%; }
-    .event-venue { font-size: 0.78rem; font-weight: 700; color: #444; }
-    .event-time { font-size: 0.7rem; color: #999; margin-top: 0.1rem; }
-    .price-free { font-size: 0.7rem; color: #2d7a3a; }
-    .price-paid { font-size: 0.7rem; color: #999; }
-    .sold-out { font-size: 0.7rem; color: #c0392b; font-weight: 600; }
+    .event-venue { font-size: 0.78rem; font-weight: 700; color: var(--card-venue); }
+    .event-time { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+    .price-free { font-size: 0.7rem; color: var(--free); }
+    .price-paid { font-size: 0.7rem; color: var(--muted); }
+    .sold-out { font-size: 0.7rem; color: var(--sold-out); font-weight: 600; }
 
     /* ── All Week table ── */
-    .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
-    .allweek-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
+    .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+    .allweek-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
     .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-    .allweek-table th { text-align: left; padding: 0.3rem 0.5rem; color: #888; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #d8d4ce; }
-    .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eee; color: #555; vertical-align: top; }
+    .allweek-table th { text-align: left; padding: 0.3rem 0.5rem; color: var(--muted-strong); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--rule); }
+    .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--rule-soft); color: var(--table-fg); vertical-align: top; }
     .allweek-table tr:last-child td { border-bottom: none; }
-    .allweek-table td strong { color: #1c1c1c; }
+    .allweek-table td strong { color: var(--page-fg); }
 
-    .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
+    .cat-omitted { font-size: 0.7rem; color: var(--muted-faint); font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
-    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
-    .sources a { color: #bbb; text-decoration: none; }
-    .sources a:hover { color: #888; }
-    .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
+    .sources { text-align: center; font-size: 0.7rem; color: var(--muted); margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: var(--muted); text-decoration: none; }
+    .sources a:hover { color: var(--page-fg); }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: var(--source-silent); }
+    .source-count { color: var(--source-silent); font-size: 0.62rem; margin-left: 0.2rem; }
+    .sources-failure { text-align: center; font-size: 0.7rem; color: var(--muted-faint); margin-top: 0.4rem; }
 
     /* ── Narrow screens ──
        Every card above is a desktop flex row with a fixed-width, right-aligned
@@ -123,13 +214,13 @@
       /* :not(:empty) -- clean_cost() legitimately yields "" (53 of them in the
          week of 2026-08-10 alone), and the separator must not dangle after the
          time with no price behind it. */
-      .event-time + div:not(:empty)::before { content: "·"; color: #ccc; margin-right: 0.4rem; }
+      .event-time + div:not(:empty)::before { content: "·"; color: var(--rule); margin-right: 0.4rem; }
 
       .allweek-table, .allweek-table tbody, .allweek-table tr, .allweek-table td { display: block; width: 100%; }
       .allweek-table thead { display: none; }
-      .allweek-table tr { background: #fff; border-radius: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
+      .allweek-table tr { background: var(--card-bg); border-radius: 5px; box-shadow: 0 1px 2px var(--card-shadow); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
       .allweek-table td { border-bottom: none; padding: 0.1rem 0; }
-      .allweek-table td::before { content: attr(data-label) ": "; color: #999; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      .allweek-table td::before { content: attr(data-label) ": "; color: var(--muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
       .allweek-table td:first-child::before { content: none; }
     }
   </style>
@@ -146,7 +237,18 @@
 </header>
 
 <div class="content">
-  <div class="day-header">
+
+  <!-- DAY INDEX -->
+  <nav class="day-index" aria-label="Jump to a day">
+    <a href="#monday">Monday<span class="day-index-count">14</span></a>
+    <a href="#tuesday">Tuesday<span class="day-index-count">11</span></a>
+    <a href="#wednesday">Wednesday<span class="day-index-count">13</span></a>
+    <a href="#thursday">Thursday<span class="day-index-count">12</span></a>
+    <a href="#friday">Friday<span class="day-index-count">13</span></a>
+    <a href="#saturday">Saturday<span class="day-index-count">12</span></a>
+    <a href="#sunday">Sunday<span class="day-index-count">8</span></a>
+  </nav>
+  <div class="day-header" id="monday">
     <span class="day-name">Monday</span>
     <span class="day-date">August 31</span>
     <div class="day-rule"></div>
@@ -161,7 +263,7 @@
         <div class="pick-why">Arlo Parks brings her Ambiguous Desire tour to Union Transfer for a rare Philly headline stop from the Mercury Prize-winning UK artist, touring the nocturnal, dancefloor-inflected material off her third album. It&#39;s the kind of visit that&#39;s genuinely easy to miss on a quiet Monday and would be talked about after. Union Transfer sits in Callowhill just north of Center City — Broad Street Line to Spring Garden station is a five-minute walk; doors 7, show 8.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Union Transfer, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1026+Spring+Garden+St%2C+Philadelphia%2C+PA+19123">Union Transfer, Philadelphia, PA</a></div>
         <div class="pick-time-cost">8:00 PM · Not listed</div>
       </div>
     </div>
@@ -172,7 +274,7 @@
         <div class="pick-why">Philly DSA and Solidarity Cinema present 5 Broken Cameras, the Oscar-nominated, Sundance-winning documentary shot over five years by a Palestinian farmer defending his village from settlement expansion. It&#39;s free programming with real political stakes, paired with a screening space built for conversation rather than passive watching. Suggested donation $6–12; South Street, easy walk from Point Breeze — heads up there&#39;s a flight of stairs to the main room.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Nikki Lopez, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=304+South+St%2C+Philadelphia%2C+PA+19147">Nikki Lopez, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · Not listed</div>
       </div>
     </div>
@@ -183,7 +285,7 @@
         <div class="pick-why">West Philadelphia Sanctuary hosts a free, no-experience-necessary clay art-making session at The Rotunda — a low-key communal drop-in built explicitly to give the West Philly community a judgment-free shared space, not to sell a class. University City; the Rotunda sits right off the 34/40 trolley and the Market-Frankford Line&#39;s 40th St station.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -351,7 +453,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="tuesday">
     <span class="day-name">Tuesday</span>
     <span class="day-date">September 1</span>
     <div class="day-rule"></div>
@@ -366,7 +468,7 @@
         <div class="pick-why">The Gaza Children&#39;s Shroud — a global memorial where mourners hand-write the names of Gaza&#39;s more than 20,000 killed children onto a communal shroud — launches its year-long tour of witness right here in Philadelphia before heading to the UN in New York and then Washington. It&#39;s a five-hour community signing (1–6 PM) organized by an interfaith coalition, not a passive rally — you can add a name yourself. City Hall, steps from the Broad Street Line.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia City Hall, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1400+John+F+Kennedy+Blvd%2C+Philadelphia%2C+PA+19107">Philadelphia City Hall, Philadelphia, PA</a></div>
         <div class="pick-time-cost">1:00 PM · Free</div>
       </div>
     </div>
@@ -377,7 +479,7 @@
         <div class="pick-why">Pharmakon (Margaret Chardiet) headlines a stacked underground noise/industrial bill with Relay For Death, Jacob Winans, $5000, and Patrick Gallagher — the kind of harsh, confrontational lineup that barely surfaces on mainstream listings. This is the DIY noise scene at its most uncompromising, in a small room built for exactly that. $19.49, 21+, South Street — an easy walk from Point Breeze.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Nikki Lopez, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=304+South+St%2C+Philadelphia%2C+PA+19147">Nikki Lopez, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:00 PM · $19.49</div>
       </div>
     </div>
@@ -388,7 +490,7 @@
         <div class="pick-why">Quicksand — post-hardcore forebears who bridged Revelation Records-era hardcore with &#39;90s alt-rock — tour with Bane, straight-edge hardcore heavyweights, for a genuinely heavy double bill at Underground Arts. Both carry real weight in hardcore history rather than trading on nostalgia. Callowhill, just north of Center City — Broad Street Line to Spring Garden is the easy route in. $39.30–$45, 21+, doors 6:30.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Underground Arts, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1200+Callowhill+St%2C+Philadelphia%2C+PA+19123">Underground Arts, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · $39.30-$45, 21+</div>
       </div>
     </div>
@@ -527,7 +629,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="wednesday">
     <span class="day-name">Wednesday</span>
     <span class="day-date">September 2</span>
     <div class="day-rule"></div>
@@ -542,7 +644,7 @@
         <div class="pick-why">Philadelphia DSA hosts investigative reporter Seth Harp for a reading and Q&amp;A on The Fort Bragg Cartel, his exposé of narcotics trafficking, institutional cover-ups, and unsolved deaths tied to elite U.S. Army special-ops units. Harp is a war veteran turned journalist, so the reporting carries firsthand institutional knowledge rather than outside speculation. Free, Workers United hall on South 22nd Street, Center City — RSVP via Action Network.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Workers United, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=22+South+22nd+Street%2C+Philadelphia%2C+PA+19103">Workers United, Philadelphia, PA</a></div>
         <div class="pick-time-cost">4:30 PM · Not listed</div>
       </div>
     </div>
@@ -553,7 +655,7 @@
         <div class="pick-why">The National Lawyers Guild runs a Know Your Rights training at Wooden Shoe Books — practical legal grounding on interacting with police and ICE at a moment when that knowledge is in real demand, not abstract civics. Wooden Shoe is Philly&#39;s anchor anarchist bookstore, and this is exactly the political-education programming it exists for. Free, South Street, easy walk from Point Breeze.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -564,7 +666,7 @@
         <div class="pick-why">Kieślowski&#39;s Dekalog continues with Parts 7 and 8 — a custody kidnapping and a wrenching Holocaust-era ethics-class confrontation — the latest chapters in the Philadelphia Film Society&#39;s run through one of cinema&#39;s great achievements. New installments each week keep this fresh even for readers already following along. 4K restoration, Film Society Center, Center City.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+Street%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -727,7 +829,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="thursday">
     <span class="day-name">Thursday</span>
     <span class="day-date">September 3</span>
     <div class="day-rule"></div>
@@ -742,7 +844,7 @@
         <div class="pick-why">Alejandro González Iñárritu&#39;s blistering feature debut gets a new 4K restoration as part of the Philadelphia Film Society&#39;s Director Series on him — three interlocking Mexico City stories collided by a car crash, still one of the most kinetic pieces of filmmaking of its era. Paired with a second Iñárritu work in the series, this is a rare chance to see his early work restored on a big screen rather than streamed. Film Society Center, Chestnut Street, Center City.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Philadelphia Film Society</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1412+Chestnut+Street%2C+Philadelphia%2C+PA+19102">Philadelphia Film Society</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -753,7 +855,7 @@
         <div class="pick-why">Todd Stephens&#39; 2001 goth road-trip cult classic gets a genuine restoration event: a new 4K transfer from the original negative, re-edited with over 40 minutes of previously unseen footage and additional goth soundtrack cues, expanding it from 95 to 138 minutes. PhilaMOCA is exactly the room for this — the city&#39;s home base for weird, underground, and gothic film culture. Callowhill, just north of Center City; doors 7, film 7:30.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
         <div class="pick-time-cost">7:30 PM · $12</div>
       </div>
     </div>
@@ -764,7 +866,7 @@
         <div class="pick-why">A community-run, costume-encouraged night of Beyoncé&#39;s full catalog, from Dangerously in Love through Cowboy Carter, built as a fundraiser for Philly&#39;s Black queer community. It opens with a physical-media swap — vinyl and CDs from her catalog as prizes — so there&#39;s a record-collecting hook alongside the dance party. Pentridge Station, Kingsessing — a bus ride or BSL-to-bus transfer from Point Breeze, not walkable.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Pentridge Station, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5116+Pentridge+St%2C+Philadelphia%2C+PA+19143">Pentridge Station, Philadelphia, PA</a></div>
         <div class="pick-time-cost">5:00 PM · Not listed</div>
       </div>
     </div>
@@ -916,7 +1018,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="friday">
     <span class="day-name">Friday</span>
     <span class="day-date">September 4</span>
     <div class="day-rule"></div>
@@ -931,7 +1033,7 @@
         <div class="pick-why">A DIY punk bill at Cousin Danny&#39;s raising funds and visibility for immigrant rights under the banner &#34;No Human Is Illegal&#34; — exactly the punk-meets-solidarity intersection this scene does best. *(confirm details)* — Ask A Punk&#39;s listing is thin on lineup specifics and door price beyond the title. West Philly, 50th &amp; Market, right at the Market-Frankford Line&#39;s 50th Street station.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Cousin Danny&#39;s (5001 Market Street)</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5001+Market+St%2C+Philadelphia%2C+PA+19139">Cousin Danny&#39;s (5001 Market Street)</a></div>
         <div class="pick-time-cost">8:30 PM · Not listed</div>
       </div>
     </div>
@@ -942,7 +1044,7 @@
         <div class="pick-why">The Rotunda&#39;s queer pop-up film series returns with a genuinely fun double bill — Twister and Jurassic Park — reclaiming &#39;90s blockbusters as camp classics for a queer crowd rather than treating repertory as arthouse-only territory. Free, all ages, exactly the kind of community film night The Rotunda does best. University City, off the 34/40 trolley and the Market-Frankford Line&#39;s 40th Street station.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -953,7 +1055,7 @@
         <div class="pick-why">Philly&#39;s long-running Depeche Mode night gets a real reason to step outside the recurring-event pile this time: Blood Handsome, a Cincinnati/LA darkwave and post-punk project, joins DJ Baby Berlin for a live set alongside the usual synth-pop and goth catalog spins. Fishtown, Frankford Ave — Market-Frankford Line to Girard, then a walk, or a Broad-Street-Line transfer from Point Breeze.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Johnny Brenda&#39;s, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1201+N+Frankford+Ave%2C+Philadelphia%2C+PA+19125">Johnny Brenda&#39;s, Philadelphia, PA</a></div>
         <div class="pick-time-cost">9:00 PM · $12.90-$18.90</div>
       </div>
     </div>
@@ -1114,7 +1216,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="saturday">
     <span class="day-name">Saturday</span>
     <span class="day-date">September 5</span>
     <div class="day-rule"></div>
@@ -1129,7 +1231,7 @@
         <div class="pick-why">Ars Nova Workshop brings John Zorn&#39;s new power trio Flatlands to Solar Myth — a rare Philly stop from one of the most restlessly inventive figures in avant-garde and free-jazz composition, spanning six-plus decades of boundary-erasing work. Zorn doesn&#39;t tour constantly, so a trio built specifically for this project is worth catching live rather than waiting for the record. Solar Myth is right on South Broad, an easy walk from Point Breeze.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Solar Myth, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1131+S+Broad+St%2C+Philadelphia%2C+PA+19147">Solar Myth, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:30 PM · $46.35, 21+</div>
       </div>
     </div>
@@ -1140,7 +1242,7 @@
         <div class="pick-why">Titus Andronicus — New Jersey punk lifers known for sprawling, politically charged rock records like The Monitor — play a completely free, all-ages set on the Delaware waterfront. Free shows from a band with this kind of national following are genuinely rare and easy to miss. *(confirm details)* — the listing is thin beyond time and price. Spruce Street Harbor Park, Penn&#39;s Landing.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Spruce Street Harbor</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=301+S+Christopher+Columbus+Blvd%2C+Philadelphia%2C+PA+19106">Spruce Street Harbor</a></div>
         <div class="pick-time-cost">6:00 PM · Free</div>
       </div>
     </div>
@@ -1151,7 +1253,7 @@
         <div class="pick-why">LA minimal-EBM duo Spike Hellis bring their new album Successor to Ruba Club — pulsing, ferocious electronic body music with real post-punk and industrial teeth. It&#39;s a genuine tour stop rather than a local recurring night, booked by R5 Productions. Northern Liberties, Green Street — a bus or Broad-Street-Line-plus-walk from Point Breeze, not a quick trip.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Ruba Club</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=416+Green+St%2C+Philadelphia%2C+PA+19123">Ruba Club</a></div>
         <div class="pick-time-cost">8:00 PM · $19.13</div>
       </div>
     </div>
@@ -1301,7 +1403,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="sunday">
     <span class="day-name">Sunday</span>
     <span class="day-date">September 6</span>
     <div class="day-rule"></div>
@@ -1316,7 +1418,7 @@
         <div class="pick-why">Sheer Mag — one of Philly&#39;s most acclaimed punk-adjacent rock exports, all analog crunch and populist songwriting — headlines a free, all-ages waterfront show as part of the Summer Sounds series. A free set from a band with this kind of national critical reputation, headlining on its own terms, is exactly the thing worth building a Sunday around. Spruce Street Harbor Park, Penn&#39;s Landing waterfront.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Cherry Street Pier, Philadelphia, PA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=301+S+Christopher+Columbus+Blvd%2C+Philadelphia%2C+PA+19106">Cherry Street Pier, Philadelphia, PA</a></div>
         <div class="pick-time-cost">7:00 PM · Not listed</div>
       </div>
     </div>
@@ -1327,7 +1429,7 @@
         <div class="pick-why">West Coast solarfunk band the pleasant uprising bring their &#34;Banned in Amerikkka&#34; Turtle Island tour to Wooden Shoe Books — political framing baked into the tour name itself, at exactly the anarchist bookstore built for that kind of booking. The listing promises &#34;solidarity and solarfunk vibes&#34; for an unusually theatrical Sunday-afternoon set. Free, South Street, easy walk from Point Breeze.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
         <div class="pick-time-cost">4:00 PM · Not listed</div>
       </div>
     </div>
@@ -1338,7 +1440,7 @@
         <div class="pick-why">Homebrew Website Club is a genuinely global, decades-spanning movement — its name borrows from the 1970s Homebrew Computer Club — for people building and owning their own corner of the web instead of renting space from social platforms. Real anti-corporate tech politics, not just a coding meetup, and Iffy Books is exactly the space for it. Free, South Philly, an easy walk from Point Breeze.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S+20th+St%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
         <div class="pick-time-cost">6:00 PM · Not listed</div>
       </div>
     </div>
@@ -1444,22 +1546,22 @@
 
   <!-- SOURCES FOOTER -->
   <div class="sources">
-    <a href="https://do215.com">Do215</a> ·
-    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a> ·
-    <a href="https://cinesp.net">cinéSPEAK</a> ·
-    <a href="https://filmadelphia.org">Philadelphia Film Society</a> ·
-    <a href="https://philamoca.org">PhilaMOCA</a> ·
-    <a href="https://phillygoth.net">Phillygoth.net</a> ·
-    <a href="https://www.philly-shows.com">Philly-Shows.com</a> ·
-    <a href="https://iffybooks.net">Iffy Books</a> ·
-    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a> ·
-    <a href="https://therotunda.org">The Rotunda</a> ·
-    <a href="https://r5productions.com">R5 Productions</a> ·
-    <a href="https://philly.askapunk.net">Philly Ask A Punk</a> ·
-    <a href="https://xpn.org">The Key by WXPN</a> ·
-    <a href="https://meetup.com">Meetup</a> ·
-    <a href="https://lu.ma">Luma</a> ·
-    <a href="https://calendar.google.com">Google Calendar</a>
+    <a href="https://do215.com">Do215</a><span class="source-count">58</span> ·
+    <a href="https://lightboxfilmcenter.org" class="source-silent">Lightbox Film Center</a> ·
+    <a href="https://cinesp.net" class="source-silent">cinéSPEAK</a> ·
+    <a href="https://filmadelphia.org">Philadelphia Film Society</a><span class="source-count">3</span> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">1</span> ·
+    <a href="https://phillygoth.net">Phillygoth.net</a><span class="source-count">1</span> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">5</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">4</span> ·
+    <a href="https://therotunda.org">The Rotunda</a><span class="source-count">6</span> ·
+    <a href="https://r5productions.com">R5 Productions</a><span class="source-count">1</span> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">3</span> ·
+    <a href="https://xpn.org" class="source-silent">The Key by WXPN</a> ·
+    <a href="https://meetup.com">Meetup</a><span class="source-count">1</span> ·
+    <a href="https://lu.ma" class="source-silent">Luma</a> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a>
   </div>
 
 </div>

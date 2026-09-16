@@ -5,89 +5,180 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>This Week in Philadelphia — June 22–28, 2026</title>
   <style>
+    /* ── Palette ──
+       Every colour in this stylesheet is a token so the dark block below can
+       restate the palette and nothing else. The light values are the report's
+       original ones, unchanged -- with one exception noted at --feature-meta.
+
+       Dark is not a mechanical inversion. In light the Top 3 card is the
+       darkest thing on a pale page; inverting that would sink it into the
+       background, so in dark it becomes the most *elevated* surface instead
+       (page < card < feature), keeping "raised means important" true in both
+       themes. Every dark pair clears WCAG AA (4.5:1) -- measured, not
+       eyeballed; the light theme does not, and fixing that is its own slice. */
+    :root {
+      --page-bg: #f0ede8;
+      --page-fg: #1c1c1c;
+      --rule: #d8d4ce;
+      --rule-soft: #eee;
+      --muted: #999;
+      --muted-strong: #888;
+      --muted-faint: #bbb;
+      --gold: #c9a84c;
+      --header-bg: #111;
+      --header-fg: #fff;
+      --card-bg: #fff;
+      --card-fg: #1c1c1c;
+      --card-venue: #444;
+      --card-shadow: rgba(0,0,0,0.06);
+      --feature-bg: #1c1c1c;
+      --feature-fg: #fff;
+      --feature-why: #999;
+      --feature-venue: #bbb;
+      /* Was #666, the one light value this change moves: 2.97:1 on the Top 3
+         card, the only outright unreadable pair in the light theme. #848484
+         clears AA at 4.56:1 and stays dimmer than --feature-why, so the
+         card's hierarchy is unchanged. */
+      --feature-meta: #848484;
+      --free: #2d7a3a;
+      --sold-out: #c0392b;
+      /* The card red, lightened for the dark Top 3 card where #c0392b muddies. */
+      --sold-out-feature: #e06a5c;
+      --table-fg: #555;
+      --source-silent: #c3bfb8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page-bg: #1a1815;
+        --page-fg: #ece8e1;
+        --rule: #3a352e;
+        --rule-soft: #2e2a25;
+        --muted: #a8a29a;
+        --muted-strong: #b5afa6;
+        --muted-faint: #918a80;
+        --gold: #d7b75f;
+        --header-bg: #100f0d;
+        --header-fg: #f3efe8;
+        --card-bg: #26231f;
+        --card-fg: #ece8e1;
+        --card-venue: #cfc8bd;
+        --card-shadow: rgba(0,0,0,0.45);
+        --feature-bg: #2e2a25;
+        --feature-fg: #f5f1ea;
+        --feature-why: #b9b2a8;
+        --feature-venue: #d0c9be;
+        --feature-meta: #a59e94;
+        --free: #7ec98b;
+        --sold-out: #ff8a7a;
+        --sold-out-feature: #ff9d8f;
+        --table-fg: #cfc8bd;
+        --source-silent: #8a8279;
+      }
+      /* The subtitle sits on --header-bg, which stays near-black in both
+         themes, so it needs its own value rather than --muted-strong. */
+      .subtitle { color: #9b948b; }
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     /* overflow-wrap inherits, so this one declaration keeps every long string
        (venues carry full street addresses -- 130 chars is real) inside its
        column instead of forcing the page to scroll sideways. */
-    body { background: #f0ede8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1c1c1c; overflow-wrap: break-word; }
+    body { background: var(--page-bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--page-fg); overflow-wrap: break-word; }
 
     /* ── Header ── */
-    .site-header { background: #111; width: 100%; }
+    .site-header { background: var(--header-bg); width: 100%; }
     .site-header-inner { max-width: 800px; margin: 0 auto; padding: 1.4rem 1.5rem 1.5rem; }
-    .eyebrow { font-size: 0.62rem; text-transform: uppercase; color: #c9a84c; letter-spacing: 0.12em; margin-bottom: 0.45rem; }
-    h1 { color: #fff; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
-    h1 span { color: #c9a84c; }
-    .subtitle { color: #888; font-size: 0.82rem; }
+    .eyebrow { font-size: 0.62rem; text-transform: uppercase; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 0.45rem; }
+    h1 { color: var(--header-fg); font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+    h1 span { color: var(--gold); }
+    .subtitle { color: var(--muted-strong); font-size: 0.82rem; }
     .header-playlist { margin-top: 0.6rem; font-size: 0.75rem; }
-    .header-playlist a { color: #c9a84c; text-decoration: none; }
+    .header-playlist a { color: var(--gold); text-decoration: none; }
     .header-playlist a:hover { text-decoration: underline; }
 
     /* ── Content wrapper ── */
     .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
-    hr.day-sep { border: none; border-top: 1px solid #d8d4ce; margin: 2.25rem 0; }
+    hr.day-sep { border: none; border-top: 1px solid var(--rule); margin: 2.25rem 0; }
+
+    /* ── Day index ──
+       Seven links, no JS. The page runs ~11 cards a day across 7 days, which
+       is short enough that a sticky bar or a back-to-top button would cost
+       more than they return (REPORT_IMPROVEMENTS_BRAINSTORM.md #16, #24, both
+       dropped on those grounds) but long enough to want one jump per day. */
+    .day-index { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; margin-bottom: 1.75rem; font-size: 0.72rem; }
+    .day-index a { color: var(--page-fg); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 0.1rem; }
+    .day-index a:hover { border-bottom-color: var(--gold); }
+    .day-index .day-index-count { color: var(--muted); margin-left: 0.25rem; }
 
     /* ── Day header ── */
-    .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
-    .day-name { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.1em; flex-shrink: 0; }
-    .day-date { font-size: 1.25rem; font-weight: 700; color: #1c1c1c; flex-shrink: 0; }
-    .day-rule { flex: 1; height: 1px; background: #d8d4ce; }
+    .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; scroll-margin-top: 0.75rem; }
+    .day-name { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; flex-shrink: 0; }
+    .day-date { font-size: 1.25rem; font-weight: 700; color: var(--page-fg); flex-shrink: 0; }
+    .day-rule { flex: 1; height: 1px; background: var(--rule); }
 
     /* ── Top 3 card ── */
-    .top3-card { background: #1c1c1c; border-radius: 7px; padding: 1rem 1.25rem; margin-bottom: 0.65rem; }
-    .top3-label { font-size: 0.62rem; text-transform: uppercase; color: #c9a84c; letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    .top3-card { background: var(--feature-bg); border-radius: 7px; padding: 1rem 1.25rem; margin-bottom: 0.65rem; }
+    .top3-label { font-size: 0.62rem; text-transform: uppercase; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
     .top3-pick { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.9rem; }
     .top3-pick:last-child { margin-bottom: 0; }
-    .pick-num { color: #c9a84c; font-weight: 700; font-size: 0.9rem; min-width: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; }
+    .pick-num { color: var(--gold); font-weight: 700; font-size: 0.9rem; min-width: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; }
     .pick-main { flex: 1; min-width: 0; }
-    .pick-name { color: #fff; font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
-    .pick-name a { color: #c9a84c; text-decoration: none; }
+    .pick-name { color: var(--feature-fg); font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
+    .pick-name a { color: var(--gold); text-decoration: none; }
     .pick-name a:hover { text-decoration: underline; }
-    .pick-name a.event-link { color: #fff; }
-    .pick-why { color: #999; font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
+    .pick-name a.event-link { color: var(--feature-fg); }
+    .pick-why { color: var(--feature-why); font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
     /* max-width caps the flex-shrink: 0 column: a venue carrying a full street
        address (130 chars is real) otherwise sizes to its own content and starves
        .pick-main down to one letter per line. */
     .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
-    .pick-venue { color: #bbb; font-size: 0.76rem; }
-    .pick-time-cost { color: #666; font-size: 0.68rem; margin-top: 0.15rem; }
+    .pick-venue { color: var(--feature-venue); font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
+    .pick-time-cost { color: var(--feature-meta); font-size: 0.68rem; margin-top: 0.15rem; }
+    .pick-time-cost .sold-out { color: var(--sold-out-feature); font-size: inherit; }
 
     /* ── Honorable mentions ── */
-    p.hm { font-size: 0.77rem; color: #999; font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
+    p.hm { font-size: 0.77rem; color: var(--muted); font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
 
     /* ── Category header ── */
-    .cat-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; margin-top: 1.1rem; }
-    .cat-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
+    .cat-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; margin-top: 1.1rem; }
+    .cat-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
 
     /* ── Event cards ── */
-    .event-card { background: #fff; border-radius: 5px; padding: 0.5rem 0.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.06); display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; }
+    .event-card { background: var(--card-bg); border-radius: 5px; padding: 0.5rem 0.75rem; box-shadow: 0 1px 2px var(--card-shadow); display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; }
     .event-left { flex: 1; min-width: 0; }
-    .event-name { font-size: 0.85rem; font-weight: 700; color: #1c1c1c; line-height: 1.3; }
+    .event-name { font-size: 0.85rem; font-weight: 700; color: var(--card-fg); line-height: 1.3; }
     .event-name a { color: inherit; text-decoration: none; }
     .event-name a:hover { text-decoration: underline; }
-    .event-note { font-size: 0.73rem; color: #999; margin-top: 0.15rem; line-height: 1.4; }
+    .event-note { font-size: 0.73rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4; }
     .event-right { text-align: right; flex-shrink: 0; min-width: 120px; max-width: 50%; }
-    .event-venue { font-size: 0.78rem; font-weight: 700; color: #444; }
-    .event-time { font-size: 0.7rem; color: #999; margin-top: 0.1rem; }
-    .price-free { font-size: 0.7rem; color: #2d7a3a; }
-    .price-paid { font-size: 0.7rem; color: #999; }
-    .sold-out { font-size: 0.7rem; color: #c0392b; font-weight: 600; }
+    .event-venue { font-size: 0.78rem; font-weight: 700; color: var(--card-venue); }
+    .event-time { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+    .price-free { font-size: 0.7rem; color: var(--free); }
+    .price-paid { font-size: 0.7rem; color: var(--muted); }
+    .sold-out { font-size: 0.7rem; color: var(--sold-out); font-weight: 600; }
 
     /* ── All Week table ── */
-    .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: #999; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
-    .allweek-label::after { content: ''; flex: 1; border-top: 1px solid #d8d4ce; }
+    .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+    .allweek-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
     .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-    .allweek-table th { text-align: left; padding: 0.3rem 0.5rem; color: #888; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #d8d4ce; }
-    .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eee; color: #555; vertical-align: top; }
+    .allweek-table th { text-align: left; padding: 0.3rem 0.5rem; color: var(--muted-strong); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--rule); }
+    .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--rule-soft); color: var(--table-fg); vertical-align: top; }
     .allweek-table tr:last-child td { border-bottom: none; }
-    .allweek-table td strong { color: #1c1c1c; }
+    .allweek-table td strong { color: var(--page-fg); }
 
-    .cat-omitted { font-size: 0.7rem; color: #bbb; font-style: italic; margin: 0.15rem 0 0 0.75rem; }
+    .cat-omitted { font-size: 0.7rem; color: var(--muted-faint); font-style: italic; margin: 0.15rem 0 0 0.75rem; }
 
     /* ── Sources footer ── */
-    .sources { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 3rem; line-height: 2.2; }
-    .sources a { color: #bbb; text-decoration: none; }
-    .sources a:hover { color: #888; }
-    .sources-failure { text-align: center; font-size: 0.7rem; color: #bbb; margin-top: 0.4rem; }
+    .sources { text-align: center; font-size: 0.7rem; color: var(--muted); margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: var(--muted); text-decoration: none; }
+    .sources a:hover { color: var(--page-fg); }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: var(--source-silent); }
+    .source-count { color: var(--source-silent); font-size: 0.62rem; margin-left: 0.2rem; }
+    .sources-failure { text-align: center; font-size: 0.7rem; color: var(--muted-faint); margin-top: 0.4rem; }
 
     /* ── Narrow screens ──
        Every card above is a desktop flex row with a fixed-width, right-aligned
@@ -123,13 +214,13 @@
       /* :not(:empty) -- clean_cost() legitimately yields "" (53 of them in the
          week of 2026-08-10 alone), and the separator must not dangle after the
          time with no price behind it. */
-      .event-time + div:not(:empty)::before { content: "·"; color: #ccc; margin-right: 0.4rem; }
+      .event-time + div:not(:empty)::before { content: "·"; color: var(--rule); margin-right: 0.4rem; }
 
       .allweek-table, .allweek-table tbody, .allweek-table tr, .allweek-table td { display: block; width: 100%; }
       .allweek-table thead { display: none; }
-      .allweek-table tr { background: #fff; border-radius: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
+      .allweek-table tr { background: var(--card-bg); border-radius: 5px; box-shadow: 0 1px 2px var(--card-shadow); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
       .allweek-table td { border-bottom: none; padding: 0.1rem 0; }
-      .allweek-table td::before { content: attr(data-label) ": "; color: #999; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      .allweek-table td::before { content: attr(data-label) ": "; color: var(--muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
       .allweek-table td:first-child::before { content: none; }
     }
   </style>
@@ -146,7 +237,18 @@
 </header>
 
 <div class="content">
-  <div class="day-header">
+
+  <!-- DAY INDEX -->
+  <nav class="day-index" aria-label="Jump to a day">
+    <a href="#monday">Monday<span class="day-index-count">20</span></a>
+    <a href="#tuesday">Tuesday<span class="day-index-count">12</span></a>
+    <a href="#wednesday">Wednesday<span class="day-index-count">14</span></a>
+    <a href="#thursday">Thursday<span class="day-index-count">6</span></a>
+    <a href="#friday">Friday<span class="day-index-count">8</span></a>
+    <a href="#saturday">Saturday<span class="day-index-count">19</span></a>
+    <a href="#sunday">Sunday<span class="day-index-count">9</span></a>
+  </nav>
+  <div class="day-header" id="monday">
     <span class="day-name">Monday</span>
     <span class="day-date">June 22</span>
     <div class="day-rule"></div>
@@ -161,7 +263,7 @@
         <div class="pick-why">Build small clay sculptures with NFC tags embedded inside that trigger shortcuts on your phone — half art project, half hardware hack, at a DIY electronics bookstore with a no-one-turned-away-for-lack-of-funds door policy. Iffy Books keeps the barrier floor as low as it gets: $4.50 for the kit, pay what you can for instruction. If you&#39;ve been wanting to start embedding tech into physical objects, this is the room to start in Philly.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St.%2C+Philadelphia%2C+PA+19146">Iffy Books</a></div>
         <div class="pick-time-cost">6:00 PM · $4.50 kit + optional instructor donation (notaflof)</div>
       </div>
     </div>
@@ -172,7 +274,7 @@
         <div class="pick-why">Die Sexual bring a heavy, bass-driven gothic rock sound that rarely makes it to Philly — this is a proper goth night with live bands, not a DJ bar set. Doors at 7, show at 8, $15 advance at a venue that keeps the room the right size for this kind of music. 21+.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Johnny Brenda&#39;s</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1201+North+Frankford+Ave%2C+Philadelphia%2C+PA+19125">Johnny Brenda&#39;s</a></div>
         <div class="pick-time-cost">8:00 PM · $15 adv / $20 DOS</div>
       </div>
     </div>
@@ -400,7 +502,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="tuesday">
     <span class="day-name">Tuesday</span>
     <span class="day-date">June 23</span>
     <div class="day-rule"></div>
@@ -415,7 +517,7 @@
         <div class="pick-why">Ruth Leitman&#39;s underground Hi-8 documentary about a 1994 New Jersey beach town sold out its PhilaMOCA premiere on Monday — this encore exists because people couldn&#39;t get in. Leitman will be in the room for a Q&amp;A, moderated by Jeff Krulik (director of Heavy Metal Parking Lot). $10 at PhilaMOCA, doors at 7.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA</a></div>
         <div class="pick-time-cost">7:30 PM · $10</div>
       </div>
     </div>
@@ -426,7 +528,7 @@
         <div class="pick-why">Black Country, New Road are one of the defining acts of current UK experimental music — chamber pop, post-rock, folk, and grief tangled into something constantly evolving. Philly dates are not frequent, and Franklin Music Hall is the right room to feel it. The kind of show that gets talked about afterward.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Franklin Music Hall</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=421+N+7th+St%2C+Philadelphia%2C+PA+19123">Franklin Music Hall</a></div>
         <div class="pick-time-cost">8:00 PM · confirm details</div>
       </div>
     </div>
@@ -437,7 +539,7 @@
         <div class="pick-why">Playtesting a game called Land to the Tillers at an anarchist bookstore is already a sentence worth showing up for — leftist theory as game design, at Wooden Shoe. This is community-built work in progress, and showing up means shaping it while it&#39;s still being made. No cost listed.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books</a></div>
         <div class="pick-time-cost">6:00 PM · confirm details</div>
       </div>
     </div>
@@ -588,7 +690,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="wednesday">
     <span class="day-name">Wednesday</span>
     <span class="day-date">June 24</span>
     <div class="day-rule"></div>
@@ -603,7 +705,7 @@
         <div class="pick-why">Three linked stories — Le Guin&#39;s &#39;The Ones Who Walk From Omelas,&#39; NK Jemisin&#39;s direct response &#39;The Ones Who Stay and Fight,&#39; and Isabel J. Kim&#39;s newer riff — make this a living conversation across generations of speculative fiction writers about complicity and collective action. Literary theory meets leftist ethics meets actual fiction at a DIY bookstore with a donation jar. All three texts are available online; come prepared or come to listen.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St.%2C+Philadelphia%2C+PA+19146">Iffy Books</a></div>
         <div class="pick-time-cost">7:00 PM · donation to store requested</div>
       </div>
     </div>
@@ -614,7 +716,7 @@
         <div class="pick-why">Lip Critic are a Philly noise-rock band with a cult following for good reason — angular, propulsive, and genuinely weird in the best sense. R5 brings them to PhilaMOCA for an all-ages show; Flatwounds and Bejalvin open. $20, doors 7:30.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA</a></div>
         <div class="pick-time-cost">8:00 PM · $20</div>
       </div>
     </div>
@@ -625,7 +727,7 @@
         <div class="pick-why">Korean-born Philadelphia bassist DoYeon Kim brings her quartet to Solar Myth under the Ars Nova Workshop banner — one of the sharpest contemporary jazz and experimental music presenters in the city. If you want to hear what&#39;s happening at the edges of jazz in Philadelphia right now, this is the room.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Solar Myth</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1010+S+Broad+St%2C+Philadelphia%2C+PA+19146">Solar Myth</a></div>
         <div class="pick-time-cost">7:30 PM · confirm details</div>
       </div>
     </div>
@@ -797,7 +899,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="thursday">
     <span class="day-name">Thursday</span>
     <span class="day-date">June 25</span>
     <div class="day-rule"></div>
@@ -812,7 +914,7 @@
         <div class="pick-why">of Montreal have been making maximalist, genre-shifting psychedelic pop since the late &#39;90s — glam, prog, funk, and absurdist theater at once — and Philly appearances aren&#39;t frequent. Underground Arts is the right room for this kind of show. An event worth clearing your evening for.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Underground Arts</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1200+Callowhill+St%2C+Philadelphia%2C+PA+19123">Underground Arts</a></div>
         <div class="pick-time-cost">8:00 PM · confirm details</div>
       </div>
     </div>
@@ -823,7 +925,7 @@
         <div class="pick-why">Prewn make slow-burning indie rock with emotional weight — the kind of band that rewards a quiet room and full attention. $15 at PhilaMOCA, R5 all-ages, doors 7:30.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA</a></div>
         <div class="pick-time-cost">8:00 PM · $15</div>
       </div>
     </div>
@@ -918,7 +1020,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="friday">
     <span class="day-name">Friday</span>
     <span class="day-date">June 26</span>
     <div class="day-rule"></div>
@@ -933,7 +1035,7 @@
         <div class="pick-why">No soldering experience required — you&#39;re building a top that flashes LEDs when it spins, and the kit is $5.39. Iffy Books&#39; beginner soldering workshops are legitimately good entry points to electronics work, run by patient instructors with a no-one-turned-away door policy. The cost floor doesn&#39;t get lower.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St.%2C+Philadelphia%2C+PA+19146">Iffy Books</a></div>
         <div class="pick-time-cost">2:00 PM · $5.39 kit (includes tax) + optional instructor donation (notaflof)</div>
       </div>
     </div>
@@ -944,7 +1046,7 @@
         <div class="pick-why">R5 brings Bike Routes — a Chicago indie rock band with road-tested, well-crafted songs — to PhilaMOCA for an all-ages Friday night. $15, doors 7:30. Wormy and Innerlove open; both worth arriving early for.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA</a></div>
         <div class="pick-time-cost">8:00 PM · $15</div>
       </div>
     </div>
@@ -955,7 +1057,7 @@
         <div class="pick-why">Philly Action Ready Coalition teaches practical street medicine at the anarchist bookstore — Narcan use, CPR, basic scans. No certifications, no jargon, just usable knowledge. Events like this are what mutual aid infrastructure actually looks like in practice.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Wooden Shoe Books</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books</a></div>
         <div class="pick-time-cost">6:00 PM · confirm details</div>
       </div>
     </div>
@@ -1063,7 +1165,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="saturday">
     <span class="day-name">Saturday</span>
     <span class="day-date">June 27</span>
     <div class="day-rule"></div>
@@ -1078,7 +1180,7 @@
         <div class="pick-why">Three experimental acts — avant-garde, free jazz, and noise — playing a benefit for Sol Collective, a West Philadelphia community arts and social justice organization. God&#39;s Automatic Body is a DIY space most of the city doesn&#39;t know about yet; shows there have a specificity that bigger venues lose. This one has community stakes attached and will be talked about.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">God&#39;s Automatic Body</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=5522+Baltimore+Ave%2C+Philadelphia%2C+PA+19143">God&#39;s Automatic Body</a></div>
         <div class="pick-time-cost">7:00 PM · confirm details</div>
       </div>
     </div>
@@ -1089,7 +1191,7 @@
         <div class="pick-why">JINSEI gets its Philadelphia premiere at PhilaMOCA — which is already a meaningful signal about what kind of film this is. $12, doors at 7. Details on the film itself are sparse, which at PhilaMOCA usually means something genuinely strange is in store.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">PhilaMOCA</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA</a></div>
         <div class="pick-time-cost">7:30 PM · $12</div>
       </div>
     </div>
@@ -1100,7 +1202,7 @@
         <div class="pick-why">Ten local acts in one afternoon and evening at the Rotunda — HECCRA, ULTRA DELUXE, SLOW BURNING DAYDREAM, SODASEAS, POWERLINE TRAIL, GUILLERMO GUILLOTINE, LINDEN, IT HELPS ME SLEEP, ALL ENDS LEAD TO YOU, KWARTER ZIP. $15 advance for the density of local talent alone is a steal. All ages, alcohol-free, the Rotunda at full capacity for a showcase has a specific Philly energy.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Rotunda</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda</a></div>
         <div class="pick-time-cost">4:00 PM · $15 advance / $18 door</div>
       </div>
     </div>
@@ -1332,7 +1434,7 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header">
+  <div class="day-header" id="sunday">
     <span class="day-name">Sunday</span>
     <span class="day-date">June 28</span>
     <div class="day-rule"></div>
@@ -1347,7 +1449,7 @@
         <div class="pick-why">Emma Goldman&#39;s Anarchism and Other Essays alongside Kropotkin&#39;s The Conquest of Bread — two foundational texts, one anarchist bookstore with a free door. Iffy Books runs this as a biweekly series through the summer; this is the session to start with if you&#39;ve never read either. Come with questions or just come to listen.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Iffy Books</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St.%2C+Philadelphia%2C+PA+19146">Iffy Books</a></div>
         <div class="pick-time-cost">6:00 PM · free</div>
       </div>
     </div>
@@ -1358,7 +1460,7 @@
         <div class="pick-why">The Human League, Soft Cell, and Alison Moyet on a single bill is a lineup that shouldn&#39;t exist outside a festival, and yet here it is at The Met. Three synthpop and new wave acts at the peak of their cultural moment, five decades in — the ticket price reflects it, but so does the occasion. A once-in-years bill.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">The Met Presented by Highmark</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=858+N+Broad+St%2C+Philadelphia%2C+PA+19130">The Met Presented by Highmark</a></div>
         <div class="pick-time-cost">7:30 PM · confirm details</div>
       </div>
     </div>
@@ -1369,7 +1471,7 @@
         <div class="pick-why">Kirk Franklin performing with a 250-member choir at Independence National Historical Park for free, 7–9 PM, as part of Wawa Welcome America. Gospel and soul at the highest register, outdoors, zero barrier to entry. The full-choir format makes this more spectacle than concert — worth showing up for even if gospel isn&#39;t your usual lane.</div>
       </div>
       <div class="pick-meta">
-        <div class="pick-venue">Independence National Historical Park</div>
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=526+Market+St%2C+Philadelphia%2C+PA+19106">Independence National Historical Park</a></div>
         <div class="pick-time-cost">7:00 PM · free</div>
       </div>
     </div>
@@ -1486,22 +1588,27 @@
 
   <!-- SOURCES FOOTER -->
   <div class="sources">
-    <a href="https://do215.com">Do215</a> ·
-    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a> ·
-    <a href="https://cinesp.net">cinéSPEAK</a> ·
-    <a href="https://filmadelphia.org">Philadelphia Film Society</a> ·
-    <a href="https://philamoca.org">PhilaMOCA</a> ·
-    <a href="https://phillygoth.net">Phillygoth.net</a> ·
-    <a href="https://www.philly-shows.com">Philly-Shows.com</a> ·
-    <a href="https://iffybooks.net">Iffy Books</a> ·
-    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a> ·
-    <a href="https://therotunda.org">The Rotunda</a> ·
-    <a href="https://r5productions.com">R5 Productions</a> ·
-    <a href="https://philly.askapunk.net">Philly Ask A Punk</a> ·
-    <a href="https://xpn.org">The Key by WXPN</a> ·
-    <a href="https://meetup.com">Meetup</a> ·
-    <a href="https://lu.ma">Luma</a> ·
-    <a href="https://calendar.google.com">Google Calendar</a>
+    <a href="https://do215.com">Do215</a><span class="source-count">14</span> ·
+    <a href="https://lightboxfilmcenter.org" class="source-silent">Lightbox Film Center</a> ·
+    <a href="https://cinesp.net" class="source-silent">cinéSPEAK</a> ·
+    <a href="https://filmadelphia.org">Philadelphia Film Society</a><span class="source-count">13</span> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">3</span> ·
+    <a href="https://phillygoth.net">Phillygoth.net</a><span class="source-count">6</span> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">9</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">2</span> ·
+    <a href="https://therotunda.org">The Rotunda</a><span class="source-count">6</span> ·
+    <a href="https://r5productions.com">R5 Productions</a><span class="source-count">3</span> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">8</span> ·
+    <a href="https://xpn.org">The Key by WXPN</a><span class="source-count">5</span> ·
+    <a href="https://meetup.com">Meetup</a><span class="source-count">5</span> ·
+    <a href="https://lu.ma">Luma</a><span class="source-count">7</span> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a> ·
+    <span>Free Library</span><span class="source-count">2</span> ·
+    <span>Hive76</span><span class="source-count">1</span> ·
+    <span>Philadelphia Citizen</span><span class="source-count">2</span> ·
+    <span>Songkick</span><span class="source-count">1</span> ·
+    <span>Trakt.tv film releases</span><span class="source-count">1</span>
   </div>
   <p class="sources-failure">⚠️ do215 unavailable this week (partial — June 22, 25, 26, 28 not covered; URL retrieval failed in scheduled-task context) — events from that source may be missing.</p>
   <p class="sources-failure">⚠️ songkick unavailable this week (partial — full June page too large to process; 2 events confirmed via supplemental search) — events from that source may be missing.</p>
