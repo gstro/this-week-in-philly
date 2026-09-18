@@ -291,11 +291,15 @@ The description points at `event-selection-philosophy.md`; the actual target is
 `event-selection-philosophy/SKILL.md`. *Rationale:* trivial, but it is a literal path that does not
 resolve from either tree.
 
-**A5 · Decide the fate of the `docs/v1/Skills/` twins. [X]**
-Both files are byte-identical to the live `.claude/skills/` copies today. `philadelphia-sources` has
-already drifted (680 vs 589 lines). *Rationale:* the moment you edit the live philosophy, the v1
-copy silently becomes a second, wrong source of truth for anyone reading `docs/v1/`. Either add a
-one-line "frozen v1 snapshot, see `.claude/skills/` for current" banner or delete them.
+**A5 · Decide the fate of the `docs/v1/Skills/` twins. [X] — done.**
+Both files were byte-identical to the live `.claude/skills/` copies at the time this was written.
+`philadelphia-sources` had already drifted (680 vs 589 lines). *Rationale:* the moment you edit the
+live philosophy, the v1 copy silently becomes a second, wrong source of truth for anyone reading
+`docs/v1/`. Either add a one-line "frozen v1 snapshot, see `.claude/skills/` for current" banner or
+delete them. **Resolved:** the banner (commit `f0c4106`) — all four `docs/v1/Skills/*/SKILL.md`
+twins carry it. All four have since diverged further from their live counterparts too (the banner
+plus the passage of time did what it was meant to); "byte-identical" above is a snapshot of the
+state at the time, not a current claim.
 
 **A6 · Note the knowledge duplicated into code. [X]**
 `scripts/prepare_selection_input.py` hardcodes venue/recurrence knowledge that also lives in the

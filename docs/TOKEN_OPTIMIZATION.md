@@ -1,5 +1,16 @@
 # Selection's token usage: what it actually costs and what didn't help
 
+> **Status update.** This document's own text is now stale in the way it was written to catch:
+> "Everything below is on the `token-optimization` branch... not yet merged to `main`" — it
+> merged via PR #23 (`a38fec2`; `8fec1ec` is an ancestor of current `main`). "No real end-to-end
+> verification yet" under **Remaining work** is also overtaken — weeks 2026-09-07 and 2026-09-14
+> have since published through the full real pipeline (`workflow_dispatch` Collection → Selection
+> Routine → `presentation.yml`), not just the scratch-directory verification described below.
+> Two items under **Remaining work** are still genuinely open, unfixed: CLAUDE.md's stale event
+> count (now corrected separately) and the proposed `check_yield`-style assertion that every
+> `top3` title appears verbatim in its day's `events[]` — no such check exists in
+> `check_selection.py` or `check_yield.py` today.
+
 ## Summary
 
 Selection is the only LLM stage in the pipeline, and its cost wasn't obvious until measured. Two

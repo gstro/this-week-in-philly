@@ -1,5 +1,13 @@
 # HTML Report Improvements — Brainstorm
 
+> **Status update.** §6's "Recommended first slice" is mostly shipped: items 1 (10-card
+> cap), 3 (true counts), 4 (dark mode + mobile breakpoint), 5 (TOC + anchors), and 6 (map
+> links, derived sources footer, sold-out on Top 3) all landed across PRs #42/#43. Item 2
+> (the stats section) is the one still open, in flight on `report-stats-section` (PR #44).
+> This doc otherwise still reflects real, load-bearing analysis (the density/cap
+> reasoning, the colour-contrast measurements) — not rewritten, just flagged so it
+> doesn't read as a fully-open backlog.
+
 ## Context
 
 The Presentation stage (`scripts/html_render.py` + `templates/report.html.j2`) now

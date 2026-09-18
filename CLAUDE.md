@@ -4,27 +4,49 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-An automated weekly events-curation pipeline for Philadelphia: every Sunday it collects ~245 events from ~29 sources, selects Top 3 picks per day against Greg's interests, and delivers an HTML report plus Google Calendar entries and a CSV log.
+An automated weekly events-curation pipeline for Philadelphia: every Sunday it collects roughly 500–1000 raw events from ~22 sources (the range moves with Do215's own volume week to week — see `data/*/_manifest.json`), narrows them to a published report of Top 3 picks per day against Greg's interests, and delivers an HTML report plus Google Calendar entries. (v1's original "~245 events from ~29 sources" is long out of date — `docs/TOKEN_OPTIMIZATION.md` flagged this itself before going stale in the same way.)
 
-**Current state: documentation only — no code exists yet.** The repo holds reference docs for v1 (the currently running desktop version) and the design/plan for v2 (the cloud rewrite about to be built). There are no build, lint, or test commands until v2's `scripts/` suite lands.
+**Current state: v2 is live in production**, running on GitHub Actions since Phase 5 of `docs/V2_IMPLEMENTATION_PLAN.md`. The `scripts/` suite, its test suite, and an in-progress TypeScript port (`src/`) all exist and run in CI — see **Commands** below. `docs/v1/` remains as reference only; it does not describe what's currently running (see **Pipeline architecture**).
 
 ## Where things are
 
-- `docs/V2_DESIGN.md` — the v2 architecture (cloud Routines + Python scripts)
-- `docs/V2_IMPLEMENTATION_PLAN.md` — the build plan; includes design-review corrections that **supersede the design doc where they conflict** (e.g., the runner.sh sketch in the design has known bugs; the plan has the corrected version)
-- `docs/v1/` — snapshot of the v1 system that still runs on Greg's Mac via desktop scheduled tasks. Reference material; changing these files does not change the running system.
+- `scripts/` — the production Python pipeline (Collection, Selection's merge/report/calendar/Spotify steps, all of Presentation). Each script is standalone with its own CLI; `scripts/common.py` holds shared constants/helpers.
+- `templates/` — the Jinja2 templates `scripts/html_render.py` renders (`report.html.j2`, `index.html.j2`); `templates/report.html.j2`'s own comments are the current spec for report layout, colour, and responsive behaviour.
+- `tests/` — pytest suite mirroring `scripts/`, plus `tests/golden/` (a byte-pinned real-output fixture) and `tests/fixtures/`.
+- `src/` — an in-progress TypeScript port of select `scripts/*.py` modules (`common`, `mergeSelections`, `prepareSelectionInput`, `checkSelection` so far). Not yet wired into any workflow or production path — the `.py` originals are still what actually runs; see **Commands** for how to exercise this side independently.
+- `.claude/skills/` — the domain-knowledge skills. `philly-events-selection`, `personal-interests`, and `event-selection-philosophy` are genuinely read by the one live Routine (Selection); `philadelphia-sources` and `events-report-format` are **not** loaded by any Routine any more (see **Pipeline architecture**'s corollary) and survive only as reference/provenance.
+- `.github/workflows/` — `collection.yml` and `presentation.yml` are the two production pipelines (see **Pipeline architecture**); `collection-check.yml` and `lint.yml` are CI guards, the latter Python-only (see **Commands**).
+- `data/<week>/` — each week's committed pipeline artifacts (`_manifest.json`, `_candidates.json`/`_candidates/`, `_selections.json`, `_spotify.json`, `_playlist.json`). `docs/weeks/<week>.html` is the corresponding published report; `docs/index.html` is regenerated from `docs/weeks/*.html` on every render.
+- `docs/*.md` (this level, not `v1/`) — design docs and investigation write-ups, several still cited as living rationale for code in `scripts/` (e.g. `COLLECTION_PROXY_ISSUE.md`, `COLLECTION_YIELD_INVESTIGATION.md`). Status banners on the older ones note what's since shipped.
+- `docs/V2_DESIGN.md` — the v2 architecture (cloud Routines + Python scripts). Historical design record now that v2 is the running system; see its status banner.
+- `docs/V2_IMPLEMENTATION_PLAN.md` — the build plan; includes design-review corrections that **supersede the design doc where they conflict** (e.g., the runner.sh sketch in the design has known bugs; the plan has the corrected version). Also historical at this point — see its status banner.
+- `docs/v1/` — snapshot of the v1 system that ran on Greg's Mac via desktop scheduled tasks, before the cutover to v2. Reference material only; changing these files does not change the running system.
   - `Scheduled/*/SKILL.md` — the three v1 task definitions (collection, selection, presentation)
-  - `Skills/*/SKILL.md` — the four domain skills (sources, interests, selection philosophy, report format)
+  - `Skills/*/SKILL.md` — the four domain skills (sources, interests, selection philosophy, report format) — each carries a "frozen v1 snapshot" banner pointing at its live `.claude/skills/` counterpart
   - `Data/event-picks-log.csv` — historical picks log (includes pre-Philly Austin rows)
+
+## Commands
+
+Python (`scripts/`, `tests/`) — CI-enforced on every push/PR touching them (`lint.yml`):
+- `pytest` — the offline suite (default; network/live-source integration tests are excluded and run manually only via `pytest -m network`)
+- `ruff check scripts/`
+- `mypy` (needs `scripts/requirements-dev.txt` + `scripts/requirements-collection.txt` installed — `mypy` type-checks `fetch_page_text.py`'s playwright import even though nothing launches a browser)
+
+Use a venv with `scripts/requirements.txt` (+ `-collection.txt` for anything touching Playwright/browser-fetch code, `-dev.txt` for ruff/mypy/pytest itself) — there's no committed `.venv/`, set one up locally.
+
+TypeScript (`src/`) — **not** CI-enforced; run manually:
+- `npm test` (vitest)
+- `npm run lint` (eslint)
+- `npm run typecheck` / `npm run build` (tsc)
 
 ## Pipeline architecture
 
 Three stages, chained by file handoffs. This structure is the same in v1 and v2; only the infrastructure changes. v1: three Mac scheduled tasks passing files through iCloud. **v2, as originally designed, ran Collection and Selection as two Claude Code Routines — that is now stale.** `scripts/collect_week.py`'s own docstring states it plainly: "Runs a full Collection pass for one week, deterministically, with no model. This is the GitHub Actions replacement for the Collection Routine." `.github/workflows/collection.yml` runs it as a plain script step (per-source parsers in `scripts/event_parsers/`), then fires **Selection's** Routine via its API trigger (`SELECTION_ROUTINE_ID`/`SELECTION_ROUTINE_TOKEN`, the "Trigger Selection routine" step) the moment collection data lands on `main` — Selection's own fixed cron stays as a fallback. Selection is the only stage still running as an actual Claude Code Routine; GitHub Actions runs the Python script suite for everything else (Collection, and everything after Selection writes its annotations), with GitHub Pages serving the report.
 
 ```
-Collection  → per-source JSONs + _manifest.json   (scrape 29 sources, tier-ordered cheapest-first; scripted)
-Selection   → _selections.json                    (dedupe, score, Top 3/day, write "why" blurbs; the one Routine)
-Presentation → HTML report, calendar events, CSV  (deterministic; v2 scripts this entirely)
+Collection   → per-source JSONs + _manifest.json        (~22 sources, tier-ordered cheapest-first; scripted)
+Selection    → _selection_annotations.json              (dedupe, score, Top 3/day, write "why" blurbs; the one Routine)
+Presentation → _selections.json, HTML report, Calendar  (deterministic; v2 scripts this entirely -- CSV logging is inert, see Key contracts)
 ```
 
 Tasks are deliberately thin; all domain logic lives in the skill files. Selection is the only stage that generates prose (the `why` blurbs) — that's why it's the only one still worth a model at all: Collection and Presentation now cost zero model tokens, not just cheaper ones.
@@ -37,11 +59,11 @@ Tasks are deliberately thin; all domain logic lives in the skill files. Selectio
 - **HTML report spec** — `docs/v1/Skills/events-report-format/SKILL.md` is a pixel-level spec (exact colors, sizes, markup). In v2 it becomes `templates/report.html.j2`; the SKILL.md remains the spec of record.
 - **Picks log columns** — `city, week_of, day, date, title, venue, category, source, rank, price_tier, spotify_link, tags, attended`. `csv_log.py` must stay idempotent on week+title.
 - **Week window convention** — every stage covers the Monday immediately following the run date through the Sunday after (computed at runtime, never hardcoded).
-- **Attendance feedback loop** — Greg deletes Curated Events calendar entries he didn't attend; presence at week's end means attended. Collection's Step 0 writes this back to the CSV. This is why `calendar_create.py` must clear only the *target* (upcoming) week, never a week that has already started. Enforced, not just documented: `calendar_create.py`'s `week_has_already_begun()` skips the Calendar write entirely when the target week's Monday is in the past (Eastern), prints why, and exits 0 so the report still renders and publishes. `--force-calendar` overrides. This exists because merging PR #26 pushed a backfill to a *historical* week's `_selection_annotations.json`, which matches `presentation.yml`'s path filter and fired Presentation against the week of 2026-08-17 after it had ended — wiping and recreating all 21 entries and destroying that week's attendance signal. **`data/2026-08-17`'s calendar week is knowingly wrong** and was accepted as lost; no CSV was affected, since `attendance_check.py`/`csv_log.py` are shelved out of `runner.sh`.
+- **Attendance feedback loop** — Greg deletes Curated Events calendar entries he didn't attend; presence at week's end means attended. As designed (`attendance_check.py`, v1's "Step 0" concept — there's no equivalent numbered step in the scripted `collect_week.py`), this gets written back to the picks-log CSV — **currently inert**, since `attendance_check.py`/`csv_log.py` are shelved out of `runner.sh`, as the end of this bullet notes. The calendar-write guard below applies regardless of that: `calendar_create.py` must clear only the *target* (upcoming) week, never a week that has already started. Enforced, not just documented: `calendar_create.py`'s `week_has_already_begun()` skips the Calendar write entirely when the target week's Monday is in the past (Eastern), prints why, and exits 0 so the report still renders and publishes. `--force-calendar` overrides. This exists because merging PR #26 pushed a backfill to a *historical* week's `_selection_annotations.json`, which matches `presentation.yml`'s path filter and fired Presentation against the week of 2026-08-17 after it had ended — wiping and recreating all 21 entries and destroying that week's attendance signal. **`data/2026-08-17`'s calendar week is knowingly wrong** and was accepted as lost; no CSV was affected, since `attendance_check.py`/`csv_log.py` are shelved out of `runner.sh`.
 
-## v2 conventions (once scripts exist)
+## Script conventions
 
-Per the implementation plan: scripts live in `scripts/`, each standalone with CLI args + env-var config, `--dry-run` on anything that mutates external state (Calendar, Drive, CSV). Google auth is built from env vars from day one (`credentials.json`/`token.json` never live in the repo — Routines have no persistent home dir). `runner.sh` orchestrates: attendance_check must complete before csv_log (shared CSV); spotify_lookup → spotify_playlist → html_render (the playlist needs lookup's `_spotify.json` artist matches; the report header needs the playlist's `_playlist.json` URL).
+Per the implementation plan: scripts live in `scripts/`, each standalone with CLI args + env-var config, `--dry-run` on anything that mutates external state (Calendar, Drive, CSV — Drive is no longer in scope, see `V2_IMPLEMENTATION_PLAN.md` G7, but the flag naming predates that cut). Google auth is built from env vars from day one (`credentials.json`/`token.json` never live in the repo) — the actor that made this necessary is GitHub Actions' ephemeral runners for everything except Selection now, not Routines generally, but the constraint (no durable home dir) is the same either way. `runner.sh` orchestrates: attendance_check must complete before csv_log (shared CSV); spotify_lookup → spotify_playlist → html_render (the playlist needs lookup's `_spotify.json` artist matches; the report header needs the playlist's `_playlist.json` URL).
 
 Two distinct Spotify auth flows, deliberately: `spotify_lookup.py` uses Client Credentials (app-only — it only searches, and has no refresh token to expire), while `spotify_playlist.py` uses the user-authorized client in `common.get_spotify_user_client()`, because Client Credentials has no user context and **cannot** create or modify a playlist. The latter needs `SPOTIFY_REFRESH_TOKEN` + `SPOTIFY_REDIRECT_URI` on top of the shared client id/secret; `scripts/spotify_oauth_bootstrap.py` is the one-time consent step. Both must use spotipy's `MemoryCacheHandler` — the default `CacheFileHandler` writes a `.cache` token file into the CWD, which is meaningless on a runner with no durable home (G3).
 

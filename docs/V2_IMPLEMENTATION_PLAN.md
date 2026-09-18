@@ -1,6 +1,6 @@
 # This Week in Philly — v2 Implementation Plan
 
-**Status:** Proposed
+**Status:** Implemented — all five phases below shipped; this is the plan the running system was actually built to (see `CLAUDE.md`'s Pipeline architecture for the current state, including where it has since moved past this doc, e.g. Collection no longer runs as a Routine). Kept as the historical build record and because individual sections (e.g. D1's `runner.sh` fix) are still cited by name from code comments.
 **Companion to:** `V2_DESIGN.md`
 **Date:** 2026-07-11
 
