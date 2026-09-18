@@ -182,6 +182,70 @@ Add a table at the bottom of the report for multi-day events spanning 3+ days.
 
 ---
 
+## Week in Numbers
+
+Between the All Week table and the sources footer — it's meta-information about
+the week, so it follows the week's content. Zero JS; hover detail rides on
+`title` attributes. `html_render.py`'s `build_stats()` is the implementation.
+
+Four blocks, each in the form its data actually calls for:
+
+1. **The funnel — a KPI row, not a chart.** `Collected · Candidates · Listed ·
+   Top 3 picks`, each after the first carrying its drop from the previous
+   (`−89% from candidates`). Values use proportional figures, not
+   `tabular-nums` — they don't align in a column.
+   **Collected comes from `_manifest.json`; when that's missing the tile is
+   simply absent and the funnel starts at Candidates.** `data/2026-06-22`
+   predates v2 and has no manifest, so this path is live, not theoretical.
+   "Listed" must count All Week / Recurring events too — they're routed out of
+   the day category blocks, so summing categories alone under-reports it
+   against the page directly above.
+2. **By category — sorted horizontal stacked bars.** Length ∝ the **true,
+   pre-cap** listed count summed across all 7 days (`true_count`, never the
+   capped display count), on one shared scale so magnitudes compare across
+   rows. A leading gold segment ∝ Top 3 count, so Top 3 counts align at the
+   baseline. A category that won no slot renders **at its true length with no
+   gold** — that's the signal, not an empty row to hide.
+3. **By source — sorted horizontal bars, single hue.** Contributors only,
+   descending. One series, so no legend: the row label carries identity.
+4. **Collection health — a sentence, not a chart.**
+
+**The health line reports sources below their documented floor, never bare
+zero-yield.** Five sources return `status: ok` with 0 events in a typical week
+(`meetup-ai-philly`, `meetup-owasp`, `meetup-philly-film-club`,
+`meetup-tech-in-motion`, `philly-shows`) and every one of them carries
+`min_expected: 0` in `data/expected_yield.json` — they are documented as
+legitimately quiet, not broken. A "5 sources silent this week" stat would cry
+wolf every single week. `scripts/check_yield.py`'s `check_yield_floor()` owns
+the rule, exemption included; `build_stats()` calls it rather than deriving a
+second one.
+
+### Chart colour
+
+Two marks only: `--gold` for what won a Top 3 slot, `--stat-bar` for everything
+else. That's an **emphasis** pair — one accent plus a de-emphasis neutral — not
+a categorical palette, and it's validated as such. The checks that decide
+whether two adjacent segments can be told apart pass in both themes (CVD
+separation 19.0 light / 19.3 dark; normal-vision ΔE 20.2 / 20.4). `--stat-bar`
+was re-stepped darker to get there: a paler grey sat at 14.0, under the 15
+normal-vision floor.
+
+The palette validator also reports a chroma-floor failure on `--stat-bar`
+("reads gray") and a lightness-band failure on `--gold` in dark. Both are scope
+mismatches, not defects: a de-emphasis neutral is *supposed* to read gray, and
+`--gold` is the report's existing brand accent rather than a slot chosen for
+this chart. `--gold`'s low contrast against the light paper (1.96:1) is why the
+per-row count labels are **mandatory** — that's the relief the contrast warning
+obligates, not decoration.
+
+Mark specs: bars 9px (cap 24px), square at the baseline and 4px-rounded at the
+data end, a **2px surface-coloured gap** between the gold and neutral segments
+(a gap, never a border drawn around the mark), and a 6px `min-width` so a
+single event still reads as a mark instead of a 1px sliver. Counts render
+*outside* the bar end, where a short bar can't clip them.
+
+---
+
 ## Sources Footer
 
 Centered, `0.7rem`, derived from the week's own events — **not** a fixed list.
