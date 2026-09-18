@@ -19,15 +19,17 @@ An automated weekly events-curation pipeline for Philadelphia: every Sunday it c
 
 ## Pipeline architecture
 
-Three stages, chained by file handoffs. This structure is the same in v1 and v2; only the infrastructure changes (v1: three Mac scheduled tasks passing files through iCloud; v2: two Claude Code Routines — Collection on Haiku, Selection on Sonnet — passing files through the GitHub repo via `git push`, with GitHub Actions triggering the Python script suite for everything after selection, and GitHub Pages serving the report).
+Three stages, chained by file handoffs. This structure is the same in v1 and v2; only the infrastructure changes. v1: three Mac scheduled tasks passing files through iCloud. **v2, as originally designed, ran Collection and Selection as two Claude Code Routines — that is now stale.** `scripts/collect_week.py`'s own docstring states it plainly: "Runs a full Collection pass for one week, deterministically, with no model. This is the GitHub Actions replacement for the Collection Routine." `.github/workflows/collection.yml` runs it as a plain script step (per-source parsers in `scripts/event_parsers/`), then fires **Selection's** Routine via its API trigger (`SELECTION_ROUTINE_ID`/`SELECTION_ROUTINE_TOKEN`, the "Trigger Selection routine" step) the moment collection data lands on `main` — Selection's own fixed cron stays as a fallback. Selection is the only stage still running as an actual Claude Code Routine; GitHub Actions runs the Python script suite for everything else (Collection, and everything after Selection writes its annotations), with GitHub Pages serving the report.
 
 ```
-Collection  → per-source JSONs + _manifest.json   (scrape 29 sources, tier-ordered cheapest-first)
-Selection   → _selections.json                    (dedupe, score, Top 3/day, write "why" blurbs)
+Collection  → per-source JSONs + _manifest.json   (scrape 29 sources, tier-ordered cheapest-first; scripted)
+Selection   → _selections.json                    (dedupe, score, Top 3/day, write "why" blurbs; the one Routine)
 Presentation → HTML report, calendar events, CSV  (deterministic; v2 scripts this entirely)
 ```
 
-Tasks are deliberately thin; all domain logic lives in the skill files. Selection is the only stage that generates prose (the `why` blurbs) — that's why it keeps Sonnet in v2 while everything else gets cheaper.
+Tasks are deliberately thin; all domain logic lives in the skill files. Selection is the only stage that generates prose (the `why` blurbs) — that's why it's the only one still worth a model at all: Collection and Presentation now cost zero model tokens, not just cheaper ones.
+
+**Corollary:** `.claude/skills/philadelphia-sources/SKILL.md` is, like `events-report-format/SKILL.md` (see the HTML report spec bullet below), no longer loaded by any Routine at runtime — `collect_source.py`, `collect_week.py`, and `scripts/event_parsers/*.py` only cite it in comments for per-source provenance now. `philly-events-selection`, `personal-interests`, and `event-selection-philosophy` remain genuinely consumed, since Selection is still the one live Routine reading skills.
 
 ## Key contracts (change with care)
 
