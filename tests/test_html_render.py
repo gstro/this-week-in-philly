@@ -17,8 +17,11 @@ the new correct output, don't just copy the diff over blind.
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
+import common
 import html_render as hr
 
 FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures"
@@ -369,6 +372,188 @@ def test_top3_pick_gets_a_map_link_only_when_it_has_an_address() -> None:
     )["top3"][0]
     assert with_address["map_url"].startswith("https://www.google.com/maps/search/")
     assert hr.build_day_viewmodel(_one_pick_day(), {})["top3"][0]["map_url"] is None
+
+
+# --- build_stats: the Week in Numbers section ---
+
+
+def _stats_day(date: str, day_name: str, events: list[dict], top3: list[dict]) -> dict:
+    return {"date": date, "day_name": day_name, "events": events, "top3": top3}
+
+
+def _stats_event(title: str, category: str, source: str = "Do215") -> dict:
+    return {
+        "title": title,
+        "url": "https://example.com",
+        "venue": "V",
+        "category": category,
+        "source": source,
+        "time": "8:00 PM",
+        "cost": "",
+    }
+
+
+MUSIC = "🎵 Music & Concerts"
+FILM = "🎬 Film & Cinema"
+
+
+def _one_day_selections(events: list[dict], top3: list[dict], candidates: int) -> dict:
+    return {
+        "days": [_stats_day("2026-06-22", "Monday", events, top3)],
+        "total_events_after_dedup": candidates,
+    }
+
+
+def test_build_stats_funnel_drops_the_collected_stage_without_a_manifest() -> None:
+    """data/2026-06-22 predates v2 and has no _manifest.json. The section still
+    renders -- one tile shorter -- rather than the week failing to render."""
+    sel = _one_day_selections([_stats_event("A", MUSIC)], [], 10)
+    stats = hr.build_stats(sel, {}, {})
+    assert [stage["label"] for stage in stats["stages"]] == [
+        "Candidates",
+        "Listed",
+        "Top 3 picks",
+    ]
+    assert stats["health"] is None
+
+
+def test_build_stats_funnel_leads_with_collected_when_the_manifest_is_there() -> None:
+    sel = _one_day_selections([_stats_event("A", MUSIC)], [], 10)
+    manifest = {"sources": {"do215": {"status": "ok", "events": 40}}}
+    stats = hr.build_stats(sel, manifest, {})
+    assert stats["stages"][0] == {
+        "label": "Collected",
+        "value": 40,
+        "drop_pct": None,
+        "drop_from": None,
+        "display": "40",
+    }
+    assert stats["stages"][1]["drop_pct"] == 75  # 40 -> 10 candidates
+    assert stats["stages"][1]["drop_from"] == "collected"
+
+
+def test_build_stats_category_counts_are_pre_cap() -> None:
+    """The display cap is a rendering decision; it must not shrink the number
+    that reports how much Selection actually listed."""
+    events = [
+        _stats_event(f"E{i}", MUSIC) for i in range(hr.CATEGORY_DISPLAY_CAP + 4)
+    ]
+    stats = hr.build_stats(_one_day_selections(events, [], 100), {}, {})
+    music = next(row for row in stats["categories"] if row["label"] == MUSIC)
+    assert music["listed"] == hr.CATEGORY_DISPLAY_CAP + 4
+
+
+def test_build_stats_categories_sort_by_listed_count_descending() -> None:
+    events = [_stats_event("M%d" % i, MUSIC) for i in range(3)]
+    events += [_stats_event("F1", FILM)]
+    stats = hr.build_stats(_one_day_selections(events, [], 10), {}, {})
+    assert [row["label"] for row in stats["categories"]] == [MUSIC, FILM]
+    # Bar widths are percentages of the widest row, so the longest bar is 100%.
+    assert stats["categories"][0]["listed_pct"] == 100.0
+    assert stats["categories"][1]["listed_pct"] == pytest.approx(33.3, abs=0.1)
+
+
+def test_build_stats_keeps_a_category_that_won_no_slot_at_its_true_length() -> None:
+    """A zero-pick category is the signal, not an empty row to hide: it renders
+    at full length with no gold at all."""
+    events = [_stats_event("M%d" % i, MUSIC) for i in range(4)]
+    stats = hr.build_stats(_one_day_selections(events, [], 10), {}, {})
+    row = stats["categories"][0]
+    assert row["top3"] == 0
+    assert row["top3_pct"] == 0.0
+    assert row["listed"] == 4
+
+
+def test_build_stats_counts_all_week_events_in_their_category() -> None:
+    """Recurring events are routed out of the day category blocks into the All
+    Week table. They're still listed events of their category -- just rendered
+    somewhere else on the same page -- so they count toward both the funnel and
+    their category's bar."""
+    recurring = _stats_event("Runs all week", MUSIC)
+    recurring["recurrence_count"] = common.RECURRING_THRESHOLD
+    recurring["occurrences"] = ["2026-06-22", "2026-06-23", "2026-06-24"]
+    sel = _one_day_selections([_stats_event("One-off", MUSIC), recurring], [], 10)
+    stats = hr.build_stats(sel, {}, {})
+    listed_stage = next(s for s in stats["stages"] if s["label"] == "Listed")
+    assert listed_stage["value"] == 2
+    assert sum(row["listed"] for row in stats["categories"]) == 2
+
+
+def test_build_stats_category_bars_sum_to_the_funnel_listed_total() -> None:
+    """The invariant an independent re-derivation caught a violation of: the
+    bars summed to 83 while the funnel directly above them said 90, because
+    All Week events counted toward one and not the other. Checked against real
+    weeks, where recurring events actually occur."""
+    for week in ("2026-09-14", "2026-08-03", "2026-06-22"):
+        week_dir = Path(__file__).resolve().parent.parent / "data" / week
+        stats = hr.build_stats(
+            common.load_selections(week_dir), common.load_manifest(week_dir), {}
+        )
+        listed_stage = next(s for s in stats["stages"] if s["label"] == "Listed")
+        assert sum(row["listed"] for row in stats["categories"]) == listed_stage["value"], week
+
+
+def test_build_stats_health_does_not_cry_wolf_over_an_expectedly_quiet_source() -> None:
+    """The regression this test exists for: a bare "N sources returned zero"
+    count would flag 5 sources every week. All of them carry min_expected: 0 in
+    data/expected_yield.json -- Meetup groups that simply don't meet weekly --
+    so they are quiet by documented design, not broken. check_yield.py owns
+    that rule and build_stats defers to it."""
+    manifest = {
+        "sources": {
+            "do215": {"status": "ok", "events": 40},
+            "meetup-owasp": {"status": "ok", "events": 0},
+        }
+    }
+    expected = {"sources": {"do215": {"min_expected": 20}, "meetup-owasp": {"min_expected": 0}}}
+    health = hr.build_stats(_one_day_selections([], [], 10), manifest, expected)["health"]
+    assert health["below_floor"] == []
+    assert health["source_count"] == 2
+    assert health["contributed"] == 1
+
+
+def test_build_stats_health_names_a_source_that_is_genuinely_below_floor() -> None:
+    manifest = {"sources": {"do215": {"status": "ok", "events": 3}}}
+    expected = {"sources": {"do215": {"min_expected": 20}}}
+    health = hr.build_stats(_one_day_selections([], [], 10), manifest, expected)["health"]
+    assert health["below_floor"] == ["do215"]
+
+
+def test_build_stats_sources_are_contributors_only_sorted_descending() -> None:
+    events = [_stats_event("A", MUSIC, source="Do215")]
+    events += [_stats_event("B", MUSIC, source="Iffy Books") for _ in range(2)]
+    stats = hr.build_stats(_one_day_selections(events, [], 10), {}, {})
+    assert [(row["name"], row["count"]) for row in stats["sources"]] == [
+        ("Iffy Books", 2),
+        ("Do215", 1),
+    ]
+    assert all(row["count"] for row in stats["sources"])
+
+
+def test_rendered_stats_agree_with_the_data_they_summarize() -> None:
+    """The golden fixture pins the *degraded* path (2026-06-22 has no
+    manifest), so the full path needs its own pin. Numbers are re-derived from
+    the source files rather than hardcoded: a stats section that disagrees with
+    the page it sits on is worse than no stats section."""
+    week_dir = Path(__file__).resolve().parent.parent / "data" / "2026-09-14"
+    selections = common.load_selections(week_dir)
+    manifest = common.load_manifest(week_dir)
+    html_out = hr.render_report(week_dir)
+
+    collected = sum(s.get("events") or 0 for s in manifest["sources"].values())
+    candidates = selections["total_events_after_dedup"]
+    listed = sum(len(day["events"]) for day in selections["days"])
+    picks = sum(len(day["top3"]) for day in selections["days"])
+
+    for value, label in [
+        (collected, "Collected"),
+        (candidates, "Candidates"),
+        (listed, "Listed"),
+        (picks, "Top 3 picks"),
+    ]:
+        assert f'<div class="funnel-value">{value:,}</div>' in html_out, label
+
+    assert "none below their expected floor" in html_out
 
 
 # --- format_failure_note / format_date_range ---

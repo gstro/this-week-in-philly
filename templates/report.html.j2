@@ -46,6 +46,11 @@
       --sold-out-feature: #e06a5c;
       --table-fg: #555;
       --source-silent: #c3bfb8;
+      /* The de-emphasis neutral for chart fills: everything that isn't a
+         Top 3 pick. Re-stepped from a paler grey, which sat 14.0 ΔE from
+         --gold -- under the 15 normal-vision floor, i.e. hard to tell apart
+         even with full colour vision. */
+      --stat-bar: #7d7568;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -74,6 +79,7 @@
         --sold-out-feature: #ff9d8f;
         --table-fg: #cfc8bd;
         --source-silent: #8a8279;
+        --stat-bar: #8a8279;
       }
       /* The subtitle sits on --header-bg, which stays near-black in both
          themes, so it needs its own value rather than --muted-strong. */
@@ -170,6 +176,58 @@
     .allweek-table td strong { color: var(--page-fg); }
 
     .cat-omitted { font-size: 0.7rem; color: var(--muted-faint); font-style: italic; margin: 0.15rem 0 0 0.75rem; }
+
+    /* ── Week in Numbers ──
+       Two marks only: --gold for what won a Top 3 slot, --stat-bar for
+       everything else. That's an emphasis pair (one accent + a de-emphasis
+       neutral), not a categorical palette, which is why the pair clears the
+       two checks that decide whether adjacent segments can be told apart --
+       CVD separation 19.0 light / 19.3 dark, normal-vision 20.2 / 20.4 -- while
+       "failing" the chroma floor, whose complaint is that --stat-bar reads
+       gray. It is supposed to read gray. Gold sits just outside the dark
+       lightness band for the same reason it always has: it's the report's
+       existing brand accent, not a slot chosen for this chart. Gold's low
+       contrast against the light paper (1.96:1) is what makes the per-row
+       count labels mandatory rather than decorative. */
+    .stats-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.9rem; }
+    .stats-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
+
+    /* Funnel: a KPI row, not a chart -- four headline numbers. Proportional
+       figures, not tabular: these don't align in a column. */
+    .funnel { display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem; margin-bottom: 1.6rem; }
+    .funnel-value { font-size: 1.15rem; font-weight: 700; color: var(--page-fg); line-height: 1.2; }
+    .funnel-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; margin-top: 0.1rem; }
+    .funnel-drop { font-size: 0.62rem; color: var(--muted-faint); margin-top: 0.1rem; }
+
+    .stats-block { margin-bottom: 1.5rem; }
+    .stats-block-title { font-size: 0.7rem; font-weight: 700; color: var(--card-venue); margin-bottom: 0.1rem; }
+    .stats-legend { font-size: 0.65rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .stats-legend .swatch { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 2px; margin-right: 0.25rem; vertical-align: baseline; }
+    .swatch-top3 { background: var(--gold); }
+    .swatch-listed { background: var(--stat-bar); }
+
+    .statbar-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem; font-size: 0.72rem; }
+    .statbar-name { flex: 0 0 8.5rem; color: var(--page-fg); min-width: 0; }
+    .statbar-track { flex: 1; min-width: 0; display: flex; align-items: center; }
+    /* <= 24px thick, square at the baseline, 4px rounded at the data end. The
+       gold segment leads so Top 3 counts align across rows; the 2px right
+       margin is the surface gap that separates the two fills -- a gap, never a
+       border drawn around the mark. */
+    /* min-width so the smallest real value still reads as a mark: a single
+       event is 1.3% of Do215's 76 and would otherwise render as a 1px sliver
+       indistinguishable from nothing at all. */
+    .statbar-fill { height: 9px; min-width: 6px; }
+    .statbar-top3 { background: var(--gold); border-radius: 2px 0 0 2px; margin-right: 2px; }
+    .statbar-rest { background: var(--stat-bar); border-radius: 0 4px 4px 0; }
+    .statbar-top3:only-child { border-radius: 2px 4px 4px 0; margin-right: 0; }
+    .statbar-rest:only-child { border-radius: 2px 4px 4px 2px; }
+    /* Outside the bar end, never inside it: a count inside a 1-event bar would
+       be clipped. tabular-nums here because these DO align in a column. */
+    .statbar-value { flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .statbar-value strong { color: var(--page-fg); font-weight: 700; }
+
+    .stats-health { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+    .stats-health .below-floor { color: var(--sold-out); font-weight: 600; }
 
     /* ── Sources footer ── */
     .sources { text-align: center; font-size: 0.7rem; color: var(--muted); margin-top: 3rem; line-height: 2.2; }
@@ -314,6 +372,66 @@
     </tr>
 {% endfor %}
   </table>
+{% endif %}
+
+  <!-- WEEK IN NUMBERS -->
+  <div class="stats-label">Week in Numbers</div>
+
+  <div class="funnel">
+{% for stage in stats.stages %}
+    <div class="funnel-stage">
+      <div class="funnel-value">{{ stage.display }}</div>
+      <div class="funnel-label">{{ stage.label }}</div>
+{% if stage.drop_pct is not none %}
+      <div class="funnel-drop">−{{ stage.drop_pct }}% from {{ stage.drop_from }}</div>
+{% endif %}
+    </div>
+{% endfor %}
+  </div>
+
+  <div class="stats-block">
+    <div class="stats-block-title">By category</div>
+    <div class="stats-legend"><span class="swatch swatch-top3"></span>Top 3 pick <span class="swatch swatch-listed"></span>listed, not picked</div>
+{% for row in stats.categories %}
+    <div class="statbar-row" title="{{ row.label }}: {{ row.top3 }} of {{ row.listed }} listed events became a Top 3 pick">
+      <div class="statbar-name">{{ row.label }}</div>
+      <div class="statbar-track">
+{% if row.top3 %}
+        <span class="statbar-fill statbar-top3" style="width: {{ '%.1f'|format(row.top3_pct) }}%"></span>
+{% endif %}
+{% if row.listed > row.top3 %}
+        <span class="statbar-fill statbar-rest" style="width: {{ '%.1f'|format(row.listed_pct - row.top3_pct) }}%"></span>
+{% endif %}
+      </div>
+      <div class="statbar-value"><strong>{{ row.top3 }}</strong> / {{ row.listed }}</div>
+    </div>
+{% endfor %}
+  </div>
+
+  <div class="stats-block">
+    <div class="stats-block-title">By source</div>
+{% for row in stats.sources %}
+    <div class="statbar-row" title="{{ row.name }} supplied {{ row.count }} of this week's listed events">
+      <div class="statbar-name">{{ row.name }}</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: {{ '%.1f'|format(row.pct) }}%"></span>
+      </div>
+      <div class="statbar-value">{{ row.count }}</div>
+    </div>
+{% endfor %}
+  </div>
+{% if stats.health %}
+
+  <p class="stats-health">
+    {{ stats.health.source_count }} sources collected · {{ stats.health.contributed }} contributed events ·
+{% if stats.health.below_floor %}
+    <span class="below-floor">below expected floor: {{ stats.health.below_floor|join(', ') }}</span>
+{% elif stats.health.run_level_shortfall %}
+    <span class="below-floor">the run as a whole came in under its floor</span>
+{% else %}
+    none below their expected floor
+{% endif %}
+  </p>
 {% endif %}
 
   <!-- SOURCES FOOTER -->
