@@ -58,9 +58,12 @@ loads skills at runtime:
 | `personal-interests`           | Interest categories and preference weights                                 |
 | `event-selection-philosophy`   | Ranking rules, what to prioritize and avoid, venue elevation, recurring Philly events |
 
-`philadelphia-sources` and `events-report-format` remain in `.claude/skills/` as
-documentation/provenance, but nothing loads them at runtime any more — Collection's
-per-source logic lives in `scripts/event_parsers/`, and the report's actual spec is
+`philadelphia-sources` and `events-report-format` used to live in `.claude/skills/` too,
+documenting Collection's and Presentation's old Routine-driven behavior. Both were
+**deleted** once nothing loaded them at runtime any more — Collection's per-source logic
+now lives in each `scripts/event_parsers/*.py` module's own docstring — depth varies,
+see `collect_week.py`'s comment for which ones inherited real quirks/rationale versus a
+one-line tech-shape description — and the report's actual spec is
 `templates/report.html.j2`'s own comments.
 
 **Sources are tiered by cost, cheapest first** in Collection's fetch order — lightweight

@@ -41,7 +41,9 @@ that** (i.e., the upcoming 7-day window starting tomorrow). Compute the date ran
 at runtime.
 
 The nine canonical `category` strings, in report display order (also `common.CATEGORY_ORDER` — stated
-here so this task never needs to open `events-report-format/SKILL.md` just to sort):
+here so this task never needs a separate report-format skill just to sort; there was one,
+`events-report-format/SKILL.md`, and it's since been deleted for exactly this reason — nothing
+downstream of Selection ever needed it either):
 
 1. `🎵 Music & Concerts`
 2. `🎬 Film & Cinema`

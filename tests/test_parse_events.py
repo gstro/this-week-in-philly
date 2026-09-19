@@ -1,4 +1,9 @@
-"""Tests for scripts/parse_events.py and scripts/event_parsers/.
+"""Tests for scripts/event_parsers/.
+
+(File name predates scripts/parse_events.py's removal -- it was the thin CLI
+wrapper around these parsers, deleted for having zero production-path
+reference; collect_week.py calls event_parsers.PARSERS directly in-process
+rather than through that CLI. Its own build_output/main tests went with it.)
 
 All fixtures are small, hand-crafted excerpts that mirror real markup/feed
 shapes captured from live sources (2026-07-21) -- not full page dumps, which
@@ -21,7 +26,6 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
-import parse_events as pe
 from event_parsers import ParseError
 from event_parsers import cinespeak as cinespeak_parser
 from event_parsers import do215 as do215_parser
@@ -924,44 +928,3 @@ def test_gcal_raises_on_invalid_json() -> None:
 def test_gcal_empty_items_is_not_an_error() -> None:
     events = gcal_parser.parse(json.dumps({"items": []}), GCAL_WEEK_START, GCAL_WEEK_END)
     assert events == []
-
-
-# ---------------------------------------------------------------------------
-# CLI / build_output
-# ---------------------------------------------------------------------------
-
-
-def test_build_output_shape() -> None:
-    output = pe.build_output("Test Source", [])
-    assert output["source"] == "Test Source"
-    assert output["events"] == []
-    assert "collected_at" in output
-
-
-def test_main_prints_json_to_stdout_and_summary_to_stderr(
-    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture
-) -> None:
-    monkeypatch.setattr(
-        sys,
-        "argv",
-        ["parse_events.py", "philamoca", "--source-name", "PhilaMOCA", "--week-start", "2026-07-20", "--week-end", "2026-07-26"],
-    )
-    monkeypatch.setattr(sys, "stdin", type("_Stdin", (), {"read": staticmethod(lambda: _read("philamoca.html"))})())
-    pe.main()
-    captured = capsys.readouterr()
-    assert "PhilaMOCA: 1 events parsed." in captured.err
-    parsed = json.loads(captured.out)
-    assert parsed["source"] == "PhilaMOCA"
-    assert len(parsed["events"]) == 1
-
-
-def test_main_exits_nonzero_and_reports_failure_on_stderr(
-    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture
-) -> None:
-    monkeypatch.setattr(sys, "argv", ["parse_events.py", "r5-productions", "--source-name", "R5", "--week-start", "2026-07-20", "--week-end", "2026-07-26"])
-    monkeypatch.setattr(sys, "stdin", type("_Stdin", (), {"read": staticmethod(lambda: "<html></html>")})())
-    with pytest.raises(SystemExit) as exc_info:
-        pe.main()
-    assert exc_info.value.code == 1
-    captured = capsys.readouterr()
-    assert "FAILED to parse" in captured.err

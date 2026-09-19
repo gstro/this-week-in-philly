@@ -10,12 +10,21 @@ which is the failure class that produced both the 2026-07-27 fabrication
 session budget to exhaust and no judgment to exercise: it completes or it
 fails loudly.
 
-Source registry below mirrors philadelphia-sources/SKILL.md, which remains
-the spec of record (per-source URLs, quirks, and the reasoning behind each
-method). Two kinds of source:
+Source registry below used to mirror philadelphia-sources/SKILL.md; that file
+was deleted (it documented a Collection Routine that no longer runs -- see
+CLAUDE.md's Pipeline architecture). Each event_parsers/*.py module's own
+docstring is the spec of record for its source now, but depth varies: do215,
+wxpn, cinespeak, gcal, lightbox, philadelphia_film_society, and the_rotunda
+carry real quirks/rationale (the kind the deleted SKILL.md had); the rest
+(luma, meetup, philamoca, philly_ask_a_punk, philly_shows, phillygoth,
+r5_productions) are a one-line tech-shape description only -- that's what
+they inherited, not a gap this change tried to backfill. Two kinds of source:
 
-  SIMPLE_SOURCES     one fetch -> one registered parser (the fetch_raw.py |
-                     parse_events.py pipeline, run in-process here)
+  SIMPLE_SOURCES     one fetch -> one registered parser (fetch_raw.py's result
+                     handed straight to event_parsers.PARSERS[key], in-process
+                     -- scripts/parse_events.py used to be a standalone CLI
+                     wrapper around this same call; deleted, zero production
+                     reference)
   COLLECTOR_SOURCES  delegated to collect_source.py, which owns a multi-fetch
                      loop (per-day URLs, pagination, index+detail pairs)
 
