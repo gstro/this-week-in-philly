@@ -1,6 +1,6 @@
 # This Week in Philly — v2 Design Doc
 
-**Status:** Draft  
+**Status:** Implemented — this design shipped and is the system currently running in production (see `CLAUDE.md`'s Pipeline architecture for what's actually live, including where reality has since diverged from this doc — Collection is no longer a Routine, for one). Kept as the historical record of the original design and rationale, and because `V2_IMPLEMENTATION_PLAN.md` cites it as the doc it supersedes on conflict.
 **Scope:** Full pipeline redesign — cloud infrastructure, code extraction, model optimization
 
 ---

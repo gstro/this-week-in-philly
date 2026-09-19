@@ -4,9 +4,13 @@ description: Source collection instructions for the weekly This Week in Philadel
 output_directory: ~/philly-events
 ---
 
-> **Frozen v1 snapshot — not updated.** This file has diverged substantially (parser fixes, source
-> drops, recalibration) from the live version and is historical reference only. For the current
-> source list, see `.claude/skills/philadelphia-sources/SKILL.md`.
+> **Frozen v1 snapshot — not updated, and its v2 counterpart is gone too.** This file diverged
+> substantially (parser fixes, source drops, recalibration) from `.claude/skills/philadelphia-sources/SKILL.md`
+> before that file was deleted — it documented a Collection Routine that no longer runs (Collection
+> is fully scripted now; see `CLAUDE.md`'s Pipeline architecture). For the current source list, see
+> each `scripts/event_parsers/*.py` module's own docstring — now the spec of record, though depth
+> varies: some carry real per-source quirks/rationale, others (`collect_week.py`'s own comment names
+> which) are a one-line tech-shape description only.
 
 # Philadelphia Events — Source Collection Instructions
 

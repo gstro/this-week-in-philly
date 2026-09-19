@@ -1,52 +1,130 @@
 # This Week in Philly
 
-An automated weekly events curation pipeline for Philadelphia. Every Sunday evening it gathers upcoming events from roughly 30 local sources — venue calendars, community spaces, film societies, Meetup groups, and city-wide aggregators — scores them against personal interests, and delivers a designed HTML report with the week's Top 3 picks per day, complete with calendar integration and a phone notification.
+An automated weekly events-curation pipeline for Philadelphia. Every Sunday it collects
+roughly 500–1000 raw events from ~22 local sources — venue calendars, community spaces,
+film societies, Meetup groups, and city-wide aggregators — narrows them against personal
+interests, and publishes an HTML report with the week's Top 3 picks per day, plus a
+Google Calendar of the picks and (when Spotify auth is configured) a weekly playlist.
+
+The report publishes to **[gstro.github.io/this-week-in-philly](https://gstro.github.io/this-week-in-philly/)**.
 
 ## How it works
 
-The pipeline runs as three scheduled tasks, each handing its output to the next through files on disk:
+Three stages, chained by committed file handoffs in `data/<week>/` (`git push`, not a
+local filesystem or iCloud). Two of the three run as plain GitHub Actions scripts with
+no model involved; only Selection is a Claude Code Routine.
 
 ```
-Sources (~30, in tiers)
-    ↓  Collection
-~/philly-events/YYYY-MM-DD/
-    [source-name].json (one per source)
-    _manifest.json
-    ↓  Selection
-_selections.json
-    (Top 3 picks per day + honorable mentions, "why" blurbs, Spotify URLs)
-    ↓  Render
-HTML report → Google Drive → phone notification
-                           → Google Calendar ("Curated Events")
-                           → event-picks-log.csv
+Collection    → per-source JSONs, _manifest.json, _candidates/       (scripted, no model)
+   ↓ collection.yml fires Selection's Routine via API trigger on push
+Selection     → _selection_annotations.json                          (the one Routine, Sonnet)
+   ↓ push triggers presentation.yml
+Presentation  → _selections.json, HTML report, Calendar, playlist     (scripted, no model)
 ```
 
-**1. Collection** fetches events from every source, working tier by tier from cheapest to most expensive. It writes one JSON file per source plus a `_manifest.json`, then stops. The run is resumable: if a session dies partway through, the next run picks up from the files already written.
+**1. Collection** (`scripts/collect_week.py`, run by `.github/workflows/collection.yml` on a
+Sunday cron or manual dispatch) fetches every source deterministically — JSON APIs, iCal
+feeds, and per-source parsers in `scripts/event_parsers/` — and writes one JSON file per
+source plus `_manifest.json`. `check_yield.py` gates the run against per-source floors in
+`data/expected_yield.json`; `prepare_selection_input.py` dedupes and splits the week into
+per-day candidate files. The workflow commits and pushes `data/<week>/`, then fires
+Selection's Routine via its API trigger (with Selection's own cron as a fallback in case
+that fires before Collection's data has landed).
 
-**2. Selection** loads all collected events, deduplicates them, scores each against personal interest categories, and applies the selection philosophy and venue elevation rules to pick the Top 3 events per day plus honorable mentions. It writes the "why" blurb for each pick while full event context is still in memory, saves everything to a compact `_selections.json`, and stops.
+**2. Selection** is the only LLM stage — a Claude Code Routine reading
+`.claude/skills/philly-events-selection/SKILL.md` (plus `personal-interests` and
+`event-selection-philosophy` for judgment). It scores each day's candidates, picks Top 3
+plus honorable mentions, writes a "why" blurb per pick, and pushes
+`_selection_annotations.json` — judgment calls only, keyed by candidate id; it does not
+re-transcribe event data it was already handed.
 
-**3. Render** reads only `_selections.json`. It batches Spotify lookups for music acts, renders the HTML report, uploads it to Google Drive, sends a notification with the link and a short weekly digest, writes the picks to the "Curated Events" Google Calendar, and appends them to `event-picks-log.csv` for longitudinal tracking.
+**3. Presentation** (`.github/workflows/presentation.yml`, triggered by that push) is
+fully scripted: `merge_selections.py` reconstructs the full `_selections.json` from the
+annotations, `check_selection.py` validates it, then `scripts/runner.sh` runs
+`spotify_lookup.py` → `spotify_playlist.py` → `html_render.py` → `calendar_create.py` in
+that order (the playlist needs the lookup's matches; the report header needs the
+playlist's URL). `html_render.py` renders `templates/report.html.j2` to
+`docs/weeks/<week>.html` and regenerates `docs/index.html`; GitHub Pages serves `docs/`.
 
 ## Design principles
 
-**Tasks are thin; skills hold the domain logic.** The scheduled tasks handle environment-specific concerns (file paths, calendar names, notification syntax) and delegate everything else to four skill files:
+**Tasks are thin; skills hold the domain logic — for the one stage that's still a
+Routine.** Now that Collection and Presentation are scripted, only Selection actually
+loads skills at runtime:
 
-| Skill                          | Purpose                                                                    | Used by    |
-| ------------------------------ | -------------------------------------------------------------------------- | ---------- |
-| `philadelphia-sources`         | Source URLs, fetch methods, tier ordering, collection discipline, resume logic | Collection |
-| `personal-interests`           | Interest categories and preference weights                                 | Selection  |
-| `event-selection-philosophy`   | Ranking rules, what to prioritize and avoid, venue elevation, recurring Philly events | Selection  |
-| `events-report-format`         | HTML layout spec, Top 3 cards, category emoji headers, Spotify linking, sources footer | Render     |
+| Skill                          | Purpose                                                                    |
+| ------------------------------ | --------------------------------------------------------------------------- |
+| `philly-events-selection`      | The Selection task itself — schema, caps, the nine canonical categories     |
+| `personal-interests`           | Interest categories and preference weights                                 |
+| `event-selection-philosophy`   | Ranking rules, what to prioritize and avoid, venue elevation, recurring Philly events |
 
-**Sources are tiered by cost, cheapest first.** Lightweight JSON APIs and iCal feeds run before verbose page scrapes and broad aggregators. If a session runs short, it's the city-wide aggregators that get cut — not the high-alignment specialist sources.
+`philadelphia-sources` and `events-report-format` used to live in `.claude/skills/` too,
+documenting Collection's and Presentation's old Routine-driven behavior. Both were
+**deleted** once nothing loaded them at runtime any more — Collection's per-source logic
+now lives in each `scripts/event_parsers/*.py` module's own docstring — depth varies,
+see `collect_week.py`'s comment for which ones inherited real quirks/rationale versus a
+one-line tech-shape description — and the report's actual spec is
+`templates/report.html.j2`'s own comments.
 
-**The three-task split bounds context.** Each stage hard-stops after writing its handoff file, so no single session accumulates the full pipeline's context. Rendering is cheap because it reads the compact selections file rather than the entire collected event set.
+**Sources are tiered by cost, cheapest first** in Collection's fetch order — lightweight
+JSON APIs and iCal feeds before anything needing a rendered browser page
+(`fetch_page_text.py`, Playwright).
+
+**No silent caps or invented data.** A category's rendered card count is capped for
+readability, but the true pre-cap count always renders too (`+N more not shown`, and the
+report's "Week in Numbers" section); nothing renders a guessed price, address, or
+category the source didn't actually provide.
 
 ## Feedback loop
 
-Each collection run starts by checking last week's "Curated Events" calendar. The convention: delete events you didn't attend. Events still on the calendar are marked `attended = true` in `event-picks-log.csv`; deleted ones are marked `attended = false`. Over time this builds a record of what got picked, attended, and skipped — raw material for tuning the selection philosophy.
+Designed, not yet live: Greg deleting a Curated Events calendar entry he didn't attend is
+meant to mark it `attended = false` in a picks-log CSV, with survivors marked
+`attended = true` — raw material for tuning selection over time. `attendance_check.py` and
+`csv_log.py` implement this and carry their own tests, but are currently **shelved out of
+`runner.sh`** pending a decision on how to seed/init the picks log. See CLAUDE.md's
+"Attendance feedback loop" entry for the incident that's kept this deliberately paused.
 
-## Repository contents
+## Repository layout
 
-- [`docs/v1/philly-events-pipeline-overview.md`](docs/v1/philly-events-pipeline-overview.md) — the detailed design document, including source tiers, session economics, and file handoff specifics.
-- [`docs/V2_DESIGN.md`](docs/V2_DESIGN.md) and [`docs/V2_IMPLEMENTATION_PLAN.md`](docs/V2_IMPLEMENTATION_PLAN.md) — the cloud rewrite (v2) this repo is migrating to; v1 above remains the currently-running system until cutover.
+- `scripts/` — the production Python pipeline; every script is a standalone CLI.
+- `templates/` — the Jinja2 templates `html_render.py` renders.
+- `tests/` — pytest suite, plus a byte-pinned golden-output fixture (`tests/golden/`).
+- `src/` — an in-progress TypeScript port of select `scripts/*.py` modules. Not yet wired
+  into any workflow; the `.py` originals are what actually runs.
+- `.claude/skills/` — domain knowledge; see Design principles above for what's still live.
+- `.github/workflows/` — `collection.yml`, `presentation.yml` (production), plus CI guards
+  (`collection-check.yml`, `lint.yml`).
+- `data/<week>/` — each week's committed pipeline artifacts.
+- `docs/weeks/<week>.html` — published reports; `docs/index.html` is regenerated from
+  these on every render.
+- `docs/*.md` — design docs and investigation write-ups (several still cited as live
+  rationale for code, others carry status banners noting what's since shipped).
+- `docs/v1/` — a frozen snapshot of the desktop system v2 replaced. Reference only.
+
+## Development
+
+Python (CI-enforced via `.github/workflows/lint.yml`):
+
+```
+pytest                     # offline suite; pytest -m network for live-source tests, manual only
+ruff check scripts/
+mypy
+```
+
+Set up a venv with `scripts/requirements.txt` (add `-collection.txt` for anything
+touching the Playwright/browser-fetch path, `-dev.txt` for the tools above).
+
+TypeScript (not yet CI-enforced — run manually against `src/`):
+
+```
+npm test          # vitest
+npm run lint       # eslint
+npm run typecheck  # tsc
+npm run build      # tsc
+```
+
+## Further reading
+
+- [`docs/v1/philly-events-pipeline-overview.md`](docs/v1/philly-events-pipeline-overview.md) — the original v1 desktop design: source tiers, session economics, file handoffs.
+- [`docs/V2_DESIGN.md`](docs/V2_DESIGN.md) and [`docs/V2_IMPLEMENTATION_PLAN.md`](docs/V2_IMPLEMENTATION_PLAN.md) — the cloud rewrite this repo now runs, and the phased plan it was built to. Both are historical design records at this point (see their status banners) — for the current architecture, see CLAUDE.md.
+- [`docs/REPORT_IMPROVEMENTS_BRAINSTORM.md`](docs/REPORT_IMPROVEMENTS_BRAINSTORM.md) and [`docs/SELECTION_IMPROVEMENTS_BRAINSTORM.md`](docs/SELECTION_IMPROVEMENTS_BRAINSTORM.md) — the live design-iteration record for the report and for Selection's judgment quality.
