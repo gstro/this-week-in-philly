@@ -1,0 +1,965 @@
+{
+  "week": "2026-09-21",
+  "collection_failures": [
+    "cinespeak (HTTPError: 429 Client Error: Too Many Requests for url: https://cinespeak.org/cinema/)",
+    "wxpn (ParseError: every request failed (1 attempted); first: https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=1 (HTTPSConnectionPool(host='backend.xpn.org', port=443): Max retries exceeded with url: /wp-json/wp/v2/event?per_page=100&page=1 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'backend.xpn.org'. (_ssl.c:1010)\")))))"
+  ],
+  "days": [
+    {
+      "date": "2026-09-21",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0718",
+          "rank": 1,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "why": "PhilaMOCA's monthly Psychotronic Film Society meetup is dedicated to the deliberately weird end of genre cinema — exploitation, horror ephemera, and whatever else doesn't fit a normal repertory slot. This screening also closes voting for the 2026 Psychotronic Awards, so it's a bigger night than the usual meetup. Doors 7:00 PM, screening 7:30; Callowhill, a couple of blocks from the Broad Street Line's Spring Garden stop."
+        },
+        {
+          "id": "c0046",
+          "rank": 2,
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "address": "530 South Street, Philadelphia, PA 19147",
+          "why": "Soup Can Magazine's roving art-and-poetry pop-up lands at Tattooed Mom with a lineup of Philly writers (Shannon Frost Greenstein among them) — free, no cover, no RSVP required. Tattooed Mom's live-music and performance shows are on hold under an ongoing city permit dispute, but non-musical nights like this one are explicitly still running, so it's a real option, not a maybe."
+        },
+        {
+          "id": "c0008",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1009 Canal St, Philadelphia, PA 19123",
+          "why": "DOMi & JD Beck are jazz-fusion prodigies barely into their twenties, touring behind the follow-up to their Blue Note debut — a genre-scrambling, virtuosic set that name-checks Herbie Hancock as readily as hyperpop. All ages, standing-room general admission. Fishtown/Olde Richmond, about a 15-minute walk from the Market-Frankford Line's Girard stop, or the 15 trolley to Frankford & Delaware right across the street."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0679"
+        },
+        {
+          "id": "c0043"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0718",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Monthly psychotronic/genre-film meetup at PhilaMOCA; this one closes 2026 Psychotronic Awards voting."
+        },
+        {
+          "id": "c0046",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Free zine-and-poetry pop-up at Tattooed Mom, no cover."
+        },
+        {
+          "id": "c0008",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Jazz-fusion duo DOMi & JD Beck's “Who Asked?” tour."
+        },
+        {
+          "id": "c0679",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Biweekly (1st/3rd Monday) coffee hangout for trans and non-binary folks and allies at Iffy Books — snacks, low-key, no program."
+        },
+        {
+          "id": "c0043",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Avant-garde performance/installation at Vox Populi, an artist-run gallery collective."
+        },
+        {
+          "id": "c0026",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Recurring weekly noon protest outside Sen. McCormick's Philly office."
+        },
+        {
+          "id": "c0042",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Mamet's two-hander on power, gender, and academia at SideQuest Theater."
+        },
+        {
+          "id": "c0037",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Liberty City Arts devised piece inspired by Seamus Heaney's “Anahorish,” at The Latvian Society."
+        },
+        {
+          "id": "c0050",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Stage reading confronting Wild West mythology, from artist Logan Phillips, at Taller Puertorriqueño."
+        },
+        {
+          "id": "c0044",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Weekly open jam session hosted by Richard Hill Jr. at Black Squirrel Club."
+        },
+        {
+          "id": "c0747",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "West Philadelphia Sanctuary craft workshop — design and screenprint your own shirt — at The Rotunda."
+        },
+        {
+          "id": "c0009",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Bartram's Garden photo exhibit at Studio 34, running through the week."
+        },
+        {
+          "id": "c0013",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Comic Chekhov one-acts at The Fidget Space, running several nights this week."
+        },
+        {
+          "id": "c0020",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Paul Ramírez Jonas's participatory bell installation at Cherry Street Pier, running all week."
+        },
+        {
+          "id": "c0035",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Devised piece on EMDR therapy and self-confrontation, running several nights this week."
+        },
+        {
+          "id": "c0036",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Improvised sound/movement performance at Art Room Studio, running several nights this week."
+        },
+        {
+          "id": "c0048",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Alexa Colas's performance piece on identity and nightlife at Clubfriends, running several nights this week."
+        },
+        {
+          "id": "c0051",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Romantic two-hander at The Proscenium at The Drake, running most of the week."
+        },
+        {
+          "id": "c0053",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Solo performance on memory and consumerism, running several nights this week."
+        },
+        {
+          "id": "c0055",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Immersive theatrical experience riffing on the Philadelphia Experiment conspiracy, at the Navy Yard, running a few nights this week."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0060",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1200 Callowhill St, Philadelphia, PA 19107",
+          "why": "Militarie Gun channel hardcore's speed and DIY ethic through unpolished, almost pop hooks and Ian Shelton's wry, anti-scene-politics lyrics — a genuinely vital band in a genre that's mostly nostalgia acts right now. 21+, $20. Doors 6:00 PM, show 7:00; Callowhill, about two blocks from the Broad Street Line's Spring Garden stop."
+        },
+        {
+          "id": "c0120",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Howard Zinn's one-man play imagines Karl Marx bargaining his way back from the afterlife to defend himself against 2026 America, delivered by longtime interpreter Bob Weick, who's performed the role hundreds of times worldwide. Sharp, funny, and unapologetically didactic — “the words the billionaire class doesn't want you to hear.” $20; opens tonight and runs most of the week. (No confirmed street address for Broken Mirror Studio — sources disagree between a Broad Street and a North 9th Street location, so confirm before heading out.)"
+        },
+        {
+          "id": "c0100",
+          "rank": 3,
+          "category": "🎨 Arts & Workshops",
+          "is_music": false,
+          "sold_out": false,
+          "address": "1400 N American St, Philadelphia, PA 19122",
+          "why": "A former Cirque du Soleil performer's autobiographical solo show tracing a childhood inside a brutal military-style circus training system, from age four to a premiere at nine — framed as reclaiming a body and voice that discipline tried to own. Opens tonight, running three nights. $25; Olde Kensington, about a 10-minute walk from the Market-Frankford Line's Girard stop."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0108"
+        },
+        {
+          "id": "c0741"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0060",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Militarie Gun's hardcore-adjacent, hook-forward set at Underground Arts."
+        },
+        {
+          "id": "c0120",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Howard Zinn's “Marx in Soho,” opening tonight, running most of the week at Broken Mirror Studio."
+        },
+        {
+          "id": "c0100",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Autobiographical circus-life solo performance, opening tonight, running three nights at Icebox Project Space."
+        },
+        {
+          "id": "c0108",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Themed listening session for Coltrane's centennial, spanning 1957–64, at The Sound Lounge."
+        },
+        {
+          "id": "c0741",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Automatic (LA synth-punk trio) at First Unitarian Church, an R5 all-ages show."
+        },
+        {
+          "id": "c0058",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Mastodon at Franklin Music Hall — a rare arena-adjacent metal act worth knowing about even outside the usual DIY circuit."
+        },
+        {
+          "id": "c0065",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "He Is Legend with Skullpresser and ShyGodwin at Nikki Lopez."
+        },
+        {
+          "id": "c0097",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Free outdoor jazz concert series at FDR Park."
+        },
+        {
+          "id": "c0083",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Community volunteer workday at Cobbs Creek Park."
+        },
+        {
+          "id": "c0127",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Civic-education session on using National Constitution Center resources."
+        },
+        {
+          "id": "c0107",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Archaeological Institute of America lecture at the Penn Museum."
+        },
+        {
+          "id": "c0098",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Dickens-riffing political satire aimed at present-day billionaires, running several nights this week at Asian Arts Initiative."
+        },
+        {
+          "id": "c0090",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Drop-in open studio hours at The People's Gallery, running a few days this week."
+        },
+        {
+          "id": "c0680",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Drop-in writing session at Iffy Books."
+        },
+        {
+          "id": "c0683",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Meetup for Magic Patterns (AI prototyping tool) users at Indy Hall."
+        },
+        {
+          "id": "c0692",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "AI Builders Night and hackathon closing ceremony via Code & Coffee, at Cesium HQ."
+        },
+        {
+          "id": "c0748",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "The Rotunda's regular Tuesday vogue ball — a standing weekly, but worth knowing about."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0168",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "why": "Minyo Crusaders reinvent Japanese min'yō (traditional folk song) as cumbia, ska, and tropical dance music — bandleader Katsumi Tanaka started the project after the 2011 Tōhoku earthquake and tsunami sent him digging into folk songs he'd ignored his whole life. Their first-ever North American tour, with Mariposas Galácticas opening. Callowhill, a couple of blocks from the Broad Street Line's Spring Garden stop."
+        },
+        {
+          "id": "c0754",
+          "rank": 2,
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "why": "Poet Hillary Gonzalez reads from their new collection “Where the Osprey Nest” (Palewell Press) — meditations on ospreys, herons, grief, and the idea that we're not separate from nature but part of it — followed by a Q&A and a briefing on the campaign to save the declining East Coast osprey population. Classic Wooden Shoe programming: politically engaged literature with a concrete cause attached."
+        },
+        {
+          "id": "c0750",
+          "rank": 3,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "why": "Secret Cinema's rare-16mm-print series turns its projector on mid-century design films for this one — “Form and Function at Mid-Century,” part of an ongoing archive-diving project distinct from the Rotunda's standing Wednesday jam session happening down the hall. Free/PWYW, University City."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0723"
+        },
+        {
+          "id": "c0155"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0168",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Minyo Crusaders' North American tour debut, Japanese folk reimagined as cumbia/ska, at PhilaMOCA."
+        },
+        {
+          "id": "c0754",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Hillary Gonzalez reads new ecopoetry collection “Where the Osprey Nest” at Wooden Shoe Books."
+        },
+        {
+          "id": "c0750",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Secret Cinema's mid-century design films on 16mm at The Rotunda."
+        },
+        {
+          "id": "c0723",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "PLEKTANI (Greece) headlines a hardcore/punk bill with Dead On Your Feet, Blunt Force, and Banshee at Cousin Danny's."
+        },
+        {
+          "id": "c0155",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Free matinee screening of the John Coltrane documentary “Chasing Trane” at the Clef Club of Jazz."
+        },
+        {
+          "id": "c0749",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Rotunda's standing weekly improvised-music drop-in jam."
+        },
+        {
+          "id": "c0202",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Open poetry and prose night at Tattooed Mom."
+        },
+        {
+          "id": "c0209",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "“Cuba after Castro” documentary screening at Nikki Lopez."
+        },
+        {
+          "id": "c0192",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Panel on Brandeis, Jefferson, and America at 250 with Jeffrey Rosen and Rev. Paul Brandeis Raushenbush, at the Weitzman museum."
+        },
+        {
+          "id": "c0158",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Artist talk on place and memory at Eastern State Penitentiary."
+        },
+        {
+          "id": "c0169",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Experimental improv duo Bryan Day/Toshi Makihara plus the Del Rossi Trio at Brickbat Books."
+        },
+        {
+          "id": "c0730",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Goth/dark-cabaret songwriter Aurelio Voltaire at Bar XIII — Wilmington, DE, about a 40-minute drive."
+        },
+        {
+          "id": "c0190",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Poetry performance piece, running several nights this week at Asian Arts Initiative."
+        },
+        {
+          "id": "c0183",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "“Priority Hoarding: A Retrospectacle,” running several nights this week at The Hairport."
+        },
+        {
+          "id": "c0207",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Guided tour of woodworker Wharton Esherick's studio-home, Malvern, PA — recurring weekly."
+        },
+        {
+          "id": "c0684",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Indy Hall's regular reading club."
+        },
+        {
+          "id": "c0694",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Code & Coffee's daytime coding drop-in session."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-24",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0257",
+          "rank": 1,
+          "category": "👻 Horror & Occult",
+          "is_music": true,
+          "sold_out": false,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "why": "Fabio Frizzi — the composer behind Lucio Fulci's gore classics *Zombi 2*, *The Beyond*, and *City of the Living Dead* — performs those scores live on his first North American tour in support of them. This is about as direct a hit on PhilaMOCA's whole reason for existing as a booking gets: Italian horror, live, at the venue built for exactly this. Doors 7:30 PM, show 8:00; Callowhill, a couple of blocks from the Broad Street Line's Spring Garden stop."
+        },
+        {
+          "id": "c0755",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "why": "A workshop on mutual aid as organizing practice, not just charity — how to build durable, non-hierarchical support networks rather than one-off relief drives. Wooden Shoe's entire program runs on this kind of practical political education, free or pay-what-you-can as always."
+        },
+        {
+          "id": "c0306",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1700 N Front Street, Philadelphia, PA 19122",
+          "why": "A full, start-to-finish listening session for Stevie Wonder's *Songs in the Key of Life* — the kind of deep-catalog, no-distractions format that lets a classic actually land instead of playing in the background. Fits the same archival/repertory lane as the city's better jazz nights, just for soul. Fishtown/Olde Kensington, about a 10-minute walk from the Market-Frankford Line's Berks stop."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0250"
+        },
+        {
+          "id": "c0353"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0257",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Fabio Frizzi performs his Lucio Fulci horror scores live at PhilaMOCA."
+        },
+        {
+          "id": "c0755",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Workshop on mutual-aid organizing practice at Wooden Shoe Books."
+        },
+        {
+          "id": "c0306",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Full-album listening session for Stevie Wonder's “Songs in the Key of Life” at The Sound Lounge."
+        },
+        {
+          "id": "c0250",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Dazzling Killmen, Intercourse, and God Called In Sick — noise rock at Kung Fu Necktie."
+        },
+        {
+          "id": "c0353",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "“REV'S Graveyard Cabaret” at Christ Church Burial Ground — a one-off gothic cabaret in an actual 18th-century graveyard."
+        },
+        {
+          "id": "c0309",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Philly DSA's Electoral Committee meeting at Workers United."
+        },
+        {
+          "id": "c0295",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Documentary and panel on the Biddle family and the American Revolution, at Arch Street Meeting House."
+        },
+        {
+          "id": "c0225",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Altın Gün's Turkish psych-folk at Union Transfer."
+        },
+        {
+          "id": "c0751",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "“The Gathering,” one-off programming at The Rotunda."
+        },
+        {
+          "id": "c0329",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Soundpainting (live sign-language composition) workshop with Sam Day Harmet at Fleisher Art Memorial."
+        },
+        {
+          "id": "c0330",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Philadelphia Folksong Society's folk & bluegrass co-op showcase at The Fallser Club."
+        },
+        {
+          "id": "c0316",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Museum of the American Revolution's annual Buchholz Lecture, this year with Lt. Gen. (Ret.) H.R. McMaster."
+        },
+        {
+          "id": "c0304",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Author talk: Patrick Bringley on “All the Beauty in the World,” at the Philadelphia Art Museum."
+        },
+        {
+          "id": "c0731",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Goth/industrial night “Pretty Pride // Machine” at Bar XIII — Wilmington, DE, about a 40-minute drive."
+        },
+        {
+          "id": "c0733",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "“East Coast Power Dynamics,” one-off event at The 700."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0391",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "29 East Allen Street, Philadelphia, PA 19123",
+          "why": "Three-quarters of the original Sex Pistols — Steve Jones, Paul Cook, and Glen Matlock — touring with Frank Carter (Gallows/Rattlesnakes) on vocals for the 50th anniversary of the band that arguably started UK punk. This date was postponed from last fall after Jones broke his wrist; he's recovered and the tour is back on. All ages. Fishtown, about a 10-minute walk from the Market-Frankford Line's Girard stop."
+        },
+        {
+          "id": "c0681",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "319 N 11th St, Philadelphia, PA 19107",
+          "why": "Iffy Books turns 5 — a genuine institution-in-the-making for DIY electronics, speculative fiction, and leftist politics in this city — with a dance party at Vox Populi's Black Box space (down the hall from Iffy's original location), DJ sets from Nila Paradise and Ishtar Sr. among others. A rare chance to celebrate the place itself rather than just its programming."
+        },
+        {
+          "id": "c0724",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": false,
+          "sold_out": false,
+          "address": "1409 South St, Philadelphia, PA 19147",
+          "why": "Ray Cappo — frontman of straight-edge hardcore pioneers Youth of Today and, later, Krishnacore band Shelter — talks about the 90s Krishnacore movement, the scene where hardcore's discipline and Hare Krishna devotion collided. He spent six years as a celibate monk before returning to music; expect a genuinely unusual insider account, not a nostalgia set. South Street, easy walk from Center City."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0421"
+        },
+        {
+          "id": "c0466"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0391",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Sex Pistols (Jones/Cook/Matlock + Frank Carter) at The Fillmore, rescheduled from last fall."
+        },
+        {
+          "id": "c0681",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Iffy Books' 5th anniversary dance party at Vox Populi's Black Box space."
+        },
+        {
+          "id": "c0724",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Ray Cappo (Youth of Today, Shelter) on 90s Krishnacore, at Bhakti Garden."
+        },
+        {
+          "id": "c0421",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "“A Bay of Blood” (Mario Bava) screening hosted by Riot Nerd at Philadelphia Film Society Center."
+        },
+        {
+          "id": "c0466",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "“If I Die Before the Revolution” — political dance piece by Amy Novinski Ballet at Bok Building."
+        },
+        {
+          "id": "c0725",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Mar-Mars, Dr. Shickadance, Panic Park, and Nadafinger at The Pouch."
+        },
+        {
+          "id": "c0726",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Suppression, Aroma, Sweepers, and Dead Door Unit at Cousin Danny's."
+        },
+        {
+          "id": "c0403",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Disco/funk DJ night with Skeme Richards at The Sound Lounge."
+        },
+        {
+          "id": "c0439",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Convening on the international legacy of the Declaration of Independence, at the Museum of the American Revolution."
+        },
+        {
+          "id": "c0462",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "“Meet & Geek: Mortuary Science” at the Mütter Museum."
+        },
+        {
+          "id": "c0492",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Soseul Dawon's “The Stark Garden of Presence,” dance/performance piece at Studio 34."
+        },
+        {
+          "id": "c0735",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "September Punk Rock Flea Market at 23rd Street Armory."
+        },
+        {
+          "id": "c0460",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "“Say it Loud, I'm Black and I'm Proud” exhibit at The Colored Girls Museum."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0502",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "why": "Iron Lung — one of grindcore's defining acts, a duo that's been redefining how much noise two people can make since the 90s — headline a five-band bill with Hologram, Pray To Be Saved, Early Grave, and Malform. An R5 all-ages show at the city's most storied punk venue; earplugs strongly advised."
+        },
+        {
+          "id": "c0756",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "why": "A prisoner-solidarity event in Wooden Shoe's downstairs space — likely tied to Books Through Bars, the Philly-based prison-literacy project, though the listing itself is thin on specifics, so treat details as worth confirming at the door. Free/PWYW, as nearly everything at Wooden Shoe is."
+        },
+        {
+          "id": "c0689",
+          "rank": 3,
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "address": "709 N 2nd St, Philadelphia, PA 19123",
+          "why": "Indy Hall turns 20 — one of the oldest independent coworking spaces in the country, founded in Old City in 2006, before “coworking” was even a common word. The party frames it as two decades of showing up for each other rather than just surviving, which tracks with the community's whole ethos: “take care of yourself, take care of each other, take care of this place.” Northern Liberties, near 2nd & Spring Garden, a few blocks from the Market-Frankford Line."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0503"
+        },
+        {
+          "id": "c0522"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0502",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Iron Lung headlines a grindcore/powerviolence bill at First Unitarian Church."
+        },
+        {
+          "id": "c0756",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Prisoner-solidarity event at Wooden Shoe Books, downstairs."
+        },
+        {
+          "id": "c0689",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Indy Hall's 20th anniversary party."
+        },
+        {
+          "id": "c0503",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Industrial pioneers Cabaret Voltaire at Underground Arts, 21+."
+        },
+        {
+          "id": "c0522",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Clef Club of Jazz's 60th-anniversary gala, featuring saxophonist Tia Fuller."
+        },
+        {
+          "id": "c0541",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Depressive black-metal artist Xasthur with Temple of the Fuzz Witch at John and Peter's — New Hope, PA, about 45 minutes out."
+        },
+        {
+          "id": "c0521",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Voter-registration block party at Philly AIDS Thrift."
+        },
+        {
+          "id": "c0728",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Log Flume, Person (NYC), Carpet Floor, and TTLC at Cousin Danny's."
+        },
+        {
+          "id": "c0737",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Market of the Macabre, a vendor market at Laurel Hill Cemetery."
+        },
+        {
+          "id": "c0739",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "The Vampire's Library horror book fair at Vampa Museum — Doylestown, PA, about an hour out."
+        },
+        {
+          "id": "c0512",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Novelty singer-songwriter Matt Farley at PhilaMOCA."
+        },
+        {
+          "id": "c0530",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Delaware River Festival at Independence Seaport Museum."
+        },
+        {
+          "id": "c0553",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "African American Market at FDR Park."
+        },
+        {
+          "id": "c0576",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Guided tour: “A Nation of Artists” at the Pennsylvania Academy of the Fine Arts."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0591",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1200 Callowhill St, Philadelphia, PA 19107",
+          "why": "Buzzcocks — one of the foundational UK punk bands, the ones who basically invented the punk love song — play a WXPN-presented show at Underground Arts. Still touring on the strength of a back catalog that shaped everything from pop-punk to indie rock. 21+, doors 7:00 PM, show 8:00. Callowhill, a couple of blocks from the Broad Street Line's Spring Garden stop."
+        },
+        {
+          "id": "c0638",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "1219 Vine Street, Philadelphia, PA 19107",
+          "why": "Satirical immersive theater staged as a mandatory corporate motivational seminar — fictional “Ramco Laboratories” brings in Luigi Mangione (framed here as a corporate-America folk antihero, not the real defendant in an active criminal case) to inspire employees to “take your shot.” Pointed, uncomfortable, and exactly the kind of anti-corporate satire that doesn't get made by anyone with something to lose. Chinatown North/Callowhill, close to the Broad Street Line's Race-Vine or Spring Garden stops."
+        },
+        {
+          "id": "c0637",
+          "rank": 3,
+          "category": "🎨 Arts & Workshops",
+          "is_music": false,
+          "sold_out": false,
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "why": "Two castaways attempt to hunt and eat a pig with predictably dire results — a genre-blending piece built on heavy movement, mask, and sound work that uses survival-horror absurdity to get at something more serious about trauma and complicity. Fringe programming at First Unitarian Church, better known for its punk shows."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0677"
+        },
+        {
+          "id": "c0615"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0591",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Buzzcocks, WXPN-presented, at Underground Arts."
+        },
+        {
+          "id": "c0638",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Satirical corporate-seminar theater piece “Take Your Shot,” at Asian Arts Initiative."
+        },
+        {
+          "id": "c0637",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "“Moral Injury,” genre-blending survival performance piece at First Unitarian Church."
+        },
+        {
+          "id": "c0677",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "“William Acker is William Acker…” — absurdist satirical mayoral-campaign performance art, from Pig Iron."
+        },
+        {
+          "id": "c0615",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "STRAIGHT CIRCLE at PhilaMOCA."
+        },
+        {
+          "id": "c0647",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "“A Day Remembering Dito” — a community celebration of life with an afternoon memorial and an evening tribute cabaret hosted by Pig Iron, at Miller Theater."
+        },
+        {
+          "id": "c0666",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Latino Market & Soccer League at FDR Park."
+        },
+        {
+          "id": "c0667",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Southeast Asian Market at FDR Park."
+        },
+        {
+          "id": "c0682",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "DJ Basixxx with Mixxx at Iffy Books."
+        },
+        {
+          "id": "c0665",
+          "category": "🎪 Festivals & Major Events",
+          "sold_out": false,
+          "note": "2026 Fall for the Arts Festival in Chestnut Hill — Regional Rail (Chestnut Hill East/West lines)."
+        },
+        {
+          "id": "c0663",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Gospel dinner theater “Prayer Changes Things” at Lansdowne Theater — Lansdowne, PA, about 20 minutes out."
+        },
+        {
+          "id": "c0640",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "“Poetry is for Everyone” book club at Valerio Coffee Roasters."
+        },
+        {
+          "id": "c0137",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Non-binary/gender-fluid drag clown cabaret (Haus of Wiggles and Giggles) at Icebox Project Space — its correct date, after do215 misdated an earlier listing to Tuesday."
+        }
+      ]
+    }
+  ]
+}
