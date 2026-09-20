@@ -1,9 +1,32 @@
 # HTML Report Improvements — Brainstorm
 
-> **Status update.** §6's "Recommended first slice" is mostly shipped: items 1 (10-card
-> cap), 3 (true counts), 4 (dark mode + mobile breakpoint), 5 (TOC + anchors), and 6 (map
-> links, derived sources footer, sold-out on Top 3) all landed across PRs #42/#43. Item 2
-> (the stats section) is the one still open, in flight on `report-stats-section` (PR #44).
+> **Status update.** §6's "Recommended first slice" is **fully shipped**: items 1
+> (10-card cap), 3 (true counts), 4 (dark mode + mobile breakpoint), 5 (TOC + anchors),
+> and 6 (map links, derived sources footer, sold-out on Top 3) landed across PRs #42/#43,
+> and item 2 (the stats section) landed as "Week in Numbers" in PR #44.
+>
+> Since then: #30 (`<time datetime>`), #34 (the real compile date, replacing a hardcoded
+> "Compiled Sunday"), #42 (Open Graph + meta description), and #43 (favicon) shipped
+> together, along with the heading-outline, skip-link, and focus-ring half of #29.
+>
+> Three items are **closed, not pending**, and should not be re-picked up:
+> - **#21 category-header true counts** ("10 of 51 shown") — the day index carries true
+>   counts instead, and `html_render.py:build_day_viewmodel` says so in a comment. The
+>   `+ N more not shown` line is the deliberate remainder.
+> - **#16 sticky nav** and **#24 back-to-top** — dropped on size grounds; see the
+>   `.day-index` comment in `templates/report.html.j2`.
+> - **#41 reconcile template/spec drift** — moot. The v2 spec file it refers to
+>   (`.claude/skills/events-report-format/SKILL.md`) was deleted once nothing loaded it
+>   at runtime; the template's own comments are the spec now. The same deletion applies
+>   to `.claude/skills/philadelphia-sources/SKILL.md`, which §1's constraint #2 and
+>   several `[spec change]` tags below still cite as live.
+>
+> The largest still-open item is the rest of **#29**: the light theme does not clear
+> WCAG AA. That is deliberately its own slice — `--gold` is knowingly at 1.96:1 on the
+> light paper (which is *why* the Week in Numbers per-row count labels are mandatory),
+> and `--stat-bar` was re-stepped to hold ≥15 ΔE from it, so neither token moves without
+> re-doing those measurements.
+>
 > This doc otherwise still reflects real, load-bearing analysis (the density/cap
 > reasoning, the colour-contrast measurements) — not rewritten, just flagged so it
 > doesn't read as a fully-open backlog.

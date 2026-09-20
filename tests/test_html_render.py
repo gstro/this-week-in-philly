@@ -759,3 +759,125 @@ def test_category_block_reports_how_many_the_display_cap_dropped() -> None:
 def test_category_block_omitted_is_none_when_nothing_was_dropped() -> None:
     categories = hr.build_categories(_rec_day("2026-09-01", [_rec_event("Only Show")]), set())
     assert categories[0]["omitted"] is None
+
+
+# --- Head metadata: canonical URL, description, compiled date ---
+
+
+def test_build_canonical_url_points_at_the_pages_project_subpath() -> None:
+    """Pages serves this repo under /this-week-in-philly/, not at the domain
+    root, so a root-absolute URL would 404."""
+    assert hr.build_canonical_url("2026-06-22") == (
+        "https://gstro.github.io/this-week-in-philly/weeks/2026-06-22.html"
+    )
+
+
+@pytest.mark.parametrize("week", [None, "", "not-a-date", "2026-13-01"])
+def test_build_canonical_url_is_none_for_an_unusable_week_key(week: str | None) -> None:
+    """Better no og:url than a guessed one -- the template drops the tag
+    entirely rather than emitting a link that resolves to nothing."""
+    assert hr.build_canonical_url(week) is None
+
+
+def test_format_compiled_drops_the_clock_time() -> None:
+    """merge_selections.py writes a naive datetime.now(), which is UTC on the
+    GitHub Actions runner: 22:23 UTC was 6:23 PM in Philadelphia. There's no
+    stored offset to correct it with, so the time is never displayed."""
+    iso, display = hr.format_compiled("2026-09-13T22:23:01")
+    assert iso == "2026-09-13"
+    assert display == "Sunday, September 13"
+    assert "22" not in display
+
+
+@pytest.mark.parametrize("raw", [None, "", "whenever"])
+def test_format_compiled_is_none_for_an_unparseable_stamp(raw: str | None) -> None:
+    assert hr.format_compiled(raw) == (None, None)
+
+
+def test_build_meta_description_uses_the_weeks_own_numbers() -> None:
+    stats = {
+        "stages": [
+            {"label": "Collected", "value": 700},
+            {"label": "Listed", "value": 90},
+            {"label": "Top 3 picks", "value": 21},
+        ],
+        "sources": [{"name": "Do215"}, {"name": "PhilaMOCA"}],
+    }
+    description = hr.build_meta_description(stats, "June 22–28, 2026")
+    assert "21 handpicked things" in description
+    assert "90 events across 2 sources" in description
+    assert "June 22–28, 2026" in description
+
+
+def test_render_report_head_carries_the_link_preview_tags() -> None:
+    """The report is delivered as a shared link, so the unfurl is its first
+    impression; it previewed as a bare URL before these landed."""
+    html_out = hr.render_report(REAL_WEEK_DIR)
+    head = html_out[: html_out.index("</head>")]
+    for tag in (
+        '<meta property="og:type" content="article">',
+        '<meta property="og:title" content="This Week in Philadelphia — June 22–28, 2026">',
+        '<meta name="twitter:card" content="summary">',
+        '<link rel="canonical" href="https://gstro.github.io/this-week-in-philly/weeks/2026-06-22.html">',
+    ):
+        assert tag in head
+    # A data URI, not a path: a relative favicon would need a different depth
+    # from docs/index.html than from docs/weeks/, and an absolute one 404s
+    # under the Pages project subpath.
+    assert 'rel="icon" href="data:image/svg+xml,' in head
+    # No og:image: there is no artwork to point at, and a generated one would
+    # be a second thing to keep true. (The head comment names it; the tag
+    # itself must be absent.)
+    assert 'property="og:image"' not in head
+
+
+def test_render_report_subtitle_states_the_real_compile_date() -> None:
+    """It used to read a hardcoded "Compiled Sunday" regardless of when the
+    week was actually built; generated_at was loaded and dropped."""
+    html_out = hr.render_report(REAL_WEEK_DIR)
+    assert 'Compiled <time datetime="2026-06-21">Sunday, June 21</time>' in html_out
+    assert "Compiled Sunday</div>" not in html_out
+
+
+# --- Document outline and keyboard affordances ---
+
+
+def test_render_report_has_one_h1_and_a_real_heading_outline() -> None:
+    """The page had exactly one heading before this: day, category, and
+    section labels were all <div>s, leaving reader mode and a screen reader's
+    heading list with no structure to work from."""
+    html_out = hr.render_report(REAL_WEEK_DIR)
+    assert html_out.count("<h1") == 1
+    # One h2 per day, plus Week in Numbers (this week has no All Week rows).
+    assert html_out.count('<h2 class="day-header"') == 7
+    assert '<h2 class="stats-label">Week in Numbers</h2>' in html_out
+    assert '<h3 class="cat-label">' in html_out
+    assert '<h3 class="top3-label">' in html_out
+    # The old markup must be fully gone, not merely outnumbered.
+    assert '<div class="day-header"' not in html_out
+    assert '<div class="cat-label">' not in html_out
+
+
+def test_day_headers_carry_a_machine_readable_date() -> None:
+    html_out = hr.render_report(REAL_WEEK_DIR)
+    assert '<time class="day-date" datetime="2026-06-22">June 22</time>' in html_out
+    # <div> inside a heading is invalid, so the rule became a <span>.
+    assert '<div class="day-rule">' not in html_out
+
+
+def test_render_report_opens_with_a_skip_link_to_the_day_index() -> None:
+    """~80 links precede the first day. The day index is itself the shortcut
+    past them, so that's what the skip link targets."""
+    html_out = hr.render_report(REAL_WEEK_DIR)
+    assert '<a class="skip-link" href="#day-index">' in html_out
+    assert '<nav class="day-index" id="day-index"' in html_out
+    assert html_out.index('class="skip-link"') < html_out.index('class="site-header"')
+
+
+def test_render_index_carries_the_same_head_block() -> None:
+    index_out = hr.render_index()
+    assert 'rel="icon" href="data:image/svg+xml,' in index_out
+    assert (
+        '<link rel="canonical" href="https://gstro.github.io/this-week-in-philly/">'
+        in index_out
+    )
