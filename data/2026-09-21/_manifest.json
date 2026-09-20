@@ -1,0 +1,95 @@
+{
+  "week": "2026-09-21",
+  "run_started": "2026-09-20T10:36:34.085127+00:00",
+  "run_completed": "2026-09-20T10:37:24.586353+00:00",
+  "sources": {
+    "cinespeak": {
+      "status": "failed",
+      "reason": "HTTPError: 429 Client Error: Too Many Requests for url: https://cinespeak.org/cinema/"
+    },
+    "do215": {
+      "status": "ok",
+      "events": 820
+    },
+    "iffy-books": {
+      "status": "ok",
+      "events": 4
+    },
+    "lightbox-film-center": {
+      "status": "ok",
+      "events": 1
+    },
+    "luma": {
+      "status": "ok",
+      "events": 8
+    },
+    "meetup-ai-philly": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-code-coffee": {
+      "status": "ok",
+      "events": 7
+    },
+    "meetup-dc215": {
+      "status": "ok",
+      "events": 1
+    },
+    "meetup-owasp": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-philadelphia-horror-meetup-group": {
+      "status": "ok",
+      "events": 3
+    },
+    "meetup-philly-film-club": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-philly-hardware": {
+      "status": "ok",
+      "events": 0
+    },
+    "meetup-tech-in-motion": {
+      "status": "ok",
+      "events": 0
+    },
+    "philadelphia-film-society": {
+      "status": "ok",
+      "events": 16
+    },
+    "philamoca": {
+      "status": "ok",
+      "events": 7
+    },
+    "philly-ask-a-punk": {
+      "status": "ok",
+      "events": 7
+    },
+    "philly-shows": {
+      "status": "ok",
+      "events": 0
+    },
+    "phillygoth": {
+      "status": "ok",
+      "events": 13
+    },
+    "r5-productions": {
+      "status": "ok",
+      "events": 6
+    },
+    "the-rotunda": {
+      "status": "ok",
+      "events": 7
+    },
+    "wooden-shoe-books": {
+      "status": "ok",
+      "events": 3
+    },
+    "wxpn": {
+      "status": "failed",
+      "reason": "ParseError: every request failed (1 attempted); first: https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=1 (HTTPSConnectionPool(host='backend.xpn.org', port=443): Max retries exceeded with url: /wp-json/wp/v2/event?per_page=100&page=1 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'backend.xpn.org'. (_ssl.c:1010)\"))))"
+    }
+  }
+}

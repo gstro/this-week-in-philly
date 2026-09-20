@@ -1,0 +1,76 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-09-20T10:36:34.421020+00:00",
+  "events": [
+    {
+      "title": "PLEKTANI (greece), DEAD ON YOUR FEET, BLUNT FORCE, BANSHEE",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-09-23",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/plektani-greece-dead-on-your-feet-blunt-force-banshee",
+      "description": "",
+      "venue_address": "5001 Market Street"
+    },
+    {
+      "title": "Ray Cappo talks 90\u2019s Krishnacore",
+      "venue": "Bhakti Garden (1409 south street)",
+      "date": "2026-09-25",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/ray-capp-talks-90s-hardcore",
+      "description": "",
+      "venue_address": "1409 south street"
+    },
+    {
+      "title": "The Mar-Mars (SAV GA), Dr. Shickadance (NJ), Panic Park, Nadafinger",
+      "venue": "The Pouch (4215 Baltimore Ave Philadelphia)",
+      "date": "2026-09-25",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/the-mar-mars-sav-ga-dr-shickadance-nj-panic-park-nadafinger",
+      "description": "OUT OF TOWN BAND / hardcore punk / noise rock / philadelphia / post-punk / punk",
+      "venue_address": "4215 Baltimore Ave Philadelphia"
+    },
+    {
+      "title": "Suppression, Aroma, Sweepers, Dead Door Unit",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-09-25",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/suppression-aroma-sweepers-dead-door-unit-1",
+      "description": "OUT OF TOWN BAND / grind / noise / punk",
+      "venue_address": "5001 Market Street"
+    },
+    {
+      "title": "Iron Lung / Hologram / Pray To Be Saved / Early Grave / Malform",
+      "venue": "The First Unitarian Church (2125 Chestnut Street)",
+      "date": "2026-09-26",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/iron-lung-hologram-pray-to-be-saved-early-grave-malform",
+      "description": "",
+      "venue_address": "2125 Chestnut Street"
+    },
+    {
+      "title": "LOG FLUME, PERSON (NYC), CARPET FLOOR AND TTLC",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-09-26",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/log-flume-person-nyc-carpet-floor-and-ttlc",
+      "description": "OUT OF TOWN BAND / philadelphia / power pop / punk",
+      "venue_address": "5001 Market Street"
+    },
+    {
+      "title": "The Superweakers",
+      "venue": "The First Unitarian Church (2125 Chestnut Street)",
+      "date": "2026-09-27",
+      "time": "5:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/the-superweakers",
+      "description": "",
+      "venue_address": "2125 Chestnut Street"
+    }
+  ]
+}

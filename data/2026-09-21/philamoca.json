@@ -1,0 +1,69 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-09-20T10:36:38.550848+00:00",
+  "events": [
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-21",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk."
+    },
+    {
+      "title": "Otto Benson Group",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-22",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/99713974",
+      "description": ""
+    },
+    {
+      "title": "Minyo Crusaders",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-23",
+      "time": "7:30, 8:00",
+      "cost": "$20\u2013$25",
+      "url": "https://www.etix.com/ticket/p/87131687",
+      "description": "Japanese cumbia heavyweights!"
+    },
+    {
+      "title": "Fabio Frizzi performs FRIZZI2FULCI",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-24",
+      "time": "7:30, 8:00",
+      "cost": "$30\u2013$40",
+      "url": "https://www.etix.com/ticket/p/69200620",
+      "description": ""
+    },
+    {
+      "title": "Love Spells",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-25",
+      "time": "7:30, 8:00",
+      "cost": "",
+      "url": "https://www.etix.com/ticket/p/47772850/",
+      "description": ""
+    },
+    {
+      "title": "Matt Farley",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-26",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/47816869",
+      "description": "Full band show from Matt Farley aka The Very Nice Interesting Singer Man aka The Guy Who Sings Songs About Cities & Towns aka Moes Haven aka The Toilet Bowl Cleaners!"
+    },
+    {
+      "title": "STRAIGHT CIRCLE",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-27",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/87010213",
+      "description": ""
+    }
+  ]
+}

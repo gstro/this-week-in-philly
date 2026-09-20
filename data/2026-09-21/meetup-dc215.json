@@ -1,0 +1,15 @@
+{
+  "source": "Meetup: DC 215",
+  "collected_at": "2026-09-20T10:36:42.088217+00:00",
+  "events": [
+    {
+      "title": "EMP Range Day",
+      "venue": "(online)",
+      "date": "2026-09-25",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/316576853/",
+      "description": "DC215\nIf you're a potential homelab enthusiast, system engineer, or cyber range developer come and check out the EMP Crew's Cyber Range Day! We'll be showcasing our cyber labs full of different development tools, offensive/defensive emulation, and our portable cyber range kit we'll be taking to DEFCON and Blackhat USA this year. You'll get to play around in our range with our new Tengu Marauder Stryker units and robots in an emulated IoT range."
+    }
+  ]
+}

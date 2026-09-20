@@ -1,0 +1,60 @@
+{
+  "source": "R5 Productions",
+  "collected_at": "2026-09-20T10:36:35.092038+00:00",
+  "events": [
+    {
+      "title": "Automatic",
+      "venue": "The First Unitarian Church",
+      "date": "2026-09-22",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$29.93",
+      "url": "https://r5productions.com/event/automatic/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": ""
+    },
+    {
+      "title": "Otto Benson",
+      "venue": "PhilaMOCA",
+      "date": "2026-09-22",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$21.19",
+      "url": "https://r5productions.com/event/otto-benson/philamoca/philadelphia-pennsylvania/",
+      "description": ""
+    },
+    {
+      "title": "EYE",
+      "venue": "Warehouse On Watts",
+      "date": "2026-09-25",
+      "time": "Doors: 7 pm | Show: 8 pm",
+      "cost": "$30.96",
+      "url": "https://r5productions.com/event/eye/warehouse-on-watts/philadelphia-pennsylvania/",
+      "description": ""
+    },
+    {
+      "title": "Love Is The Law World Tour | Love Spells",
+      "venue": "PhilaMOCA",
+      "date": "2026-09-25",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$25.81",
+      "url": "https://r5productions.com/event/love-spells/philamoca/philadelphia-pennsylvania/",
+      "description": "Love Is The Law World Tour"
+    },
+    {
+      "title": "An Evening with | POSTPONED: Hazlett",
+      "venue": "The First Unitarian Church",
+      "date": "2026-09-25",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "",
+      "url": "https://r5productions.com/event/postponed-hazlett/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": "An Evening with"
+    },
+    {
+      "title": "Performing In The Round, In Quadrophonic Sound... | Iron Lung",
+      "venue": "The First Unitarian Church",
+      "date": "2026-09-26",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "",
+      "url": "https://r5productions.com/event/iron-lung/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": "Performing In The Round, In Quadrophonic Sound..."
+    }
+  ]
+}

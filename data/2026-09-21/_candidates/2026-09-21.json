@@ -1,0 +1,636 @@
+{
+  "week": "2026-09-21",
+  "date": "2026-09-21",
+  "collection_failures": [
+    "cinespeak (HTTPError: 429 Client Error: Too Many Requests for url: https://cinespeak.org/cinema/)",
+    "wxpn (ParseError: every request failed (1 attempted); first: https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=1 (HTTPSConnectionPool(host='backend.xpn.org', port=443): Max retries exceeded with url: /wp-json/wp/v2/event?per_page=100&page=1 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'backend.xpn.org'. (_ssl.c:1010)\")))))"
+  ],
+  "candidates": [
+    {
+      "title": "Suki Waterhouse: The Loveland Tour",
+      "venue": "The Fillmore, 29 East Allen Street, Philadelphia, PA 19123",
+      "date": "2026-09-21",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/suki-waterhouse-the-loveland-tour-tickets",
+      "description": "This is an All Ages Event. Doors open at 7:00 PM. All support acts are subject to change without notice.",
+      "source": "Do215",
+      "id": "c0000"
+    },
+    {
+      "title": "Cheap Trick",
+      "venue": "Keswick Theatre, 291 N Keswick Ave, Glenside, Pe 19038",
+      "date": "2026-09-21",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/cheap-trick-tickets",
+      "description": "Currently gearing up for their 50th anniversary year, Cheap Trick remain an indisputable, indispensable rock ’n’ roll institution, beloved everywhere for their instantly identifiable, hugely influential union of mischievous wit and maximum melodies, powerhouse pop hooks and razor-sharp riffs. Established almost half a century ago by Robin Zander (vocals, rhythm guitar), Rick Nielsen (lead guitar), Tom Petersson (bass guitar), and Bun E. Carlos (drums), the Rockford, IL-based band has become part of the very fiber of American music, with more than 40 international Gold and Platinum certificatio…",
+      "source": "Do215",
+      "id": "c0001"
+    },
+    {
+      "title": "Brandon Flowers",
+      "venue": "Franklin Music Hall, 421 N. 7th Street, Philadelphia, PA 19123",
+      "date": "2026-09-21",
+      "time": "8:15 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/brandon-flowers-tickets",
+      "description": "\"I’ve been keeping the secret of my upbringing,” Brandon Flowers laughs. We all know the story, fittingly mythological: a Mormon raised in the seedy glimmer of casinos, destined for rock ‘n’ roll stardom. But before that, Flowers was a teenager in small-town Utah, taken with the new wave and post-punk and Britpop his brother had shown him, yet spending just as much time driving the countryside with his dad and hearing Johnny Cash and Waylon Jennings songs reflect his surroundings back at him. Those seemingly disparate influences have converged in Flowers’ music for twenty years, but he only ra…",
+      "source": "Do215",
+      "id": "c0002"
+    },
+    {
+      "title": "Sara Bareilles: The Good Grief Tour",
+      "venue": "The Met, 858 N Broad St, Philadelphia, PA 19130",
+      "date": "2026-09-21",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/sara-bareilles-the-good-grief-tour-tickets",
+      "description": "Sara Bareilles has partnered with PLUS1 so that $1 per ticket sold will be contributed by Live Nation to help protect emotional health and prevent suicide among teens and young adults through the JED Foundation. No portion of the purchase price is tax-deductible. plus1.org | jedfoundation.org",
+      "source": "Do215",
+      "id": "c0003"
+    },
+    {
+      "title": "Dale Watson & His Lonestars w/ India Ramey",
+      "venue": "Elkton Music Hall, 107 North St, Elkton, MD 21921",
+      "date": "2026-09-21",
+      "time": "6:30 PM",
+      "cost": "$56, $33.99, 21+",
+      "url": "https://do215.com/events/2026/9/21/dale-watson-his-lonestars-w-india-ramey-tickets",
+      "description": "**Doors open 6:30PM\nMusic starts at 7:00PM**\nDale Watson is a living legend of American roots music, blending honky-tonk, outlaw country, western swing, and rockabilly into the sound he calls “Ameripolitan.”\nAcross more than 30 albums, Watson has built an international following, appeared on Austin City Limits, Jimmy Kimmel Live!, and The Late Show with David Letterman, and shared stages with Merle Haggard, Johnny Cash, Willie Nelson, and Kris Kristofferson.\nHis latest album, Unwanted, is a raw, rowdy mix of country twang, hard-earned heartache, and road-tested swagger—proof that after four de…",
+      "source": "Do215",
+      "id": "c0005"
+    },
+    {
+      "title": "Smut, Dirt Buyer",
+      "venue": "Nikki Lopez, 304 South St, Philadelphia, PA 19147",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$19.49",
+      "url": "https://do215.com/events/2026/9/21/smut-dirt-buyer-tickets",
+      "description": "Bar open at 3pm M-F and 11am Saturday and Sunday. Join us for Happy Hour before the show! Monday-Friday till 7pm. $5 drafts, $5 well, $8 signature craft cocktails. $1 hot dogs during all Philly sports home games.",
+      "source": "Do215",
+      "id": "c0006"
+    },
+    {
+      "title": "Pink Breath Of Heaven",
+      "venue": "Ortlieb's, 847 N 3rd St, Philadelphia, PA 19123",
+      "date": "2026-09-21",
+      "time": "8:00 PM",
+      "cost": "$15.13",
+      "url": "https://do215.com/events/2026/9/21/pink-breath-of-heaven-tickets",
+      "description": "$12 adv $15 at the door",
+      "source": "Do215",
+      "id": "c0007"
+    },
+    {
+      "title": "DOMi & JD BECK - WHO ASKED? Tour",
+      "venue": "Brooklyn Bowl Philadelphia, 1009 Canal St, Philadelphia, PA 19123",
+      "date": "2026-09-21",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/domi-jd-beck-who-asked-tour-tickets",
+      "description": "Doors 7 PM / Show 8 PM. All ages welcome. This ticket is valid for standing room only, general admission. ADA accommodations are available day of show. All support acts are subject to change without notice. Any change in showtimes, safety protocols, and other important information will be relayed to ticket-buyers via email. ALL SALES ARE FINAL",
+      "source": "Do215",
+      "id": "c0008"
+    },
+    {
+      "title": "Bartram’s Garden Photo Exhibit at Studio 34",
+      "venue": "Studio 34, 4522 Baltimore Avenue, Philadelphia, PA 19143",
+      "date": "2026-09-21",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/bartram-s-garden-photo-exhibit-at-studio-34-tickets",
+      "description": "Bartram’s Garden is the oldest surviving botanical garden in North America. Located in an urban neighborhood, it is a gem of nature that may seem incongruous to first-time visitors. In the 1720s, botanist John Bartram built a stone house overlooking the Schuylkill River, and began farming the 107 acres of land around it. In his spare time, Bartram followed his interest in native plant species and traveled widely collecting plants and seeds from th northern shores of Nova Scotia to the southern tip of Florida. He founded a botanical garden on the five acre plot between his house and the river a…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-09-24"
+      ],
+      "recurrence_count": 4,
+      "id": "c0009"
+    },
+    {
+      "title": "audiOhm Sound Bath",
+      "venue": "Studio 34, 4522 Baltimore Avenue, Philadelphia, PA 19143",
+      "date": "2026-09-21",
+      "time": "6:00 PM",
+      "cost": "$20",
+      "url": "https://do215.com/events/2026/9/21/audiohm-sound-bath-tickets",
+      "description": "audiOhm is a live electro-acoustic sound bath that combines elements of meditation, improvisation, psychedelic music, and restorative yoga to create an immersive and transformative auditory and visceral experience. Led by multi-instrumentalist Brett Zweiman and occasional guest musician, audiOhm combines live instrumentation and environmental sounds to create rich and dynamic soundscapes in real-time.\naudiOhm begins with meditation practice that focuses attention on the breath to help participants quiet their minds and enter a state of relaxation, preparing them for the journey ahead. Brett of…",
+      "source": "Do215",
+      "id": "c0010"
+    },
+    {
+      "title": "Karaoke with DJ Rachel Wild",
+      "venue": "Club 624, 624 S 6th S, Philadelphia, PA 19146",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/karaoke-with-dj-rachel-wild-tickets",
+      "description": "Step up to the mic and bring your best song for a new karaoke night at Club 624, hosted by DJ Rachel Wild.\nGrab your friends, pick your anthem, and come make Club 624 your new karaoke spot.\nEvery Monday | 7PM - 11PM",
+      "source": "Do215",
+      "id": "c0012"
+    },
+    {
+      "title": "Chekhov’s Banana Peel",
+      "venue": "The Fidget Space",
+      "date": "2026-09-21",
+      "time": "7:30 PM",
+      "cost": "$15",
+      "url": "https://do215.com/events/2026/9/21/chekhov-s-banana-peel-tickets",
+      "description": "Four masterpieces. Four acts each. Dozens of miserable Russians, a doomed cherry orchard, a dead seagull, and exactly one hour to get through it all. What could possibly go wrong?\nWelcome to Chekhov’s Banana Peel, the debut production from 21st Century Commedia. This high-octane, relentlessly physical production takes the complete works of Anton Chekhov, the undisputed master of existential subtext and melancholy drama and strips away the subtext entirely. Armed with nothing but physical theatre, high-energy clowning, precision mime, and a healthy dose of theatrical anarchy, our ensemble attem…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-23",
+        "2026-09-26"
+      ],
+      "recurrence_count": 3,
+      "id": "c0013"
+    },
+    {
+      "title": "Kennedy Ryon",
+      "venue": "City Winery, 990 Filbert St, Philadelphia, PA 19107",
+      "date": "2026-09-21",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/kennedy-ryon-tickets",
+      "description": "City Winery Philadelphia presents(opens in a new tab) Kennedy Ryon The Can We Evolve? Tour live on September 21st at 7:30pm.\nKennedy Ryon built her following without a label, without a machine, and without anyone standing between her and the people who listen. That independence is the whole story. Over 600,000 fans across platforms and nearly a quarter million monthly Spotify listeners found her the same way: word of mouth, shared links, songs that feel like therapy until the beat drops and the room turns into a party. Her 2025 debut run sold more than 1,500 tickets across eight cities, proof…",
+      "source": "Do215",
+      "id": "c0014"
+    },
+    {
+      "title": "Wellness Walks",
+      "venue": "The Farm at Awbury, 6336 Ardleigh St, Philadelphia, PA 19138",
+      "date": "2026-09-21",
+      "time": "7:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/wellness-walks-tickets",
+      "description": "Mondays and Thursdays 7am – 8am\nStart your morning with peace and fresh air! Join wellness coordinator Megan Do Nascimento for a moderately paced stroll through Awbury’s 56-acre landscape—exploring gardens, woodlands, meadows, ponds, and the farm. It’s the perfect way to reset, connect with nature, and begin the day energized.",
+      "source": "Do215",
+      "id": "c0015"
+    },
+    {
+      "title": "Day-Off Camp",
+      "venue": "Schuylkill Center, 8480 Hagy's Mill Road, Philadelphia, PA 19128",
+      "date": "2026-09-21",
+      "time": "8:00 AM",
+      "cost": "$80 – $90",
+      "url": "https://do215.com/events/2026/9/21/day-off-camp-tickets",
+      "description": "When schools are closed, we are open! Keep curious young minds and busy bodies active with the Schuylkill Center Day Off Camp. Trained educators lead students grades K-6 on unique nature-themed explorations that take advantage of our science lab, Discovery Center, and 365 acres of beautiful wooded trails, streams, and ponds.\nPlease bring a packed lunch, water bottle and an extra set of clothes. Wear weather-appropriate clothing that can get dirty. Space is limited to 30 campers. Sign up early to guarantee your spot.\nRegister Now\nHours:\nDay Off Camp Hours: 8:00 am–3:00 pm\nAftercare Hours: 3:00p…",
+      "source": "Do215",
+      "id": "c0017"
+    },
+    {
+      "title": "We Walk Philly",
+      "venue": "Clark Park, 4300-4398 Baltimore Ave, Philadelphia, PA 19104",
+      "date": "2026-09-21",
+      "time": "8:30 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/we-walk-philly-tickets",
+      "description": "We are proud to announce that as part of our health and wellness programming Clark Park is partnering with We Walk Philadelphia to fund the We Walk Clark Park Program on Monday and Friday Mornings from 8:30 to 9:30 AM throughout the year. The program is free of charge – just show up at the Dickens Statue and walk with us twice for a free T-shirt! We look forward to seeing you there! Contact Frank Chance at chancefl@gmail.com or checkout the Facebook page for further information!",
+      "source": "Do215",
+      "id": "c0018"
+    },
+    {
+      "title": "Let Freedom Ring",
+      "venue": "Cherry Street Pier, 121 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+      "date": "2026-09-21",
+      "time": "9:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/let-freedom-ring-tickets",
+      "description": "Paul Ramírez Jonas’ monumental artwork plays the song “My Country ‘Tis of Thee” in its entirety—all but the final note. Participants must pull a lever to ring the last note on a 600-pound bell at the base of the sculpture to complete the song, a metaphor for how we can work together as a society to fulfill the unfinished promises of our nation’s founding. This artwork promotes civic engagement by providing a public site to speak, listen, and learn from one another, and to bring people together to imagine a more inclusive future that embraces the complexities of our past.\nTwo phrases etched on…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-09-24",
+        "2026-09-25",
+        "2026-09-26",
+        "2026-09-27"
+      ],
+      "recurrence_count": 7,
+      "id": "c0020"
+    },
+    {
+      "title": "Play-in-a-Day: Adventure Seekers (Yom Kippur)",
+      "venue": "Hamilton Family Arts Center",
+      "date": "2026-09-21",
+      "time": "9:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/play-in-a-day-adventure-seekers-yom-kippur-tickets",
+      "description": "In these award-winning classes, students work together to create an original play. Each Play-in-a-Day is as unique as the participants – the story and characters are always new!\n9am – 5pm\nGrades: K – 5\nGo on an epic journey of your imagination!",
+      "source": "Do215",
+      "id": "c0021"
+    },
+    {
+      "title": "Military Mondays",
+      "venue": "Dave & Buster's, 325 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+      "date": "2026-09-21",
+      "time": "11:00 AM",
+      "cost": "All Ages",
+      "url": "https://do215.com/events/2026/9/21/military-mondays-tickets",
+      "description": "At ease — it's time for fun! Every Monday, Dave & Buster's is hooking up ALL vets & active-duty military members with a FREE $10 Power Card + 15% off food and non-alcoholic beverages with valid military ID.\n*Promotional. Active Duty and Retired Military Service Members receive $10 in free game play with valid Military ID at participating locations on Mondays only. 15% Military Discount applies to food and non-alcoholic beverages only. Excludes game play, gift cards, alcohol, past purchases, tax and gratuity. Present ID to Server to redeem. 15% discount is for valid Military ID holder and up to…",
+      "source": "Do215",
+      "id": "c0022"
+    },
+    {
+      "title": "Military Mondays",
+      "venue": "Dave & Buster's - Philadelphia, 325 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+      "date": "2026-09-21",
+      "time": "11:00 AM",
+      "cost": "All Ages",
+      "url": "https://do215.com/events/2026/9/21/military-mondays-tickets-abzkkzv",
+      "description": "At ease — it's time for fun! Every Monday, Dave & Buster's is hooking up ALL vets & active-duty military members with a FREE $10 Power Card + 15% off food and non-alcoholic beverages with valid military ID.\n*Promotional. Active Duty and Retired Military Service Members receive $10 in free game play with valid Military ID at participating locations on Mondays only. 15% Military Discount applies to food and non-alcoholic beverages only. Excludes game play, gift cards, alcohol, past purchases, tax and gratuity. Present ID to Server to redeem. 15% discount is for valid Military ID holder and up to…",
+      "source": "Do215",
+      "id": "c0023"
+    },
+    {
+      "title": "Highlights of the Museum",
+      "venue": "Philadelphia Art Museum, 2600 Benjamin Franklin Pkwy, Philadelphia, PA 19130",
+      "date": "2026-09-21",
+      "time": "11:00 AM",
+      "cost": "Free with museum admission. Reservations not required.",
+      "url": "https://do215.com/events/2026/9/21/highlights-of-the-museum-tickets",
+      "description": "Perfect for the first-time visitor, this tour provides an overview of some of the museum’s most renowned treasures.",
+      "source": "Do215",
+      "id": "c0024"
+    },
+    {
+      "title": "Mondays @ McCormick's - Weekly Protest Noon 2000 Market",
+      "venue": "Senator McCormicks Philly Ofc.",
+      "date": "2026-09-21",
+      "time": "12:00 PM",
+      "cost": "Free",
+      "url": "https://do215.com/events/2026/9/21/mondays-mccormick-s-weekly-protest-noon-2000-market-tickets",
+      "description": "\"Monday's at McCormick's\" each Monday at noon - rain or shine - Here's why:\nWe are living in a MAGA-republican Coup. We were warned. Now it's here!\nWe now have a true oligarchy in the US and we must fight back!\nThe Trump administration’s illegal actions and relentless efforts to dismantle protections for vulnerable communities — both here in the U.S. and abroad— have made clear we are in the midst of an authoritarian takeover not unlike what has happened in Orban’s Hungary. But look what happened to him!\nWe’re all in danger!\nThe US has never been a perfect democracy. It has a lot of problems,…",
+      "source": "Do215",
+      "id": "c0026"
+    },
+    {
+      "title": "“Midnight Whiskers” Paint and Sip",
+      "venue": "Tapster Philly, 110-16 South 16th Street, Philadelphia, PA 19102",
+      "date": "2026-09-21",
+      "time": "1:00 PM",
+      "cost": "$39.19, 21+",
+      "url": "https://do215.com/events/2026/9/21/midnight-whiskers-paint-and-sip-tickets",
+      "description": "Unleash your inner artist while sipping cocktails at Tapster Philly’s Midnight Whiskers paint party!",
+      "source": "Do215",
+      "id": "c0027"
+    },
+    {
+      "title": "Industry Night at Buttonwood Grill",
+      "venue": "Peddler's Village, 100 Peddlers Village, Lahaska, PA 18931",
+      "date": "2026-09-21",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/industry-night-at-buttonwood-grill-tickets",
+      "description": "Starting July 6 at 4PM\nEvery Monday, receive 20% off your meal at Buttonwood Grill if you work in the service industry (hairdressers, hotel/restaurant teams, etc.)\n(alcohol excluded; limited time only).",
+      "source": "Do215",
+      "id": "c0028"
+    },
+    {
+      "title": "Street Sammies",
+      "venue": "Wissahickon Brewing Company, 3705 W School House Ln, Philadelphia, PA 19129",
+      "date": "2026-09-21",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/street-sammies-tickets",
+      "description": "Two Street Sammies will be slinging their signature gourmet sandwiches & as well traditional Irish fare.",
+      "source": "Do215",
+      "id": "c0029"
+    },
+    {
+      "title": "Yoga",
+      "venue": "The People’s Gallery, 1034 Pine St, Philadelphia, PA 19107",
+      "date": "2026-09-21",
+      "time": "6:00 PM",
+      "cost": "$5",
+      "url": "https://do215.com/events/2026/9/21/yoga-tickets",
+      "description": "Welcome to Yoga at the Gallery! Join us for a relaxing evening of yoga in a unique and intimate setting. Take a break from your busy day and unwind surrounded by beautiful artwork. Bring your mat and get ready to stretch, breathe, and find your inner peace. No experience necessary, all levels are welcome.",
+      "source": "Do215",
+      "id": "c0030"
+    },
+    {
+      "title": "Dungeons & Drafts",
+      "venue": "Evil Genius, 1727 N Front St, Philadelphia, Pe 19122",
+      "date": "2026-09-21",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/dungeons-drafts-tickets",
+      "description": "Join a questing group of adventurers to roll some dice, sip magical brews, and forge legendary memories! Sign Up Here!",
+      "source": "Do215",
+      "id": "c0032"
+    },
+    {
+      "title": "Impersonator",
+      "venue": "Yellow Bicycle Theater",
+      "date": "2026-09-21",
+      "time": "6:30 PM",
+      "cost": "$15",
+      "url": "https://do215.com/events/2026/9/21/impersonator-tickets",
+      "description": "Can you find yourself by being someone else? Spencer Boyce has been an Elvis Tribute Artist since he was six years old. But as he enters adulthood, he's not sure if his time spent with the King of Rock 'n' Roll has been a blessing, or a curse. Join Spencer as he leads you through a musical journey of his own life, peeling the curtain back on the Elvis tribute world, while also reliving Elvis's biggest career highlights and hits. You won't want to miss this one of a kind solo show!",
+      "source": "Do215",
+      "id": "c0033"
+    },
+    {
+      "title": "Egg and How I Learned to Save Myself",
+      "venue": "Calvary Center for Culture and Community",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$40",
+      "url": "https://do215.com/events/2026/9/21/egg-and-how-i-learned-to-save-myself-tickets",
+      "description": "A woman falls into a haunting internal dreamscape as part of her EMDR guided therapy session. There she must reckon with a past version of herself stuck in a vicious loop. The shared negative self beliefs, shameful memories, and past traumas manifest as literal eggs, and the woman and her past self dance, contort, and eventually fly out of the dreamscape towards a hopeful future.\n“Egg, and How I Learned To Save Myself” is a genre-bending movement story living at the intersection of physical theatre, dance, and circus arts. Proud to be ‘weird but not boring’, the duet is performed by Nicole Bur…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-24",
+        "2026-09-25",
+        "2026-09-27"
+      ],
+      "recurrence_count": 4,
+      "id": "c0035"
+    },
+    {
+      "title": "Flood Stones Rising",
+      "venue": "Art Room Studio",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$15",
+      "url": "https://do215.com/events/2026/9/21/flood-stones-rising-tickets",
+      "description": "\"Flood Stones Rising\" explores time, location and memory. Grounded in deep listening improvisation, we activate personal story, vocalization practice and physical gesture. Small stones anchor the space and our bodies exploring sonic, physical and metaphorical resonances. Building on and expanding our ‘carry with me this place’ practice, “Flood Stones Rising” embraces the flooding of memory and tension between erasure and memory in ourselves and the landscape.\nThis quote from Toni Morrison inspires our process:\n\"Floods\" is the word they use, but in fact it is not flooding; it is remembering. Re…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-22",
+        "2026-09-23"
+      ],
+      "recurrence_count": 3,
+      "id": "c0036"
+    },
+    {
+      "title": "Liberty City Arts Presents “My Place of Clear Water”",
+      "venue": "The Latvian Society of Philadelphia",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$15",
+      "url": "https://do215.com/events/2026/9/21/liberty-city-arts-presents-my-place-of-clear-water-tickets",
+      "description": "A reference to the opening line of Seamus Heaney’s poem, Anahorish, the “first hill in the world where springs washed into the shiny grass,” My Place of Clear Water is a love letter you’re welcome to read.\nIn this concert, music by Missy Mazzoli, Kate Soper, Tom Cipullo, and Jake Heggie, weaves together historic and contemporary poets Hildegard von Bingen, John Milton, Emily Dickenson, and Laura Morefield, among others. Performer and singer Rachel DiBlasio follows the thread of the text as she examines connection to place, to body, to the cycle of seasons (birth and decay), and to the shelters…",
+      "source": "Do215",
+      "id": "c0037"
+    },
+    {
+      "title": "Phillyhood – short plays about what it means to be Philly!",
+      "venue": "Prism Arts Philadelphia, 1021 Hamilton Street, FL 2, Philadelphia, PA 19123",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$20",
+      "url": "https://do215.com/events/2026/9/21/phillyhood-short-plays-about-what-it-means-to-be-philly-tickets",
+      "description": "Three short plays that show what it means to be Philly! A comedy about Betsy Ross and a rabid Eagles fan. A drama about two young women finding out what really happened to their mother in 1918 Philadelphia. A dramedy about two frenemies looking for a missing husband or is it their own hearts?\nBetsy & The Birds by Susan Cain McQuilkin\nMisery ... Love ... Company by Robin Rodriguez\nTapping at the Window by Julie Zaffarano\nFrom the writers of Philadelphia Dramatists Center -- Phillyhood! What it means to be of Philly.\nPDC is the longest-running playwright development organization in Philly. With…",
+      "source": "Do215",
+      "id": "c0039"
+    },
+    {
+      "title": "Liberty City Arts Presents: ‘Beyond’",
+      "venue": "Indy Hall",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$15",
+      "url": "https://do215.com/events/2026/9/21/liberty-city-arts-presents-beyond-tickets",
+      "description": "In the distant future, humans have fled a dying Earth and embarked on a voyage to colonize the farthest reaches of outer space. A generation of life-like androids has been built to support their journey. Designated only by number, these androids work as cleaners, mechanics, and servants for the dwindling human population aboard the fleet of colonial spaceships. But as the ships near their destination, the future of the android population is in doubt. While some favor an integrated society, those in power fear the androids’ capacity to evolve and order the dismantling of all but a few.\nSet outs…",
+      "source": "Do215",
+      "id": "c0041"
+    },
+    {
+      "title": "Oleanna",
+      "venue": "SideQuest Theater",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$45",
+      "url": "https://do215.com/events/2026/9/21/oleanna-tickets",
+      "description": "Oleanna is an uncomfortably relevant play that explores the intricate interplay of gender, authority, control, and education. Witness the deeply personal and profoundly affecting dialogues between a university professor and his student as they struggle to truly understand one another. The academic setting becomes a crucible where assumptions are challenged and communication breaks down. Written in 1992 in response to the Anita Hill-Clarence Thomas hearing, Oleanna invites audiences to reflect on their own perspectives, assumptions, and values. In today’s world, it’s easy for differences to gro…",
+      "source": "Do215",
+      "id": "c0042"
+    },
+    {
+      "title": "Rituals",
+      "venue": "Vox Populi Gallery",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$20",
+      "url": "https://do215.com/events/2026/9/21/rituals-tickets",
+      "description": "You’ve lost your faith in life. Existing on Earth feels like eating steel wool and steel wool is the new Shroud of Turin. You are lost, pissed, covered in Lisa Frank tattoos, listening to Zara Larsson and desperate for a total bliss takeover to handle the crime of living in 2026. RITUALS has the spiritual deliverance you crave. Throw away your old cult (Christianity, Bahi, Shinto), today’s hottest cult offers the ultimate DP exorcism! Join the Church of Perpetual Diet Coke in, RITUALS - a holy immersive, celebratory, interdisciplinary, religious obstacle experience. This coven is open for busi…",
+      "source": "Do215",
+      "id": "c0043"
+    },
+    {
+      "title": "The Monday Night Jam Session hosted by Richard Hill Jr. and Friends",
+      "venue": "Black Squirrel Club, 1049 Sarah St, Philadelphia, PA 19125",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/the-monday-night-jam-session-hosted-by-richard-hill-jr-and-friends-tickets",
+      "description": "",
+      "source": "Do215",
+      "id": "c0044"
+    },
+    {
+      "title": "Music Video Bingo: Recession Pop Edition",
+      "venue": "MilkBoy South Street",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/music-video-bingo-recession-pop-edition-tickets",
+      "description": "",
+      "source": "Do215",
+      "id": "c0045"
+    },
+    {
+      "title": "Soup Can Magazine Art + Poetry Pop-Up",
+      "venue": "Tattooed Moms, 530 South Street, Philadelphia, PA 19147",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "Free",
+      "url": "https://do215.com/events/2026/9/21/soup-can-magazine-art-poetry-pop-up-tickets",
+      "description": "MONDAY, SEPTEMBER 21ST\n7PM\nNO COVER // FREE FUN\nRSVP: FB EVENT | VIP TICKETS: EVENTBRITE\nFeaturing:\nShannon Frost Greenstein\nNikki Hartwell\nJane Rebecca Caneralla\nRachel Frese\nVivian Opal\nand special guest Chibbi Orduna\nFollow Soup Can Magazine and NJ AMP Alliance on Instagram.\n***\nWhat’s Up at TMoms:\n Mondays, 4-11pm | mom’s marvelous meatless mondays?? Say it 3 times fast and see what happens. we dare u. Meatless Monday is here at TMoms from open ’till close. See what’s on special this month!\n Mondays, Upstairs 6-11pm | cue ball as bright as ur future. Free Pool Mondays upstairs at TMoms con…",
+      "source": "Do215",
+      "id": "c0046"
+    },
+    {
+      "title": "Trivia w/ Philthy Phil",
+      "venue": "Morgan's Pier, 221 N Christopher Columbus Blvd, Philadelphia, PA 19106",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/trivia-w-philthy-phil-tickets",
+      "description": "",
+      "source": "Do215",
+      "id": "c0047"
+    },
+    {
+      "title": "After a Night Out",
+      "venue": "Clubfriends Radio & Records",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "$20",
+      "url": "https://do215.com/events/2026/9/21/after-a-night-out-tickets",
+      "description": "Clubfriends is Alexa Colas' physical space and live show where she explores her own identity and lived experience through moments that move her — off the dance floor and on the record. At this year's Fringe Festival, she's inviting 13 other artists to do the same, following their respective Fringe performances. The public is invited to participate in this exploration with her, where she's extending the moments we all experience as part of a city's nightlife ecosystem. This takes place in her substance-free living room turned record store, now at Meantime On Market in Center City.\nArtists Alexa…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-26",
+        "2026-09-27"
+      ],
+      "recurrence_count": 3,
+      "id": "c0048"
+    },
+    {
+      "title": "EF: Open Mic & Industry Night",
+      "venue": "Wissahickon Brewing Company, 3705 W School House Ln, Philadelphia, PA 19129",
+      "date": "2026-09-21",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/9/21/ef-open-mic-industry-night-tickets",
+      "description": "Calling all musicians, singers, songwriters, comedians, poets, magicians, or anyone with talent... Open Mic at Wiss is BACK! Join us and host Mark Menk every Monday at 8PM.",
+      "source": "Do215",
+      "id": "c0049"
+    },
+    {
+      "title": "RECKON Stage Reading",
+      "venue": "Taller Puertorriqueno",
+      "date": "2026-09-21",
+      "time": "7:30 PM",
+      "cost": "$20",
+      "url": "https://do215.com/events/2026/9/21/reckon-stage-reading-tickets",
+      "description": "In RECKON, artist Logan Phillips returns to the fabled town to face the history he was raised on as a boy—gunfights, outlaws, and Hollywood cowboys—for a new, personal confrontation with the West’s foundational mythology. This hybrid memoir also explores sexuality, masculinity, parenting, and what it means to love a land rife with contradiction and “slathered in murder.”\nAs innovative as it is moving, this memoir is constructed of essays, photography, poetry, newspaper clippings from the Tombstone Epitaph Local Edition, and of course, movie screenplays. As he writes the characters of his past–…",
+      "source": "Do215",
+      "id": "c0050"
+    },
+    {
+      "title": "returned, iridescent",
+      "venue": "The Proscenium at The Drake",
+      "date": "2026-09-21",
+      "time": "7:30 PM",
+      "cost": "$30",
+      "url": "https://do215.com/events/2026/9/21/returned-iridescent-tickets",
+      "description": "Elio and Luna are lovers bound by the stars, a sun and moon destined to meet every dusk and every dawn, rise and fall, come together and drift apart, across a lifetime. With each reunion a loss, and with each departure a gain. Trans bodies shift and age, both weathered and bolstered by time, only realized through radical transformation, yet still able see the truths in one another. Elio and Luna will follow each other through the stars, and back again.\nRose Farrell's returned, iridescent is a new play and trans love story about leaving and returning, transformation, and the perpetual act of be…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-23",
+        "2026-09-24",
+        "2026-09-25",
+        "2026-09-26",
+        "2026-09-27"
+      ],
+      "recurrence_count": 6,
+      "id": "c0051"
+    },
+    {
+      "title": "Wisdom Of The Crowd",
+      "venue": "The Coop",
+      "date": "2026-09-21",
+      "time": "7:30 PM",
+      "cost": "$20",
+      "url": "https://do215.com/events/2026/9/21/wisdom-of-the-crowd-tickets",
+      "description": "Do you love Bar Trivia?\nDo you miss playing Kahoot?\nDo you know everything ... including how to read the room?\nThen you should come to Wisdom Of The Crowd, The Live Game Show where You are The Contestant and The Answer.\nIn the first half, go head to head with every other audience member in a trivia showdown. The top 3 contestants from the Trivia showdown will come on stage for the second half of the game. In the second half, the contestants on stage will guess what answer the rest of the audience gibes to a series of opinon polls. The winner gets $100!\nBut that's not all! Everyone who correctl…",
+      "source": "Do215",
+      "id": "c0052"
+    },
+    {
+      "title": "My Allowance",
+      "venue": "Queen Memorial Building",
+      "date": "2026-09-21",
+      "time": "7:30 PM",
+      "cost": "$30",
+      "url": "https://do215.com/events/2026/9/21/my-allowance-tickets",
+      "description": "Objects hold memories. We save them to remember. But why can't I let go of my giant Beanie Baby collection?!\nPhiladelphia performance artist Thomas Choinacky humorously assembles ordinary objects and their curious histories. Sitting around a tabletop, a small audience of ten gets an up-close view of the action.\nHandheld ephemera from the 1990s come alive: a Beanie Baby collection, VHS of Olympic ice skating routines, Lauryn Hill’s ‘Miseducation’ on a mix tape. These personal artifacts (bought with pocket money) hold peculiar memories and bring up particular questions. What objects and stories…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-23",
+        "2026-09-24",
+        "2026-09-25",
+        "2026-09-27"
+      ],
+      "recurrence_count": 5,
+      "id": "c0053"
+    },
+    {
+      "title": "Showcase Supreme",
+      "venue": "Claude's Comedy Club & Bar, 1123 South Broad St., Philadelphia, PA 19147",
+      "date": "2026-09-21",
+      "time": "8:00 PM",
+      "cost": "21+",
+      "url": "https://do215.com/events/2026/9/21/showcase-supreme-tickets",
+      "description": "A lineup of comics from Philly and beyond!",
+      "source": "Do215",
+      "id": "c0054"
+    },
+    {
+      "title": "The Philadelphia Experiment",
+      "venue": "Philadelphia Navy Yard",
+      "date": "2026-09-21",
+      "time": "8:05 PM",
+      "cost": "$14.82",
+      "url": "https://do215.com/events/2026/9/21/the-philadelphia-experiment-tickets",
+      "description": "On October 28th 1943, an incredible experiment took place at the Philadelphia Navy Yard. The USS Eldridge was part of revolutionary technological breakthrough. In attempt to make the ship invisible to sight and radar, the ship was teleported to another location. The experiment had gone sideways into an unexpected area of new science. But the event had disastrous effects on the crew. With many physically fused to the deck and other sailors' minds driven to madness. The government officially shut down the experiment on November 3rd. It was deemed a failure and stamped top secret. But with the la…",
+      "source": "Do215",
+      "occurrences": [
+        "2026-09-21",
+        "2026-09-22",
+        "2026-09-23"
+      ],
+      "recurrence_count": 3,
+      "id": "c0055"
+    },
+    {
+      "title": "‘Sing Your Life’ Karaoke by Sara Sherr",
+      "venue": "The 700, 700 N 2nd St, Philadelphia, Pe 19123",
+      "date": "2026-09-21",
+      "time": "9:00 PM",
+      "cost": "Free",
+      "url": "https://do215.com/events/2026/9/21/sing-your-life-karaoke-by-sara-sherr-tickets",
+      "description": "Philadelphia’s ‘Queen of Karaoke’, Sara Sherr, brings the best catalog and vibe in the city to Upstairs @ The 700, Philly’s truly unique event space, every Monday night. There’s a different suggested theme every week, but feel free to pick anything from Sara’s awesome library. 21 and over with ID – No cover charge https://www.phillymag.com/business/2020/01/15/philly-karaoke-dj-sara-sherr/",
+      "source": "Do215",
+      "id": "c0056"
+    },
+    {
+      "title": "☕️ Coffee Talk",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-09-21",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjRwM2NiOWg2c3NqMGMxaDZjcjMwYzFkNjRyamljMWc2OG8zZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "A social hangout every first and third Monday for trans and non-binary people, their significant others, and allies. We have snacks and coffee.",
+      "source": "Iffy Books",
+      "id": "c0679"
+    },
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-09-21",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk.",
+      "source": "PhilaMOCA",
+      "id": "c0718"
+    },
+    {
+      "title": "in-person! West Philadelphia Sanctuary invites you to design your own shirt!",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-09-21",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/west-philadelphia-sanctuary-invites-you-to-design-your-own-shirt",
+      "description": "in-person! West Philadelphia Sanctuary invites you to design your own shirt!",
+      "source": "The Rotunda",
+      "id": "c0747"
+    }
+  ]
+}
