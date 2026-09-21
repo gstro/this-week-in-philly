@@ -4,6 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>This Week in Philadelphia — September 14–20, 2026</title>
+  <!-- ── Link preview ──
+       This report is delivered as a shared link, so the unfurl IS the
+       product's first impression; without these it previewed as a bare URL.
+       No og:image on purpose: there is no artwork to point at and a
+       generated one would be a second thing to keep true. -->
+  <meta name="description" content="21 handpicked things to do in Philadelphia, September 14–20, 2026 — chosen from 90 events across 10 sources.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="This Week in Philadelphia">
+  <meta property="og:title" content="This Week in Philadelphia — September 14–20, 2026">
+  <meta property="og:description" content="21 handpicked things to do in Philadelphia, September 14–20, 2026 — chosen from 90 events across 10 sources.">
+  <meta property="og:url" content="https://gstro.github.io/this-week-in-philly/weeks/2026-09-14.html">
+  <link rel="canonical" href="https://gstro.github.io/this-week-in-philly/weeks/2026-09-14.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#111111">
+  <!-- Inline data URI, not a file: Pages serves this site from a project
+       subpath, so an absolute /favicon.svg 404s, and a relative one would
+       need a different depth from docs/index.html than from docs/weeks/. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Cpath d='M16 6.5 18.47 12.6 25.03 13.06 19.99 17.3 21.59 23.68 16 20.2 10.41 23.68 12.01 17.3 7.44 13.06 13.53 12.6Z' fill='%23c9a84c'/%3E%3C/svg%3E">
   <style>
     /* ── Palette ──
        Every colour in this stylesheet is a token so the dark block below can
@@ -91,6 +109,26 @@
        (venues carry full street addresses -- 130 chars is real) inside its
        column instead of forcing the page to scroll sideways. */
     body { background: var(--page-bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--page-fg); overflow-wrap: break-word; }
+
+    /* ── Keyboard affordances ──
+       The page is ~80 links deep before the first day, and the day index is
+       itself the shortcut past it, so the skip link targets that nav rather
+       than the content wrapper. It is off-canvas until focused, never
+       display:none, which would take it out of the tab order entirely.
+       :focus-visible (not :focus) so a mouse click on a card link doesn't
+       leave a ring behind it. */
+    .skip-link { position: absolute; left: -9999px; top: 0; background: var(--header-bg); color: var(--header-fg); padding: 0.6rem 1rem; font-size: 0.8rem; z-index: 1; }
+    .skip-link:focus { left: 0; }
+    a:focus-visible, .skip-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+
+    /* ── Heading resets ──
+       The day/category/section labels became real h2/h3 elements for the
+       document outline (they were <div>s, so the page had one heading in
+       total and no structure for reader mode or a screen reader's heading
+       list). Their appearance is unchanged, which means undoing the UA
+       stylesheet's bold and its em-relative sizing everywhere the class
+       below doesn't already state both. */
+    h2, h3 { font-size: inherit; font-weight: 400; }
 
     /* ── Header ── */
     .site-header { background: var(--header-bg); width: 100%; }
@@ -285,11 +323,13 @@
 </head>
 <body>
 
+<a class="skip-link" href="#day-index">Skip to the day index</a>
+
 <header class="site-header">
   <div class="site-header-inner">
     <div class="eyebrow">Weekly Guide</div>
     <h1>This Week in <span>Philadelphia</span></h1>
-    <div class="subtitle">September 14–20, 2026 &nbsp;·&nbsp; Compiled Sunday</div>
+    <div class="subtitle">September 14–20, 2026 &nbsp;·&nbsp; Compiled <time datetime="2026-09-13">Sunday, September 13</time></div>
     <div class="header-playlist"><a href="https://open.spotify.com/playlist/2dvdeUPbZwVM33147Rekhf">♫ This week's picks on Spotify</a></div>
   </div>
 </header>
@@ -297,7 +337,7 @@
 <div class="content">
 
   <!-- DAY INDEX -->
-  <nav class="day-index" aria-label="Jump to a day">
+  <nav class="day-index" id="day-index" aria-label="Jump to a day">
     <a href="#monday">Monday<span class="day-index-count">13</span></a>
     <a href="#tuesday">Tuesday<span class="day-index-count">15</span></a>
     <a href="#wednesday">Wednesday<span class="day-index-count">13</span></a>
@@ -306,14 +346,14 @@
     <a href="#saturday">Saturday<span class="day-index-count">9</span></a>
     <a href="#sunday">Sunday<span class="day-index-count">10</span></a>
   </nav>
-  <div class="day-header" id="monday">
+  <h2 class="day-header" id="monday">
     <span class="day-name">Monday</span>
-    <span class="day-date">September 14</span>
-    <div class="day-rule"></div>
-  </div>
+    <time class="day-date" datetime="2026-09-14">September 14</time>
+    <span class="day-rule"></span>
+  </h2>
 
   <div class="top3-card">
-    <div class="top3-label">⭐ Top 3 Picks</div>
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
@@ -351,7 +391,7 @@
 
   <p class="hm">Honorable mentions: ULTIMATE DISASTER, NIGHTFALL, THE BROOD, SEDIMENT at Cousin Danny's (5001 Market Street) · 🚧 Make Your First Website at Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</p>
 
-  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://philly.askapunk.net/ultimate-disaster-nightfall-the-brood-sediment">ULTIMATE DISASTER, NIGHTFALL, THE BROOD, SEDIMENT</a></div>
@@ -386,7 +426,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://cinespeak.eventive.org/schedule/6a55009312d4540340e6b0f0">Selah &amp; The Spades</a></div>
@@ -399,7 +439,7 @@
     </div>
   </div>
 
-  <div class="cat-label">📚 Literary</div>
+  <h3 class="cat-label">📚 Literary</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://www.therotunda.org/event/fringe-festival-ginsburg-s-howl-as-read-by-james-dalton-with-the-ginsburg-beat-connection">⭐ In-person! Fringe Festival! Ginsburg’s Howl, as read by James Dalton with the Ginsburg Beat Connection</a></div>
@@ -412,7 +452,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/14/trans-rights-and-bodily-autonomy-powerpoint-party-tickets">⭐ Trans Rights and Bodily Autonomy PowerPoint Party</a></div>
@@ -458,7 +498,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/14/lady-laughs-philly-open-mic-night-tickets">Lady Laughs Philly: Open Mic Night</a></div>
@@ -471,7 +511,7 @@
     </div>
   </div>
 
-  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjBvMzBiOWg2c3MzaWQxZzcwczMwYzFkNjRyamdlOWs2NHIzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">🚧 Make Your First Website</a></div>
@@ -484,7 +524,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🌿 Markets &amp; Outdoors</div>
+  <h3 class="cat-label">🌿 Markets &amp; Outdoors</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/14/september-plant-swap-at-manayunk-pop-up-garden-tickets">September Plant Swap at Manayunk Pop Up Garden</a></div>
@@ -497,7 +537,7 @@
     </div>
   </div>
 
-  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://www.etix.com/ticket/p/86690867/cicadai-was-a-teenage-horror-movie-1997the-violence-movie-1998-philadelphia-philamoca">⭐ CICADA: I WAS A TEENAGE HORROR MOVIE (1997) + THE VIOLENCE MOVIE (1988)</a></div>
@@ -510,14 +550,14 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header" id="tuesday">
+  <h2 class="day-header" id="tuesday">
     <span class="day-name">Tuesday</span>
-    <span class="day-date">September 15</span>
-    <div class="day-rule"></div>
-  </div>
+    <time class="day-date" datetime="2026-09-15">September 15</time>
+    <span class="day-rule"></span>
+  </h2>
 
   <div class="top3-card">
-    <div class="top3-label">⭐ Top 3 Picks</div>
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
@@ -555,7 +595,7 @@
 
   <p class="hm">Honorable mentions: Justice 101: Justice, Reentry, and Civic Power at Eastern State Penitentiary, 2027 Fairmount Ave, Philadelphia, Pe 19130 · Wherever You Are at Roxborough Pocket Park</p>
 
-  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/15/nai-palm-of-hiatus-kaiyote-tickets">⭐ Nai Palm (of Hiatus Kaiyote)</a></div>
@@ -590,7 +630,7 @@
     </div>
   </div>
 
-  <div class="cat-label">📚 Literary</div>
+  <h3 class="cat-label">📚 Literary</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/15/poem-club-tickets">⭐ Poem Club</a></div>
@@ -614,7 +654,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/15/free-renters-rights-clinic-tickets">⭐ Free Renters Rights Clinic</a></div>
@@ -660,7 +700,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/15/wherever-you-are-tickets">Wherever You Are</a></div>
@@ -695,7 +735,7 @@
     </div>
   </div>
 
-  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://www.meetup.com/code-coffee-philly/events/316146274/">Quirq'y Workshop: Building &amp; Running AI Agents</a></div>
@@ -708,7 +748,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🌿 Markets &amp; Outdoors</div>
+  <h3 class="cat-label">🌿 Markets &amp; Outdoors</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/15/park-after-dark-moonwalk-stargazing-tickets">Park after Dark: Moonwalk + Stargazing</a></div>
@@ -721,7 +761,7 @@
     </div>
   </div>
 
-  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/316484501/">DEAD BY DAWN (2025) - Polish slasher!</a></div>
@@ -734,14 +774,14 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header" id="wednesday">
+  <h2 class="day-header" id="wednesday">
     <span class="day-name">Wednesday</span>
-    <span class="day-date">September 16</span>
-    <div class="day-rule"></div>
-  </div>
+    <time class="day-date" datetime="2026-09-16">September 16</time>
+    <span class="day-rule"></span>
+  </h2>
 
   <div class="top3-card">
-    <div class="top3-label">⭐ Top 3 Picks</div>
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
@@ -779,7 +819,7 @@
 
   <p class="hm">Honorable mentions: Gender Minorities in the Sciences Panel at Science History Institute · Dekalog: Parts 9 &amp; 10 at Philadelphia Film Society</p>
 
-  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/16/beck-ride-lonesome-listening-session-tickets">Beck - Ride Lonesome :: Listening Session</a></div>
@@ -814,7 +854,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://www.lightboxfilmcenter.org/events/mares-nest">⭐ Mare's Nest</a></div>
@@ -849,7 +889,7 @@
     </div>
   </div>
 
-  <div class="cat-label">📚 Literary</div>
+  <h3 class="cat-label">📚 Literary</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/16/ariel-delgado-dixon-sourland-tickets">⭐ Ariel Delgado Dixon / SOURLAND</a></div>
@@ -862,7 +902,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/16/west-philly-canvass-for-chris-rabb-tickets">West Philly Canvass for Chris Rabb</a></div>
@@ -875,7 +915,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/16/the-enemy-at-hand-tickets">⭐ The Enemy at Hand</a></div>
@@ -910,7 +950,7 @@
     </div>
   </div>
 
-  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/16/gender-minorities-in-the-sciences-panel-tickets">Gender Minorities in the Sciences Panel</a></div>
@@ -923,7 +963,7 @@
     </div>
   </div>
 
-  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://phillygoth.net/events/ligeia-by-edgar-allan-poe-part-of-the-philadelphia-fringe-festival/">LIGEIA by Edgar Allan Poe (part of the Philadelphia Fringe Festival)</a></div>
@@ -936,14 +976,14 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header" id="thursday">
+  <h2 class="day-header" id="thursday">
     <span class="day-name">Thursday</span>
-    <span class="day-date">September 17</span>
-    <div class="day-rule"></div>
-  </div>
+    <time class="day-date" datetime="2026-09-17">September 17</time>
+    <span class="day-rule"></span>
+  </h2>
 
   <div class="top3-card">
-    <div class="top3-label">⭐ Top 3 Picks</div>
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
@@ -981,7 +1021,7 @@
 
   <p class="hm">Honorable mentions: The Spine (Record Release Show), NRG, and Bán Sidhe Dogs at Cousin Danny's (5001 Market Street) · My Carmilla at Plays and Players Skinner Studio</p>
 
-  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://philly.askapunk.net/the-spine-record-release-show-nrg-and-ban-sidhe-dogs">The Spine (Record Release Show), NRG, and Bán Sidhe Dogs</a></div>
@@ -994,7 +1034,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/17/birdman-tickets">⭐ Birdman</a></div>
@@ -1018,7 +1058,7 @@
     </div>
   </div>
 
-  <div class="cat-label">📚 Literary</div>
+  <h3 class="cat-label">📚 Literary</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/17/baggage-from-baghdad-becoming-my-father-s-daughter-tickets">Baggage From BaghDAD: Becoming My Father’s Daughter</a></div>
@@ -1042,7 +1082,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/17/bad-activist-tickets">⭐ Bad Activist</a></div>
@@ -1055,7 +1095,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://www.google.com/calendar/event?eid=NjBraDdoZGZrYXE2azVsdXY2b21qNTloaDQgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&amp;ctz=America/New_York">⭐ Seated Stick Fighting</a></div>
@@ -1079,7 +1119,7 @@
     </div>
   </div>
 
-  <div class="cat-label">💻 Tech &amp; Maker</div>
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://www.meetup.com/philly-hardware/events/316377206/">14th Philly Hardware Meetup @ Delve!</a></div>
@@ -1103,7 +1143,7 @@
     </div>
   </div>
 
-  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/17/my-carmilla-tickets">My Carmilla</a></div>
@@ -1127,14 +1167,14 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header" id="friday">
+  <h2 class="day-header" id="friday">
     <span class="day-name">Friday</span>
-    <span class="day-date">September 18</span>
-    <div class="day-rule"></div>
-  </div>
+    <time class="day-date" datetime="2026-09-18">September 18</time>
+    <span class="day-rule"></span>
+  </h2>
 
   <div class="top3-card">
-    <div class="top3-label">⭐ Top 3 Picks</div>
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
@@ -1172,7 +1212,7 @@
 
   <p class="hm">Honorable mentions: Joe Lally / Jerry Busher / Yanni / Sun Within / Applied Knowledge at Khyber Pass Pub, 56 S 2nd St, Philadelphia, PA 19106 · Pansy Division / Teenage Halloween / Hot Seat at PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</p>
 
-  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/18/bikini-kill-tickets">⭐ Bikini Kill</a></div>
@@ -1207,7 +1247,7 @@
     </div>
   </div>
 
-  <div class="cat-label">📚 Literary</div>
+  <h3 class="cat-label">📚 Literary</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/18/outdoor-programming-tickets">Outdoor Programming</a></div>
@@ -1242,7 +1282,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/18/say-it-loud-i-m-black-and-i-m-proud-tickets">⭐ “Say it Loud, I’m Black and I’m Proud”</a></div>
@@ -1255,7 +1295,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/18/historical-drama-set-to-open-at-the-stagecrafters-theater-tickets">⭐ Historic Drama “These Shining Lives” Opens at The Stagecrafters Theater</a></div>
@@ -1301,14 +1341,14 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header" id="saturday">
+  <h2 class="day-header" id="saturday">
     <span class="day-name">Saturday</span>
-    <span class="day-date">September 19</span>
-    <div class="day-rule"></div>
-  </div>
+    <time class="day-date" datetime="2026-09-19">September 19</time>
+    <span class="day-rule"></span>
+  </h2>
 
   <div class="top3-card">
-    <div class="top3-label">⭐ Top 3 Picks</div>
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
@@ -1346,7 +1386,7 @@
 
   <p class="hm">Honorable mentions: Soji and Friends Fight Back II feat. Soji, The Angies, In Jest, and Good Teal (Benefit for Serenity House) at Ortlieb's, 847 N 3rd St, Philadelphia, PA 19123 · Earlybirds Club at Brooklyn Bowl Philadelphia, 1009 Canal St, Philadelphia, PA 19123</p>
 
-  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/19/plow-united-with-the-ergs-chris-gethard-crossed-keys-tickets">⭐ Plow United, with The Ergs!, Chris Gethard, Crossed Keys</a></div>
@@ -1381,7 +1421,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🤝 Community &amp; Politics</div>
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/19/frankford-fall-festival-tickets">Frankford Fall Festival</a></div>
@@ -1394,7 +1434,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/19/the-david-liebe-hart-experience-w-sound-of-jeb-tickets">⭐ The David Liebe Hart Experience w/ Sound of Jeb + Ecology: HomeStones</a></div>
@@ -1429,7 +1469,7 @@
     </div>
   </div>
 
-  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/19/fall-open-house-tickets">⭐ Fall Open House</a></div>
@@ -1442,7 +1482,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎪 Festivals &amp; Major Events</div>
+  <h3 class="cat-label">🎪 Festivals &amp; Major Events</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/19/conshohocken-s-biggest-free-festival-yet-returns-9-19-tickets">Conshohocken’s Biggest Free Festival Yet Returns 9/19</a></div>
@@ -1455,14 +1495,14 @@
     </div>
   </div>
   <hr class="day-sep">
-  <div class="day-header" id="sunday">
+  <h2 class="day-header" id="sunday">
     <span class="day-name">Sunday</span>
-    <span class="day-date">September 20</span>
-    <div class="day-rule"></div>
-  </div>
+    <time class="day-date" datetime="2026-09-20">September 20</time>
+    <span class="day-rule"></span>
+  </h2>
 
   <div class="top3-card">
-    <div class="top3-label">⭐ Top 3 Picks</div>
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
     <div class="top3-pick">
       <div class="pick-num">1</div>
       <div class="pick-main">
@@ -1500,7 +1540,7 @@
 
   <p class="hm">Honorable mentions: Negative Approach ~ School Drugs ~ Impact Driver ~ Brainwashed at Kung Fu Necktie, 1248 N Front St, Philadelphia, PA 19122 · South Philly Food Co-op - Harvest Jawn 2026 at South Philly Food Co Op</p>
 
-  <div class="cat-label">🎵 Music &amp; Concerts</div>
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/20/liz-phair-sleater-kinney-the-flannel-and-the-fury-2026-tickets">⭐ Liz Phair &amp; Sleater‐Kinney: The Flannel and The Fury 2026</a></div>
@@ -1535,7 +1575,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎬 Film &amp; Cinema</div>
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/20/david-lynch-s-blue-velvet-1986-40th-anniversary-screening-tickets">⭐ David Lynch's BLUE VELVET (1986) - 40th Anniversary Screening</a></div>
@@ -1548,7 +1588,7 @@
     </div>
   </div>
 
-  <div class="cat-label">📚 Literary</div>
+  <h3 class="cat-label">📚 Literary</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/20/lady-sarkazym-tickets">⭐ Lady Sarkazym</a></div>
@@ -1572,7 +1612,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🎨 Arts &amp; Workshops</div>
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/20/meat-cute-tickets">Meat Cute</a></div>
@@ -1596,7 +1636,7 @@
     </div>
   </div>
 
-  <div class="cat-label">🌿 Markets &amp; Outdoors</div>
+  <h3 class="cat-label">🌿 Markets &amp; Outdoors</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/20/south-philly-food-co-op-harvest-jawn-2026-tickets">South Philly Food Co-op - Harvest Jawn 2026</a></div>
@@ -1609,7 +1649,7 @@
     </div>
   </div>
 
-  <div class="cat-label">👻 Horror &amp; Occult</div>
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
   <div class="event-card">
     <div class="event-left">
       <div class="event-name"><a href="https://do215.com/events/2026/9/20/zombied-tickets">Zombied</a></div>
@@ -1623,7 +1663,7 @@
   </div>
 
   <!-- ALL WEEK / RECURRING -->
-  <div class="allweek-label">All Week / Recurring</div>
+  <h2 class="allweek-label">All Week / Recurring</h2>
   <table class="allweek-table">
     <thead><tr><th>Event</th><th>Venue</th><th>This week</th><th>Price</th></tr></thead>
     <tr>
@@ -1671,7 +1711,7 @@
   </table>
 
   <!-- WEEK IN NUMBERS -->
-  <div class="stats-label">Week in Numbers</div>
+  <h2 class="stats-label">Week in Numbers</h2>
 
   <div class="funnel">
     <div class="funnel-stage">
@@ -1696,7 +1736,7 @@
   </div>
 
   <div class="stats-block">
-    <div class="stats-block-title">By category</div>
+    <h3 class="stats-block-title">By category</h3>
     <div class="stats-legend"><span class="swatch swatch-top3"></span>Top 3 pick <span class="swatch swatch-listed"></span>listed, not picked</div>
     <div class="statbar-row" title="🎨 Arts &amp; Workshops: 4 of 22 listed events became a Top 3 pick">
       <div class="statbar-name">🎨 Arts &amp; Workshops</div>
@@ -1770,7 +1810,7 @@
   </div>
 
   <div class="stats-block">
-    <div class="stats-block-title">By source</div>
+    <h3 class="stats-block-title">By source</h3>
     <div class="statbar-row" title="Do215 supplied 76 of this week's listed events">
       <div class="statbar-name">Do215</div>
       <div class="statbar-track">

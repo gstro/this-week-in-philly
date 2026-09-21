@@ -67,6 +67,12 @@ TEMPLATES_DIR = common.REPO_ROOT / "templates"
 DOCS_DIR = common.REPO_ROOT / "docs"
 WEEKS_DIR = DOCS_DIR / "weeks"
 
+# Where GitHub Pages actually serves this site (`gh api repos/:owner/:repo/pages`).
+# It needs a trailing slash and it needs the project subpath: Pages does not
+# serve this repo at the domain root, which is why nothing here may use a
+# root-absolute path.
+SITE_BASE_URL = "https://gstro.github.io/this-week-in-philly/"
+
 # The full set of sources the pipeline watches, in display order. The footer
 # renders all of them every week, but build_sources() now marks which ones
 # actually contributed (with counts) and dims the rest -- the list alone used
@@ -547,6 +553,7 @@ def build_day_viewmodel(day: dict, spotify: dict) -> dict:
         # typed from memory in a way "#2026-09-19" doesn't.
         "slug": day["day_name"].casefold(),
         "date_display": day_date.strftime("%B %-d"),
+        "date_iso": day["date"],
         # The day index shows true counts, before the display cap: it's the one
         # place on the page that states real scale, which is what made a "10 of
         # 51 shown" suffix on every category header unnecessary.
@@ -565,6 +572,49 @@ def format_failure_note(raw: str) -> str:
         name, _, rest = raw.partition("(")
         return f"{name.strip()} unavailable this week ({rest}"
     return f"{raw} unavailable this week"
+
+
+def build_canonical_url(week: str | None) -> str | None:
+    """The published URL for a week, or None when the week key is missing or
+    malformed. Derived from `week` rather than the output path argument, which
+    is caller-supplied and need not be the location the file is published to."""
+    try:
+        date.fromisoformat(week or "")
+    except ValueError:
+        return None
+    return f"{SITE_BASE_URL}weeks/{week}.html"
+
+
+def format_compiled(generated_at: str | None) -> tuple[str | None, str | None]:
+    """(datetime attribute, display text) for the "Compiled ..." subtitle.
+
+    Deliberately date-only, dropping the clock time `generated_at` carries.
+    merge_selections.py writes a naive `datetime.now()`, which on the GitHub
+    Actions runner is UTC: the week of 2026-09-14 records 22:23, but that was
+    6:23 PM for a reader in Philadelphia. Printing the wall clock would state
+    a time that is simply wrong by four hours, and there is no offset stored
+    to correct it with. The date is true in both zones for every real run so
+    far -- and if one ever straddles midnight UTC, a day-old date is a much
+    smaller lie than a four-hour-wrong time.
+    """
+    try:
+        stamp = datetime.fromisoformat(generated_at or "")
+    except ValueError:
+        return None, None
+    return stamp.date().isoformat(), stamp.strftime("%A, %B %-d")
+
+
+def build_meta_description(stats: dict, date_range: str) -> str:
+    """The unfurl's one line of body text, derived from the week's own numbers
+    so it can never drift from what the page shows."""
+    totals = {stage["label"]: stage["value"] for stage in stats["stages"]}
+    listed = totals.get("Listed", 0)
+    picks = totals.get("Top 3 picks", 0)
+    sources = len(stats["sources"])
+    return (
+        f"{picks} handpicked things to do in Philadelphia, {date_range} — "
+        f"chosen from {listed} events across {sources} sources."
+    )
 
 
 def format_date_range(monday: date, sunday: date) -> str:
@@ -603,15 +653,22 @@ def render_report(week_dir: Path) -> str:
         format_failure_note(f) for f in selections.get("collection_failures", [])
     ]
 
+    stats = build_stats(
+        selections, common.load_manifest(week_dir), common.load_expected_yield()
+    )
+    compiled_iso, compiled_display = format_compiled(selections.get("generated_at"))
+
     template = _jinja_env().get_template("report.html.j2")
     return template.render(
         date_range=date_range,
+        canonical_url=build_canonical_url(selections.get("week")),
+        meta_description=build_meta_description(stats, date_range),
+        compiled_iso=compiled_iso,
+        compiled_display=compiled_display,
         playlist_url=playlist_url,
         days=days,
         all_week=all_week,
-        stats=build_stats(
-            selections, common.load_manifest(week_dir), common.load_expected_yield()
-        ),
+        stats=stats,
         sources=build_sources(selections["days"]),
         collection_failure_notes=collection_failure_notes,
     )
@@ -633,7 +690,7 @@ def render_index() -> str:
         )
 
     template = _jinja_env().get_template("index.html.j2")
-    return template.render(weeks=weeks)
+    return template.render(weeks=weeks, site_url=SITE_BASE_URL)
 
 
 def main() -> None:
