@@ -12,11 +12,14 @@ Usage:
     2. python scripts/oauth_bootstrap.py
     3. A browser opens; log in and approve Calendar access.
     4. Copy the printed refresh token into GOOGLE_REFRESH_TOKEN wherever it's
-       needed: a local .env for testing scripts, the Collection Routine's
-       environment, and a GitHub Actions repo secret. GOOGLE_CLIENT_ID and
-       GOOGLE_CLIENT_SECRET come from the same credentials.json.
+       needed: a local .env for testing scripts, and a GitHub Actions repo
+       secret (Collection and Presentation both run on Actions now, not a
+       Routine -- see docs/SETUP.md). GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
+       come from the same credentials.json.
     5. Delete credentials.json when done -- this script doesn't need to run
        again unless the refresh token is revoked.
+
+See docs/SETUP.md for the full Google Cloud / Calendar setup walkthrough.
 """
 
 import argparse
@@ -55,8 +58,7 @@ def main() -> None:
 
     print()
     print("Consent complete. Set this as GOOGLE_REFRESH_TOKEN -- in your local")
-    print(".env, the Collection Routine's environment, and a GitHub Actions")
-    print("repo secret. Never commit it:")
+    print(".env and as a GitHub Actions repo secret. Never commit it:")
     print()
     print(creds.refresh_token)
     print()
