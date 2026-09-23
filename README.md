@@ -125,6 +125,8 @@ npm run build      # tsc
 
 ## Further reading
 
+- [`docs/SETUP.md`](docs/SETUP.md) — manual setup: vendor accounts (Google, Spotify),
+  where each secret/env var goes, and the Selection Routine's own configuration.
 - [`docs/v1/philly-events-pipeline-overview.md`](docs/v1/philly-events-pipeline-overview.md) — the original v1 desktop design: source tiers, session economics, file handoffs.
 - [`docs/V2_DESIGN.md`](docs/V2_DESIGN.md) and [`docs/V2_IMPLEMENTATION_PLAN.md`](docs/V2_IMPLEMENTATION_PLAN.md) — the cloud rewrite this repo now runs, and the phased plan it was built to. Both are historical design records at this point (see their status banners) — for the current architecture, see CLAUDE.md.
 - [`docs/REPORT_IMPROVEMENTS_BRAINSTORM.md`](docs/REPORT_IMPROVEMENTS_BRAINSTORM.md) and [`docs/SELECTION_IMPROVEMENTS_BRAINSTORM.md`](docs/SELECTION_IMPROVEMENTS_BRAINSTORM.md) — the live design-iteration record for the report and for Selection's judgment quality.
