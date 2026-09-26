@@ -26,24 +26,24 @@ downloaded OAuth client) is gitignored too and is only ever needed transiently, 
 
 ## 1. Google Cloud / Calendar
 
-- [ ] In [Google Cloud Console](https://console.cloud.google.com), create (or reuse) a
+- [x] In [Google Cloud Console](https://console.cloud.google.com), create (or reuse) a
       project and enable the **Google Calendar API**.
-- [ ] Configure the OAuth consent screen, then **push it to Production** (not Testing).
+- [x] Configure the OAuth consent screen, then **push it to Production** (not Testing).
       A consent screen left in Testing expires refresh tokens after 7 days — the pipeline
       would die silently the second week. No verification is needed for personal-scope use.
-- [ ] Under APIs & Services → Credentials, create an **OAuth 2.0 Client ID**, type
+- [x] Under APIs & Services → Credentials, create an **OAuth 2.0 Client ID**, type
       **Desktop app**. Download the JSON and save it as `credentials.json` in the repo
       root (already gitignored — never commit it).
-- [ ] Run `python scripts/oauth_bootstrap.py`. A browser opens; log in and approve
+- [x] Run `python scripts/oauth_bootstrap.py`. A browser opens; log in and approve
       Calendar access (scope is `common.CALENDAR_SCOPES`, Calendar-only — no Drive, no
       Gmail). It prints a refresh token.
-- [ ] Copy that refresh token into `GOOGLE_REFRESH_TOKEN`, and `GOOGLE_CLIENT_ID` /
+- [x] Copy that refresh token into `GOOGLE_REFRESH_TOKEN`, and `GOOGLE_CLIENT_ID` /
       `GOOGLE_CLIENT_SECRET` from the same `credentials.json`, into **both**: your local
       `.env` and the repo's GitHub Actions secrets (Settings → Secrets and variables →
       Actions).
-- [ ] Delete `credentials.json` once done — it doesn't need to run again unless the
+- [x] Delete `credentials.json` once done — it doesn't need to run again unless the
       refresh token is revoked.
-- [ ] In Google Calendar, create a calendar named **exactly** `Curated Events`.
+- [x] In Google Calendar, create a calendar named **exactly** `Curated Events`.
       `calendar_create.py` (via `common.get_calendar_id()`) looks it up by that name and
       raises if it isn't found — nothing creates it for you.
 
@@ -53,18 +53,18 @@ nothing to create for those; they already exist.
 
 ## 2. Spotify
 
-- [ ] At [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard),
+- [x] At [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard),
       create an app. Its Client ID and Client Secret are `SPOTIFY_CLIENT_ID` /
       `SPOTIFY_CLIENT_SECRET` — one app, shared by both Spotify scripts.
-- [ ] Under the app's Settings, add the redirect URI `http://127.0.0.1:8888/callback`.
+- [x] Under the app's Settings, add the redirect URI `http://127.0.0.1:8888/callback`.
       Whatever you register must byte-match `SPOTIFY_REDIRECT_URI` everywhere it's set —
       Spotify may reject a bare `localhost` host in favor of the explicit `127.0.0.1`
       loopback.
-- [ ] Export `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` locally (or put them in `.env`
+- [x] Export `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` locally (or put them in `.env`
       and `set -a; . ./.env; set +a`), then run
       `python scripts/spotify_oauth_bootstrap.py`. A browser opens; log in and approve
       playlist access (scope: `playlist-modify-public playlist-read-private`).
-- [ ] Copy the printed refresh token into `SPOTIFY_REFRESH_TOKEN`, and set
+- [x] Copy the printed refresh token into `SPOTIFY_REFRESH_TOKEN`, and set
       `SPOTIFY_REDIRECT_URI` — both in local `.env` and as GitHub Actions secrets.
       This token doesn't expire on its own; it only needs re-running if access is
       revoked or the scope changes.
@@ -75,17 +75,17 @@ nothing to create for those; they already exist.
 
 ## 3. GitHub repository settings
 
-- [ ] Pages: Settings → Pages → serve from `main` / `docs/`. The repo is public (an
+- [x] Pages: Settings → Pages → serve from `main` / `docs/`. The repo is public (an
       accepted tradeoff — see `V2_IMPLEMENTATION_PLAN.md` G8 — since the picks log and
       the `personal-interests` / `event-selection-philosophy` skills become
       world-readable).
-- [ ] Actions: confirm no branch protection rule on `main` blocks pushes from
+- [x] Actions: confirm no branch protection rule on `main` blocks pushes from
       `github-actions[bot]` — both workflows declare `permissions: contents: write` and
       push directly to `main`.
-- [ ] Add every secret/variable in the table above under Settings → Secrets and
+- [x] Add every secret/variable in the table above under Settings → Secrets and
       variables → Actions (`SELECTION_ROUTINE_ID` goes under the **Variables** tab, not
       Secrets).
-- [ ] Watch the repository (or otherwise make sure Actions failure emails reach you).
+- [x] Watch the repository (or otherwise make sure Actions failure emails reach you).
       That's the only failure alert this pipeline has (no custom notify script — a
       failed `presentation.yml` run is the only signal for a silent Sunday on that side).
 
@@ -93,30 +93,30 @@ nothing to create for those; they already exist.
 
 Selection is the one stage still running as a Claude Code Routine rather than a script.
 
-- [ ] Create/confirm a Routine attached to this repo, running `claude-sonnet-5`, whose
+- [x] Create/confirm a Routine attached to this repo, running `claude-sonnet-5`, whose
       task is `.claude/skills/philly-events-selection/SKILL.md` (it in turn reads
       `personal-interests` and `event-selection-philosophy`).
-- [ ] Give it a fallback cron roughly 30 minutes after Collection's own
+- [x] Give it a fallback cron roughly 30 minutes after Collection's own
       (`0 6 * * 0` UTC), e.g. `30 6 * * 0` UTC — this is the safety net for when the API
       trigger below doesn't fire.
-- [ ] Add an **API trigger**: Edit routine → Select a trigger → API. Copy the resulting
+- [x] Add an **API trigger**: Edit routine → Select a trigger → API. Copy the resulting
       routine ID into the `SELECTION_ROUTINE_ID` repo **variable** and its token into the
       `SELECTION_ROUTINE_TOKEN` repo **secret**. `collection.yml`'s trigger step works
       with no further code change once these exist. Note `/fire` ships under an
       experimental beta header — request/response shape may change.
-- [ ] Housekeeping: make sure no old/decommissioned Collection Routine or spike Routine
+- [x] Housekeeping: make sure no old/decommissioned Collection Routine or spike Routine
       is still enabled. A stale, still-firing Collection Routine caused a real incident
       (2026-08-02, a mistargeted push to `data/2026-08-04/`) — delete anything not the
       current Selection Routine at claude.ai/code/routines.
 
 ## 5. Local development
 
-- [ ] Copy `.env.example` to `.env` and fill in the values above; load it with
+- [x] Copy `.env.example` to `.env` and fill in the values above; load it with
       `set -a; . ./.env; set +a` before running scripts locally.
-- [ ] Set up a Python venv: `scripts/requirements.txt` (+ `-collection.txt` for anything
+- [x] Set up a Python venv: `scripts/requirements.txt` (+ `-collection.txt` for anything
       touching Playwright/browser-fetch, `-dev.txt` for ruff/mypy/pytest). See
       `CLAUDE.md`'s Commands section for the exact invocations.
-- [ ] For the TypeScript port (`src/`, not yet wired into any workflow): `npm install`,
+- [x] For the TypeScript port (`src/`, not yet wired into any workflow): `npm install`,
       then `npm test` / `npm run lint` / `npm run typecheck`.
 
 ## 6. Maintenance / rotation runbook
