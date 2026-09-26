@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * Port of scripts/check_selection.py -- mechanical post-conditions for a
- * week's Selection output, modeled on check_yield.ts's (not yet ported)
- * role for Collection: the SKILL-level rules in
+ * week's Selection output, modeled on checkYield.ts's role for Collection:
+ * the SKILL-level rules in
  * event-selection-philosophy/SKILL.md and philly-events-selection/SKILL.md's
  * own Phase 4 self-check are prose a model reads and can drift from. This
  * script re-checks the parts of that prose that are actually mechanical, in
