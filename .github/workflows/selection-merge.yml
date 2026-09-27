@@ -30,16 +30,23 @@ jobs:
       pull-requests: write
       actions: write  # gh workflow run presentation.yml
     steps:
-      # fetch-depth: 0 -- the guard's three-dot diff needs a merge base with
-      # origin/main, which a shallow clone doesn't have.
+      # Check out main, not the pushed branch: the guard and merge scripts
+      # then run from main's trusted copy (a claude/* branch can't swap in a
+      # guard that approves itself), and gh pr merge --delete-branch isn't
+      # deleting the branch it's standing on. fetch-depth: 0 fetches every
+      # branch, so the pushed commit (github.sha) and a merge base with
+      # origin/main are both available for the guard's three-dot diff.
       - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Check this is a new week's Selection
         id: guard
+        env:
+          PUSHED_SHA: ${{ github.sha }}
         run: |
-          if WEEK_DIR=$(scripts/ci/selection_merge_guard.sh origin/main HEAD); then
+          if WEEK_DIR=$(scripts/ci/selection_merge_guard.sh origin/main "$PUSHED_SHA"); then
             echo "Qualifies: $WEEK_DIR"
             echo "dir=$WEEK_DIR" >> "$GITHUB_OUTPUT"
           else
