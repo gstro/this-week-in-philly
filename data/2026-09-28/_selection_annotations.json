@@ -1,0 +1,919 @@
+{
+  "week": "2026-09-28",
+  "collection_failures": [
+    "wxpn (ParseError: every request failed (1 attempted); first: https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=1 (HTTPSConnectionPool(host='backend.xpn.org', port=443): Max retries exceeded with url: /wp-json/wp/v2/event?per_page=100&page=1 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'backend.xpn.org'. (_ssl.c:1010)\")))))"
+  ],
+  "days": [
+    {
+      "date": "2026-09-28",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0010",
+          "rank": 1,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "time": "7:00 PM",
+          "why": "PhilaMOCA screens Nobuhiko Obayashi's SCHOOL IN THE CROSSHAIRS (1981), a delirious teen sci-fi film from the director of the cult classic House — psychic students, a fascist substitute teacher, and an alien invasion all crammed into one deliriously stylized high school. Two showtimes, 7:00 and 7:30 PM. PhilaMOCA sits in Callowhill, a few blocks from the Broad-Ridge Spur's Spring Garden stop."
+        },
+        {
+          "id": "c0038",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philly DSA's Building Trades caucus opens the floor to anyone working construction, electrical, or the other skilled trades for an open discussion on recent union contract fights and where organizing stands across the industry. It's shop talk with stakes — building solidarity in a sector where the boss's power is still very direct. Free, at Pub on Passyunk East in South Philly."
+        },
+        {
+          "id": "c0003",
+          "rank": 3,
+          "address": "1248 N Front St, Philadelphia, PA 19122",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Boston's FÓRN bring their funeral sludge-doom (the name means \"sacrifice\" in Old Norse) to Kung Fu Necktie alongside Otay:onii, Quiet Man, and Blood Spore — a full night of heavy, unhurried noise for the 21+ crowd. Doors 6, show 7. Kung Fu Necktie is in Fishtown, a short walk from the Market-Frankford El's Girard stop or the Girard Ave trolley."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0572"
+        },
+        {
+          "id": "c0011"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0010",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0038",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0003",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0572",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "French-Congolese soul/R&B vocalist anaiis performs a seated, devotional set at the Ethical Society."
+        },
+        {
+          "id": "c0011",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Spencer Krug (Wolf Parade, Sunset Rubdown, Moonface) brings his prolific solo songwriting to Johnny Brenda's."
+        },
+        {
+          "id": "c0001",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Phoebe Bridgers' arena stop on The Lost Tour; duplicate listing omitted."
+        },
+        {
+          "id": "c0023",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Weekly noon protest outside Sen. McCormick's office, ongoing under the current administration."
+        },
+        {
+          "id": "c0031",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Free talk on the PA and US constitutions' shared 250th anniversary at Carpenters' Hall."
+        },
+        {
+          "id": "c0037",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Monthly Afro Socialists and Socialists of Color caucus meeting."
+        },
+        {
+          "id": "c0039",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "SCOTUSblog's co-founder and Bloomberg's Supreme Court reporter preview the coming term at the National Constitution Center."
+        },
+        {
+          "id": "c0012",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Philly DSA's casual Eagles watch party doubles as a meet-and-greet for prospective members."
+        },
+        {
+          "id": "c0040",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Weekly Monday-night jam session hosted by Richard Hill Jr. and friends."
+        },
+        {
+          "id": "c0043",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Recurring piano set at Midnight & The Wicked, running three nights this week."
+        },
+        {
+          "id": "c0575",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "West Philly Sanctuary's community \"Learn to Sing\" workshop returns by popular demand at The Rotunda."
+        },
+        {
+          "id": "c0535",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online meetup screening of the analog-horror series Vita Carnis."
+        },
+        {
+          "id": "c0033",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Hands-on heirloom seed-saving workshop with Tine and Toil Farm's founder at PHS's Manayunk pop-up garden."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0112",
+          "rank": 1,
+          "address": "421 N 7th St, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "From HELL Productions throws a night of metal burlesque and pagan revelry for Mabon (the autumn equinox) at Doom — genuinely strange, genuinely local, not a costume-store version of \"gothic.\" Doors 8, show 9, 21+, $15.71. Doom sits in Poplar/Northern Liberties, a short walk from the Broad-Ridge Spur's Spring Garden stop."
+        },
+        {
+          "id": "c0059",
+          "rank": 2,
+          "address": "96 S. Main St, New Hope, PA 18938",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Laura Jane Grace of Against Me... — one of punk's most important songwriters and a trans icon whose records shaped a generation of queer punk — plays a just-announced, one-night-only set at John and Peter's with Steve O and the Crippling Addictions. This kind of show doesn't get rescheduled. It's a genuine trek: New Hope is about 40 miles from Point Breeze with no direct transit, roughly an hour's drive."
+        },
+        {
+          "id": "c0000",
+          "rank": 3,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "cinéSPEAK hosts the Philadelphia premiere of the documentary \"Do You Love Me\" at the Village of Industry & Art — a one-time-only screening, the kind of thing that plays once and disappears. Free-standing documentary programming like this is exactly what a citywide aggregator buries under a thousand bar nights."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0101"
+        },
+        {
+          "id": "c0064"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0112",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0059",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0000",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0101",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Second session of a political-education series covering the Young Lords' 13-Point and Black Panther Party's 10-Point Programs."
+        },
+        {
+          "id": "c0064",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Chinese Football, the Wuhan emo/math-rock band beloved by the Midwest-emo diaspora, at Underground Arts."
+        },
+        {
+          "id": "c0061",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "AyoDylan's emo-inflected songwriting at Kung Fu Necktie."
+        },
+        {
+          "id": "c0073",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "(confirm details) — PhilaMOCA listing with no genre info beyond the venue itself."
+        },
+        {
+          "id": "c0058",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Rocketship, the long-dormant shoegaze/dream-pop project, at Johnny Brenda's."
+        },
+        {
+          "id": "c0106",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Monthly Tuesday Nite Music Club at 48 Record Bar, this edition curated by Friends of Jerry."
+        },
+        {
+          "id": "c0077",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Harrisburg Lobby Day pushing the \"Tax Billionaires, Fund PA\" budget package; a Lehigh Valley chapter duplicate omitted."
+        },
+        {
+          "id": "c0100",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Philly DSA's Cinema with Comrades happy hour and movie meetup."
+        },
+        {
+          "id": "c0094",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Kickoff for Week Without Driving / Week With Affordable Transit, pushing for a permanent Zero Fare transit fund."
+        },
+        {
+          "id": "c0098",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Heirloom seed-saving workshop at PHS's South Street pop-up garden."
+        },
+        {
+          "id": "c0076",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Fairmount Park Conservancy volunteer workday refreshing gardens at Cobbs Creek's Johnny Sample Rec Center."
+        },
+        {
+          "id": "c0090",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Wyck's collaboratively-run kitchen garden welcomes volunteers Tuesdays and Fridays."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0541",
+          "rank": 1,
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Lucio Fulci's 1972 giallo \"Don't Torture a Duckling\" — a brutal, hallucinatory murder mystery set in a superstition-soaked southern Italian village — gets a rare theatrical outing at the Film Society's Chestnut Street screen. It's the kind of formative Italian horror that shaped decades of the genre and almost never plays outside a repertory print. Center City, easy to reach."
+        },
+        {
+          "id": "c0142",
+          "rank": 2,
+          "address": "1400 John F Kennedy Blvd, Philadelphia, PA 19107",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philadelphia City Council hears public testimony on Councilmember O'Rourke's push to make the city more affordable, with tenants from Neighborhood Restorations properties speaking directly to the need for affordable housing. Free and open to the public — a chance to watch housing policy get shaped in real time rather than read about it after the fact. City Hall, Center City."
+        },
+        {
+          "id": "c0140",
+          "rank": 3,
+          "address": "33 E Laurel St, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Ryan Singer headlines opening night of the SureKill Comedy Festival — Philadelphia's first paranormal- and horror-themed comedy festival — with horror-leaning comedians from around the country. The Callback Bar hosts pre-show \"paranormal festivities\" before doors. A genuinely new format for the city's horror calendar, not another haunted house or screening. Punch Line is in Northern Liberties, a short walk from the Market-Frankford El's Girard stop."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0162"
+        },
+        {
+          "id": "c0518"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0541",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0142",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0140",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0162",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Lightbox Film Center presents \"Escape,\" following Satoshi Kirishima, once a member of the 1970s Japanese New Left militant \"Scorpion Cell,\" who spent decades as a fugitive after his comrades' campaign of violence. At the Bok Building in South Philly."
+        },
+        {
+          "id": "c0518",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Iffy Books' Speculative Futures Reading Group discusses Cameron Reed's \"The Fortunate Fall\" (meets last Wednesday of the month)."
+        },
+        {
+          "id": "c0115",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Candi Carpenter and Moselle co-headline at Silk City, both working through toxic religion and identity in their new material."
+        },
+        {
+          "id": "c0118",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Squirrel Flower's first full-band headline tour in two years, at Johnny Brenda's."
+        },
+        {
+          "id": "c0117",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Kirk Whalum, Kevin Whalum, and Gerald Veasley bring jazz under the stars to the Mann."
+        },
+        {
+          "id": "c0578",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Fire Museum Presents: Mir Naqibul Islam's Tabla Waves at The Rotunda."
+        },
+        {
+          "id": "c0577",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Rotunda's standing weekly improvised-music drop-in jam."
+        },
+        {
+          "id": "c0156",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "21+ mask-making workshop at Tattooed Mom, built around slow, sustainable Halloween costuming."
+        },
+        {
+          "id": "c0536",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online horror-meetup screening of Midnight Special (2016)."
+        },
+        {
+          "id": "c0163",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Free virtual screening of the documentary North to Freedom, on the Underground Railroad's Philadelphia-area history."
+        },
+        {
+          "id": "c0517",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Analog A/V Session at Iffy Books — hands-on VHS and cassette transfer equipment, pay-what-you-can."
+        }
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0206",
+          "rank": 1,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "time": "7:00 PM",
+          "why": "PhilaMOCA screens Wes Craven's underseen 1986 cult oddity DEADLY FRIEND, about a teenage inventor who reanimates his dead friend with a robot's AI chip — equal parts absurd and unsettling. Two showtimes, 7:00 and 7:30 PM. In Callowhill, a few blocks from the Broad-Ridge Spur's Spring Garden stop."
+        },
+        {
+          "id": "c0242",
+          "rank": 2,
+          "category": "🎨 Arts & Workshops",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Stagecrafters open \"These Shining Lives,\" dramatizing the real Radium Girls: four dial-factory workers who developed radium poisoning from painting watch faces in the 1920s, and who took their employer to court over it. Community theater staging a genuine labor-rights landmark, opening night. In Chestnut Hill — Regional Rail to Chestnut Hill West or East gets you there from Center City."
+        },
+        {
+          "id": "c0177",
+          "rank": 3,
+          "address": "23 E Lancaster Ave, Ardmore, PA 19003",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Ted Leo, one of American punk/indie's most durable political songwriters (Chisel, then two decades fronting the Pharmacists), plays Ardmore Music Hall — a catalog built on righteous anger at power and a real soft spot for the underdog. On the Main Line: SEPTA's Paoli/Thorndale Regional Rail to Ardmore station, about a 10-minute walk from the platform."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0246"
+        },
+        {
+          "id": "c0519"
+        },
+        {
+          "id": "c0200"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0206",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0242",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0177",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0246",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Miss Lisa Lisa's Drag Show at Bob & Barbara's — Philadelphia's longest-running drag show."
+        },
+        {
+          "id": "c0519",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Philly Electronic Music Club's monthly livecoding jam at Iffy Books, working in Strudel."
+        },
+        {
+          "id": "c0200",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Industrial double bill: <PIG> and Cyanotic at Nikki Lopez, 21+."
+        },
+        {
+          "id": "c0180",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "DFL, The Dopamines, and Teenage Halloween bring pop-punk to Kung Fu Necktie."
+        },
+        {
+          "id": "c0191",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Upon Your Dead Body, When The Sun Sets, and Letters to Part — a Midwest-emo/mathrock bill at Kung Fu Necktie."
+        },
+        {
+          "id": "c0184",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Spatial Awareness DJ night at The Sound Lounge, an explicitly zero-tolerance-for-bigotry, donation-based space."
+        },
+        {
+          "id": "c0198",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "David P. Stevens brings jazz/funk/R&B to SOUTH Jazz Club, two sets."
+        },
+        {
+          "id": "c0226",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Journalist Evan Gershkovich discusses his memoir of arrest and imprisonment in Russia, at Independence Visitor Center."
+        },
+        {
+          "id": "c0232",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Renters United Philadelphia's monthly tenant-union meeting (Zoom)."
+        },
+        {
+          "id": "c0233",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Rox Crit, a monthly neighborhood artist critique group in Roxborough."
+        },
+        {
+          "id": "c0238",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Soundpainting Workshop at Fleisher Art Memorial — improvisational sign-language composing for musicians, dancers, and poets."
+        },
+        {
+          "id": "c0215",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "ArBOOretum Month opens at Morris Arboretum: 50+ public-made scarecrows on display through October."
+        }
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0581",
+          "rank": 1,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Wooden Shoe Books hosts the launch for The Pomegranate is a Grenade by Arab and Muslim writer Maha Hashwi — exactly the kind of politically engaged literary event this anarchist bookstore does best. All events are masked (provided) with an air filter always running. On South Street, a block from Center City, a short walk or an easy ride on the 45 or 47 bus."
+        },
+        {
+          "id": "c0303",
+          "rank": 2,
+          "category": "🎨 Arts & Workshops",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Yeda Theatre Productions stages \"Sarajevo Will Be (Everything Else Will Pass),\" a physical-theatre piece — live violin and accordion, shadow puppetry, recorded survivor interviews — about La Benevolencija, the Jewish humanitarian organization that kept operating through the 1992–95 siege of Sarajevo. It follows a present-day violinist piecing together the story her father never told her. This is opening night of a three-show run at Deep End Studios."
+        },
+        {
+          "id": "c0290",
+          "rank": 3,
+          "address": "1026 Spring Garden St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "John Lydon's post-Sex Pistols project Public Image Ltd — one of post-punk's genuinely foundational bands, still touring more than four decades after 1978's First Issue — plays Union Transfer. About as close as Philadelphia gets to a living link to punk's first wave. Union Transfer sits by the Broad-Ridge Spur's Spring Garden stop and the Girard Ave trolley, just north of Center City."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0256"
+        },
+        {
+          "id": "c0293"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0581",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0303",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0290",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0256",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Set Your Goals mark 20 years of their album 'Mutiny!' with The Warriors, Restraining Order, and Stateside at First Unitarian Church, Philly's storied all-ages punk/hardcore room."
+        },
+        {
+          "id": "c0293",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "First Friday at Elfreth's Alley Museum commemorates hitchBOT, the hitchhiking robot whose journey ended at the top of the Alley, with robotics-themed activities."
+        },
+        {
+          "id": "c0273",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Longfriend Timefriend headlines Silk City with Women in Sports and We're Ghosts Now — South Philly basement rock in the lineage of Jeff Rosenstock and Bad Moves."
+        },
+        {
+          "id": "c0272",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Free all-ages DIY bill — Cherry Cheeks, Lo Fives, Marathon 77, DNA Cream — at Vetmoto Bike Shop."
+        },
+        {
+          "id": "c0308",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Bowerbird presents Thumbs (David Leon and Yuma Uesaka) with an opening set from Aaron Pond, pay-what-you-wish improvised music at The Rotunda."
+        },
+        {
+          "id": "c0325",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "\"A Bump in the Night,\" a First Friday group show at Paradigm Arts Building built around folklore, superstition, and things that can't quite be explained."
+        },
+        {
+          "id": "c0331",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Barnes Foundation's First Friday mixer features vocalist/pianist V. Shayne Frederick's quintet honoring John Coltrane's 100th birthday."
+        },
+        {
+          "id": "c0294",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "First Friday spooky-season group show at Arch Enemy Arts, including a mythological-creature-themed IMAGINARY MENAGERIE installment."
+        },
+        {
+          "id": "c0295",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "First Fridays at the Museum for Art in Wood, featuring work from the Windgate Wood Arts Residency fellows."
+        },
+        {
+          "id": "c0520",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Philly 2600, the monthly meetup for local hackers, phreaks, and tinkerers, at Iffy Books."
+        },
+        {
+          "id": "c0304",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Grammy-nominated Michael Mayo makes his Penn Live Arts debut at the Annenberg Center, jazz/neo-soul/R&B."
+        },
+        {
+          "id": "c0279",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Night of the Living Dead screens under the stars in the Betsy Ross House courtyard, after an after-hours house tour."
+        }
+      ]
+    },
+    {
+      "date": "2026-10-03",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0359",
+          "rank": 1,
+          "address": "1200 Callowhill St, Philadelphia, PA 19107",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Underground Arts hosts U5 Fest, a stacked all-ages punk/garage bill headlined by Toody Cole of Dead Moon — the enduring lo-fi Pacific Northwest legend — alongside Sheer Mag, J.R.C.G., Powerplant, and a dozen more acts across a full day. Doors at noon. Underground Arts is in Callowhill, a few blocks from the Broad-Ridge Spur's Spring Garden stop."
+        },
+        {
+          "id": "c0424",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Fairmount Park Conservancy and UGR3DAY Underground Railroad Experiences lead a 3.5-mile history hike through West Fairmount Park honoring William Still — the \"Father of the Underground Railroad\" — on his 205th birthday, followed by a community conversation. Free, and a genuinely different way to spend a Saturday morning. In West Fairmount Park — check the specific meeting point (Sheep Barn) for the nearest transit, since the park spans several neighborhoods."
+        },
+        {
+          "id": "c0397",
+          "rank": 3,
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Fort Mifflin — one of the country's most reliably \"most haunted\" sites — opens for a free-rein paranormal investigation, with experienced investigators on hand if you want guidance. Runs 7 PM to midnight. (confirm details: the listing gives the venue as \"Schuylkill Banks,\" but the event itself is at Fort Mifflin near the airport — verify the address before heading out, and note it's a drive or rideshare, not a transit-friendly spot.)"
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0379"
+        },
+        {
+          "id": "c0372"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0359",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0424",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0397",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0379",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "This Time's Quartet (Elsa Saade, Tracy Chahwan, Erik Ruin, Huda Asfour) plus Golem Ensemble and a Dani Dobkin/Matt Sargent duo — an experimental bill rooted partly in Arab diasporic music, at 2223 Fish."
+        },
+        {
+          "id": "c0372",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "LA post-punk band Deceits (\"too romantic for the punks, too fierce for the goths\") with Computer Kill at The Grape."
+        },
+        {
+          "id": "c0421",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Canvass for State Senate and State Rep candidates Mark Pinsley and Ce-Ce Gerlach."
+        },
+        {
+          "id": "c0380",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Voter-registration drive at Philly AIDS Thrift ahead of November's election."
+        },
+        {
+          "id": "c0414",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Neshaminy Federation of Teachers' weekly Get-Out-the-Vote canvass, running Saturdays through October 31."
+        },
+        {
+          "id": "c0416",
+          "category": "🎪 Festivals & Major Events",
+          "sold_out": false,
+          "note": "Revolutionary Germantown Festival at Cliveden — living history, blacksmithing, and candle-dipping on the actual 1777 Battle of Germantown site."
+        },
+        {
+          "id": "c0432",
+          "category": "🎪 Festivals & Major Events",
+          "sold_out": false,
+          "note": "Old City Creative Block Party for Design Philadelphia — 3rd Street closes for local makers, installations, and demos."
+        },
+        {
+          "id": "c0449",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Black-Tie GayBINGO! marks Action Wellness's 40th anniversary, honoring the CDC's former HIV Prevention director."
+        },
+        {
+          "id": "c0355",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Hardcore-turned-post-punk mainstays Ceremony play Union Transfer."
+        },
+        {
+          "id": "c0406",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Front Street Clash: an all-vinyl reggae/dub/dancehall night with Quikdish and Soon Come at The Sound Lounge."
+        },
+        {
+          "id": "c0568",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Frankenstein pop-up exhibit at the Mütter Museum, included with admission."
+        },
+        {
+          "id": "c0376",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Bloodletting & Burials, the Betsy Ross House's spooky Old City history tour, runs every Saturday in October."
+        },
+        {
+          "id": "c0569",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Sex Dwarf presents the Dark Side of New Wave, a goth/new-wave DJ night at Broad Hall."
+        }
+      ]
+    },
+    {
+      "date": "2026-10-04",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0522",
+          "rank": 1,
+          "address": "800 Mifflin St, Philadelphia, PA 19148",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Lightbox Film Center screens a new restoration of Dread Beat an Blood (1978), Franco Rosso's documentary portrait of dub poet Linton Kwesi Johnson and Black British political life in Thatcher-era London — a landmark of Black British cinema that's been nearly impossible to see for decades. At Bok Auditorium in South Philly."
+        },
+        {
+          "id": "c0501",
+          "rank": 2,
+          "address": "1906 Rittenhouse Square, Philadelphia, PA 19103",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Playback for Change, a multiracial improvisational theater company, brings its Playback Theatre practice to the Ethical Society's Sunday Platform: audience members tell a story from their own life, choose actors to play the roles, and watch it recreated live on stage. Free and open to the public — a genuinely participatory way to sit with the subject rather than a lecture about it."
+        },
+        {
+          "id": "c0555",
+          "rank": 3,
+          "address": "4522 Baltimore Avenue, Philadelphia, PA 19143",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Leila Abdul-Rauf — of death metal band Vastum, working solo here in queer dungeon-synth/noise territory — headlines a bill with Angel Meat, Mephisto Halabi, and Vaelastrasz at Studio 34. Genuinely strange, genuinely heavy, and not reducible to one metal subgenre. West Philly, on the Route 34 trolley along Baltimore Ave."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0473"
+        },
+        {
+          "id": "c0476"
+        },
+        {
+          "id": "c0465"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0522",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0501",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0555",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0473",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "WILDWOOD, NJ (1994), Ruth Leitman's Super-8 documentary on the women of the Jersey shore's last great carnival town, screens at PhilaMOCA with Leitman in attendance for Q&A."
+        },
+        {
+          "id": "c0476",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Black metal bill at Kung Fu Necktie: LA's Veneraxiom with Pennsylvania's Glorious Decent, Grozov, and Katabasilisk."
+        },
+        {
+          "id": "c0465",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Rise Against, one of political punk's most consistent voices, at The Fillmore."
+        },
+        {
+          "id": "c0489",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Canvass in Bensalem for State House candidates Albillar, Harvie, and Allen; carpool available from Center City."
+        },
+        {
+          "id": "c0499",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Philly DSA's casual Sunday-morning birding walk in the Wissahickon at Andorra Meadows."
+        },
+        {
+          "id": "c0580",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "FR33 TH3 PU$$Y artivist pop-up market at The Rotunda — art vendors, music, and entertainment raising funds for a big-cat sanctuary."
+        },
+        {
+          "id": "c0521",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Monthly IndieWeb Homebrew Website Club meetup at Iffy Books, for anyone building their own corner of the web outside social media."
+        },
+        {
+          "id": "c0471",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Reds, Pinks & Purples (Glenn Donaldson's lo-fi indie-pop project) with Simon Joyner & The Ghosts, at Johnny Brenda's."
+        },
+        {
+          "id": "c0463",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Russian Circles, one of the biggest instrumental heavy-rock bands going, at Union Transfer."
+        },
+        {
+          "id": "c0467",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Linda Lindas — the teen punk band that broke out with \"Racist, Sexist Boy\" — donate $1 per ticket to equity and access organizations, at TLA."
+        },
+        {
+          "id": "c0538",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Philadelphia Area Horror Meetup Group's online discussion of Human Sacrifices by María Fernanda Ampuero."
+        }
+      ]
+    }
+  ]
+}
