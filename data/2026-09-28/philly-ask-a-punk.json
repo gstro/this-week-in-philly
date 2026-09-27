@@ -1,0 +1,56 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-09-27T13:47:26.895995+00:00",
+  "events": [
+    {
+      "title": "Little Big Planet Presents",
+      "venue": "Little Big Planet (1123 Walnut Street, Philadelphia, PA 19107)",
+      "date": "2026-10-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/little-big-planet-presents",
+      "description": "alternative / emo garage pop / post-punk / punk",
+      "venue_address": "1123 Walnut Street, Philadelphia, PA 19107"
+    },
+    {
+      "title": "U5 Fest w/Toody Cole of DEAD MOON + SHEER MAG + POWERPLANT + MORE",
+      "venue": "Underground Arts (1200 Callowhill Street)",
+      "date": "2026-10-03",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/u5-fest-withtoody-cole-of-dead-moon-sheer-mag-powerplant-more",
+      "description": "experimental rock / noise rock / philadelphia / punk",
+      "venue_address": "1200 Callowhill Street"
+    },
+    {
+      "title": "Leila Abdul-Rauf (Vastum), Angel Meat, Mephisto Halabi, Vaelastrasz",
+      "venue": "Studio 34 (4522 Baltimore Ave. Philadelphia, PA 19143)",
+      "date": "2026-10-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/leila-abdul-rauf-vastum-angel-meat-mephisto-halabi-vaelastrasz",
+      "description": "Death metal / OUT OF TOWN BAND / Queer / dungeon synth / harp / metal / noise / philadelphia",
+      "venue_address": "4522 Baltimore Ave. Philadelphia, PA 19143"
+    },
+    {
+      "title": "3 The Hardway (Detroit)~Total Whine~Void of Infinite Consequence",
+      "venue": "JTs Burgers & Brews (1940 W. Passyunk Ave)",
+      "date": "2026-10-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/3-the-hardway-detroit~total-whine~void-of-infinite-consequence",
+      "description": "",
+      "venue_address": "1940 W. Passyunk Ave"
+    },
+    {
+      "title": "Mary Chicken Soup & Rice, Subtle Body, The Spine",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-10-04",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/mary-chicken-soup-and-rice-subtle-body-the-spine",
+      "description": "OUT OF TOWN BAND / experimental rock / goth / philadelphia / post-punk",
+      "venue_address": "5001 Market Street"
+    }
+  ]
+}
