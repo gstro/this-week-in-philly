@@ -86,6 +86,10 @@ nothing to create for those; they already exist.
       variables → Actions (`SELECTION_ROUTINE_ID` goes under the **Variables** tab, not
       Secrets).
 - [x] Watch the repository (or otherwise make sure Actions failure emails reach you).
+- [ ] Optional — `@claude` on issues/PRs (`.github/workflows/claude.yml`, owner-only):
+      run `/install-github-app` in Claude Code, or `claude setup-token` and store it as
+      the `CLAUDE_CODE_OAUTH_TOKEN` repo secret (an `ANTHROPIC_API_KEY` secret also
+      works). Inert until one exists.
       That's the only failure alert this pipeline has (no custom notify script — a
       failed `presentation.yml` run is the only signal for a silent Sunday on that side).
 
@@ -112,7 +116,10 @@ Selection is the one stage still running as a Claude Code Routine rather than a 
 ## 5. Local development
 
 - [x] Copy `.env.example` to `.env` and fill in the values above; load it with
-      `set -a; . ./.env; set +a` before running scripts locally.
+      `set -a; . ./.env; set +a` before running scripts locally (or `direnv allow` once —
+      `.envrc` loads it automatically).
+- [ ] `npm run setup` then `npm run check` — see `docs/DEV_ENVIRONMENT.md` for the full
+      dev environment (local, cloud sessions, Claude Code hooks/agents/MCP).
 - [x] Set up a Python venv: `scripts/requirements.txt` (+ `-collection.txt` for anything
       touching Playwright/browser-fetch, `-dev.txt` for ruff/mypy/pytest). See
       `CLAUDE.md`'s Commands section for the exact invocations.
