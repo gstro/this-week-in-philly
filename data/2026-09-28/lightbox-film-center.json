@@ -1,0 +1,24 @@
+{
+  "source": "Lightbox Film Center",
+  "collected_at": "2026-09-27T13:47:48.852929+00:00",
+  "events": [
+    {
+      "title": "Escape",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-09-30",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/escape",
+      "description": "Co-presented with Collaborative Cataloging Japan"
+    },
+    {
+      "title": "Dread Beat an Blood",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-10-04",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/dread-beat-an-blood",
+      "description": "New Restoration"
+    }
+  ]
+}
