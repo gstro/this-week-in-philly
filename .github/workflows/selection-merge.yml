@@ -1,0 +1,66 @@
+name: Selection Merge
+# Lands the Selection Routine's output on main and starts Presentation.
+#
+# main only accepts PRs (repository ruleset added 2026-09-26, no bypass
+# actors), so the Routine pushes _selection_annotations.json to its own
+# claude/* session branch (see .claude/skills/philly-events-selection/
+# SKILL.md, "Commit and push"). This workflow merges that branch through an
+# immediately merged PR, then dispatches presentation.yml: the merge is made
+# with GITHUB_TOKEN, which never fires presentation.yml's own `on: push`.
+#
+# Interactive Claude Code sessions push to claude/* branches too, so nothing
+# is merged unless scripts/ci/selection_merge_guard.sh says the branch is
+# exactly one newly added week's annotations file -- see that script for the
+# rules. Anything else is left alone for a human to review.
+on:
+  push:
+    branches: ['claude/**']
+    paths:
+      - 'data/**/_selection_annotations.json'
+
+concurrency:
+  group: selection-merge-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write  # gh workflow run presentation.yml
+    steps:
+      # fetch-depth: 0 -- the guard's three-dot diff needs a merge base with
+      # origin/main, which a shallow clone doesn't have.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check this is a new week's Selection
+        id: guard
+        run: |
+          if WEEK_DIR=$(scripts/ci/selection_merge_guard.sh origin/main HEAD); then
+            echo "Qualifies: $WEEK_DIR"
+            echo "dir=$WEEK_DIR" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Not auto-merging ${{ github.ref_name }} -- $WEEK_DIR. Open a PR and review it by hand if it should land."
+          fi
+
+      - name: Merge via PR
+        if: steps.guard.outputs.dir != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+          WEEK_DIR: ${{ steps.guard.outputs.dir }}
+        run: |
+          scripts/ci/merge_via_pr.sh \
+            --branch "$BRANCH" \
+            --title "Selection: week of $(basename "$WEEK_DIR")" \
+            --body "Selection Routine output, auto-merged by ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} after scripts/ci/selection_merge_guard.sh confirmed it adds only $WEEK_DIR/_selection_annotations.json."
+
+      - name: Dispatch Presentation
+        if: steps.guard.outputs.dir != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WEEK_DIR: ${{ steps.guard.outputs.dir }}
+        run: gh workflow run presentation.yml --ref main -f week_dir="$WEEK_DIR"

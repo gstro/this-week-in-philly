@@ -79,9 +79,20 @@ nothing to create for those; they already exist.
       accepted tradeoff — see `V2_IMPLEMENTATION_PLAN.md` G8 — since the picks log and
       the `personal-interests` / `event-selection-philosophy` skills become
       world-readable).
-- [x] Actions: confirm no branch protection rule on `main` blocks pushes from
-      `github-actions[bot]` — both workflows declare `permissions: contents: write` and
-      push directly to `main`.
+- [x] `main` is protected by a repository ruleset (added 2026-09-26, the same one used on
+      all of Greg's repos). Every change must arrive by pull request: 0 approvals, merge
+      commits only, and **no bypass actors**. Nothing pushes to `main` directly. The three
+      automated writers each land their work through a PR that's merged right away
+      (`scripts/ci/merge_via_pr.sh`):
+      - `collection.yml` merges `bot/collection-<week>`.
+      - `selection-merge.yml` merges the Selection Routine's `claude/*` branch, then
+        dispatches `presentation.yml`.
+      - `presentation.yml` merges `bot/publish-<week>`.
+- [ ] Actions → General → Workflow permissions: turn on **"Allow GitHub Actions to create
+      and approve pull requests"**. Without it `GITHUB_TOKEN` can't open those PRs.
+      Keep the default token permission at read-only, since each workflow declares what
+      it needs. From the CLI:
+      `gh api -X PUT repos/gstro/this-week-in-philly/actions/permissions/workflow -f default_workflow_permissions=read -F can_approve_pull_request_reviews=true`
 - [x] Add every secret/variable in the table above under Settings → Secrets and
       variables → Actions (`SELECTION_ROUTINE_ID` goes under the **Variables** tab, not
       Secrets).
@@ -96,9 +107,11 @@ Selection is the one stage still running as a Claude Code Routine rather than a 
 - [x] Create/confirm a Routine attached to this repo, running `claude-sonnet-5`, whose
       task is `.claude/skills/philly-events-selection/SKILL.md` (it in turn reads
       `personal-interests` and `event-selection-philosophy`).
-- [x] Give it a fallback cron roughly 30 minutes after Collection's own
-      (`0 6 * * 0` UTC), e.g. `30 6 * * 0` UTC — this is the safety net for when the API
-      trigger below doesn't fire.
+- [ ] Optional: a fallback cron roughly 30 minutes after Collection's own
+      (`0 6 * * 0` UTC), e.g. `30 6 * * 0` UTC, as a safety net if the API trigger below
+      doesn't fire. **Not currently configured.** The live routine had an empty
+      `cron_expression` when checked on 2026-09-27, so `collection.yml`'s API trigger is the
+      only thing that starts Selection. If that fails, use Run now.
 - [x] Add an **API trigger**: Edit routine → Select a trigger → API. Copy the resulting
       routine ID into the `SELECTION_ROUTINE_ID` repo **variable** and its token into the
       `SELECTION_ROUTINE_TOKEN` repo **secret**. `collection.yml`'s trigger step works

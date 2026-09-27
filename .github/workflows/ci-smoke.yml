@@ -1,0 +1,30 @@
+name: CI Smoke (temporary)
+# TEMPORARY -- delete this file (and .github/ci-smoke.txt) once it has run
+# green once. Proves, before a real Sunday depends on it, that GITHUB_TOKEN
+# can open AND merge a PR into the ruleset-protected main via
+# scripts/ci/merge_via_pr.sh, with the same permissions and commit identity
+# collection.yml/presentation.yml use. See issue #57.
+on:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Commit a scratch change and merge it via PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "smoke run ${{ github.run_id }} at $(date -u +%FT%TZ)" > .github/ci-smoke.txt
+          git add .github/ci-smoke.txt
+          git commit -m "CI smoke: merge_via_pr from GITHUB_TOKEN"
+          scripts/ci/merge_via_pr.sh --push \
+            --branch "bot/ci-smoke-${{ github.run_id }}" \
+            --title "CI smoke: merge_via_pr from GITHUB_TOKEN" \
+            --body "Temporary smoke test, run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}."

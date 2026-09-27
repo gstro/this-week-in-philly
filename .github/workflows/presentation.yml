@@ -16,6 +16,19 @@ on:
       # GITHUB_TOKEN, which doesn't retrigger `on: push` -- see
       # merge_selections.py's docstring.
       - 'data/**/_selection_annotations.json'
+  # How Selection's output normally arrives now. main only accepts PRs (the
+  # 2026-09-26 ruleset), so the Routine pushes to its own claude/* branch and
+  # selection-merge.yml merges it with GITHUB_TOKEN -- and a GITHUB_TOKEN merge
+  # never fires the `push` trigger above, so selection-merge.yml dispatches
+  # this workflow explicitly with the week. The push trigger stays for a PR a
+  # human merges in the UI; the two paths never both fire for one merge.
+  # Also the manual "re-publish week X" button.
+  workflow_dispatch:
+    inputs:
+      week_dir:
+        description: 'Week directory to publish, e.g. data/2026-09-28'
+        required: true
+        type: string
 jobs:
   present:
     runs-on: ubuntu-latest
@@ -25,8 +38,11 @@ jobs:
     # git log) and only failed at the final `git push`, with "Permission to
     # ...git denied to github-actions[bot]" (403). collection.yml already
     # sets this for the same reason.
+    # pull-requests: the report reaches main through a PR that
+    # scripts/ci/merge_via_pr.sh opens and merges (2026-09-26 ruleset).
     permissions:
       contents: write
+      pull-requests: write
     steps:
       # fetch-depth: 2 (not the default 1) -- the week-dir derivation below
       # needs HEAD^ to exist. presentation.yml ran with the default twice
@@ -46,7 +62,25 @@ jobs:
       # the Merge selections step below).
       - name: Determine week directory
         id: week
+        env:
+          INPUT_WEEK_DIR: ${{ inputs.week_dir }}
         run: |
+          # Dispatched (selection-merge.yml or by hand): the week is given.
+          # Validated rather than trusted -- it's interpolated into every
+          # later step.
+          if [ -n "$INPUT_WEEK_DIR" ]; then
+            WEEK_DIR="${INPUT_WEEK_DIR%/}"
+            if ! [[ "$WEEK_DIR" =~ ^data/[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+              echo "::error::week_dir must look like data/YYYY-MM-DD, got '$WEEK_DIR'"
+              exit 1
+            fi
+            if [ ! -f "$WEEK_DIR/_selection_annotations.json" ]; then
+              echo "::error::$WEEK_DIR/_selection_annotations.json is not on main -- nothing to publish"
+              exit 1
+            fi
+            echo "dir=$WEEK_DIR" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           TOUCHED=$(git diff --name-only HEAD^ HEAD -- 'data/**/_selection_annotations.json')
           if [ -z "$TOUCHED" ]; then
             echo "::error::Could not determine week directory from the push diff"
@@ -104,10 +138,18 @@ jobs:
           SPOTIFY_REDIRECT_URI: ${{ secrets.SPOTIFY_REDIRECT_URI }}
         run: bash scripts/runner.sh "${{ steps.week.outputs.dir }}"
 
-      - name: Commit and push report
+      # main requires a PR (2026-09-26 ruleset, no bypass actors): commit to a
+      # bot branch and merge it through an immediately merged PR. On
+      # 2026-09-27 a bare `git push` here was rejected *after* Spotify and
+      # Calendar had already been written, and the rendered report was lost
+      # with the runner. Committed as github-actions[bot] -- a real account;
+      # the ruleset wants extra approval for unattributed commits.
+      - name: Commit and merge report
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git config user.name "twip-bot"
-          git config user.email "twip-bot@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # data/event-picks-log.csv is intentionally not written here --
           # csv_log.py/attendance_check.py are deferred (see runner.sh);
           # only add it if a future run reintroduces that stage.
@@ -147,5 +189,12 @@ jobs:
           # never equals the week anyway -- on-schedule runs fire the Sunday
           # before. Matches collection.yml's "Collection: week of ...".
           WEEK=$(basename "${{ steps.week.outputs.dir }}")
-          git diff --staged --quiet || git commit -m "Publish report for week of $WEEK"
-          git push
+          if git diff --staged --quiet; then
+            echo "Report unchanged for week of $WEEK; nothing to publish."
+            exit 0
+          fi
+          git commit -m "Publish report for week of $WEEK"
+          scripts/ci/merge_via_pr.sh --push \
+            --branch "bot/publish-$WEEK" \
+            --title "Publish report for week of $WEEK" \
+            --body "Automated Presentation run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
