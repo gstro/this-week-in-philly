@@ -41,13 +41,18 @@ TypeScript (`src/`) — **not** CI-enforced; run manually:
 
 ## Pipeline architecture
 
-Three stages, chained by file handoffs. This structure is the same in v1 and v2; only the infrastructure changes. v1: three Mac scheduled tasks passing files through iCloud. **v2, as originally designed, ran Collection and Selection as two Claude Code Routines — that is now stale.** `scripts/collect_week.py`'s own docstring states it plainly: "Runs a full Collection pass for one week, deterministically, with no model. This is the GitHub Actions replacement for the Collection Routine." `.github/workflows/collection.yml` runs it as a plain script step (per-source parsers in `scripts/event_parsers/`), then fires **Selection's** Routine via its API trigger (`SELECTION_ROUTINE_ID`/`SELECTION_ROUTINE_TOKEN`, the "Trigger Selection routine" step) the moment collection data lands on `main` — Selection's own fixed cron stays as a fallback. Selection is the only stage still running as an actual Claude Code Routine; GitHub Actions runs the Python script suite for everything else (Collection, and everything after Selection writes its annotations), with GitHub Pages serving the report.
+Three stages, chained by file handoffs. This structure is the same in v1 and v2; only the infrastructure changes. v1: three Mac scheduled tasks passing files through iCloud. **v2, as originally designed, ran Collection and Selection as two Claude Code Routines — that is now stale.** `scripts/collect_week.py`'s own docstring states it plainly: "Runs a full Collection pass for one week, deterministically, with no model. This is the GitHub Actions replacement for the Collection Routine." `.github/workflows/collection.yml` runs it as a plain script step (per-source parsers in `scripts/event_parsers/`), then fires **Selection's** Routine via its API trigger (`SELECTION_ROUTINE_ID`/`SELECTION_ROUTINE_TOKEN`, the "Trigger Selection routine" step) the moment collection data lands on `main` (the Routine has no cron of its own, so this trigger is the only thing that starts it). Selection is the only stage still running as an actual Claude Code Routine; GitHub Actions runs the Python script suite for everything else (Collection, and everything after Selection writes its annotations), with GitHub Pages serving the report.
 
 ```
 Collection   → per-source JSONs + _manifest.json        (~22 sources, tier-ordered cheapest-first; scripted)
 Selection    → _selection_annotations.json              (dedupe, score, Top 3/day, write "why" blurbs; the one Routine)
 Presentation → _selections.json, HTML report, Calendar  (deterministic; v2 scripts this entirely -- CSV logging is inert, see Key contracts)
 ```
+
+**Nothing pushes to `main` directly.** A repository ruleset (2026-09-26, no bypass actors) requires a PR for every change. Each automated writer commits to a branch, and `scripts/ci/merge_via_pr.sh` opens a PR and merges it immediately:
+- `collection.yml` uses `bot/collection-<week>`.
+- `presentation.yml` uses `bot/publish-<week>`.
+- The Selection Routine pushes to its own `claude/*` branch. `.github/workflows/selection-merge.yml` then merges it, but only if `scripts/ci/selection_merge_guard.sh` confirms the branch adds exactly one new week's `_selection_annotations.json`. After merging, it dispatches `presentation.yml` with `week_dir`, because merges made with `GITHUB_TOKEN` never fire `on: push`.
 
 Tasks are deliberately thin; all domain logic lives in the skill files. Selection is the only stage that generates prose (the `why` blurbs) — that's why it's the only one still worth a model at all: Collection and Presentation now cost zero model tokens, not just cheaper ones.
 

@@ -21,13 +21,21 @@ on:
         description: 'Monday of the target week (YYYY-MM-DD). Blank = next upcoming Monday.'
         required: false
         type: string
+      trigger_selection:
+        description: 'Fire the Selection routine after the data lands on main. Uncheck for a re-collection that should not re-run Selection.'
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   collect:
     runs-on: ubuntu-latest
     # Default GITHUB_TOKEN needs write access to push the collected week.
+    # contents + pull-requests: main is only reachable through a PR (the
+    # 2026-09-26 ruleset), which scripts/ci/merge_via_pr.sh opens and merges.
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -97,17 +105,32 @@ jobs:
         continue-on-error: true
         run: python scripts/prepare_selection_input.py "${{ steps.week.outputs.dir }}" --split-by-day
 
-      - name: Commit and push collected week
+      # main requires a PR (repository ruleset added 2026-09-26, no bypass
+      # actors), so this lands the week via a bot branch + immediately merged
+      # PR instead of a direct push. Committed as github-actions[bot], a real
+      # GitHub identity: the ruleset asks for extra approval on commits that
+      # aren't attributed to an account, which twip-bot@users.noreply never was.
+      - name: Commit and merge collected week
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git config user.name "twip-bot"
-          git config user.email "twip-bot@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Only this run's own week directory -- not `git add data/`, which
           # would blindly absorb and commit anything else that showed up
           # under data/ between checkout and here (see the Determine target
           # week step's comment for exactly this happening).
           git add "${{ steps.week.outputs.dir }}"
-          git diff --staged --quiet || git commit -m "Collection: week of $(basename "${{ steps.week.outputs.dir }}")"
-          git push
+          if git diff --staged --quiet; then
+            echo "Nothing new to commit for this week."
+            exit 0
+          fi
+          WEEK=$(basename "${{ steps.week.outputs.dir }}")
+          git commit -m "Collection: week of $WEEK"
+          scripts/ci/merge_via_pr.sh --push \
+            --branch "bot/collection-$WEEK" \
+            --title "Collection: week of $WEEK" \
+            --body "Automated Collection run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       # Fires Selection's API trigger the moment this run's data is actually
       # on main, instead of relying solely on Selection's own fixed cron (30
@@ -117,12 +140,15 @@ jobs:
       # found no _candidates.json yet, and correctly no-op'd via its own
       # prerequisite guard (.claude/skills/philly-events-selection/SKILL.md)
       # -- safe, but it left Selection needing a manual re-trigger afterward.
-      # Selection's fixed cron stays as-is, now a true fallback rather than
-      # the only mechanism: its own guard makes a redundant fire here
-      # harmless ("already selected this week" -> stop, don't overwrite).
-      # continue-on-error, like the step above -- a failed trigger call
-      # shouldn't fail an otherwise-successful Collection run, and the
-      # fallback cron covers it.
+      # This is the ONLY thing that starts Selection: the live routine has
+      # no cron of its own (checked 2026-09-27 -- its cron_expression is
+      # empty, despite older docs describing a fallback). If this step fails,
+      # Selection must be fired by hand (claude.ai/code/routines -> Run now).
+      # It runs after the merge step above, and must: the Routine clones
+      # main, so the week's data has to be merged before it fires. Its own
+      # guard still makes a redundant fire harmless ("already selected this
+      # week" -> stop, don't overwrite). continue-on-error -- a failed
+      # trigger call shouldn't mark otherwise-good Collection data as failed.
       #
       # Needs SELECTION_ROUTINE_ID (repo variable) and SELECTION_ROUTINE_TOKEN
       # (repo secret), both from the Selection routine's API trigger (added at
@@ -132,6 +158,7 @@ jobs:
       # header (per Claude Code's routines docs) -- request/response shape and
       # header version may change.
       - name: Trigger Selection routine
+        if: github.event_name != 'workflow_dispatch' || inputs.trigger_selection
         continue-on-error: true
         run: |
           curl -sf -X POST "https://api.anthropic.com/v1/claude_code/routines/${{ vars.SELECTION_ROUTINE_ID }}/fire" \
