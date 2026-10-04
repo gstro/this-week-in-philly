@@ -6,8 +6,9 @@ output_directory: data
 
 # Philadelphia Events — Selection Task
 
-**Schedule:** Sunday mornings, ~30 minutes after Collection's own cron (v1's original cadence — this
-task's Routine runs on its own schedule, not an event pushed from Collection; see the guard below).
+**Schedule:** Sunday mornings, fired by `collection.yml`'s "Trigger Selection routine" step once
+Collection's data has merged to `main`. The Routine has no cron of its own. It can also be fired by
+hand, so the guard below still matters.
 **Input:** `data/YYYY-MM-DD/_candidates/<date>.json` — one file per day, written by
 `scripts/prepare_selection_input.py --split-by-day` as a `collection.yml` step, alongside the rest of
 Collection's output.
@@ -373,20 +374,30 @@ Selection complete. Top 3 written for [N]/7 days. _selection_annotations.json sa
 
 ## Commit and push
 
+Push to a `claude/*` branch, **never to `main`**. `main` only accepts pull requests (a repository
+ruleset with no bypass), so a direct push is rejected.
+
 ```
+# Usually the session already starts on its own claude/* branch. If it started on main, branch first:
+[ "$(git branch --show-current)" = "main" ] && git checkout -b claude/selection-YYYY-MM-DD
 git add data/YYYY-MM-DD/_selection_annotations.json
 git commit -m "Selection: week of YYYY-MM-DD"
-git push
+git push -u origin HEAD
 ```
 
-This push is what fires `presentation.yml` (`on: push`, `paths: ['data/**/_selection_annotations.json']`)
-— no API call, no webhook, no separate trigger. `presentation.yml`'s first step runs
-`scripts/merge_selections.py`, which reconstructs `_selections.json` from this file plus
-`_candidates.json` before the rest of the pipeline (Spotify lookup, HTML render, calendar create) runs.
+Commit **only** `_selection_annotations.json`, in its own commit. Don't open or merge a PR yourself.
+
+This push fires `.github/workflows/selection-merge.yml`. It checks that the branch adds exactly one new
+week's `_selection_annotations.json` and nothing else. Then it merges the branch into `main` through a
+PR and dispatches `presentation.yml` for that week. If you commit anything else on the branch, that
+check declines it and nothing publishes until someone merges by hand. `presentation.yml`'s first step
+runs `scripts/merge_selections.py`, which rebuilds `_selections.json` from this file plus
+`_candidates.json`. The rest of the pipeline (Spotify lookup, HTML render, calendar create) runs after
+that.
 
 ---
 
 ## Stop
 
 Do not proceed to merging, Spotify lookup, or rendering. Those run in GitHub Actions
-(`presentation.yml`'s merge step and `scripts/runner.sh`), invoked by this push.
+(`presentation.yml`'s merge step and `scripts/runner.sh`), started by `selection-merge.yml` after this push.
