@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week in Philadelphia — October 5–11, 2026</title>
+  <!-- ── Link preview ──
+       This report is delivered as a shared link, so the unfurl IS the
+       product's first impression; without these it previewed as a bare URL.
+       No og:image on purpose: there is no artwork to point at and a
+       generated one would be a second thing to keep true. -->
+  <meta name="description" content="21 handpicked things to do in Philadelphia, October 5–11, 2026 — chosen from 97 events across 10 sources.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="This Week in Philadelphia">
+  <meta property="og:title" content="This Week in Philadelphia — October 5–11, 2026">
+  <meta property="og:description" content="21 handpicked things to do in Philadelphia, October 5–11, 2026 — chosen from 97 events across 10 sources.">
+  <meta property="og:url" content="https://gstro.github.io/this-week-in-philly/weeks/2026-10-05.html">
+  <link rel="canonical" href="https://gstro.github.io/this-week-in-philly/weeks/2026-10-05.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#111111">
+  <!-- Inline data URI, not a file: Pages serves this site from a project
+       subpath, so an absolute /favicon.svg 404s, and a relative one would
+       need a different depth from docs/index.html than from docs/weeks/. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Cpath d='M16 6.5 18.47 12.6 25.03 13.06 19.99 17.3 21.59 23.68 16 20.2 10.41 23.68 12.01 17.3 7.44 13.06 13.53 12.6Z' fill='%23c9a84c'/%3E%3C/svg%3E">
+  <style>
+    /* ── Palette ──
+       Every colour in this stylesheet is a token so the dark block below can
+       restate the palette and nothing else. The light values are the report's
+       original ones, unchanged -- with one exception noted at --feature-meta.
+
+       Dark is not a mechanical inversion. In light the Top 3 card is the
+       darkest thing on a pale page; inverting that would sink it into the
+       background, so in dark it becomes the most *elevated* surface instead
+       (page < card < feature), keeping "raised means important" true in both
+       themes. Every dark pair clears WCAG AA (4.5:1) -- measured, not
+       eyeballed; the light theme does not, and fixing that is its own slice. */
+    :root {
+      --page-bg: #f0ede8;
+      --page-fg: #1c1c1c;
+      --rule: #d8d4ce;
+      --rule-soft: #eee;
+      --muted: #999;
+      --muted-strong: #888;
+      --muted-faint: #bbb;
+      --gold: #c9a84c;
+      --header-bg: #111;
+      --header-fg: #fff;
+      --card-bg: #fff;
+      --card-fg: #1c1c1c;
+      --card-venue: #444;
+      --card-shadow: rgba(0,0,0,0.06);
+      --feature-bg: #1c1c1c;
+      --feature-fg: #fff;
+      --feature-why: #999;
+      --feature-venue: #bbb;
+      /* Was #666, the one light value this change moves: 2.97:1 on the Top 3
+         card, the only outright unreadable pair in the light theme. #848484
+         clears AA at 4.56:1 and stays dimmer than --feature-why, so the
+         card's hierarchy is unchanged. */
+      --feature-meta: #848484;
+      --free: #2d7a3a;
+      --sold-out: #c0392b;
+      /* The card red, lightened for the dark Top 3 card where #c0392b muddies. */
+      --sold-out-feature: #e06a5c;
+      --table-fg: #555;
+      --source-silent: #c3bfb8;
+      /* The de-emphasis neutral for chart fills: everything that isn't a
+         Top 3 pick. Re-stepped from a paler grey, which sat 14.0 ΔE from
+         --gold -- under the 15 normal-vision floor, i.e. hard to tell apart
+         even with full colour vision. */
+      --stat-bar: #7d7568;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page-bg: #1a1815;
+        --page-fg: #ece8e1;
+        --rule: #3a352e;
+        --rule-soft: #2e2a25;
+        --muted: #a8a29a;
+        --muted-strong: #b5afa6;
+        --muted-faint: #918a80;
+        --gold: #d7b75f;
+        --header-bg: #100f0d;
+        --header-fg: #f3efe8;
+        --card-bg: #26231f;
+        --card-fg: #ece8e1;
+        --card-venue: #cfc8bd;
+        --card-shadow: rgba(0,0,0,0.45);
+        --feature-bg: #2e2a25;
+        --feature-fg: #f5f1ea;
+        --feature-why: #b9b2a8;
+        --feature-venue: #d0c9be;
+        --feature-meta: #a59e94;
+        --free: #7ec98b;
+        --sold-out: #ff8a7a;
+        --sold-out-feature: #ff9d8f;
+        --table-fg: #cfc8bd;
+        --source-silent: #8a8279;
+        --stat-bar: #8a8279;
+      }
+      /* The subtitle sits on --header-bg, which stays near-black in both
+         themes, so it needs its own value rather than --muted-strong. */
+      .subtitle { color: #9b948b; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* overflow-wrap inherits, so this one declaration keeps every long string
+       (venues carry full street addresses -- 130 chars is real) inside its
+       column instead of forcing the page to scroll sideways. */
+    body { background: var(--page-bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--page-fg); overflow-wrap: break-word; }
+
+    /* ── Keyboard affordances ──
+       The page is ~80 links deep before the first day, and the day index is
+       itself the shortcut past it, so the skip link targets that nav rather
+       than the content wrapper. It is off-canvas until focused, never
+       display:none, which would take it out of the tab order entirely.
+       :focus-visible (not :focus) so a mouse click on a card link doesn't
+       leave a ring behind it. */
+    .skip-link { position: absolute; left: -9999px; top: 0; background: var(--header-bg); color: var(--header-fg); padding: 0.6rem 1rem; font-size: 0.8rem; z-index: 1; }
+    .skip-link:focus { left: 0; }
+    a:focus-visible, .skip-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+
+    /* ── Heading resets ──
+       The day/category/section labels became real h2/h3 elements for the
+       document outline (they were <div>s, so the page had one heading in
+       total and no structure for reader mode or a screen reader's heading
+       list). Their appearance is unchanged, which means undoing the UA
+       stylesheet's bold and its em-relative sizing everywhere the class
+       below doesn't already state both. */
+    h2, h3 { font-size: inherit; font-weight: 400; }
+
+    /* ── Header ── */
+    .site-header { background: var(--header-bg); width: 100%; }
+    .site-header-inner { max-width: 800px; margin: 0 auto; padding: 1.4rem 1.5rem 1.5rem; }
+    .eyebrow { font-size: 0.62rem; text-transform: uppercase; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 0.45rem; }
+    h1 { color: var(--header-fg); font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+    h1 span { color: var(--gold); }
+    .subtitle { color: var(--muted-strong); font-size: 0.82rem; }
+    .header-playlist { margin-top: 0.6rem; font-size: 0.75rem; }
+    .header-playlist a { color: var(--gold); text-decoration: none; }
+    .header-playlist a:hover { text-decoration: underline; }
+
+    /* ── Content wrapper ── */
+    .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
+    hr.day-sep { border: none; border-top: 1px solid var(--rule); margin: 2.25rem 0; }
+
+    /* ── Day index ──
+       Seven links, no JS. The page runs ~11 cards a day across 7 days, which
+       is short enough that a sticky bar or a back-to-top button would cost
+       more than they return (REPORT_IMPROVEMENTS_BRAINSTORM.md #16, #24, both
+       dropped on those grounds) but long enough to want one jump per day. */
+    .day-index { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; margin-bottom: 1.75rem; font-size: 0.72rem; }
+    .day-index a { color: var(--page-fg); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 0.1rem; }
+    .day-index a:hover { border-bottom-color: var(--gold); }
+    .day-index .day-index-count { color: var(--muted); margin-left: 0.25rem; }
+
+    /* ── Day header ── */
+    .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; scroll-margin-top: 0.75rem; }
+    .day-name { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; flex-shrink: 0; }
+    .day-date { font-size: 1.25rem; font-weight: 700; color: var(--page-fg); flex-shrink: 0; }
+    .day-rule { flex: 1; height: 1px; background: var(--rule); }
+
+    /* ── Top 3 card ── */
+    .top3-card { background: var(--feature-bg); border-radius: 7px; padding: 1rem 1.25rem; margin-bottom: 0.65rem; }
+    .top3-label { font-size: 0.62rem; text-transform: uppercase; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    .top3-pick { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.9rem; }
+    .top3-pick:last-child { margin-bottom: 0; }
+    .pick-num { color: var(--gold); font-weight: 700; font-size: 0.9rem; min-width: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; }
+    .pick-main { flex: 1; min-width: 0; }
+    .pick-name { color: var(--feature-fg); font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
+    .pick-name a { color: var(--gold); text-decoration: none; }
+    .pick-name a:hover { text-decoration: underline; }
+    .pick-name a.event-link { color: var(--feature-fg); }
+    .pick-why { color: var(--feature-why); font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
+    /* max-width caps the flex-shrink: 0 column: a venue carrying a full street
+       address (130 chars is real) otherwise sizes to its own content and starves
+       .pick-main down to one letter per line. */
+    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
+    .pick-venue { color: var(--feature-venue); font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
+    .pick-time-cost { color: var(--feature-meta); font-size: 0.68rem; margin-top: 0.15rem; }
+    .pick-time-cost .sold-out { color: var(--sold-out-feature); font-size: inherit; }
+
+    /* ── Honorable mentions ── */
+    p.hm { font-size: 0.77rem; color: var(--muted); font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
+
+    /* ── Category header ── */
+    .cat-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; margin-top: 1.1rem; }
+    .cat-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
+
+    /* ── Event cards ── */
+    .event-card { background: var(--card-bg); border-radius: 5px; padding: 0.5rem 0.75rem; box-shadow: 0 1px 2px var(--card-shadow); display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; }
+    .event-left { flex: 1; min-width: 0; }
+    .event-name { font-size: 0.85rem; font-weight: 700; color: var(--card-fg); line-height: 1.3; }
+    .event-name a { color: inherit; text-decoration: none; }
+    .event-name a:hover { text-decoration: underline; }
+    .event-note { font-size: 0.73rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4; }
+    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; max-width: 50%; }
+    .event-venue { font-size: 0.78rem; font-weight: 700; color: var(--card-venue); }
+    .event-time { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+    .price-free { font-size: 0.7rem; color: var(--free); }
+    .price-paid { font-size: 0.7rem; color: var(--muted); }
+    .sold-out { font-size: 0.7rem; color: var(--sold-out); font-weight: 600; }
+
+    /* ── All Week table ── */
+    .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+    .allweek-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
+    .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .allweek-table th { text-align: left; padding: 0.3rem 0.5rem; color: var(--muted-strong); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--rule); }
+    .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--rule-soft); color: var(--table-fg); vertical-align: top; }
+    .allweek-table tr:last-child td { border-bottom: none; }
+    .allweek-table td strong { color: var(--page-fg); }
+
+    .cat-omitted { font-size: 0.7rem; color: var(--muted-faint); font-style: italic; margin: 0.15rem 0 0 0.75rem; }
+
+    /* ── Week in Numbers ──
+       Two marks only: --gold for what won a Top 3 slot, --stat-bar for
+       everything else. That's an emphasis pair (one accent + a de-emphasis
+       neutral), not a categorical palette, which is why the pair clears the
+       two checks that decide whether adjacent segments can be told apart --
+       CVD separation 19.0 light / 19.3 dark, normal-vision 20.2 / 20.4 -- while
+       "failing" the chroma floor, whose complaint is that --stat-bar reads
+       gray. It is supposed to read gray. Gold sits just outside the dark
+       lightness band for the same reason it always has: it's the report's
+       existing brand accent, not a slot chosen for this chart. Gold's low
+       contrast against the light paper (1.96:1) is what makes the per-row
+       count labels mandatory rather than decorative. */
+    .stats-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.9rem; }
+    .stats-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
+
+    /* Funnel: a KPI row, not a chart -- four headline numbers. Proportional
+       figures, not tabular: these don't align in a column. */
+    .funnel { display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem; margin-bottom: 1.6rem; }
+    .funnel-value { font-size: 1.15rem; font-weight: 700; color: var(--page-fg); line-height: 1.2; }
+    .funnel-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; margin-top: 0.1rem; }
+    .funnel-drop { font-size: 0.62rem; color: var(--muted-faint); margin-top: 0.1rem; }
+
+    .stats-block { margin-bottom: 1.5rem; }
+    .stats-block-title { font-size: 0.7rem; font-weight: 700; color: var(--card-venue); margin-bottom: 0.1rem; }
+    .stats-legend { font-size: 0.65rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .stats-legend .swatch { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 2px; margin-right: 0.25rem; vertical-align: baseline; }
+    .swatch-top3 { background: var(--gold); }
+    .swatch-listed { background: var(--stat-bar); }
+
+    .statbar-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem; font-size: 0.72rem; }
+    .statbar-name { flex: 0 0 8.5rem; color: var(--page-fg); min-width: 0; }
+    .statbar-track { flex: 1; min-width: 0; display: flex; align-items: center; }
+    /* <= 24px thick, square at the baseline, 4px rounded at the data end. The
+       gold segment leads so Top 3 counts align across rows; the 2px right
+       margin is the surface gap that separates the two fills -- a gap, never a
+       border drawn around the mark. */
+    /* min-width so the smallest real value still reads as a mark: a single
+       event is 1.3% of Do215's 76 and would otherwise render as a 1px sliver
+       indistinguishable from nothing at all. */
+    .statbar-fill { height: 9px; min-width: 6px; }
+    .statbar-top3 { background: var(--gold); border-radius: 2px 0 0 2px; margin-right: 2px; }
+    .statbar-rest { background: var(--stat-bar); border-radius: 0 4px 4px 0; }
+    .statbar-top3:only-child { border-radius: 2px 4px 4px 0; margin-right: 0; }
+    .statbar-rest:only-child { border-radius: 2px 4px 4px 2px; }
+    /* Outside the bar end, never inside it: a count inside a 1-event bar would
+       be clipped. tabular-nums here because these DO align in a column. */
+    .statbar-value { flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .statbar-value strong { color: var(--page-fg); font-weight: 700; }
+
+    .stats-health { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+    .stats-health .below-floor { color: var(--sold-out); font-weight: 600; }
+
+    /* ── Sources footer ── */
+    .sources { text-align: center; font-size: 0.7rem; color: var(--muted); margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: var(--muted); text-decoration: none; }
+    .sources a:hover { color: var(--page-fg); }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: var(--source-silent); }
+    .source-count { color: var(--source-silent); font-size: 0.62rem; margin-left: 0.2rem; }
+    .sources-failure { text-align: center; font-size: 0.7rem; color: var(--muted-faint); margin-top: 0.4rem; }
+
+    /* ── Narrow screens ──
+       Every card above is a desktop flex row with a fixed-width, right-aligned
+       meta column (130px / 120px). Below ~600px those columns eat a third of a
+       phone screen and squeeze the title into a ribbon, so each card wraps its
+       meta column onto its own full-width line and left-aligns it. The All Week
+       table -- four columns, unfittable at 375px -- becomes stacked cards that
+       label themselves from the td data-label attributes. */
+    @media (max-width: 600px) {
+      .site-header-inner { padding: 1.1rem 1rem 1.2rem; }
+      h1 { font-size: 1.5rem; }
+      .content { padding: 1.35rem 1rem 2.5rem; }
+
+      .day-header { gap: 0.5rem; }
+      .day-date { font-size: 1.1rem; }
+
+      .top3-card { padding: 0.9rem 1rem; }
+      .top3-pick { flex-wrap: wrap; }
+      /* 1.85rem = .pick-num's 1.1rem min-width + .top3-pick's 0.75rem gap, so
+         the meta line hangs under the title rather than under the number. It has
+         to be padding, not margin: flex-basis 100% + a left margin would put the
+         venue 1.85rem past the card's right edge. */
+      .pick-meta { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; margin: 0.3rem 0 0; padding-left: 1.85rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      .pick-venue { flex-basis: 100%; }
+      .pick-time-cost { margin-top: 0; }
+
+      .event-card { flex-wrap: wrap; gap: 0.15rem; }
+      .event-right { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      /* Venue on its own line so the time and price below it don't read as a
+         continuation of the address. */
+      .event-venue { flex-basis: 100%; }
+      .event-time { margin-top: 0; }
+      /* :not(:empty) -- clean_cost() legitimately yields "" (53 of them in the
+         week of 2026-08-10 alone), and the separator must not dangle after the
+         time with no price behind it. */
+      .event-time + div:not(:empty)::before { content: "·"; color: var(--rule); margin-right: 0.4rem; }
+
+      .allweek-table, .allweek-table tbody, .allweek-table tr, .allweek-table td { display: block; width: 100%; }
+      .allweek-table thead { display: none; }
+      .allweek-table tr { background: var(--card-bg); border-radius: 5px; box-shadow: 0 1px 2px var(--card-shadow); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
+      .allweek-table td { border-bottom: none; padding: 0.1rem 0; }
+      .allweek-table td::before { content: attr(data-label) ": "; color: var(--muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      .allweek-table td:first-child::before { content: none; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#day-index">Skip to the day index</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="eyebrow">Weekly Guide</div>
+    <h1>This Week in <span>Philadelphia</span></h1>
+    <div class="subtitle">October 5–11, 2026 &nbsp;·&nbsp; Compiled <time datetime="2026-10-04">Sunday, October 4</time></div>
+    <div class="header-playlist"><a href="https://open.spotify.com/playlist/6msn8JYUWtxC2OG84IBq9C">♫ This week's picks on Spotify</a></div>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- DAY INDEX -->
+  <nav class="day-index" id="day-index" aria-label="Jump to a day">
+    <a href="#monday">Monday<span class="day-index-count">12</span></a>
+    <a href="#tuesday">Tuesday<span class="day-index-count">14</span></a>
+    <a href="#wednesday">Wednesday<span class="day-index-count">14</span></a>
+    <a href="#thursday">Thursday<span class="day-index-count">13</span></a>
+    <a href="#friday">Friday<span class="day-index-count">13</span></a>
+    <a href="#saturday">Saturday<span class="day-index-count">14</span></a>
+    <a href="#sunday">Sunday<span class="day-index-count">13</span></a>
+  </nav>
+  <h2 class="day-header" id="monday">
+    <span class="day-name">Monday</span>
+    <time class="day-date" datetime="2026-10-05">October 5</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name">DECIDE TODAY , <a href="https://open.spotify.com/artist/3osPFn4n6nIX1cI3EOaJMq">BASECK</a>, HiHelga, Nullifeye</div>
+        <div class="pick-why">Decide Today and Baseck — both touring hardcore acts — headline a stacked all-local bill with HiHelga and Nullifeye at Nikki Lopez, a block off South Street. $19.49, doors at 7, show at 8; a solid night of hardcore without the trek to Fishtown or Kensington.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=304+South+St%2C+Philadelphia%2C+PA+19147">Nikki Lopez, 304 South St, Philadelphia, PA 19147</a></div>
+        <div class="pick-time-cost">7:00 PM · $19.49</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/5/comics-for-gaza-tickets">Comics for Gaza</a></div>
+        <div class="pick-why">Claude&#39;s Comedy Club &amp; Bar hosts a stand-up benefit for Gaza relief — political cause wrapped into a 21+ night of comedy, a block off South Broad in South Philly. The listing is thin on lineup and price beyond the ticket link, so double-check details before you go.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1123+South+Broad+St.%2C+Philadelphia%2C+PA+19147">Claude&#39;s Comedy Club &amp; Bar, 1123 South Broad St., Philadelphia, PA 19147</a></div>
+        <div class="pick-time-cost">8:00 PM · 21+</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/5/our-stories-hosted-by-philly-queer-storytellers-tickets">OUR Stories hosted by Philly Queer Storytellers</a></div>
+        <div class="pick-why">Philly Queer Storytellers bring real coming-out and community stories to the mic at Tattooed Moms, timed just ahead of National Coming Out Day. Free, no cover, South Street in South Philly — an evening of first-person storytelling rather than scripted readings.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=530+South+Street%2C+Philadelphia%2C+PA+19147">Tattooed Moms, 530 South Street, Philadelphia, PA 19147</a></div>
+        <div class="pick-time-cost">7:30 PM · Free</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: Paper Jam! at The Soapbox: Community Print Shop &amp; Zine Library, 4700 Kingsessing Ave, Philadelphia, PA 19143 · The Dispossessed Book Club: Session at Philadelphia, Philadelphia, Pe</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/decide-today-baseck-hihelga-nullifeye-tickets">⭐ DECIDE TODAY , BASECK, HiHelga, Nullifeye</a></div>
+      <div class="event-note">Hardcore bill with Baseck, HiHelga, and Nullifeye.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Nikki Lopez, 304 South St, Philadelphia, PA 19147</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">$19.49</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/jeru-the-damaja-30th-anniversary-of-wrath-of-the-math-tickets">Jeru the Damaja "30th Anniversary of Wrath of the Math"</a></div>
+      <div class="event-note">Golden-era Brooklyn MC Jeru the Damaja marks the 30th anniversary of Wrath of the Math at City Winery.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Winery, 990 Filbert St, Philadelphia, PA 19107</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">📚 Literary</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/our-stories-hosted-by-philly-queer-storytellers-tickets">⭐ OUR Stories hosted by Philly Queer Storytellers</a></div>
+      <div class="event-note">Queer storytelling night ahead of National Coming Out Day.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Tattooed Moms, 530 South Street, Philadelphia, PA 19147</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/the-dispossessed-book-club-session-tickets">The Dispossessed Book Club: Session</a></div>
+      <div class="event-note">Philly DSA reading group discussing Ursula K. Le Guin&#39;s The Dispossessed; partly over Zoom.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia, Philadelphia, Pe</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/lydia-darragh-irish-quaker-patriot-spy-at-carpenters-hall-tickets">Lydia Darragh: Irish Quaker, Patriot Spy at Carpenters' Hall</a></div>
+      <div class="event-note">(confirm details) Performance and discussion on Revolutionary-era spy Lydia Darragh at Carpenter&#39;s Hall; the listing names Oct. 10 despite being dated the 5th.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Carpenters’ Hall</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/pes-classics-book-club-tickets">PES Classics Book Club</a></div>
+      <div class="event-note">Monthly classics discussion group at the Philadelphia Ethical Society.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia Ethical Society, 1906 Rittenhouse Square, Philadelphia, PA 19103</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/comics-for-gaza-tickets">⭐ Comics for Gaza</a></div>
+      <div class="event-note">Benefit comedy show for Gaza relief.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Claude&#39;s Comedy Club &amp; Bar, 1123 South Broad St., Philadelphia, PA 19147</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">21+</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/transit-access-fund-advocacy-day-training-tickets">Transit Access Fund Advocacy Day Training</a></div>
+      <div class="event-note">In-person training for an upcoming Transit Access Fund advocacy push.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Transit Forward Philadelphia Offices</div>
+      <div class="event-time">5:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/housing-committee-monthly-meeting-tickets">Housing Committee Monthly Meeting</a></div>
+      <div class="event-note">Monthly DSA-organized housing committee meeting at Workers United.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Workers United, 22 South 22nd St, Philadelphia, PA 19103</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/paper-jam-tickets">Paper Jam!</a></div>
+      <div class="event-note">Free monthly craft circle exploring paper at The Soapbox&#39;s community print shop and zine library.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Soapbox: Community Print Shop &amp; Zine Library, 4700 Kingsessing Ave, Philadelphia, PA 19143</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/impressionism-beyond-tickets">Impressionism &amp; Beyond</a></div>
+      <div class="event-note">Standing guided tour of PMA&#39;s European Impressionist galleries; free with admission, recurring.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia Art Museum, 2600 Benjamin Franklin Pkwy, Philadelphia, PA 19130</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-paid">Free with museum admission. Reservations not required.</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🌿 Markets &amp; Outdoors</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/5/october-plant-swap-at-manayunk-pop-up-garden-tickets">October Plant Swap at Manayunk Pop Up Garden</a></div>
+      <div class="event-note">One-for-one plant and garden-item swap at the Manayunk Pop Up Garden.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PHS Pop Up Garden at Manayunk, 106 Jamestown Avenue, Philadelphia, PA 19127</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="tuesday">
+    <span class="day-name">Tuesday</span>
+    <time class="day-date" datetime="2026-10-06">October 6</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/6/haggus-tickets">Haggus ~ Zorn ~ Concrete Caveman ~ Aroma</a></div>
+        <div class="pick-why">Haggus headlines a four-band noise-and-grind bill with Zorn, Concrete Caveman, and Aroma at Kung Fu Necktie — hardcore heavier and weirder than the usual Tuesday. Fishtown, a few blocks from the Girard stop on the El. The listing&#39;s age policy is contradictory (All Ages on the ticket page, 21+ in the venue&#39;s own notice) — confirm before you go.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1248+N+Front+St%2C+Philadelphia%2C+PA+19122">Kung Fu Necktie, 1248 N Front St, Philadelphia, PA 19122</a></div>
+        <div class="pick-time-cost">7:00 PM · $22.72 to $23.75, All Ages</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.etix.com/ticket/p/93083176/">SCREAM OF MY BLOOD: A GOGOL BORDELLO STORY</a></div>
+        <div class="pick-why">Scream of My Blood traces the rise of Gogol Bordello&#39;s gypsy-punk chaos, screening twice at PhilaMOCA for $12 — a music documentary that plays almost nowhere else in the city. Center City-adjacent, just north of Chinatown.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N.+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
+        <div class="pick-time-cost">7:00 PM · $12</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/6/film-breathless-tickets">Film | Breathless</a></div>
+        <div class="pick-why">Woodmere screens Godard&#39;s Breathless free — the jump-cut, handheld 1960 French New Wave landmark that rewired how movies move, in French with English subtitles. It&#39;s a real trip from South Philly: Chestnut Hill, reachable via the Chestnut Hill West Regional Rail line, then a walk or short bus.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=9201+Germantown+Ave%2C+Philadelphia%2C+PA+19118">Woodmere Art Museum, 9201 Germantown Ave, Philadelphia, PA 19118</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: We Get Requests at Chris' Jazz Cafe, 1421 Sansom St, Philadelphia, PA 19102 · On Practice: Pew Fellows in Conversation at The Barnes Foundation, 2025 Benjamin Franklin Pkwy, Philadelphia, Pe 19130</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/haggus-tickets">⭐ Haggus ~ Zorn ~ Concrete Caveman ~ Aroma</a></div>
+      <div class="event-note">Noise-and-grind bill with Zorn, Concrete Caveman, and Aroma.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kung Fu Necktie, 1248 N Front St, Philadelphia, PA 19122</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">$22.72 to $23.75, All Ages</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/we-get-requests-tickets">We Get Requests</a></div>
+      <div class="event-note">GRAMMY-nominated trumpeter Josh Lawrence leads a request-based live set at Chris&#39; Jazz Cafe.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Chris&#39; Jazz Cafe, 1421 Sansom St, Philadelphia, PA 19102</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$11-$90</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/tuesday-nite-music-club-w-taylor-kelly-tickets">Tuesday Nite Music Club w/ Taylor Kelly</a></div>
+      <div class="event-note">Monthly jazz/soul/funk listening-session residency at 48 Record Bar.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">48 Record Bar, 48 S 2nd St., Philadelphia, PA 19106</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/white-denim-tickets">White Denim</a></div>
+      <div class="event-note">Austin-rooted garage/soul/psych band at Ardmore Music Hall, Main Line Regional Rail.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ardmore Music Hall, 23 E Lancaster Ave, Ardmore, Pe 19003</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$25-$55, 21+</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/toth-tickets">Tōth</a></div>
+      <div class="event-note">Ex-Rubblebucket songwriter Alex Toth&#39;s solo project at Johnny Brenda&#39;s.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda&#39;s, 1201 Frankford Ave, Philadelphia, PA 19125</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$22.90</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/film-breathless-tickets">⭐ Film | Breathless</a></div>
+      <div class="event-note">Free screening of Godard&#39;s 1960 French New Wave landmark.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Woodmere Art Museum, 9201 Germantown Ave, Philadelphia, PA 19118</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/93083176/">⭐ SCREAM OF MY BLOOD: A GOGOL BORDELLO STORY</a></div>
+      <div class="event-note">Music documentary on Gogol Bordello&#39;s gypsy-punk rise.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00, 7:30</div>
+      <div class="price-paid">$12</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">📚 Literary</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/ncc-book-club-richard-brookhiser-on-the-hero-returns-lafayette-and-the-legacy-of-revolution-tickets">NCC Book Club: Richard Brookhiser on The Hero Returns: Lafayette and the Legacy of Revolution</a></div>
+      <div class="event-note">Free author talk with Richard Brookhiser on his new Lafayette biography, National Constitution Center.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">National Constitution Center, 525 Arch Street, Philadelphia, PA 19106</div>
+      <div class="event-time">1:00 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/universal-student-fares-hearing-tickets">Universal Student Fares Hearing</a></div>
+      <div class="event-note">Public comment hearing at City Hall on universal student transit fares.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia City City Hall Room 400</div>
+      <div class="event-time">1:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/justice-101-erasure-of-queer-history-tickets">Justice 101: Erasure of Queer History</a></div>
+      <div class="event-note">(confirm details) Eastern State Penitentiary program on the erasure of queer history; free, but the listing itself says details are still to come.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Eastern State Penitentiary, 2027 Fairmount Ave, Philadelphia, Pe 19130</div>
+      <div class="event-time">5:30 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/transit-accessibility-audit-fairmount-tickets">Transit Accessibility Audit - Fairmount</a></div>
+      <div class="event-note">Community-organized audit of bus-stop accessibility with the Fairmount Civic Association.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">23rd and Fairmount Bus Stop</div>
+      <div class="event-time">5:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/marxist-reading-group-abcs-of-communism-tickets">Marxist Reading Group ABCs of Communism</a></div>
+      <div class="event-note">Advanced Marxist theory discussion group works through Bukharin&#39;s ABC of Communism; free, Washington Square Park.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Washington Square Park</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/sapir-debates-is-free-speech-endangering-jews-tickets">SAPIR Debates | Is Free Speech Endangering Jews?</a></div>
+      <div class="event-note">Ticketed debate on free speech and antisemitism at the Weitzman museum; $20-30.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Weitzman National Museum of American Jewish History</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/6/on-practice-pew-fellows-in-conversation-tickets">On Practice: Pew Fellows in Conversation</a></div>
+      <div class="event-note">Free talk with three 2025 Pew Fellows — a choreographer, filmmaker, and visual artist/chef — on sustaining a creative practice, at the Barnes.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Barnes Foundation, 2025 Benjamin Franklin Pkwy, Philadelphia, Pe 19130</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="wednesday">
+    <span class="day-name">Wednesday</span>
+    <time class="day-date" datetime="2026-10-07">October 7</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/7/dracula-s-angel-2014-tickets">DRACULA'S ANGEL (2014) w/ filmmaker Bryan Beasley in attendance!</a></div>
+        <div class="pick-why">Bleeding Skull brings Bryan Beasley&#39;s 2014 self-financed animated horror oddity to PhilaMOCA, with Beasley himself in the room — four years of solo-animated labor on a $15,000 budget, about a woman who&#39;d rather fall for Dracula than any mortal man. $14.52, two showtimes; singular, hand-made horror that only plays with the filmmaker present.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N.+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</a></div>
+        <div class="pick-time-cost">7:30 PM · $14.52</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.lightboxfilmcenter.org/events/talking-to-strangers">Talking to Strangers</a></div>
+        <div class="pick-why">Lightbox Film Center — a venue that rarely shows up in weekly listings — screens a new restoration of Talking to Strangers at Bok Auditorium. The listing itself is sparse (title and &#34;New Restoration&#34; only), so research it before buying a ticket, but Lightbox&#39;s programming track record alone makes the trip to South Philly worth it — a short walk from home.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=800+Mifflin+St%2C+Philadelphia%2C+PA+19148">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name">In-person! Birthday Jazz for Desmond Tutu with <a href="https://open.spotify.com/artist/4DofVDXCUzpsAPy5kfgjPC">Bert Harris</a> and the Afrojazz Collective!</div>
+        <div class="pick-why">Bert Harris and the Afrojazz Collective mark what would have been Desmond Tutu&#39;s birthday with a set at The Rotunda — jazz as living tribute to an anti-apartheid icon, free and in University City. One of the Rotunda&#39;s one-off bookings, not one of its standing weekly series.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
+        <div class="pick-time-cost">7:30 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: The Schizophonics ~ Descartes A Kant ~ Dale Crover of Melvins at Kung Fu Necktie, 1248 N Front St, Philadelphia, PA 19122 · Profs &amp; Pints Philadelphia: A Guide to Witches at Black Squirrel Club, 1049 Sarah St, Philadelphia, PA 19125 · NLG Know Your Rights and Risks Training at Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/birthday-jazz-for-desmond-tutu-with-bert-harris-and-the-afrojazz-collective">⭐ In-person! Birthday Jazz for Desmond Tutu with Bert Harris and the Afrojazz Collective!</a></div>
+      <div class="event-note">Jazz tribute marking what would&#39;ve been Desmond Tutu&#39;s birthday.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/the-schizophonics-descartes-a-kant-dale-crover-of-melvins-tickets">The Schizophonics ~ Descartes A Kant ~ Dale Crover of Melvins</a></div>
+      <div class="event-note">San Diego garage-punk trio with Dale Crover of the Melvins on the bill, Kung Fu Necktie.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kung Fu Necktie, 1248 N Front St, Philadelphia, PA 19122</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$21.69, 21+</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/world-to-come-1-aaron-julius-rj-tickets">World to Come 1: Aaron Julius RJ</a></div>
+      <div class="event-note">Free improvised electronic/flute/drum set at Christ Church Gardens, rooted in Philly&#39;s Creative Music lineage (Coltrane, Sun Ra).</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Christ Church Gardens</div>
+      <div class="event-time">5:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/o-slow-trusselina-skin-press-chasia-tickets">O Slow , Trusselina, Skinpress , Chasia</a></div>
+      <div class="event-note">Four-band bill at Nikki Lopez, 21+.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Nikki Lopez, 304 South St, Philadelphia, PA 19147</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">$13.34</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/cor-de-lux-tickets">Cor de Lux, Washer, Puddled, and Bimbo</a></div>
+      <div class="event-note">Four-band bill at Ortlieb&#39;s, 21+.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ortlieb&#39;s, 847 N 3rd St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">$18.39, 21+</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.lightboxfilmcenter.org/events/talking-to-strangers">⭐ Talking to Strangers</a></div>
+      <div class="event-note">New restoration screening from Lightbox Film Center.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/october-shadows-an-exploration-of-trauma-and-healing-after-october-7-tickets">October Shadows: An Exploration of Trauma and Healing After October 7</a></div>
+      <div class="event-note">Documentary screening and discussion on trauma and healing after October 7, 2023, at Penn Museum.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Penn Museum, 3260 South Street, Philadelphia, PA 19104</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-film-society-center-aaxow/theater-page">The Five Heartbeats (1991)</a></div>
+      <div class="event-note">Robert Townsend&#39;s 1991 R&amp;B-group drama screens in repertory at PFS Film Society Center.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=YzhzNmFjcGtjbGgzMmI5bzY4cWo0YjlrNzFnajBiYjFjb282MmJiMWM5aGplY2I0YzVpNjhjMWhjNF8yMDI2MTAwN1QyMjAwMDBaIHQ4cW1pdmU2M24yN21kajdndDAzbnRjMnU4QGc&amp;ctz=America/New_York">NLG Know Your Rights and Risks Training</a></div>
+      <div class="event-note">National Lawyers Guild &#39;Know Your Rights and Risks&#39; training at Wooden Shoe Books.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/transit-access-fund-advocacy-day-tickets">Transit Access Fund Advocacy Day</a></div>
+      <div class="event-note">In-person transit advocacy at City Hall, continuing the week&#39;s campaign.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Hall, 1400 John F Kennedy Blvd, Philadelphia, PA 19107</div>
+      <div class="event-time">9:00 AM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/groove-for-good-lutheran-settlement-house-fundraiser-tickets">Groove For Good - Lutheran Settlement House Fundraiser</a></div>
+      <div class="event-note">Benefit dance party for Lutheran Settlement House&#39;s domestic-violence services, Johnny Brenda&#39;s; $30.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda&#39;s, 1201 Frankford Ave, Philadelphia, PA 19125</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">$30</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/ecologies-of-photography-in-the-american-west-tickets">Ecologies of Photography in the American West</a></div>
+      <div class="event-note">Photography lecture on the American West at PAFA; $25 includes admission.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Pennsylvania Academy of the Fine Arts Museum, 118-128 North Broad Street, Philadelphia, PA 19102</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-paid">General General $25 (includes General Admission)</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/dracula-s-angel-2014-tickets">⭐ DRACULA'S ANGEL (2014) w/ filmmaker Bryan Beasley in attendance!</a></div>
+      <div class="event-note">Self-financed animated horror oddity, filmmaker Bryan Beasley in attendance.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$14.52</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/7/profs-pints-philadelphia-a-guide-to-witches-tickets">Profs &amp; Pints Philadelphia: A Guide to Witches</a></div>
+      <div class="event-note">Academic lecture series brings a talk on witches to Black Squirrel Club.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Black Squirrel Club, 1049 Sarah St, Philadelphia, PA 19125</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="thursday">
+    <span class="day-name">Thursday</span>
+    <time class="day-date" datetime="2026-10-08">October 8</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.google.com/calendar/event?eid=MTdyODQ1MWgzOG9pZnMzNTdrMWhsZ3A4azMgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&amp;ctz=America/New_York">Liberating Abortion Book Talk with Renee Bracey Sherman and Regina Mahone</a></div>
+        <div class="pick-why">Renee Bracey Sherman and Regina Mahone bring Liberating Abortion to Wooden Shoe — a reparative history of reproductive-rights organizing that centers the Black and brown activists usually left out of the story. Free, South Street, squarely in Wooden Shoe&#39;s wheelhouse: political education as a bookstore event, not just a reading.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
+        <div class="pick-time-cost">6:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name">Noun / <a href="https://open.spotify.com/artist/3MFU4K82yhiZLPobvJ1Quc">Sensor Ghost</a> / Northern Liberties / Gutter Pearl</div>
+        <div class="pick-why">A four-band DIY bill — Noun, Sensor Ghost, Northern Liberties, and Gutter Pearl — lands at First Unitarian Church, the city&#39;s most storied all-ages punk and hardcore room, on Chestnut near Rittenhouse.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2125+Chestnut+Street">The First Unitarian Church (2125 Chestnut Street)</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/2OqxxoA5s8DyO5JYSRmbQ6">Lee Fields</a></div>
+        <div class="pick-why">Lee Fields — North Carolina-born, Daptone-adjacent, the real article when it comes to classic American soul — plays City Winery just blocks from the Convention Center. His new LP Sentimental Fool, cut with Daptone&#39;s Gabriel Roth, is the kind of record critics reach for superlatives on; a rare chance to hear him do it live in a room built for it.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=990+Filbert+St%2C+Philadelphia%2C+PA+19107">City Winery, 990 Filbert St, Philadelphia, PA 19107</a></div>
+        <div class="pick-time-cost">7:30 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: TRICK OR TREAT (1986) w/ Richard Christy at PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123 · Barbara Kingsolver: Partita at Miller Theater, 250 S Broad St, Philadelphia, PA 19102</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/noun-sensor-ghost-northern-liberties-gutter-pearl">⭐ Noun / Sensor Ghost / Northern Liberties / Gutter Pearl</a></div>
+      <div class="event-note">Four-band DIY bill at First Unitarian Church.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The First Unitarian Church (2125 Chestnut Street)</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/lee-fields-tickets">⭐ Lee Fields</a></div>
+      <div class="event-note">Daptone-adjacent soul legend plays City Winery.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Winery, 990 Filbert St, Philadelphia, PA 19107</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/bobby-lyle-6-30pm-and-9-00pm-tickets">Bobby Lyle 6:30pm and 9:00pm</a></div>
+      <div class="event-note">Legendary jazz pianist, former musical director for Al Jarreau and Anita Baker, SOUTH Jazz Club.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">SOUTH Jazz Club (Unscripted Jazz), 600 N. Broad Street, Philadelphia, PA 19130</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">$52 - $47</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/panic-park-the-speed-dials-shortcuts-total-whine">Panic Park-The Speed Dials-Shortcuts-Total Whine</a></div>
+      <div class="event-note">Punk bill at Little Big Planet, via Philly Ask a Punk.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Little Big Planet (1123 Walnut Street, Philadelphia, PA 19107)</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/plastician-uk-tickets">Plastician [Uk]</a></div>
+      <div class="event-note">UK grime and dubstep pioneer DJs at The Dolphin, South Broad St.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Dolphin, 1539 S Broad St, Philadelphia, PA 19147</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$11.84-$14.01</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">📚 Literary</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=MTdyODQ1MWgzOG9pZnMzNTdrMWhsZ3A4azMgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&amp;ctz=America/New_York">⭐ Liberating Abortion Book Talk with Renee Bracey Sherman and Regina Mahone</a></div>
+      <div class="event-note">Reparative history of reproductive-rights organizing, centering Black and brown activists.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/barbara-kingsolver-partita-tickets">Barbara Kingsolver: Partita</a></div>
+      <div class="event-note">Pulitzer Prize-winning novelist in conversation on her new novel Partita, with live piano, Miller Theater.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Miller Theater, 250 S Broad St, Philadelphia, PA 19102</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/trba-reading-group-gender-trouble-session-tickets">TRBA Reading Group: Gender Trouble Session</a></div>
+      <div class="event-note">Queer/socialist book club&#39;s third session on Judith Butler&#39;s Gender Trouble.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia, Philadelphia, Pe</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/transit-access-fund-thursday-tickets">Transit Access Fund Thursday</a></div>
+      <div class="event-note">City Hall advocacy continuing the week&#39;s Transit Access Fund campaign.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Hall, 1400 John F Kennedy Blvd, Philadelphia, PA 19107</div>
+      <div class="event-time">9:00 AM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/pennsylvania-german-american-elites-and-the-third-reich-presentation-tickets">Pennsylvania German-American Elites and the Third Reich: Presentation</a></div>
+      <div class="event-note">Free lunchtime lecture on fascism&#39;s allure among Pennsylvania German-American elites, German Society of PA.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The German Society of Pennsylvania, 611 Spring Garden Street, Philadelphia, PA 19123</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/meet-geek-strange-girls-tickets">Meet &amp; Geek: Strange Girls</a></div>
+      <div class="event-note">Talk on disability history and the American freak show at the Mütter Museum; $20.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Mütter Museum, 19 S 22nd Street, Philadelphia, PA 19103</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">$20</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/61008283/">TRICK OR TREAT (1986) w/ Richard Christy</a></div>
+      <div class="event-note">1986 metal-horror cult classic at PhilaMOCA with Howard Stern Show&#39;s Richard Christy in attendance.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00, 7:30</div>
+      <div class="price-paid">$20</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/8/jennifer-s-body-watch-party-and-drag-show-tickets">Jennifer's Body: Watch Party and Drag Show</a></div>
+      <div class="event-note">Cult-film watch party with a drag show after, Franky Bradley&#39;s.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Franky Bradley&#39;s, 1320 Chancellor St, Philadelphia, PA 19107</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$12.65</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="friday">
+    <span class="day-name">Friday</span>
+    <time class="day-date" datetime="2026-10-09">October 9</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/9/special-event-movie-night-nosferatu-in-person-tickets">Special Event | Movie Night: Nosferatu | In-Person</a></div>
+        <div class="pick-why">The Rosenbach screens Nosferatu: A Symphony of Horror picnic-style — bring a blanket, they provide popcorn and prosecco — for an evening of 1922 silent gothic dread in an intimate Delancey Place setting. $10 members / $20 non-members, 18+.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2008-2010+Delancey+St">The Rosenbach Museum and Library, 2008-2010 Delancey St</a></div>
+        <div class="pick-time-cost">6:00 PM · $10, $20</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name">An Exchange Of Information | <a href="https://open.spotify.com/artist/63GTn25wbdRNX3ijCHvYxD">Oso Oso</a></div>
+        <div class="pick-why">R5 Productions brings Oso Oso&#39;s An Exchange of Information to First Unitarian Church, with Leisure Hour and Bad Luck opening — emo-inflected indie rock at the city&#39;s storied all-ages punk sanctuary. Doors 7:30, show at 8; $30.96, Center City.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2125+Chestnut+St%2C+Philadelphia%2C+PA+19103">The First Unitarian Church</a></div>
+        <div class="pick-time-cost">8:00 PM · $30.96</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="">2026 Artist + Activist Screening</a></div>
+        <div class="pick-why">The Leeway Foundation screens five years of work from its Artist + Activist Media Residents at PhillyCAM — pieces from Norris Square Neighborhood Project, Jewish Voice for Peace, and Care Not Control among them. Free, light refreshments at 6, screening at 6:30, Old City.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=699+Ranstead+St+%231%2C+Philadelphia%2C+PA+19106">PhillyCAM, 699 Ranstead St #1, Philadelphia, PA 19106, USA</a></div>
+        <div class="pick-time-cost">6:00 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: Horse Lords at Solar Myth, 1131 S Broad St, Philadelphia, PA 19147 · Eraserhood at Night at The Trestle Inn, 339 N 11th Street, Philadelphia, Pe 19107</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://r5productions.com/event/oso-oso-2/the-first-unitarian-church/philadelphia-pennsylvania/">⭐ An Exchange Of Information | Oso Oso</a></div>
+      <div class="event-note">Emo-inflected indie rock headlines First Unitarian Church.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The First Unitarian Church</div>
+      <div class="event-time">Doors: 7:30 pm | Show: 8 pm</div>
+      <div class="price-paid">$30.96</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/horse-lords-tickets">Horse Lords</a></div>
+      <div class="event-note">Ars Nova Workshop presents Baltimore avant-rock band Horse Lords at Solar Myth; 21+, $37.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Solar Myth, 1131 S Broad St, Philadelphia, PA 19147</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$37.08, 21+</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/mad-skillz-with-a-live-band-tickets">Mad Skillz with a Live Band</a></div>
+      <div class="event-note">Grammy-winning hip-hop/spoken-word artist in an intimate live-band set at City Winery.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Winery, 990 Filbert St, Philadelphia, PA 19107</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/pianist-caelan-cardello-his-quintet-tickets">Pianist Caelan Cardello &amp; His Quintet</a></div>
+      <div class="event-note">Young jazz pianist&#39;s quintet at Chris&#39; Jazz Cafe.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Chris&#39; Jazz Cafe, 1421 Sansom St, Philadelphia, PA 19102</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">$15-$120</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/dj-shadow-celebrates-30-years-of-endtroducing-tickets">DJ Shadow Celebrates 30 Years of Endtroducing</a></div>
+      <div class="event-note">DJ Shadow marks 30 years of Endtroducing at Franklin Music Hall.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Franklin Music Hall, 421 N. 7th Street, Philadelphia, PA 19123</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/queen-of-jeans-record-release-show-with-special-guest-bren-tickets">QUEEN OF JEANS Record Release Show - with Special Guest, BREN</a></div>
+      <div class="event-note">Philly indie band&#39;s record-release show at PhilaMOCA.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$24.20</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="">⭐ 2026 Artist + Activist Screening</a></div>
+      <div class="event-note">Leeway Foundation screens five years of Artist + Activist Media Residency work.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhillyCAM, 699 Ranstead St #1, Philadelphia, PA 19106, USA</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=Y2FlZ28wMDhrcjR1MjBtcHZsMzM2MHJiZzdfMjAyNjEwMDlUMjMwMDAwWiB0OHFtaXZlNjNuMjdtZGo3Z3QwM250YzJ1OEBn&amp;ctz=America/New_York">Red Rabbits De-Escalation training</a></div>
+      <div class="event-note">Monthly community de-escalation training at Wooden Shoe Books.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/eraserhood-at-night-tickets">Eraserhood at Night</a></div>
+      <div class="event-note">Free night of DJs, go-go, and opera celebrating the Eraserhood nightlife district, Trestle Inn and Velvet Whip.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Trestle Inn, 339 N 11th Street, Philadelphia, Pe 19107</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/physical-media-pop-up-tickets">Physical Media Pop-Up</a></div>
+      <div class="event-note">Free used-book, zine, and vinyl pop-up at Tattooed Moms.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Tattooed Moms, 530 South Street, Philadelphia, PA 19147</div>
+      <div class="event-time">5:00 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/biodiversitease-cabugaret-tickets">BiodiversiTEASE: CaBUGaret</a></div>
+      <div class="event-note">Science-meets-burlesque cabaret for ecology education at Club 624.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Club 624, 624 S 6th S, Philadelphia, PA 19146</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">$23.18-$33.85</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/special-event-movie-night-nosferatu-in-person-tickets">⭐ Special Event | Movie Night: Nosferatu | In-Person</a></div>
+      <div class="event-note">Silent 1922 vampire classic, picnic-style with popcorn and prosecco provided.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rosenbach Museum and Library, 2008-2010 Delancey St</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">$10, $20</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/9/candlelight-ghost-tours-at-fort-mifflin-tickets">Candlelight Ghost Tours at Fort Mifflin</a></div>
+      <div class="event-note">Candlelit walking ghost tours of Fort Mifflin after dark; runs select nights through late October.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Schuylkill Banks</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="saturday">
+    <span class="day-name">Saturday</span>
+    <time class="day-date" datetime="2026-10-10">October 10</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.therotunda.org/event/the-feeling-of-being-watched">In-person! As part of the Collective Futures Festival, Batikh Batikh partners with cineSPEAK to present Super Surveillance, screening Assia Boundaoui’s film The Feeling of Being Watched (2018)</a></div>
+        <div class="pick-why">The Rotunda screens Assia Boundaoui&#39;s acclaimed 2018 documentary The Feeling of Being Watched — her investigation into why the FBI surveilled her own Arab-American Chicago neighborhood for decades — as part of the Collective Futures Festival, presented with Batikh Batikh and cineSPEAK. Free, University City.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/10/trane-s-house-farid-barron-commemorating-the-100th-birthday-of-john-coltrane-tickets">Trane’s House – Farid Barron Commemorating the 100th Birthday of John Coltrane</a></div>
+        <div class="pick-why">Pianist Farid Barron leads a tribute marking what would have been John Coltrane&#39;s 100th birthday at the Clef Club of Jazz, Philadelphia&#39;s home for the music Coltrane grew up playing in this city. South Broad Street, a short walk from Point Breeze.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=736+S.+Broad+Street%2C+Philadelphia%2C+PA+19146">Philadelphia Clef Club of Jazz &amp; Performing Arts, 736 S. Broad Street, Philadelphia, PA 19146</a></div>
+        <div class="pick-time-cost">7:30 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/10/missing-link-king-9-criminal-instinct-morning-again-scorched-earth-policy-azshara-unmoved-tickets">Missing Link/King 9/Criminal Instinct/Morning Again/Scorched Earth Policy/Azshara/Unmoved</a></div>
+        <div class="pick-why">Seven bands — headlined by Missing Link with King 9, Criminal Instinct, Morning Again, Scorched Earth Policy, Azshara, and Unmoved — turn Warehouse on Watts into an afternoon hardcore matinee. $25-30, 1pm start; Broad Street Line to Spring Garden gets you close.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=923+N+Watts+St%2C+Philadelphia%2C+PA+19123">Warehouse on Watts, 923 N Watts St, Philadelphia, PA 19123</a></div>
+        <div class="pick-time-cost">1:00 PM · $25-$30</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: Hot Fix Sideshow at Franky Bradley's | B.West (1320 Chancellor St, Philadelphia, PA 19107) · Mirah / Evan Greer / Sad13 at PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/missing-link-king-9-criminal-instinct-morning-again-scorched-earth-policy-azshara-unmoved-tickets">⭐ Missing Link/King 9/Criminal Instinct/Morning Again/Scorched Earth Policy/Azshara/Unmoved</a></div>
+      <div class="event-note">Seven-band hardcore matinee, 1pm start.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Warehouse on Watts, 923 N Watts St, Philadelphia, PA 19123</div>
+      <div class="event-time">1:00 PM</div>
+      <div class="price-paid">$25-$30</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/trane-s-house-farid-barron-commemorating-the-100th-birthday-of-john-coltrane-tickets">⭐ Trane’s House – Farid Barron Commemorating the 100th Birthday of John Coltrane</a></div>
+      <div class="event-note">Pianist Farid Barron marks John Coltrane&#39;s 100th birthday.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia Clef Club of Jazz &amp; Performing Arts, 736 S. Broad Street, Philadelphia, PA 19146</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/mirah-evan-greer-sad13-tickets">Mirah / Evan Greer / Sad13</a></div>
+      <div class="event-note">Indie singer-songwriter bill at PhilaMOCA, including activist-musician Evan Greer.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$24.20</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/half-crosscorrupt-worlddoddiskritikmercifix">HALF CROSS/CORRUPT WORLD/D.O.D./DISKRITIK/MERCIFIX</a></div>
+      <div class="event-note">Powerviolence/crust/hardcore house show at Cousin Danny&#39;s.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Cousin Dannys (5001 Market St)</div>
+      <div class="event-time">8:00 AM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/korine-tickets">Korine</a></div>
+      <div class="event-note">Philly dark-pop duo Korine with Zanias, Johnny Brenda&#39;s.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda&#39;s, 1201 Frankford Ave, Philadelphia, PA 19125</div>
+      <div class="event-time">9:00 PM</div>
+      <div class="price-paid">$25.65</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/the-feeling-of-being-watched">⭐ In-person! As part of the Collective Futures Festival, Batikh Batikh partners with cineSPEAK to present Super Surveillance, screening Assia Boundaoui’s film The Feeling of Being Watched (2018)</a></div>
+      <div class="event-note">Assia Boundaoui&#39;s documentary on FBI surveillance of her own Arab-American neighborhood.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">📚 Literary</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/book-release-party-for-she-was-wild-grass-by-katie-bennett-tickets">Book Release Party for She Was Wild Grass by Katie Bennett</a></div>
+      <div class="event-note">West Philly writer Katie Bennett launches her debut memoir at The Perch.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Perch Music &amp; Arts Workshop, 2321 Emerald St, Philadelphia, PA 19125</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">$24.89</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/west-philadelphia-canvass-cobbs-creek-tickets">West Philadelphia Canvass | Cobbs Creek</a></div>
+      <div class="event-note">Labor-to-labor GOTV canvass ahead of the midterms, Cobbs Creek Pool parking lot.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Cobbs Creek Pool Parking Lot</div>
+      <div class="event-time">9:00 AM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/voter-registration-philly-aids-thrift-tickets">Voter Registration: Philly AIDS Thrift</a></div>
+      <div class="event-note">Indivisible Philadelphia voter-registration drive at Philly AIDS Thrift.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philly AIDS Thrift, 710 S 5th St, Philadelphia, PA 19147</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/hot-fix-sideshow">Hot Fix Sideshow</a></div>
+      <div class="event-note">Burlesque, fire-eating, and sword-swallowing sideshow at Franky Bradley&#39;s | B.West.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Franky Bradley&#39;s | B.West (1320 Chancellor St, Philadelphia, PA 19107)</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNyMzRiOWg2c3NqMmRoaTcwcDMwYzFkNjRyamljOW02Y3FqOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">🚂 Model Internet Club</a></div>
+      <div class="event-note">Iffy Books&#39; monthly meetup on building small-scale computer networks.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">10:30 AM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🌿 Markets &amp; Outdoors</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/out-in-nature-tickets">Out in Nature</a></div>
+      <div class="event-note">Guided hike exploring queerness and gender fluidity in nature, timed to Coming Out Day, Schuylkill Center.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Schuylkill Center, 8480 Hagy&#39;s Mill Road, Philadelphia, PA 19128</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/10/d-i-y-spell-jar-with-casey-britton-tickets">D.I.Y. Spell Jar with Casey Britton</a></div>
+      <div class="event-note">Pagan-witchcraft spell-jar workshop with tarot readings, The People&#39;s Gallery; $20.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The People’s Gallery, 1034 Pine St, Philadelphia, PA 19107</div>
+      <div class="event-time">11:00 AM</div>
+      <div class="price-paid">$20</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-film-society-center-aaxow/theater-page">Don't Torture a Duckling</a></div>
+      <div class="event-note">Fulci giallo classic in repertory at PFS Film Society Center.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102</div>
+      <div class="event-time">9:45 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="sunday">
+    <span class="day-name">Sunday</span>
+    <time class="day-date" datetime="2026-10-11">October 11</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.lightboxfilmcenter.org/events/monument">monument</a></div>
+        <div class="pick-why">Lightbox Film Center — the city&#39;s premier venue for exactly this kind of discovery — brings its Philadelphia premiere of monument to Bok. The listing gives no synopsis beyond the premiere billing, so this is one to research before buying a ticket, but Lightbox&#39;s track record alone is reason enough to go. South Philly, an easy trip from home.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=800+Mifflin+St%2C+Philadelphia%2C+PA+19148">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</a></div>
+        <div class="pick-time-cost">5:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name">In-person! Ghost Nights: an Evening of Noise/Drone/Experimental Music w/Mazel, <a href="https://open.spotify.com/artist/6YFcG6dLJIjlCR5KM85FfQ">Body garden</a> x Milkbag (HBG/PHL interactive collab set), Empathic Window</div>
+        <div class="pick-why">The Rotunda hosts Ghost Nights, an evening of noise, drone, and experimental music with Mazel, a Body Garden x Milkbag interactive collaboration, and Empathic Window — one of the Rotunda&#39;s one-off bookings, not its standing weeklies. University City.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
+        <div class="pick-time-cost">7:30 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://do215.com/events/2026/10/11/queer-life-drawing-tickets">Queer Life Drawing</a></div>
+        <div class="pick-why">Tattooed Moms hosts Queer Life Drawing — a structured session lifting up queer, trans, POC, and fat bodies as models, open to anyone with a sketchbook. No cover, ticket sales matched dollar-for-dollar and donated to a Philly mutual-aid org, South Street.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=530+South+Street%2C+Philadelphia%2C+PA+19147">Tattooed Moms, 530 South Street, Philadelphia, PA 19147</a></div>
+        <div class="pick-time-cost">1:00 PM · Free</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: SHOCK INFINITY at PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123 · 'I Know About You' 30th Anniversary | Ida at Johnny Brenda’s</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/ghost-nights">⭐ In-person! Ghost Nights: an Evening of Noise/Drone/Experimental Music w/Mazel, Body garden x Milkbag (HBG/PHL interactive collab set), Empathic Window</a></div>
+      <div class="event-note">Noise/drone/experimental night with Mazel and a Body Garden x Milkbag collab set.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://r5productions.com/event/ida/johnny-brendas/philadelphia-pennsylvania/">'I Know About You' 30th Anniversary | Ida</a></div>
+      <div class="event-note">R5 Productions presents Ida&#39;s 30th-anniversary show for I Know About You, Johnny Brenda&#39;s.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda’s</div>
+      <div class="event-time">Doors: 7 pm | Show: 8 pm</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/11/plague-master-tickets">Plague Master</a></div>
+      <div class="event-note">Brooklyn death/thrash/grindcore band at Kung Fu Necktie.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kung Fu Necktie, 1248 N Front St, Philadelphia, PA 19122</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">$18.35, 21+</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/11/isiliel-from-japan-eternal-hoshi-tickets">Isiliel (from Japan) / Eternal Hoshi</a></div>
+      <div class="event-note">Japanese blackgaze/darkwave artist Isiliel at PhilaMOCA.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N. 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">$18.15</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.lightboxfilmcenter.org/events/monument">⭐ monument</a></div>
+      <div class="event-note">Philadelphia premiere of monument, presented by Lightbox Film Center.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</div>
+      <div class="event-time">5:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">📚 Literary</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/11/course-writing-queer-identities-with-greta-garbo-and-mercedes-de-acosta-in-person-tickets">Course | Writing Queer Identities with Greta Garbo and Mercedes de Acosta | In-Person</a></div>
+      <div class="event-note">National Coming Out Day program on Greta Garbo and Mercedes de Acosta at the Rosenbach; $45.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rosenbach Museum and Library, 2008-2010 Delancey St</div>
+      <div class="event-time">2:00 PM</div>
+      <div class="price-paid">$45</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/11/canvassing-in-bensalem-for-albillar-harvie-allen-tickets">Canvassing in Bensalem for Albillar, Harvie, Allen</a></div>
+      <div class="event-note">Indivisible Philadelphia GOTV canvass; carpool available from Center City.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia, Philadelphia, Pe</div>
+      <div class="event-time">10:00 AM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/11/help-soapbox-move-volunteer-work-day-tickets">Help Soapbox Move! Volunteer Work Day</a></div>
+      <div class="event-note">Volunteer day helping The Soapbox print shop and zine library prepare for its move.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Soapbox: Community Print Shop &amp; Zine Library, 4700 Kingsessing Ave, Philadelphia, PA 19143</div>
+      <div class="event-time">10:00 AM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/11/queer-life-drawing-tickets">⭐ Queer Life Drawing</a></div>
+      <div class="event-note">Queer-centered life drawing session, proceeds matched for a Philly mutual-aid org.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Tattooed Moms, 530 South Street, Philadelphia, PA 19147</div>
+      <div class="event-time">1:00 PM</div>
+      <div class="price-free">Free</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/11/zine-swap-at-stitch-and-destroy-tickets">ZINE SWAP</a></div>
+      <div class="event-note">Free zine swap at Stitch and Destroy.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Stitch and Destroy, 523 S 4th St, Philadelphia, PA 19147</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="">The Fair</a></div>
+      <div class="event-note">Print fair closing out the Collective Futures Festival&#39;s PRINT TIME AFTER TIME, 20+ collectively run presses.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Icebox Project Space, 1400 N American St, Philadelphia, PA 19122, USA</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://do215.com/events/2026/10/11/no-longer-bound-the-musical-tickets">No Longer Bound, The Musical</a></div>
+      <div class="event-note">Theatrical production exploring the Declaration of Independence, Emancipation, and Juneteenth, Perelman Theater.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Perelman Theater, 300 S Broad St, Philadelphia, PA 19102</div>
+      <div class="event-time">4:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/53589228/">SHOCK INFINITY</a></div>
+      <div class="event-note">Psychotronic triptych at PhilaMOCA, filmmaker Jake Griswold in attendance.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">3:00, 3:30</div>
+      <div class="price-paid">$10</div>
+    </div>
+  </div>
+
+  <!-- ALL WEEK / RECURRING -->
+  <h2 class="allweek-label">All Week / Recurring</h2>
+  <table class="allweek-table">
+    <thead><tr><th>Event</th><th>Venue</th><th>This week</th><th>Price</th></tr></thead>
+    <tr>
+      <td data-label="Event"><strong>Art and Artists of Latin America Tour</strong></td>
+      <td data-label="Venue">Philadelphia Art Museum, 2600 Benjamin Franklin Pkwy, Philadelphia, PA 19130</td>
+      <td data-label="This week">Mon, Thu, Fri, Sat, Sun</td>
+      <td data-label="Price">Free with museum admission.</td>
+    </tr>
+    <tr>
+      <td data-label="Event"><strong>THE ADDAMS FAMILY: The Musical</strong></td>
+      <td data-label="Venue">Walnut Street Theatre, 825 Walnut St, Philadelphia, PA 19107</td>
+      <td data-label="This week">Tue, Wed, Thu, Fri, Sat, Sun</td>
+      <td data-label="Price">Not listed</td>
+    </tr>
+    <tr>
+      <td data-label="Event"><strong>Experiencing Esherick Tour</strong></td>
+      <td data-label="Venue">Wharton Esherick Museum, 1520 Horseshoe Trail, Malvern, PA 19355</td>
+      <td data-label="This week">Wed, Thu, Fri, Sat, Sun</td>
+      <td data-label="Price">Not listed</td>
+    </tr>
+    <tr>
+      <td data-label="Event"><strong>Philadelphia Ballet w/ Stars and Stripes Forever</strong></td>
+      <td data-label="Venue">Academy of Music, 240 S Broad St, Philadelphia, PA 19102</td>
+      <td data-label="This week">Thu, Fri, Sat, Sun</td>
+      <td data-label="Price">Not listed</td>
+    </tr>
+  </table>
+
+  <!-- WEEK IN NUMBERS -->
+  <h2 class="stats-label">Week in Numbers</h2>
+
+  <div class="funnel">
+    <div class="funnel-stage">
+      <div class="funnel-value">629</div>
+      <div class="funnel-label">Collected</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-value">581</div>
+      <div class="funnel-label">Candidates</div>
+      <div class="funnel-drop">−8% from collected</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-value">97</div>
+      <div class="funnel-label">Listed</div>
+      <div class="funnel-drop">−83% from candidates</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-value">21</div>
+      <div class="funnel-label">Top 3 picks</div>
+      <div class="funnel-drop">−78% from listed</div>
+    </div>
+  </div>
+
+  <div class="stats-block">
+    <h3 class="stats-block-title">By category</h3>
+    <div class="stats-legend"><span class="swatch swatch-top3"></span>Top 3 pick <span class="swatch swatch-listed"></span>listed, not picked</div>
+    <div class="statbar-row" title="🎵 Music &amp; Concerts: 9 of 32 listed events became a Top 3 pick">
+      <div class="statbar-name">🎵 Music &amp; Concerts</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 28.1%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 71.9%"></span>
+      </div>
+      <div class="statbar-value"><strong>9</strong> / 32</div>
+    </div>
+    <div class="statbar-row" title="🤝 Community &amp; Politics: 1 of 18 listed events became a Top 3 pick">
+      <div class="statbar-name">🤝 Community &amp; Politics</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 3.1%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 53.1%"></span>
+      </div>
+      <div class="statbar-value"><strong>1</strong> / 18</div>
+    </div>
+    <div class="statbar-row" title="🎨 Arts &amp; Workshops: 1 of 17 listed events became a Top 3 pick">
+      <div class="statbar-name">🎨 Arts &amp; Workshops</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 3.1%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 50.0%"></span>
+      </div>
+      <div class="statbar-value"><strong>1</strong> / 17</div>
+    </div>
+    <div class="statbar-row" title="📚 Literary: 2 of 10 listed events became a Top 3 pick">
+      <div class="statbar-name">📚 Literary</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 6.2%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 25.0%"></span>
+      </div>
+      <div class="statbar-value"><strong>2</strong> / 10</div>
+    </div>
+    <div class="statbar-row" title="👻 Horror &amp; Occult: 2 of 9 listed events became a Top 3 pick">
+      <div class="statbar-name">👻 Horror &amp; Occult</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 6.2%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 21.9%"></span>
+      </div>
+      <div class="statbar-value"><strong>2</strong> / 9</div>
+    </div>
+    <div class="statbar-row" title="🎬 Film &amp; Cinema: 6 of 8 listed events became a Top 3 pick">
+      <div class="statbar-name">🎬 Film &amp; Cinema</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 18.8%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 6.2%"></span>
+      </div>
+      <div class="statbar-value"><strong>6</strong> / 8</div>
+    </div>
+    <div class="statbar-row" title="🌿 Markets &amp; Outdoors: 0 of 2 listed events became a Top 3 pick">
+      <div class="statbar-name">🌿 Markets &amp; Outdoors</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 6.2%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 2</div>
+    </div>
+    <div class="statbar-row" title="💻 Tech &amp; Maker: 0 of 1 listed events became a Top 3 pick">
+      <div class="statbar-name">💻 Tech &amp; Maker</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 3.1%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 1</div>
+    </div>
+  </div>
+
+  <div class="stats-block">
+    <h3 class="stats-block-title">By source</h3>
+    <div class="statbar-row" title="Do215 supplied 75 of this week's listed events">
+      <div class="statbar-name">Do215</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 100.0%"></span>
+      </div>
+      <div class="statbar-value">75</div>
+    </div>
+    <div class="statbar-row" title="Philly Ask A Punk supplied 4 of this week's listed events">
+      <div class="statbar-name">Philly Ask A Punk</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 5.3%"></span>
+      </div>
+      <div class="statbar-value">4</div>
+    </div>
+    <div class="statbar-row" title="PhilaMOCA supplied 3 of this week's listed events">
+      <div class="statbar-name">PhilaMOCA</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 4.0%"></span>
+      </div>
+      <div class="statbar-value">3</div>
+    </div>
+    <div class="statbar-row" title="The Rotunda supplied 3 of this week's listed events">
+      <div class="statbar-name">The Rotunda</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 4.0%"></span>
+      </div>
+      <div class="statbar-value">3</div>
+    </div>
+    <div class="statbar-row" title="Wooden Shoe Books supplied 3 of this week's listed events">
+      <div class="statbar-name">Wooden Shoe Books</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 4.0%"></span>
+      </div>
+      <div class="statbar-value">3</div>
+    </div>
+    <div class="statbar-row" title="Lightbox Film Center supplied 2 of this week's listed events">
+      <div class="statbar-name">Lightbox Film Center</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 2.7%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="Luma supplied 2 of this week's listed events">
+      <div class="statbar-name">Luma</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 2.7%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="Philadelphia Film Society supplied 2 of this week's listed events">
+      <div class="statbar-name">Philadelphia Film Society</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 2.7%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="R5 Productions supplied 2 of this week's listed events">
+      <div class="statbar-name">R5 Productions</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 2.7%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="Iffy Books supplied 1 of this week's listed events">
+      <div class="statbar-name">Iffy Books</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 1.3%"></span>
+      </div>
+      <div class="statbar-value">1</div>
+    </div>
+  </div>
+
+  <p class="stats-health">
+    22 sources collected · 14 contributed events ·
+    none below their expected floor
+  </p>
+
+  <!-- SOURCES FOOTER -->
+  <div class="sources">
+    <a href="https://do215.com">Do215</a><span class="source-count">75</span> ·
+    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a><span class="source-count">2</span> ·
+    <a href="https://cinesp.net" class="source-silent">cinéSPEAK</a> ·
+    <a href="https://filmadelphia.org">Philadelphia Film Society</a><span class="source-count">2</span> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">3</span> ·
+    <a href="https://phillygoth.net" class="source-silent">Phillygoth.net</a> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">1</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">3</span> ·
+    <a href="https://therotunda.org">The Rotunda</a><span class="source-count">3</span> ·
+    <a href="https://r5productions.com">R5 Productions</a><span class="source-count">2</span> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">4</span> ·
+    <a href="https://xpn.org" class="source-silent">The Key by WXPN</a> ·
+    <a href="https://meetup.com" class="source-silent">Meetup</a> ·
+    <a href="https://lu.ma">Luma</a><span class="source-count">2</span> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a>
+  </div>
+  <p class="sources-failure">⚠️ cinespeak unavailable this week (HTTPError: 429 Client Error: Too Many Requests for url: https://cinespeak.org/cinema/) — events from that source may be missing.</p>
+  <p class="sources-failure">⚠️ wxpn unavailable this week (ParseError: every request failed (1 attempted); first: https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&amp;page=1 (HTTPSConnectionPool(host=&#39;backend.xpn.org&#39;, port=443): Max retries exceeded with url: /wp-json/wp/v2/event?per_page=100&amp;page=1 (Caused by SSLError(SSLCertVerificationError(1, &#34;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for &#39;backend.xpn.org&#39;. (_ssl.c:1010)&#34;))))) — events from that source may be missing.</p>
+
+</div>
+</body>
+</html>
