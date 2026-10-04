@@ -64,11 +64,13 @@ settings:
   ```sh
   #!/bin/bash
   set -e
+  cd /home/user/this-week-in-philly
   node --version | grep -q '^v2[4-9]' || { . "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm install 24 && nvm alias default 24; } || true
   npm ci
   pip install -r scripts/requirements-dev.txt -r scripts/requirements-collection.txt
   ```
-  The first line is best-effort and assumes the image provides nvm. Check it the first time with
+  The script starts in `/home/user`, not the repo, so the `cd` is required. Without it `npm ci` fails
+  with a misleading "needs an existing package-lock.json" error. The nvm line is best-effort and assumes the image provides nvm. Check it the first time with
   `node --version`. If Node 24 isn't available, the image's Node works as long as it is ≥ 22
   (`engines`). CI still tests on 24.
 - **Network access:** the default *Trusted* level covers npm and PyPI. Playwright's browser download
