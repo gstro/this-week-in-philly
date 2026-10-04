@@ -1,12 +1,5 @@
 name: Claude Code
 
-# @claude mentions on issues/PRs, via anthropics/claude-code-action.
-# Setup (docs/SETUP.md §3): run `/install-github-app` from Claude Code, or add
-# a CLAUDE_CODE_OAUTH_TOKEN (`claude setup-token`) or ANTHROPIC_API_KEY repo
-# secret. Without either secret the job skips its Claude step.
-#
-# This repo is public: the `if:` below only honors mentions from the repo
-# owner, so a stranger's comment can't spend tokens or get write access.
 on:
   issue_comment:
     types: [created]
@@ -20,30 +13,38 @@ on:
 jobs:
   claude:
     if: |
-      (github.event_name == 'issue_comment' && github.event.comment.author_association == 'OWNER' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review_comment' && github.event.comment.author_association == 'OWNER' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review' && github.event.review.author_association == 'OWNER' && contains(github.event.review.body, '@claude')) ||
-      (github.event_name == 'issues' && github.event.issue.author_association == 'OWNER' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
-      issues: write
+      contents: read
+      pull-requests: read
+      issues: read
       id-token: write
-      actions: read # lets Claude read CI results on PRs
-    env:
-      HAS_CLAUDE_AUTH: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' || secrets.ANTHROPIC_API_KEY != '' }}
+      actions: read # Required for Claude to read CI results on PRs
     steps:
-      - name: Skip (no Claude credentials configured)
-        if: env.HAS_CLAUDE_AUTH != 'true'
-        run: echo "::notice::No CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY secret -- see docs/SETUP.md §3."
-      - uses: actions/checkout@v4
-        if: env.HAS_CLAUDE_AUTH == 'true'
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
+
       - name: Run Claude Code
-        if: env.HAS_CLAUDE_AUTH == 'true'
+        id: claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+          # This is an optional setting that allows Claude to read CI results on PRs
+          additional_permissions: |
+            actions: read
+
+          # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
+          # prompt: 'Update the pull request description to include a summary of changes.'
+
+          # Optional: Add claude_args to customize behavior and configuration
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://code.claude.com/docs/en/cli-reference for available options
+          # claude_args: '--allowed-tools Bash(gh pr *)'
+
