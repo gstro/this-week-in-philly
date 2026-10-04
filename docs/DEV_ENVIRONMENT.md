@@ -64,7 +64,7 @@ settings:
   ```sh
   #!/bin/bash
   set -e
-  node --version | grep -q '^v2[4-9]' || { . "$NVM_DIR/nvm.sh" && nvm install 24 && nvm alias default 24; } || true
+  node --version | grep -q '^v2[4-9]' || { . "${NVM_DIR:-$HOME/.nvm}/nvm.sh" && nvm install 24 && nvm alias default 24; } || true
   npm ci
   pip install -r scripts/requirements-dev.txt -r scripts/requirements-collection.txt
   ```
