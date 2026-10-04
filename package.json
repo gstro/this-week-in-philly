@@ -11,7 +11,16 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "check": "npm run check:ts && npm run check:py",
+    "check:ts": "npm run typecheck && npm run lint && npm test",
+    "check:py": "npm run lint:py && npm run typecheck:py && npm run test:py",
+    "lint:py": "scripts/dev/py.sh ruff check scripts/",
+    "typecheck:py": "scripts/dev/py.sh mypy",
+    "test:py": "scripts/dev/py.sh pytest",
+    "setup": "npm ci && npm run setup:py",
+    "setup:py": "python3.12 -m venv .venv && .venv/bin/pip install -r scripts/requirements-dev.txt -r scripts/requirements-collection.txt",
+    "setup:browsers": "scripts/dev/py.sh playwright install chromium"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

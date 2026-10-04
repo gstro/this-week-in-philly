@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 An automated weekly events-curation pipeline for Philadelphia: every Sunday it collects roughly 500–1000 raw events from ~22 sources (the range moves with Do215's own volume week to week — see `data/*/_manifest.json`), narrows them to a published report of Top 3 picks per day against Greg's interests, and delivers an HTML report plus Google Calendar entries. (v1's original "~245 events from ~29 sources" is long out of date — `docs/TOKEN_OPTIMIZATION.md` flagged this itself before going stale in the same way.)
 
-**Current state: v2 is live in production**, running on GitHub Actions since Phase 5 of `docs/V2_IMPLEMENTATION_PLAN.md`. The `scripts/` suite, its test suite, and an in-progress TypeScript port (`src/`) all exist and run in CI — see **Commands** below. `docs/v1/` remains as reference only; it does not describe what's currently running (see **Pipeline architecture**).
+**Current state: v2 is live in production**, running on GitHub Actions since Phase 5 of `docs/V2_IMPLEMENTATION_PLAN.md`. The `scripts/` suite, its test suite, and an in-progress TypeScript port (`src/`) all exist and are checked in CI (`lint.yml`) — see **Commands** below. `docs/v1/` remains as reference only; it does not describe what's currently running (see **Pipeline architecture**).
 
 ## Where things are
 
@@ -15,7 +15,8 @@ An automated weekly events-curation pipeline for Philadelphia: every Sunday it c
 - `tests/` — pytest suite mirroring `scripts/`, plus `tests/golden/` (a byte-pinned real-output fixture) and `tests/fixtures/`.
 - `src/` — an in-progress TypeScript port of select `scripts/*.py` modules (`common`, `mergeSelections`, `prepareSelectionInput`, `checkSelection`, `checkYield` so far). Not yet wired into any workflow or production path — the `.py` originals are still what actually runs; see **Commands** for how to exercise this side independently.
 - `.claude/skills/` — the domain-knowledge skills genuinely read by the one live Routine (Selection): `philly-events-selection`, `personal-interests`, `event-selection-philosophy`. `philadelphia-sources` and `events-report-format` used to live here too, documenting Collection's and Presentation's old Routine-driven behavior; both were **deleted** once neither stage loaded them at runtime any more (see **Pipeline architecture**'s corollary) — per-source knowledge now lives in each `scripts/event_parsers/*.py` module's own docstring (depth varies — `collect_week.py`'s own comment names which ones inherited real quirks/rationale vs. a one-line tech-shape description), and the report format spec is `templates/report.html.j2`'s own comments. Their frozen `docs/v1/Skills/` counterparts remain as historical reference only, pointing at those replacements.
-- `.github/workflows/` — `collection.yml` and `presentation.yml` are the two production pipelines (see **Pipeline architecture**); `collection-check.yml` and `lint.yml` are CI guards, the latter Python-only (see **Commands**).
+- `.github/workflows/` — `collection.yml` and `presentation.yml` are the two production pipelines (see **Pipeline architecture**); `collection-check.yml` and `lint.yml` are CI guards, the latter covering both Python and the TS port (see **Commands**); `claude.yml` answers owner-only `@claude` mentions.
+- `.claude/settings.json`, `.claude/hooks/`, `.claude/agents/`, `.mcp.json` — dev-environment config for Claude Code (permissions, a lint-on-edit hook, port/review subagents, Playwright MCP). These also load inside the Selection Routine, so read `docs/DEV_ENVIRONMENT.md`'s "Routine safety" before changing them.
 - `data/<week>/` — each week's committed pipeline artifacts (`_manifest.json`, `_candidates.json`/`_candidates/`, `_selections.json`, `_spotify.json`, `_playlist.json`). `docs/weeks/<week>.html` is the corresponding published report; `docs/index.html` is regenerated from `docs/weeks/*.html` on every render.
 - `docs/*.md` (this level, not `v1/`) — design docs and investigation write-ups, several still cited as living rationale for code in `scripts/` (e.g. `COLLECTION_PROXY_ISSUE.md`, `COLLECTION_YIELD_INVESTIGATION.md`). Status banners on the older ones note what's since shipped. `docs/SETUP.md` is the exception — it's a live manual-setup checklist (vendor accounts, secrets placement, Selection Routine config), not a design doc.
 - `docs/V2_DESIGN.md` — the v2 architecture (cloud Routines + Python scripts). Historical design record now that v2 is the running system; see its status banner.
@@ -27,6 +28,8 @@ An automated weekly events-curation pipeline for Philadelphia: every Sunday it c
 
 ## Commands
 
+One entry point for both stacks (full guide, including cloud sessions and every dev tool: `docs/DEV_ENVIRONMENT.md`): `npm run setup` once (npm ci + a Python 3.12 `.venv`), then `npm run check` (= `check:ts` + `check:py`, everything CI runs). Runtime pins: `.python-version` (3.12), `.nvmrc` (24).
+
 Python (`scripts/`, `tests/`) — CI-enforced on every push/PR touching them (`lint.yml`):
 - `pytest` — the offline suite (default; network/live-source integration tests are excluded and run manually only via `pytest -m network`)
 - `ruff check scripts/`
@@ -34,7 +37,7 @@ Python (`scripts/`, `tests/`) — CI-enforced on every push/PR touching them (`l
 
 Use a venv with `scripts/requirements.txt` (+ `-collection.txt` for anything touching Playwright/browser-fetch code, `-dev.txt` for ruff/mypy/pytest itself) — there's no committed `.venv/`, set one up locally.
 
-TypeScript (`src/`) — **not** CI-enforced; run manually:
+TypeScript (`src/`) — CI-enforced by `lint.yml`'s `typescript` job (`npm run check:ts`), though not yet wired into any production workflow:
 - `npm test` (vitest)
 - `npm run lint` (eslint)
 - `npm run typecheck` / `npm run build` (tsc)

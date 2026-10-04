@@ -3,14 +3,32 @@ on:
   push:
     paths:
       - 'scripts/**.py'
-      - 'tests/**.py'
+      - 'scripts/requirements*.txt'
+      - 'tests/**'
       - 'pyproject.toml'
+      - '.python-version'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'eslint.config.js'
+      - 'vitest.config.ts'
+      - '.nvmrc'
       - '.github/workflows/lint.yml'
   pull_request:
     paths:
       - 'scripts/**.py'
-      - 'tests/**.py'
+      - 'scripts/requirements*.txt'
+      - 'tests/**'
       - 'pyproject.toml'
+      - '.python-version'
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'eslint.config.js'
+      - 'vitest.config.ts'
+      - '.nvmrc'
       - '.github/workflows/lint.yml'
 jobs:
   ruff:
@@ -18,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: '3.12' }
+        with: { python-version-file: '.python-version' }
       - run: pip install ruff
       - run: ruff check scripts/
   mypy:
@@ -26,7 +44,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: '3.12' }
+        with:
+          python-version-file: '.python-version'
+          cache: pip
+          cache-dependency-path: 'scripts/requirements*.txt'
       # requirements-collection.txt (playwright) is needed too -- fetch_page_text.py
       # imports it, and mypy needs the package importable to type-check that
       # import, even though it never executes/launches a browser.
@@ -37,7 +58,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: '3.12' }
+        with:
+          python-version-file: '.python-version'
+          cache: pip
+          cache-dependency-path: 'scripts/requirements*.txt'
       - run: |
           pip install -r scripts/requirements-dev.txt -r scripts/requirements-collection.txt
           playwright install --with-deps chromium
@@ -45,3 +69,18 @@ jobs:
       # fast, offline suite only. Network/integration tests against the real
       # sources are run manually (`pytest -m network`), not in CI.
       - run: pytest -v
+  # The TypeScript port (src/). Not wired into production yet, but CI-checked
+  # so each ported module stays green. Its tests read tests/fixtures/** and
+  # committed data/**; data/ is deliberately not a trigger path (it changes
+  # every week) -- json.roundtrip.test.ts will catch a new-data regression on
+  # the next src/ change instead.
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run check:ts
