@@ -1,0 +1,86 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-10-04T14:57:26.370394+00:00",
+  "events": [
+    {
+      "title": "Panic Park-The Speed Dials-Shortcuts-Total Whine",
+      "venue": "Little Big Planet (1123 Walnut Street, Philadelphia, PA 19107)",
+      "date": "2026-10-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/panic-park-the-speed-dials-shortcuts-total-whine",
+      "description": "",
+      "venue_address": "1123 Walnut Street, Philadelphia, PA 19107"
+    },
+    {
+      "title": "Noun / Sensor Ghost / Northern Liberties / Gutter Pearl",
+      "venue": "The First Unitarian Church (2125 Chestnut Street)",
+      "date": "2026-10-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/noun-sensor-ghost-northern-liberties-gutter-pearl",
+      "description": "",
+      "venue_address": "2125 Chestnut Street"
+    },
+    {
+      "title": "USURP SYNAPSE, EYELET, .GIFFROMGOD, INDEX, PS2, 9AMYGDALAE",
+      "venue": "thunderbird hall (2856 Frankford Ave)",
+      "date": "2026-10-09",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/usurp-synapse-eyelet-giffromgod-index-ps2-9amygdalae",
+      "description": "OUT OF TOWN BAND / philadelphia",
+      "venue_address": "2856 Frankford Ave"
+    },
+    {
+      "title": "GREG MENDEZ, CATHERINE ELICSON, SHANNEN MOSER",
+      "venue": "God's Automatic Body (5522 Baltimore Ave.)",
+      "date": "2026-10-09",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/greg-mendez-catherine-elicson-shannen-moser",
+      "description": "experimental / philadelphia / punk / singer/songwriter",
+      "venue_address": "5522 Baltimore Ave."
+    },
+    {
+      "title": "HALF CROSS/CORRUPT WORLD/D.O.D./DISKRITIK/MERCIFIX",
+      "venue": "Cousin Dannys (5001 Market St)",
+      "date": "2026-10-10",
+      "time": "8:00 AM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/half-crosscorrupt-worlddoddiskritikmercifix",
+      "description": "Powerviolence / crust / hardcore / punk",
+      "venue_address": "5001 Market St"
+    },
+    {
+      "title": "THE HELL (Clevo), RAW HEADS, (Clevo), Vulgares, Soft Targets",
+      "venue": "Mom's Living Room (North Philly)",
+      "date": "2026-10-10",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/the-hell-clevo-raw-heads-clevo-vulgares-soft-targets",
+      "description": "",
+      "venue_address": "North Philly"
+    },
+    {
+      "title": "DIVAS DOWN! A CELEBRATION OF SAINTS! TIM CURRY/DOLLY PARTON",
+      "venue": "God's Automatic Body (5522 Baltimore Ave.)",
+      "date": "2026-10-10",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/divas-down-a-celebration-of-saints-tim-currydolly-parton",
+      "description": "costumes / karaoke / line dancing",
+      "venue_address": "5522 Baltimore Ave."
+    },
+    {
+      "title": "Hot Fix Sideshow",
+      "venue": "Franky Bradley's | B.West (1320 Chancellor St, Philadelphia, PA 19107)",
+      "date": "2026-10-10",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/hot-fix-sideshow",
+      "description": "burlesque / circus / fire eating / live / opera / performance / sideshow / sword swallowing",
+      "venue_address": "1320 Chancellor St, Philadelphia, PA 19107"
+    }
+  ]
+}

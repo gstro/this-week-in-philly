@@ -1,0 +1,15 @@
+{
+  "source": "Meetup: DC 215",
+  "collected_at": "2026-10-04T14:57:34.182446+00:00",
+  "events": [
+    {
+      "title": "DNS - More Than Just a Phone Book",
+      "venue": "(online)",
+      "date": "2026-10-07",
+      "time": "6:00 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/316687585/",
+      "description": "DC215\nJoin DC215 as we host a talk on one of the most overlooked attack surfaces in any organization. We'll cover DNS history and trivia, break down how businesses should be thinking about permissions and segmentation of duties, and map out the controls you actually need. Whether you're a sysadmin, a security practitioner, or just DNS-curious, this one's for you.\n\nItinerary:\n6:00 PM: Open House\n6:45 PM: Talk\n7:30 PM: Q&A / Hangout"
+    }
+  ]
+}

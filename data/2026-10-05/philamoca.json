@@ -1,0 +1,78 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-10-04T14:57:30.901081+00:00",
+  "events": [
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-05",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk."
+    },
+    {
+      "title": "SCREAM OF MY BLOOD: A GOGOL BORDELLO STORY",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-06",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/93083176/",
+      "description": ""
+    },
+    {
+      "title": "DRACULA\u2019S ANGEL (2014)",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-07",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/81856353/",
+      "description": "Filmmaker Bryan Beasley in attendance!"
+    },
+    {
+      "title": "TRICK OR TREAT (1986) w/ Richard Christy",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-08",
+      "time": "7:00, 7:30",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/61008283/",
+      "description": "Halloween enthusiast/drummer extraordinaire/Stern Show mainstay Richard Christy in attendance!"
+    },
+    {
+      "title": "Queen of Jeans",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-09",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/68921401/",
+      "description": ""
+    },
+    {
+      "title": "Mirah",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-10",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/39028258/mirah-evan-greer-sad13-philadelphia-philamoca",
+      "description": ""
+    },
+    {
+      "title": "SHOCK INFINITY",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-11",
+      "time": "3:00, 3:30",
+      "cost": "$10",
+      "url": "https://www.etix.com/ticket/p/53589228/",
+      "description": "Filmmaker Jake Griswold in attendance!"
+    },
+    {
+      "title": "Isiliel (from Japan)",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-11",
+      "time": "7:30, 8:00",
+      "cost": "$15",
+      "url": "https://www.etix.com/ticket/p/77478306",
+      "description": ""
+    }
+  ]
+}
