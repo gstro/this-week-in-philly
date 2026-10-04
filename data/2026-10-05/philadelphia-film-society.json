@@ -1,0 +1,141 @@
+{
+  "source": "Philadelphia Film Society",
+  "collected_at": "2026-10-04T14:58:06.320139+00:00",
+  "events": [
+    {
+      "title": "Curtains",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-07",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 29 min."
+    },
+    {
+      "title": "The Five Heartbeats (1991)",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-07",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 2 hr 2 min."
+    },
+    {
+      "title": "Def by Temptation",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-10",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 35 min."
+    },
+    {
+      "title": "Don't Torture a Duckling",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-10",
+      "time": "9:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 42 min."
+    },
+    {
+      "title": "Jawbreaker",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-10",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 27 min."
+    },
+    {
+      "title": "Malatesta's Carnival of Blood",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-10",
+      "time": "5:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 27 min."
+    },
+    {
+      "title": "Welcome to the Dollhouse",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-10",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 27 min."
+    },
+    {
+      "title": "Rachel Getting Married",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-10",
+      "time": "4:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 51 min."
+    },
+    {
+      "title": "Speed Racer (2008)",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-10-10",
+      "time": "1:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated PG. Runtime: 2 hr 15 min."
+    },
+    {
+      "title": "Digger (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-10-07",
+      "time": "3:30 PM, 6:45 PM, 9:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 2 hr 9 min."
+    },
+    {
+      "title": "Ha-Chan, Shake Your Booty! (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-10-07",
+      "time": "3:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 2 hr 2 min."
+    },
+    {
+      "title": "The Incomer (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-10-07",
+      "time": "6:30 PM, 8:50 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 42 min."
+    },
+    {
+      "title": "The History of Concrete (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-10-07",
+      "time": "4:00 PM, 6:20 PM, 8:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 42 min."
+    },
+    {
+      "title": "Coyote vs. Acme",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-10-07",
+      "time": "3:20 PM, 6:20 PM, 8:40 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated PG. Runtime: 1 hr 41 min."
+    },
+    {
+      "title": "Primetime (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-10-07",
+      "time": "4:00 PM, 4:45 PM, 6:45 PM, 7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 1 hr 50 min."
+    }
+  ]
+}

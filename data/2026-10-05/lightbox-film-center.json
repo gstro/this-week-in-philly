@@ -1,0 +1,24 @@
+{
+  "source": "Lightbox Film Center",
+  "collected_at": "2026-10-04T14:57:47.416600+00:00",
+  "events": [
+    {
+      "title": "Talking to Strangers",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-10-07",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/talking-to-strangers",
+      "description": "New Restoration"
+    },
+    {
+      "title": "monument",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-10-11",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/monument",
+      "description": "Philadelphia Premiere"
+    }
+  ]
+}
