@@ -200,10 +200,31 @@ def _exact_match_url(sp: spotipy.Spotify, candidate: str) -> str | None:
     # the real exact-name match. Still "never guess": this only widens which
     # of Spotify's own results counts, the exact-name requirement itself is
     # unchanged.
-    for artist in items:
-        if artist["name"].strip().casefold() == candidate.casefold():
-            return artist["external_urls"]["spotify"]
-    return None
+    #
+    # When several results match exactly (name clashes: there are at least two
+    # artists named "Lee Fields"), Spotify's order drifts between runs, so
+    # taking the first would flip the link run to run. Pick the one with the
+    # most followers instead. `followers` may be absent -- Spotify's 2026 API
+    # changes removed `popularity` from track results and it's unverified that
+    # artist `followers` survives -- in which case every key is -1 and max()
+    # keeps the first, i.e. Spotify's order, exactly as before the tie-break.
+    exact = [a for a in items if a["name"].strip().casefold() == candidate.casefold()]
+    if not exact:
+        return None
+    if len(exact) == 1:
+        return exact[0]["external_urls"]["spotify"]
+
+    def followers(artist: dict) -> int:
+        total = (artist.get("followers") or {}).get("total")
+        return -1 if total is None else total
+
+    chosen = max(exact, key=followers)
+    url = chosen["external_urls"]["spotify"]
+    print(
+        f"  {len(exact)} exact matches for {candidate!r}; chose {url} ({followers(chosen)} followers)",
+        file=sys.stderr,
+    )
+    return url
 
 
 def find_spotify_matches(sp: spotipy.Spotify, title: str) -> list[dict]:
