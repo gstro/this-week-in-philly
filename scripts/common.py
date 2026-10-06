@@ -186,6 +186,45 @@ def load_spotify(week_dir: Path) -> dict:
     return load_json(path)
 
 
+MUSIC_CATEGORY = CATEGORY_ORDER[0]
+
+
+def music_events(selections: dict) -> list[tuple[str, bool]]:
+    """(title, is_top3) for every music event in the report, in report order:
+    each day's Top 3, then its honorable mentions, then the rest of its
+    events[] -- the tiers html_render.py's category listing sorts by.
+
+    Two different signals, on purpose. A Top 3 pick counts by its `is_music`
+    flag, which is Selection's own per-pick judgement and disagrees with the
+    category in both directions in real weeks (a music-adjacent pick filed
+    elsewhere; a karaoke night filed under Music but flagged false). Nothing
+    else carries `is_music` -- merge_selections.py writes it on top3 only --
+    so every other event counts by the Music & Concerts category. A Top 3
+    pick is never re-admitted through the category path.
+
+    Not deduped: the same title on two days appears twice, so a caller can
+    tell whether it was a Top 3 pick on *any* of them.
+    """
+    result: list[tuple[str, bool]] = []
+    for day in selections["days"]:
+        top3_titles = {pick["title"] for pick in day["top3"]}
+        result.extend((pick["title"], True) for pick in day["top3"] if pick.get("is_music"))
+        # merge_selections.py appends "(SOLD OUT)" to a sold-out mention's
+        # title but not to its events[] entry -- strip it to match.
+        hm_titles = {
+            mention["title"].removesuffix(" (SOLD OUT)")
+            for mention in day.get("honorable_mentions", [])
+        }
+        rest = [
+            event["title"]
+            for event in day.get("events", [])
+            if event.get("category") == MUSIC_CATEGORY and event["title"] not in top3_titles
+        ]
+        result.extend((title, False) for title in rest if title in hm_titles)
+        result.extend((title, False) for title in rest if title not in hm_titles)
+    return result
+
+
 def load_playlist(week_dir: Path) -> dict:
     """Returns {} if _playlist.json doesn't exist yet (spotify_playlist.py
     hasn't run, or ran without credentials). The report renders fine without

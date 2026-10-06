@@ -638,7 +638,7 @@ def test_render_report_puts_the_playlist_link_in_the_header(tmp_path: Path) -> N
     link_html = (
         '<div class="header-playlist">'
         '<a href="https://open.spotify.com/playlist/abc123">'
-        "♫ This week's picks on Spotify</a></div>"
+        "♫ This week's music on Spotify</a></div>"
     )
     assert link_html in html_out
     # It belongs in the site header, above the first day, not buried in content

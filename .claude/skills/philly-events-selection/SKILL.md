@@ -276,7 +276,8 @@ nothing you annotate disappears silently.
 - `is_music`: **always include on a top3 pick, `true` or `false`** — true for any pick where a Spotify
   artist page lookup makes sense. Not written for plain `annotations` entries — nothing downstream reads
   it there. (Omitting it merges as `false` rather than failing, but don't rely on that — write it
-  explicitly.)
+  explicitly.) Non-Top 3 events feed the week's Spotify playlist by their `🎵 Music & Concerts`
+  category instead; categorize them as usual.
 - `sold_out`: **always include, `true` or `false`**, on both `top3` picks and `annotations` entries — true
   if any source flagged the event as sold out (check the candidate's `description` in the per-day file —
   `prepare_selection_input.py` preserves a sold-out mention found on a discarded duplicate as a

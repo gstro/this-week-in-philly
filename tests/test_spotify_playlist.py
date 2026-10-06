@@ -165,13 +165,20 @@ def test_artist_id_from_url_returns_none_for_non_artist_urls(url: str) -> None:
     assert sp_mod.artist_id_from_url(url) is None
 
 
-# --- matched_artist_ids ---
+# --- matched_artists ---
+
+MUSIC = "\U0001f3b5 Music & Concerts"
 
 
-def _selections(*days: list[dict]) -> dict:
+def _selections(*days: list[dict], events: list[list[dict]] | None = None) -> dict:
     return {
         "days": [
-            {"date": f"2026-09-0{i + 7}", "top3": picks}
+            {
+                "date": f"2026-09-0{i + 7}",
+                "top3": picks,
+                "events": (events or [[]] * len(days))[i],
+                "honorable_mentions": [],
+            }
             for i, picks in enumerate(days)
         ]
     }
@@ -181,19 +188,28 @@ def _pick(title: str, is_music: bool = True) -> dict:
     return {"title": title, "is_music": is_music}
 
 
-def test_matched_artist_ids_follows_report_order_not_spotify_json_order() -> None:
+def _music(title: str) -> dict:
+    return {"title": title, "category": MUSIC}
+
+
+def _entry(*ids: str) -> dict:
+    """A _spotify.json value with every listed id as a matched act."""
+    artists = [
+        {"spotify_url": f"https://open.spotify.com/artist/{i}", "matched_text": i} for i in ids
+    ]
+    return {**artists[0], "artists": artists}
+
+
+def test_matched_artists_follows_report_order_not_spotify_json_order() -> None:
     selections = _selections([_pick("Monday Act")], [_pick("Tuesday Act")])
     # _spotify.json is written sort_keys=True, so its own iteration order is
     # alphabetical -- "Monday" after... nothing here, so build the reversed
     # case explicitly to prove day order wins over dict order.
-    spotify = {
-        "Tuesday Act": {"spotify_url": "https://open.spotify.com/artist/bbb"},
-        "Monday Act": {"spotify_url": "https://open.spotify.com/artist/aaa"},
-    }
-    assert sp_mod.matched_artist_ids(selections, spotify) == ["aaa", "bbb"]
+    spotify = {"Tuesday Act": _entry("bbb"), "Monday Act": _entry("aaa")}
+    assert sp_mod.matched_artists(selections, spotify) == [("aaa", True), ("bbb", True)]
 
 
-def test_matched_artist_ids_skips_non_music_and_unmatched_picks() -> None:
+def test_matched_artists_skips_non_music_and_unmatched_picks() -> None:
     selections = _selections(
         [
             _pick("A Band"),
@@ -202,20 +218,67 @@ def test_matched_artist_ids_skips_non_music_and_unmatched_picks() -> None:
         ]
     )
     spotify = {
-        "A Band": {"spotify_url": "https://open.spotify.com/artist/aaa"},
-        "A Film Screening": {"spotify_url": "https://open.spotify.com/artist/zzz"},
+        "A Band": _entry("aaa"),
+        "A Film Screening": _entry("zzz"),
         "No Match Band": None,
     }
-    assert sp_mod.matched_artist_ids(selections, spotify) == ["aaa"]
+    assert sp_mod.matched_artists(selections, spotify) == [("aaa", True)]
 
 
-def test_matched_artist_ids_dedupes_an_artist_playing_twice_in_a_week() -> None:
+def test_matched_artists_includes_every_act_on_a_bill() -> None:
+    selections = _selections([_pick("A / B / C")])
+    spotify = {"A / B / C": _entry("aaa", "ccc")}
+    assert sp_mod.matched_artists(selections, spotify) == [("aaa", True), ("ccc", True)]
+
+
+def test_matched_artists_reads_a_pre_artists_spotify_json_entry() -> None:
+    """Weeks written before `artists` existed carry only the top-level pair."""
+    selections = _selections([_pick("Old Week Band")])
+    spotify = {"Old Week Band": {"spotify_url": "https://open.spotify.com/artist/aaa"}}
+    assert sp_mod.matched_artists(selections, spotify) == [("aaa", True)]
+
+
+def test_matched_artists_adds_non_top3_music_events_after_the_days_top3() -> None:
+    selections = _selections(
+        [_pick("Pick")],
+        events=[[_music("Pick"), _music("Also Playing"), {"title": "A Film", "category": "film"}]],
+    )
+    spotify = {"Pick": _entry("aaa"), "Also Playing": _entry("bbb"), "A Film": _entry("zzz")}
+    assert sp_mod.matched_artists(selections, spotify) == [("aaa", True), ("bbb", False)]
+
+
+def test_matched_artists_dedupes_an_artist_playing_twice_in_a_week() -> None:
     selections = _selections([_pick("Band at Venue A")], [_pick("Band at Venue B")])
-    spotify = {
-        "Band at Venue A": {"spotify_url": "https://open.spotify.com/artist/aaa"},
-        "Band at Venue B": {"spotify_url": "https://open.spotify.com/artist/aaa"},
-    }
-    assert sp_mod.matched_artist_ids(selections, spotify) == ["aaa"]
+    spotify = {"Band at Venue A": _entry("aaa"), "Band at Venue B": _entry("aaa")}
+    assert sp_mod.matched_artists(selections, spotify) == [("aaa", True)]
+
+
+def test_matched_artists_upgrades_an_artist_who_is_a_top3_pick_later_in_the_week() -> None:
+    """First seen as a Monday also-ran, a Tuesday Top 3 pick: keeps its Monday
+    position, but gets the Top 3 track count."""
+    selections = _selections(
+        [], [_pick("Band, Tuesday")], events=[[_music("Band, Monday")], []]
+    )
+    spotify = {"Band, Monday": _entry("aaa"), "Band, Tuesday": _entry("aaa")}
+    assert sp_mod.matched_artists(selections, spotify) == [("aaa", True)]
+
+
+# --- cap_artists ---
+
+
+def test_cap_artists_keeps_top3_acts_first_but_returns_report_order() -> None:
+    artists = [("o1", False), ("t1", True), ("o2", False), ("t2", True)]
+    assert sp_mod.cap_artists(artists, 3) == [("o1", False), ("t1", True), ("t2", True)]
+
+
+def test_cap_artists_is_a_no_op_under_the_cap() -> None:
+    artists = [("o1", False), ("t1", True)]
+    assert sp_mod.cap_artists(artists, 50) == artists
+
+
+def test_cap_artists_is_a_hard_limit_even_on_top3_acts() -> None:
+    artists = [(f"t{i}", True) for i in range(5)]
+    assert sp_mod.cap_artists(artists, 2) == artists[:2]
 
 
 # --- track_uris_for_artist ---
@@ -295,7 +358,26 @@ def test_collect_track_uris_concatenates_across_artists_in_order() -> None:
         },
         tracks_by_album={"a": [_track("uri:a")], "b": [_track("uri:b")]},
     )
-    assert sp_mod.collect_track_uris(sp, ["aaa", "bbb"], 3) == ["uri:a", "uri:b"]
+    assert sp_mod.collect_track_uris(sp, [("aaa", 3), ("bbb", 3)]) == ["uri:a", "uri:b"]
+
+
+def test_collect_track_uris_applies_each_artists_own_limit() -> None:
+    sp = FakeSpotify(
+        albums_by_artist={
+            "top": [_album("a", "2026-01-01")],
+            "other": [_album("b", "2026-01-01")],
+        },
+        tracks_by_album={
+            "a": [_track(f"uri:a{i}") for i in range(5)],
+            "b": [_track(f"uri:b{i}") for i in range(5)],
+        },
+    )
+    assert sp_mod.collect_track_uris(sp, [("top", 3), ("other", 1)]) == [
+        "uri:a0",
+        "uri:a1",
+        "uri:a2",
+        "uri:b0",
+    ]
 
 
 def test_collect_track_uris_propagates_a_failure_immediately() -> None:
@@ -316,7 +398,7 @@ def test_collect_track_uris_propagates_a_failure_immediately() -> None:
         tracks_by_album={"a": [_track("uri:a")], "c": [_track("uri:c")]},
     )
     with pytest.raises(RuntimeError, match="deprecated endpoint"):
-        sp_mod.collect_track_uris(sp, ["aaa", "bbb", "ccc"], 3)
+        sp_mod.collect_track_uris(sp, [("aaa", 3), ("bbb", 3), ("ccc", 3)])
 
 
 # --- find_existing_playlist ---

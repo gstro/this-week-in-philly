@@ -1,14 +1,23 @@
 #!/usr/bin/env python3
-"""Batch Spotify artist lookup for a week's Top 3 music picks.
+"""Batch Spotify artist lookup for every music act in a week's report.
 
-Reads data/YYYY-MM-DD/_selections.json, looks up a Spotify artist page for
-every Top 3 pick with is_music: true, and writes data/YYYY-MM-DD/_spotify.json
-as {title: {"spotify_url": ..., "matched_text": ...} | null}. `matched_text`
-is the substring of the title that should be hyperlinked -- often not the
-whole title (e.g. "Die Sexual" within "Gothic night: Die Sexual, Ronnie
-Stone & DJ Baby Berlin"). Non-music picks and honorable mentions are not
-looked up (per events-report-format/SKILL.md, Spotify linking only applies
-to Top 3 music acts).
+Reads data/YYYY-MM-DD/_selections.json, looks up Spotify artist pages for
+every music event in the report (common.music_events: Top 3 picks by their
+is_music flag, everything else by the Music & Concerts category), and writes
+data/YYYY-MM-DD/_spotify.json as
+
+    {title: {"spotify_url": ..., "matched_text": ...,
+             "artists": [{"spotify_url": ..., "matched_text": ...}, ...]}
+            | null}
+
+`artists` holds every act on the bill that matched, in the order they're
+listed. `spotify_url`/`matched_text` repeat its first entry and are what
+html_render.py links -- the report still links one act per Top 3 pick, and
+non-Top 3 entries exist only for spotify_playlist.py. `matched_text` is the
+substring of the title that should be hyperlinked -- often not the whole
+title (e.g. "Die Sexual" within "Gothic night: Die Sexual, Ronnie Stone & DJ
+Baby Berlin"). Files written before `artists` existed lack it; readers fall
+back to the top-level pair.
 
 No-match -> null, never guess: only an exact (casefolded) artist-name match
 against a Spotify search result counts as a hit.
@@ -85,8 +94,11 @@ _ENSEMBLE_SUFFIX_PATTERN = re.compile(
     r"\s+(?:Quartet|Trio|Duo|Quintet|Sextet|Septet|Ensemble)\s*$", re.IGNORECASE
 )
 
-# Bounds worst-case Spotify calls per pick (a long comma-separated bill).
-_MAX_CANDIDATES = 8
+# Bounds worst-case Spotify calls per title (a long comma-separated bill).
+# Every act on a bill is looked up now, not just the first hit, so this has
+# to cover a real seven-act hardcore bill plus its variants -- 8 (the
+# single-headliner era's value) cut those off partway.
+_MAX_CANDIDATES = 20
 
 # Generic words that full multi-segment splitting can produce as byproducts
 # of boilerplate clauses ("... & More!" -> "More", "... Screening &
@@ -113,31 +125,29 @@ _NOISE_CANDIDATES = frozenset(
 )
 
 
-def candidate_names(title: str) -> list[str]:
-    """Deterministic search candidates, most to least specific.
+def candidate_groups(title: str) -> list[list[str]]:
+    """Deterministic search candidates, grouped by act, most to least
+    specific within each group.
 
-    Every act in a multi-act bill gets tried (not just one "headliner"),
-    since candidate order determines which act wins -- find_spotify_match
-    still returns on the first exact hit, and _spotify.json's schema only
-    supports one linked act per pick. Order is preserved left-to-right as
-    the acts appear in the title, so an earlier-listed act still wins ties,
-    consistent with the previous single-headliner design intent.
+    Group 0 is always the full title on its own. Every later group is one
+    act from the bill, left to right as listed, with its fallback variants
+    (trailing parenthetical stripped, ensemble-size word stripped) after the
+    act as written -- find_spotify_matches takes the first hit per group, so
+    "SKEKSIS (RVA)" is preferred over "SKEKSIS" when both exist, and a match
+    never produces a second link for the same act.
 
     A colon splits titles both ways in practice ("Gothic night: Die Sexual,
     Ronnie Stone & DJ Baby Berlin" -- act list after the colon; "LAYER MEAT,
     SPECTRAL FORCES: A Benefit Show..." -- act list before it), so both
     sides are tried as candidates; exact-match is what keeps this safe.
+
+    A candidate already seen in an earlier group is dropped, and the total
+    across all groups is capped at _MAX_CANDIDATES.
     """
     title = title.strip()
-    candidates = [title]
-
-    def add(candidate: str) -> None:
-        if (
-            candidate
-            and candidate.casefold() not in _NOISE_CANDIDATES
-            and candidate not in candidates
-        ):
-            candidates.append(candidate)
+    groups = [[title]]
+    seen = {title}
+    count = 1
 
     cleaned = _VENUE_SUFFIX_PATTERN.sub("", title)
     cleaned = _TRAILING_PUNCT_PATTERN.sub("", cleaned).strip()
@@ -153,59 +163,89 @@ def candidate_names(title: str) -> list[str]:
                 piece = piece.strip()
                 if not piece:
                     continue
-                add(piece)
                 variants = [piece]
                 stripped = _TRAILING_PAREN_PATTERN.sub("", piece).strip()
                 if stripped and stripped != piece:
-                    add(stripped)
                     variants.append(stripped)
-                for variant in variants:
+                for variant in list(variants):
                     suffix_stripped = _ENSEMBLE_SUFFIX_PATTERN.sub("", variant).strip()
                     if suffix_stripped and suffix_stripped != variant:
-                        add(suffix_stripped)
-                if len(candidates) >= _MAX_CANDIDATES:
-                    return candidates[:_MAX_CANDIDATES]
-    return candidates
+                        variants.append(suffix_stripped)
+
+                group = []
+                for variant in variants:
+                    if variant.casefold() in _NOISE_CANDIDATES or variant in seen:
+                        continue
+                    seen.add(variant)
+                    group.append(variant)
+                if not group:
+                    continue
+                group = group[: _MAX_CANDIDATES - count]
+                groups.append(group)
+                count += len(group)
+                if count >= _MAX_CANDIDATES:
+                    return groups
+    return groups
 
 
-def find_spotify_match(sp: spotipy.Spotify, title: str) -> dict | None:
-    """Returns {"spotify_url": ..., "matched_text": ...} for the first
-    candidate with an exact-name hit, or None. `matched_text` is the
-    substring of `title` the renderer should wrap in the link -- not
-    necessarily the whole title (see candidate_names)."""
-    for candidate in candidate_names(title):
-        try:
-            result = sp.search(q=f'artist:"{candidate}"', type="artist", limit=5)
-        except Exception as exc:  # noqa: BLE001 -- one candidate's search failing shouldn't skip the rest
-            print(f"  Spotify search failed for {candidate!r}: {exc}", file=sys.stderr)
-            continue
-        items = result.get("artists", {}).get("items", [])
-        # Check all returned results for an exact match, not just the top
-        # one -- Spotify's own ranking can put a fuzzy/unrelated same-named
-        # result above the real exact-name match. Still "never guess": this
-        # only widens which of Spotify's own results counts, the exact-name
-        # requirement itself is unchanged.
-        for artist in items:
-            if artist["name"].strip().casefold() == candidate.casefold():
-                return {
-                    "spotify_url": artist["external_urls"]["spotify"],
-                    "matched_text": candidate,
-                }
+def _exact_match_url(sp: spotipy.Spotify, candidate: str) -> str | None:
+    try:
+        result = sp.search(q=f'artist:"{candidate}"', type="artist", limit=5)
+    except Exception as exc:  # noqa: BLE001 -- one candidate's search failing shouldn't skip the rest
+        print(f"  Spotify search failed for {candidate!r}: {exc}", file=sys.stderr)
+        return None
+    items = result.get("artists", {}).get("items", [])
+    # Check all returned results for an exact match, not just the top one --
+    # Spotify's own ranking can put a fuzzy/unrelated same-named result above
+    # the real exact-name match. Still "never guess": this only widens which
+    # of Spotify's own results counts, the exact-name requirement itself is
+    # unchanged.
+    for artist in items:
+        if artist["name"].strip().casefold() == candidate.casefold():
+            return artist["external_urls"]["spotify"]
     return None
 
 
+def find_spotify_matches(sp: spotipy.Spotify, title: str) -> list[dict]:
+    """[{"spotify_url": ..., "matched_text": ...}, ...] -- one per act on the
+    bill that exact-matched, in listed order, deduped by URL. `matched_text`
+    is the substring of `title` the renderer should wrap in the link.
+
+    If the full title itself is an exact artist name, that is the only
+    match: "Simon & Garfunkel" is one act, and splitting it would add two
+    others that merely share the words.
+    """
+    groups = candidate_groups(title)
+    matches: list[dict] = []
+    seen_urls: set[str] = set()
+    for index, group in enumerate(groups):
+        for candidate in group:
+            url = _exact_match_url(sp, candidate)
+            if url:
+                if url not in seen_urls:
+                    seen_urls.add(url)
+                    matches.append({"spotify_url": url, "matched_text": candidate})
+                break
+        if index == 0 and matches:
+            return matches
+    return matches
+
+
+def spotify_entry(matches: list[dict]) -> dict | None:
+    """The _spotify.json value for one title (see the module docstring)."""
+    if not matches:
+        return None
+    return {**matches[0], "artists": matches}
+
+
 def music_titles(selections: dict) -> list[str]:
-    titles = []
-    for day in selections["days"]:
-        for pick in day["top3"]:
-            if pick.get("is_music"):
-                titles.append(pick["title"])
-    return titles
+    """Every music event title in the report, deduped, in report order."""
+    return list(dict.fromkeys(title for title, _ in common.music_events(selections)))
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Batch Spotify artist lookup for a week's Top 3 music picks"
+        description="Batch Spotify artist lookup for every music act in a week's report"
     )
     parser.add_argument("week_dir", type=Path, help="data/YYYY-MM-DD")
     parser.add_argument("--max-workers", type=int, default=5)
@@ -218,7 +258,7 @@ def main() -> None:
         out_path = Path(args.week_dir) / "_spotify.json"
         with open(out_path, "w") as f:
             json.dump({}, f, indent=2)
-        print("Spotify lookup complete. 0 matched, 0 not found (no music picks).")
+        print("Spotify lookup complete. 0 matched, 0 not found (no music events).")
         return
 
     client_id = os.environ.get("SPOTIFY_CLIENT_ID")
@@ -239,20 +279,24 @@ def main() -> None:
     results: dict[str, dict | None] = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.max_workers) as executor:
         future_to_title = {
-            executor.submit(find_spotify_match, sp, title): title for title in titles
+            executor.submit(find_spotify_matches, sp, title): title for title in titles
         }
         for future in concurrent.futures.as_completed(future_to_title):
             title = future_to_title[future]
-            results[title] = future.result()
+            results[title] = spotify_entry(future.result())
 
     matched = sum(1 for v in results.values() if v)
     not_found = len(results) - matched
+    artists = sum(len(v["artists"]) for v in results.values() if v)
 
     out_path = Path(args.week_dir) / "_spotify.json"
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2, ensure_ascii=False, sort_keys=True)
 
-    print(f"Spotify lookup complete. {matched} matched, {not_found} not found.")
+    print(
+        f"Spotify lookup complete. {matched} matched ({artists} artists), "
+        f"{not_found} not found."
+    )
 
 
 if __name__ == "__main__":
