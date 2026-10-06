@@ -2,8 +2,8 @@
 """Builds a public Spotify playlist from every music act in a week's report.
 
 Reads data/YYYY-MM-DD/_spotify.json (spotify_lookup.py's output) and
-_selections.json, takes recent tracks for every matched artist -- a few for
-each Top 3 pick's acts, fewer for everyone else -- and replaces the contents of a per-week playlist named "YYYY-MM-DD: This Week
+_selections.json, takes a handful of recent tracks for every matched artist,
+and replaces the contents of a per-week playlist named "YYYY-MM-DD: This Week
 in Philly" -- date first so that a truncated title in Spotify's sidebar still
 sorts and reads chronologically. The playlist's id and URL are written to
 data/YYYY-MM-DD/_playlist.json, which html_render.py reads to put a link in
@@ -46,13 +46,13 @@ legitimate backfill re-renders.
 
 Scope: every music event in the report (common.music_events), and every
 matched act on each bill (_spotify.json's `artists`; older files without it
-contribute their one top-level match). Top 3 acts get --tracks-per-artist
-tracks each, everyone else --tracks-per-other-artist, and --max-artists caps
-the total. Top 3 acts are kept first when the cap bites, so it can only ever
-drop the long tail. A normal week has 20-40 music events, so the cap is
-insurance against a malformed week like 2026-08-03, whose events[] holds 486
-of 561 candidates (172 of them music) -- and that week does have a playlist
-a backfill re-run would rebuild.
+contribute their one top-level match). Every artist gets the same
+--tracks-per-artist, and --max-artists caps the total. Top 3 acts are kept
+first when the cap bites, so it can only ever drop the long tail. A normal
+week has 20-40 music events, so the cap is insurance against a malformed
+week like 2026-08-03, whose events[] holds 486 of 561 candidates (172 of
+them music) -- and that week does have a playlist a backfill re-run would
+rebuild.
 """
 
 import argparse
@@ -124,7 +124,7 @@ def matched_artists(selections: dict, spotify: dict) -> list[tuple[str, bool]]:
 
     An artist keeps its first position but is marked Top 3 if *any* of its
     events was a Top 3 pick, so a band that is a Monday also-ran and a
-    Friday pick still gets the Top 3 track count.
+    Friday pick is still kept first by cap_artists.
     """
     order: list[str] = []
     is_top3: dict[str, bool] = {}
@@ -194,9 +194,8 @@ def track_uris_for_artist(sp: spotipy.Spotify, artist_id: str, limit: int) -> li
     return uris
 
 
-def collect_track_uris(sp: spotipy.Spotify, artist_limits: list[tuple[str, int]]) -> list[str]:
-    """Track URIs for every (artist_id, track limit) pair, in order,
-    concatenated.
+def collect_track_uris(sp: spotipy.Spotify, artist_ids: list[str], limit: int) -> list[str]:
+    """Track URIs for every matched artist, in order, concatenated.
 
     Deliberately no per-artist try/except: track_uris_for_artist raising
     means the underlying API call itself failed (not "this artist has no
@@ -208,7 +207,7 @@ def collect_track_uris(sp: spotipy.Spotify, artist_limits: list[tuple[str, int]]
     than losing it under a wall of repeats.
     """
     uris: list[str] = []
-    for artist_id, limit in artist_limits:
+    for artist_id in artist_ids:
         uris.extend(track_uris_for_artist(sp, artist_id, limit))
     return uris
 
@@ -251,8 +250,8 @@ def set_playlist_tracks(sp: spotipy.Spotify, playlist_id: str, uris: list[str]) 
 
     The first call is items_replace (which also clears a playlist when `uris`
     is empty); any overflow past Spotify's 100-per-call cap is appended after
-    it. A full week (~10 Top 3 acts x 3 tracks plus ~20 others x 1) can
-    pass that cap, so the chunking is load-bearing.
+    it. A normal week (~20-40 artists x 3 tracks) routinely passes that cap,
+    so the chunking is load-bearing.
     """
     sp.playlist_replace_items(playlist_id, uris[:_MAX_ITEMS_PER_CALL])
     for start in range(_MAX_ITEMS_PER_CALL, len(uris), _MAX_ITEMS_PER_CALL):
@@ -312,13 +311,7 @@ def main() -> None:
         "--tracks-per-artist",
         type=int,
         default=3,
-        help="Recent tracks per act from a Top 3 pick (default: 3)",
-    )
-    parser.add_argument(
-        "--tracks-per-other-artist",
-        type=int,
-        default=1,
-        help="Recent tracks per act from any other music event (default: 1)",
+        help="Recent tracks to take per matched artist (default: 3)",
     )
     parser.add_argument(
         "--max-artists",
@@ -336,12 +329,9 @@ def main() -> None:
     capped = cap_artists(artists, args.max_artists)
     if len(capped) < len(artists):
         print(f"  Capped at {len(capped)} of {len(artists)} matched artists (--max-artists).")
-    artist_limits = [
-        (artist_id, args.tracks_per_artist if top3 else args.tracks_per_other_artist)
-        for artist_id, top3 in capped
-    ]
+    artist_ids = [artist_id for artist_id, _ in capped]
 
-    if not artist_limits:
+    if not artist_ids:
         print("No matched music artists this week; no playlist to build.")
         return
 
@@ -359,7 +349,7 @@ def main() -> None:
     # sync N tracks" message that a real run then couldn't back up at all.
     try:
         sp = common.get_spotify_user_client()
-        uris = collect_track_uris(sp, artist_limits)
+        uris = collect_track_uris(sp, artist_ids, args.tracks_per_artist)
     except Exception as exc:  # noqa: BLE001 -- must not block the report; see above
         print(
             f"spotify_playlist: SKIPPING playlist build -- {exc}\n"
@@ -376,7 +366,7 @@ def main() -> None:
     if not uris:
         print(
             f"spotify_playlist: SKIPPING playlist build -- no tracks found for "
-            f"any of {len(artist_limits)} matched artist(s).\n"
+            f"any of {len(artist_ids)} matched artist(s).\n"
             f"  The report will render without a playlist link.",
             file=sys.stderr,
         )
@@ -385,13 +375,13 @@ def main() -> None:
     if args.dry_run:
         print(
             f"[dry-run] Would sync playlist {playlist_name(monday)!r} with "
-            f"{len(uris)} tracks from {len(artist_limits)} artists."
+            f"{len(uris)} tracks from {len(artist_ids)} artists."
         )
         return
 
     stored_id = common.load_playlist(args.week_dir).get("playlist_id")
     try:
-        result = sync_playlist(sp, monday, uris, len(artist_limits), stored_id)
+        result = sync_playlist(sp, monday, uris, len(artist_ids), stored_id)
     except Exception as exc:  # noqa: BLE001 -- must not block the report; see above
         print(
             f"spotify_playlist: SKIPPING playlist build -- {exc}\n"

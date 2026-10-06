@@ -255,7 +255,7 @@ def test_matched_artists_dedupes_an_artist_playing_twice_in_a_week() -> None:
 
 def test_matched_artists_upgrades_an_artist_who_is_a_top3_pick_later_in_the_week() -> None:
     """First seen as a Monday also-ran, a Tuesday Top 3 pick: keeps its Monday
-    position, but gets the Top 3 track count."""
+    position, but is kept first by the cap."""
     selections = _selections(
         [], [_pick("Band, Tuesday")], events=[[_music("Band, Monday")], []]
     )
@@ -358,26 +358,7 @@ def test_collect_track_uris_concatenates_across_artists_in_order() -> None:
         },
         tracks_by_album={"a": [_track("uri:a")], "b": [_track("uri:b")]},
     )
-    assert sp_mod.collect_track_uris(sp, [("aaa", 3), ("bbb", 3)]) == ["uri:a", "uri:b"]
-
-
-def test_collect_track_uris_applies_each_artists_own_limit() -> None:
-    sp = FakeSpotify(
-        albums_by_artist={
-            "top": [_album("a", "2026-01-01")],
-            "other": [_album("b", "2026-01-01")],
-        },
-        tracks_by_album={
-            "a": [_track(f"uri:a{i}") for i in range(5)],
-            "b": [_track(f"uri:b{i}") for i in range(5)],
-        },
-    )
-    assert sp_mod.collect_track_uris(sp, [("top", 3), ("other", 1)]) == [
-        "uri:a0",
-        "uri:a1",
-        "uri:a2",
-        "uri:b0",
-    ]
+    assert sp_mod.collect_track_uris(sp, ["aaa", "bbb"], 3) == ["uri:a", "uri:b"]
 
 
 def test_collect_track_uris_propagates_a_failure_immediately() -> None:
@@ -398,7 +379,7 @@ def test_collect_track_uris_propagates_a_failure_immediately() -> None:
         tracks_by_album={"a": [_track("uri:a")], "c": [_track("uri:c")]},
     )
     with pytest.raises(RuntimeError, match="deprecated endpoint"):
-        sp_mod.collect_track_uris(sp, [("aaa", 3), ("bbb", 3), ("ccc", 3)])
+        sp_mod.collect_track_uris(sp, ["aaa", "bbb", "ccc"], 3)
 
 
 # --- find_existing_playlist ---
