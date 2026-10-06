@@ -25,12 +25,14 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.5.0",
+    "@types/nunjucks": "3.2.6",
     "eslint": "^10.10.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.69.0",
     "vitest": "^5.0.0"
   },
   "dependencies": {
-    "googleapis": "^178.0.0"
+    "googleapis": "^178.0.0",
+    "nunjucks": "3.2.4"
   }
 }
