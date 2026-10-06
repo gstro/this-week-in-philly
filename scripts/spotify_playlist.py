@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds a public Spotify playlist from a week's Top 3 music picks.
+"""Builds a public Spotify playlist from every music act in a week's report.
 
 Reads data/YYYY-MM-DD/_spotify.json (spotify_lookup.py's output) and
 _selections.json, takes a handful of recent tracks for every matched artist,
@@ -44,11 +44,15 @@ absence of calendar entries; a playlist carries no such signal, so rebuilding
 a past week's playlist destroys nothing, and a guard would only block
 legitimate backfill re-renders.
 
-Two inherited scope limits, both from _spotify.json rather than from here:
-it covers Top 3 music picks only (honorable-mention acts contribute no
-tracks), and it holds one matched artist per title, so a multi-act bill
-contributes only its headliner. Widening either means changing
-spotify_lookup.py's matching, not this script.
+Scope: every music event in the report (common.music_events), and every
+matched act on each bill (_spotify.json's `artists`; older files without it
+contribute their one top-level match). Every artist gets the same
+--tracks-per-artist, and --max-artists caps the total. Top 3 acts are kept
+first when the cap bites, so it can only ever drop the long tail. A normal
+week has 20-40 music events, so the cap is insurance against a malformed
+week like 2026-08-03, whose events[] holds 486 of 561 candidates (172 of
+them music) -- and that week does have a playlist a backfill re-run would
+rebuild.
 """
 
 import argparse
@@ -77,6 +81,8 @@ _MARKET = "US"
 # default of 3 -- most artists fill that from their single latest release.
 _ALBUMS_TO_CONSIDER = 10
 
+DEFAULT_MAX_ARTISTS = 50
+
 
 def playlist_name(monday: date) -> str:
     """Date first, deliberately: Spotify truncates playlist titles in the
@@ -88,7 +94,8 @@ def playlist_name(monday: date) -> str:
 def playlist_description(monday: date) -> str:
     sunday = common.week_dates(monday)[-1]
     return (
-        f"Top 3 music picks for {monday:%B %-d}-{sunday:%-d}, {sunday.year}. "
+        f"Music from the acts in this week's report, {monday:%B %-d}-{sunday:%-d}, "
+        f"{sunday.year}. Top 3 picks first each day. "
         f"{REPORT_BASE_URL}/{monday.isoformat()}.html"
     )
 
@@ -106,28 +113,44 @@ def artist_id_from_url(url: str) -> str | None:
     return None
 
 
-def matched_artist_ids(selections: dict, spotify: dict) -> list[str]:
-    """Artist ids for the week's matched music picks, in the order they appear
-    in the report (day, then rank), deduped.
+def matched_artists(selections: dict, spotify: dict) -> list[tuple[str, bool]]:
+    """(artist_id, is_top3) for every matched act in the week's music events,
+    in the order they appear in the report (day, then Top 3 / honorable
+    mention / rest, then billing order), deduped by artist.
 
     Iterating _selections.json rather than _spotify.json's keys is what makes
     the playlist run chronologically through the week -- spotify_lookup.py
     writes its output sorted by title, which would otherwise scramble it.
+
+    An artist keeps its first position but is marked Top 3 if *any* of its
+    events was a Top 3 pick, so a band that is a Monday also-ran and a
+    Friday pick is still kept first by cap_artists.
     """
-    ids: list[str] = []
-    seen: set[str] = set()
-    for day in selections["days"]:
-        for pick in day["top3"]:
-            if not pick.get("is_music"):
+    order: list[str] = []
+    is_top3: dict[str, bool] = {}
+    for title, top3 in common.music_events(selections):
+        entry = spotify.get(title)
+        if not entry:
+            continue
+        for artist in entry.get("artists") or [entry]:
+            artist_id = artist_id_from_url(artist.get("spotify_url", ""))
+            if not artist_id:
                 continue
-            entry = spotify.get(pick["title"])
-            if not entry:
-                continue
-            artist_id = artist_id_from_url(entry.get("spotify_url", ""))
-            if artist_id and artist_id not in seen:
-                seen.add(artist_id)
-                ids.append(artist_id)
-    return ids
+            if artist_id not in is_top3:
+                order.append(artist_id)
+                is_top3[artist_id] = top3
+            elif top3:
+                is_top3[artist_id] = True
+    return [(artist_id, is_top3[artist_id]) for artist_id in order]
+
+
+def cap_artists(artists: list[tuple[str, bool]], max_artists: int) -> list[tuple[str, bool]]:
+    """At most `max_artists`, Top 3 acts first, then the rest in report
+    order -- returned in the original report order either way."""
+    kept = [a for a in artists if a[1]][:max_artists]
+    kept += [a for a in artists if not a[1]][: max_artists - len(kept)]
+    keep = {artist_id for artist_id, _ in kept}
+    return [a for a in artists if a[0] in keep]
 
 
 def track_uris_for_artist(sp: spotipy.Spotify, artist_id: str, limit: int) -> list[str]:
@@ -227,8 +250,8 @@ def set_playlist_tracks(sp: spotipy.Spotify, playlist_id: str, uris: list[str]) 
 
     The first call is items_replace (which also clears a playlist when `uris`
     is empty); any overflow past Spotify's 100-per-call cap is appended after
-    it. The current week's shape (~8 artists x 3 tracks) is nowhere near that,
-    but chunking here costs nothing and removes a silent cliff.
+    it. A normal week (~20-40 artists x 3 tracks) routinely passes that cap,
+    so the chunking is load-bearing.
     """
     sp.playlist_replace_items(playlist_id, uris[:_MAX_ITEMS_PER_CALL])
     for start in range(_MAX_ITEMS_PER_CALL, len(uris), _MAX_ITEMS_PER_CALL):
@@ -281,7 +304,7 @@ def sync_playlist(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Build a public Spotify playlist from a week's Top 3 music picks"
+        description="Build a public Spotify playlist from every music act in a week's report"
     )
     parser.add_argument("week_dir", type=Path, help="data/YYYY-MM-DD")
     parser.add_argument(
@@ -290,13 +313,23 @@ def main() -> None:
         default=3,
         help="Recent tracks to take per matched artist (default: 3)",
     )
+    parser.add_argument(
+        "--max-artists",
+        type=int,
+        default=DEFAULT_MAX_ARTISTS,
+        help=f"Most artists in the playlist, Top 3 acts kept first (default: {DEFAULT_MAX_ARTISTS})",
+    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
     selections = common.load_selections(args.week_dir)
     spotify = common.load_spotify(args.week_dir)
     monday = date.fromisoformat(selections["days"][0]["date"])
-    artist_ids = matched_artist_ids(selections, spotify)
+    artists = matched_artists(selections, spotify)
+    capped = cap_artists(artists, args.max_artists)
+    if len(capped) < len(artists):
+        print(f"  Capped at {len(capped)} of {len(artists)} matched artists (--max-artists).")
+    artist_ids = [artist_id for artist_id, _ in capped]
 
     if not artist_ids:
         print("No matched music artists this week; no playlist to build.")

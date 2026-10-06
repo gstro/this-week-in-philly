@@ -1,6 +1,6 @@
 """Tests for scripts/spotify_lookup.py.
 
-find_spotify_match takes `sp` as a parameter, so it's tested against a fake
+find_spotify_matches takes `sp` as a parameter, so it's tested against a fake
 Spotify client with a `.search()` method -- zero network, following the
 _FakeSession dependency-injection precedent used elsewhere in this repo's
 tests rather than mocking spotipy internals.
@@ -21,7 +21,20 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from spotify_lookup import candidate_names, find_spotify_match, music_titles
+from spotify_lookup import (
+    candidate_groups,
+    find_spotify_matches,
+    music_titles,
+    spotify_entry,
+)
+
+
+def candidate_names(title: str) -> list[str]:
+    """candidate_groups flattened: every search find_spotify_matches might
+    make, in order. Most tests below care about which strings get tried,
+    not how they're grouped."""
+    return [candidate for group in candidate_groups(title) for candidate in group]
+
 
 # --- candidate_names ---
 
@@ -227,9 +240,41 @@ def test_candidate_names_preserves_a_period_in_an_initialism_act_name() -> None:
 
 
 def test_candidate_names_caps_the_total_number_of_candidates() -> None:
-    title = ", ".join(f"Act{i}" for i in range(10))
+    title = ", ".join(f"Act{i}" for i in range(30))
     candidates = candidate_names(title)
-    assert len(candidates) == 8
+    assert len(candidates) == 20
+
+
+def test_candidate_names_covers_every_act_on_a_seven_act_bill() -> None:
+    """The cap must leave room for a long bill now that every act is looked
+    up, not just the first hit. (Modelled on a real 2026-10-05 title that
+    used bare "/" with no spaces -- which deliberately does NOT split, so
+    "AC/DC" survives; that real title still resolves as one candidate.)"""
+    acts = ["Missing Link (NJ)", "King 9", "Criminal Instinct", "Morning Again", "Scorched Earth Policy", "Azshara", "Unmoved"]
+    candidates = candidate_names(" / ".join(acts))
+    for act in [*acts, "Missing Link"]:
+        assert act in candidates
+
+
+# --- candidate_groups ---
+
+
+def test_candidate_groups_puts_the_full_title_alone_in_the_first_group() -> None:
+    assert candidate_groups("Quicksand + Bane") == [["Quicksand + Bane"], ["Quicksand"], ["Bane"]]
+
+
+def test_candidate_groups_keeps_an_acts_fallback_variants_in_its_own_group() -> None:
+    title = "SKEKSIS (RVA), DoYeon Kim Quartet"
+    assert candidate_groups(title) == [
+        [title],
+        ["SKEKSIS (RVA)", "SKEKSIS"],
+        ["DoYeon Kim Quartet", "DoYeon Kim"],
+    ]
+
+
+def test_candidate_groups_truncates_the_last_group_at_the_cap() -> None:
+    groups = candidate_groups(", ".join(f"Act{i} (x)" for i in range(30)))
+    assert sum(len(group) for group in groups) == 20
 
 
 def test_candidate_names_every_candidate_is_a_substring_of_the_raw_title() -> None:
@@ -262,28 +307,88 @@ def test_candidate_names_every_candidate_is_a_substring_of_the_raw_title() -> No
 
 # --- music_titles ---
 
+MUSIC = "\U0001f3b5 Music & Concerts"
+FILM = "\U0001f3ac Film & Cinema"
 
-def test_music_titles_collects_only_is_music_true_picks_across_all_days() -> None:
+
+def _day(top3: list[dict], events: list[dict], honorable_mentions: list[dict] | None = None) -> dict:
+    return {"top3": top3, "events": events, "honorable_mentions": honorable_mentions or []}
+
+
+def test_music_titles_takes_top3_by_is_music_and_the_rest_by_category() -> None:
     selections = {
         "days": [
-            {"top3": [{"title": "Music Pick", "is_music": True}, {"title": "Reading", "is_music": False}]},
-            {"top3": [{"title": "Another Band", "is_music": True}]},
+            _day(
+                [
+                    {"title": "Music Pick", "is_music": True},
+                    {"title": "Reading", "is_music": False},
+                ],
+                [
+                    {"title": "Music Pick", "category": MUSIC},
+                    {"title": "Reading", "category": "\U0001f4da Literary"},
+                    {"title": "Other Band", "category": MUSIC},
+                    {"title": "A Film", "category": FILM},
+                ],
+            ),
+            _day([{"title": "Another Band", "is_music": True}], [{"title": "Another Band", "category": MUSIC}]),
         ]
     }
-    assert music_titles(selections) == ["Music Pick", "Another Band"]
+    assert music_titles(selections) == ["Music Pick", "Other Band", "Another Band"]
 
 
-def test_music_titles_returns_empty_list_when_no_music_picks() -> None:
-    selections = {"days": [{"top3": [{"title": "A Reading", "is_music": False}]}]}
+def test_music_titles_trusts_is_music_false_over_a_music_category_on_a_top3_pick() -> None:
+    """Selection flagged the pick not-music (e.g. a karaoke night filed under
+    Music) -- it must not come back in through the category path."""
+    selections = {
+        "days": [
+            _day(
+                [{"title": "Karaoke Night", "is_music": False}],
+                [{"title": "Karaoke Night", "category": MUSIC}],
+            )
+        ]
+    }
     assert music_titles(selections) == []
+
+
+def test_music_titles_includes_a_top3_is_music_pick_outside_the_music_category() -> None:
+    selections = {
+        "days": [
+            _day(
+                [{"title": "Silent Film w/ Live Score", "is_music": True}],
+                [{"title": "Silent Film w/ Live Score", "category": FILM}],
+            )
+        ]
+    }
+    assert music_titles(selections) == ["Silent Film w/ Live Score"]
+
+
+def test_music_titles_orders_honorable_mentions_before_the_rest_of_the_day() -> None:
+    selections = {
+        "days": [
+            _day(
+                [],
+                [
+                    {"title": "Early Show", "category": MUSIC},
+                    {"title": "Mentioned Band", "category": MUSIC},
+                ],
+                honorable_mentions=[{"title": "Mentioned Band (SOLD OUT)", "venue": "X"}],
+            )
+        ]
+    }
+    assert music_titles(selections) == ["Mentioned Band", "Early Show"]
+
+
+def test_music_titles_dedupes_a_title_listed_on_two_days() -> None:
+    day = _day([], [{"title": "Two Night Stand", "category": MUSIC}])
+    assert music_titles({"days": [day, day]}) == ["Two Night Stand"]
 
 
 def test_music_titles_treats_missing_is_music_key_as_false() -> None:
-    selections = {"days": [{"top3": [{"title": "No Flag Set"}]}]}
+    selections = {"days": [_day([{"title": "No Flag Set"}], [])]}
     assert music_titles(selections) == []
 
 
-# --- find_spotify_match ---
+# --- find_spotify_matches ---
 
 
 class _FakeSpotify:
@@ -308,52 +413,49 @@ def _artist(name: str, url: str = "https://open.spotify.com/artist/xyz") -> dict
     return {"name": name, "external_urls": {"spotify": url}}
 
 
-def test_find_spotify_match_exact_hit_on_full_title() -> None:
+def test_find_spotify_matches_exact_hit_on_full_title() -> None:
     sp = _FakeSpotify({"Die Sexual": [_artist("Die Sexual")]})
-    match = find_spotify_match(sp, "Die Sexual")  # type: ignore[arg-type]
-    assert match == {"spotify_url": "https://open.spotify.com/artist/xyz", "matched_text": "Die Sexual"}
+    matches = find_spotify_matches(sp, "Die Sexual")  # type: ignore[arg-type]
+    assert matches == [{"spotify_url": "https://open.spotify.com/artist/xyz", "matched_text": "Die Sexual"}]
 
 
-def test_find_spotify_match_falls_through_to_a_later_candidate() -> None:
+def test_find_spotify_matches_falls_through_to_a_later_candidate() -> None:
     title = "Gothic night: Die Sexual, Ronnie Stone & DJ Baby Berlin"
     sp = _FakeSpotify({"Die Sexual": [_artist("Die Sexual")]})  # full title and "Gothic night" both miss
-    match = find_spotify_match(sp, title)  # type: ignore[arg-type]
-    assert match is not None
-    assert match["matched_text"] == "Die Sexual"
+    matches = find_spotify_matches(sp, title)  # type: ignore[arg-type]
+    assert [m["matched_text"] for m in matches] == ["Die Sexual"]
 
 
-def test_find_spotify_match_requires_exact_casefolded_name_not_a_fuzzy_hit() -> None:
+def test_find_spotify_matches_requires_exact_casefolded_name_not_a_fuzzy_hit() -> None:
     # Spotify's own search is fuzzy -- a top result that ISN'T an exact name
     # match must not count as a hit ("never guess" per the module docstring).
     sp = _FakeSpotify({"Die Sexual": [_artist("Die Sexual (Tribute Band)")]})
-    assert find_spotify_match(sp, "Die Sexual") is None  # type: ignore[arg-type]
+    assert find_spotify_matches(sp, "Die Sexual") == []  # type: ignore[arg-type]
 
 
-def test_find_spotify_match_is_case_insensitive_on_the_match() -> None:
+def test_find_spotify_matches_is_case_insensitive_on_the_match() -> None:
     sp = _FakeSpotify({"Die Sexual": [_artist("DIE SEXUAL")]})
-    match = find_spotify_match(sp, "Die Sexual")  # type: ignore[arg-type]
-    assert match is not None
-    assert match["matched_text"] == "Die Sexual"
+    matches = find_spotify_matches(sp, "Die Sexual")  # type: ignore[arg-type]
+    assert [m["matched_text"] for m in matches] == ["Die Sexual"]
 
 
-def test_find_spotify_match_returns_none_when_no_candidate_matches() -> None:
+def test_find_spotify_matches_returns_none_when_no_candidate_matches() -> None:
     sp = _FakeSpotify({})
-    assert find_spotify_match(sp, "Totally Unknown Act") is None  # type: ignore[arg-type]
+    assert find_spotify_matches(sp, "Totally Unknown Act") == []  # type: ignore[arg-type]
 
 
-def test_find_spotify_match_checks_all_returned_results_not_just_the_top_one() -> None:
+def test_find_spotify_matches_checks_all_returned_results_not_just_the_top_one() -> None:
     """Spotify's own ranking can put a fuzzy/unrelated same-named result
     above the real exact-name match -- the exact-match requirement is
     unchanged, but it must be checked against more than just items[0]."""
     sp = _FakeSpotify(
         {"The Body": [_artist("The Body (Karaoke Tribute)"), _artist("The Body")]}
     )
-    match = find_spotify_match(sp, "The Body")  # type: ignore[arg-type]
-    assert match is not None
-    assert match["matched_text"] == "The Body"
+    matches = find_spotify_matches(sp, "The Body")  # type: ignore[arg-type]
+    assert [m["matched_text"] for m in matches] == ["The Body"]
 
 
-def test_find_spotify_match_continues_past_a_failed_candidate_search() -> None:
+def test_find_spotify_matches_continues_past_a_failed_candidate_search() -> None:
     """A search failure for one candidate must not abort the whole lookup --
     later candidates still get tried."""
     title = "Die Sexual & The Rest"
@@ -363,9 +465,73 @@ def test_find_spotify_match_continues_past_a_failed_candidate_search() -> None:
             "Die Sexual": [_artist("Die Sexual")],
         }
     )
-    match = find_spotify_match(sp, title)  # type: ignore[arg-type]
-    assert match is not None
-    assert match["matched_text"] == "Die Sexual"
+    matches = find_spotify_matches(sp, title)  # type: ignore[arg-type]
+    assert [m["matched_text"] for m in matches] == ["Die Sexual"]
+
+
+def _url(name: str) -> str:
+    return f"https://open.spotify.com/artist/{name.replace(' ', '')}"
+
+
+def test_find_spotify_matches_returns_every_act_on_the_bill_in_listed_order() -> None:
+    title = "Noun / Sensor Ghost / Northern Liberties / Gutter Pearl"
+    sp = _FakeSpotify(
+        {
+            "Gutter Pearl": [_artist("Gutter Pearl", _url("Gutter Pearl"))],
+            "Sensor Ghost": [_artist("Sensor Ghost", _url("Sensor Ghost"))],
+        }
+    )
+    matches = find_spotify_matches(sp, title)  # type: ignore[arg-type]
+    assert [m["matched_text"] for m in matches] == ["Sensor Ghost", "Gutter Pearl"]
+
+
+def test_find_spotify_matches_does_not_split_a_title_that_is_itself_an_act() -> None:
+    """"Simon & Garfunkel" is one act -- splitting it would add a "Simon" and
+    a "Garfunkel" that merely share the words."""
+    sp = _FakeSpotify(
+        {
+            "Simon & Garfunkel": [_artist("Simon & Garfunkel", _url("SG"))],
+            "Simon": [_artist("Simon", _url("Simon"))],
+            "Garfunkel": [_artist("Garfunkel", _url("Garfunkel"))],
+        }
+    )
+    matches = find_spotify_matches(sp, "Simon & Garfunkel")  # type: ignore[arg-type]
+    assert [m["matched_text"] for m in matches] == ["Simon & Garfunkel"]
+    assert sp.queries == ["Simon & Garfunkel"]
+
+
+def test_find_spotify_matches_takes_only_the_first_hit_per_act() -> None:
+    """"SKEKSIS (RVA)" matching means "SKEKSIS" is never searched -- one act
+    must not produce two links."""
+    sp = _FakeSpotify(
+        {
+            "SKEKSIS (RVA)": [_artist("SKEKSIS (RVA)", _url("a"))],
+            "SKEKSIS": [_artist("SKEKSIS", _url("b"))],
+        }
+    )
+    matches = find_spotify_matches(sp, "SKEKSIS (RVA), NIGHTFALL")  # type: ignore[arg-type]
+    assert [m["matched_text"] for m in matches] == ["SKEKSIS (RVA)"]
+    assert "SKEKSIS" not in sp.queries
+
+
+def test_find_spotify_matches_dedupes_two_acts_resolving_to_one_artist() -> None:
+    same = _url("same")
+    sp = _FakeSpotify({"Foo": [_artist("Foo", same)], "FOO": [_artist("foo", same)]})
+    matches = find_spotify_matches(sp, "Foo, FOO")  # type: ignore[arg-type]
+    assert [m["matched_text"] for m in matches] == ["Foo"]
+
+
+# --- spotify_entry ---
+
+
+def test_spotify_entry_repeats_the_first_act_at_the_top_level_for_the_renderer() -> None:
+    first = {"spotify_url": _url("a"), "matched_text": "A"}
+    second = {"spotify_url": _url("b"), "matched_text": "B"}
+    assert spotify_entry([first, second]) == {**first, "artists": [first, second]}
+
+
+def test_spotify_entry_is_none_when_nothing_matched() -> None:
+    assert spotify_entry([]) is None
 
 
 # --- live canary: real historical nulls against the real Spotify API ---
@@ -416,10 +582,11 @@ def test_matcher_recovers_a_meaningful_fraction_of_real_historical_nulls() -> No
 
     hits = 0
     for title in _REAL_HISTORICAL_NULLS:
-        match = find_spotify_match(sp, title)
-        if match:
+        matches = find_spotify_matches(sp, title)
+        if matches:
             hits += 1
-            print(f"MATCHED  {title!r} -> {match['matched_text']!r} ({match['spotify_url']})")
+            for match in matches:
+                print(f"MATCHED  {title!r} -> {match['matched_text']!r} ({match['spotify_url']})")
         else:
             print(f"null     {title!r}")
 

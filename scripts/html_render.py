@@ -40,10 +40,11 @@ tie-break (stable, original JSON array order) is kept as the more
 defensible choice, but is not "validated against the archive," despite an
 earlier version of this comment claiming it was.
 
-A related, unfixed gap: only one Spotify link is representable per pick
-(_spotify.json is one matched_text/url per title), so a pick naming two
-acts can only link one. v1's report has 9 links across 8 Top 3 picks; v2
-renders 8 -- see tests/golden/README.md.
+A related, unfixed gap: only one Spotify link is rendered per pick (the
+top-level matched_text/url; _spotify.json's per-title `artists` list, which
+the playlist uses, is ignored here), so a pick naming two acts links one.
+v1's report has 9 links across 8 Top 3 picks; v2 renders 8 -- see
+tests/golden/README.md.
 """
 
 import argparse

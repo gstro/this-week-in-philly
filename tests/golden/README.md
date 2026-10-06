@@ -50,7 +50,8 @@ linked. `2026-06-22.html`'s Sunday Human League pick names both "The Human
 League" and "Soft Cell"; v1 linked both (9 links total across 8 Top 3
 picks), v2 links only one (8). This is a real, acknowledged capability gap
 versus `events-report-format/SKILL.md:128` ("for any music act... embed the
-link"), not a bug — fixing it means changing `_spotify.json`'s schema,
-`spotify_lookup.py`'s return shape, and `build_pick_name_html` together, and
-is deliberately out of scope for the Presentation-completion chunk that
-added this note.
+link"), not a bug. `_spotify.json` now records every matched act on a bill
+in a per-title `artists` list (spotify_lookup.py, for the weekly playlist),
+so closing this gap is a `build_pick_name_html` change alone — but this
+week's fixture predates that field, and the renderer still links only the
+top-level `matched_text`.
