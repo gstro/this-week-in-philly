@@ -461,15 +461,23 @@ export function parseCsv(text: string): string[][] {
   return records;
 }
 
-/** csv.DictReader(f): header from the first row, blank rows skipped, short rows padded with None. */
-export function parseCsvDicts(text: string): Map<string | null, string | string[] | null>[] {
+/** One csv.DictReader row: header name -> value, None for a short row's missing cells, extras under None. */
+export type CsvDictRow = Map<string | null, string | string[] | null>;
+
+/**
+ * csv.DictReader(f): `fieldnames` is the first record verbatim -- None for an
+ * empty file, and `[]` (not None) when the file starts with a blank line,
+ * exactly as DictReader.fieldnames reports them. Then `rows`: blank rows
+ * skipped, short rows padded with None, a long row's extras under None.
+ */
+export function readCsvDict(text: string): { fieldnames: string[] | null; rows: CsvDictRow[] } {
   const records = parseCsv(text);
   const header = records.shift();
-  if (header === undefined) return [];
-  const dicts: Map<string | null, string | string[] | null>[] = [];
+  if (header === undefined) return { fieldnames: null, rows: [] };
+  const dicts: CsvDictRow[] = [];
   for (const row of records) {
     if (row.length === 0) continue;
-    const d = new Map<string | null, string | string[] | null>();
+    const d: CsvDictRow = new Map();
     header.forEach((name, idx) => {
       if (idx < row.length) d.set(name, row[idx]!);
     });
@@ -477,7 +485,12 @@ export function parseCsvDicts(text: string): Map<string | null, string | string[
     else for (const name of header.slice(row.length)) d.set(name, null);
     dicts.push(d);
   }
-  return dicts;
+  return { fieldnames: header, rows: dicts };
+}
+
+/** csv.DictReader(f)'s rows (see readCsvDict). */
+export function parseCsvDicts(text: string): CsvDictRow[] {
+  return readCsvDict(text).rows;
 }
 
 /** Python's set-of-tuples key for (week_of, title). */
@@ -485,7 +498,8 @@ export function logKey(weekOf: unknown, title: unknown): string {
   return JSON.stringify([weekOf ?? null, title ?? null]);
 }
 
-function readUtf8(path: string): string {
+/** Python's `open(path, newline="")` + read() under a UTF-8 locale (see the Encoding divergence). */
+export function readUtf8(path: string): string {
   return new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(readFileSync(path));
 }
 
