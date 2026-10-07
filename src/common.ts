@@ -221,6 +221,29 @@ export function loadPlaylist(weekDir: string): unknown {
   return loadJson(path);
 }
 
+/**
+ * Returns {} if _manifest.json doesn't exist for this week. Every week
+ * Collection has ever run has one, but data/2026-06-22 predates v2 entirely
+ * (imported from v1's archive), so the report's stats section has to render
+ * without it rather than refuse the week.
+ */
+export function loadManifest(weekDir: string): unknown {
+  const path = join(weekDir, "_manifest.json");
+  if (!existsSync(path)) return {};
+  return loadJson(path);
+}
+
+/**
+ * The hand-maintained per-source floors check_yield enforces in CI. Returns
+ * {} if the file is missing, so the report degrades the same way it does for
+ * a missing manifest.
+ */
+export function loadExpectedYield(): unknown {
+  const path = join(DATA_DIR, "expected_yield.json");
+  if (!existsSync(path)) return {};
+  return loadJson(path);
+}
+
 export interface SpotifyUserClient {
   accessToken: string;
 }
