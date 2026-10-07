@@ -409,8 +409,11 @@ class _FakeSpotify:
         return {"artists": {"items": result}}
 
 
-def _artist(name: str, url: str = "https://open.spotify.com/artist/xyz") -> dict:
-    return {"name": name, "external_urls": {"spotify": url}}
+def _artist(name: str, url: str = "https://open.spotify.com/artist/xyz", followers: int | None = None) -> dict:
+    artist = {"name": name, "external_urls": {"spotify": url}}
+    if followers is not None:
+        artist["followers"] = {"total": followers}
+    return artist
 
 
 def test_find_spotify_matches_exact_hit_on_full_title() -> None:
@@ -521,6 +524,59 @@ def test_find_spotify_matches_dedupes_two_acts_resolving_to_one_artist() -> None
     assert [m["matched_text"] for m in matches] == ["Foo"]
 
 
+# --- exact-match tie-break (several artists share a name) ---
+
+
+def _lee_fields_matches(artists: list[dict]) -> list[dict]:
+    return find_spotify_matches(_FakeSpotify({"Lee Fields": artists}), "Lee Fields")  # type: ignore[arg-type]
+
+
+def test_tie_break_highest_followers_wins_even_when_listed_second() -> None:
+    matches = _lee_fields_matches(
+        [_artist("Lee Fields", "u/small", followers=10), _artist("Lee Fields", "u/big", followers=5000)]
+    )
+    assert [m["spotify_url"] for m in matches] == ["u/big"]
+
+
+def test_tie_break_equal_followers_keeps_first_listed() -> None:
+    matches = _lee_fields_matches(
+        [_artist("Lee Fields", "u/first", followers=7), _artist("Lee Fields", "u/second", followers=7)]
+    )
+    assert [m["spotify_url"] for m in matches] == ["u/first"]
+
+
+def test_tie_break_without_followers_keeps_first_listed() -> None:
+    matches = _lee_fields_matches([_artist("Lee Fields", "u/first"), _artist("Lee Fields", "u/second")])
+    assert [m["spotify_url"] for m in matches] == ["u/first"]
+
+
+def test_tie_break_followers_null_is_treated_as_missing() -> None:
+    first = _artist("Lee Fields", "u/first")
+    first["followers"] = {"total": None}
+    matches = _lee_fields_matches([first, _artist("Lee Fields", "u/second", followers=1)])
+    assert [m["spotify_url"] for m in matches] == ["u/second"]
+
+
+def test_tie_break_non_exact_result_with_more_followers_never_wins() -> None:
+    matches = _lee_fields_matches(
+        [
+            _artist("Lee Fields Tribute", "u/fuzzy", followers=999999),
+            _artist("Lee Fields", "u/a", followers=1),
+            _artist("Lee Fields", "u/b", followers=2),
+        ]
+    )
+    assert [m["spotify_url"] for m in matches] == ["u/b"]
+
+
+def test_tie_break_logs_only_when_two_or_more_exact_matches(capsys: pytest.CaptureFixture[str]) -> None:
+    _lee_fields_matches([_artist("Lee Fields", "u/only", followers=1), _artist("Lee Fields Tribute")])
+    assert capsys.readouterr().err == ""
+
+    _lee_fields_matches([_artist("Lee Fields", "u/a", followers=1), _artist("Lee Fields", "u/b", followers=2)])
+    err = capsys.readouterr().err
+    assert "2 exact matches" in err and "'Lee Fields'" in err and "u/b" in err and "2 followers" in err
+
+
 # --- spotify_entry ---
 
 
@@ -593,3 +649,23 @@ def test_matcher_recovers_a_meaningful_fraction_of_real_historical_nulls() -> No
     assert hits >= len(_REAL_HISTORICAL_NULLS) // 3, (
         f"only {hits}/{len(_REAL_HISTORICAL_NULLS)} recovered -- expected at least a third"
     )
+
+
+@pytest.mark.network
+@pytest.mark.skipif(
+    not (os.environ.get("SPOTIFY_CLIENT_ID") and os.environ.get("SPOTIFY_CLIENT_SECRET")),
+    reason="requires SPOTIFY_CLIENT_ID/SPOTIFY_CLIENT_SECRET",
+)
+def test_lee_fields_name_clash_resolves_to_a_match() -> None:
+    """Several real artists are named "Lee Fields"; the tie-break must still
+    land on one. Deliberately doesn't pin which id wins."""
+    import spotipy
+    from spotipy.oauth2 import SpotifyClientCredentials
+
+    sp = spotipy.Spotify(
+        auth_manager=SpotifyClientCredentials(
+            client_id=os.environ["SPOTIFY_CLIENT_ID"],
+            client_secret=os.environ["SPOTIFY_CLIENT_SECRET"],
+        )
+    )
+    assert find_spotify_matches(sp, "Lee Fields")
