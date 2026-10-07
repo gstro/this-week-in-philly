@@ -869,11 +869,17 @@ describe("Jinja2 semantics over Nunjucks (TS-only)", () => {
     expect(parseTimeForSort(null)).toBeNull();
   });
 
-  it("formatCompiled accepts the datetime.fromisoformat forms Python 3.12 does", () => {
+  it("formatCompiled accepts strict ISO 8601 only (narrower than fromisoformat)", () => {
     expect(formatCompiled("2026-09-13")[0]).toBe("2026-09-13");
-    expect(formatCompiled("20260913T222301")[0]).toBe("2026-09-13");
-    expect(formatCompiled("2026-09-13X22:23:01.1234567+01")[0]).toBe("2026-09-13");
+    expect(formatCompiled("2026-09-13T22:23")[0]).toBe("2026-09-13");
+    expect(formatCompiled("2026-09-13 22:23:01")[0]).toBe("2026-09-13");
+    expect(formatCompiled("2026-09-13T22:23:01.123456+01:00")[0]).toBe("2026-09-13");
     expect(formatCompiled("2026-09-13T22:23:01Z")[0]).toBe("2026-09-13");
+    // Python's fromisoformat takes all of these; this port rejects them.
+    expect(formatCompiled("20260913T222301")[0]).toBeNull();
+    expect(formatCompiled("2026-09-13X22:23:01")[0]).toBeNull();
+    expect(formatCompiled("2026-W37-7")[0]).toBeNull();
+    // Out of range, as in Python.
     expect(formatCompiled("2026-09-13T24:00:00")[0]).toBeNull();
     expect(formatCompiled("2026-09-13T22:23:1")[0]).toBeNull();
     expect(formatCompiled("2026-02-30")[0]).toBeNull();
@@ -894,5 +900,62 @@ describe("Jinja2 semantics over Nunjucks (TS-only)", () => {
   it("an empty spotify entry is falsy, as a Python empty dict is", () => {
     const pick = { title: "Band", url: "https://e", is_music: true };
     expect(buildPickNameHtml(pick, {} as never)).toBe('<a class="event-link" href="https://e">Band</a>');
+  });
+});
+
+// --- Python bugs fixed in this port, not reproduced (TS-only; see the
+// module docstring's divergence list and PR #72's notes) ---
+
+describe("Python bugs fixed in the port", () => {
+  it("renders a funnel stage that grew as +N%, not a double minus", () => {
+    const dir = tmpPath();
+    const selections = JSON.parse(readFileSync(join(REAL_WEEK_DIR, "_selections.json"), "utf8")) as Selections;
+    selections.total_events_after_dedup = 10; // fewer candidates than the 88 listed
+    writeFileSync(join(dir, "_selections.json"), JSON.stringify(selections));
+    const html = renderReport(dir);
+    expect(html).toContain('<div class="funnel-drop">+780% from candidates</div>');
+    expect(html).not.toContain("−-");
+    // A real drop still renders with the minus sign.
+    expect(html).toMatch(/<div class="funnel-drop">−\d+% from listed<\/div>/);
+  });
+
+  it("renders a non-canonical category after the canonical ones instead of dropping it", () => {
+    const day = statsDay("2026-06-22", "Monday", [statsEvent("Odd One", "🧪 Experimental"), statsEvent("A", MUSIC)], []);
+    expect(buildCategories(day, new Set()).map((c) => c.label)).toEqual([MUSIC, "🧪 Experimental"]);
+    const stats = buildStats({ days: [day], total_events_after_dedup: 2 }, {}, {});
+    expect(stats.categories.map((row) => row.label)).toContain("🧪 Experimental");
+  });
+
+  it("gives a Top 3 time the multiple-showtimes '+' from its listing's note", () => {
+    const day = onePickDay();
+    day.events = [{ ...statsEvent("A Show", MUSIC), note: "Multiple showtimes Friday." }];
+    expect(buildDayViewmodel(day, {}).top3[0]!.time_display).toBe("8:00 PM+");
+  });
+
+  it("falls back to the event link when matched_text is empty", () => {
+    const pick = { title: "Band", url: "https://e", is_music: true };
+    expect(buildPickNameHtml(pick, { spotify_url: "https://open.spotify.com/artist/x", matched_text: "" })).toBe(
+      '<a class="event-link" href="https://e">Band</a>',
+    );
+  });
+
+  it("keeps a comma inside a Meetup group's name", () => {
+    expect(splitSourceField("Meetup: Food, Drink & Code")).toEqual(["Meetup: Food, Drink & Code"]);
+    expect(splitSourceField("Meetup: Food, Drink & Code, Do215")).toEqual(["Meetup: Food, Drink & Code", "Do215"]);
+    expect(splitSourceField("Meetup: A, WXPN")).toEqual(["Meetup: A", "WXPN"]);
+    expect(splitSourceField("Meetup: A, Meetup: B")).toEqual(["Meetup: A", "Meetup: B"]);
+    expect(splitSourceField("Do215, WXPN")).toEqual(["Do215", "WXPN"]);
+  });
+
+  it("rejects basic and week-date ISO forms for week keys and filenames", () => {
+    expect(buildCanonicalUrl("2026-06-22")).not.toBeNull();
+    expect(buildCanonicalUrl("20260622")).toBeNull();
+    expect(buildCanonicalUrl("2026-W26-1")).toBeNull();
+    const dir = tmpPath();
+    for (const name of ["2026-06-22.html", "20260629.html", "2026-W27-1.html"]) writeFileSync(join(dir, name), "");
+    const index = renderIndex(dir);
+    expect(index).toContain("weeks/2026-06-22.html");
+    expect(index).not.toContain("20260629");
+    expect(index).not.toContain("W27");
   });
 });

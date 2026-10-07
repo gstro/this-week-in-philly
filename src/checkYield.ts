@@ -75,7 +75,7 @@ export interface Issue {
 
 export interface ManifestSourceResult {
   status?: string;
-  events?: number;
+  events?: number | null;
   reason?: string;
 }
 
