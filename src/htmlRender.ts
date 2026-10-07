@@ -58,13 +58,11 @@
  *   `f"{n:,}"` grouping. What JS can't mirror is int-vs-float identity: a
  *   JSON `1.0` is the number 1 here, so a field Python would print as "1.0"
  *   prints as "1". No committed week carries a float in a printed field.
- * - Dates. Python 3.12's `date.fromisoformat`/`datetime.fromisoformat` are
- *   very permissive; parseIsoDate/parseIsoDateTime mirror the extended and
- *   basic calendar forms ("2026-06-22", "20260622"), any single-character
- *   date/time separator, HH[:MM[:SS[.fff]]] (or basic), and Z/+HH[:MM]
- *   offsets, with Python's range checks -- but not ISO week dates
- *   ("2026-W26-1"), which Python accepts and these reject. strftime's %a/%A/
- *   %B are hardcoded English (Python runs in the C locale in CI), never Intl.
+ * - Dates. parseIsoDate/parseIsoDateTime accept only strict ISO 8601
+ *   (YYYY-MM-DD, optionally "T"/space + HH:MM[:SS[.ffffff]] + Z/+HH:MM),
+ *   where Python 3.12's `fromisoformat` also takes basic ("20260622") and
+ *   week-date ("2026-W26-1") forms -- see parseIsoDate. strftime's %a/%A/%B
+ *   are hardcoded English (Python runs in the C locale in CI), never Intl.
  *   Nothing here builds a Date from a timestamp string, so there is no
  *   local-time skew of the kind checkYield.ts guards against.
  * - Unicode edge cases. `str.casefold()` becomes `toLowerCase()` (they
@@ -84,6 +82,20 @@
  *   render down; checkYield.ts's checkYieldFloor treats it as 0 (`?? 0`),
  *   so this renders. Inherited from that port; no committed manifest has a
  *   null events count.
+ * - Python bugs fixed here rather than reproduced (flagged in PR #72's
+ *   port; no committed week triggers any of them, so parity on real data
+ *   is unaffected):
+ *   - Non-canonical categories render after the canonical nine instead of
+ *     vanishing from the day blocks and stats (withExtraCategories).
+ *   - A Top 3 time gets the "+" multiple-showtimes suffix its listing card
+ *     gets (buildDayViewmodel reads the note from the events[] entry).
+ *   - An empty Spotify matched_text falls back to the event link instead of
+ *     an empty <a> (buildPickNameHtml).
+ *   - A comma inside a Meetup group's name doesn't split it into two
+ *     sources (splitSourceField).
+ *   - Lax ISO dates are rejected (see Dates above).
+ *   The funnel's double minus on a stage that grew ("−-314%") was fixed in
+ *   templates/report.html.j2 itself, so both renderers print "+314%".
  * - renderIndex takes the weeks directory as an optional parameter (default
  *   docs/weeks) rather than reading a module constant, so it can be pointed
  *   at a scratch dir without monkeypatching. The CLI behaves identically.
@@ -433,32 +445,39 @@ function validDate(year: number, month: number, day: number): IsoDate | null {
   return { year, month, day };
 }
 
-const ISO_DATE_RE = /^(\d{4})(?:-(\d{2})-(\d{2})|(\d{2})(\d{2}))$/;
+const ISO_DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
-/** Python's `date.fromisoformat` (calendar forms only -- see module docstring); null for ValueError. */
+/**
+ * A strict YYYY-MM-DD date; null otherwise. Deliberately narrower than
+ * Python's `date.fromisoformat`, which also takes the basic form
+ * ("20260622") and ISO week dates ("2026-W26-1") -- so html_render.py would
+ * publish a canonical URL like weeks/20260622.html and list such a file in
+ * the index. Every date this pipeline writes is YYYY-MM-DD.
+ */
 export function parseIsoDate(text: string): IsoDate | null {
   const m = ISO_DATE_RE.exec(text);
   if (!m) return null;
-  return validDate(Number(m[1]), Number(m[2] ?? m[4]), Number(m[3] ?? m[5]));
+  return validDate(Number(m[1]), Number(m[2]), Number(m[3]));
 }
 
-const ISO_TIME_RE =
-  /^(\d{2})(?:(:?)(\d{2})(?:\2(\d{2})(?:[.,](\d+))?)?)?(?:Z|[+-](\d{2})(?::?(\d{2})(?::?(\d{2})(?:\.\d{1,6})?)?)?)?$/;
+const ISO_DATETIME_RE =
+  /^(\d{4}-\d{2}-\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2})(?:\.\d{1,6})?)?(?:Z|[+-](\d{2}):(\d{2}))?)?$/;
 
-/** The date part of Python's `datetime.fromisoformat(text)` (no tz conversion, like `.date()`); null for ValueError. */
+/**
+ * The date part of a strict ISO 8601 timestamp (no tz conversion, like
+ * Python's `.date()`): YYYY-MM-DD, optionally followed by "T" or a space,
+ * HH:MM[:SS[.ffffff]] and a Z or +/-HH:MM offset. Null otherwise -- narrower
+ * than `datetime.fromisoformat`, for the same reason as parseIsoDate.
+ */
 export function parseIsoDateTime(text: string): IsoDate | null {
-  const dateLength = /^\d{4}-/.test(text) ? 10 : 8;
-  const datePart = parseIsoDate(text.slice(0, dateLength));
+  const m = ISO_DATETIME_RE.exec(text);
+  if (!m) return null;
+  const datePart = parseIsoDate(m[1]!);
   if (!datePart) return null;
-  const rest = [...text.slice(dateLength)];
-  if (rest.length === 0) return datePart;
-  // Any single character separates date from time in Python 3.11+.
-  const time = ISO_TIME_RE.exec(rest.slice(1).join(""));
-  if (!time) return null;
-  const [hh, mm, ss, offH, offM, offS] = [time[1], time[3], time[4], time[6], time[7], time[8]].map((v) =>
+  const [hh, mm, ss, offH, offM] = [m[2], m[3], m[4], m[5], m[6]].map((v) =>
     v === undefined ? 0 : Number(v),
-  ) as [number, number, number, number, number, number];
-  if (hh > 23 || mm > 59 || ss > 59 || offH > 23 || offM > 59 || offS > 59) return null;
+  ) as [number, number, number, number, number];
+  if (hh > 23 || mm > 59 || ss > 59 || offH > 23 || offM > 59) return null;
   return datePart;
 }
 
@@ -494,17 +513,43 @@ function requireIsoDate(text: string): IsoDate {
 // Sources footer
 // ---------------------------------------------------------------------------
 
+/**
+ * Splits a combined source field into its sources. A comma inside a Meetup
+ * group's name ("Meetup: Food, Drink & Code") is not a separator: a piece that
+ * follows a "Meetup: ..." piece is folded back into it unless it is itself a
+ * known source or another Meetup group. Python's split_source_field has no
+ * such guard and counts the tail of the group name as a source of its own.
+ */
 export function splitSourceField(raw: string | null | undefined): string[] {
-  return (raw || "")
+  const parts = (raw || "")
     .split(SOURCE_SPLIT_RE)
     .map((part) => pyStrip(part))
     .filter((part) => part);
+  const merged: string[] = [];
+  for (const part of parts) {
+    const previous = merged[merged.length - 1];
+    if (previous !== undefined && isMeetupSource(previous) && !isMeetupSource(part) && !KNOWN_SOURCE_NAMES.has(part)) {
+      merged[merged.length - 1] = `${previous}, ${part}`;
+    } else {
+      merged.push(part);
+    }
+  }
+  return merged;
 }
+
+function isMeetupSource(name: string): boolean {
+  return name.toLowerCase().startsWith("meetup:");
+}
+
+const KNOWN_SOURCE_NAMES: ReadonlySet<string> = new Set([
+  ...SOURCES.map(([name]) => name),
+  ...Object.keys(SOURCE_ALIASES),
+]);
 
 /** Maps one source token onto its footer name; every "Meetup: <group>" collapses to "Meetup". */
 export function normalizeSourceName(raw: string): string {
   const name = pyStrip(raw);
-  if (name.toLowerCase().startsWith("meetup:")) return "Meetup";
+  if (isMeetupSource(name)) return "Meetup";
   return SOURCE_ALIASES[name] ?? name;
 }
 
@@ -578,7 +623,9 @@ export function buildPickNameHtml(
   const title = pick.title;
   if (pyTruthy(pick.is_music) && pyTruthy(spotifyEntry)) {
     const matched = spotifyEntry!.matched_text;
-    const idx = title.indexOf(matched);
+    // An empty matched_text would "match" at index 0 and emit an empty <a>
+    // (Python's build_pick_name_html does exactly that); treat it as no match.
+    const idx = matched ? title.indexOf(matched) : -1;
     if (idx !== -1) {
       const before = htmlEscapeText(title.slice(0, idx));
       const after = htmlEscapeText(title.slice(idx + matched.length));
@@ -664,6 +711,18 @@ export function isAllWeek(event: SelectionEvent, top3Titles: ReadonlySet<string>
   return pyInt(pyTruthy(count) ? count : 0) >= RECURRING_THRESHOLD;
 }
 
+/**
+ * CATEGORY_ORDER, then any non-canonical category actually present, in first-
+ * seen order. Python iterates CATEGORY_ORDER alone, so an event whose category
+ * isn't one of the nine canonical strings silently vanishes from its day and
+ * from the stats; here it still renders, under its own label, after the rest.
+ */
+function withExtraCategories(present: Iterable<string>): string[] {
+  const canonical = new Set<string>(CATEGORY_ORDER);
+  const extras = [...new Set(present)].filter((label) => !canonical.has(label));
+  return [...CATEGORY_ORDER, ...extras];
+}
+
 export function buildCategories(
   day: { events: SelectionEvent[]; honorable_mentions?: HonorableMention[] },
   top3Titles: ReadonlySet<string>,
@@ -679,7 +738,7 @@ export function buildCategories(
   }
 
   const categories: CategoryView[] = [];
-  for (const label of CATEGORY_ORDER) {
+  for (const label of withExtraCategories(byCategory.keys())) {
     const events = byCategory.get(label);
     if (!events || events.length === 0) continue;
     const ordered = events
@@ -781,7 +840,7 @@ export function buildStats(
 
   const categoryRows: CategoryStatRow[] = [];
   const maxListed = Math.max(0, ...listed.values());
-  for (const label of CATEGORY_ORDER) {
+  for (const label of withExtraCategories(listed.keys())) {
     const count = listed.get(label) ?? 0;
     if (!count) continue;
     const top3 = picks.get(label) ?? 0;
@@ -856,6 +915,13 @@ export function buildStats(
 export function buildDayViewmodel(day: Day, spotify: Readonly<Record<string, SpotifyEntry | null>>): DayView {
   const dayDate = requireIsoDate(day.date);
   const top3Titles = new Set(day.top3.map((pick) => pick.title));
+  // Selection writes `note` on the events[] entry, not the top3 pick, so a
+  // pick's "multiple showtimes" note has to come from its listing. Python
+  // passes "" here, so a Top 3 time never gets the "+" its listing card shows.
+  const noteByTitle = new Map<string, string>();
+  for (const event of day.events) {
+    if (event.note && !noteByTitle.has(event.title)) noteByTitle.set(event.title, event.note);
+  }
 
   const top3: PickView[] = day.top3.map((pick) => {
     const spotifyEntry = pyTruthy(pick.is_music) ? spotify[pick.title] : null;
@@ -867,7 +933,7 @@ export function buildDayViewmodel(day: Day, spotify: Readonly<Record<string, Spo
       why: pick.why,
       venue: pick.venue,
       map_url: buildMapUrl(pick.address),
-      time_display: displayTime(pick.time ?? "", ""),
+      time_display: displayTime(pick.time ?? "", pick.note || noteByTitle.get(pick.title) || ""),
       cost_text: costText || null,
       sold_out: pyTruthy(pick.sold_out),
     };

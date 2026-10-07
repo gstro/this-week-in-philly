@@ -425,7 +425,7 @@
       <div class="funnel-value">{{ stage.display }}</div>
       <div class="funnel-label">{{ stage.label }}</div>
 {% if stage.drop_pct is not none %}
-      <div class="funnel-drop">−{{ stage.drop_pct }}% from {{ stage.drop_from }}</div>
+      <div class="funnel-drop">{% if stage.drop_pct < 0 %}+{{ -stage.drop_pct }}{% else %}−{{ stage.drop_pct }}{% endif %}% from {{ stage.drop_from }}</div>
 {% endif %}
     </div>
 {% endfor %}

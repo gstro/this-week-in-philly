@@ -147,6 +147,15 @@ describe("yield floor", () => {
     expect(issues[0]!.source).toBe("do215");
   });
 
+  it("treats a null events count as 0 rather than throwing", () => {
+    // Python's check_yield_floor raises TypeError here (sum() over None),
+    // which takes the whole report render down with it.
+    const manifest = { sources: { do215: { status: "ok", events: null } } };
+    const expected = { sources: { do215: { min_expected: 4 } }, _meta: { total_floor: 1 } };
+    const issues = checkYieldFloor(manifest, expected);
+    expect(issues.map((i) => i.source)).toEqual(["do215", null]);
+  });
+
   it("does not flag a source with a zero floor", () => {
     // Sources documented as genuinely-quiet (min_expected: 0) never trip this
     // check -- exactly the meetup-owasp / philly-shows case, so a real quiet

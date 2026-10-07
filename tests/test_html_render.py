@@ -619,6 +619,21 @@ def test_render_report_omits_the_playlist_link_without_playlist_file(tmp_path: P
     assert "open.spotify.com/playlist" not in html_out
 
 
+def test_render_report_shows_a_funnel_stage_that_grew_as_a_plus(tmp_path: Path) -> None:
+    """A stage larger than the one before it (fewer candidates than listed
+    events) has a negative drop_pct; the template used to prefix it with its
+    own minus sign and print "−-780%"."""
+    import json
+
+    selections = json.loads((REAL_WEEK_DIR / "_selections.json").read_text())
+    selections["total_events_after_dedup"] = 10  # fewer candidates than the 88 listed
+    (tmp_path / "_selections.json").write_text(json.dumps(selections))
+
+    html_out = hr.render_report(tmp_path)
+    assert '<div class="funnel-drop">+780% from candidates</div>' in html_out
+    assert "−-" not in html_out
+
+
 def test_render_report_puts_the_playlist_link_in_the_header(tmp_path: Path) -> None:
     import json
     import shutil
