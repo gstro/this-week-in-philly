@@ -12,7 +12,7 @@ Everything below is committed to the repo unless a section says it's manual.
 
 ```sh
 npm run setup           # npm ci + .venv (Python 3.12) with dev + collection requirements
-npm run setup:browsers  # only if you'll touch fetch_page_text.py / run the full pytest suite
+npm run setup:browsers  # only if you'll touch fetch_page_text.py/fetchPageText.ts / run the full test suites
 cp .env.example .env    # fill in; only needed to run scripts against real Google/Spotify
 direnv allow            # loads .env and puts .venv/bin on PATH whenever you cd in
 npm run check           # everything CI checks, both stacks
@@ -78,6 +78,7 @@ settings:
   switch to *Custom* and add the Playwright CDN hosts, or to *Full*. Otherwise leave it at Trusted.
   Without a browser, the offline pytest suite fails only in `tests/test_fetch_page_text.py`, which
   drives real Chromium against file:// fixtures. Run it as `npm run test:py -- --ignore tests/test_fetch_page_text.py`.
+  Likewise vitest fails only in `src/fetchPageText.test.ts`: `npm test -- --exclude src/fetchPageText.test.ts`.
   `npm run check:ts` never needs a browser.
 - **Secrets:** none are needed to run the tests. Don't put real Google or Spotify tokens into a
   cloud environment for dev work, because environment variables are visible to anyone using that
@@ -100,7 +101,7 @@ settings:
 | `npm run check:py` | `lint:py` (`ruff check scripts/`) → `typecheck:py` (mypy) → `test:py` (pytest, offline) |
 | `npm run setup` | `npm ci` + `setup:py` |
 | `npm run setup:py` | creates `.venv` with 3.12, installs dev + collection requirements |
-| `npm run setup:browsers` | `playwright install chromium` into the venv |
+| `npm run setup:browsers` | `playwright install chromium` for both the venv and Playwright for Node (each pins its own browser build) |
 | `npm run test:watch` | vitest watch mode |
 | `npm run build` | tsc → `dist/` |
 

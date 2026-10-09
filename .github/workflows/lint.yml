@@ -83,4 +83,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: npm
       - run: npm ci
+      # fetchPageText.test.ts drives real Chromium (Playwright for Node keeps
+      # its own browser build, separate from the Python job's).
+      - run: npx playwright install --with-deps chromium
       - run: npm run check:ts
