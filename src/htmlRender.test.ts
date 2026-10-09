@@ -1,18 +1,20 @@
 /**
- * Port of tests/test_html_render.py, case for case, plus a TS-only block at
- * the end covering the Jinja2-semantics adapters htmlRender.ts adds on top of
- * Nunjucks (escaping, None, truthiness, trailing newline, Python rounding).
+ * Port of tests/test_html_render.py, case for case, plus TS-only blocks at
+ * the end: rendering the shared templates through Nunjucks, and the Python
+ * bugs htmlRender.ts fixes.
  *
  * Same two tiers as the Python: pure-helper unit tests, and render tests
- * against the real committed data/2026-06-22/ week -- including the golden
- * test, which pins this port to the very same tests/golden/actual-2026-06-22.html
- * bytes html_render.py's own golden test pins.
+ * against the real committed data/2026-06-22/ week. The golden test compares
+ * as parsed DOM, not bytes: htmlRender.ts is a rewrite whose serialization
+ * (entity spelling, trailing newline) differs from Jinja2's, but its document
+ * must be the one tests/golden/actual-2026-06-22.html -- html_render.py's own
+ * byte-pinned golden -- describes.
  */
 
 import { copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import nunjucks from "nunjucks";
+import * as cheerio from "cheerio";
 import { afterEach, describe, expect, it } from "vitest";
 import { CATEGORY_ORDER, RECURRING_THRESHOLD, loadManifest, loadSelections } from "./common.js";
 import {
@@ -37,16 +39,12 @@ import {
   formatCompiled,
   formatDateRange,
   formatFailureNote,
+  escapeHtml,
   hasMultipleShowtimes,
-  jinjaContext,
-  jinjaSource,
-  markupEscape,
   normalizeSourceName,
+  parseIsoDate,
   parseTimeForSort,
   priceClassAndText,
-  pyFormatFixed,
-  pyRound,
-  pyThousands,
   renderIndex,
   renderReport,
   renderTemplate,
@@ -167,9 +165,12 @@ describe("buildPickNameHtml", () => {
   });
 
   it("escapes title text", () => {
-    // html.escape(quote=False): only &, <, > -- the apostrophe stays literal.
+    // The Python leaves the apostrophe literal (html.escape(quote=False));
+    // escapeHtml writes &#39;. Same text once parsed.
     const pick = { title: "Johnny Brenda's <Show>", is_music: false, url: "https://example.com" };
-    expect(buildPickNameHtml(pick, null)).toContain("Johnny Brenda's &lt;Show&gt;");
+    const html = buildPickNameHtml(pick, null);
+    expect(html).toContain("Johnny Brenda&#39;s &lt;Show&gt;");
+    expect(cheerio.load(html)("a").text()).toBe("Johnny Brenda's <Show>");
   });
 });
 
@@ -511,7 +512,7 @@ describe("buildStats", () => {
       [listed, "Listed"],
       [picks, "Top 3 picks"],
     ] as const) {
-      expect(html, label).toContain(`<div class="funnel-value">${pyThousands(value)}</div>`);
+      expect(html, label).toContain(`<div class="funnel-value">${value.toLocaleString("en-US")}</div>`);
     }
     expect(html).toContain("none below their expected floor");
   });
@@ -586,11 +587,67 @@ describe("renderReport optional inputs", () => {
 
 // --- Golden test ---
 
+/** The parts of a parsed node domLines reads (cheerio's node types live in a transitive package). */
+interface DomNode {
+  type: string;
+  name?: string;
+  data?: string;
+  attribs?: Record<string, string>;
+  children?: DomNode[];
+}
+
+/**
+ * A parsed document as one line per node: tags with their attributes sorted,
+ * text and comments with HTML whitespace runs collapsed, whitespace-only text
+ * dropped. Two documents with equal lines have the same element tree,
+ * attributes and text -- entity spelling (&#34; vs &quot;) and insignificant
+ * whitespace don't count.
+ */
+function domLines(html: string): string[] {
+  const lines: string[] = [];
+  // Collapse whitespace runs but keep them: a lost space between inline
+  // elements ("foo <b>bar</b>" vs "foo<b>bar</b>") renders differently. Only
+  // a whitespace-only node at the very start or end of its parent is dropped
+  // (e.g. the file's trailing newline), since that never renders.
+  const squash = (text: string): string => text.replace(/[ \t\n\r\f]+/g, " ");
+  const walk = (node: DomNode, depth: number, edge: boolean): void => {
+    const indent = "  ".repeat(depth);
+    if (node.type === "text") {
+      const text = squash(node.data ?? "");
+      if (text && !(edge && text === " ")) lines.push(`${indent}${JSON.stringify(text)}`);
+    } else if (node.type === "comment") {
+      lines.push(`${indent}<!-- ${squash(node.data ?? "")} -->`);
+    } else if (node.type === "directive") {
+      lines.push(`${indent}<${(node.data ?? "").toLowerCase()}>`);
+    } else {
+      const attrs = Object.entries(node.attribs ?? {})
+        .sort(([a], [b]) => (a < b ? -1 : 1))
+        .map(([name, value]) => ` ${name}=${JSON.stringify(value)}`)
+        .join("");
+      lines.push(`${indent}<${node.name ?? node.type}${attrs}>`);
+      const children = node.children ?? [];
+      children.forEach((child, i) => walk(child, depth + 1, i === 0 || i === children.length - 1));
+    }
+  };
+  walk(cheerio.load(html).root()[0] as unknown as DomNode, 0, true);
+  return lines;
+}
+
 describe("golden", () => {
-  it("renderReport matches the golden v2 artifact byte for byte", () => {
-    // The same file html_render.py's own golden test pins -- one spec of record.
+  it("renderReport produces the same document as the golden v2 artifact", () => {
+    // The same file html_render.py's own golden test pins byte for byte -- one
+    // spec of record. Compared as parsed DOM: see domLines.
     const expected = readFileSync(join(GOLDEN_DIR, "actual-2026-06-22.html"), "utf8");
-    expect(renderReport(REAL_WEEK_DIR)).toBe(expected);
+    expect(domLines(renderReport(REAL_WEEK_DIR))).toEqual(domLines(expected));
+  });
+
+  it("domLines ignores serialization but not content", () => {
+    const a = '<p class="x" id="y">A &#34;b&#34;\n  c</p>';
+    expect(domLines('<p id="y" class="x">A &quot;b&quot; c</p>\n')).toEqual(domLines(a));
+    expect(domLines('<p class="x" id="y">A "b" d</p>')).not.toEqual(domLines(a));
+    expect(domLines('<p class="z" id="y">A "b" c</p>')).not.toEqual(domLines(a));
+    expect(domLines("<p>foo <b>bar</b></p>")).not.toEqual(domLines("<p>foo<b>bar</b></p>"));
+    expect(domLines("<p>foo  \n <b>bar</b></p>")).toEqual(domLines("<p>foo <b>bar</b></p>"));
   });
 });
 
@@ -771,135 +828,153 @@ describe("document outline", () => {
   });
 });
 
-// --- TS-only: the Jinja2-semantics layer over Nunjucks ---
-// No Python counterpart: these pin the adaptations listed in htmlRender.ts's
-// module docstring, each of which the parity sweep showed real data needs
-// (or would need) to stay byte-identical with the Jinja2 output.
+// --- TS-only: the shared templates through Nunjucks ---
+// No Python counterpart: these pin what htmlRender.ts relies on instead of
+// emulating Jinja2 (see its module docstring), and its plain-JS helpers.
 
-describe("Jinja2 semantics over Nunjucks (TS-only)", () => {
-  it("the suppressValue hook takes effect (guards the pinned-version internal)", () => {
-    // If a nunjucks upgrade stops routing {{ }} through runtime.suppressValue,
-    // this fails before any output silently changes. markupsafe -> &#34;,
-    // nunjucks' own escape -> &quot; / &#92;.
-    const html = renderTemplate("index.html.j2", {
-      weeks: [{ href: 'a"b\\c', label: `<x> & 'y'` }],
-      site_url: "u",
-    });
-    expect(html).toContain('<a href="a&#34;b\\c">&lt;x&gt; &amp; &#39;y&#39;</a>');
-    expect(html).not.toContain("&quot;");
+/** A minimal report.html.j2 context; override what a test is about. */
+function reportContext(overrides: Record<string, unknown> = {}): Record<string, unknown> {
+  return {
+    date_range: "June 22–28, 2026",
+    canonical_url: null,
+    meta_description: "m",
+    compiled_iso: null,
+    compiled_display: null,
+    playlist_url: undefined,
+    days: [],
+    all_week: [],
+    stats: { stages: [], categories: [], sources: [], health: null },
+    sources: [],
+    collection_failure_notes: [],
+    ...overrides,
+  };
+}
+
+function health(belowFloor: string[], runLevelShortfall: boolean): Record<string, unknown> {
+  return {
+    stages: [],
+    categories: [],
+    sources: [],
+    health: { source_count: 3, contributed: 2, below_floor: belowFloor, run_level_shortfall: runLevelShortfall },
+  };
+}
+
+describe("templates through Nunjucks (TS-only)", () => {
+  it("autoescapes printed values with Nunjucks' own escaping", () => {
+    const html = renderTemplate("index.html.j2", { weeks: [{ href: 'a"b', label: `<x> & 'y'` }], site_url: "u" });
+    expect(html).toContain('<a href="a&quot;b">&lt;x&gt; &amp; &#39;y&#39;</a>');
+    expect(cheerio.load(html)("li a").text()).toBe(`<x> & 'y'`);
   });
 
-  it("the hook is scoped to one render and restored afterwards", () => {
-    const before = (nunjucks.runtime as unknown as { suppressValue: unknown }).suppressValue;
-    renderIndex();
-    expect((nunjucks.runtime as unknown as { suppressValue: unknown }).suppressValue).toBe(before);
-  });
-
-  it("the hook is restored even when the render throws", () => {
-    const before = (nunjucks.runtime as unknown as { suppressValue: unknown }).suppressValue;
-    expect(() => renderTemplate("does-not-exist.html.j2", {})).toThrow();
-    expect((nunjucks.runtime as unknown as { suppressValue: unknown }).suppressValue).toBe(before);
-  });
-
-  it("markupEscape matches markupsafe, not html.escape", () => {
-    expect(markupEscape(`<a href="x">'&'</a>`)).toBe("&lt;a href=&#34;x&#34;&gt;&#39;&amp;&#39;&lt;/a&gt;");
-  });
-
-  it("an empty list is falsy in the template, as in Jinja2", () => {
-    // index.html.j2's {% for %}{% else %} branch.
+  it("runs the for-else branch for an empty week list", () => {
     expect(renderTemplate("index.html.j2", { weeks: [], site_url: "u" })).toContain("No reports published yet.");
   });
 
-  it("jinjaContext maps empty containers to null and leaves everything else alone", () => {
-    expect(jinjaContext({ a: [], b: {}, c: [1, []], d: 0, e: "", f: { g: [] } })).toEqual({
-      a: null,
-      b: null,
-      c: [1, null],
-      d: 0,
-      e: "",
-      f: { g: null },
-    });
+  it("skips the All Week table when there are no rows (the template's |length check)", () => {
+    expect(renderTemplate("report.html.j2", reportContext())).not.toContain("All Week / Recurring");
+    const row = { title: "Rent", venue: "V", days: "Mon, Tue, Wed", price_text: "$10" };
+    expect(renderTemplate("report.html.j2", reportContext({ all_week: [row] }))).toContain("All Week / Recurring");
   });
 
-  it("a null printed value renders as None, an undefined one as empty", () => {
-    const html = renderTemplate("index.html.j2", { weeks: [{ href: null, label: true }], site_url: undefined });
-    expect(html).toContain('<li><a href="None">True</a></li>');
+  it("picks the health line's branch by below_floor length, then run_level_shortfall", () => {
+    const render = (belowFloor: string[], shortfall: boolean): string =>
+      renderTemplate("report.html.j2", reportContext({ stats: health(belowFloor, shortfall) }));
+    expect(render([], false)).toContain("none below their expected floor");
+    expect(render([], true)).toContain("the run as a whole came in under its floor");
+    expect(render(["do215", "luma"], true)).toContain("below expected floor: do215, luma");
+  });
+
+  it("shows a funnel delta only for a numeric drop_pct, zero included", () => {
+    const stage = (label: string, dropPct: number | null): Record<string, unknown> => ({
+      label,
+      value: 1,
+      drop_pct: dropPct,
+      drop_from: dropPct === null ? null : "prev",
+      display: "1",
+    });
+    const html = renderTemplate(
+      "report.html.j2",
+      reportContext({ stats: { stages: [stage("A", null), stage("B", 0), stage("C", -5)], categories: [], sources: [], health: null } }),
+    );
+    expect(html.split('class="funnel-drop"').length - 1).toBe(2);
+    expect(html).toContain('<div class="funnel-drop">−0% from prev</div>');
+    expect(html).toContain('<div class="funnel-drop">+5% from prev</div>');
+  });
+
+  it("formats bar widths with toFixed (an exact binary tie rounds up, unlike Python's '%.1f')", () => {
+    const row = { label: "🎵 Music & Concerts", listed: 16, top3: 1, listed_pct: 100, top3_pct: 6.25 };
+    const html = renderTemplate("report.html.j2", reportContext({ stats: { stages: [], categories: [row], sources: [], health: null } }));
+    expect(html).toContain('style="width: 6.3%"'); // Python: 6.2%
+    expect(html).toContain('style="width: 93.8%"'); // 100 - 6.25 = 93.75, also a tie
+  });
+
+  it("prints a null field as empty", () => {
+    const html = renderTemplate("index.html.j2", { weeks: [{ href: null, label: "x" }], site_url: undefined });
+    expect(html).toContain('<li><a href="">x</a></li>');
     expect(html).toContain('<link rel="canonical" href="">');
   });
 
-  it("jinjaSource normalizes newlines and drops exactly one trailing newline", () => {
-    expect(jinjaSource("a\r\nb\rc\n")).toBe("a\nb\nc");
-    expect(jinjaSource("a\n\n")).toBe("a\n");
-    expect(jinjaSource("a")).toBe("a");
-    expect(renderIndex().endsWith("</html>")).toBe(true);
+  it("throws for a template that doesn't exist", () => {
+    expect(() => renderTemplate("does-not-exist.html.j2", {})).toThrow();
+  });
+});
+
+describe("plain-JS helpers (TS-only)", () => {
+  it("escapeHtml escapes the five HTML-special characters", () => {
+    expect(escapeHtml(`<a href="x">'&'</a>`)).toBe("&lt;a href=&quot;x&quot;&gt;&#39;&amp;&#39;&lt;/a&gt;");
   });
 
-  it("pyFormatFixed rounds exact binary ties half-to-even, like '%.1f'", () => {
-    expect(pyFormatFixed(6.25, 1)).toBe("6.2"); // toFixed gives "6.3"
-    expect(pyFormatFixed(18.75, 1)).toBe("18.8");
-    expect(pyFormatFixed(0.05, 1)).toBe("0.1"); // 0.05 is slightly above the tie in binary
-    expect(pyFormatFixed(100, 1)).toBe("100.0");
-    expect(pyFormatFixed(33.333333333333336, 1)).toBe("33.3");
-    expect(pyFormatFixed(-0.04, 1)).toBe("-0.0");
+  it("funnel percentages round with Math.round and counts group with en-US separators", () => {
+    // 16 -> 14 is a 12.5% drop: Math.round gives 13 where Python's round gives 12.
+    const tie = buildStats(oneDaySelections([], [], 14), { sources: { do215: { status: "ok", events: 16 } } }, {});
+    expect(tie.stages[1]!.drop_pct).toBe(13);
+    const big = buildStats(oneDaySelections([], [], 10), { sources: { do215: { status: "ok", events: 1234567 } } }, {});
+    expect(big.stages[0]!.display).toBe("1,234,567");
   });
 
-  it("pyRound is Python's banker's round", () => {
-    expect(pyRound(12.5)).toBe(12);
-    expect(pyRound(13.5)).toBe(14);
-    expect(pyRound(-2.5)).toBe(-2);
-    expect(pyRound(75)).toBe(75);
-    expect(pyRound(74.6)).toBe(75);
-  });
-
-  it("pyThousands groups like f'{n:,}'", () => {
-    expect(pyThousands(40)).toBe("40");
-    expect(pyThousands(1234567)).toBe("1,234,567");
-    expect(pyThousands(-1234)).toBe("-1,234");
-  });
-
-  it("parseTimeForSort mirrors strptime's %I:%M %p regex exactly", () => {
+  it("parseTimeForSort reads 12-hour clock times", () => {
     expect(parseTimeForSort("12:00 am")).toBe(0);
     expect(parseTimeForSort("12:30 PM")).toBe(12 * 60 + 30);
-    expect(parseTimeForSort("7:5 PM")).toBe(19 * 60 + 5);
-    expect(parseTimeForSort(" 7:00 PM")).toBe(19 * 60); // %I accepts a space-padded hour
-    expect(parseTimeForSort("7:00  pm")).toBe(19 * 60); // the space is \s+
-    expect(parseTimeForSort("07:00PM")).toBeNull();
+    expect(parseTimeForSort("07:00PM")).toBe(19 * 60);
+    expect(parseTimeForSort(" 7:00 pm ")).toBe(19 * 60);
+    expect(parseTimeForSort("7:5 PM")).toBeNull();
     expect(parseTimeForSort("13:00 PM")).toBeNull();
-    expect(parseTimeForSort("7:00 PM ")).toBeNull();
+    expect(parseTimeForSort("0:30 AM")).toBeNull();
+    expect(parseTimeForSort("7:00, 7:30")).toBeNull();
     expect(parseTimeForSort(null)).toBeNull();
   });
 
-  it("formatCompiled accepts strict ISO 8601 only (narrower than fromisoformat)", () => {
-    expect(formatCompiled("2026-09-13")[0]).toBe("2026-09-13");
-    expect(formatCompiled("2026-09-13T22:23")[0]).toBe("2026-09-13");
+  it("parseIsoDate takes real YYYY-MM-DD dates only, at UTC midnight", () => {
+    expect(parseIsoDate("2026-06-22")?.toISOString()).toBe("2026-06-22T00:00:00.000Z");
+    for (const bad of ["2026-02-30", "2026-13-01", "20260622", "2026-W26-1", "2026-06-22T00:00", ""]) {
+      expect(parseIsoDate(bad), bad).toBeNull();
+    }
+  });
+
+  it("formatCompiled shows the stamp's own date, with no time-zone conversion", () => {
+    expect(formatCompiled("2026-09-13")).toEqual(["2026-09-13", "Sunday, September 13"]);
     expect(formatCompiled("2026-09-13 22:23:01")[0]).toBe("2026-09-13");
-    expect(formatCompiled("2026-09-13T22:23:01.123456+01:00")[0]).toBe("2026-09-13");
-    expect(formatCompiled("2026-09-13T22:23:01Z")[0]).toBe("2026-09-13");
-    // Python's fromisoformat takes all of these; this port rejects them.
-    expect(formatCompiled("20260913T222301")[0]).toBeNull();
+    expect(formatCompiled("2026-09-13T23:59:59-05:00")[0]).toBe("2026-09-13"); // 04:59 UTC on the 14th
     expect(formatCompiled("2026-09-13X22:23:01")[0]).toBeNull();
     expect(formatCompiled("2026-W37-7")[0]).toBeNull();
-    // Out of range, as in Python.
-    expect(formatCompiled("2026-09-13T24:00:00")[0]).toBeNull();
-    expect(formatCompiled("2026-09-13T22:23:1")[0]).toBeNull();
     expect(formatCompiled("2026-02-30")[0]).toBeNull();
   });
 
-  it("buildMapUrl encodes what quote_plus encodes and encodeURIComponent doesn't", () => {
-    expect(buildMapUrl("1 Main St. (rear)! *x* 'y'")).toBe(
-      "https://www.google.com/maps/search/?api=1&query=1+Main+St.+%28rear%29%21+%2Ax%2A+%27y%27",
+  it("buildMapUrl form-encodes the address", () => {
+    expect(buildMapUrl("1 Main St. (rear)! 'y'")).toBe(
+      "https://www.google.com/maps/search/?api=1&query=1+Main+St.+%28rear%29%21+%27y%27",
     );
   });
 
-  it("buildPickNameHtml quotes the href the way html.escape(quote=True) does", () => {
+  it("buildPickNameHtml escapes quotes in the href", () => {
     expect(buildPickNameHtml({ title: "T", url: `a"b'c`, is_music: false }, null)).toBe(
-      '<a class="event-link" href="a&quot;b&#x27;c">T</a>',
+      '<a class="event-link" href="a&quot;b&#39;c">T</a>',
     );
   });
 
-  it("an empty spotify entry is falsy, as a Python empty dict is", () => {
+  it("an empty spotify entry falls back to the event link", () => {
     const pick = { title: "Band", url: "https://e", is_music: true };
-    expect(buildPickNameHtml(pick, {} as never)).toBe('<a class="event-link" href="https://e">Band</a>');
+    expect(buildPickNameHtml(pick, {})).toBe('<a class="event-link" href="https://e">Band</a>');
   });
 });
 

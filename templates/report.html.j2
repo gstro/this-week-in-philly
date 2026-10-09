@@ -399,7 +399,7 @@
 {% endif %}
 {% endfor %}
 {% endfor %}
-{% if all_week %}
+{% if all_week|length %}
 
   <!-- ALL WEEK / RECURRING -->
   <h2 class="allweek-label">All Week / Recurring</h2>
@@ -424,7 +424,7 @@
     <div class="funnel-stage">
       <div class="funnel-value">{{ stage.display }}</div>
       <div class="funnel-label">{{ stage.label }}</div>
-{% if stage.drop_pct is not none %}
+{% if stage.drop_pct is number %}
       <div class="funnel-drop">{% if stage.drop_pct < 0 %}+{{ -stage.drop_pct }}{% else %}−{{ stage.drop_pct }}{% endif %}% from {{ stage.drop_from }}</div>
 {% endif %}
     </div>
@@ -466,7 +466,7 @@
 
   <p class="stats-health">
     {{ stats.health.source_count }} sources collected · {{ stats.health.contributed }} contributed events ·
-{% if stats.health.below_floor %}
+{% if stats.health.below_floor|length %}
     <span class="below-floor">below expected floor: {{ stats.health.below_floor|join(', ') }}</span>
 {% elif stats.health.run_level_shortfall %}
     <span class="below-floor">the run as a whole came in under its floor</span>

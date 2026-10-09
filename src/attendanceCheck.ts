@@ -91,10 +91,9 @@ const DAY_MS = 86_400_000;
 
 /** A Date at UTC midnight of a YYYY-MM-DD string (throws like date.fromisoformat on anything else). */
 function utcDate(iso: string): Date {
-  const d = parseIsoDate(iso);
-  if (!d) throw new Error(`ValueError: Invalid isoformat string: '${iso}'`);
-  const date = new Date(0);
-  date.setUTCFullYear(d.year, d.month - 1, d.day); // not Date.UTC: it maps years 0-99 to 19xx
+  const date = parseIsoDate(iso);
+  // Year 0000 parses as an ISO date but isn't one Python's date accepts.
+  if (!date || date.getUTCFullYear() < 1) throw new Error(`ValueError: Invalid isoformat string: '${iso}'`);
   return date;
 }
 
