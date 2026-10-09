@@ -88,7 +88,7 @@ affect the published report today. Each fix is listed in the TS parser's
 ### `fetch_raw` / `proxy_session` / `fetch_page_text` — fixed in TS, still present in Python (production: Collection)
 
 - **Mojibake in every Meetup source (confirmed live 2026-10-09):** Meetup serves its iCal feeds as `text/calendar` with no charset, and `requests` decodes any charset-less `text/*` body as ISO-8859-1. Every non-ASCII character in a Meetup title or description reaches `data/<week>/meetup-*.json` garbled (e.g. ☕ as `â\x98\x95`; 35 such sequences in `data/2026-10-05`), and from there Selection's input. `lib/http.ts` decodes with the declared charset, else UTF-8. On the same day's live pages, the TS fetch gave the same parsed events as the Python for every other source.
-- An http:// URL went through HTTPS_PROXY; the TS uses HTTP_PROXY for it (curl's convention). No source is http://.
+- **Proxied relay (latent; matters only behind an egress proxy):** a redirect was followed by Chromium directly, bypassing the proxy, and cookies were never sent back on relayed requests, so a challenge relying on a clearance cookie could loop. The TS follows redirects in the relay and forwards cookies.
 
 ### Open gaps (not port bugs)
 

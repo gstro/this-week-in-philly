@@ -72,15 +72,16 @@ describe("proxy handling", () => {
     expect(proxy.carried).toEqual([]);
   });
 
-  it("sends requests through the configured proxy", async () => {
-    restoreEnv = setProxyEnv({ HTTP_PROXY: proxy.url });
+  it("sends http:// and https:// alike through the first proxy variable set", async () => {
+    // The sandbox case: only HTTPS_PROXY is set.
+    restoreEnv = setProxyEnv({ HTTPS_PROXY: proxy.url });
     expect(configuredProxy()).toBe(proxy.url);
     expect(await fetchRaw(`${server.url}/sample.json`)).toBe(SAMPLE);
     expect(proxy.carried).toEqual([`GET ${server.url}/sample.json`]);
   });
 
   it("honours NO_PROXY", async () => {
-    restoreEnv = setProxyEnv({ HTTP_PROXY: proxy.url, NO_PROXY: "localhost,127.0.0.1" });
+    restoreEnv = setProxyEnv({ HTTPS_PROXY: proxy.url, NO_PROXY: "localhost,127.0.0.1" });
     await fetchRaw(`${server.url}/sample.json`);
     expect(proxy.carried).toEqual([]);
   });

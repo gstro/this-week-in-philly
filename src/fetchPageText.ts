@@ -20,9 +20,18 @@
  *   costs HTTP/2 and parallelism, which is why it's proxy-only (measured
  *   2026-08-01).
  *
- * Divergences from the Python: the browser is closed on every path, not just
- * on success; the relay uses lib/http.ts's 20s idle timeouts (the Python
- * relay used 15s) and drops hop-by-hop headers undici rejects.
+ * Divergences from the Python, all in the proxied relay unless noted:
+ * - Redirects are followed inside the relay. The Python handed a 3xx back to
+ *   Chromium, which follows it without consulting the route handler -- i.e.
+ *   directly, which is exactly what fails behind the proxy. The cost: the
+ *   page keeps the original URL as its base for relative links.
+ * - Cookies go back to the server (`allHeaders()`; `headers()` omits
+ *   Cookie), so a challenge that sets a clearance cookie and reloads can
+ *   pass. Several Set-Cookie headers are kept apart (requests joined them
+ *   with ", ", corrupting them), and br/zstd bodies are decoded.
+ * - lib/http.ts's 20s timeouts (the Python relay used 15s); hop-by-hop
+ *   headers undici rejects are dropped.
+ * - Both modes: the browser is closed on every path, not just on success.
  */
 
 import { existsSync } from "node:fs";
@@ -120,9 +129,10 @@ export async function relayRoute(route: Route): Promise<void> {
   try {
     response = await request(req.url(), {
       method: req.method(),
-      headers: Object.fromEntries(Object.entries(req.headers()).filter(([name]) => !STRIP_REQUEST_HEADERS.has(name.toLowerCase()))),
+      headers: Object.fromEntries(Object.entries(await req.allHeaders()).filter(([name]) => !STRIP_REQUEST_HEADERS.has(name.toLowerCase()))),
       body: req.postDataBuffer(),
-      redirect: "manual", // Chromium follows redirects itself
+      // Chromium would follow a 3xx itself, bypassing this handler and so the proxy.
+      redirect: "follow",
     });
     body = Buffer.from(await response.arrayBuffer());
   } catch {

@@ -9,13 +9,20 @@
  * handles both: it reads HTTP(S)_PROXY and NO_PROXY itself, which is all
  * proxy_session.py's `requests.Session` subclass existed to get right.
  *
+ * As in the Python, the first of HTTPS_PROXY, https_proxy, HTTP_PROXY,
+ * http_proxy carries both http:// and https:// traffic.
+ *
  * Divergences from the Python:
- * - An http:// URL uses HTTP_PROXY only; the Python sent it through
- *   HTTPS_PROXY too. (curl's convention; every source is https anyway.)
  * - A body is decoded with the charset its Content-Type names, else UTF-8.
- *   `requests` decoded a `text/*` response with no charset as ISO-8859-1,
- *   which turns UTF-8 pages into mojibake.
- * - The cap is applied without splitting a surrogate pair.
+ *   `requests` decoded a `text/*` response with no charset as ISO-8859-1
+ *   (garbling every Meetup feed -- docs/TS_PORT.md) and guessed the charset
+ *   for other types. A page that names a legacy charset only in a <meta> tag
+ *   would now decode with U+FFFD replacements; no source does. (TextDecoder
+ *   also reads ISO-8859-1 as windows-1252, per the WHATWG spec.)
+ * - The cap counts UTF-16 code units, not code points, and never splits a
+ *   surrogate pair; text with emoji is cut slightly earlier.
+ * - NO_PROXY entries are host names/suffixes only; undici ignores CIDR
+ *   ranges, which `requests` honoured.
  */
 
 import { EnvHttpProxyAgent, type RequestInit, type Response, fetch } from "undici";
@@ -41,9 +48,18 @@ let agent: { key: string; dispatcher: EnvHttpProxyAgent } | undefined;
 function dispatcher(): EnvHttpProxyAgent {
   const key = JSON.stringify([...PROXY_VARS, "NO_PROXY", "no_proxy"].map((name) => process.env[name]));
   if (agent?.key !== key) {
-    // requests' timeout=20 limited each wait, not the whole transfer; these
-    // are the same idle limits.
-    agent = { key, dispatcher: new EnvHttpProxyAgent({ headersTimeout: 20_000, bodyTimeout: 20_000 }) };
+    // requests' timeout=20 limited the connect and each read, not the whole
+    // transfer; these are the same limits.
+    const proxy = configuredProxy();
+    agent = {
+      key,
+      dispatcher: new EnvHttpProxyAgent({
+        ...(proxy !== undefined && { httpProxy: proxy, httpsProxy: proxy }),
+        connectTimeout: 20_000,
+        headersTimeout: 20_000,
+        bodyTimeout: 20_000,
+      }),
+    };
   }
   return agent.dispatcher;
 }

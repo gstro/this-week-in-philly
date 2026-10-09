@@ -27,6 +27,14 @@ beforeAll(async () => {
     },
     "/data.json": { body: JSON.stringify({ text: "Painted by JS" }), type: "application/json" },
     "/pixel.gif": { body: PIXEL, type: "image/gif" },
+    "/moved": { body: "", status: 302, headers: { Location: "/page.html" } },
+    "/cookies.html": {
+      body: `<html><body><p id="echo"></p>
+        <script>fetch("/echo").then((r) => r.text()).then((t) => { document.getElementById("echo").textContent = "cookies: " + t; });</script>
+        </body></html>`,
+      headers: { "Set-Cookie": ["a=1; Path=/", "b=2; Path=/"] },
+    },
+    "/echo": (req) => ({ body: req.headers.cookie ?? "none", type: "text/plain" }),
     "/challenge.html": {
       body: `<html><body><p id="msg">Checking your browser before accessing</p>
         <script>setTimeout(() => { document.getElementById("msg").textContent = "Real listings"; }, ${String(DEFAULT_SETTLE_MS + 1500)});</script>
@@ -79,11 +87,24 @@ describe("fetchPageText", { timeout: 20_000 }, () => {
   });
 
   it("proxied mode: relays every request through the proxy and still runs JS", async () => {
-    restoreEnv = setProxyEnv({ HTTP_PROXY: proxy.url });
+    restoreEnv = setProxyEnv({ HTTPS_PROXY: proxy.url });
     const text = await fetchPageText(`${server.url}/page.html`);
     expect(text).toContain("Painted by JS");
     expect(proxy.carried).toEqual(expect.arrayContaining([`GET ${server.url}/page.html`, `GET ${server.url}/data.json`]));
     expect(server.requests).not.toContain("/pixel.gif");
+  });
+
+  it("proxied mode: follows redirects through the proxy", async () => {
+    restoreEnv = setProxyEnv({ HTTPS_PROXY: proxy.url });
+    const text = await fetchPageText(`${server.url}/moved`);
+    expect(text).toContain("Painted by JS");
+    expect(proxy.carried).toEqual(expect.arrayContaining([`GET ${server.url}/moved`, `GET ${server.url}/page.html`]));
+    expect(server.requests.length).toBe(proxy.carried.length); // nothing went direct
+  });
+
+  it("proxied mode: keeps each Set-Cookie and sends cookies back", async () => {
+    restoreEnv = setProxyEnv({ HTTPS_PROXY: proxy.url });
+    expect(await fetchPageText(`${server.url}/cookies.html`)).toContain("cookies: a=1; b=2");
   });
 
   it("waits out a self-resolving bot challenge once", { timeout: 30_000 }, async () => {

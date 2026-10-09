@@ -21,6 +21,7 @@ export interface Page {
   body: string | Buffer;
   type?: string;
   status?: number;
+  headers?: Record<string, string | string[]>;
 }
 
 async function listen(server: ReturnType<typeof createServer>): Promise<string> {
@@ -38,18 +39,19 @@ function closer(server: ReturnType<typeof createServer>): () => Promise<void> {
     });
 }
 
-/** Serves `pages` by path; anything else is a 404. */
-export async function startStaticServer(pages: Record<string, Page>): Promise<StaticServer> {
+/** Serves `pages` by path (a function sees the request); anything else is a 404. */
+export async function startStaticServer(pages: Record<string, Page | ((req: IncomingMessage) => Page)>): Promise<StaticServer> {
   const requests: string[] = [];
   const server = createServer((req: IncomingMessage, res: ServerResponse) => {
     const path = req.url ?? "/";
     requests.push(path);
-    const page = pages[path];
+    const entry = pages[path];
+    const page = typeof entry === "function" ? entry(req) : entry;
     if (!page) {
       res.writeHead(404, { "Content-Type": "text/plain" }).end("not found");
       return;
     }
-    res.writeHead(page.status ?? 200, { "Content-Type": page.type ?? "text/html; charset=utf-8" }).end(page.body);
+    res.writeHead(page.status ?? 200, { "Content-Type": page.type ?? "text/html; charset=utf-8", ...page.headers }).end(page.body);
   });
   return { url: await listen(server), requests, close: closer(server) };
 }

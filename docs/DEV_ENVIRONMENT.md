@@ -19,7 +19,7 @@ npm run check           # everything CI checks, both stacks
 ```
 
 `npm run setup` needs `python3.12` on PATH (`brew install python@3.12`), because the system `python3` is newer.
-It also needs Node 24 (`.nvmrc`). With nvm, run `nvm use`. Homebrew's `node` also works as long as it's ≥ 22.
+It also needs Node 24 (`.nvmrc`). With nvm, run `nvm use`. Homebrew's `node` also works as long as it's ≥ 22.19 (undici's floor).
 
 ## Where each tool works
 
@@ -71,15 +71,17 @@ settings:
   ```
   The script starts in `/home/user`, not the repo, so the `cd` is required. Without it `npm ci` fails
   with a misleading "needs an existing package-lock.json" error. The nvm line is best-effort and assumes the image provides nvm. Check it the first time with
-  `node --version`. If Node 24 isn't available, the image's Node works as long as it is ≥ 22
+  `node --version`. If Node 24 isn't available, the image's Node works as long as it is ≥ 22.19
   (`engines`). CI still tests on 24.
 - **Network access:** the default *Trusted* level covers npm and PyPI. Playwright's browser download
   is not on that list. If you need `npm run setup:browsers` or the network pytest suite in the cloud,
   switch to *Custom* and add the Playwright CDN hosts, or to *Full*. Otherwise leave it at Trusted.
   Without a browser, the offline pytest suite fails only in `tests/test_fetch_page_text.py`, which
   drives real Chromium against file:// fixtures. Run it as `npm run test:py -- --ignore tests/test_fetch_page_text.py`.
-  Likewise vitest fails only in `src/fetchPageText.test.ts`: `npm test -- --exclude src/fetchPageText.test.ts`.
-  `npm run check:ts` never needs a browser.
+  Likewise vitest (and so `npm run check:ts`/`check`) fails only in `src/fetchPageText.test.ts`:
+  `npm test -- --exclude src/fetchPageText.test.ts`. If `/opt/pw-browsers/chromium` exists, both
+  stacks launch that prebaked build instead of their own, so a version mismatch there shows up as a
+  launch or protocol error rather than a missing browser.
 - **Secrets:** none are needed to run the tests. Don't put real Google or Spotify tokens into a
   cloud environment for dev work, because environment variables are visible to anyone using that
   environment.
