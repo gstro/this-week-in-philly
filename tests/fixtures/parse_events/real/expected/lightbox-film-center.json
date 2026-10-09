@@ -1,0 +1,56 @@
+[
+  {
+    "title": "monument",
+    "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+    "date": "2026-10-11",
+    "time": "5:00 PM",
+    "cost": "",
+    "url": "https://www.lightboxfilmcenter.org/events/monument",
+    "description": "Philadelphia Premiere"
+  },
+  {
+    "title": "My Brother's Wedding",
+    "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+    "date": "2026-10-14",
+    "time": "7:00 PM",
+    "cost": "",
+    "url": "https://www.lightboxfilmcenter.org/events/my-brothers-wedding",
+    "description": "New Restoration"
+  },
+  {
+    "title": "Sudden Fury",
+    "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+    "date": "2026-10-18",
+    "time": "6:00 PM",
+    "cost": "",
+    "url": "https://www.lightboxfilmcenter.org/events/sudden-fury",
+    "description": "New Restoration"
+  },
+  {
+    "title": "Screamplay + Manos: The Hands of Fate (Double Feature)",
+    "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+    "date": "2026-10-21",
+    "time": "7:00 PM",
+    "cost": "",
+    "url": "https://www.lightboxfilmcenter.org/events/screamplay-manos-the-hands-of-fate-double-feature",
+    "description": "New Restoration"
+  },
+  {
+    "title": "Magic Thinking",
+    "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+    "date": "2026-10-25",
+    "time": "6:00 PM",
+    "cost": "",
+    "url": "https://www.lightboxfilmcenter.org/events/magic-thinking",
+    "description": "Philadelphia Premiere"
+  },
+  {
+    "title": "Capone Cries A Lot",
+    "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+    "date": "2026-10-28",
+    "time": "7:00 PM",
+    "cost": "",
+    "url": "https://www.lightboxfilmcenter.org/events/capone-cries-a-lot-2",
+    "description": "New Restoration"
+  }
+]

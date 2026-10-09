@@ -32,6 +32,8 @@
     "vitest": "^5.0.0"
   },
   "dependencies": {
+    "cheerio": "1.2.0",
+    "entities": "7.0.1",
     "googleapis": "^178.0.0",
     "nunjucks": "3.2.4"
   }
