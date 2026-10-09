@@ -11,7 +11,9 @@ module and `difflib`). From Tier B on, ports use ordinary TypeScript libraries
 and idioms, fix known Python bugs rather than copy them, and are checked for
 "same results" on real inputs (e.g. `tests/fixtures/parse_events/real/`), with
 every intentional difference listed in the module's "Divergences from the
-Python". The Tier A emulation is to be revisited after Tier B's first PR.
+Python". The Tier A emulation is being removed module by module: `htmlRender`
+is done (plain Nunjucks autoescape, `Date`/`Intl`; checked as "same DOM" as the
+Python on every committed week); `csvLog`/`attendanceCheck` are next.
 
 ## Tiers
 

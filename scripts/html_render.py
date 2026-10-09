@@ -481,9 +481,9 @@ def build_stats(selections: dict, manifest: dict, expected: dict) -> dict:
     stages.append({"label": "Top 3 picks", "value": sum(picks.values())})
     stages = [stage for stage in stages if stage["value"] is not None]
     for stage in stages:
-        # Set explicitly, including on the first stage: an absent key is Undefined
-        # in Jinja, and `Undefined is not none` is true, so a missing drop_pct
-        # renders the delta line instead of skipping it.
+        # Set explicitly, including on the first stage, so every stage has the
+        # same keys. The template tests `drop_pct is number` (a test both Jinja2
+        # and Nunjucks have), so None skips the delta line.
         stage["drop_pct"] = None
         stage["drop_from"] = None
         stage["display"] = f"{stage['value']:,}"

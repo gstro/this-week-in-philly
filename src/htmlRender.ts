@@ -1,90 +1,73 @@
 #!/usr/bin/env node
 /**
- * Port of scripts/html_render.py -- renders data/YYYY-MM-DD/_selections.json
- * (+ _spotify.json, _playlist.json, _manifest.json) into the weekly HTML
- * report, then regenerates docs/index.html to link every published week.
+ * Renders data/YYYY-MM-DD/_selections.json (+ _spotify.json, _playlist.json,
+ * _manifest.json) into the weekly HTML report, then regenerates
+ * docs/index.html to link every published week. Rewrite (not a byte-level
+ * port) of scripts/html_render.py: same view model, same templates, checked
+ * for the *same rendered document* on every committed week rather than the
+ * same bytes.
  *
  * See html_render.py's module docstring for the product-level divergences
  * from v1's historical LLM-rendered output (fixed category order, verbatim
  * text, the restored All Week table, the unfixed one-Spotify-link-per-pick
- * gap). Those are behaviours of the renderer itself, so this port inherits
- * them unchanged; tests/golden/actual-2026-06-22.html pins both
- * implementations to the same bytes.
+ * gap). Those are behaviours of the renderer itself and apply here unchanged.
  *
  * Template engine: Nunjucks, rendering the very same templates/*.html.j2
- * files Jinja2 renders for the Python. There is deliberately one spec of
- * record -- templates/report.html.j2's own comments are the report spec --
- * so duplicating the markup into TS (or into a second template dialect)
- * would create two copies to keep in sync. Nunjucks parses every construct
- * the two templates use (`{% for %}...{% else %}`, `loop.first/last`,
- * inline `x if c else y`, `is not none`, `|safe`, `|join`) and implements
- * trim_blocks/lstrip_blocks, and rendering Python's own template context
- * through it differed only in the engine-level semantics adapted below; no
- * template edit was needed. The adaptations, all confined to this module's
- * render boundary (renderTemplate) so the view-model builders stay
- * Python-shaped:
+ * files Jinja2 renders for the Python, so there is one spec of record
+ * (templates/report.html.j2's own comments). The templates stick to syntax
+ * both engines read the same way -- empty-list checks are `|length`, the
+ * funnel's "has a delta" check is `is number` -- so the view model is passed
+ * straight through. The one Jinja builtin Nunjucks lacks, `format` (used as
+ * `'%.1f'|format(x)` for bar widths), is registered as a plain `toFixed`
+ * filter. Escaping is Nunjucks' own autoescape; the HTML fragments the view
+ * model builds itself (pick/event names, honorable mentions) go through
+ * escapeHtml and are marked `|safe` in the template.
  *
- * - Output semantics. Nunjucks' autoescape maps `"` to `&quot;` and `\` to
- *   `&#92;`; Jinja2's markupsafe maps `"` to `&#34;` and leaves `\` alone.
- *   Nunjucks prints null as "", Jinja2 prints None as "None" (and True/False
- *   capitalized). Nunjucks has no hook for either, but every `{{ }}` compiles
- *   to a call through `runtime.suppressValue`, looked up on the shared
- *   runtime module at render time, so renderTemplate swaps in a Jinja2-
- *   faithful version for the duration of one synchronous render and restores
- *   the original in `finally`. That reaches into a Nunjucks internal, which
- *   is why package.json pins nunjucks to an exact version and
- *   htmlRender.test.ts has a guard test that fails loudly if the hook stops
- *   taking effect.
- * - Truthiness. Jinja2 treats an empty list/dict as false (`{% if all_week
- *   %}`, `{% if stats.health.below_floor %}`); JS treats `[]` as true, which
- *   rendered an empty All Week table header. jinjaContext() deep-maps empty
- *   arrays and empty plain objects to null in the template context only:
- *   Nunjucks then skips `if` blocks and runs a `for` loop's `else` branch on
- *   them, exactly as Jinja2 does for an empty container.
- * - keep_trailing_newline=False. Jinja2 normalizes \r\n / \r to \n in the
- *   template source and drops one trailing newline; JinjaSourceLoader does
- *   the same before Nunjucks compiles the file.
- * - `'%.1f'|format(x)`. Nunjucks has no `format` filter; a small custom one
- *   implements Python %-formatting for the only spec the template uses
- *   (`%.Nf`), with Python's exact round-half-even on the binary value.
- * - `is none`. Registered as a custom test (`value === null`), Jinja2's
- *   `value is None`.
+ * Divergences from the Python, all intentional. On every committed week the
+ * reports and the index parse to the same DOM as the Python's (same element
+ * tree, attributes and whitespace-normalised text) except for the bar-width
+ * ties noted under number formatting.
  *
- * Divergences from the Python, all intentional:
- *
- * - Float formatting. `'%.1f'` and `round()` are mirrored exactly (Python
- *   rounds an exact binary tie half-to-even: `'%.1f' % 6.25` is "6.2", and
- *   `round(12.5)` is 12, where toFixed/Math.round give "6.3" and 13), as is
- *   `f"{n:,}"` grouping. What JS can't mirror is int-vs-float identity: a
- *   JSON `1.0` is the number 1 here, so a field Python would print as "1.0"
- *   prints as "1". No committed week carries a float in a printed field.
- * - Dates. parseIsoDate/parseIsoDateTime accept only strict ISO 8601
- *   (YYYY-MM-DD, optionally "T"/space + HH:MM[:SS[.ffffff]] + Z/+HH:MM),
- *   where Python 3.12's `fromisoformat` also takes basic ("20260622") and
- *   week-date ("2026-W26-1") forms -- see parseIsoDate. strftime's %a/%A/%B
- *   are hardcoded English (Python runs in the C locale in CI), never Intl.
- *   Nothing here builds a Date from a timestamp string, so there is no
- *   local-time skew of the kind checkYield.ts guards against.
- * - Unicode edge cases. `str.casefold()` becomes `toLowerCase()` (they
- *   differ only for characters like "ß"/"ſ", irrelevant to the ASCII needles
- *   "meetup:" and "multiple showtimes" and to English weekday slugs).
- *   strptime's `\d`/`\s` are Unicode-aware in Python and nearly so in JS
- *   (JS `\d` is ASCII-only; the `\s` sets differ in \x1c-\x1f, \x85 and
- *   U+FEFF). `str.strip()` is mirrored with Python's exact whitespace set
- *   (pyStrip) for this module's own strips; common.ts's
- *   stripPlaceholderWrapper still uses `trim()`, a pre-existing divergence of
- *   that port.
- * - Printing a non-scalar. Jinja2 prints a list/dict as its Python repr and
- *   an empty container that jinjaContext() mapped to null would print
- *   "None" here. Neither template prints a container directly.
- * - A manifest source with `"events": null`. Python's check_yield_floor
- *   raises TypeError on it (`sum(r.get("events", 0))`), taking the whole
- *   render down; checkYield.ts's checkYieldFloor treats it as 0 (`?? 0`),
- *   so this renders. Inherited from that port; no committed manifest has a
- *   null events count.
- * - Python bugs fixed here rather than reproduced (flagged in PR #72's
- *   port; no committed week triggers any of them, so parity on real data
- *   is unaffected):
+ * - Serialization, not content: Nunjucks writes `"` as `&quot;` and `\` as
+ *   `&#92;` (markupsafe: `&#34;`, `\` literal), the view model's own
+ *   fragments escape quotes in text too, and the output keeps the template's
+ *   trailing newline (Jinja2 drops it). None of this changes the parsed DOM.
+ * - Number formatting is plain JS. Bar widths use `toFixed(1)` and the
+ *   funnel's percentage uses `Math.round`, so an exact binary tie rounds up
+ *   where Python rounds half-to-even (`'%.1f' % 6.25` is "6.2", toFixed gives
+ *   "6.3"; `round(12.5)` is 12, Math.round gives 13). This does show in real
+ *   output: a 1-of-16 bar is `width: 6.3%` here and `6.2%` in Python (one bar
+ *   in the week of 2026-08-17, four in 2026-10-05) -- a fraction of a pixel.
+ *   No committed funnel percentage differs. Funnel counts use
+ *   `toLocaleString("en-US")`. A JSON `1.0` is the number 1 here, so a
+ *   printed field Python would show as "1.0" shows as "1"; no committed week
+ *   prints a float.
+ * - A null printed field (`why`, `venue`, `rank`) renders empty; Jinja2
+ *   prints "None". No committed week has one.
+ * - Dates use Date/Intl (en-US, UTC) for month and weekday names. Week keys,
+ *   week file names and `occurrences` must be strict YYYY-MM-DD: Python's
+ *   `date.fromisoformat` also takes "20260622" / "2026-W26-1", which can
+ *   publish a bogus canonical URL or index row. `generated_at` must be
+ *   YYYY-MM-DD-led and `Date.parse`-able; its date part is shown as written
+ *   (no time-zone conversion), as in Python.
+ * - Sort times (category ordering) are read with a plain regex: "7:00PM"
+ *   without a space now sorts as 7 PM, while "7:5 PM" (strptime accepts a
+ *   one-digit minute) doesn't. No committed time is affected.
+ * - `recurrence_count` is read with Number(): a non-numeric string just isn't
+ *   recurring, where Python's int() raised. A missing pick/event `url` links
+ *   to "" instead of raising KeyError.
+ * - The map link is built with URLSearchParams, which leaves `*` literal and
+ *   encodes `~` (Python's quote_plus: the reverse). Same query either way.
+ * - Strings are trimmed with trim() (Python's strip() whitespace set differs
+ *   in \x1c-\x1f, \x85, U+FEFF), lowercased with toLowerCase() (casefold()
+ *   differs for "ß"), and tie-break sorts compare UTF-16 code units (Python
+ *   compares code points; they differ only between astral and U+E000-U+FFFF
+ *   characters). Plain `<`, not localeCompare, so "Do215" still sorts before
+ *   "cinéSPEAK" as in Python.
+ * - A manifest source with `"events": null` renders (checkYield.ts treats it
+ *   as 0); Python's check_yield_floor raises TypeError.
+ * - Python bugs fixed here rather than reproduced (PR #73; still present in
+ *   html_render.py, triggered by no committed week):
  *   - Non-canonical categories render after the canonical nine instead of
  *     vanishing from the day blocks and stats (withExtraCategories).
  *   - A Top 3 time gets the "+" multiple-showtimes suffix its listing card
@@ -94,14 +77,11 @@
  *   - A comma inside a Meetup group's name doesn't split it into two
  *     sources (splitSourceField).
  *   - Lax ISO dates are rejected (see Dates above).
- *   The funnel's double minus on a stage that grew ("−-314%") was fixed in
- *   templates/report.html.j2 itself, so both renderers print "+314%".
  * - renderIndex takes the weeks directory as an optional parameter (default
- *   docs/weeks) rather than reading a module constant, so it can be pointed
- *   at a scratch dir without monkeypatching. The CLI behaves identically.
+ *   docs/weeks), so it can be pointed at a scratch dir.
  */
 
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
@@ -212,6 +192,8 @@ export interface SpotifyEntry {
   spotify_url: string;
 }
 
+// The view model below keeps the templates' snake_case keys.
+
 export interface SourceRow {
   name: string;
   url: string | null;
@@ -299,215 +281,68 @@ export interface DayView {
 }
 
 // ---------------------------------------------------------------------------
-// Python-semantics helpers
+// Small helpers
 // ---------------------------------------------------------------------------
 
-/** Python truthiness: empty containers are false, unlike JS. */
-function pyTruthy(value: unknown): boolean {
-  if (Array.isArray(value)) return value.length > 0;
-  if (value !== null && typeof value === "object") return Object.keys(value).length > 0;
-  return Boolean(value);
+const HTML_ESCAPES: Readonly<Record<string, string>> = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+};
+
+/** Escapes text for an HTML fragment the view model builds itself (text or a quoted attribute). */
+export function escapeHtml(text: string): string {
+  return text.replace(/[&<>"']/g, (ch) => HTML_ESCAPES[ch]!);
 }
 
-// Exactly the characters for which Python's str.isspace() is true -- what a
-// bare str.strip() removes.
-const PY_WS = "\\t\\n\\v\\f\\r\\x1c-\\x20\\x85\\xa0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000";
-const PY_STRIP_RE = new RegExp(`^[${PY_WS}]+|[${PY_WS}]+$`, "g");
-
-/** Python's `str.strip()` with no arguments. */
-function pyStrip(text: string): string {
-  return text.replace(PY_STRIP_RE, "");
+/** Orders strings by UTF-16 code unit -- deliberately not localeCompare, which would put "cinéSPEAK" before "Do215". */
+function compareStrings(a: string, b: string): number {
+  return a < b ? -1 : a > b ? 1 : 0;
 }
 
-/** Compares by Unicode code point, as Python's str ordering does (JS's default compares UTF-16 units). */
-function compareCodePoints(a: string, b: string): number {
-  const ai = a[Symbol.iterator]();
-  const bi = b[Symbol.iterator]();
-  for (;;) {
-    const x = ai.next();
-    const y = bi.next();
-    if (x.done) return y.done ? 0 : -1;
-    if (y.done) return 1;
-    const cx = x.value.codePointAt(0)!;
-    const cy = y.value.codePointAt(0)!;
-    if (cx !== cy) return cx < cy ? -1 : 1;
+function sum(values: Iterable<number>): number {
+  let total = 0;
+  for (const value of values) total += value;
+  return total;
+}
+
+function countBy<T>(items: Iterable<T>, keyOf: (item: T) => string): Map<string, number> {
+  const counts = new Map<string, number>();
+  for (const item of items) {
+    const key = keyOf(item);
+    counts.set(key, (counts.get(key) ?? 0) + 1);
   }
+  return counts;
 }
 
-/** Python's `html.escape(s, quote=False)`. */
-function htmlEscapeText(text: string): string {
-  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+// ---------------------------------------------------------------------------
+// Dates (always UTC midnight, so the calendar date never shifts with the host zone)
+// ---------------------------------------------------------------------------
+
+/** A strict YYYY-MM-DD calendar date as a UTC-midnight Date, or null. */
+export function parseIsoDate(text: string): Date | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;
+  const date = new Date(`${text}T00:00:00Z`);
+  // Rejects month 13 (Invalid Date) and Feb 30 (which Date rolls over to Mar 2).
+  return !Number.isNaN(date.getTime()) && date.toISOString().startsWith(text) ? date : null;
 }
 
-/** Python's `html.escape(s, quote=True)` -- note `&#x27;`, not markupsafe's `&#39;`. */
-function htmlEscapeQuoted(text: string): string {
-  return htmlEscapeText(text).replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
+function requireIsoDate(text: string): Date {
+  const date = parseIsoDate(text);
+  if (!date) throw new Error(`not a YYYY-MM-DD date: ${JSON.stringify(text)}`);
+  return date;
 }
 
-/** markupsafe.escape, which Jinja2's autoescape uses. */
-export function markupEscape(text: string): string {
-  return htmlEscapeText(text).replace(/'/g, "&#39;").replace(/"/g, "&#34;");
+function dateFormat(options: Intl.DateTimeFormatOptions): (date: Date) => string {
+  const format = new Intl.DateTimeFormat("en-US", { timeZone: "UTC", ...options });
+  return (date) => format.format(date);
 }
 
-/** Python's `urllib.parse.quote_plus(s)` (safe=""): space -> "+", and `!'()*` encoded too. */
-function quotePlus(text: string): string {
-  return encodeURIComponent(text)
-    .replace(/[!'()*]/g, (ch) => `%${ch.charCodeAt(0).toString(16).toUpperCase()}`)
-    .replace(/%20/g, "+");
-}
-
-/** Python's `round(x)` to an int: exact binary ties go to the even neighbour. */
-export function pyRound(x: number): number {
-  const floor = Math.floor(x);
-  const diff = x - floor; // exact for doubles
-  if (diff < 0.5) return floor;
-  if (diff > 0.5) return floor + 1;
-  return floor % 2 === 0 ? floor : floor + 1;
-}
-
-/**
- * Python's `'%.{digits}f' % x`: rounds the *exact* binary value, ties to
- * even. toFixed() rounds exact ties up instead ("6.3" for 6.25, Python "6.2").
- */
-export function pyFormatFixed(x: number, digits: number): string {
-  if (Number.isNaN(x)) return "nan";
-  if (!Number.isFinite(x)) return x > 0 ? "inf" : "-inf";
-  const negative = x < 0 || Object.is(x, -0);
-  const view = new DataView(new ArrayBuffer(8));
-  view.setFloat64(0, Math.abs(x));
-  const bits = view.getBigUint64(0);
-  const exponentBits = Number((bits >> 52n) & 0x7ffn);
-  const fraction = bits & ((1n << 52n) - 1n);
-  const mantissa = exponentBits === 0 ? fraction : fraction | (1n << 52n);
-  const exponent = exponentBits === 0 ? -1074 : exponentBits - 1075;
-  const scale = 10n ** BigInt(digits);
-  let scaled: bigint;
-  if (exponent >= 0) {
-    scaled = (mantissa << BigInt(exponent)) * scale;
-  } else {
-    const numerator = mantissa * scale;
-    const denominator = 1n << BigInt(-exponent);
-    scaled = numerator / denominator;
-    const twiceRemainder = 2n * (numerator % denominator);
-    if (twiceRemainder > denominator || (twiceRemainder === denominator && scaled % 2n === 1n)) {
-      scaled += 1n;
-    }
-  }
-  const text = scaled.toString().padStart(digits + 1, "0");
-  const intPart = text.slice(0, text.length - digits);
-  const fracPart = text.slice(text.length - digits);
-  return `${negative ? "-" : ""}${intPart}${digits > 0 ? `.${fracPart}` : ""}`;
-}
-
-/** Python's `f"{n:,}"` for an int (or a float, grouping only the integer part). */
-export function pyThousands(n: number): string {
-  const text = Number.isInteger(n) ? String(Math.abs(n)) : String(Math.abs(n));
-  const [intPart = "", fracPart] = text.split(".");
-  const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return `${n < 0 ? "-" : ""}${grouped}${fracPart !== undefined ? `.${fracPart}` : ""}`;
-}
-
-/** Python's `int(x)` for the JSON shapes `recurrence_count` can take. */
-function pyInt(value: unknown): number {
-  if (typeof value === "number") return Math.trunc(value);
-  if (typeof value === "boolean") return value ? 1 : 0;
-  if (typeof value === "string") {
-    const stripped = pyStrip(value).replace(/_/g, "");
-    if (/^[+-]?\d+$/.test(stripped)) return Number.parseInt(stripped, 10);
-    throw new Error(`invalid literal for int() with base 10: '${value}'`);
-  }
-  throw new TypeError(`int() argument must be a string or a number, not '${typeof value}'`);
-}
-
-/** Python's str() of a scalar, as Jinja2 prints it. */
-function pyStr(value: unknown): string {
-  if (value === null) return "None";
-  if (value === true) return "True";
-  if (value === false) return "False";
-  if (typeof value === "string") return value;
-  if (typeof value === "number" || typeof value === "bigint") return String(value);
-  // Not Python's repr for a container -- neither template prints one.
-  return JSON.stringify(value) ?? "";
-}
-
-interface IsoDate {
-  year: number;
-  month: number;
-  day: number;
-}
-
-function daysInMonth(year: number, month: number): number {
-  return new Date(Date.UTC(year, month, 0)).getUTCDate();
-}
-
-function validDate(year: number, month: number, day: number): IsoDate | null {
-  if (year < 1 || month < 1 || month > 12 || day < 1 || day > daysInMonth(year, month)) return null;
-  return { year, month, day };
-}
-
-const ISO_DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
-
-/**
- * A strict YYYY-MM-DD date; null otherwise. Deliberately narrower than
- * Python's `date.fromisoformat`, which also takes the basic form
- * ("20260622") and ISO week dates ("2026-W26-1") -- so html_render.py would
- * publish a canonical URL like weeks/20260622.html and list such a file in
- * the index. Every date this pipeline writes is YYYY-MM-DD.
- */
-export function parseIsoDate(text: string): IsoDate | null {
-  const m = ISO_DATE_RE.exec(text);
-  if (!m) return null;
-  return validDate(Number(m[1]), Number(m[2]), Number(m[3]));
-}
-
-const ISO_DATETIME_RE =
-  /^(\d{4}-\d{2}-\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2})(?:\.\d{1,6})?)?(?:Z|[+-](\d{2}):(\d{2}))?)?$/;
-
-/**
- * The date part of a strict ISO 8601 timestamp (no tz conversion, like
- * Python's `.date()`): YYYY-MM-DD, optionally followed by "T" or a space,
- * HH:MM[:SS[.ffffff]] and a Z or +/-HH:MM offset. Null otherwise -- narrower
- * than `datetime.fromisoformat`, for the same reason as parseIsoDate.
- */
-export function parseIsoDateTime(text: string): IsoDate | null {
-  const m = ISO_DATETIME_RE.exec(text);
-  if (!m) return null;
-  const datePart = parseIsoDate(m[1]!);
-  if (!datePart) return null;
-  const [hh, mm, ss, offH, offM] = [m[2], m[3], m[4], m[5], m[6]].map((v) =>
-    v === undefined ? 0 : Number(v),
-  ) as [number, number, number, number, number];
-  if (hh > 23 || mm > 59 || ss > 59 || offH > 23 || offM > 59) return null;
-  return datePart;
-}
-
-function dayOfWeek(d: IsoDate): number {
-  return new Date(Date.UTC(d.year, d.month - 1, d.day)).getUTCDay(); // Sunday = 0
-}
-
-const MONTH_NAMES = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
-];
-const WEEKDAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-function monthName(d: IsoDate): string {
-  return MONTH_NAMES[d.month - 1]!;
-}
-
-function weekdayName(d: IsoDate): string {
-  return WEEKDAY_NAMES[dayOfWeek(d)]!;
-}
-
-function isoDateString(d: IsoDate): string {
-  return `${String(d.year).padStart(4, "0")}-${String(d.month).padStart(2, "0")}-${String(d.day).padStart(2, "0")}`;
-}
-
-function requireIsoDate(text: string): IsoDate {
-  const parsed = parseIsoDate(text);
-  if (!parsed) throw new Error(`Invalid isoformat string: '${text}'`);
-  return parsed;
-}
+const monthDay = dateFormat({ month: "long", day: "numeric" }); // "June 22"
+const weekdayShort = dateFormat({ weekday: "short" }); // "Mon"
+const weekdayMonthDay = dateFormat({ weekday: "long", month: "long", day: "numeric" }); // "Sunday, June 21"
 
 // ---------------------------------------------------------------------------
 // Sources footer
@@ -521,13 +356,13 @@ function requireIsoDate(text: string): IsoDate {
  * such guard and counts the tail of the group name as a source of its own.
  */
 export function splitSourceField(raw: string | null | undefined): string[] {
-  const parts = (raw || "")
+  const parts = (raw ?? "")
     .split(SOURCE_SPLIT_RE)
-    .map((part) => pyStrip(part))
-    .filter((part) => part);
+    .map((part) => part.trim())
+    .filter(Boolean);
   const merged: string[] = [];
   for (const part of parts) {
-    const previous = merged[merged.length - 1];
+    const previous = merged.at(-1);
     if (previous !== undefined && isMeetupSource(previous) && !isMeetupSource(part) && !KNOWN_SOURCE_NAMES.has(part)) {
       merged[merged.length - 1] = `${previous}, ${part}`;
     } else {
@@ -548,7 +383,7 @@ const KNOWN_SOURCE_NAMES: ReadonlySet<string> = new Set([
 
 /** Maps one source token onto its footer name; every "Meetup: <group>" collapses to "Meetup". */
 export function normalizeSourceName(raw: string): string {
-  const name = pyStrip(raw);
+  const name = raw.trim();
   if (isMeetupSource(name)) return "Meetup";
   return SOURCE_ALIASES[name] ?? name;
 }
@@ -559,25 +394,17 @@ export function normalizeSourceName(raw: string): string {
  * archived weeks) render unlinked, sorted, after the known ones.
  */
 export function buildSources(days: readonly { events: readonly { source?: string | null }[] }[]): SourceRow[] {
-  const counts = new Map<string, number>();
-  for (const day of days) {
-    for (const event of day.events) {
-      for (const part of splitSourceField(event.source)) {
-        const name = normalizeSourceName(part);
-        counts.set(name, (counts.get(name) ?? 0) + 1);
-      }
-    }
-  }
-
-  const rows: SourceRow[] = [];
-  for (const [name, url] of SOURCES) {
-    rows.push({ name, url, count: counts.get(name) ?? 0 });
-    counts.delete(name);
-  }
-  for (const name of [...counts.keys()].sort(compareCodePoints)) {
-    rows.push({ name, url: null, count: counts.get(name)! });
-  }
-  return rows;
+  const counts = countBy(
+    days.flatMap((day) => day.events.flatMap((event) => splitSourceField(event.source))),
+    normalizeSourceName,
+  );
+  const known: SourceRow[] = SOURCES.map(([name, url]) => ({ name, url, count: counts.get(name) ?? 0 }));
+  const knownNames = new Set(SOURCES.map(([name]) => name));
+  const retired: SourceRow[] = [...counts.keys()]
+    .filter((name) => !knownNames.has(name))
+    .sort(compareStrings)
+    .map((name) => ({ name, url: null, count: counts.get(name)! }));
+  return [...known, ...retired];
 }
 
 // ---------------------------------------------------------------------------
@@ -586,9 +413,9 @@ export function buildSources(days: readonly { events: readonly { source?: string
 
 /** A Google Maps search link for a Top 3 pick's address, or null without one. */
 export function buildMapUrl(address: string | null | undefined): string | null {
-  const stripped = pyStrip(address || "");
-  if (!stripped) return null;
-  return `https://www.google.com/maps/search/?api=1&query=${quotePlus(stripped)}`;
+  const query = (address ?? "").trim();
+  if (!query) return null;
+  return `https://www.google.com/maps/search/?${new URLSearchParams({ api: "1", query }).toString()}`;
 }
 
 export function cleanCost(cost: string | null | undefined): string {
@@ -596,7 +423,7 @@ export function cleanCost(cost: string | null | undefined): string {
 }
 
 export function hasMultipleShowtimes(note: string | null | undefined): boolean {
-  return (note || "").toLowerCase().includes("multiple showtimes");
+  return (note ?? "").toLowerCase().includes("multiple showtimes");
 }
 
 /**
@@ -611,94 +438,51 @@ export function displayTime(eventTime: string | null | undefined, note: string |
 }
 
 export function priceClassAndText(event: { sold_out?: unknown; cost?: string | null }): [string, string] {
-  if (pyTruthy(event.sold_out)) return ["sold-out", "SOLD OUT"];
-  const cost = cleanCost(event.cost ?? "");
+  if (event.sold_out) return ["sold-out", "SOLD OUT"];
+  const cost = cleanCost(event.cost);
   return [isFreeCost(cost) ? "price-free" : "price-paid", cost];
 }
 
 export function buildPickNameHtml(
   pick: { title: string; url?: string; is_music?: unknown },
-  spotifyEntry: SpotifyEntry | null | undefined,
+  spotifyEntry: Partial<SpotifyEntry> | null | undefined,
 ): string {
-  const title = pick.title;
-  if (pyTruthy(pick.is_music) && pyTruthy(spotifyEntry)) {
-    const matched = spotifyEntry!.matched_text;
-    // An empty matched_text would "match" at index 0 and emit an empty <a>
-    // (Python's build_pick_name_html does exactly that); treat it as no match.
-    const idx = matched ? title.indexOf(matched) : -1;
-    if (idx !== -1) {
-      const before = htmlEscapeText(title.slice(0, idx));
-      const after = htmlEscapeText(title.slice(idx + matched.length));
-      const label = htmlEscapeText(matched);
-      const url = htmlEscapeQuoted(spotifyEntry!.spotify_url);
-      return `${before}<a href="${url}">${label}</a>${after}`;
-    }
+  const { title } = pick;
+  const matched = spotifyEntry?.matched_text;
+  // An empty matched_text would "match" at index 0 and emit an empty <a>
+  // (Python's build_pick_name_html does exactly that); treat it as no match.
+  const idx = pick.is_music && matched ? title.indexOf(matched) : -1;
+  if (idx !== -1 && matched) {
+    const before = escapeHtml(title.slice(0, idx));
+    const after = escapeHtml(title.slice(idx + matched.length));
+    return `${before}<a href="${escapeHtml(spotifyEntry?.spotify_url ?? "")}">${escapeHtml(matched)}</a>${after}`;
   }
-  const url = htmlEscapeQuoted(pick.url as string);
-  const label = htmlEscapeText(title);
-  return `<a class="event-link" href="${url}">${label}</a>`;
+  return `<a class="event-link" href="${escapeHtml(pick.url ?? "")}">${escapeHtml(title)}</a>`;
 }
 
 export function buildEventNameHtml(event: { title: string; url?: string }, isTop3: boolean): string {
-  const url = htmlEscapeQuoted(event.url as string);
-  const label = htmlEscapeText(event.title);
   const prefix = isTop3 ? "⭐ " : "";
-  return `<a href="${url}">${prefix}${label}</a>`;
+  return `<a href="${escapeHtml(event.url ?? "")}">${prefix}${escapeHtml(event.title)}</a>`;
 }
 
 export function buildHonorableMentionsHtml(mentions: readonly HonorableMention[] | null | undefined): string | null {
-  if (!mentions || mentions.length === 0) return null;
+  if (!mentions?.length) return null;
   return mentions
-    .map((m) => {
-      const title = htmlEscapeText(m.title).split("(SOLD OUT)").join("(<strong>SOLD OUT</strong>)");
-      return `${title} at ${htmlEscapeText(m.venue)}`;
-    })
+    .map((m) => `${escapeHtml(m.title).replaceAll("(SOLD OUT)", "(<strong>SOLD OUT</strong>)")} at ${escapeHtml(m.venue)}`)
     .join(" · ");
 }
 
-// datetime.strptime(s, "%I:%M %p")'s actual compiled regex on Python 3.12
-// (`_strptime._TimeRE_cache.pattern("%I:%M %p")`): %I also accepts a
-// space-padded hour (" 7:00 PM" parses), the format's space becomes \s+,
-// matching is case-insensitive, and it must consume the whole string.
-const STRPTIME_I_M_P_RE = /^(1[0-2]|0[1-9]|[1-9]| [1-9]):([0-5]\d|\d)\s+(am|pm)$/i;
+const CLOCK_TIME_RE = /^(\d{1,2}):(\d{2})\s*([ap]m)$/i;
 
-/** Minutes past midnight for "7:00 PM", or null where strptime raises. */
+/** Minutes past midnight for "7:00 PM", or null for anything that isn't a 12-hour clock time. */
 export function parseTimeForSort(eventTime: unknown): number | null {
   if (typeof eventTime !== "string") return null;
-  const m = STRPTIME_I_M_P_RE.exec(eventTime);
+  const m = CLOCK_TIME_RE.exec(eventTime.trim());
   if (!m) return null;
-  const hour12 = Number(m[1]!.trim()) % 12;
-  const hour = m[3]!.toLowerCase() === "pm" ? hour12 + 12 : hour12;
-  return hour * 60 + Number(m[2]);
-}
-
-/**
- * Top 3 first, then Honorable Mentions, then chronological; unparseable times
- * last within their tier; ties keep original array order. Applied before the
- * display cap so the cap can never drop something Selection vetted.
- */
-function priorityKey(
-  event: SelectionEvent,
-  top3Titles: ReadonlySet<string>,
-  hmTitles: ReadonlySet<string>,
-  index: number,
-): number[] {
-  const parsed = parseTimeForSort(event.time ?? "");
-  return [
-    top3Titles.has(event.title) ? 0 : 1,
-    hmTitles.has(event.title) ? 0 : 1,
-    parsed === null ? 1 : 0,
-    parsed ?? 0,
-    index,
-  ];
-}
-
-function compareKeys(a: readonly number[], b: readonly number[]): number {
-  for (let i = 0; i < a.length; i++) {
-    const diff = a[i]! - b[i]!;
-    if (diff !== 0) return diff;
-  }
-  return 0;
+  const hour = Number(m[1]);
+  const minute = Number(m[2]);
+  if (hour < 1 || hour > 12 || minute > 59) return null;
+  return ((hour % 12) + (m[3]!.toLowerCase() === "pm" ? 12 : 0)) * 60 + minute;
 }
 
 /**
@@ -707,8 +491,7 @@ function compareKeys(a: readonly number[], b: readonly number[]): number {
  */
 export function isAllWeek(event: SelectionEvent, top3Titles: ReadonlySet<string>): boolean {
   if (top3Titles.has(event.title)) return false;
-  const count = event.recurrence_count;
-  return pyInt(pyTruthy(count) ? count : 0) >= RECURRING_THRESHOLD;
+  return Number(event.recurrence_count ?? 0) >= RECURRING_THRESHOLD;
 }
 
 /**
@@ -719,8 +502,33 @@ export function isAllWeek(event: SelectionEvent, top3Titles: ReadonlySet<string>
  */
 function withExtraCategories(present: Iterable<string>): string[] {
   const canonical = new Set<string>(CATEGORY_ORDER);
-  const extras = [...new Set(present)].filter((label) => !canonical.has(label));
-  return [...CATEGORY_ORDER, ...extras];
+  return [...CATEGORY_ORDER, ...new Set([...present].filter((label) => !canonical.has(label)))];
+}
+
+/**
+ * Top 3 first, then Honorable Mentions, then chronological, unparseable times
+ * last within their tier; Array#sort is stable, so ties keep array order.
+ * Applied before the display cap so the cap can never drop something
+ * Selection vetted.
+ */
+function byPriority(
+  top3Titles: ReadonlySet<string>,
+  hmTitles: ReadonlySet<string>,
+): (a: SelectionEvent, b: SelectionEvent) => number {
+  const key = (event: SelectionEvent): number[] => {
+    const minutes = parseTimeForSort(event.time);
+    return [
+      top3Titles.has(event.title) ? 0 : 1,
+      hmTitles.has(event.title) ? 0 : 1,
+      minutes === null ? 1 : 0,
+      minutes ?? 0,
+    ];
+  };
+  return (a, b) => {
+    const ka = key(a);
+    const kb = key(b);
+    return ka.map((value, i) => value - kb[i]!).find((diff) => diff !== 0) ?? 0;
+  };
 }
 
 export function buildCategories(
@@ -731,36 +539,29 @@ export function buildCategories(
   const byCategory = new Map<string, SelectionEvent[]>();
   for (const event of day.events) {
     if (isAllWeek(event, top3Titles)) continue;
-    const key = event.category as string;
-    const list = byCategory.get(key);
-    if (list) list.push(event);
-    else byCategory.set(key, [event]);
+    const label = event.category ?? "";
+    byCategory.set(label, [...(byCategory.get(label) ?? []), event]);
   }
 
-  const categories: CategoryView[] = [];
-  for (const label of withExtraCategories(byCategory.keys())) {
+  return withExtraCategories(byCategory.keys()).flatMap((label): CategoryView[] => {
     const events = byCategory.get(label);
-    if (!events || events.length === 0) continue;
-    const ordered = events
-      .map((event, index) => ({ event, key: priorityKey(event, top3Titles, hmTitles, index) }))
-      .sort((a, b) => compareKeys(a.key, b.key));
-    const displayed = ordered.slice(0, CATEGORY_DISPLAY_CAP);
-    const viewEvents: EventView[] = displayed.map(({ event }) => {
+    if (!events?.length) return [];
+    const displayed = events.toSorted(byPriority(top3Titles, hmTitles)).slice(0, CATEGORY_DISPLAY_CAP);
+    const views = displayed.map((event): EventView => {
       const [priceClass, priceText] = priceClassAndText(event);
       return {
         name_html: buildEventNameHtml(event, top3Titles.has(event.title)),
-        note: pyTruthy(event.note) ? (event.note as string) : null,
+        note: event.note || null,
         venue: event.venue,
-        time_display: displayTime(event.time ?? "", event.note ?? ""),
+        time_display: displayTime(event.time, event.note),
         price_class: priceClass,
         price_text: priceText,
       };
     });
     // "No silent caps": say when the display cap actually dropped something.
     const omitted = events.length - displayed.length;
-    categories.push({ label, events: viewEvents, true_count: events.length, omitted: omitted || null });
-  }
-  return categories;
+    return [{ label, events: views, true_count: events.length, omitted: omitted || null }];
+  });
 }
 
 /**
@@ -776,23 +577,19 @@ export function buildAllWeek(
   for (const day of days) {
     const top3Titles = top3TitlesByDate.get(day.date) ?? new Set<string>();
     for (const event of day.events) {
-      if (!isAllWeek(event, top3Titles)) continue;
       const key = JSON.stringify([event.title, event.venue]);
-      if (rows.has(key)) continue;
-      const occurrences = pyTruthy(event.occurrences) ? event.occurrences! : [day.date];
-      const weekdays: string[] = [];
-      for (const iso of occurrences) {
-        const parsed = parseIsoDate(iso);
-        if (!parsed) continue;
-        weekdays.push(weekdayName(parsed).slice(0, 3));
-      }
-      const [, priceText] = priceClassAndText(event);
+      if (!isAllWeek(event, top3Titles) || rows.has(key)) continue;
+      const occurrences = event.occurrences?.length ? event.occurrences : [day.date];
+      const weekdays = occurrences.flatMap((iso) => {
+        const date = parseIsoDate(iso);
+        return date ? [weekdayShort(date)] : [];
+      });
       rows.set(key, {
         title: event.title,
         venue: event.venue,
         category: event.category,
         days: weekdays.join(", "),
-        price_text: priceText,
+        price_text: priceClassAndText(event)[1],
       });
     }
   }
@@ -819,92 +616,67 @@ export function buildStats(
   expected: ExpectedYield,
 ): Stats {
   const listed = new Map<string, number>();
-  const picks = new Map<string, number>();
-  const bump = (counter: Map<string, number>, key: string, by: number): void => {
-    counter.set(key, (counter.get(key) ?? 0) + by);
+  const bump = (label: string, by: number): void => {
+    listed.set(label, (listed.get(label) ?? 0) + by);
   };
   for (const day of selections.days) {
     const top3Titles = new Set(day.top3.map((pick) => pick.title));
-    for (const category of buildCategories(day, top3Titles)) {
-      // true_count, not the displayed length: the cap is a rendering decision.
-      bump(listed, category.label, category.true_count);
-    }
-    for (const pick of day.top3) bump(picks, pick.category as string, 1);
+    // true_count, not the displayed length: the cap is a rendering decision.
+    for (const category of buildCategories(day, top3Titles)) bump(category.label, category.true_count);
   }
-
   // All Week events are routed out of the day blocks but are still listed
   // events of their category: count them in both the funnel and the bars.
-  for (const row of buildAllWeek(selections.days, top3TitlesByDateOf(selections.days))) {
-    bump(listed, row.category as string, 1);
-  }
+  for (const row of buildAllWeek(selections.days, top3TitlesByDateOf(selections.days))) bump(row.category ?? "", 1);
+  const picks = countBy(
+    selections.days.flatMap((day) => day.top3),
+    (pick) => pick.category ?? "",
+  );
 
-  const categoryRows: CategoryStatRow[] = [];
   const maxListed = Math.max(0, ...listed.values());
-  for (const label of withExtraCategories(listed.keys())) {
-    const count = listed.get(label) ?? 0;
-    if (!count) continue;
-    const top3 = picks.get(label) ?? 0;
-    categoryRows.push({
-      label,
-      listed: count,
-      top3,
-      listed_pct: (100.0 * count) / maxListed,
-      top3_pct: (100.0 * top3) / maxListed,
-    });
-  }
-  // Labels all lead with astral-plane emoji, where UTF-16 and code-point
-  // order happen to agree -- compareCodePoints is used anyway so that
-  // doesn't have to stay true.
-  categoryRows.sort((a, b) => b.listed - a.listed || compareCodePoints(a.label, b.label));
+  const categoryRows = withExtraCategories(listed.keys())
+    .filter((label) => listed.get(label))
+    .map((label): CategoryStatRow => {
+      const count = listed.get(label)!;
+      const top3 = picks.get(label) ?? 0;
+      return { label, listed: count, top3, listed_pct: (100 * count) / maxListed, top3_pct: (100 * top3) / maxListed };
+    })
+    .sort((a, b) => b.listed - a.listed || compareStrings(a.label, b.label));
 
-  const counted = buildSources(selections.days).filter((row) => row.count);
-  counted.sort((a, b) => b.count - a.count || compareCodePoints(a.name, b.name));
+  const counted = buildSources(selections.days)
+    .filter((row) => row.count)
+    .sort((a, b) => b.count - a.count || compareStrings(a.name, b.name));
   const maxSource = counted[0]?.count ?? 0;
-  const sourceRows: SourceStatRow[] = counted.map((row) => ({ ...row, pct: (100.0 * row.count) / maxSource }));
+  const sourceRows = counted.map((row): SourceStatRow => ({ ...row, pct: (100 * row.count) / maxSource }));
 
-  const listedTotal = [...listed.values()].reduce((sum, n) => sum + n, 0);
-  const raw: { label: string; value: number | null | undefined }[] = [];
-  const manifestSources = manifest.sources;
-  const hasManifestSources = pyTruthy(manifestSources);
-  if (hasManifestSources) {
-    raw.push({
-      label: "Collected",
-      value: Object.values(manifestSources!).reduce((sum, s) => sum + (s.events || 0), 0),
+  const manifestSources = Object.values(manifest.sources ?? {});
+  const funnel: [string, number | null | undefined][] = [
+    ...(manifestSources.length ? [["Collected", sum(manifestSources.map((s) => s.events ?? 0))] as [string, number]] : []),
+    ["Candidates", selections.total_events_after_dedup],
+    ["Listed", sum(listed.values())],
+    ["Top 3 picks", sum(picks.values())],
+  ];
+  const stages = funnel
+    .filter((entry): entry is [string, number] => typeof entry[1] === "number")
+    .map(([label, value], i, all): Stage => {
+      const previous = all[i - 1];
+      const hasDrop = previous !== undefined && previous[1] !== 0;
+      return {
+        label,
+        value,
+        drop_pct: hasDrop ? Math.round((100 * (previous[1] - value)) / previous[1]) : null,
+        drop_from: hasDrop ? previous[0].toLowerCase() : null,
+        display: value.toLocaleString("en-US"),
+      };
     });
-  }
-  raw.push({ label: "Candidates", value: selections.total_events_after_dedup });
-  raw.push({ label: "Listed", value: listedTotal });
-  raw.push({ label: "Top 3 picks", value: [...picks.values()].reduce((sum, n) => sum + n, 0) });
-  const stages: Stage[] = raw
-    .filter((stage): stage is { label: string; value: number } => stage.value !== null && stage.value !== undefined)
-    .map((stage) => ({
-      label: stage.label,
-      value: stage.value,
-      // Set explicitly, even on the first stage -- see html_render.py.
-      drop_pct: null,
-      drop_from: null,
-      display: pyThousands(stage.value),
-    }));
-  for (let i = 1; i < stages.length; i++) {
-    const previous = stages[i - 1]!;
-    const stage = stages[i]!;
-    if (previous.value) {
-      stage.drop_pct = pyRound((100.0 * (previous.value - stage.value)) / previous.value);
-      stage.drop_from = previous.label.toLowerCase();
-    }
-  }
 
   let health: Health | null = null;
-  if (hasManifestSources) {
+  if (manifestSources.length) {
     // check_yield owns what "too few" means, min_expected: 0 exemptions included.
     const belowFloor = checkYieldFloor(manifest as Manifest, expected);
     health = {
-      source_count: Object.keys(manifestSources!).length,
-      contributed: Object.values(manifestSources!).filter((s) => pyTruthy(s.events)).length,
-      below_floor: belowFloor
-        .map((issue) => issue.source)
-        .filter((source): source is string => Boolean(source))
-        .sort(compareCodePoints),
+      source_count: manifestSources.length,
+      contributed: manifestSources.filter((s) => s.events).length,
+      below_floor: belowFloor.flatMap((issue) => (issue.source ? [issue.source] : [])).sort(compareStrings),
       run_level_shortfall: belowFloor.some((issue) => issue.source === null),
     };
   }
@@ -913,7 +685,6 @@ export function buildStats(
 }
 
 export function buildDayViewmodel(day: Day, spotify: Readonly<Record<string, SpotifyEntry | null>>): DayView {
-  const dayDate = requireIsoDate(day.date);
   const top3Titles = new Set(day.top3.map((pick) => pick.title));
   // Selection writes `note` on the events[] entry, not the top3 pick, so a
   // pick's "multiple showtimes" note has to come from its listing. Python
@@ -923,19 +694,18 @@ export function buildDayViewmodel(day: Day, spotify: Readonly<Record<string, Spo
     if (event.note && !noteByTitle.has(event.title)) noteByTitle.set(event.title, event.note);
   }
 
-  const top3: PickView[] = day.top3.map((pick) => {
-    const spotifyEntry = pyTruthy(pick.is_music) ? spotify[pick.title] : null;
+  const top3 = day.top3.map((pick): PickView => {
     // Same helper as the listed-event cards, so sold_out overrides cost here too.
     const [, costText] = priceClassAndText(pick);
     return {
       rank: pick.rank,
-      name_html: buildPickNameHtml(pick, spotifyEntry),
+      name_html: buildPickNameHtml(pick, pick.is_music ? spotify[pick.title] : null),
       why: pick.why,
       venue: pick.venue,
       map_url: buildMapUrl(pick.address),
-      time_display: displayTime(pick.time ?? "", pick.note || noteByTitle.get(pick.title) || ""),
+      time_display: displayTime(pick.time, pick.note || noteByTitle.get(pick.title)),
       cost_text: costText || null,
-      sold_out: pyTruthy(pick.sold_out),
+      sold_out: Boolean(pick.sold_out),
     };
   });
 
@@ -944,42 +714,39 @@ export function buildDayViewmodel(day: Day, spotify: Readonly<Record<string, Spo
     day_name: day.day_name,
     // Weekday, not the ISO date: unambiguous within one Mon-Sun report.
     slug: day.day_name.toLowerCase(),
-    date_display: `${monthName(dayDate)} ${String(dayDate.day)}`,
+    date_display: monthDay(requireIsoDate(day.date)),
     date_iso: day.date,
     // True counts, before the display cap.
-    event_count: categories.reduce((sum, category) => sum + category.true_count, 0),
+    event_count: sum(categories.map((category) => category.true_count)),
     top3,
-    honorable_mentions_html: buildHonorableMentionsHtml(day.honorable_mentions ?? []),
+    honorable_mentions_html: buildHonorableMentionsHtml(day.honorable_mentions),
     categories,
   };
 }
 
 export function formatFailureNote(raw: string): string {
-  const stripped = pyStrip(raw);
-  const idx = stripped.indexOf("(");
-  if (idx !== -1) {
-    const name = stripped.slice(0, idx);
-    const rest = stripped.slice(idx + 1);
-    return `${pyStrip(name)} unavailable this week (${rest}`;
-  }
-  return `${stripped} unavailable this week`;
+  const text = raw.trim();
+  const idx = text.indexOf("(");
+  if (idx === -1) return `${text} unavailable this week`;
+  return `${text.slice(0, idx).trim()} unavailable this week (${text.slice(idx + 1)}`;
 }
 
 /** The published URL for a week, or null when the week key is missing or malformed. */
 export function buildCanonicalUrl(week: string | null | undefined): string | null {
-  if (!parseIsoDate(week || "")) return null;
-  return `${SITE_BASE_URL}weeks/${week!}.html`;
+  return week && parseIsoDate(week) ? `${SITE_BASE_URL}weeks/${week}.html` : null;
 }
 
 /**
  * [datetime attribute, display text] for the "Compiled ..." subtitle --
  * date-only on purpose, since generated_at is a naive UTC wall clock (see
- * html_render.py's format_compiled).
+ * html_render.py's format_compiled). The date is taken as written, with no
+ * time-zone conversion.
  */
 export function formatCompiled(generatedAt: string | null | undefined): [string | null, string | null] {
-  const parsed = parseIsoDateTime(generatedAt || "");
-  if (!parsed) return [null, null];
-  return [isoDateString(parsed), `${weekdayName(parsed)}, ${monthName(parsed)} ${String(parsed.day)}`];
+  if (!generatedAt || Number.isNaN(Date.parse(generatedAt))) return [null, null];
+  const iso = generatedAt.slice(0, 10);
+  const date = parseIsoDate(iso);
+  return date ? [iso, weekdayMonthDay(date)] : [null, null];
 }
 
 /** The unfurl's one line of body text, derived from the week's own numbers. */
@@ -990,10 +757,9 @@ export function buildMetaDescription(
   const totals = new Map(stats.stages.map((stage) => [stage.label, stage.value]));
   const listed = totals.get("Listed") ?? 0;
   const picks = totals.get("Top 3 picks") ?? 0;
-  const sources = stats.sources.length;
   return (
     `${String(picks)} handpicked things to do in Philadelphia, ${dateRange} — ` +
-    `chosen from ${String(listed)} events across ${String(sources)} sources.`
+    `chosen from ${String(listed)} events across ${String(stats.sources.length)} sources.`
   );
 }
 
@@ -1001,103 +767,38 @@ export function buildMetaDescription(
 export function formatDateRange(monday: string, sunday: string): string {
   const mon = requireIsoDate(monday);
   const sun = requireIsoDate(sunday);
-  if (mon.month === sun.month) {
-    return `${monthName(mon)} ${String(mon.day)}–${String(sun.day)}, ${String(sun.year)}`;
+  const year = sun.getUTCFullYear();
+  if (mon.getUTCMonth() === sun.getUTCMonth()) {
+    return `${monthDay(mon)}–${String(sun.getUTCDate())}, ${String(year)}`;
   }
-  return `${monthName(mon)} ${String(mon.day)} – ${monthName(sun)} ${String(sun.day)}, ${String(sun.year)}`;
+  return `${monthDay(mon)} – ${monthDay(sun)}, ${String(year)}`;
 }
 
 // ---------------------------------------------------------------------------
-// Template rendering (Nunjucks over the shared Jinja2 templates)
+// Template rendering (Nunjucks over the shared templates)
 // ---------------------------------------------------------------------------
 
-/** Jinja2's template-source preprocessing: newline normalization, and keep_trailing_newline=False. */
-export function jinjaSource(src: string): string {
-  const lines = src.split(/\r\n|\r|\n/);
-  if (lines[lines.length - 1] === "") lines.pop();
-  return lines.join("\n");
+/** Jinja's `format` filter for the one spec the templates use, `'%.Nf'|format(x)`. */
+function formatFilter(spec: string, value: number): string {
+  const m = /^%\.(\d+)f$/.exec(spec);
+  if (!m) throw new Error(`format filter: only '%.Nf' is supported, got ${JSON.stringify(spec)}`);
+  return value.toFixed(Number(m[1]));
 }
 
-class JinjaSourceLoader extends nunjucks.Loader implements nunjucks.ILoader {
-  constructor(private readonly root: string) {
-    super();
-  }
+let environment: nunjucks.Environment | undefined;
 
-  getSource(name: string): nunjucks.LoaderSource {
-    const path = join(this.root, name);
-    return { src: jinjaSource(readFileSync(path, "utf8")), path, noCache: false };
-  }
-}
-
-/** Python's '%.Nf' % value -- the only format spec the templates use. */
-function formatFilter(spec: unknown, ...args: unknown[]): string {
-  const m = typeof spec === "string" ? /^%\.(\d+)f$/.exec(spec) : null;
-  if (!m || args.length !== 1 || typeof args[0] !== "number") {
-    throw new Error(`format filter: only '%.Nf' with one number is ported, got ${JSON.stringify([spec, ...args])}`);
-  }
-  return pyFormatFixed(args[0], Number(m[1]));
-}
-
-let environment: nunjucks.Environment | null = null;
-
-function jinjaEnvironment(): nunjucks.Environment {
-  if (!environment) {
-    environment = new nunjucks.Environment(new JinjaSourceLoader(TEMPLATES_DIR), {
-      autoescape: true,
-      trimBlocks: true,
-      lstripBlocks: true,
-    });
-    environment.addFilter("format", formatFilter);
-    // addTest exists at runtime but is missing from @types/nunjucks.
-    (environment as unknown as { addTest(name: string, test: (value: unknown) => boolean): void }).addTest(
-      "none",
-      (value) => value === null,
-    );
-  }
+function templateEnvironment(): nunjucks.Environment {
+  environment ??= new nunjucks.Environment(new nunjucks.FileSystemLoader(TEMPLATES_DIR), {
+    autoescape: true,
+    trimBlocks: true,
+    lstripBlocks: true,
+  }).addFilter("format", formatFilter);
   return environment;
 }
 
-/**
- * Empty arrays / plain objects -> null, so Nunjucks' JS truthiness matches
- * Jinja2's Python truthiness in `if` and `for ... else`. Template context only.
- */
-export function jinjaContext(value: unknown): unknown {
-  if (Array.isArray(value)) return value.length === 0 ? null : value.map(jinjaContext);
-  if (value !== null && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype) {
-    const entries = Object.entries(value);
-    if (entries.length === 0) return null;
-    return Object.fromEntries(entries.map(([key, v]) => [key, jinjaContext(v)]));
-  }
-  return value;
-}
-
-type SuppressValue = (val: unknown, autoescape: boolean) => unknown;
-const nunjucksRuntime = nunjucks.runtime as unknown as {
-  suppressValue: SuppressValue;
-  SafeString: typeof nunjucks.runtime.SafeString;
-};
-if (typeof nunjucksRuntime.suppressValue !== "function") {
-  throw new Error("nunjucks.runtime.suppressValue is missing -- the pinned nunjucks version changed; see htmlRender.ts");
-}
-
-/** What Jinja2 emits for `{{ val }}`: Undefined -> "", None -> "None", markupsafe escaping. */
-const jinjaSuppressValue: SuppressValue = (val, autoescape) => {
-  if (val === undefined) return "";
-  if (val instanceof nunjucksRuntime.SafeString) return val;
-  const text = pyStr(val);
-  return autoescape ? markupEscape(text) : text;
-};
-
-/** Renders one of templates/*.j2 with Jinja2's output semantics (see module docstring). */
-export function renderTemplate(name: string, context: Record<string, unknown>): string {
-  const env = jinjaEnvironment();
-  const original = nunjucksRuntime.suppressValue;
-  nunjucksRuntime.suppressValue = jinjaSuppressValue;
-  try {
-    return env.render(name, jinjaContext(context) as object);
-  } finally {
-    nunjucksRuntime.suppressValue = original;
-  }
+/** Renders one of templates/*.html.j2. */
+export function renderTemplate(name: string, context: object): string {
+  return templateEnvironment().render(name, context);
 }
 
 export function renderReport(weekDir: string): string {
@@ -1106,12 +807,7 @@ export function renderReport(weekDir: string): string {
   // Optional by design: the header link is simply omitted without it.
   const playlistUrl = (loadPlaylist(weekDir) as { playlist_url?: unknown }).playlist_url;
 
-  const dateRange = formatDateRange(selections.days[0]!.date, selections.days[selections.days.length - 1]!.date);
-
-  const days = selections.days.map((day) => buildDayViewmodel(day, spotify));
-  const allWeek = buildAllWeek(selections.days, top3TitlesByDateOf(selections.days));
-  const collectionFailureNotes = (selections.collection_failures ?? []).map(formatFailureNote);
-
+  const dateRange = formatDateRange(selections.days[0]!.date, selections.days.at(-1)!.date);
   const stats = buildStats(selections, loadManifest(weekDir) as ManifestSources, loadExpectedYield() as ExpectedYield);
   const [compiledIso, compiledDisplay] = formatCompiled(selections.generated_at);
 
@@ -1122,29 +818,22 @@ export function renderReport(weekDir: string): string {
     compiled_iso: compiledIso,
     compiled_display: compiledDisplay,
     playlist_url: playlistUrl,
-    days,
-    all_week: allWeek,
+    days: selections.days.map((day) => buildDayViewmodel(day, spotify)),
+    all_week: buildAllWeek(selections.days, top3TitlesByDateOf(selections.days)),
     stats,
     sources: buildSources(selections.days),
-    collection_failure_notes: collectionFailureNotes,
+    collection_failure_notes: (selections.collection_failures ?? []).map(formatFailureNote),
   });
 }
 
 /** Regenerates the index from scratch by scanning `weeksDir`/*.html (newest first). */
 export function renderIndex(weeksDir: string = WEEKS_DIR): string {
-  const weekFiles = readdirSync(weeksDir)
-    .filter((name) => name.endsWith(".html") && name.length > ".html".length)
-    .sort(compareCodePoints)
-    .reverse();
-  const weeks: { href: string; label: string }[] = [];
-  for (const name of weekFiles) {
-    const stem = name.slice(0, -".html".length);
-    const monday = parseIsoDate(stem);
-    if (!monday) continue;
-    const mondayIso = isoDateString(monday);
-    const sunday = weekDates(mondayIso)[6]!;
-    weeks.push({ href: `weeks/${name}`, label: formatDateRange(mondayIso, sunday) });
-  }
+  const weeks = readdirSync(weeksDir)
+    .map((name) => /^(.+)\.html$/.exec(name)?.[1])
+    .filter((stem): stem is string => stem !== undefined && parseIsoDate(stem) !== null)
+    .sort()
+    .reverse()
+    .map((monday) => ({ href: `weeks/${monday}.html`, label: formatDateRange(monday, weekDates(monday).at(-1)!) }));
   return renderTemplate("index.html.j2", { weeks, site_url: SITE_BASE_URL });
 }
 
