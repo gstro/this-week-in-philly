@@ -1,8 +1,7 @@
 /**
- * Port of tests/test_csv_log.py, case for case, plus a TS-only block at the
- * end pinning the Python-semantics pieces csvLog.ts reimplements by hand:
- * difflib.SequenceMatcher ratios and csv-module bytes, each expected value
- * taken from CPython 3.12 (.venv) rather than reasoned out.
+ * Port of tests/test_csv_log.py, case for case, then TS-only tests for the
+ * real-week fuzzy matches and for each Python bug csvLog.ts fixes (its
+ * "Divergences from the Python").
  *
  * csv_log.py is currently NOT wired into runner.sh (the attendance/picks-log
  * feedback loop is deferred); these tests exist so neither implementation
@@ -12,22 +11,20 @@
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, describe, expect, it } from "vitest";
-import { loadSelections, loadSpotify } from "./common.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { PICKS_LOG_COLUMNS, loadSelections, loadSpotify } from "./common.js";
 import {
   type SpotifyMap,
   appendRows,
   buildRows,
   findMatchingEvent,
-  formatCsvRow,
   inferPriceTier,
   loadExistingKeys,
-  logKey,
-  parseCsv,
-  parseCsvDicts,
-  sequenceMatcherRatio,
+  run,
+  titleSimilarity,
 } from "./csvLog.js";
 import type { Selections } from "./htmlRender.js";
+import { PicksLogError, parsePicksLog, rowKey } from "./lib/picksLog.js";
 
 const REPO_ROOT = join(import.meta.dirname, "..");
 
@@ -40,6 +37,8 @@ function tmpPath(): string {
 afterEach(() => {
   for (const dir of tmpDirs.splice(0)) rmSync(dir, { recursive: true, force: true });
 });
+
+const readLog = (path: string): ReturnType<typeof parsePicksLog> => parsePicksLog(readFileSync(path, "utf8"), path);
 
 // --- infer_price_tier ---
 // Rules per the module docstring, validated against the real archived week
@@ -80,13 +79,16 @@ describe("inferPriceTier", () => {
 
 // --- find_matching_event ---
 
+const WILDWOOD_EVENT = {
+  title: "WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)",
+  category: "🎬 Film & Cinema",
+  source: "PhilaMOCA",
+};
+
 describe("findMatchingEvent", () => {
   it("exact title match", () => {
     const mention = { title: "WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)", venue: "PhilaMOCA" };
-    const events = [
-      { title: "WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)", category: "🎬 Film & Cinema", source: "PhilaMOCA" },
-    ];
-    expect(findMatchingEvent(mention, events).category).toBe("🎬 Film & Cinema");
+    expect(findMatchingEvent(mention, [WILDWOOD_EVENT])?.category).toBe("🎬 Film & Cinema");
   });
 
   it("falls back to fuzzy match above threshold", () => {
@@ -95,22 +97,16 @@ describe("findMatchingEvent", () => {
     // "(SOLD OUT)" suffix added, a subtitle dropped) -- confirmed on the real
     // archived week.
     const mention = { title: "WILDWOOD, NJ (1994) — Cult Movie Monday", venue: "PhilaMOCA" };
-    const events = [
-      { title: "WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)", category: "🎬 Film & Cinema", source: "PhilaMOCA" },
-    ];
-    expect(findMatchingEvent(mention, events).category).toBe("🎬 Film & Cinema");
+    expect(findMatchingEvent(mention, [WILDWOOD_EVENT])?.category).toBe("🎬 Film & Cinema");
   });
 
-  it("returns empty object below fuzzy threshold", () => {
+  it("returns nothing below fuzzy threshold", () => {
     const mention = { title: "A Totally Different Event", venue: "Somewhere" };
-    const events = [
-      { title: "WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)", category: "🎬 Film & Cinema", source: "PhilaMOCA" },
-    ];
-    expect(findMatchingEvent(mention, events)).toEqual({});
+    expect(findMatchingEvent(mention, [WILDWOOD_EVENT])).toBeUndefined();
   });
 
-  it("returns empty object for no events", () => {
-    expect(findMatchingEvent({ title: "Anything", venue: "Anywhere" }, [])).toEqual({});
+  it("returns nothing for no events", () => {
+    expect(findMatchingEvent({ title: "Anything", venue: "Anywhere" }, [])).toBeUndefined();
   });
 });
 
@@ -144,25 +140,21 @@ function selectionsWithOnePick(isMusic = false): Selections {
 
 describe("buildRows", () => {
   it("maps category to the csv slug", () => {
-    const rows = buildRows(selectionsWithOnePick(), {});
-    expect(rows[0]!.category).toBe("tech");
+    expect(buildRows(selectionsWithOnePick(), {})[0]!.category).toBe("tech");
   });
 
   it("top3 rank is stringified", () => {
-    const rows = buildRows(selectionsWithOnePick(), {});
-    expect(rows[0]!.rank).toBe("1");
+    expect(buildRows(selectionsWithOnePick(), {})[0]!.rank).toBe("1");
   });
 
   it("non-music pick has no spotify link even if present", () => {
     const spotify = { "NFC Sculpture Workshop": { spotify_url: "https://open.spotify.com/artist/xyz", matched_text: "x" } };
-    const rows = buildRows(selectionsWithOnePick(false), spotify);
-    expect(rows[0]!.spotify_link).toBe("");
+    expect(buildRows(selectionsWithOnePick(false), spotify)[0]!.spotify_link).toBe("");
   });
 
   it("music pick includes its spotify link", () => {
     const spotify = { "NFC Sculpture Workshop": { spotify_url: "https://open.spotify.com/artist/xyz", matched_text: "x" } };
-    const rows = buildRows(selectionsWithOnePick(true), spotify);
-    expect(rows[0]!.spotify_link).toBe("https://open.spotify.com/artist/xyz");
+    expect(buildRows(selectionsWithOnePick(true), spotify)[0]!.spotify_link).toBe("https://open.spotify.com/artist/xyz");
   });
 
   it("tags and attended are always blank", () => {
@@ -211,12 +203,9 @@ describe("loadExistingKeys / appendRows", () => {
 
   it("appendRows writes a header on first write", () => {
     const path = join(tmpPath(), "log.csv");
-    const rows = buildRows(selectionsWithOnePick(), {});
-    const written = appendRows(path, rows);
-    expect(written).toBe(1);
-    const records = parseCsv(readFileSync(path, "utf8"));
-    expect(records[0]).toContain("city");
-    expect(records.slice(1)).toHaveLength(1);
+    expect(appendRows(path, buildRows(selectionsWithOnePick(), {}))).toBe(1);
+    expect(readFileSync(path, "utf8").split("\r\n")[0]).toBe(PICKS_LOG_COLUMNS.join(","));
+    expect(readLog(path)).toHaveLength(1);
   });
 
   it("appendRows does not duplicate the header on a second write", () => {
@@ -224,76 +213,150 @@ describe("loadExistingKeys / appendRows", () => {
     const rows = buildRows(selectionsWithOnePick(), {});
     appendRows(path, rows);
     appendRows(path, rows);
-    // csvLog's own idempotency (existing-keys skip) is main()'s job, not appendRows'.
-    expect(parseCsvDicts(readFileSync(path, "utf8"))).toHaveLength(2);
+    // csvLog's own idempotency (existing-keys skip) is run()'s job, not appendRows'.
+    expect(readLog(path)).toHaveLength(2);
   });
 
   it("loadExistingKeys reflects a previously appended row", () => {
     const path = join(tmpPath(), "log.csv");
     appendRows(path, buildRows(selectionsWithOnePick(), {}));
-    expect(loadExistingKeys(path).has(logKey("2026-06-22", "NFC Sculpture Workshop"))).toBe(true);
+    expect(loadExistingKeys(path).has(rowKey({ week_of: "2026-06-22", title: "NFC Sculpture Workshop" }))).toBe(true);
   });
 });
 
 // ---------------------------------------------------------------------------
-// TS-only: Python-semantics pins (expected values from CPython 3.12)
+// TS-only
 // ---------------------------------------------------------------------------
 
-describe("sequenceMatcherRatio (difflib.SequenceMatcher(None, a, b).ratio())", () => {
+describe("titleSimilarity", () => {
   it.each([
-    ["wildwood, nj (1994) — cult movie monday", "wildwood, nj (1994) — cult movie monday (sold out)", 0.8764044943820225],
-    ["tommy conwell & the young rumblers + fireworks", "tommy conwell & the young rumblers", 0.85],
-    ["a totally different event", "wildwood, nj (1994) — cult movie monday (sold out)", 0.13333333333333333],
-    ["", "", 1.0],
-    ["abc", "", 0.0],
-    // Code points, not UTF-16 units: each emoji counts once.
-    ["😀a😀b", "😀ab", 0.8571428571428571],
+    ["WILDWOOD, NJ (1994) — Cult Movie Monday", "WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)", 12 / 14],
+    ["Tommy Conwell & The Young Rumblers + fireworks", "Tommy Conwell & The Young Rumblers — Free Concert + Fireworks", 12 / 14],
+    ["A Totally Different Event", "WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)", 0],
+    ["Café Noir", "CAFÉ noir!", 1],
+    ["", "", 0],
   ])("%j vs %j", (a, b, expected) => {
-    expect(sequenceMatcherRatio(a, b)).toBe(expected);
-  });
-
-  it("applies autojunk's popular-element purge when len(b) >= 200", () => {
-    // Every element of b occurs > len(b)//100 + 1 times, so all are purged
-    // and nothing matches -- 1.0 without autojunk.
-    expect(sequenceMatcherRatio("ab".repeat(150), "ba".repeat(150) + "x".repeat(20))).toBe(0.0);
+    expect(titleSimilarity(a, b)).toBeCloseTo(expected, 12);
   });
 });
 
-describe("csv module byte parity", () => {
-  it("formatCsvRow quotes only on , \" \\r \\n and writes None as empty", () => {
-    expect(formatCsvRow(["a b", " lead", "", null, "x,y", 'q"q', "l\rm", "n\nm", "é—", true, 7])).toBe(
-      'a b, lead,,,"x,y","q""q","l\rm","n\nm",é—,True,7\r\n',
-    );
+describe("real week 2026-06-22", () => {
+  const weekDir = join(REPO_ROOT, "data", "2026-06-22");
+  const rows = buildRows(loadSelections(weekDir) as Selections, loadSpotify(weekDir) as SpotifyMap);
+
+  // The only two honorable mentions in data/ without an exact events[] title;
+  // expected values are csv_log.py's output for the same week.
+  it.each([
+    ["WILDWOOD, NJ (1994) — Cult Movie Monday (SOLD OUT)", "film", "PhilaMOCA", "paid"],
+    ["Tommy Conwell & The Young Rumblers + fireworks", "music", "WXPN", "free"],
+  ])("fuzzy-matches %j", (title, category, source, price_tier) => {
+    const row = rows.find((r) => r.title === title && r.rank === "HM");
+    expect(row).toMatchObject({ category, source, price_tier });
   });
 
-  it("parseCsv mirrors the non-strict reader's leniencies", () => {
-    expect(parseCsv('a,"b"c,d"e","un\nterm')).toEqual([["a", "bc", 'd"e"', "un\nterm"]]);
-    expect(parseCsv('x,"y\n')).toEqual([["x", "y\n"]]);
+  it("round-trips through appendRows + loadExistingKeys", () => {
+    const path = join(tmpPath(), "log.csv");
+    appendRows(path, rows);
+    expect(readLog(path)).toEqual(rows);
+    const keys = loadExistingKeys(path);
+    for (const row of rows) expect(keys.has(rowKey(row))).toBe(true);
   });
+});
 
-  it("parseCsvDicts skips blank rows, pads short rows with None, collects extras under None", () => {
-    const rows = parseCsvDicts("a,b\r\n\r\n1\r\n1,2,3\r\n,\r\n").map((m) => Object.fromEntries(m) as Record<string, unknown>);
-    expect(rows).toEqual([{ a: "1", b: null }, { a: "1", b: "2", null: ["3"] }, { a: "", b: "" }]);
-  });
-
-  it("loadExistingKeys reads quoted titles from the v1 picks log", () => {
+describe("loadExistingKeys on the v1 picks log", () => {
+  it("reads quoted titles", () => {
     const keys = loadExistingKeys(join(REPO_ROOT, "docs", "v1", "Data", "event-picks-log.csv"));
     expect(keys.size).toBeGreaterThan(100);
   });
+});
 
-  it("a real week round-trips through append + loadExistingKeys", () => {
-    const weekDir = join(REPO_ROOT, "data", "2026-06-22");
-    const rows = buildRows(loadSelections(weekDir) as Selections, loadSpotify(weekDir) as SpotifyMap);
-    const path = join(tmpPath(), "log.csv");
-    appendRows(path, rows);
-    const keys = loadExistingKeys(path);
-    for (const row of rows) expect(keys.has(logKey(row.week_of, row.title))).toBe(true);
-  });
-
-  it("an empty existing log gets no header (mirrors the Python)", () => {
+describe("fixed Python bugs", () => {
+  it("an empty existing log gets a header", () => {
     const path = join(tmpPath(), "log.csv");
     writeFileSync(path, "");
     appendRows(path, buildRows(selectionsWithOnePick(), {}));
-    expect(readFileSync(path, "utf8").startsWith("Philadelphia,")).toBe(true);
+    expect(readLog(path).map((r) => r.title)).toEqual(["NFC Sculpture Workshop"]);
+  });
+
+  it("a log without a trailing newline doesn't get the first new row glued on", () => {
+    const path = join(tmpPath(), "log.csv");
+    appendRows(path, buildRows(selectionsWithOnePick(), {}));
+    writeFileSync(path, readFileSync(path, "utf8").replace(/\r\n$/, ""));
+    const second = buildRows(selectionsWithOnePick(), {}).map((r) => ({ ...r, title: "Second" }));
+    appendRows(path, second);
+    expect(readLog(path).map((r) => r.title)).toEqual(["NFC Sculpture Workshop", "Second"]);
+  });
+
+  it("a Spotify entry without spotify_url gives an empty link", () => {
+    const spotify: SpotifyMap = { "NFC Sculpture Workshop": {} };
+    expect(buildRows(selectionsWithOnePick(true), spotify)[0]!.spotify_link).toBe("");
+    expect(buildRows(selectionsWithOnePick(true), { "NFC Sculpture Workshop": null })[0]!.spotify_link).toBe("");
+  });
+
+  it("honorable_mentions: null means none", () => {
+    const selections = selectionsWithOnePick();
+    (selections.days[0] as unknown as Record<string, unknown>)["honorable_mentions"] = null;
+    expect(buildRows(selections, {})).toHaveLength(1);
+  });
+
+  it("text is UTF-8 and fields with , \" or newlines round-trip", () => {
+    const path = join(tmpPath(), "log.csv");
+    const titles = ["Café — “Noir”", 'He said "hi", twice', "two\nlines", "carriage\rreturn"];
+    const rows = titles.map((title) => ({ ...buildRows(selectionsWithOnePick(), {})[0]!, title }));
+    appendRows(path, rows);
+    expect(readFileSync(path).includes(Buffer.from("Café — “Noir”", "utf8"))).toBe(true);
+    expect(readLog(path).map((r) => r.title)).toEqual(titles);
+  });
+});
+
+describe("run", () => {
+  let dir: string;
+  let logPath: string;
+  let weekDir: string;
+
+  function writeWeek(selections: Selections): void {
+    writeFileSync(join(weekDir, "_selections.json"), JSON.stringify(selections));
+  }
+
+  beforeEach(() => {
+    dir = tmpPath();
+    logPath = join(dir, "log.csv");
+    weekDir = dir;
+    vi.stubEnv("PICKS_LOG_PATH", logPath);
+    vi.spyOn(console, "log").mockImplementation(() => undefined);
+  });
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.restoreAllMocks();
+  });
+
+  it("is idempotent across runs", () => {
+    writeWeek(selectionsWithOnePick());
+    expect(run({ weekDir, dryRun: false })).toEqual({ appended: 1, skipped: 0 });
+    expect(run({ weekDir, dryRun: false })).toEqual({ appended: 0, skipped: 1 });
+    expect(readLog(logPath)).toHaveLength(1);
+  });
+
+  it("writes a (week_of, title) repeated within one week once", () => {
+    const selections = selectionsWithOnePick();
+    const day = selections.days[0]!;
+    day.honorable_mentions = [{ title: "NFC Sculpture Workshop", venue: "Iffy Books" }];
+    writeWeek(selections);
+    expect(run({ weekDir, dryRun: false })).toEqual({ appended: 1, skipped: 1 });
+    expect(readLog(logPath).map((r) => r.rank)).toEqual(["1"]);
+  });
+
+  it("--dry-run writes nothing", () => {
+    writeWeek(selectionsWithOnePick());
+    expect(run({ weekDir, dryRun: true })).toEqual({ appended: 0, skipped: 0 });
+    expect(() => readFileSync(logPath)).toThrow();
+  });
+
+  it("refuses to append to a log with the wrong header, leaving it untouched", () => {
+    writeWeek(selectionsWithOnePick());
+    const original = "city,week_of,title\r\nPhiladelphia,2026-06-15,A\r\n";
+    writeFileSync(logPath, original);
+    expect(() => run({ weekDir, dryRun: false })).toThrow(PicksLogError);
+    expect(readFileSync(logPath, "utf8")).toBe(original);
   });
 });
