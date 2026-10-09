@@ -1,10 +1,8 @@
 /**
- * Port of tests/test_attendance_check.py, case for case, plus a TS-only block
- * at the end pinning what attendanceCheck.ts reimplements by hand: the
- * zoneinfo-faithful events.list window, the request shape, and run()'s
- * end-to-end CSV bytes and messages. Every expected value there was taken
- * from CPython 3.12 (.venv) running scripts/attendance_check.py, not
- * reasoned out.
+ * Port of tests/test_attendance_check.py, case for case, then TS-only tests
+ * for the events.list window and request shape, and run() end to end,
+ * including each Python bug attendanceCheck.ts fixes (its "Divergences from
+ * the Python").
  *
  * attendance_check.py is NOT wired into runner.sh (the attendance/picks-log
  * feedback loop is deferred); these tests exist so neither implementation
@@ -12,7 +10,7 @@
  * the real "Curated Events" calendar, which holds the attendance signal.
  */
 
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -21,16 +19,17 @@ import {
   type EventsListParams,
   type EventsPage,
   calendarWeekWindow,
-  easternMidnightIso,
   fetchCalendarTitles,
   lastWeekMonday,
   run,
   updateAttendance,
 } from "./attendanceCheck.js";
-import type { CsvDictRow } from "./csvLog.js";
+import { PICKS_LOG_COLUMNS } from "./common.js";
+import { type PicksLogRow, PicksLogError, parsePicksLog } from "./lib/picksLog.js";
 
-function row(fields: Record<string, string>): CsvDictRow {
-  return new Map(Object.entries(fields));
+function row(fields: Partial<PicksLogRow>): PicksLogRow {
+  const blank = Object.fromEntries(PICKS_LOG_COLUMNS.map((c) => [c, ""])) as PicksLogRow;
+  return { ...blank, ...fields };
 }
 
 // --- lastWeekMonday ---
@@ -97,16 +96,14 @@ describe("fetchCalendarTitles", () => {
 describe("updateAttendance", () => {
   it("marks present titles true", () => {
     const rows = [row({ city: "Philadelphia", week_of: "2026-06-15", title: "NFC Sculpture Workshop", attended: "" })];
-    const updated = updateAttendance(rows, "2026-06-15", new Set(["NFC Sculpture Workshop"]));
-    expect(updated).toBe(1);
-    expect(rows[0]!.get("attended")).toBe("true");
+    expect(updateAttendance(rows, "2026-06-15", new Set(["NFC Sculpture Workshop"]))).toBe(1);
+    expect(rows[0]!.attended).toBe("true");
   });
 
   it("marks absent titles false", () => {
     const rows = [row({ city: "Philadelphia", week_of: "2026-06-15", title: "Skipped Event", attended: "" })];
-    const updated = updateAttendance(rows, "2026-06-15", new Set());
-    expect(updated).toBe(1);
-    expect(rows[0]!.get("attended")).toBe("false");
+    expect(updateAttendance(rows, "2026-06-15", new Set())).toBe(1);
+    expect(rows[0]!.attended).toBe("false");
   });
 
   // calendar_create only creates events for the 21 Top 3 picks, never
@@ -114,71 +111,56 @@ describe("updateAttendance", () => {
   // always resolve to false, never left blank. Confirmed as v1's actual
   // historical behavior too.
   it("honorable mention rows always resolve false", () => {
-    const rows = [
-      row({ city: "Philadelphia", week_of: "2026-06-15", title: "An Honorable Mention", rank: "HM", attended: "" }),
-    ];
+    const rows = [row({ city: "Philadelphia", week_of: "2026-06-15", title: "An Honorable Mention", rank: "HM" })];
     updateAttendance(rows, "2026-06-15", new Set(["Some Other Event"]));
-    expect(rows[0]!.get("attended")).toBe("false");
+    expect(rows[0]!.attended).toBe("false");
   });
 
   it("skips rows from other weeks", () => {
-    const rows = [row({ city: "Philadelphia", week_of: "2026-06-08", title: "Different Week Event", attended: "" })];
-    const updated = updateAttendance(rows, "2026-06-15", new Set());
-    expect(updated).toBe(0);
-    expect(rows[0]!.get("attended")).toBe(""); // untouched
+    const rows = [row({ city: "Philadelphia", week_of: "2026-06-08", title: "Different Week Event" })];
+    expect(updateAttendance(rows, "2026-06-15", new Set())).toBe(0);
+    expect(rows[0]!.attended).toBe(""); // untouched
   });
 
   it("skips non-Philadelphia rows", () => {
-    const rows = [row({ city: "Austin", week_of: "2026-06-15", title: "Austin Event", attended: "" })];
-    const updated = updateAttendance(rows, "2026-06-15", new Set(["Austin Event"]));
-    expect(updated).toBe(0);
-    expect(rows[0]!.get("attended")).toBe(""); // untouched -- city filter, not just title match
+    const rows = [row({ city: "Austin", week_of: "2026-06-15", title: "Austin Event" })];
+    expect(updateAttendance(rows, "2026-06-15", new Set(["Austin Event"]))).toBe(0);
+    expect(rows[0]!.attended).toBe(""); // untouched -- city filter, not just title match
   });
 
   it("returns the count of rows touched", () => {
     const rows = [
-      row({ city: "Philadelphia", week_of: "2026-06-15", title: "A", attended: "" }),
-      row({ city: "Philadelphia", week_of: "2026-06-15", title: "B", attended: "" }),
-      row({ city: "Philadelphia", week_of: "2026-06-08", title: "C", attended: "" }),
+      row({ city: "Philadelphia", week_of: "2026-06-15", title: "A" }),
+      row({ city: "Philadelphia", week_of: "2026-06-15", title: "B" }),
+      row({ city: "Philadelphia", week_of: "2026-06-08", title: "C" }),
     ];
     expect(updateAttendance(rows, "2026-06-15", new Set(["A"]))).toBe(2);
   });
 });
 
 // ---------------------------------------------------------------------------
-// TS-only: values below are CPython 3.12 output.
+// TS-only
 // ---------------------------------------------------------------------------
 
-describe("calendar week window (datetime.combine(..., tzinfo=ZoneInfo) + timedelta(days=7))", () => {
+describe("calendarWeekWindow (Python's values)", () => {
   it.each([
     ["2026-06-15", "2026-06-15T00:00:00-04:00", "2026-06-22T00:00:00-04:00"],
     ["2026-01-05", "2026-01-05T00:00:00-05:00", "2026-01-12T00:00:00-05:00"],
-    // DST starts 2026-03-08: wall-clock arithmetic, so the offsets differ.
+    // DST starts 2026-03-08 and ends 2026-11-01: each end keeps its own offset.
     ["2026-03-02", "2026-03-02T00:00:00-05:00", "2026-03-09T00:00:00-04:00"],
     ["2026-03-09", "2026-03-09T00:00:00-04:00", "2026-03-16T00:00:00-04:00"],
-    // DST ends 2026-11-01.
     ["2026-10-26", "2026-10-26T00:00:00-04:00", "2026-11-02T00:00:00-05:00"],
     ["2026-11-02", "2026-11-02T00:00:00-05:00", "2026-11-09T00:00:00-05:00"],
-    // Pre-1883 LMT: isoformat() adds seconds for a non-whole-minute offset.
-    ["1883-11-12", "1883-11-12T00:00:00-04:56:02", "1883-11-19T00:00:00-05:00"],
-    ["1800-01-06", "1800-01-06T00:00:00-04:56:02", "1800-01-13T00:00:00-04:56:02"],
+    // The transition days themselves: midnight is before the 2 AM switch.
+    ["2026-03-08", "2026-03-08T00:00:00-05:00", "2026-03-15T00:00:00-04:00"],
+    ["2026-11-01", "2026-11-01T00:00:00-04:00", "2026-11-08T00:00:00-05:00"],
   ])("%s", (monday, timeMin, timeMax) => {
     expect(calendarWeekWindow(monday)).toEqual({ timeMin, timeMax });
   });
 
-  it.each([
-    ["America/Sao_Paulo", "2018-11-04", "2018-11-04T00:00:00-03:00"], // midnight skipped: pre-transition
-    ["America/Havana", "2023-03-12", "2023-03-12T00:00:00-05:00"], // midnight skipped: pre-transition
-    ["America/Havana", "2023-11-05", "2023-11-05T00:00:00-04:00"], // midnight repeated: first (fold=0)
-    ["Asia/Kolkata", "2026-06-15", "2026-06-15T00:00:00+05:30"],
-    ["Pacific/Chatham", "2026-06-15", "2026-06-15T00:00:00+12:45"],
-  ])("follows zoneinfo's fold=0 rule in %s on %s", (zone, day, expected) => {
-    expect(easternMidnightIso(day, zone)).toBe(expected);
-  });
-
-  it("rejects a non-YYYY-MM-DD date and an out-of-range result", () => {
-    expect(() => lastWeekMonday("2026-02-30")).toThrow(/Invalid isoformat/);
-    expect(() => lastWeekMonday("0001-01-03")).toThrow(/OverflowError/);
+  it("rejects a non-YYYY-MM-DD date", () => {
+    expect(() => lastWeekMonday("2026-02-30")).toThrow(/not a YYYY-MM-DD date/);
+    expect(() => lastWeekMonday("20260622")).toThrow(/not a YYYY-MM-DD date/);
   });
 });
 
@@ -198,7 +180,7 @@ describe("fetchCalendarTitles request shape", () => {
 });
 
 describe("run (end to end, fake calendar)", () => {
-  const HEADER = "city,week_of,day,date,title,venue,category,source,rank,price_tier,spotify_link,tags,attended\r\n";
+  const HEADER = `${PICKS_LOG_COLUMNS.join(",")}\r\n`;
   const LOG =
     HEADER +
     'Philadelphia,2026-06-15,Monday,2026-06-15,"Gothic Night, Vol. 2",Venue A,music,Do215,1,free,,,\r\n' +
@@ -246,6 +228,7 @@ describe("run (end to end, fake calendar)", () => {
         "Philadelphia,2026-06-08,Monday,2026-06-08,Gothic Night,Venue A,music,Do215,1,free,,,true\r\n" +
         "Austin,2026-06-15,Monday,2026-06-15,Skipped Event,Venue D,music,X,1,free,,,\r\n",
     );
+    expect(readdirSync(dir)).toEqual(["log.csv"]); // no temp file left behind
     expect(out).toEqual(["Attendance check complete. 3 rows updated for week_of=2026-06-15 (1 attended, 2 not attended)."]);
   });
 
@@ -272,38 +255,35 @@ describe("run (end to end, fake calendar)", () => {
     expect(out).toEqual(["No Philadelphia rows for week_of=2026-06-29; skipping."]);
   });
 
-  it("an empty log raises (no header row)", async () => {
-    writeFileSync(logPath, "");
-    await expect(run({ weekDir: "data/2026-06-22", dryRun: false }, fakeFetch([]))).rejects.toThrow(
-      /RuntimeError: .* has no header row/,
-    );
-  });
-
-  // Latent Python bug, reproduced: the file is truncated before DictWriter
-  // validates each row, so a long row loses itself and everything after it.
-  it("a row longer than the header raises mid-write, leaving a truncated log", async () => {
-    writeFileSync(
-      logPath,
+  // Each of these used to truncate the log (or fail with KeyError) in the
+  // Python. Now: a clear PicksLogError, no calendar read, the log untouched.
+  it.each([
+    ["an empty log", "", /is empty \(no header row\)/],
+    [
+      "a row longer than the header",
       HEADER +
         "Philadelphia,2026-06-15,Monday,2026-06-15,A,V,music,S,1,free,,,\r\n" +
         "Philadelphia,2026-06-15,Monday,2026-06-15,B,V,music,S,2,free,,,,extra\r\n" +
         "Philadelphia,2026-06-15,Monday,2026-06-15,C,V,music,S,3,free,,,\r\n",
-    );
-    await expect(run({ weekDir: "data/2026-06-22", dryRun: false }, fakeFetch(["A"]))).rejects.toThrow(
-      "ValueError: dict contains fields not in fieldnames: None",
-    );
-    expect(readFileSync(logPath, "utf8")).toBe(
-      HEADER + "Philadelphia,2026-06-15,Monday,2026-06-15,A,V,music,S,1,free,,,true\r\n",
-    );
+      /record 3 has 14 fields/,
+    ],
+    ["a log without an attended column", "city,week_of,title\r\nPhiladelphia,2026-06-15,A\r\n", /missing .*attended/],
+    ["a blank first line", `\r\n${LOG}`, /first line is blank/],
+  ])("%s is rejected and left untouched", async (_name, text, message) => {
+    writeFileSync(logPath, text);
+    const result = run({ weekDir: "data/2026-06-22", dryRun: false }, fakeFetch(["A"]));
+    await expect(result).rejects.toThrow(PicksLogError);
+    await expect(result).rejects.toThrow(message);
+    expect(fetches).toEqual([]);
+    expect(readFileSync(logPath, "utf8")).toBe(text);
+    expect(readdirSync(dir)).toEqual(["log.csv"]);
   });
 
-  // Same bug via a header without `attended`: updateAttendance adds the key,
-  // so the very first row raises and only the header survives.
-  it("a log without an attended column is truncated to its header", async () => {
-    writeFileSync(logPath, "city,week_of,title\r\nPhiladelphia,2026-06-15,A\r\n");
-    await expect(run({ weekDir: "data/2026-06-22", dryRun: false }, fakeFetch(["A"]))).rejects.toThrow(
-      "ValueError: dict contains fields not in fieldnames: 'attended'",
-    );
-    expect(readFileSync(logPath, "utf8")).toBe("city,week_of,title\r\n");
+  it("chained weeks keep earlier weeks' attendance", async () => {
+    writeFileSync(logPath, LOG);
+    await run({ weekDir: "data/2026-06-22", dryRun: false }, fakeFetch(["Skipped Event"]));
+    await run({ weekDir: "data/2026-06-15", dryRun: false }, fakeFetch([]));
+    const rows = parsePicksLog(readFileSync(logPath, "utf8"), logPath);
+    expect(rows.map((r) => r.attended)).toEqual(["false", "true", "false", "false", ""]);
   });
 });

@@ -13,7 +13,9 @@ and idioms, fix known Python bugs rather than copy them, and are checked for
 every intentional difference listed in the module's "Divergences from the
 Python". The Tier A emulation is being removed module by module: `htmlRender`
 is done (plain Nunjucks autoescape, `Date`/`Intl`; checked as "same DOM" as the
-Python on every committed week); `csvLog`/`attendanceCheck` are next.
+Python on every committed week), and so are `csvLog`/`attendanceCheck`
+(`csv-parse`/`csv-stringify`, a word-set similarity instead of `difflib`;
+checked as the same parsed rows as the Python).
 
 ## Tiers
 
@@ -47,19 +49,20 @@ in a dedicated PR (Python and TS together while both exist, or TS-only with a
 - `check_yield_floor` raises `TypeError` on `"events": null`.
 - `tests/test_html_render.py:124-126` wrongly says autoescape leaves `'` as-is (it writes `&#39;`).
 
-### `csv_log` — present in both (shelved; not in `runner.sh`)
+### `csv_log` — fixed in TS (except where noted), still present in Python (shelved; not in `runner.sh`)
 
 - `open()` has no `encoding=`, so the log's encoding follows the machine's locale (TS always uses UTF-8).
 - A zero-byte existing log never gets a header; a log without a trailing newline gets the first new row glued onto its last line.
 - Idempotency only works across runs: a duplicate `(week_of, title)` within one week is written twice.
-- Editing a title breaks the `(week_of, title)` key, so the event is logged again.
+- Editing a title breaks the `(week_of, title)` key, so the event is logged again. **Still present in TS** (it's inherent to the key).
 - A Spotify entry without `spotify_url` raises `KeyError`; `honorable_mentions: null` raises `TypeError`.
 
-### `attendance_check` — present in both (shelved; not in `runner.sh`)
+### `attendance_check` — fixed in TS (except where noted), still present in Python (shelved; not in `runner.sh`)
 
-- **The log is emptied before rows are validated.** `open(log_path, "w")` truncates first, then `DictWriter` raises on a row longer than the header or a header with no `attended` column, leaving the log cut short. Write to a temp file and rename. **Fix before the attendance loop is re-enabled.**
-- `--dry-run` still calls Google Calendar (read-only); it only skips the CSV write.
+- **The log is emptied before rows are validated.** `open(log_path, "w")` truncates first, then `DictWriter` raises on a row longer than the header or a header with no `attended` column, leaving the log cut short. The TS validates the whole log first and writes via temp file + rename. **The Python must be fixed (or replaced by the TS) before the attendance loop is re-enabled.**
+- `--dry-run` still calls Google Calendar (read-only); it only skips the CSV write. **Kept in TS** (reading is harmless).
 - A blank first line in the log gives `KeyError 'city'` instead of a clear error.
+- **Data quirk, not a bug:** the v1 picks log uses each event's date as `week_of` for 2026-06-08 through 06-21, so attendance can't match those rows by week in either implementation. Matters only if the loop is run over that history.
 
 ### `event_parsers` — fixed in TS, still present in Python (production: Collection)
 
