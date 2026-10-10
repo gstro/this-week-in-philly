@@ -112,7 +112,7 @@ Selection is the one stage still running as a Claude Code Routine rather than a 
       task is `.claude/skills/philly-events-selection/SKILL.md` (it in turn reads
       `personal-interests` and `event-selection-philosophy`).
 - [ ] Optional: a fallback cron roughly 30 minutes after Collection's own
-      (`0 6 * * 0` UTC), e.g. `30 6 * * 0` UTC, as a safety net if the API trigger below
+      (`0 13 * * 0` UTC), e.g. `30 13 * * 0` UTC, as a safety net if the API trigger below
       doesn't fire. **Not currently configured.** The live routine had an empty
       `cron_expression` when checked on 2026-09-27, so `collection.yml`'s API trigger is the
       only thing that starts Selection. If that fails, use Run now.
