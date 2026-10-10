@@ -28,7 +28,7 @@ is the working definition from Tier B on.
 | Tier | Scope | Status |
 |---|---|---|
 | A | Pure data transforms on committed files: `common`, `prepare_selection_input`, `merge_selections`, `check_selection`, `check_yield`, `html_render`, `csv_log`, `attendance_check` | Done (PRs #36–#75) |
-| B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | In progress: `event_parsers` → `src/eventParsers/`, and `fetch_raw`/`proxy_session`/`fetch_page_text` → `fetchRaw`/`lib/http.ts`/`fetchPageText` done; `collect_source`, `collect_week` next |
+| B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | In progress: `event_parsers` → `src/eventParsers/`, `fetch_raw`/`proxy_session`/`fetch_page_text` → `fetchRaw`/`lib/http.ts`/`fetchPageText`, and `collect_source` → `collectSource` done; `collect_week` next |
 | C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | Not started |
 | D | Cut `collection.yml` / `presentation.yml` / `collection-check.yml` / `runner.sh` over to `src/`, then delete `scripts/` and the Python toolchain | Not started |
 
@@ -89,6 +89,13 @@ affect the published report today. Each fix is listed in the TS parser's
 
 - **Mojibake in every Meetup source (confirmed live 2026-10-09):** Meetup serves its iCal feeds as `text/calendar` with no charset, and `requests` decodes any charset-less `text/*` body as ISO-8859-1. Every non-ASCII character in a Meetup title or description reaches `data/<week>/meetup-*.json` garbled (e.g. ☕ as `â\x98\x95`; 35 such sequences in `data/2026-10-05`), and from there Selection's input. `lib/http.ts` decodes with the declared charset, else UTF-8. On the same day's live pages, the TS fetch gave the same parsed events as the Python for every other source.
 - **Proxied relay (latent; matters only behind an egress proxy):** a redirect was followed by Chromium directly, bypassing the proxy, and cookies were never sent back on relayed requests, so a challenge relying on a clearance cookie could loop. The TS follows redirects in the relay and forwards cookies.
+
+### `collect_source` — fixed in TS, still present in Python (production: Collection)
+
+- **A total failure could be written as an empty "ok" source.** The "every request failed" guard counts fetched items, and two collectors add items that aren't data. gcal adds a `_gcal_meta` marker entry, and PFS adds a per-(venue, day) entry whose page is `null`. So a venue calendar whose API call failed, or a PFS run where all six renders failed, wrote zero events as success. The yield check's floors were the only backstop. The TS throws "every request failed" for both.
+- An inverted week window (`--week-end` before `--week-start`) made no requests and wrote an empty "ok" file, and an impossible date crashed with a traceback. The TS CLI rejects both with exit 2.
+- **One malformed response crashed the whole source:** a do215 page that isn't a JSON object, or a WXPN `X-WP-TotalPages` header that isn't a number. The TS records the do215 page as a failed request, and treats the WXPN header as "no further pages".
+- Live check (2026-10-09, week of 2026-10-12): every collector's output file was byte-identical to the Python's apart from `collected_at`, for do215 (660 events), Lightbox, PFS, Iffy Books and Wooden Shoe. WXPN failed the same way in both (see below).
 
 ### Open gaps (not port bugs)
 
