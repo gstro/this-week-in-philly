@@ -29,7 +29,7 @@ is the working definition from Tier B on.
 |---|---|---|
 | A | Pure data transforms on committed files: `common`, `prepare_selection_input`, `merge_selections`, `check_selection`, `check_yield`, `html_render`, `csv_log`, `attendance_check` | Done (PRs #36–#75) |
 | B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | Done: `event_parsers` → `src/eventParsers/`, `fetch_raw`/`proxy_session`/`fetch_page_text` → `fetchRaw`/`lib/http.ts`/`fetchPageText`, `collect_source` → `collectSource`, `collect_week` → `collectWeek` (PRs #76–#81) |
-| C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | In progress: `spotify_lookup` → `spotifyLookup` done |
+| C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | In progress: `spotify_lookup` → `spotifyLookup`, `spotify_playlist` → `spotifyPlaylist` done |
 | D | Cut `collection.yml` / `presentation.yml` / `collection-check.yml` / `runner.sh` over to `src/`, then delete `scripts/` and the Python toolchain | Not started |
 
 `token_report.py` is a local dev tool (Selection token accounting from session
@@ -109,6 +109,14 @@ affect the published report today. Each fix is listed in the TS parser's
 - **An auth failure wrote an all-null `_spotify.json`, exit 0** (each search caught spotipy's auth error and recorded "no match"). The TS fails up front, writing nothing. Transient token-endpoint errors are retried, and the token is refreshed near expiry or on a 401.
 - A search result without a string `name`/URL is skipped instead of crashing the whole lookup from inside a worker thread. Names compare with `toLowerCase()` rather than `casefold()` (only differs for characters like "ß").
 - Verified 2026-10-10: candidate extraction identical to the Python on all 4,495 event titles in `data/`, and a live lookup over the weeks of 2026-09-21, 09-28 and 10-05 wrote byte-identical `_spotify.json` files from both.
+
+### `spotify_playlist` — ported (Tier C)
+
+- **Wrong description on cross-month weeks (production, live today).** `playlist_description` formats only Monday's month, so a week spanning two months reads "September 28-4, 2026" (the playlists for 2026-08-31 and 2026-09-28 say this now), and over New Year one year covers both ends. The TS writes "September 28-October 4, 2026". Re-running a cross-month week rewrites its playlist description. **Python fix:** compare the months/years of Monday and Sunday.
+- **A rate-limit ban hangs the Python,** as with `spotify_lookup` (spotipy sleeps through any `Retry-After`): here it would sit inside the `try` that is meant to make failures non-fatal, so the report would never render. The TS stops at once, says so, and exits 0 without a playlist link.
+- Calls go through `lib/spotifyHttp.ts` (shared with `spotifyLookup`): retries, a 10s timeout, a 401 refreshes the user token once. A POST (create, append) is never retried after a timeout or 5xx, since the server may have acted and a retry would duplicate it (spotipy retries 5xx on POST); only a 429 is. The token refresh in `common.getSpotifyUserClient` now has a 10s timeout, so a hung accounts.spotify.com can't hang the non-fatal step.
+- **Unverified live (by design, Tier C = dry-run only):** every write path (`POST /me/playlists`, `PUT /playlists/{id}`, `PUT`/`POST /playlists/{id}/items`) is checked only against a recording fake. Overflow adds send the documented `{"uris": [...]}` body where spotipy sent a bare array, and `GET /albums/{id}/tracks` has no trailing slash (spotipy's has one). The >100-track overflow path has also never run in production (the week of 2026-10-05 has 16 tracks). First live write: the Tier D cutover.
+- Verified 2026-10-10: artist order, Top-3 flags, caps and playlist names are identical to the Python on all 11 committed weeks (`matchedArtists`/`capArtists`/`playlistName`); descriptions differ only on the two cross-month weeks. Live `--dry-run` track-URI parity with the Python is pending the Spotify ban (see `spotify_lookup`), which lifts about 08:20 EDT 2026-10-11.
 
 ### Open gaps (not port bugs)
 

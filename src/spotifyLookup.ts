@@ -45,10 +45,10 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
-import { setTimeout as sleep } from "node:timers/promises";
 
 import { type MusicSelections, loadSelections, musicEvents } from "./common.js";
 import { writeJson } from "./lib/json.js";
+import { type HttpDeps, RateLimitedError, resilientFetch } from "./lib/spotifyHttp.js";
 
 // Splits a compound listing title ("A w/ B, C" / "A & B" / "A -- subtitle")
 // so every act on the bill can be tried. Not ":" -- a "Subtitle: Act, Act2"
@@ -226,44 +226,6 @@ export function spotifyEntry(matches: Match[]): SpotifyEntry {
 /** Every music event title in the report, deduped, in report order. */
 export function musicTitles(selections: MusicSelections): string[] {
   return [...new Set(musicEvents(selections).map(([title]) => title))];
-}
-
-const RETRY_STATUSES = new Set([429, 500, 502, 503, 504]);
-const MAX_RETRIES = 3;
-const REQUEST_TIMEOUT_MS = 10_000;
-// A Retry-After longer than this is a ban, not a blip (one seen 2026-10-10
-// was 85,725s, ~24h, after a day of repeated test runs). The lookup stops
-// rather than waiting it out -- spotipy sleeps through any Retry-After, so
-// the Python would hang until the job timed out.
-const MAX_RETRY_AFTER_S = 60;
-
-/** Spotify has banned this app for longer than a run should wait; the whole lookup stops. */
-export class RateLimitedError extends Error {
-  override name = "RateLimitedError";
-}
-
-export interface HttpDeps {
-  fetch?: typeof fetch;
-  sleep?: (ms: number) => Promise<unknown>;
-}
-
-/** One request with spotipy-like resilience: retries network errors, 429 and 5xx (honouring Retry-After), with a timeout. */
-async function resilientFetch(url: string, init: () => RequestInit, { fetch: doFetch = fetch, sleep: wait = sleep }: HttpDeps): Promise<Response> {
-  for (let attempt = 0; ; attempt++) {
-    let response: Response;
-    try {
-      response = await doFetch(url, { ...init(), signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
-    } catch (err) {
-      if (attempt >= MAX_RETRIES) throw err;
-      await wait(300 * 2 ** attempt);
-      continue;
-    }
-    if (!RETRY_STATUSES.has(response.status) || attempt >= MAX_RETRIES) return response;
-    const retryAfter = Number(response.headers.get("retry-after"));
-    await response.body?.cancel();
-    if (retryAfter > MAX_RETRY_AFTER_S) throw new RateLimitedError(`Spotify rate-limited this app for ${String(retryAfter)}s`);
-    await wait(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 300 * 2 ** attempt);
-  }
 }
 
 /**

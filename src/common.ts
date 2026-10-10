@@ -346,6 +346,8 @@ export async function getSpotifyUserClient(): Promise<SpotifyUserClient> {
       refresh_token: refreshToken!,
       redirect_uri: redirectUri!,
     }),
+    // A hung token endpoint must not hang spotifyPlaylist's "non-fatal" skip.
+    signal: AbortSignal.timeout(10_000),
   });
   if (!response.ok) {
     throw new Error(`Spotify token refresh failed: ${response.status} ${await response.text()}`);
