@@ -29,7 +29,7 @@ is the working definition from Tier B on.
 |---|---|---|
 | A | Pure data transforms on committed files: `common`, `prepare_selection_input`, `merge_selections`, `check_selection`, `check_yield`, `html_render`, `csv_log`, `attendance_check` | Done (PRs #36–#75) |
 | B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | Done: `event_parsers` → `src/eventParsers/`, `fetch_raw`/`proxy_session`/`fetch_page_text` → `fetchRaw`/`lib/http.ts`/`fetchPageText`, `collect_source` → `collectSource`, `collect_week` → `collectWeek` (PRs #76–#81) |
-| C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | Not started |
+| C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | In progress: `spotify_lookup` → `spotifyLookup` done |
 | D | Cut `collection.yml` / `presentation.yml` / `collection-check.yml` / `runner.sh` over to `src/`, then delete `scripts/` and the Python toolchain | Not started |
 
 `token_report.py` is a local dev tool (Selection token accounting from session
@@ -102,6 +102,13 @@ affect the published report today. Each fix is listed in the TS parser's
 - **cinéSPEAK will now fail every week it isn't rate-limited.** `collect_week.py` caps every fetch at 200,000 characters (`_MAX_FETCH_CHARS`, a leftover from printing feeds for a model). The page grew past that between the 2026-10-07 capture (~200,000 characters, every event inside the cap) and 2026-10-09 (~368,000, first event block ~270,000 in). Under the cap the parser sees no events and reports "markup may have changed". No committed run has hit this yet: earlier runs were either ok or 429s. The cap also hides r5's and phillygoth's later listings (r5: 17 of 45 events through December survive; phillygoth: 40 of 89), though both list soonest-first, so their target week is intact today. `collectWeek` parses whole pages. **Python fix:** pass no cap, or a far larger one, in `collect_simple`/`collect_rotunda`.
 - `--week-start` must be a Monday; the Python accepted any date.
 - Live check (2026-10-09, week of 2026-10-12): both full runs gave the same manifest, 20/22 ok (cinéSPEAK and WXPN failed; they differed only in WXPN's error text). 14 source files were byte-identical apart from `collected_at`. The other 7 that succeeded differed only by documented parser fixes (the Ask A Punk `/event/` links, Meetup mojibake, whitespace normalisation). With the cap removed, cinéSPEAK returned 2 events for the week.
+
+### `spotify_lookup` — ported (Tier C)
+
+- **A rate-limit ban hangs the Python (production).** spotipy sleeps through any `Retry-After`. On 2026-10-10 a day of repeated test runs got the app banned for 85,725s (~24h). Under such a ban `spotify_lookup.py` would sleep until the Actions job timed out, so Presentation would publish nothing. The TS aborts at once with exit 1 and writes nothing. **Tier D decision:** whether a lookup failure should stop the report (`runner.sh` is `set -e`) or let it render without Spotify links.
+- **An auth failure wrote an all-null `_spotify.json`, exit 0** (each search caught spotipy's auth error and recorded "no match"). The TS fails up front, writing nothing. Transient token-endpoint errors are retried, and the token is refreshed near expiry or on a 401.
+- A search result without a string `name`/URL is skipped instead of crashing the whole lookup from inside a worker thread. Names compare with `toLowerCase()` rather than `casefold()` (only differs for characters like "ß").
+- Verified 2026-10-10: candidate extraction identical to the Python on all 4,495 event titles in `data/`, and a live lookup over the weeks of 2026-09-21, 09-28 and 10-05 wrote byte-identical `_spotify.json` files from both.
 
 ### Open gaps (not port bugs)
 
