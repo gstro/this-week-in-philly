@@ -62,6 +62,8 @@ export const CATEGORY_ORDER = [
 
 export type Category = (typeof CATEGORY_ORDER)[number];
 
+export const MUSIC_CATEGORY: Category = CATEGORY_ORDER[0];
+
 // Maps the canonical emoji category strings to the short lowercase slugs
 // used in the picks-log CSV's category column. Validated against the real
 // 2026-06-22 archived week's rows in docs/v1/Data/event-picks-log.csv
@@ -201,6 +203,46 @@ export function loadSelections(weekDir: string): unknown {
     );
   }
   return loadJson(path);
+}
+
+/** The parts of a _selections.json day that {@link musicEvents} reads. */
+export interface MusicSelections {
+  days: Array<{
+    top3: Array<{ title: string; is_music?: boolean }>;
+    honorable_mentions?: Array<{ title: string }>;
+    events?: Array<{ title: string; category?: string }>;
+  }>;
+}
+
+/**
+ * [title, isTop3] for every music event in the report, in report order: each
+ * day's Top 3, then its honorable mentions, then the rest of its events[] --
+ * the tiers htmlRender's category listing sorts by.
+ *
+ * Two signals, on purpose. A Top 3 pick counts by its `is_music` flag,
+ * Selection's own per-pick judgement, which disagrees with the category in
+ * both directions in real weeks (a music-adjacent pick filed elsewhere; a
+ * karaoke night filed under Music but flagged false). Nothing else carries
+ * `is_music` (mergeSelections writes it on top3 only), so every other event
+ * counts by the Music & Concerts category. A Top 3 pick is never re-admitted
+ * through the category path.
+ *
+ * Not deduped: the same title on two days appears twice, so a caller can
+ * tell whether it was a Top 3 pick on any of them.
+ */
+export function musicEvents(selections: MusicSelections): Array<[title: string, isTop3: boolean]> {
+  const result: Array<[string, boolean]> = [];
+  for (const day of selections.days) {
+    const top3Titles = new Set(day.top3.map((pick) => pick.title));
+    for (const pick of day.top3) if (pick.is_music) result.push([pick.title, true]);
+    // mergeSelections appends "(SOLD OUT)" to a sold-out mention's title but
+    // not to its events[] entry -- strip it to match.
+    const mentioned = new Set((day.honorable_mentions ?? []).map((mention) => mention.title.replace(/ \(SOLD OUT\)$/, "")));
+    const rest = (day.events ?? []).filter((event) => event.category === MUSIC_CATEGORY && !top3Titles.has(event.title)).map((event) => event.title);
+    for (const title of rest) if (mentioned.has(title)) result.push([title, false]);
+    for (const title of rest) if (!mentioned.has(title)) result.push([title, false]);
+  }
+  return result;
 }
 
 /** Returns {} if _spotify.json doesn't exist yet (spotify_lookup hasn't run). */
