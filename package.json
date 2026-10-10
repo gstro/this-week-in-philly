@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.19.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -20,7 +20,7 @@
     "test:py": "scripts/dev/py.sh pytest",
     "setup": "npm ci && npm run setup:py",
     "setup:py": "python3.12 -m venv .venv && .venv/bin/pip install -r scripts/requirements-dev.txt -r scripts/requirements-collection.txt",
-    "setup:browsers": "scripts/dev/py.sh playwright install chromium"
+    "setup:browsers": "scripts/dev/py.sh playwright install chromium && npx playwright install chromium"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -37,6 +37,8 @@
     "csv-stringify": "6.9.0",
     "entities": "7.0.1",
     "googleapis": "^178.0.0",
-    "nunjucks": "^3.2.4"
+    "nunjucks": "^3.2.4",
+    "playwright": "1.64.0",
+    "undici": "8.11.2"
   }
 }

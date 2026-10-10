@@ -15,7 +15,10 @@ Python". The Tier A emulation is being removed module by module: `htmlRender`
 is done (plain Nunjucks autoescape, `Date`/`Intl`; checked as "same DOM" as the
 Python on every committed week), and so are `csvLog`/`attendanceCheck`
 (`csv-parse`/`csv-stringify`, a word-set similarity instead of `difflib`;
-checked as the same parsed rows as the Python).
+checked as the same parsed rows as the Python). The fetch layer uses Node's
+undici (`EnvHttpProxyAgent` reads HTTP(S)_PROXY/NO_PROXY itself) and
+Playwright for Node; it was checked by fetching every live source with both
+stacks and comparing what the parsers extract.
 
 ## Tiers
 
@@ -25,7 +28,7 @@ is the working definition from Tier B on.
 | Tier | Scope | Status |
 |---|---|---|
 | A | Pure data transforms on committed files: `common`, `prepare_selection_input`, `merge_selections`, `check_selection`, `check_yield`, `html_render`, `csv_log`, `attendance_check` | Done (PRs #36–#75) |
-| B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | In progress: `event_parsers` → `src/eventParsers/` done |
+| B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | In progress: `event_parsers` → `src/eventParsers/`, and `fetch_raw`/`proxy_session`/`fetch_page_text` → `fetchRaw`/`lib/http.ts`/`fetchPageText` done; `collect_source`, `collect_week` next |
 | C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | Not started |
 | D | Cut `collection.yml` / `presentation.yml` / `collection-check.yml` / `runner.sh` over to `src/`, then delete `scripts/` and the Python toolchain | Not started |
 
@@ -82,6 +85,13 @@ affect the published report today. Each fix is listed in the TS parser's
 - **Unpinned Python patch level:** CPython's `html.parser` changed across 2025's 3.12.x security releases, and `.python-version` / `collection-check.yml` pin only `3.12`; `beautifulsoup4` is unpinned too. Collection's output can shift with the runner image.
 - **Unverified:** `luma` treats a start time without a trailing `Z` as UTC (kept as-is in TS).
 
+### `fetch_raw` / `proxy_session` / `fetch_page_text` — fixed in TS, still present in Python (production: Collection)
+
+- **Mojibake in every Meetup source (confirmed live 2026-10-09):** Meetup serves its iCal feeds as `text/calendar` with no charset, and `requests` decodes any charset-less `text/*` body as ISO-8859-1. Every non-ASCII character in a Meetup title or description reaches `data/<week>/meetup-*.json` garbled (e.g. ☕ as `â\x98\x95`; 35 such sequences in `data/2026-10-05`), and from there Selection's input. `lib/http.ts` decodes with the declared charset, else UTF-8. On the same day's live pages, the TS fetch gave the same parsed events as the Python for every other source.
+- **Proxied relay (latent; matters only behind an egress proxy):** a redirect was followed by Chromium directly, bypassing the proxy, and cookies were never sent back on relayed requests, so a challenge relying on a clearance cookie could loop. The TS follows redirects in the relay and forwards cookies.
+
 ### Open gaps (not port bugs)
+
+- **WXPN has failed since the 2026-09-28 run:** `backend.xpn.org`'s TLS certificate doesn't cover that hostname (curl rejects it too, 2026-10-09), so both stacks fail the same way. A site-side problem; if it persists, find the API's new host.
 
 - `spotify_lookup`'s follower-count tie-break (#71) is inert: live artist search results carry no `followers`, so name clashes still follow Spotify's drifting order.

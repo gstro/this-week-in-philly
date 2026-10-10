@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version-file: '.python-version' }
-      - run: pip install ruff
+      - run: pip install ruff==0.17.0  # keep in step with scripts/requirements-dev.txt
       - run: ruff check scripts/
   mypy:
     runs-on: ubuntu-latest
@@ -83,4 +83,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: npm
       - run: npm ci
+      # fetchPageText.test.ts drives real Chromium (Playwright for Node keeps
+      # its own browser build, separate from the Python job's).
+      - run: npx playwright install --with-deps chromium
       - run: npm run check:ts
