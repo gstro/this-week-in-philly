@@ -2,11 +2,16 @@
 // partial vs total failure) against canned responses. The parsers it hands
 // results to have their own real-capture tests in eventParsers/.
 
+import { existsSync, mkdtempSync, readFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+
 import { Response } from "undici";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
   COLLECTORS,
+  MAX_PAGES_GCAL,
   MAX_PAGES_PER_DAY,
   MAX_PAGES_WXPN,
   buildOutput,
@@ -16,6 +21,8 @@ import {
   collectWxpn,
   datesBetween,
   easternTimestamp,
+  run,
+  utcTimestamp,
 } from "./collectSource.js";
 import { ParseError } from "./eventParsers/index.js";
 import { fetchPageText } from "./fetchPageText.js";
@@ -25,10 +32,8 @@ vi.mock("./lib/http.js", async (importActual) => ({ ...(await importActual<objec
 vi.mock("./fetchPageText.js", () => ({ fetchPageText: vi.fn() }));
 
 const listEvents = vi.fn();
-vi.mock("./common.js", () => ({
-  CALENDAR_TIMEZONE: "America/New_York",
-  getCalendarService: (): object => ({ events: { list: listEvents } }),
-}));
+const getCalendarService = vi.fn((): object => ({ events: { list: listEvents } }));
+vi.mock("./common.js", () => ({ CALENDAR_TIMEZONE: "America/New_York", getCalendarService }));
 
 type Canned = string | object | Error | { body: object; headers: Record<string, string> };
 
@@ -56,6 +61,7 @@ beforeEach(() => {
   vi.mocked(get).mockReset();
   vi.mocked(fetchPageText).mockReset();
   listEvents.mockReset();
+  getCalendarService.mockClear();
 });
 
 describe("dates", () => {
@@ -68,6 +74,11 @@ describe("dates", () => {
   it("gives Philadelphia's offset for the day, DST included", () => {
     expect(easternTimestamp("2026-10-12", "00:00:00")).toBe("2026-10-12T00:00:00-04:00");
     expect(easternTimestamp("2026-12-06", "23:59:59.999")).toBe("2026-12-06T23:59:59.999-05:00");
+  });
+
+  it("uses the offset in force at the end of a DST switch-over Sunday", () => {
+    expect(easternTimestamp("2026-11-01", "23:59:59.999")).toBe("2026-11-01T23:59:59.999-05:00");
+    expect(easternTimestamp("2026-03-08", "23:59:59.999")).toBe("2026-03-08T23:59:59.999-04:00");
   });
 });
 
@@ -200,6 +211,11 @@ describe("philadelphia film society", () => {
     vi.mocked(fetchPageText).mockRejectedValue(new Error("no browser"));
     await expect(collectPhiladelphiaFilmSociety("2026-10-12", "2026-10-18")).rejects.toThrow(/every request failed \(6 attempted\)/);
   });
+
+  it("throws when every render came back blank", async () => {
+    vi.mocked(fetchPageText).mockResolvedValue("");
+    await expect(collectPhiladelphiaFilmSociety("2026-10-12", "2026-10-18")).rejects.toThrow(/every request failed \(6 attempted\).*blank page/);
+  });
 });
 
 describe("venue calendars", () => {
@@ -231,6 +247,21 @@ describe("venue calendars", () => {
     expect(failed).toEqual(["wooden-shoe-books calendar page (token=p2) (quota)"]);
   });
 
+  it(`stops after ${String(MAX_PAGES_GCAL)} pages of an endless nextPageToken`, async () => {
+    listEvents.mockResolvedValue({ data: { items: [], nextPageToken: "again" } });
+    await COLLECTORS["iffy-books"]!("2026-10-12", "2026-10-18");
+    expect(listEvents).toHaveBeenCalledTimes(MAX_PAGES_GCAL);
+  });
+
+  it("missing credentials are an auth ParseError", async () => {
+    getCalendarService.mockImplementationOnce(() => {
+      throw new Error("Missing required env var(s) for Google auth: GOOGLE_REFRESH_TOKEN");
+    });
+    await expect(COLLECTORS["iffy-books"]!("2026-10-12", "2026-10-18")).rejects.toThrow(
+      new ParseError("Google Calendar auth failed: Missing required env var(s) for Google auth: GOOGLE_REFRESH_TOKEN"),
+    );
+  });
+
   it("throws when the first page fails (the Python wrote an empty file)", async () => {
     listEvents.mockRejectedValueOnce(new Error("404 Not Found"));
     await expect(COLLECTORS["iffy-books"]!("2026-10-12", "2026-10-18")).rejects.toThrow(/every request failed \(1 attempted\)/);
@@ -244,5 +275,53 @@ describe("buildOutput", () => {
     // Python's datetime.now(UTC).isoformat(), microseconds included.
     expect(output.collected_at).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}\+00:00$/);
     expect(Math.abs(Date.parse(output.collected_at) - Date.now())).toBeLessThan(5000);
+  });
+});
+
+describe("utcTimestamp", () => {
+  it("is Python's isoformat, microseconds included, on the Date clock", () => {
+    const before = Date.now();
+    const stamp = utcTimestamp();
+    expect(stamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}\+00:00$/);
+    expect(Date.parse(stamp)).toBeGreaterThanOrEqual(before - 1);
+    expect(Date.parse(stamp)).toBeLessThanOrEqual(Date.now());
+  });
+});
+
+describe("CLI", () => {
+  const dir = mkdtempSync(join(tmpdir(), "collect-source-"));
+  const args = (out: string, start = "2026-10-12", end = "2026-10-12"): string[] =>
+    ["do215", "--source-name", "Do215", "--week-start", start, "--week-end", end, "--out", out];
+
+  beforeEach(() => {
+    vi.spyOn(console, "error").mockImplementation(() => undefined);
+  });
+
+  it("writes the source file and warns about a partial failure", async () => {
+    const base = "https://do215.com/events/2026/10/12.json";
+    serve({ [base]: { events: [do215Event(1, "2026-10-12")], paging: { total_pages: 2 } }, [`${base}?page=2`]: new Error("reset") });
+    const out = join(dir, "partial.json");
+    expect(await run(args(out))).toBe(0);
+    const written = JSON.parse(readFileSync(out, "utf8")) as { source: string; events: unknown[] };
+    expect(written.source).toBe("Do215");
+    expect(written.events).toHaveLength(1);
+    expect(vi.mocked(console.error).mock.calls.flat().join("\n")).toContain("WARNING: 1 request(s) failed during collection");
+  });
+
+  it("exits 1 and writes nothing when every request failed", async () => {
+    serve({ "https://do215.com/events/2026/10/12.json": new Error("down") });
+    const out = join(dir, "failed.json");
+    expect(await run(args(out))).toBe(1);
+    expect(existsSync(out)).toBe(false);
+  });
+
+  it("exits 2 on bad arguments, an impossible date, or an inverted window", async () => {
+    const out = join(dir, "never.json");
+    expect(await run(["do215", "--bogus", "x"])).toBe(2);
+    expect(await run(["nope", ...args(out).slice(1)])).toBe(2);
+    expect(await run(args(out, "2026-02-30", "2026-03-01"))).toBe(2);
+    expect(await run(args(out, "2026-10-18", "2026-10-12"))).toBe(2);
+    expect(vi.mocked(get)).not.toHaveBeenCalled();
+    expect(existsSync(out)).toBe(false);
   });
 });

@@ -30,7 +30,10 @@
  * - A do215 page that isn't a JSON object, or a WXPN X-WP-TotalPages header
  *   that isn't a number, is recorded as a failed request (do215) or treated
  *   as "no further pages" (WXPN); both crashed the whole source.
- * - The CLI exits 2 on bad arguments.
+ * - The CLI rejects an impossible date or an inverted window (exit 2); the
+ *   Python crashed on the former and wrote an empty "ok" file for the
+ *   latter. A blank render counts as a failed PFS fetch, and the calendar
+ *   loop is capped at MAX_PAGES_GCAL pages.
  *
  * Output JSON keeps Python's default ASCII escaping, so committed source
  * files don't churn at the cutover.
@@ -62,6 +65,10 @@ export const MAX_PAGES_PER_DAY = 6;
 // be fetched. Observed live (2026-07-29): 495 records across 5 pages of 100
 // (the API's per_page cap). Capped one page above that.
 export const MAX_PAGES_WXPN = 6;
+
+// A venue calendar's week is a few events (one page of up to 250). The cap
+// only guards against an API that keeps handing back a nextPageToken.
+export const MAX_PAGES_GCAL = 10;
 
 const failure = (url: string, err: unknown): string => `${url} (${errorMessage(err)})`;
 
@@ -226,7 +233,10 @@ export async function collectPhiladelphiaFilmSociety(weekStart: string, weekEnd:
       });
     }
   }
-  if (entries.every((entry) => entry.rendered_text === null)) throw allFailed(failed);
+  // A blank page reads as nothing to the parser, so it counts as a failure too.
+  if (entries.every((entry) => !entry.rendered_text)) {
+    throw allFailed(failed.length > 0 ? failed : entries.map((entry) => `${entry.theater_url}?date=${entry.context_date} (blank page)`));
+  }
   return { events: PARSERS["philadelphia-film-society"]!(JSON.stringify(entries), weekStart, weekEnd), failed };
 }
 
@@ -277,7 +287,9 @@ function gcalCollector(key: keyof typeof GCAL_CALENDARS): Collector {
     const items: unknown[] = [];
     const failed: string[] = [];
     let pageToken: string | undefined;
+    let pages = 0;
     do {
+      pages++;
       try {
         const { data } = await service.events.list({
           calendarId: config.calendarId,
@@ -297,7 +309,7 @@ function gcalCollector(key: keyof typeof GCAL_CALENDARS): Collector {
         failed.push(`${key} calendar page (token=${pageToken ?? "none"}) (${errorMessage(err)})`);
         break;
       }
-    } while (pageToken);
+    } while (pageToken && pages < MAX_PAGES_GCAL);
     if (items.length === 0 && failed.length > 0) throw allFailed(failed);
     const raw = JSON.stringify({ items, venue: config.venue, fallback_url: config.fallbackUrl });
     return { events: PARSERS["gcal"]!(raw, weekStart, weekEnd), failed };
@@ -321,35 +333,53 @@ export const COLLECTORS: Readonly<Record<string, Collector>> = {
  * `toISOString()`'s milliseconds would make honest collisions likelier.
  */
 export function utcTimestamp(): string {
-  const now = performance.timeOrigin + performance.now();
-  const ms = Math.floor(now);
-  const micros = String(Math.floor((now - ms) * 1000)).padStart(3, "0");
-  return new Date(ms).toISOString().replace("Z", `${micros}+00:00`);
+  // Wall clock from Date (the clock collectWeek's manifest timestamps use);
+  // only the sub-millisecond digits come from the high-resolution timer.
+  const fraction = performance.now() % 1;
+  const micros = String(Math.min(999, Math.floor(fraction * 1000))).padStart(3, "0");
+  return new Date().toISOString().replace("Z", `${micros}+00:00`);
 }
 
 export function buildOutput(sourceName: string, events: Event[]): { source: string; collected_at: string; events: Event[] } {
   return { source: sourceName, collected_at: utcTimestamp(), events };
 }
 
-async function main(): Promise<void> {
-  const { positionals, values } = parseArgs({
-    args: process.argv.slice(2),
-    allowPositionals: true,
-    options: {
-      "source-name": { type: "string" },
-      "week-start": { type: "string" },
-      "week-end": { type: "string" },
-      out: { type: "string" },
-    },
-  });
+const USAGE = `usage: collectSource.js {${Object.keys(COLLECTORS).sort().join(",")}} --source-name NAME --week-start YYYY-MM-DD --week-end YYYY-MM-DD --out PATH`;
+
+/** A real calendar date in YYYY-MM-DD form (rejects 2026-02-30). */
+function isIsoDate(value: string): boolean {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString().startsWith(value);
+}
+
+/** The CLI; returns the exit code (2 bad arguments, 1 collection failed and nothing written). */
+export async function run(argv: string[]): Promise<number> {
+  let parsed;
+  try {
+    parsed = parseArgs({
+      args: argv,
+      allowPositionals: true,
+      options: {
+        "source-name": { type: "string" },
+        "week-start": { type: "string" },
+        "week-end": { type: "string" },
+        out: { type: "string" },
+      },
+    });
+  } catch (err) {
+    console.error(`${errorMessage(err)}\n${USAGE}`);
+    return 2;
+  }
+  const { positionals, values } = parsed;
   const [key] = positionals;
   const { "source-name": sourceName, "week-start": weekStart, "week-end": weekEnd, out } = values;
-  const isoDate = /^\d{4}-\d{2}-\d{2}$/;
-  if (!key || positionals.length > 1 || !(key in COLLECTORS) || !sourceName || !out || !weekStart || !weekEnd || !isoDate.test(weekStart) || !isoDate.test(weekEnd)) {
-    console.error(
-      `usage: collectSource.js {${Object.keys(COLLECTORS).sort().join(",")}} --source-name NAME --week-start YYYY-MM-DD --week-end YYYY-MM-DD --out PATH`,
-    );
-    process.exit(2);
+  if (!key || positionals.length > 1 || !(key in COLLECTORS) || !sourceName || !out || !weekStart || !weekEnd) {
+    console.error(USAGE);
+    return 2;
+  }
+  if (!isIsoDate(weekStart) || !isIsoDate(weekEnd) || weekStart > weekEnd) {
+    // An inverted window would make no requests and write an empty "ok" file.
+    console.error(`invalid week window ${weekStart}..${weekEnd}\n${USAGE}`);
+    return 2;
   }
 
   let result: Collected;
@@ -358,7 +388,7 @@ async function main(): Promise<void> {
   } catch (err) {
     // Nothing is written: an empty file on total failure is what this exists to avoid.
     console.error(`FAILED to collect ${key}: ${errorMessage(err)}`);
-    process.exit(1);
+    return 1;
   }
 
   writeFileSync(out, writeJsonAsciiEscaped(buildOutput(sourceName, result.events)));
@@ -370,8 +400,9 @@ async function main(): Promise<void> {
     for (const item of result.failed) console.error(`  FAILED: ${item}`);
   }
   console.error(`${sourceName}: ${String(result.events.length)} events written. Proceeding.`);
+  return 0;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
-  await main();
+  process.exitCode = await run(process.argv.slice(2));
 }

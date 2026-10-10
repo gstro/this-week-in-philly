@@ -93,6 +93,7 @@ affect the published report today. Each fix is listed in the TS parser's
 ### `collect_source` — fixed in TS, still present in Python (production: Collection)
 
 - **A total failure could be written as an empty "ok" source.** The "every request failed" guard counts fetched items, and two collectors add items that aren't data. gcal adds a `_gcal_meta` marker entry, and PFS adds a per-(venue, day) entry whose page is `null`. So a venue calendar whose API call failed, or a PFS run where all six renders failed, wrote zero events as success. The yield check's floors were the only backstop. The TS throws "every request failed" for both.
+- An inverted week window (`--week-end` before `--week-start`) made no requests and wrote an empty "ok" file, and an impossible date crashed with a traceback. The TS CLI rejects both with exit 2.
 - **One malformed response crashed the whole source:** a do215 page that isn't a JSON object, or a WXPN `X-WP-TotalPages` header that isn't a number. The TS records the do215 page as a failed request, and treats the WXPN header as "no further pages".
 - Live check (2026-10-09, week of 2026-10-12): every collector's output file was byte-identical to the Python's apart from `collected_at`, for do215 (660 events), Lightbox, PFS, Iffy Books and Wooden Shoe. WXPN failed the same way in both (see below).
 
