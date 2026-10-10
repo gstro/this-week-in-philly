@@ -21,7 +21,7 @@ import * as r5Productions from "./r5Productions.js";
 import * as theRotunda from "./theRotunda.js";
 import * as wxpn from "./wxpn.js";
 
-export { type Event, type EventParser, type ParserOptions, ParseError } from "./base.js";
+export { type Event, type EventParser, type ParserOptions, ParseError, skippedRecords } from "./base.js";
 export { parseIndex as parseLightboxIndex } from "./lightbox.js";
 
 export const PARSERS: Readonly<Record<string, EventParser>> = {

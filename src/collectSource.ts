@@ -91,7 +91,7 @@ export function datesBetween(start: string, end: string): string[] {
   return dates;
 }
 
-function addDays(date: string, days: number): string {
+export function addDays(date: string, days: number): string {
   const day = new Date(`${date}T00:00:00Z`);
   day.setUTCDate(day.getUTCDate() + days);
   return day.toISOString().slice(0, 10);
