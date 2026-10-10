@@ -53,6 +53,12 @@
  * - Calls go through lib/spotifyHttp: network errors, 429 and 5xx are retried,
  *   each request times out after 10s, and a Retry-After over 60s (a ban) ends
  *   the step at once instead of sleeping through it as spotipy does.
+ * - A POST (create, append) is never retried after a timeout or 5xx -- the
+ *   server may have acted, and a retry would duplicate the playlist or a
+ *   100-track chunk (spotipy retries 5xx on POST). A failed run just skips;
+ *   the next run finds the playlist by name. Only a 429 is retried.
+ * - The token refresh has a 10s timeout, so a hung accounts.spotify.com can't
+ *   hang the "non-fatal" step.
  * - Overflow tracks are added with the documented `{uris}` body; spotipy posts
  *   a bare array. Unverified against the live API (a run needs more than 100
  *   tracks, and live writes happen only at the Tier D cutover).
@@ -181,7 +187,7 @@ export function capArtists(artists: Array<[string, boolean]>, maxArtists: number
  * same failure for every remaining artist.
  */
 export async function trackUrisForArtist(api: Pick<SpotifyUserApi, "get">, artistId: string, limit: number): Promise<string[]> {
-  const albums = await api.get<{ items: Array<{ id: string; release_date?: string }> }>(`/artists/${artistId}/albums`, {
+  const albums = await api.get<{ items: Array<{ id: string; release_date?: string }> }>(`/artists/${encodeURIComponent(artistId)}/albums`, {
     include_groups: "album,single",
     country: MARKET,
     limit: String(ALBUMS_TO_CONSIDER),
@@ -193,7 +199,7 @@ export async function trackUrisForArtist(api: Pick<SpotifyUserApi, "get">, artis
   const seen = new Set<string>();
   for (const album of ordered) {
     if (uris.length >= limit) break;
-    const tracks = await api.get<{ items: Array<{ uri: string }> }>(`/albums/${album.id}/tracks`, { market: MARKET, limit: String(limit) });
+    const tracks = await api.get<{ items: Array<{ uri: string }> }>(`/albums/${encodeURIComponent(album.id)}/tracks`, { market: MARKET, limit: String(limit) });
     for (const track of tracks.items) {
       if (!seen.has(track.uri)) {
         seen.add(track.uri);
@@ -243,7 +249,7 @@ export async function findExistingPlaylist(
 ): Promise<string | null> {
   if (storedId) {
     try {
-      const playlist = await api.get<PlaylistSummary>(`/playlists/${storedId}`);
+      const playlist = await api.get<PlaylistSummary>(`/playlists/${encodeURIComponent(storedId)}`);
       if (playlist.owner?.id === userId) return playlist.id;
     } catch (err) {
       console.log(`  Stored playlist ${storedId} unusable (${err instanceof Error ? err.message : String(err)}); searching by name.`);
@@ -267,9 +273,9 @@ export async function findExistingPlaylist(
  * week (20-40 artists x 3 tracks) routinely passes the cap.
  */
 export async function setPlaylistTracks(api: Pick<SpotifyUserApi, "put" | "post">, playlistId: string, uris: string[]): Promise<void> {
-  await api.put(`/playlists/${playlistId}/items`, { uris: uris.slice(0, MAX_ITEMS_PER_CALL) });
+  await api.put(`/playlists/${encodeURIComponent(playlistId)}/items`, { uris: uris.slice(0, MAX_ITEMS_PER_CALL) });
   for (let start = MAX_ITEMS_PER_CALL; start < uris.length; start += MAX_ITEMS_PER_CALL) {
-    await api.post(`/playlists/${playlistId}/items`, { uris: uris.slice(start, start + MAX_ITEMS_PER_CALL) });
+    await api.post(`/playlists/${encodeURIComponent(playlistId)}/items`, { uris: uris.slice(start, start + MAX_ITEMS_PER_CALL) });
   }
 }
 
@@ -293,7 +299,7 @@ export async function syncPlaylist(api: SpotifyUserApi, monday: string, uris: st
   const userId = (await api.get<{ id: string }>("/me")).id;
   let playlistId = await findExistingPlaylist(api, userId, name, storedId);
   if (playlistId) {
-    await api.put(`/playlists/${playlistId}`, { name, description });
+    await api.put(`/playlists/${encodeURIComponent(playlistId)}`, { name, description });
   } else {
     // POST /me/playlists, NOT POST /users/{user_id}/playlists: Spotify's
     // February 2026 Development Mode changes removed the latter, which 403s

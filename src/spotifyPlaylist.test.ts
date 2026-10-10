@@ -438,6 +438,15 @@ describe("buildPlaylist", () => {
     expect(existsSync(join(dir, "_playlist.json"))).toBe(false);
   });
 
+  it("with no Spotify credentials in the environment, skips cleanly (exit 0, no file) through the default client", async () => {
+    for (const name of ["SPOTIFY_CLIENT_ID", "SPOTIFY_CLIENT_SECRET", "SPOTIFY_REFRESH_TOKEN", "SPOTIFY_REDIRECT_URI"]) vi.stubEnv(name, "");
+    const dir = weekDir();
+    expect(await buildPlaylist({ weekDir: dir })).toBe(0);
+    expect(errors.join("\n")).toContain("SKIPPING playlist build -- Missing required env var(s) for Spotify user auth");
+    expect(existsSync(join(dir, "_playlist.json"))).toBe(false);
+    vi.unstubAllEnvs();
+  });
+
   it("caps the artists with --max-artists, Top 3 first, and says so", async () => {
     const dir = mkdtempSync(join(tmpdir(), "spotify-playlist-"));
     writeFileSync(join(dir, "_selections.json"), JSON.stringify(selections([[pick("A"), pick("B")]])));
@@ -521,5 +530,47 @@ describe("spotifyUserApi", () => {
     const doFetch = fakeFetch([new Response("", { status: 429, headers: { "Retry-After": "85725" } })]);
     const api = spotifyUserApi({ getToken: () => Promise.resolve("t"), fetch: doFetch, ...noSleep });
     await expect(api.get("/me")).rejects.toBeInstanceOf(RateLimitedError);
+  });
+
+  it("never retries a POST after a timeout or 5xx (it could duplicate the playlist or a chunk), but does retry a 429", async () => {
+    const timedOut = fakeFetch([new DOMException("timed out", "TimeoutError"), Response.json({ id: "dup" })]);
+    const api = spotifyUserApi({ getToken: () => Promise.resolve("t"), fetch: timedOut, ...noSleep });
+    await expect(api.post("/me/playlists", {})).rejects.toThrow("timed out");
+    expect(timedOut.seen).toHaveLength(1);
+
+    const serverError = fakeFetch([new Response("", { status: 503 }), Response.json({ id: "dup" })]);
+    await expect(spotifyUserApi({ getToken: () => Promise.resolve("t"), fetch: serverError, ...noSleep }).post("/playlists/p/items", {})).rejects.toMatchObject({ status: 503 });
+    expect(serverError.seen).toHaveLength(1);
+
+    const limited = fakeFetch([new Response("", { status: 429, headers: { "Retry-After": "1" } }), Response.json({ id: "ok" })]);
+    expect(await spotifyUserApi({ getToken: () => Promise.resolve("t"), fetch: limited, ...noSleep }).post("/me/playlists", {})).toEqual({ id: "ok" });
+  });
+
+  it("retries a GET or PUT after a network error", async () => {
+    const flaky = fakeFetch([new TypeError("fetch failed"), new Response(null, { status: 200 })]);
+    await spotifyUserApi({ getToken: () => Promise.resolve("t"), fetch: flaky, ...noSleep }).put("/playlists/p/items", { uris: [] });
+    expect(flaky.seen).toHaveLength(2);
+  });
+
+  it("surfaces a token failure on a 401 refresh, and refuses to send the token to another host", async () => {
+    let calls = 0;
+    const getToken = (): Promise<string> => (++calls === 1 ? Promise.resolve("old") : Promise.reject(new Error("invalid_grant")));
+    const api = spotifyUserApi({ getToken, fetch: fakeFetch([new Response("", { status: 401 })]), ...noSleep });
+    await expect(api.get("/me")).rejects.toThrow("invalid_grant");
+
+    const doFetch = fakeFetch([]);
+    await expect(spotifyUserApi({ getToken: () => Promise.resolve("t"), fetch: doFetch, ...noSleep }).get("https://evil.example/v1/me/playlists")).rejects.toThrow("refusing to send a Spotify token");
+    expect(doFetch.seen).toEqual([]);
+  });
+
+  it("pages through /me/playlists end to end, following Spotify's absolute `next` URL", async () => {
+    const next = "https://api.spotify.com/v1/me/playlists?offset=50&limit=50";
+    const doFetch = fakeFetch([
+      Response.json({ items: [owned("x", "other")], next }),
+      Response.json({ items: [owned("page2", NAME)], next: null }),
+    ]);
+    const api = spotifyUserApi({ getToken: () => Promise.resolve("t"), fetch: doFetch, ...noSleep });
+    expect(await findExistingPlaylist(api, "greg", NAME, null)).toBe("page2");
+    expect(doFetch.seen.map((call) => call.url)).toEqual(["https://api.spotify.com/v1/me/playlists?limit=50", next]);
   });
 });

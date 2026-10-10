@@ -26,18 +26,34 @@ export interface HttpDeps {
   sleep?: (ms: number) => Promise<unknown>;
 }
 
+export interface FetchOptions {
+  /**
+   * False for a request that must not run twice (POST /me/playlists, an
+   * append to a playlist): a timeout or 5xx may mean the server did act, and a
+   * retry would duplicate it. Then only a 429 (rejected before processing) is
+   * retried. Default true.
+   */
+  idempotent?: boolean;
+}
+
 /** One request with spotipy-like resilience: retries network errors, 429 and 5xx (honouring Retry-After), with a timeout. */
-export async function resilientFetch(url: string, init: () => RequestInit, { fetch: doFetch = fetch, sleep: wait = sleep }: HttpDeps): Promise<Response> {
+export async function resilientFetch(
+  url: string,
+  init: () => RequestInit,
+  { fetch: doFetch = fetch, sleep: wait = sleep }: HttpDeps,
+  { idempotent = true }: FetchOptions = {},
+): Promise<Response> {
   for (let attempt = 0; ; attempt++) {
     let response: Response;
     try {
       response = await doFetch(url, { ...init(), signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
     } catch (err) {
-      if (attempt >= MAX_RETRIES) throw err;
+      if (!idempotent || attempt >= MAX_RETRIES) throw err;
       await wait(300 * 2 ** attempt);
       continue;
     }
-    if (!RETRY_STATUSES.has(response.status) || attempt >= MAX_RETRIES) return response;
+    const retryable = idempotent ? RETRY_STATUSES.has(response.status) : response.status === 429;
+    if (!retryable || attempt >= MAX_RETRIES) return response;
     const retryAfter = Number(response.headers.get("retry-after"));
     await response.body?.cancel();
     if (retryAfter > MAX_RETRY_AFTER_S) throw new RateLimitedError(`Spotify rate-limited this app for ${String(retryAfter)}s`);
@@ -82,7 +98,9 @@ export function spotifyUserApi({ getToken = async (): Promise<string> => (await 
   let token: string | undefined;
 
   async function call<T>(method: string, path: string, query: Record<string, string> | undefined, body: unknown): Promise<T> {
-    // `path` may be an absolute `next` URL from a paged response.
+    // `path` may be an absolute `next` URL from a paged response; the bearer
+    // token only ever goes to Spotify's own API.
+    if (path.startsWith("https://") && !path.startsWith(`${API}/`)) throw new Error(`refusing to send a Spotify token to ${path}`);
     const url = path.startsWith("https://") ? path : `${API}${path}${query ? `?${new URLSearchParams(query).toString()}` : ""}`;
     const send = async (): Promise<Response> => {
       token ??= await getToken();
@@ -95,6 +113,7 @@ export function spotifyUserApi({ getToken = async (): Promise<string> => (await 
           ...(body !== undefined && { body: JSON.stringify(body) }),
         }),
         http,
+        { idempotent: method !== "POST" },
       );
     };
     let response = await send();
