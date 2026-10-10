@@ -28,7 +28,7 @@ is the working definition from Tier B on.
 | Tier | Scope | Status |
 |---|---|---|
 | A | Pure data transforms on committed files: `common`, `prepare_selection_input`, `merge_selections`, `check_selection`, `check_yield`, `html_render`, `csv_log`, `attendance_check` | Done (PRs #36–#75) |
-| B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | In progress: `event_parsers` → `src/eventParsers/`, `fetch_raw`/`proxy_session`/`fetch_page_text` → `fetchRaw`/`lib/http.ts`/`fetchPageText`, and `collect_source` → `collectSource` done; `collect_week` next |
+| B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | Done: `event_parsers` → `src/eventParsers/`, `fetch_raw`/`proxy_session`/`fetch_page_text` → `fetchRaw`/`lib/http.ts`/`fetchPageText`, `collect_source` → `collectSource`, `collect_week` → `collectWeek` (PRs #76–#81) |
 | C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | Not started |
 | D | Cut `collection.yml` / `presentation.yml` / `collection-check.yml` / `runner.sh` over to `src/`, then delete `scripts/` and the Python toolchain | Not started |
 
@@ -81,7 +81,7 @@ affect the published report today. Each fix is listed in the TS parser's
   - `lightbox`: a JSON-LD `PostalAddress` object in `location.address` lands in the venue as a Python dict repr; `"@type": ["Event"]` is skipped.
   - `_ical`: only a space continues a folded line (RFC 5545 also allows a tab); an escaped backslash followed by `n` becomes backslash + newline; `\N` is never unescaped.
 - **One bad record fails the whole source** (uncaught exception): an impossible time in `luma`, `meetup`, `cinespeak` or `philadelphia_film_society` ("7:75 pm"); wrong JSON types in `philly_ask_a_punk`, `do215`, `lightbox`, `gcal`, `wxpn`, `philadelphia_film_society`. The TS skips that record with a stderr warning instead, but throws `ParseError` if *every* record is malformed, so a format change still marks the source failed rather than an empty "ok". (`the_rotunda`'s `isdigit()`/`int()` mismatch on "²" is avoided in TS by matching only ASCII digits; such a cell is ignored.)
-- **TS follow-up for the `collect_week` port:** a *partial* malformed-record skip is only visible as stderr warnings. Surface a skip count in the manifest `note`, the way `partial_failure_note` does for failed requests.
+- A *partial* malformed-record skip is reported in the source's manifest `note` by `collectWeek` (`skipped N malformed record(s): ...`), next to any failed requests.
 - **Unpinned Python patch level:** CPython's `html.parser` changed across 2025's 3.12.x security releases, and `.python-version` / `collection-check.yml` pin only `3.12`; `beautifulsoup4` is unpinned too. Collection's output can shift with the runner image.
 - **Unverified:** `luma` treats a start time without a trailing `Z` as UTC (kept as-is in TS).
 
@@ -97,7 +97,15 @@ affect the published report today. Each fix is listed in the TS parser's
 - **One malformed response crashed the whole source:** a do215 page that isn't a JSON object, or a WXPN `X-WP-TotalPages` header that isn't a number. The TS records the do215 page as a failed request, and treats the WXPN header as "no further pages".
 - Live check (2026-10-09, week of 2026-10-12): every collector's output file was byte-identical to the Python's apart from `collected_at`, for do215 (660 events), Lightbox, PFS, Iffy Books and Wooden Shoe. WXPN failed the same way in both (see below).
 
+### `collect_week` — fixed in TS, still present in Python (production: Collection)
+
+- **cinéSPEAK will now fail every week it isn't rate-limited.** `collect_week.py` caps every fetch at 200,000 characters (`_MAX_FETCH_CHARS`, a leftover from printing feeds for a model). The page grew past that between the 2026-10-07 capture (~200,000 characters, every event inside the cap) and 2026-10-09 (~368,000, first event block ~270,000 in). Under the cap the parser sees no events and reports "markup may have changed". No committed run has hit this yet: earlier runs were either ok or 429s. The cap also hides r5's and phillygoth's later listings (r5: 17 of 45 events through December survive; phillygoth: 40 of 89), though both list soonest-first, so their target week is intact today. `collectWeek` parses whole pages. **Python fix:** pass no cap, or a far larger one, in `collect_simple`/`collect_rotunda`.
+- `--week-start` must be a Monday; the Python accepted any date.
+- Live check (2026-10-09, week of 2026-10-12): both full runs gave the same manifest, 20/22 ok (cinéSPEAK and WXPN failed; they differed only in WXPN's error text). 14 source files were byte-identical apart from `collected_at`. The other 7 that succeeded differed only by documented parser fixes (the Ask A Punk `/event/` links, Meetup mojibake, whitespace normalisation). With the cap removed, cinéSPEAK returned 2 events for the week.
+
 ### Open gaps (not port bugs)
+
+- **cinéSPEAK also rate-limits (HTTP 429 on the 2026-09-21 and 2026-10-05 runs).** Independent of the cap above; a retry with backoff would cover it.
 
 - **WXPN has failed since the 2026-09-28 run:** `backend.xpn.org`'s TLS certificate doesn't cover that hostname (curl rejects it too, 2026-10-09), so both stacks fail the same way. A site-side problem; if it persists, find the API's new host.
 

@@ -41,6 +41,8 @@
  *   Python's fabricated "12:00 AM".
  */
 
+import { AsyncLocalStorage } from "node:async_hooks";
+
 import type { CheerioAPI } from "cheerio";
 
 /** Any cheerio selection (cheerio's node type lives in a transitive package). */
@@ -110,6 +112,14 @@ export function makeEvent(fields: Event): Event {
 }
 
 /**
+ * Collects a description of every record {@link collectRecords} skips while
+ * a callback runs: `skippedRecords.run([], fn)`, then read the array. Lets
+ * collectWeek report partial skips per source without threading a logger
+ * through every parser.
+ */
+export const skippedRecords = new AsyncLocalStorage<string[]>();
+
+/**
  * Maps each item to its events (null/[] to skip), skipping and logging any
  * MalformedRecord. One bad record shouldn't fail a whole source -- but if
  * every record is malformed, that's a format change, not bad data, so it
@@ -133,6 +143,7 @@ export function collectRecords<T>(source: string, items: Iterable<T>, toEvents: 
       malformed++;
       firstError ||= err.message;
       console.warn(`${source}: skipping malformed record: ${err.message}`);
+      skippedRecords.getStore()?.push(err.message);
     }
   }
   if (malformed > 0 && wellFormed === 0) {

@@ -90,9 +90,23 @@ export async function get(url: string): Promise<Response> {
   return response;
 }
 
-/** The body as text, decoded with the charset its Content-Type names (UTF-8 if none or unknown). */
-export async function readText(response: Response): Promise<string> {
-  const bytes = await response.arrayBuffer();
+/**
+ * The body as text, decoded with the charset its Content-Type names (UTF-8
+ * if none or unknown). Throws once the body passes `maxBytes`, so a runaway
+ * response can't exhaust memory.
+ */
+export async function readText(response: Response, maxBytes = Number.POSITIVE_INFINITY): Promise<string> {
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  for await (const chunk of (response.body ?? []) as AsyncIterable<Uint8Array>) {
+    size += chunk.byteLength;
+    if (size > maxBytes) {
+      await response.body?.cancel();
+      throw new Error(`response body exceeds ${String(maxBytes)} bytes`);
+    }
+    chunks.push(chunk);
+  }
+  const bytes = Buffer.concat(chunks);
   const charset = /charset\s*=\s*"?([^";\s]+)/i.exec(response.headers.get("content-type") ?? "")?.[1];
   let decoder: TextDecoder;
   try {
