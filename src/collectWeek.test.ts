@@ -39,6 +39,10 @@ describe("partialNote (same text as collect_week.partial_failure_note for failed
     expect(partialNote(failures)).toBe("partial -- 7 request(s) failed: day-0 (err); day-1 (err); day-2 (err); +4 more");
   });
 
+  it("clips a long skip message", () => {
+    expect(partialNote([], ["x".repeat(500)])).toBe(`skipped 1 malformed record(s): ${"x".repeat(200)}...`);
+  });
+
   it("reports skipped malformed records, alone or alongside failures", () => {
     expect(partialNote([], ["bad hour 7:75 pm"])).toBe("skipped 1 malformed record(s): bad hour 7:75 pm");
     expect(partialNote(["x (err)"], ["a", "b", "c", "d"])).toBe(
@@ -55,15 +59,15 @@ describe("collectWeek", () => {
     {
       stem: "skippy",
       name: "Skippy",
-      // A parser skipping one malformed record, as eventParsers' parsers do.
-      collect: () =>
-        Promise.resolve({
-          events: collectRecords("skippy", ["ok", "bad"], (item) => {
-            if (item === "bad") throw new MalformedRecord("impossible time 7:75 pm");
-            return event("Fine");
-          }),
-          failed: [],
-        }),
+      // A parser skipping one malformed record after an await, as the real collectors do.
+      collect: async (): Promise<{ events: Event[]; failed: string[] }> => {
+        await new Promise((resolve) => setTimeout(resolve, 5));
+        const events = collectRecords("skippy", ["ok", "bad"], (item) => {
+          if (item === "bad") throw new MalformedRecord("impossible time 7:75 pm");
+          return event("Fine");
+        });
+        return { events, failed: [] };
+      },
     },
   ];
 
@@ -98,13 +102,17 @@ describe("collectWeek", () => {
     expect(failed.status).toBe("failed");
   });
 
-  it("every collected_at lies inside the run window (checkYield's provenance check)", async () => {
-    const outRoot = mkdtempSync(join(tmpdir(), "collect-week-"));
-    const manifest = await collectWeek({ weekStart: "2026-10-12", outRoot, sources });
-    for (const stem of Object.keys(manifest.sources)) {
-      const stamp = readJson(join(outRoot, "2026-10-12", `${stem}.json`)).collected_at as string;
-      expect(Date.parse(stamp)).toBeGreaterThanOrEqual(Date.parse(manifest.run_started));
-      expect(Date.parse(stamp)).toBeLessThanOrEqual(Date.parse(manifest.run_completed));
+  it("every collected_at lies inside the run window at microsecond precision (check_yield's provenance check)", async () => {
+    // Fixed-width stamps compare as strings exactly like check_yield.py's datetimes.
+    const fast: Source[] = Array.from({ length: 22 }, (_, i) => ({ stem: `s${String(i).padStart(2, "0")}`, name: "S", collect: () => Promise.resolve({ events: [], failed: [] }) }));
+    for (let round = 0; round < 50; round++) {
+      const outRoot = mkdtempSync(join(tmpdir(), "collect-week-"));
+      const manifest = await collectWeek({ weekStart: "2026-10-12", outRoot, sources: fast });
+      const stamps = fast.map(({ stem }) => readJson(join(outRoot, "2026-10-12", `${stem}.json`)).collected_at as string);
+      expect(new Set(stamps).size).toBe(stamps.length);
+      for (const stamp of stamps) {
+        expect(stamp > manifest.run_started && stamp < manifest.run_completed, stamp).toBe(true);
+      }
     }
   });
 

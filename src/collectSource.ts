@@ -326,18 +326,24 @@ export const COLLECTORS: Readonly<Record<string, Collector>> = {
   "wooden-shoe-books": gcalCollector("wooden-shoe-books"),
 };
 
+let lastMicros = 0;
+
 /**
  * Now, as Python's `datetime.now(UTC).isoformat()` writes it
- * ("2026-10-12T00:22:01.054578+00:00"). Microseconds matter: checkYield
- * flags source files sharing an identical `collected_at` as fabricated, and
- * `toISOString()`'s milliseconds would make honest collisions likelier.
+ * ("2026-10-12T00:22:01.054578+00:00"), strictly increasing within the
+ * process. Both matter to check_yield.py, which compares at full microsecond
+ * precision: identical `collected_at`s across files read as fabricated, and
+ * a source stamped after the manifest's `run_completed` reads as unfetched.
+ * Date gives the wall clock and the high-resolution timer the sub-millisecond
+ * digits; the two aren't aligned, so the clamp keeps successive stamps from
+ * appearing to run backwards.
  */
 export function utcTimestamp(): string {
-  // Wall clock from Date (the clock collectWeek's manifest timestamps use);
-  // only the sub-millisecond digits come from the high-resolution timer.
-  const fraction = performance.now() % 1;
-  const micros = String(Math.min(999, Math.floor(fraction * 1000))).padStart(3, "0");
-  return new Date().toISOString().replace("Z", `${micros}+00:00`);
+  const sub = Math.min(999, Math.floor((performance.now() % 1) * 1000));
+  const micros = Math.max(Date.now() * 1000 + sub, lastMicros + 1);
+  lastMicros = micros;
+  const ms = Math.floor(micros / 1000);
+  return new Date(ms).toISOString().replace("Z", `${String(micros - ms * 1000).padStart(3, "0")}+00:00`);
 }
 
 export function buildOutput(sourceName: string, events: Event[]): { source: string; collected_at: string; events: Event[] } {

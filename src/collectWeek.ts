@@ -26,10 +26,12 @@
  *   only printed a warning, and its parsers failed the whole source instead.
  * - `--week-start` must be a real date and a Monday (the week-window
  *   convention); the Python accepted any date, or crashed on a bad one.
- * - Pages are parsed whole. The Python capped each fetch at 200,000
- *   characters, which cuts off every event on cinéSPEAK's ~370,000-character
- *   page (its first starts ~270,000 in), failing the source as "markup may
- *   have changed".
+ * - Pages are parsed whole (up to a 5 MB runaway guard). The Python capped
+ *   each fetch at 200,000 characters. cinéSPEAK's page grew past that
+ *   between 2026-10-07 (~200,000 characters, all events inside the cap) and
+ *   2026-10-09 (~368,000, first event ~270,000 in), so under the cap it now
+ *   fails as "markup may have changed". The cap also hides r5's and
+ *   phillygoth's later listings.
  * - A failure reason carries the underlying cause (undici reports a DNS or
  *   TLS failure as a bare "fetch failed"), and error class names are the TS
  *   ones (`HttpError`, not requests' `HTTPError`).
@@ -59,13 +61,17 @@ export interface Source {
   collect: (weekStart: string, weekEnd: string) => Promise<Collected>;
 }
 
+// Real pages run to ~450 KB; anything past this is a runaway response.
+const MAX_BODY_BYTES = 5_000_000;
+
 /**
  * The whole response body. Deliberately not fetchRaw's 200,000-character cap:
  * that's for printing a feed, and cutting a page short only hides content
- * from its parser (cinéSPEAK's first event sits ~270,000 characters in).
+ * from its parser (cinéSPEAK's first event sat ~270,000 characters in on
+ * 2026-10-09).
  */
 async function fetchBody(url: string): Promise<string> {
-  return readText(await get(url));
+  return readText(await get(url), MAX_BODY_BYTES);
 }
 
 /** One fetch handed to one parser. */
@@ -136,10 +142,13 @@ export const SOURCES: readonly Source[] = [
 ];
 
 const MAX_SHOWN_IN_NOTE = 3;
+// A skip message can embed a whole bad record.
+const MAX_ITEM_CHARS = 200;
 
 /** "a; b; c; +4 more" -- bounded, since the note lands in the committed manifest. */
 function capped(items: readonly string[]): string {
-  const shown = items.slice(0, MAX_SHOWN_IN_NOTE).join("; ");
+  const clip = (item: string): string => (item.length > MAX_ITEM_CHARS ? `${item.slice(0, MAX_ITEM_CHARS)}...` : item);
+  const shown = items.slice(0, MAX_SHOWN_IN_NOTE).map(clip).join("; ");
   return items.length > MAX_SHOWN_IN_NOTE ? `${shown}; +${String(items.length - MAX_SHOWN_IN_NOTE)} more` : shown;
 }
 
