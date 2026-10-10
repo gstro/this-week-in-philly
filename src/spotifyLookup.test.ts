@@ -12,6 +12,7 @@ import {
   type Artist,
   type ArtistSearch,
   candidateGroups,
+  clientCredentialsSearch,
   findSpotifyMatches,
   formatSpotifyJson,
   lookupWeek,
@@ -384,6 +385,135 @@ describe("_spotify.json", () => {
         spotify_url: url("Quicksand"),
       },
     });
+    vi.restoreAllMocks();
+  });
+});
+
+describe("_spotify.json ordering edge cases", () => {
+  it("orders by code point and keeps integer-like titles in place, like Python's sort_keys", () => {
+    const text = formatSpotifyJson({ "😀 Night": null, "！Bang": null, "9": null, "10": null, "2024": null, "#1 Fan": null });
+    // Python: "#1 Fan" < "10" < "2024" < "9" < "！Bang" (U+FF01) < "😀 Night" (U+1F600).
+    expect([...text.matchAll(/^ {2}"([^"]+)"/gm)].map((m) => m[1])).toEqual(["#1 Fan", "10", "2024", "9", "！Bang", "😀 Night"]);
+  });
+});
+
+describe("lookupWeek concurrency", () => {
+  it("keeps every title's own result when searches finish out of order", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "spotify-lookup-"));
+    const titles = ["Slow Act", "Fast Act", "Mid Act", "Quick Act"];
+    writeFileSync(join(dir, "_selections.json"), JSON.stringify({ days: [day([], titles.map((title) => ({ title, category: MUSIC })))] }));
+    const delays: Record<string, number> = { "Slow Act": 40, "Fast Act": 1, "Mid Act": 20, "Quick Act": 5 };
+    const search: ArtistSearch = async (candidate) => {
+      await new Promise((resolve) => setTimeout(resolve, delays[candidate] ?? 0));
+      return [artist(candidate, url(candidate))];
+    };
+    vi.spyOn(console, "log").mockImplementation(() => undefined);
+    await lookupWeek({ weekDir: dir, search, maxWorkers: 4 });
+    const written = JSON.parse(readFileSync(join(dir, "_spotify.json"), "utf8")) as Record<string, { spotify_url: string }>;
+    for (const title of titles) expect(written[title]?.spotify_url).toBe(url(title));
+    vi.restoreAllMocks();
+  });
+});
+
+describe("clientCredentialsSearch", () => {
+  type Call = { url: string; init: RequestInit };
+  /** A fake fetch answering from a queue of responses per URL prefix. */
+  function fakeFetch(responses: Record<string, Array<Response | Error>>): typeof fetch & { calls: Call[] } {
+    const calls: Call[] = [];
+    const impl = (input: string | URL | Request, init: RequestInit = {}): Promise<Response> => {
+      const target = input instanceof Request ? input.url : input.toString();
+      calls.push({ url: target, init });
+      const key = Object.keys(responses).find((prefix) => target.startsWith(prefix))!;
+      const next = responses[key]!.shift();
+      if (!next) throw new Error(`no response queued for ${target}`);
+      return next instanceof Error ? Promise.reject(next) : Promise.resolve(next);
+    };
+    return Object.assign(impl, { calls });
+  }
+  const TOKEN = "https://accounts.spotify.com/api/token";
+  const SEARCH = "https://api.spotify.com/v1/search";
+  const token = (value: string, expires_in = 3600): Response => Response.json({ access_token: value, expires_in });
+  const results = (...names: string[]): Response => Response.json({ artists: { items: names.map((name) => artist(name)) } });
+  const noSleep = { sleep: (): Promise<void> => Promise.resolve() };
+
+  it("gets one token up front and reuses it, quoting the artist query", async () => {
+    const doFetch = fakeFetch({ [TOKEN]: [token("t1")], [SEARCH]: [results("A"), results("B")] });
+    const search = await clientCredentialsSearch("id", "secret", { fetch: doFetch, ...noSleep });
+    expect((await search("A")).map((a) => a.name)).toEqual(["A"]);
+    await search("B");
+    expect(doFetch.calls.filter((call) => call.url === TOKEN)).toHaveLength(1);
+    expect(new URL(doFetch.calls[1]!.url).searchParams.get("q")).toBe('artist:"A"');
+    expect(doFetch.calls[1]!.init.headers).toEqual({ Authorization: "Bearer t1" });
+  });
+
+  it("retries a failed token request, then fails up front if it never succeeds", async () => {
+    const recovered = fakeFetch({ [TOKEN]: [new Error("ECONNRESET"), new Response("busy", { status: 503 }), token("t1")], [SEARCH]: [] });
+    await expect(clientCredentialsSearch("id", "secret", { fetch: recovered, ...noSleep })).resolves.toBeTypeOf("function");
+    const bad = fakeFetch({ [TOKEN]: [new Response('{"error":"invalid_client"}', { status: 400 })], [SEARCH]: [] });
+    await expect(clientCredentialsSearch("id", "bad", { fetch: bad, ...noSleep })).rejects.toThrow(/token request failed: 400/);
+  });
+
+  it("retries 429 with Retry-After and 5xx, then gives up after 3 retries", async () => {
+    const waits: number[] = [];
+    const sleep = (ms: number): Promise<void> => (waits.push(ms), Promise.resolve());
+    const flaky = fakeFetch({
+      [TOKEN]: [token("t1")],
+      [SEARCH]: [new Response("", { status: 429, headers: { "Retry-After": "2" } }), new Response("", { status: 502 }), results("A")],
+    });
+    const search = await clientCredentialsSearch("id", "secret", { fetch: flaky, sleep });
+    expect((await search("A")).map((a) => a.name)).toEqual(["A"]);
+    expect(waits).toEqual([2000, 600]);
+
+    const down = fakeFetch({ [TOKEN]: [token("t1")], [SEARCH]: Array.from({ length: 4 }, () => new Response("down", { status: 503 })) });
+    const failing = await clientCredentialsSearch("id", "secret", { fetch: down, ...noSleep });
+    await expect(failing("A")).rejects.toThrow(/HTTP 503/);
+    expect(down.calls.filter((call) => call.url.startsWith(SEARCH))).toHaveLength(4);
+  });
+
+  it("gives up at once on a long Retry-After (a rate-limit ban)", async () => {
+    const banned = fakeFetch({ [TOKEN]: [token("t1")], [SEARCH]: [new Response("", { status: 429, headers: { "Retry-After": "3600" } })] });
+    const search = await clientCredentialsSearch("id", "secret", { fetch: banned, ...noSleep });
+    await expect(search("A")).rejects.toThrow(/rate-limited this app for 3600s/);
+  });
+
+  it("a ban aborts the whole lookup: exit 1, nothing written", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "spotify-lookup-"));
+    writeFileSync(join(dir, "_selections.json"), JSON.stringify({ days: [day([], [{ title: "A Band", category: MUSIC }, { title: "B Band", category: MUSIC }])] }));
+    vi.stubEnv("SPOTIFY_CLIENT_ID", "id");
+    vi.stubEnv("SPOTIFY_CLIENT_SECRET", "secret");
+    vi.spyOn(console, "error").mockImplementation(() => undefined);
+    const banned = fakeFetch({ [TOKEN]: [token("t1")], [SEARCH]: [results("A Band"), new Response("", { status: 429, headers: { "Retry-After": "85725" } })] });
+    expect(await lookupWeek({ weekDir: dir, maxWorkers: 1, http: { fetch: banned, ...noSleep } })).toBe(1);
+    expect(() => readFileSync(join(dir, "_spotify.json"))).toThrow();
+    vi.unstubAllEnvs();
+    vi.restoreAllMocks();
+  });
+
+  it("refreshes the token on a 401 and when it nears expiry", async () => {
+    const doFetch = fakeFetch({
+      [TOKEN]: [token("old"), token("new"), token("newer")],
+      [SEARCH]: [new Response("", { status: 401 }), results("A"), results("B")],
+    });
+    const search = await clientCredentialsSearch("id", "secret", { fetch: doFetch, ...noSleep });
+    await search("A");
+    expect(doFetch.calls.at(-1)!.init.headers).toEqual({ Authorization: "Bearer new" });
+
+    const expiring = fakeFetch({ [TOKEN]: [token("short", 30), token("fresh")], [SEARCH]: [results("A")] });
+    const search2 = await clientCredentialsSearch("id", "secret", { fetch: expiring, ...noSleep });
+    await search2("A"); // expires_in 30s is inside the 60s margin
+    expect(expiring.calls.at(-1)!.init.headers).toEqual({ Authorization: "Bearer fresh" });
+  });
+
+  it("lookupWeek exits 1 and writes nothing when authentication fails", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "spotify-lookup-"));
+    writeFileSync(join(dir, "_selections.json"), JSON.stringify({ days: [day([], [{ title: "A Band", category: MUSIC }])] }));
+    vi.stubEnv("SPOTIFY_CLIENT_ID", "id");
+    vi.stubEnv("SPOTIFY_CLIENT_SECRET", "bad");
+    vi.spyOn(console, "error").mockImplementation(() => undefined);
+    const bad = fakeFetch({ [TOKEN]: [new Response("nope", { status: 400 })], [SEARCH]: [] });
+    expect(await lookupWeek({ weekDir: dir, http: { fetch: bad, ...noSleep } })).toBe(1);
+    expect(() => readFileSync(join(dir, "_spotify.json"))).toThrow();
+    vi.unstubAllEnvs();
     vi.restoreAllMocks();
   });
 });

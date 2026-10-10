@@ -105,7 +105,10 @@ affect the published report today. Each fix is listed in the TS parser's
 
 ### `spotify_lookup` — ported (Tier C)
 
-No Python bugs reproduced or fixed beyond robustness: a search result without a string `name`/URL is skipped instead of crashing the whole lookup from inside a worker thread. Names compare with `toLowerCase()` rather than `casefold()` (only differs for characters like "ß"). Verified 2026-10-10: candidate extraction identical to the Python on all 4,495 event titles in `data/`, and a live lookup over the weeks of 2026-09-21, 09-28 and 10-05 wrote byte-identical `_spotify.json` files from both.
+- **A rate-limit ban hangs the Python (production).** spotipy sleeps through any `Retry-After`. On 2026-10-10 a day of repeated test runs got the app banned for 85,725s (~24h). Under such a ban `spotify_lookup.py` would sleep until the Actions job timed out, so Presentation would publish nothing. The TS aborts at once with exit 1 and writes nothing. **Tier D decision:** whether a lookup failure should stop the report (`runner.sh` is `set -e`) or let it render without Spotify links.
+- **An auth failure wrote an all-null `_spotify.json`, exit 0** (each search caught spotipy's auth error and recorded "no match"). The TS fails up front, writing nothing. Transient token-endpoint errors are retried, and the token is refreshed near expiry or on a 401.
+- A search result without a string `name`/URL is skipped instead of crashing the whole lookup from inside a worker thread. Names compare with `toLowerCase()` rather than `casefold()` (only differs for characters like "ß").
+- Verified 2026-10-10: candidate extraction identical to the Python on all 4,495 event titles in `data/`, and a live lookup over the weeks of 2026-09-21, 09-28 and 10-05 wrote byte-identical `_spotify.json` files from both.
 
 ### Open gaps (not port bugs)
 

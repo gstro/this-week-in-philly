@@ -30,8 +30,15 @@
  *   way no longer matches.
  * - A search result without a string `name` or Spotify URL is skipped; it
  *   raised inside a worker thread and crashed the whole lookup.
- * - Spotify's search is called directly with fetch, retrying a 429 or 5xx up
- *   to 3 times, honouring Retry-After (spotipy's default policy).
+ * - Spotify is called directly with fetch: network errors, 429 and 5xx are
+ *   retried up to 3 times (honouring a Retry-After of up to 60s), with a 10s
+ *   timeout per request (spotipy: 5s). A token that can't be obtained, or a
+ *   longer rate-limit ban, fails the run with exit 1 and writes nothing. The
+ *   Python caught an auth failure per search and wrote every title as null,
+ *   and slept through any ban (one seen 2026-10-10 lasted ~24h).
+ * - Regexes use JS semantics: `\b` is ASCII-only (Python's is Unicode-aware)
+ *   and `\s` covers a slightly different whitespace set. Candidate groups
+ *   were identical on all 4,495 real titles in data/ (2026-10-10).
  */
 
 import { writeFileSync } from "node:fs";
@@ -151,6 +158,9 @@ export async function exactMatchUrl(search: ArtistSearch, candidate: string): Pr
   try {
     items = await search(candidate);
   } catch (err) {
+    // A ban would fail every remaining search too; carrying on would write
+    // them all as "no match".
+    if (err instanceof RateLimitedError) throw err;
     // One candidate's search failing shouldn't skip the rest.
     console.error(`  Spotify search failed for ${JSON.stringify(candidate)}: ${err instanceof Error ? err.message : String(err)}`);
     return null;
@@ -220,39 +230,92 @@ export function musicTitles(selections: MusicSelections): string[] {
 
 const RETRY_STATUSES = new Set([429, 500, 502, 503, 504]);
 const MAX_RETRIES = 3;
+const REQUEST_TIMEOUT_MS = 10_000;
+// A Retry-After longer than this is a ban, not a blip (one seen 2026-10-10
+// was 85,725s, ~24h, after a day of repeated test runs). The lookup stops
+// rather than waiting it out -- spotipy sleeps through any Retry-After, so
+// the Python would hang until the job timed out.
+const MAX_RETRY_AFTER_S = 60;
 
-/** An {@link ArtistSearch} using Spotify's Client Credentials flow. */
-export function clientCredentialsSearch(clientId: string, clientSecret: string): ArtistSearch {
-  let token: Promise<string> | undefined;
-  const getToken = (): Promise<string> =>
-    (token ??= (async (): Promise<string> => {
-      const response = await fetch("https://accounts.spotify.com/api/token", {
+/** Spotify has banned this app for longer than a run should wait; the whole lookup stops. */
+export class RateLimitedError extends Error {
+  override name = "RateLimitedError";
+}
+
+export interface HttpDeps {
+  fetch?: typeof fetch;
+  sleep?: (ms: number) => Promise<unknown>;
+}
+
+/** One request with spotipy-like resilience: retries network errors, 429 and 5xx (honouring Retry-After), with a timeout. */
+async function resilientFetch(url: string, init: () => RequestInit, { fetch: doFetch = fetch, sleep: wait = sleep }: HttpDeps): Promise<Response> {
+  for (let attempt = 0; ; attempt++) {
+    let response: Response;
+    try {
+      response = await doFetch(url, { ...init(), signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
+    } catch (err) {
+      if (attempt >= MAX_RETRIES) throw err;
+      await wait(300 * 2 ** attempt);
+      continue;
+    }
+    if (!RETRY_STATUSES.has(response.status) || attempt >= MAX_RETRIES) return response;
+    const retryAfter = Number(response.headers.get("retry-after"));
+    await response.body?.cancel();
+    if (retryAfter > MAX_RETRY_AFTER_S) throw new RateLimitedError(`Spotify rate-limited this app for ${String(retryAfter)}s`);
+    await wait(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 300 * 2 ** attempt);
+  }
+}
+
+/**
+ * An {@link ArtistSearch} using Spotify's Client Credentials flow. Resolves
+ * once the first token is in hand, so bad credentials or an unreachable
+ * accounts service fail the run up front (the Python caught that per search
+ * and wrote every title as null). The token is refreshed a minute before it
+ * expires, or on a 401.
+ */
+export async function clientCredentialsSearch(clientId: string, clientSecret: string, deps: HttpDeps = {}): Promise<ArtistSearch> {
+  const now = (): number => Date.now();
+  const requestToken = async (): Promise<{ value: string; expiresAt: number }> => {
+    const response = await resilientFetch(
+      "https://accounts.spotify.com/api/token",
+      () => ({
         method: "POST",
         headers: {
           Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({ grant_type: "client_credentials" }),
-      });
-      if (!response.ok) throw new Error(`Spotify token request failed: ${String(response.status)} ${await response.text()}`);
-      return ((await response.json()) as { access_token: string }).access_token;
-    })());
+      }),
+      deps,
+    );
+    if (!response.ok) throw new Error(`Spotify token request failed: ${String(response.status)} ${await response.text()}`);
+    const body = (await response.json()) as { access_token: string; expires_in?: number };
+    return { value: body.access_token, expiresAt: now() + ((body.expires_in ?? 3600) - 60) * 1000 };
+  };
+
+  let token = await requestToken();
+  let refreshing: Promise<void> | undefined;
+  const refresh = (): Promise<void> =>
+    (refreshing ??= requestToken()
+      .then((fresh) => {
+        token = fresh;
+      })
+      .finally(() => {
+        refreshing = undefined;
+      }));
 
   return async (candidate) => {
     const url = `https://api.spotify.com/v1/search?${new URLSearchParams({ q: `artist:"${candidate}"`, type: "artist", limit: "5" }).toString()}`;
-    for (let attempt = 0; ; attempt++) {
-      const response = await fetch(url, { headers: { Authorization: `Bearer ${await getToken()}` } });
-      if (response.ok) {
-        const body = (await response.json()) as { artists?: { items?: unknown } };
-        return Array.isArray(body.artists?.items) ? (body.artists.items as Artist[]) : [];
-      }
-      if (!RETRY_STATUSES.has(response.status) || attempt >= MAX_RETRIES) {
-        throw new Error(`HTTP ${String(response.status)} from Spotify search: ${await response.text()}`);
-      }
-      const retryAfter = Number(response.headers.get("retry-after"));
+    if (now() >= token.expiresAt) await refresh();
+    let response = await resilientFetch(url, () => ({ headers: { Authorization: `Bearer ${token.value}` } }), deps);
+    if (response.status === 401) {
       await response.body?.cancel();
-      await sleep(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 300 * 2 ** attempt);
+      await refresh();
+      response = await resilientFetch(url, () => ({ headers: { Authorization: `Bearer ${token.value}` } }), deps);
     }
+    if (!response.ok) throw new Error(`HTTP ${String(response.status)} from Spotify search: ${await response.text()}`);
+    const body = (await response.json()) as { artists?: { items?: unknown } };
+    return Array.isArray(body.artists?.items) ? (body.artists.items as Artist[]) : [];
   };
 }
 
@@ -281,16 +344,17 @@ function byCodePoint(a: string, b: string): number {
 }
 
 export function formatSpotifyJson(results: Record<string, SpotifyEntry>): string {
+  const titles = Object.keys(results).sort(byCodePoint);
+  if (titles.length === 0) return "{}";
   const sortedMatch = ({ matched_text, spotify_url }: Match): Match => ({ matched_text, spotify_url });
-  const sorted = Object.fromEntries(
-    Object.keys(results)
-      .sort(byCodePoint)
-      .map((title) => {
-        const entry = results[title]!;
-        return [title, entry && { artists: entry.artists.map(sortedMatch), ...sortedMatch(entry) }];
-      }),
-  );
-  return writeJson(sorted);
+  // Assembled by hand: a JS object would hoist integer-like titles ("2024")
+  // ahead of the rest whatever order they were inserted in.
+  const lines = titles.map((title) => {
+    const entry = results[title]!;
+    const value = writeJson(entry && { artists: entry.artists.map(sortedMatch), ...sortedMatch(entry) }).replace(/\n/g, "\n  ");
+    return `  ${JSON.stringify(title)}: ${value}`;
+  });
+  return `{\n${lines.join(",\n")}\n}`;
 }
 
 export interface RunOptions {
@@ -298,10 +362,12 @@ export interface RunOptions {
   maxWorkers?: number;
   /** Defaults to Client Credentials from SPOTIFY_CLIENT_ID/SPOTIFY_CLIENT_SECRET. */
   search?: ArtistSearch;
+  /** For the default search's HTTP calls (tests). */
+  http?: HttpDeps;
 }
 
 /** Writes _spotify.json; returns the exit code. */
-export async function lookupWeek({ weekDir, maxWorkers = 5, search }: RunOptions): Promise<number> {
+export async function lookupWeek({ weekDir, maxWorkers = 5, search, http = {} }: RunOptions): Promise<number> {
   const titles = musicTitles(loadSelections(weekDir) as MusicSelections);
   const outPath = join(weekDir, "_spotify.json");
   if (titles.length === 0) {
@@ -317,11 +383,25 @@ export async function lookupWeek({ weekDir, maxWorkers = 5, search }: RunOptions
       console.error("Missing SPOTIFY_CLIENT_ID/SPOTIFY_CLIENT_SECRET env vars.");
       return 1;
     }
-    search = clientCredentialsSearch(clientId, clientSecret);
+    try {
+      search = await clientCredentialsSearch(clientId, clientSecret, http);
+    } catch (err) {
+      // Nothing written: an all-null _spotify.json would strip every link from the report.
+      console.error(`Spotify authentication failed: ${err instanceof Error ? err.message : String(err)}`);
+      return 1;
+    }
   }
   const lookup = search;
 
-  const entries = await mapLimit(titles, maxWorkers, async (title) => spotifyEntry(await findSpotifyMatches(lookup, title)));
+  let entries: SpotifyEntry[];
+  try {
+    entries = await mapLimit(titles, maxWorkers, async (title) => spotifyEntry(await findSpotifyMatches(lookup, title)));
+  } catch (err) {
+    if (!(err instanceof RateLimitedError)) throw err;
+    // Nothing written: a half-null _spotify.json would quietly drop links.
+    console.error(`Spotify lookup aborted: ${err.message}. _spotify.json not written.`);
+    return 1;
+  }
   const results = Object.fromEntries(titles.map((title, i) => [title, entries[i]!]));
   writeFileSync(outPath, formatSpotifyJson(results));
 
