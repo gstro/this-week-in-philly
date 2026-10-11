@@ -13,6 +13,7 @@ generation and limit=5 changes actually recover matches, not just that the
 offline logic behaves as designed.
 """
 
+import json
 import os
 import sys
 from pathlib import Path
@@ -21,6 +22,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
+import common
+import spotify_lookup
 from spotify_lookup import (
     candidate_groups,
     find_spotify_matches,
@@ -669,3 +672,37 @@ def test_lee_fields_name_clash_resolves_to_a_match() -> None:
         )
     )
     assert find_spotify_matches(sp, "Lee Fields")
+
+
+def _run_main_under_ban(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    week_dir = tmp_path / "2026-10-12"
+    week_dir.mkdir(exist_ok=True)
+    selections = {"days": [_day([{"title": "Some Band", "is_music": True}], [])]}
+    (week_dir / "_selections.json").write_text(json.dumps(selections))
+    monkeypatch.setenv("SPOTIFY_CLIENT_ID", "id")
+    monkeypatch.setenv("SPOTIFY_CLIENT_SECRET", "secret")
+    monkeypatch.setattr(sys, "argv", ["spotify_lookup.py", str(week_dir)])
+
+    def banned(sp: object, title: str) -> list[dict]:
+        raise common.SpotifyRateLimitedError("banned for 85725s")
+
+    monkeypatch.setattr(spotify_lookup, "find_spotify_matches", banned)
+    spotify_lookup.main()
+    return week_dir / "_spotify.json"
+
+
+def test_main_skips_without_failing_when_rate_limited_and_writes_empty_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    out = _run_main_under_ban(tmp_path, monkeypatch)
+    assert json.loads(out.read_text()) == {}
+    assert "SKIPPING Spotify lookup" in capsys.readouterr().err
+
+
+def test_main_keeps_an_earlier_spotify_json_when_rate_limited(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "2026-10-12").mkdir()
+    (tmp_path / "2026-10-12" / "_spotify.json").write_text('{"Some Band": null}')
+    out = _run_main_under_ban(tmp_path, monkeypatch)
+    assert json.loads(out.read_text()) == {"Some Band": None}
