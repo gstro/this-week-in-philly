@@ -1,0 +1,51 @@
+{
+  "source": "Meetup: Code & Coffee",
+  "collected_at": "2026-10-11T19:08:06.777583+00:00",
+  "events": [
+    {
+      "title": "OG Coffee&Code Coding!",
+      "venue": "(online)",
+      "date": "2026-10-14",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316696880/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n# \u00e2\u0098\u0095 The OG Coffee&Code Meetup\n\n### A Blockspace Community \u00c3\u0097 Coffee&Code Collaboration\n\nBefore the hype. Before the buzzwords. Before \u00e2\u0080\u009cAI-powered everything.\u00e2\u0080\u009d\nThis is **The OG Coffee&Code**\u00e2\u0080\u0094the meetup that started it all, now presented in collaboration with the **Blockspace Community**.\nNo panels. No pitches. No pressure.\nJust good people, good coffee, and focused time to build, learn, and connect.\n\n## What this meetup is\n\nAn open, welcoming space for coders, builders, designers, and curious minds.\nBring your own project, homework, startup, side quest, experiment, or idea. Work at your own pace, meet other builders, ask questions, exchange ideas, or simply enjoy being productive around like-minded people.\nExpect:\n\n* Focused building time\n* Organic conversations\n* Spontaneous debugging\n* Knowledge sharing\n* Genuine community\n\nThis meetup is beginner-friendly, expert-respected, and ego-free.\n\n## What this meetup is not\n\n\u00e2\u009d\u008c A lecture\n\u00e2\u009d\u008c A sales event\n\u00e2\u009d\u008c A recruiting trap\n\u00e2\u009d\u008c A 90-minute presentation\n\n## How it works\n\n1. Show up\n2. Grab coffee \u00e2\u0098\u0095\n3. Open your laptop, notebook, or sketchpad\n4. Work at your own pace\n5. Chat when you want and focus when you need\n6. Leave having made progress\u00e2\u0080\u0094or at least a new friend\n\n## Who should attend\n\n* Software engineers and data professionals\n* Students and self-learners\n* Founders and indie hackers\n* Designers, tinkerers, and technologists\n* Members of the Blockspace and Coffee&Code communities\n* Anyone who enjoys building things with other humans\n\nWhether this is your first Coffee&Code, you are part of the Blockspace Community, or you have been attending since day one, you are welcome.\nThis collaboration brings together two communities around a shared goal: creating a relaxed, supportive space where people can build, learn, and connect.\n\n**Come for the code.**\n**Stay for the community.**\n**Leave caffeinated. \u00e2\u0098\u0095\u00f0\u009f\u009a\u0080**"
+    },
+    {
+      "title": "C.O.D.E. @ Pennovation Works \u00e2\u0080\u0094 Innovation Hub Build Day",
+      "venue": "(online)",
+      "date": "2026-10-16",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316931775/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n# C.O.D.E. @ Pennovation Works \u00e2\u0080\u0094 Innovation Hub Build Day\n\nJoin **C.O.D.E Community of Developers & Engineers** at Pennovation Works on **Oct 16** for an open build day focused on making progress, sharing ideas, and collaborating with other builders across Philadelphia.\nPennovation Works is the University of Pennsylvania\u00e2\u0080\u0099s innovation campus, bringing together startups, researchers, engineers, founders, and teams working on new technology and products.\nThis is a working session rather than a formal presentation. Bring whatever you are currently building and spend the day alongside other developers, founders, designers, researchers, and technical creatives.\nYou can:\n\n* Work on your own project\n* Pair program or collaborate with others\n* Get feedback on something you\u00e2\u0080\u0099re building\n* Meet potential collaborators\n* Work through technical blockers\n* Prototype a new idea\n* Contribute to an open-source project\n* Simply bring your laptop and get some focused work done\n\nThere is no required project, stack, company, or experience level. Whether you are building an AI agent, startup, open-source tool, research project, side project, or just experimenting with something new, you are welcome to join.\n**Date:** Oct 16\n**Location:** Pennovation Works, Philadelphia\nBring your laptop, something you want to work on, and a willingness to build with other people.\nHosted by **C.O.D.E Community of Developers & Engineers**."
+    },
+    {
+      "title": "Emerging Research in Cislunar Space and How to Get Involved",
+      "venue": "(online)",
+      "date": "2026-10-16",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316162308/",
+      "description": "C.O.D.E - Community of Developers & Engineers\nThis workshop will introduce NASA\u00e2\u0080\u0099s upcoming Artemis missions, emerging research areas in cislunar space, and opportunities for programmers, engineers, students, and space enthusiasts to contribute to humanity\u00e2\u0080\u0099s return to the Moon. Participants will learn the fundamentals of orbital motion, reference frames, trajectory design, and orbit propagation before exploring current research in cislunar space situational awareness, lunar landing and descent, and space robotics. The session will conclude with a short Python demonstration of selenocentric orbit propagation using planetary ephemerides.\nThe workshop will be led by Scott Blender, a third-year Ph.D. student in aerospace engineering at Rensselaer Polytechnic Institute (RPI) and a researcher in the Advanced Space Concepts Laboratory. His research focuses on spacecraft guidance, cislunar space domain awareness, and lunar-surface sensor networks. He previously interned at AstronetX, a startup developing an optical system for cislunar space situational awareness.\n\nThe workshop will be organized as follows:\n\n1. NASA\u00e2\u0080\u0099s Return to the Moon Through Artemis\n2. Fundamentals of Orbital Motion: Kepler\u00e2\u0080\u0099s Laws and Newtonian Gravitation\n3. Two-Body Orbit Propagation, Reference Frames, and Selenocentric Orbits\n4. Emerging Cislunar Research: Space Situational Awareness, Lunar Landing and Descent, and Space Robotics\n5. Live Python Demonstration: Ephemeris-Supported Orbit Propagation\n6. Q&A and Opportunities to Get Involved"
+    },
+    {
+      "title": "Claude Code vs. Codex: Loops, Graphs, and Harnesses",
+      "venue": "(online)",
+      "date": "2026-10-17",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316643202/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n## Claude Code vs. Codex: Loops, Graphs, and Harnesses\n\nThis is a casual pair-programming meetup for developers experimenting with Claude Code, Codex, and agentic coding workflows.\nThere is no formal presentation and no fixed curriculum. Bring a laptop, a repository, a side project, or a workflow you want to test. We will work in small groups, compare approaches, debug problems, and share what is working.\n\nPossible areas to explore include:\n\n* Building iterative coding-agent loops\n* Comparing Claude Code and Codex on the same task\n* Designing graph-based agent workflows\n* Creating reusable coding harnesses\n* Managing context across large repositories\n* Running tests and validating agent-generated changes\n* Using sandboxes, permissions, and approval steps\n* Coordinating subagents or parallel tasks\n* Measuring latency, token usage, cost, and completion quality\n* Debugging failed or incomplete agent runs\n\nYou do not need to be an expert in either tool. This meetup is for people who want hands-on time to experiment, pair with other developers, and learn through building.\nBring something you are working on, or join someone else\u00e2\u0080\u0099s project.\nHosted by **Coffee & Code Philadelphia**.\n\n**Coffee & Code Philadelphia**\nWebsite: [https://www.codephilly.com](https://www.codephilly.com/)\nMeetup: [https://www.meetup.com/code-coffee-philly/](https://www.meetup.com/code-coffee-philly/)\nLinkedIn: [https://www.linkedin.com/company/code-coffee-philadelphia](https://www.linkedin.com/company/code-coffee-philadelphia)\nInstagram: [https://www.instagram.com/coffeecodephilly](https://www.instagram.com/coffeecodephilly)\nDiscord: [https://discord.gg/2ad8NmvC2](https://discord.gg/2ad8NmvC2)\nLinktree: [https://linktr.ee/codecoffeephilly](https://linktr.ee/codecoffeephilly)\nSubstack: [https://substack.com/@codecoffeephilly](https://substack.com/@codecoffeephilly)"
+    },
+    {
+      "title": "Cups of Code: Connecting the Community",
+      "venue": "(online)",
+      "date": "2026-10-18",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316752465/",
+      "description": "C.O.D.E - Community of Developers & Engineers\nA fun and light code session where tech friends get together in a large and relaxed caf\u00c3\u00a9 space, and code! Bring your laptop (or another coding device of choice) for a great opportunity to ask questions, share ongoing projects, help each other out, and meet other awesome coders. We're all about the code, and we hope to make a space for people who like to build.\n\n**Notes to keep in mind:**\n\n\\*Guest wireless internet access is good and free\n\nCome out and work, help, or just hang out!\n\n**Links:**\n**Site:** codephilly.com\n**Donate:** [https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia](https://hcb.hackclub.com/donations/start/code-and-coffee-philadelphia)\n**Merch:** [https://nol-kky-shop.fourthwall.com/](https://nol-kky-shop.fourthwall.com/)\n**LinkedIn:** [https://www.linkedin.com/company/code-coffee-philadelphia](https://www.linkedin.com/company/code-coffee-philadelphia)\n**Instagram:** [https://www.instagram.com/philly_codes/](https://www.instagram.com/philly_codes/)"
+    }
+  ]
+}
