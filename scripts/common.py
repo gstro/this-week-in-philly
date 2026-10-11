@@ -8,15 +8,19 @@ repo-relative; there is no Drive or Gmail access in v2.
 
 import json
 import os
+import threading
 from datetime import date, timedelta
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+import requests
 import spotipy
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from spotipy.cache_handler import MemoryCacheHandler
-from spotipy.oauth2 import SpotifyOAuth
+from spotipy.oauth2 import SpotifyAuthBase, SpotifyOAuth
+from urllib3 import BaseHTTPResponse
+from urllib3.util.retry import Retry
 
 if TYPE_CHECKING:
     # Stub-only (google-api-python-client-stubs); doesn't exist at runtime,
@@ -208,7 +212,9 @@ def music_events(selections: dict) -> list[tuple[str, bool]]:
     result: list[tuple[str, bool]] = []
     for day in selections["days"]:
         top3_titles = {pick["title"] for pick in day["top3"]}
-        result.extend((pick["title"], True) for pick in day["top3"] if pick.get("is_music"))
+        result.extend(
+            (pick["title"], True) for pick in day["top3"] if pick.get("is_music")
+        )
         # merge_selections.py appends "(SOLD OUT)" to a sold-out mention's
         # title but not to its events[] entry -- strip it to match.
         hm_titles = {
@@ -218,7 +224,8 @@ def music_events(selections: dict) -> list[tuple[str, bool]]:
         rest = [
             event["title"]
             for event in day.get("events", [])
-            if event.get("category") == MUSIC_CATEGORY and event["title"] not in top3_titles
+            if event.get("category") == MUSIC_CATEGORY
+            and event["title"] not in top3_titles
         ]
         result.extend((title, False) for title in rest if title in hm_titles)
         result.extend((title, False) for title in rest if title not in hm_titles)
@@ -255,6 +262,90 @@ def load_expected_yield() -> dict:
     if not path.exists():
         return {}
     return load_json(path)
+
+
+# A Retry-After longer than this is a ban, not a blip (one seen 2026-10-10 was
+# 85,725s, ~24h, after a day of repeated test runs). spotipy's own retry
+# sleeps through any Retry-After, so under a ban the job would hang until the
+# Actions timeout and Presentation would publish nothing.
+SPOTIFY_MAX_RETRY_AFTER_S = 60
+
+
+class SpotifyRateLimitedError(Exception):
+    """Spotify has rate-limited this app for longer than a run should wait.
+
+    Deliberately not a ValueError/OSError: spotipy and urllib3 each catch
+    those and would rewrap or retry it.
+    """
+
+
+class _CappedRetry(Retry):
+    """urllib3 Retry that refuses to sleep through a ban."""
+
+    def sleep_for_retry(self, response: BaseHTTPResponse) -> bool:
+        retry_after = self.get_retry_after(response)
+        if retry_after is not None and retry_after > SPOTIFY_MAX_RETRY_AFTER_S:
+            raise SpotifyRateLimitedError(
+                f"Spotify rate-limited this app for {response.headers.get('Retry-After')}s "
+                f"(more than the {SPOTIFY_MAX_RETRY_AFTER_S}s a run will wait)"
+            )
+        if retry_after:
+            spotify_stats.record_rate_limit_wait()
+        return super().sleep_for_retry(response)
+
+
+class SpotifyStats:
+    """Thread-safe tally of one script run's Spotify API traffic, so the
+    Actions log shows how close a real week gets to the (unpublished) limit."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self.calls = 0
+        self.rate_limit_waits = 0
+
+    def record_call(self) -> None:
+        with self._lock:
+            self.calls += 1
+
+    def record_rate_limit_wait(self) -> None:
+        with self._lock:
+            self.rate_limit_waits += 1
+
+    def summary(self) -> str:
+        return f"Spotify API calls: {self.calls} ({self.rate_limit_waits} rate-limit waits)"
+
+
+spotify_stats = SpotifyStats()
+
+
+class _CountingSession(requests.Session):
+    def request(self, *args: object, **kwargs: object) -> requests.Response:  # type: ignore[override]
+        spotify_stats.record_call()
+        return super().request(*args, **kwargs)  # type: ignore[arg-type]
+
+
+def make_spotify_client(
+    auth: str | None = None, auth_manager: SpotifyAuthBase | None = None
+) -> spotipy.Spotify:
+    """spotipy.Spotify with the same retry policy as its default (3 retries on
+    429/5xx, 0.3 backoff) but raising SpotifyRateLimitedError instead of
+    sleeping through a long Retry-After, and counting calls in spotify_stats."""
+    retry = _CappedRetry(
+        total=3,
+        connect=None,
+        read=False,
+        allowed_methods=frozenset(["GET", "POST", "PUT", "DELETE"]),
+        status=3,
+        backoff_factor=0.3,
+        status_forcelist=spotipy.Spotify.default_retry_codes,
+    )
+    session = _CountingSession()
+    adapter = requests.adapters.HTTPAdapter(max_retries=retry)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
+    return spotipy.Spotify(
+        auth=auth, auth_manager=auth_manager, requests_session=session
+    )
 
 
 def get_spotify_user_client() -> spotipy.Spotify:
@@ -308,7 +399,7 @@ def get_spotify_user_client() -> spotipy.Spotify:
         cache_handler=MemoryCacheHandler(),
     )
     token = auth_manager.refresh_access_token(refresh_token)
-    return spotipy.Spotify(auth=token["access_token"])
+    return make_spotify_client(auth=token["access_token"])
 
 
 def get_calendar_credentials() -> Credentials:

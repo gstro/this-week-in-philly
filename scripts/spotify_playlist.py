@@ -356,6 +356,7 @@ def main() -> None:
             f"  The report will render without a playlist link.",
             file=sys.stderr,
         )
+        print(common.spotify_stats.summary())
         return
 
     # Zero tracks from a non-empty artist list means every lookup failed to
@@ -388,6 +389,7 @@ def main() -> None:
             f"  The report will render without a playlist link.",
             file=sys.stderr,
         )
+        print(common.spotify_stats.summary())
         return
 
     out_path = Path(args.week_dir) / "_playlist.json"
@@ -399,6 +401,7 @@ def main() -> None:
         f"Playlist synced. {result['track_count']} tracks from "
         f"{result['artist_count']} artists: {result['playlist_url']}"
     )
+    print(common.spotify_stats.summary())
 
 
 if __name__ == "__main__":

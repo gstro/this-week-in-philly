@@ -191,6 +191,8 @@ def candidate_groups(title: str) -> list[list[str]]:
 def _exact_match_url(sp: spotipy.Spotify, candidate: str) -> str | None:
     try:
         result = sp.search(q=f'artist:"{candidate}"', type="artist", limit=5)
+    except common.SpotifyRateLimitedError:
+        raise
     except Exception as exc:  # noqa: BLE001 -- one candidate's search failing shouldn't skip the rest
         print(f"  Spotify search failed for {candidate!r}: {exc}", file=sys.stderr)
         return None
@@ -291,20 +293,42 @@ def main() -> None:
         )
         sys.exit(1)
 
-    sp = spotipy.Spotify(
+    sp = common.make_spotify_client(
         auth_manager=SpotifyClientCredentials(
             client_id=client_id, client_secret=client_secret
         )
     )
 
     results: dict[str, dict | None] = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.max_workers) as executor:
-        future_to_title = {
-            executor.submit(find_spotify_matches, sp, title): title for title in titles
-        }
-        for future in concurrent.futures.as_completed(future_to_title):
-            title = future_to_title[future]
-            results[title] = spotify_entry(future.result())
+    try:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.max_workers) as executor:
+            future_to_title = {
+                executor.submit(find_spotify_matches, sp, title): title for title in titles
+            }
+            try:
+                for future in concurrent.futures.as_completed(future_to_title):
+                    title = future_to_title[future]
+                    results[title] = spotify_entry(future.result())
+            except common.SpotifyRateLimitedError:
+                # Stop queued searches from hitting a banned app.
+                executor.shutdown(wait=False, cancel_futures=True)
+                raise
+    except common.SpotifyRateLimitedError as exc:
+        # Non-fatal, like spotify_playlist.py's failures: the report renders
+        # without (new) Spotify links rather than the job hanging or dying.
+        # An earlier run's _spotify.json is left alone; only a missing one is
+        # written, as {}, since later steps expect the file to exist.
+        print(
+            f"spotify_lookup: SKIPPING Spotify lookup -- {exc}\n"
+            f"  The report will render without new Spotify links.",
+            file=sys.stderr,
+        )
+        out_path = Path(args.week_dir) / "_spotify.json"
+        if not out_path.exists():
+            with open(out_path, "w") as f:
+                json.dump({}, f, indent=2)
+        print(common.spotify_stats.summary())
+        return
 
     matched = sum(1 for v in results.values() if v)
     not_found = len(results) - matched
@@ -318,6 +342,7 @@ def main() -> None:
         f"Spotify lookup complete. {matched} matched ({artists} artists), "
         f"{not_found} not found."
     )
+    print(common.spotify_stats.summary())
 
 
 if __name__ == "__main__":
