@@ -1,0 +1,33 @@
+{
+  "source": "Meetup: DC 215",
+  "collected_at": "2026-10-11T19:08:07.484976+00:00",
+  "events": [
+    {
+      "title": "JawnCon",
+      "venue": "(online)",
+      "date": "2026-10-16",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/316687613/",
+      "description": "DC215\nJawnCon is an event that celebrates the evolution of security and technology in our lives. Forged in the fires that are everything Philly, this event is driven to educate, celebrate and better understand all the things that make these weird machines blink and go bump in the night. For more information please go to:\n\nhttps://jawncon.org/"
+    },
+    {
+      "title": "Third Friday Lockpicking Workshop",
+      "venue": "(online)",
+      "date": "2026-10-16",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/316727901/",
+      "description": "DC215\nCome join us for our monthly Third Friday Lockpicking Workshop at Wooden Shoe Books! Whether you're a novice who just stumbled upon LockpickingLawyer, a seasoned safecracker, or somewhere in between, come join us for a evening of fun as we pop some locks!"
+    },
+    {
+      "title": "Study Hall / Work on CTFs",
+      "venue": "(online)",
+      "date": "2026-10-17",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/315839475/",
+      "description": "DC215\nTime to get together and work on or just discuss the CTF."
+    }
+  ]
+}
