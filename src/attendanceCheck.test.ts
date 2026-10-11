@@ -14,17 +14,9 @@ import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSy
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  type CalendarEventsService,
-  type EventsListParams,
-  type EventsPage,
-  calendarWeekWindow,
-  fetchCalendarTitles,
-  lastWeekMonday,
-  run,
-  updateAttendance,
-} from "./attendanceCheck.js";
+import { fetchCalendarTitles, lastWeekMonday, run, updateAttendance } from "./attendanceCheck.js";
 import { PICKS_LOG_COLUMNS } from "./common.js";
+import { type CalendarListService, type EventsListParams, type EventsPage, calendarWeekWindow } from "./lib/calendar.js";
 import { type PicksLogRow, PicksLogError, parsePicksLog } from "./lib/picksLog.js";
 
 function row(fields: Partial<PicksLogRow>): PicksLogRow {
@@ -46,10 +38,10 @@ describe("lastWeekMonday", () => {
 
 // --- fetchCalendarTitles ---
 
-class FakeService implements CalendarEventsService {
+class FakeService implements CalendarListService {
   readonly listCalls: EventsListParams[] = [];
   private calls = 0;
-  readonly events: CalendarEventsService["events"];
+  readonly events: CalendarListService["events"];
 
   constructor(pages: EventsPage[]) {
     this.events = {
