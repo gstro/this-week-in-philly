@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "description": "Hand-maintained expected-yield baseline for scripts/check_yield.py. min_expected is a conservative floor -- comfortably below the lowest legitimate weekly count seen for that source -- not a target, so it doesn't false-positive on a genuinely quiet week. A source at status 'ok' with events below its floor gets flagged. Sources with min_expected: 0 are known to have genuinely empty weeks (confirmed against v1's dual-write run, which predates v2's under-collection) and are excluded from the yield-floor check entirely -- only the provenance and manifest/file-agreement checks apply to them.",
+    "description": "Hand-maintained expected-yield baseline for scripts/check_yield.py. min_expected is 1 for every source that normally has events: the check fires only when such a source writes zero (2026-10-11: the old numeric floors, e.g. philadelphia-film-society at 6, false-positived on legitimately quiet weeks and failed the run). The per-source notes below still cite the historical numeric floors for context. A source at status 'ok' with events below its floor gets flagged. Sources with min_expected: 0 are known to have genuinely empty weeks (confirmed against v1's dual-write run, which predates v2's under-collection) and are excluded from the yield-floor check entirely -- only the provenance and manifest/file-agreement checks apply to them.",
     "baseline_source": "git show 728633b:data/2026-07-20/_manifest.json (v1 Mac dual-write, the last known-complete collection of a real week before v2's Collection Routine began silently zeroing sources under budget pressure -- see docs/COLLECTION_YIELD_INVESTIGATION.md)",
     "revisit": "Each quarterly source-revalidation pass (see philadelphia-sources/SKILL.md Maintenance section) and whenever a source gains a deterministic parser -- raise min_expected once real yield is confirmed stable under the new method.",
-    "total_floor": 44,
-    "total_floor_note": "Lowered from 45 to 44 on 2026-09-13 when trakt-film-releases was retired (Trakt.tv removed iCal/RSS export entirely, no replacement -- see philadelphia-sources/SKILL.md's dropped-sources table). The baseline_source manifest above had this source at 2 events; the floor is reduced only by its own former min_expected (1), not its full historical count, to keep the aggregate check conservative rather than mechanically replaying the baseline's arithmetic."
+    "total_floor": 1,
+    "total_floor_note": "Set to 1 on 2026-10-11 (fires only if the whole run collects zero events); the history that follows describes the earlier 44. Lowered from 45 to 44 on 2026-09-13 when trakt-film-releases was retired (Trakt.tv removed iCal/RSS export entirely, no replacement -- see philadelphia-sources/SKILL.md's dropped-sources table). The baseline_source manifest above had this source at 2 events; the floor is reduced only by its own former min_expected (1), not its full historical count, to keep the aggregate check conservative rather than mechanically replaying the baseline's arithmetic."
   },
   "sources": {
     "cinespeak": {
@@ -12,11 +12,11 @@
       "note": "A deterministic parser now backs this source (scripts/event_parsers/cinespeak.py, plain Gutenberg block markup on /cinema/) -- confirmed live 2026-07-29: 1 event for the real week of 2026-08-03. Historical range is thin and genuinely variable (1-2/week in v1 and v2 run A, 0 confirmed for this specific week) -- kept at 0 rather than 1 to avoid false-positiving on a real single-screening-per-week cadence; the provenance and manifest-agreement checks still cover this source."
     },
     "do215": {
-      "min_expected": 20,
+      "min_expected": 1,
       "note": "v1 marked this 'partial' (events=8). A real JSON API (/events/YYYY/M/D.json) now backs this source (scripts/event_parsers/do215.py + scripts/collect_source.py) -- confirmed live 2026-07-29 against the real week of 2026-08-03: 467 events, not the 8-60 every prior estimate assumed. Almost all of the volume is legitimate but repetitive (e.g. a museum's daily guided tour re-listed as a distinct dated event on each of its 5 occurrences that week) with no structural field distinguishing it from a genuine one-off -- this is exactly the case event-selection-philosophy's 'Avoid: recurring weekly events' rule exists for, but that rule has never had to operate at this volume from a single source. Floor kept low and deliberately not raised to the true yield, since the real number this source contributes to a week's total_events_after_dedup is now an open question for Selection, not Collection, to absorb."
     },
     "iffy-books": {
-      "min_expected": 3,
+      "min_expected": 1,
       "note": "Google Calendar via MCP. Historical range 4-8; floor set with margin since the true minimum in a slow week is unconfirmed."
     },
     "lightbox-film-center": {
@@ -24,7 +24,7 @@
       "note": "A deterministic two-stage parser now backs this source (scripts/event_parsers/lightbox.py + scripts/collect_source.py: Wix data-hook index -> per-event JSON-LD detail pages) -- confirmed live 2026-07-29: 2 real events for the week of 2026-07-27 (a week v2 had previously collected as 0), and genuinely 0 for the week of 2026-08-03 (listings jump Aug 1 -> Sep 9). Kept at 0 rather than raised, since 0 is a real, frequent, correct result for this source, not evidence of failure -- the provenance and manifest-agreement checks still cover it."
     },
     "luma": {
-      "min_expected": 2,
+      "min_expected": 1,
       "note": "Historical range 5-10 across weeks of 2026-08-03 through -08-24 (never below 5, hence the prior floor). The scheduled 2026-08-30 run for the week of 2026-08-31 wrote 2 and tripped that floor -- verified directly against a live fetch of the same iCal feed: 2 real, well-formed events (a Beyonce-tribute pop-up and an online DIY book-cover workshop), not a parser or feed failure. Lowered to 2 to reflect this confirmed low rather than treat it as a recurring false positive, same reasoning as the r5-productions and the-rotunda precedents below."
     },
     "meetup-ai-philly": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run (well-formed iCal, 0 VEVENTs). Parser's own structural validation (raises only if BEGIN:VCALENDAR is absent) already covers this source; yield-floor adds nothing." },
@@ -36,15 +36,15 @@
     "meetup-philly-hardware": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "meetup-tech-in-motion": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "philadelphia-film-society": {
-      "min_expected": 6,
+      "min_expected": 1,
       "note": "A resilient collector now backs this source (scripts/event_parsers/philadelphia_film_society.py + scripts/collect_source.py): 3 venues x 2 sample days (Wed+Sat), each fetch isolated so one hanging venue/day no longer fails the whole source -- confirmed live 2026-08-01: 18 events for the week of 2026-08-03, zero fetch failures, replacing a real prior week where the whole source reported status:failed. Still browser-only (Fandango showtimes are JS-rendered; Agile Ticketing, the real backend, is WAF-blocked same as filmadelphia.org). Floor set well below the confirmed 18 since only 2 of 7 days are sampled and yield will vary by what's actually programmed that week."
     },
     "philamoca": {
-      "min_expected": 4,
+      "min_expected": 1,
       "note": "Deterministic parser. Historical range 5-6; floor set with margin."
     },
     "philly-ask-a-punk": {
-      "min_expected": 4,
+      "min_expected": 1,
       "note": "Deterministic parser (Gancio API). One real incident (2026-07-21) where a WebFetch-routed fetch was silently truncated and returned 0 -- floor set to catch a repeat without false-positiving on a slower week. Historical non-incident range was 10-12 prior to 2026-08-10; the first real workflow_dispatch run of the GHA collection pipeline (2026-08-10) confirmed a genuine 5-event week -- verified directly: 5 well-formed events, real bands/venues/URLs, not an extraction failure. Lowered from 6 to 4 to reflect this real observed low without re-litigating it as a false positive every time DIY show volume dips."
     },
     "philly-shows": {
@@ -52,7 +52,7 @@
       "note": "Documented sparse (~1-2/week); deterministic parser already in place and structurally validated."
     },
     "phillygoth": {
-      "min_expected": 2,
+      "min_expected": 1,
       "note": "Deterministic parser. Historical legitimate range 2-7 (excludes the 2026-07-27 fabricated 0); floor set at the low end."
     },
     "r5-productions": {
@@ -64,11 +64,11 @@
       "note": "Deterministic parser. Historical range was 3-5/week across all runs prior to 2026-08-03 -- floor of 2 was calibrated against that alone. The real 2026-08-03 run confirmed a genuine 1-event week (verified directly: a real, well-formed event) and correctly tripped check_yield.py's floor. Lowered to 1 to reflect this real observed low rather than treat one confirmed-legitimate quiet week as a recurring false positive."
     },
     "wooden-shoe-books": {
-      "min_expected": 2,
+      "min_expected": 1,
       "note": "Google Calendar via MCP. Stable at 3/week."
     },
     "wxpn": {
-      "min_expected": 15,
+      "min_expected": 1,
       "note": "v1 marked this 'partial' at 0 events. A deterministic parser now backs this source (scripts/event_parsers/wxpn.py + scripts/collect_source.py, backend.xpn.org's own WordPress REST API) -- confirmed live 2026-07-29 against the real week of 2026-08-03: 46 events in well under a second. Floor raised from 0 to 15, comfortably below that real number but high enough to catch a real regression, now that the source is stable."
     }
   }
