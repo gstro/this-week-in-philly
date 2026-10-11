@@ -23,10 +23,11 @@
  * path is UNTESTED LIVE: tests and parity runs only ever pass a fake,
  * because the Curated Events calendar is the attendance signal itself.
  *
- * The events.list window is Monday 00:00 to the next Monday 00:00 in
- * America/New_York, each with its own UTC offset (a DST-crossing week gets
- * "-05:00" / "-04:00"), as Python's aware-datetime arithmetic produces.
- * The offset comes from Intl's "longOffset" time-zone name.
+ * The events.list window (lib/calendar.ts, shared with calendarCreate) is
+ * Monday 00:00 to the next Monday 00:00 in America/New_York, each with its
+ * own UTC offset (a DST-crossing week gets "-05:00" / "-04:00"), as Python's
+ * aware-datetime arithmetic produces. The offset comes from Intl's
+ * "longOffset" time-zone name.
  *
  * Divergences from the Python, all intentional:
  *
@@ -60,98 +61,34 @@
 import { basename } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
-import { CALENDAR_TIMEZONE, getCalendarId, getCalendarService, picksLogPath } from "./common.js";
-import { parseIsoDate } from "./htmlRender.js";
+import { getCalendarId, getCalendarService, picksLogPath } from "./common.js";
+import { type CalendarListService, addDays, listWeekEvents } from "./lib/calendar.js";
 import { type PicksLogRow, formatPicksLog, parsePicksLog, readLogText, writeFileAtomic } from "./lib/picksLog.js";
-
-const DAY_MS = 86_400_000;
 
 // ---------------------------------------------------------------------------
 // Week math
 // ---------------------------------------------------------------------------
 
-function addDays(isoDate: string, days: number): string {
-  const date = parseIsoDate(isoDate);
-  if (!date) throw new Error(`not a YYYY-MM-DD date: ${JSON.stringify(isoDate)}`);
-  return new Date(date.getTime() + days * DAY_MS).toISOString().slice(0, 10);
-}
-
 export function lastWeekMonday(targetMonday: string): string {
   return addDays(targetMonday, -7);
-}
-
-const offsetFormat = new Intl.DateTimeFormat("en-US", { timeZone: CALENDAR_TIMEZONE, timeZoneName: "longOffset" });
-
-/** America/New_York's UTC offset at an instant, in ms (east-positive). */
-function easternOffsetMs(instantMs: number): number {
-  const name = offsetFormat.formatToParts(instantMs).find((part) => part.type === "timeZoneName")?.value ?? "";
-  if (name === "GMT") return 0;
-  // Whole-minute offsets only; LMT's "GMT-04:56:02" (pre-1883) is rejected.
-  const match = /^GMT([+-])(\d{2}):(\d{2})$/.exec(name);
-  if (!match) throw new Error(`unsupported ${CALENDAR_TIMEZONE} offset: ${JSON.stringify(name)}`);
-  const minutes = Number(match[2]) * 60 + Number(match[3]);
-  return (match[1] === "-" ? -1 : 1) * minutes * 60_000;
-}
-
-/** Midnight at the start of `isoDate` in America/New_York, e.g. "2026-06-15T00:00:00-04:00". */
-export function easternMidnightIso(isoDate: string): string {
-  const utcMidnight = Date.parse(`${addDays(isoDate, 0)}T00:00:00Z`);
-  // Estimate from the offset at UTC midnight, then take the offset at the
-  // local midnight that estimate gives (right unless a zone changes offset
-  // within hours of midnight; America/New_York changes at 2 AM).
-  const offset = easternOffsetMs(utcMidnight - easternOffsetMs(utcMidnight));
-  const minutes = Math.abs(offset) / 60_000;
-  const pad = (n: number): string => String(n).padStart(2, "0");
-  return `${isoDate}T00:00:00${offset < 0 ? "-" : "+"}${pad(Math.floor(minutes / 60))}:${pad(minutes % 60)}`;
-}
-
-/** The events.list window: Monday 00:00 Eastern through the next Monday 00:00 Eastern. */
-export function calendarWeekWindow(monday: string): { timeMin: string; timeMax: string } {
-  return { timeMin: easternMidnightIso(monday), timeMax: easternMidnightIso(addDays(monday, 7)) };
 }
 
 // ---------------------------------------------------------------------------
 // Calendar
 // ---------------------------------------------------------------------------
 
-export interface EventsListParams {
-  calendarId: string;
-  timeMin: string;
-  timeMax: string;
-  singleEvents: boolean;
-  pageToken?: string;
-}
-
-export interface EventsPage {
-  items?: { summary?: string | null }[] | null;
-  nextPageToken?: string | null;
-}
-
-/** The slice of googleapis' calendar_v3.Calendar this module uses; tests pass a fake. */
-export interface CalendarEventsService {
-  events: { list(params: EventsListParams): Promise<{ data: EventsPage }> };
-}
-
 /** Last week's Monday (YYYY-MM-DD) -> the summaries of every event in that week. */
 export type CalendarTitlesFetcher = (monday: string) => Promise<Set<string>>;
 
 export async function fetchCalendarTitles(
-  service: CalendarEventsService,
+  service: CalendarListService,
   calendarId: string,
   monday: string,
 ): Promise<Set<string>> {
-  const window = calendarWeekWindow(monday);
   const titles = new Set<string>();
-  let pageToken: string | undefined;
-  do {
-    const params: EventsListParams = { calendarId, ...window, singleEvents: true };
-    if (pageToken) params.pageToken = pageToken;
-    const { data } = await service.events.list(params);
-    for (const { summary } of data.items ?? []) {
-      if (summary) titles.add(summary);
-    }
-    pageToken = data.nextPageToken ?? undefined;
-  } while (pageToken);
+  for (const { summary } of await listWeekEvents(service, calendarId, monday)) {
+    if (summary) titles.add(summary);
+  }
   return titles;
 }
 
