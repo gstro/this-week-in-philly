@@ -28,15 +28,27 @@ if [ "${2:-}" = "--dry-run" ]; then
   DRY_RUN_FLAG="--dry-run"
 fi
 
-python scripts/spotify_lookup.py "$WEEK_DIR"
+# A Spotify failure never stops the report (decided 2026-10-14). On any
+# lookup failure -- a crash, an auth error, or the 10-minute cutoff below
+# (belt and braces: spotify_lookup.py itself already skips on a ban-length
+# Retry-After) -- the playlist step is skipped (it would build from a stale or
+# missing _spotify.json) and html_render renders without Spotify links. The
+# cutoff only applies where `timeout` exists (GNU coreutils: the Actions
+# runner). html_render.py and calendar_create.py stay fatal under `set -e`.
+TIMEOUT=""
+if command -v timeout >/dev/null 2>&1; then
+  TIMEOUT="timeout 600"
+fi
 
 # Ordering constraint: spotify_lookup -> spotify_playlist -> html_render.
 # The playlist needs lookup's artist matches (_spotify.json), and the report
 # header needs the playlist's URL (_playlist.json).
-if [ -n "$DRY_RUN_FLAG" ]; then
-  python scripts/spotify_playlist.py "$WEEK_DIR" --dry-run
+if $TIMEOUT python scripts/spotify_lookup.py "$WEEK_DIR"; then
+  if ! python scripts/spotify_playlist.py "$WEEK_DIR" $DRY_RUN_FLAG; then
+    echo "::warning::spotify_playlist failed; the report renders without a playlist link."
+  fi
 else
-  python scripts/spotify_playlist.py "$WEEK_DIR"
+  echo "::warning::spotify_lookup failed or timed out; the report renders without Spotify links and no playlist is built."
 fi
 
 python scripts/html_render.py "$WEEK_DIR" "$HTML_PATH"

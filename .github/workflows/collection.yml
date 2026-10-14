@@ -28,10 +28,26 @@ on:
         required: false
         type: boolean
         default: true
+      engine:
+        description: 'Which implementation runs: python or ts (anything else fails the run). Blank = the COLLECTION_ENGINE repo variable (python if unset).'
+        required: false
+        type: string
+        default: ''
+      dry_run:
+        description: 'Rehearsal: collect and check, but do not commit, open a PR or fire Selection. The week is uploaded as a build artifact.'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   collect:
     runs-on: ubuntu-latest
+    env:
+      # Tier D (docs/TS_PORT.md): "python" runs scripts/, "ts" runs the
+      # TypeScript port from dist/. A scheduled run uses the repo variable, so
+      # cutting this stage over (or rolling it back) is a settings change, not
+      # a PR. scripts/ci/pipeline.sh is the only thing that reads it.
+      ENGINE: ${{ inputs.engine || vars.COLLECTION_ENGINE || 'python' }}
     # Default GITHUB_TOKEN needs write access to push the collected week.
     # contents + pull-requests: main is only reachable through a PR (the
     # 2026-09-26 ruleset), which scripts/ci/merge_via_pr.sh opens and merges.
@@ -39,8 +55,19 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      # Fail fast on a mistyped engine variable, before anything is installed
+      # (Actions compares strings case-insensitively; pipeline.sh lowercases to
+      # match). Without this, a typo would only surface at the first step that
+      # calls pipeline.sh.
+      - name: Check engine
+        run: |
+          case "${ENGINE,,}" in
+            python|ts) echo "Engine: ${ENGINE,,}" ;;
+            *) echo "::error::COLLECTION_ENGINE / the engine input must be 'python' or 'ts', got '$ENGINE'"; exit 1 ;;
+          esac
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+        if: env.ENGINE != 'ts'
         with:
           python-version-file: '.python-version'
           cache: pip
@@ -51,13 +78,31 @@ jobs:
       # the first workflow that installs it to actually *run* collection.
       # requirements.txt is needed for the Google Calendar sources.
       - name: Install dependencies
+        if: env.ENGINE != 'ts'
         run: pip install -r scripts/requirements.txt -r scripts/requirements-collection.txt
 
       # Only philadelphia-film-society needs a browser (Fandango's showtimes
       # are JS-rendered and its real backend is WAF-blocked). Proven working on
       # ubuntu-latest by lint.yml's pytest job.
       - name: Install Chromium
+        if: env.ENGINE != 'ts'
         run: playwright install --with-deps chromium
+
+      # The TypeScript engine: Node (the version in .nvmrc), the build in
+      # dist/, and Playwright for Node's own Chromium (a separate browser
+      # build from the Python one above, used by fetchPageText for the same
+      # one source).
+      - uses: actions/setup-node@v4
+        if: env.ENGINE == 'ts'
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Build and install Chromium (TypeScript engine)
+        if: env.ENGINE == 'ts'
+        run: |
+          npm ci
+          npm run build
+          npx playwright install --with-deps chromium
 
       # Computed explicitly and once, BEFORE collection, rather than inferred
       # afterward from `ls -d data/*/ | sort | tail -1` -- that inference is
@@ -75,7 +120,7 @@ jobs:
           if [ -n "${{ inputs.week_start }}" ]; then
             WEEK_START="${{ inputs.week_start }}"
           else
-            WEEK_START=$(python3 -c "import sys; sys.path.insert(0, 'scripts'); import common; print(common.target_week_monday().isoformat())")
+            WEEK_START=$(scripts/ci/pipeline.sh target-week)
           fi
           echo "week_start=$WEEK_START" >> "$GITHUB_OUTPUT"
           echo "dir=data/$WEEK_START" >> "$GITHUB_OUTPUT"
@@ -85,7 +130,7 @@ jobs:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-        run: python scripts/collect_week.py --week-start "${{ steps.week.outputs.week_start }}"
+        run: scripts/ci/pipeline.sh collect --week-start "${{ steps.week.outputs.week_start }}"
 
       # This MUST run here, not only in collection-check.yml. Commits pushed
       # with the default GITHUB_TOKEN do not retrigger `on: push` workflows,
@@ -93,8 +138,14 @@ jobs:
       # silently losing the anti-fabrication guard entirely. collection-check
       # is kept for pushes from any other source (a human commit, a manual
       # re-collection); this step is what covers the scheduled run.
+      #
+      # dry_run (a rehearsal) reports a yield failure without stopping, so the
+      # later steps still run and the week still comes back as an artifact: an
+      # off-schedule rehearsal collects a week that is not posted yet and
+      # always trips a floor. A real run is unaffected (`false`).
       - name: Check yield
-        run: python scripts/check_yield.py "${{ steps.week.outputs.dir }}"
+        continue-on-error: ${{ inputs.dry_run == true }}
+        run: scripts/ci/pipeline.sh check-yield "${{ steps.week.outputs.dir }}"
 
       # Deterministic pre-filter for Selection (flatten+tag sources, exact-dup
       # collapse, recurring-listing grouping -- see the script's docstring).
@@ -108,14 +159,26 @@ jobs:
       # safely (stop and notify).
       - name: Prepare selection candidates
         continue-on-error: true
-        run: python scripts/prepare_selection_input.py "${{ steps.week.outputs.dir }}" --split-by-day
+        run: scripts/ci/pipeline.sh prepare-selection "${{ steps.week.outputs.dir }}" --split-by-day
 
       # main requires a PR (repository ruleset added 2026-09-26, no bypass
       # actors), so this lands the week via a bot branch + immediately merged
       # PR instead of a direct push. Committed as github-actions[bot], a real
       # GitHub identity: the ruleset asks for extra approval on commits that
       # aren't attributed to an account, which twip-bot@users.noreply never was.
+      # Rehearsal (dry_run): nothing is committed, no PR is opened, Selection is
+      # not fired -- the week's files are kept as a build artifact instead, so a
+      # run on either engine can be inspected and diffed without touching main.
+      - name: Upload rehearsal output
+        if: ${{ always() && inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: collection-${{ steps.week.outputs.week_start }}-${{ github.run_id }}-${{ env.ENGINE }}
+          path: ${{ steps.week.outputs.dir }}
+          retention-days: 7
+
       - name: Commit and merge collected week
+        if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -163,7 +226,7 @@ jobs:
       # header (per Claude Code's routines docs) -- request/response shape and
       # header version may change.
       - name: Trigger Selection routine
-        if: github.event_name != 'workflow_dispatch' || inputs.trigger_selection
+        if: ${{ !inputs.dry_run && (github.event_name != 'workflow_dispatch' || inputs.trigger_selection) }}
         continue-on-error: true
         run: |
           curl -sf -X POST "https://api.anthropic.com/v1/claude_code/routines/${{ vars.SELECTION_ROUTINE_ID }}/fire" \

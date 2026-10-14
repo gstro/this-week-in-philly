@@ -14,12 +14,37 @@ on:
 jobs:
   check-yield:
     runs-on: ubuntu-latest
+    env:
+      # Follows Collection's engine (Tier D, docs/TS_PORT.md); see
+      # scripts/ci/pipeline.sh.
+      ENGINE: ${{ vars.COLLECTION_ENGINE || 'python' }}
     steps:
+      # Fail fast on a mistyped engine variable, before anything is installed
+      # (Actions compares strings case-insensitively; pipeline.sh lowercases to
+      # match). Without this, a typo would only surface at the first step that
+      # calls pipeline.sh.
+      - name: Check engine
+        run: |
+          case "${ENGINE,,}" in
+            python|ts) echo "Engine: ${ENGINE,,}" ;;
+            *) echo "::error::COLLECTION_ENGINE / the engine input must be 'python' or 'ts', got '$ENGINE'"; exit 1 ;;
+          esac
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
       - uses: actions/setup-python@v5
+        if: env.ENGINE != 'ts'
         with: { python-version: '3.12' }
+      - uses: actions/setup-node@v4
+        if: env.ENGINE == 'ts'
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Build (TypeScript engine)
+        if: env.ENGINE == 'ts'
+        run: |
+          npm ci
+          npm run build
       - name: Check every changed week's manifest
         run: |
           set -euo pipefail
@@ -45,8 +70,8 @@ jobs:
           FAILED=0
           for manifest_path in "${CHANGED[@]}"; do
             week_dir="$(dirname "$manifest_path")"
-            echo "::group::check_yield.py $week_dir"
-            if ! python scripts/check_yield.py "$week_dir" "${REF_ARGS[@]}"; then
+            echo "::group::check-yield ($ENGINE) $week_dir"
+            if ! scripts/ci/pipeline.sh check-yield "$week_dir" "${REF_ARGS[@]}"; then
               FAILED=1
             fi
             echo "::endgroup::"

@@ -88,6 +88,26 @@ settings:
 - **Keep the Selection Routine's environment lean.** It needs none of the above. Give it its own
   environment, or accept a setup script that only adds time.
 
+## Pipeline engine: Python or TypeScript
+
+Tier D of `docs/TS_PORT.md`: each production workflow can run the Python in `scripts/` or the TypeScript port in `src/` (built to `dist/`). `scripts/ci/pipeline.sh` is the only thing that knows both; it reads `$ENGINE`, which each workflow sets from `inputs.engine || vars.<STAGE>_ENGINE || 'python'`:
+
+| Variable (Settings > Secrets and variables > Actions > Variables) | Workflows |
+| --- | --- |
+| `COLLECTION_ENGINE` | `collection.yml`, `collection-check.yml` |
+| `PRESENTATION_ENGINE` | `presentation.yml` |
+
+Unset means `python`, so nothing changes until a variable is set. **Cut a stage over** by setting its variable to `ts`; **roll it back** by setting it to `python` (a settings change, not a PR, since `main` only takes PRs) and re-dispatching the workflow for the affected week if it already ran. Re-running `presentation.yml` for a week that has **not begun** is safe: `calendar_create` clears and rewrites the target week, and the playlist is reused by id. Once the week has begun, `calendar_create`'s past-week guard skips the calendar write on purpose (it protects the attendance signal), so a rollback re-run then only re-renders the report and playlist and leaves the calendar as it is.
+
+**Rehearse without touching `main`.** Both workflows take `engine` (`python`/`ts`, blank = the variable) and `dry_run` on `workflow_dispatch`. `dry_run` runs every step but commits nothing, opens no PR, fires no Selection, and passes `--dry-run` to the Spotify playlist and Calendar writes; the week's files come back as a build artifact to diff against `main`. The two engines serialize the report differently (`&#34;` vs `&quot;`, a final newline) but parse to the same page, so compare reports with `node dist/compareHtml.js a.html b.html`, not `diff`. A dispatch runs the workflow file from the ref you name, so a branch can be rehearsed before it merges:
+
+```
+gh workflow run collection.yml   --ref <branch> -f engine=ts -f dry_run=true -f week_start=2026-10-19
+gh workflow run presentation.yml --ref <branch> -f engine=ts -f dry_run=true -f week_dir=data/2026-10-12
+```
+
+A Spotify failure never stops the report on either engine: a failure prints a `::warning::`, the playlist is skipped, and the report renders without Spotify links (or with the week's earlier links, if it had been run before: the files already on `main` are not cleared). The lookup is cut off after 10 minutes (always on the TS engine; on the Python engine where `timeout` exists, which includes the Actions runner), and the job step has a 20-minute limit overall. The `engine` value is checked first thing in each run and is case-insensitive.
+
 ## Tool reference
 
 ### Runtime pins: `.python-version`, `.nvmrc`
