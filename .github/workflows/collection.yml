@@ -138,7 +138,13 @@ jobs:
       # silently losing the anti-fabrication guard entirely. collection-check
       # is kept for pushes from any other source (a human commit, a manual
       # re-collection); this step is what covers the scheduled run.
+      #
+      # dry_run (a rehearsal) reports a yield failure without stopping, so the
+      # later steps still run and the week still comes back as an artifact: an
+      # off-schedule rehearsal collects a week that is not posted yet and
+      # always trips a floor. A real run is unaffected (`false`).
       - name: Check yield
+        continue-on-error: ${{ inputs.dry_run == true }}
         run: scripts/ci/pipeline.sh check-yield "${{ steps.week.outputs.dir }}"
 
       # Deterministic pre-filter for Selection (flatten+tag sources, exact-dup
@@ -164,7 +170,7 @@ jobs:
       # not fired -- the week's files are kept as a build artifact instead, so a
       # run on either engine can be inspected and diffed without touching main.
       - name: Upload rehearsal output
-        if: inputs.dry_run
+        if: ${{ always() && inputs.dry_run }}
         uses: actions/upload-artifact@v4
         with:
           name: collection-${{ steps.week.outputs.week_start }}-${{ github.run_id }}-${{ env.ENGINE }}

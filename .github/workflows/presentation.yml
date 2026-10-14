@@ -198,7 +198,7 @@ jobs:
       # rendered report and the week's data files are kept as a build artifact
       # instead, so either engine can be inspected and diffed against main.
       - name: Upload rehearsal output
-        if: inputs.dry_run
+        if: ${{ always() && inputs.dry_run }}
         uses: actions/upload-artifact@v4
         with:
           # Not the week dir: artifact names cannot contain '/'.
