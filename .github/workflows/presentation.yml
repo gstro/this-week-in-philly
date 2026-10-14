@@ -29,9 +29,25 @@ on:
         description: 'Week directory to publish, e.g. data/2026-09-28'
         required: true
         type: string
+      engine:
+        description: 'Which implementation runs: python or ts (anything else fails the run). Blank = the PRESENTATION_ENGINE repo variable (python if unset).'
+        required: false
+        type: string
+        default: ''
+      dry_run:
+        description: 'Rehearsal: run every step with --dry-run on the Spotify playlist and Calendar writes, but do not commit or open a PR. The report and data files are uploaded as a build artifact.'
+        required: false
+        type: boolean
+        default: false
 jobs:
   present:
     runs-on: ubuntu-latest
+    env:
+      # Tier D (docs/TS_PORT.md): "python" runs scripts/, "ts" runs the
+      # TypeScript port from dist/. Scheduled/dispatched-by-Selection runs use
+      # the repo variable, so cutting this stage over (or rolling it back) is a
+      # settings change, not a PR. scripts/ci/pipeline.sh reads it.
+      ENGINE: ${{ inputs.engine || vars.PRESENTATION_ENGINE || 'python' }}
     # Default GITHUB_TOKEN needs write access to push the report -- confirmed
     # missing the hard way: a real run (30721803844) got through the whole
     # pipeline (including a real, unintended calendar_create.py write -- see
@@ -44,6 +60,16 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      # Fail fast on a mistyped engine variable, before anything is installed
+      # (Actions compares strings case-insensitively; pipeline.sh lowercases to
+      # match). Without this, a typo would only surface at the first step that
+      # calls pipeline.sh.
+      - name: Check engine
+        run: |
+          case "${ENGINE,,}" in
+            python|ts) echo "Engine: ${ENGINE,,}" ;;
+            *) echo "::error::PRESENTATION_ENGINE / the engine input must be 'python' or 'ts', got '$ENGINE'"; exit 1 ;;
+          esac
       # fetch-depth: 2 (not the default 1) -- the week-dir derivation below
       # needs HEAD^ to exist. presentation.yml ran with the default twice
       # (29652043283, 29702768189) and failed both times because HEAD~1 was
@@ -54,11 +80,26 @@ jobs:
         with:
           fetch-depth: 2
       - uses: actions/setup-python@v5
+        if: env.ENGINE != 'ts'
         with:
           python-version-file: '.python-version'
           cache: pip
           cache-dependency-path: 'scripts/requirements*.txt'
       - run: pip install -r scripts/requirements.txt
+        if: env.ENGINE != 'ts'
+
+      # The TypeScript engine: Node (the version in .nvmrc) and the build in
+      # dist/. No browser is needed; Presentation never fetches a page.
+      - uses: actions/setup-node@v4
+        if: env.ENGINE == 'ts'
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Build (TypeScript engine)
+        if: env.ENGINE == 'ts'
+        run: |
+          npm ci
+          npm run build
 
       # Reads off _selection_annotations.json now (Selection's own push),
       # not _selections.json (which this workflow itself now produces, in
@@ -117,7 +158,7 @@ jobs:
       # the same GITHUB_TOKEN-doesn't-retrigger reason explained in this
       # trigger's `paths` comment above. See merge_selections.py's docstring.
       - name: Merge selections
-        run: python scripts/merge_selections.py "${{ steps.week.outputs.dir }}"
+        run: scripts/ci/pipeline.sh merge-selections "${{ steps.week.outputs.dir }}"
 
       # Mechanical post-conditions on the merged _selections.json (venue cap,
       # time-format regression guard, blank-cost regression guard) --
@@ -125,10 +166,16 @@ jobs:
       # Runs after the merge, not after Selection's own push, because title/
       # venue/cost don't exist until merge_selections.py reconstructs them.
       - name: Check selection
-        run: python scripts/check_selection.py "${{ steps.week.outputs.dir }}"
+        run: scripts/ci/pipeline.sh check-selection "${{ steps.week.outputs.dir }}"
 
+      # timeout-minutes: a hung Spotify call can no longer hold the job open
+      # for hours (the lookup is also cut off on its own after 10 minutes, on
+      # both engines). dry_run adds --dry-run, which the two external writes
+      # (the playlist and the Calendar) honour.
       - name: Run presentation pipeline
+        timeout-minutes: 20
         env:
+          DRY_RUN_FLAG: ${{ inputs.dry_run && '--dry-run' || '' }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
@@ -139,7 +186,7 @@ jobs:
           # step prints why and exits 0; the report still publishes.
           SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
           SPOTIFY_REDIRECT_URI: ${{ secrets.SPOTIFY_REDIRECT_URI }}
-        run: bash scripts/runner.sh "${{ steps.week.outputs.dir }}"
+        run: scripts/ci/pipeline.sh present "${{ steps.week.outputs.dir }}" $DRY_RUN_FLAG
 
       # main requires a PR (2026-09-26 ruleset, no bypass actors): commit to a
       # bot branch and merge it through an immediately merged PR. On
@@ -147,7 +194,26 @@ jobs:
       # Calendar had already been written, and the rendered report was lost
       # with the runner. Committed as github-actions[bot] -- a real account;
       # the ruleset wants extra approval for unattributed commits.
+      # Rehearsal (dry_run): nothing is committed and no PR is opened -- the
+      # rendered report and the week's data files are kept as a build artifact
+      # instead, so either engine can be inspected and diffed against main.
+      - name: Upload rehearsal output
+        if: inputs.dry_run
+        uses: actions/upload-artifact@v4
+        with:
+          # Not the week dir: artifact names cannot contain '/'.
+          name: presentation-${{ github.run_id }}-${{ env.ENGINE }}
+          path: |
+            docs/weeks
+            docs/index.html
+            ${{ steps.week.outputs.dir }}/_selections.json
+            ${{ steps.week.outputs.dir }}/_spotify.json
+            ${{ steps.week.outputs.dir }}/_playlist.json
+          if-no-files-found: warn
+          retention-days: 7
+
       - name: Commit and merge report
+        if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -170,13 +236,11 @@ jobs:
           # creating a duplicate.
           #
           # `git add` on a path that doesn't exist is an error, so both are
-          # guarded. _spotify.json is written unconditionally by
-          # spotify_lookup.py (even {} when there's no music this week) --
-          # the guard here is defense in depth, not the expected path, since
-          # runner.sh's `set -euo pipefail` means a hard failure there (e.g.
-          # missing SPOTIFY_CLIENT_ID/SECRET) stops the job before this step
-          # ever runs. _playlist.json is genuinely optional: spotify_playlist.py
-          # exits 0 without writing one when Spotify user auth fails.
+          # guarded. Both are optional now: a Spotify failure no longer stops
+          # the run (2026-10-14), so a failed lookup leaves _spotify.json
+          # unwritten (or stale from an earlier run of the same week), and
+          # spotify_playlist exits 0 without writing a _playlist.json when
+          # Spotify user auth fails. The report renders without either.
           git add docs/ "${{ steps.week.outputs.dir }}/_selections.json"
           SPOTIFY_JSON="${{ steps.week.outputs.dir }}/_spotify.json"
           PLAYLIST_JSON="${{ steps.week.outputs.dir }}/_playlist.json"

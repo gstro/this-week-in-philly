@@ -12,12 +12,14 @@ This is a checklist, not a design doc — for *why* things are shaped this way, 
 | `GOOGLE_CLIENT_ID` | Actions secret, local `.env` | `collection.yml` (gcal venue sources), `presentation.yml` (`calendar_create.py`) | Google Cloud Console OAuth client — [Google Cloud / Calendar](#1-google-cloud--calendar) |
 | `GOOGLE_CLIENT_SECRET` | Actions secret, local `.env` | same as above | same |
 | `GOOGLE_REFRESH_TOKEN` | Actions secret, local `.env` | same as above | `scripts/oauth_bootstrap.py` |
-| `SPOTIFY_CLIENT_ID` | Actions secret, local `.env` | `presentation.yml` (`spotify_lookup.py`, `spotify_playlist.py`) — **required**, job fails without it | Spotify app dashboard — [Spotify](#2-spotify) |
-| `SPOTIFY_CLIENT_SECRET` | Actions secret, local `.env` | same as above — **required** | same |
+| `SPOTIFY_CLIENT_ID` | Actions secret, local `.env` | `presentation.yml` (`spotify_lookup.py`, `spotify_playlist.py`) — needed for Spotify links and the playlist; without it the lookup fails, the run prints a warning, and the report still renders and publishes without them | Spotify app dashboard — [Spotify](#2-spotify) |
+| `SPOTIFY_CLIENT_SECRET` | Actions secret, local `.env` | same as above | same |
 | `SPOTIFY_REFRESH_TOKEN` | Actions secret, local `.env` | `spotify_playlist.py` only — **optional**, missing it just skips the playlist step (exit 0) | `scripts/spotify_oauth_bootstrap.py` |
 | `SPOTIFY_REDIRECT_URI` | Actions secret, local `.env` | same as above — **optional** | must byte-match what's registered on the Spotify app |
 | `SELECTION_ROUTINE_ID` | Actions **variable** (not secret) | `collection.yml`'s "Trigger Selection routine" step | the Selection Routine's API trigger — [Selection Routine](#4-selection-routine-claudeaicoderoutines) |
 | `SELECTION_ROUTINE_TOKEN` | Actions secret | same step | same |
+| `COLLECTION_ENGINE` | Actions **variable**, optional | `collection.yml` and `collection-check.yml`: `python` (default) or `ts`, which implementation runs | you set it — [Pipeline engine](DEV_ENVIRONMENT.md#pipeline-engine-python-or-typescript) |
+| `PRESENTATION_ENGINE` | Actions **variable**, optional | `presentation.yml`: `python` (default) or `ts` | same |
 | `PICKS_LOG_PATH` | local `.env` only, optional | `csv_log.py` (currently inert, see below) | n/a — defaults to `data/event-picks-log.csv` |
 | `HTTP_PROXY` / `HTTPS_PROXY` | set automatically | `fetch_page_text.py` | nothing to configure — set by the runner/Routine environment |
 
