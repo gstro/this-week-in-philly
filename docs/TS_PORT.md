@@ -29,7 +29,7 @@ is the working definition from Tier B on.
 |---|---|---|
 | A | Pure data transforms on committed files: `common`, `prepare_selection_input`, `merge_selections`, `check_selection`, `check_yield`, `html_render`, `csv_log`, `attendance_check` | Done (PRs #36–#75) |
 | B | Collection — reads the web, writes only inside the repo: `event_parsers/*` (pure; fixture-tested), then `fetch_raw`, `proxy_session`, `fetch_page_text` (Playwright), `collect_source`, `collect_week` | Done: `event_parsers` → `src/eventParsers/`, `fetch_raw`/`proxy_session`/`fetch_page_text` → `fetchRaw`/`lib/http.ts`/`fetchPageText`, `collect_source` → `collectSource`, `collect_week` → `collectWeek` (PRs #76–#81) |
-| C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | In progress: `spotify_lookup` → `spotifyLookup`, `spotify_playlist` → `spotifyPlaylist`, `calendar_create` → `calendarCreate` done |
+| C | Presentation's external steps: `spotify_lookup`, `spotify_playlist`, `calendar_create`, `oauth_bootstrap`, `spotify_oauth_bootstrap`. Mutating steps are tested in `--dry-run` only | Done: `spotify_lookup` → `spotifyLookup`, `spotify_playlist` → `spotifyPlaylist`, `calendar_create` → `calendarCreate`, `oauth_bootstrap` → `oauthBootstrap`, `spotify_oauth_bootstrap` → `spotifyOauthBootstrap` (PRs #82, #84, #86, #92) |
 | D | Cut `collection.yml` / `presentation.yml` / `collection-check.yml` / `runner.sh` over to `src/`, then delete `scripts/` and the Python toolchain | Not started |
 
 `token_report.py` is a local dev tool (Selection token accounting from session
@@ -128,6 +128,15 @@ affect the published report today. Each fix is listed in the TS parser's
 - End times are a wall-clock add, as Python's aware-datetime add is; the offset is that of the resulting wall time (an event at 11:30 PM on 10-31 ends at `2026-11-01T02:30:00-05:00`); a wall time in the spring-forward gap takes the offset from before the change, as Python's zoneinfo does (checked against it). A time must be `H:MM AM/PM` (Python's strptime also took a one-digit minute).
 - `lib/calendar.ts` now holds what `attendanceCheck` and `calendarCreate` share: the Eastern week window, `easternIso`, `todayEastern`, the paged `listWeekEvents` and the service types.
 - Verified 2026-10-10: `buildEvent` output (231 events) and skip warnings are identical to the Python's `build_event` on all 11 committed weeks, and the CLI's stdout and exit code are byte-identical to the Python's for all 11 weeks under `--dry-run --force-calendar`, `--dry-run` (the past-week refusal) and no flags. **Unverified live (by design):** the clear and insert calls are checked only against a recording fake. First live write: the Tier D cutover.
+
+### `oauth_bootstrap` and `spotify_oauth_bootstrap` — ported (Tier C)
+
+One-time local consent tools, not pipeline stages. Both receive the browser redirect through `lib/loopback.ts`, which binds only the loopback host of the redirect URI, checks a random `state` (a request with the wrong state, path or method is answered and ignored) and gives up after 5 minutes. The authorize URL is always printed as well as opened. Nothing is written to disk; the token goes to stdout.
+
+- **Google: a re-run could print `None` (Python).** Google issues a refresh token only on a first consent, and the Python's flow did not ask for `prompt=consent`, so re-running for an already-authorised account printed `None` instead of a token. The TS always asks for consent, uses PKCE and `127.0.0.1` (the Python used `localhost`), and fails if Google still returns no refresh token. The credentials file's own `auth_uri`/`token_uri` are ignored, so the client secret only goes to Google's fixed endpoints.
+- **Spotify: no `state` check, and any token accepted (Python).** spotipy's listener did not verify `state`, and the script printed whatever token came back. The TS verifies `state`, fails on a response with no refresh token, and fails if the granted scope lacks `playlist-modify-public` or `playlist-read-private` (which would otherwise 403 at the first playlist write). Consent denied and a timeout give a clear message and exit 1; the Python hung or crashed.
+- Errors print one line, never the client secret.
+- **Unverified live (by design):** both are tested against local fake token endpoints with a fake "browser" that completes the redirect. A real consent has never been run from the port, and neither tool is needed again unless a token is revoked or the scope changes. The Python originals stay the documented route in `docs/SETUP.md` until Tier D.
 
 ### Open gaps (not port bugs)
 
