@@ -178,43 +178,49 @@ def test_fetch_result_is_a_plain_dataclass() -> None:
     assert result.raw_events == [_event(1)]
 
 
-# --- collect_wxpn: pagination via X-WP-TotalPages ---
+# --- collect_wxpn: server-side date window, pagination via total_pages ---
+
+_WXPN_BASE = "https://xpn.org/wp-json/tribe/events/v1/events?per_page=50"
 
 
-def test_collect_wxpn_pages_until_total_pages_header(monkeypatch: pytest.MonkeyPatch) -> None:
-    url1 = "https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=1"
-    url2 = "https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=2"
-    session = _FakeSession(
-        {
-            url1: _FakeResponse([_event(1)], headers={"X-WP-TotalPages": "2"}),
-            url2: _FakeResponse([_event(2)], headers={"X-WP-TotalPages": "2"}),
-        }
-    )
+def _wxpn_url(page: int) -> str:
+    return f"{_WXPN_BASE}&page={page}&start_date=2026-10-19&end_date=2026-10-25"
+
+
+def _wxpn_page(events: list[dict], total_pages: int = 1) -> _FakeResponse:
+    return _FakeResponse({"events": events, "total": len(events), "total_pages": total_pages})
+
+
+def test_collect_wxpn_pages_until_total_pages(monkeypatch: pytest.MonkeyPatch) -> None:
+    session = _FakeSession({_wxpn_url(1): _wxpn_page([_event(1)], 2), _wxpn_url(2): _wxpn_page([_event(2)], 2)})
     monkeypatch.setattr("collect_source.build_session", lambda: session)
 
-    result = collect_wxpn(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    result = collect_wxpn(datetime.date(2026, 10, 19), datetime.date(2026, 10, 25))
     assert [e["id"] for e in result.raw_events] == [1, 2]
     assert result.failed_requests == []
 
 
 def test_collect_wxpn_respects_max_pages_cap(monkeypatch: pytest.MonkeyPatch) -> None:
-    responses = {}
-    for page in range(1, 10):
-        url = f"https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page={page}"
-        responses[url] = _FakeResponse([_event(page)], headers={"X-WP-TotalPages": "99"})
-    session = _FakeSession(responses)
+    session = _FakeSession({_wxpn_url(page): _wxpn_page([_event(page)], 99) for page in range(1, 10)})
     monkeypatch.setattr("collect_source.build_session", lambda: session)
 
-    result = collect_wxpn(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    result = collect_wxpn(datetime.date(2026, 10, 19), datetime.date(2026, 10, 25))
     assert len(result.raw_events) == 6  # _MAX_PAGES_WXPN
 
 
-def test_collect_wxpn_records_failure_when_response_is_not_a_list(monkeypatch: pytest.MonkeyPatch) -> None:
-    url1 = "https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=1"
-    session = _FakeSession({url1: _FakeResponse({"code": "rest_no_route"}, headers={"X-WP-TotalPages": "1"})})
+def test_collect_wxpn_garbage_page_count_means_no_further_pages(monkeypatch: pytest.MonkeyPatch) -> None:
+    session = _FakeSession({_wxpn_url(1): _FakeResponse({"events": [_event(1)], "total_pages": "lots"})})
     monkeypatch.setattr("collect_source.build_session", lambda: session)
 
-    result = collect_wxpn(datetime.date(2026, 8, 3), datetime.date(2026, 8, 9))
+    result = collect_wxpn(datetime.date(2026, 10, 19), datetime.date(2026, 10, 25))
+    assert [e["id"] for e in result.raw_events] == [1]
+
+
+def test_collect_wxpn_records_failure_when_response_has_no_events_array(monkeypatch: pytest.MonkeyPatch) -> None:
+    session = _FakeSession({_wxpn_url(1): _FakeResponse({"code": "rest_no_route"})})
+    monkeypatch.setattr("collect_source.build_session", lambda: session)
+
+    result = collect_wxpn(datetime.date(2026, 10, 19), datetime.date(2026, 10, 25))
     assert result.raw_events == []
     assert len(result.failed_requests) == 1
 

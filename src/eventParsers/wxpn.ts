@@ -1,53 +1,66 @@
 /**
- * wxpn -- WXPN's own WordPress REST API (backend.xpn.org), not the public
+ * wxpn -- WXPN's concert calendar, via the Modern Tribe Events REST API on
+ * xpn.org (`/wp-json/tribe/events/v1/events`), not the public
  * xpn.org/concert-and-events/ page. Rewrite of scripts/event_parsers/wxpn.py.
  *
- * That public page is Next.js RSC (`self.__next_f` payload chunks) with zero
- * event data in its raw HTML -- confirmed live 2026-07-29 -- which is why
- * this source needed a full Chromium render before. The site's own JS bundle
- * calls `https://backend.xpn.org/wp-json/wp/v2/event` directly; that endpoint
- * is public, paginated, and returns structured JSON with no model in the loop.
+ * The site used to be read from `backend.xpn.org/wp-json/wp/v2/event`; that
+ * host stopped serving (its Pantheon site was removed -- the TLS certificate
+ * no longer covers the hostname and the origin answers "404 - Unknown site"),
+ * and the first failed run was 2026-09-28. The calendar moved to The Events
+ * Calendar plugin on xpn.org itself, confirmed live 2026-10-18.
  *
- * Two API quirks:
+ * API quirks:
  *
- * - `per_page` is capped at 100 (a value above that 400s), and results are
- *   sorted by WordPress publish date, not the event's own date -- an event in
- *   next week's window could be on any page. There's no server-side way to
- *   sort or filter by the ACF event date, so the collector fetches every page
- *   (bounded by `X-WP-Total-Pages`, capped defensively) and this parser
- *   filters client-side on `acf.date`.
- * - `acf.date` is a full "YYYY-MM-DD HH:MM:SS" string, but the time portion
- *   is always "00:00:00" in every record observed (2026-07-29) -- a date, not
- *   a showtime. Time is left blank rather than reporting a fake midnight.
+ * - Unlike the old endpoint, this one filters server-side: `start_date` and
+ *   `end_date` bound the window, so the collector fetches only the target
+ *   week. `per_page` is capped at 50 (a larger value is silently clamped), and
+ *   the response is an object (`events`, `total`, `total_pages`), which the
+ *   collector flattens into the bare array this parser takes.
+ * - Most events are `all_day` with a "00:00:00" start -- a date, not a
+ *   showtime -- so time is left blank for those. A few (the Free At Noon
+ *   series) carry a real start time, which is surfaced.
+ * - Titles, venue names and the `website` ticket link are HTML-escaped
+ *   ("Ortlieb&#8217;s", "&amp;" in query strings), so they're entity-decoded.
+ * - `venue` is an object when set and an empty array when not.
+ * - The "Philadelphia Area" category is on nearly every event, so it carries
+ *   no signal; the remaining categories ("WXPN Welcomes", "Free At Noon",
+ *   "Central PA") become the description.
  *
- * WordPress HTML-escapes `title.rendered` (and ACF text fields), so they're
- * entity-decoded.
- *
- * Divergences from the Python: a non-object `acf` or `title` skips that event
- * with a warning (it crashed the whole source).
+ * Divergences from the Python: a malformed record (wrong JSON types) is
+ * skipped with a warning instead of crashing the whole source.
  */
 
 import { decodeHTML } from "entities";
-import { type Event, type EventParser, ParseError, collectRecords, inWeek, leadingIsoDate, makeEvent, obj, parseJson, requireObject, str } from "./base.js";
+import { type Event, type EventParser, ParseError, collectRecords, formatTime, inWeek, isObject, leadingIsoDate, makeEvent, parseJson, requireObject, str } from "./base.js";
+
+const NOISE_CATEGORY = "Philadelphia Area";
 
 export const parse: EventParser = (raw, weekStart, weekEnd) => {
   const payload = parseJson(raw);
-  if (!Array.isArray(payload)) throw new ParseError("response is not a JSON array of posts -- API shape may have changed");
+  if (!Array.isArray(payload)) throw new ParseError("response is not a JSON array of events -- API shape may have changed");
 
   return collectRecords("wxpn", payload as unknown[], (entry): Event | null => {
     const item = requireObject(entry);
-    const acf = obj(item, "acf");
-    const date = leadingIsoDate(str(acf, "date"));
+    const start = str(item, "start_date");
+    const date = leadingIsoDate(start);
     if (date === null || !inWeek(date, weekStart, weekEnd)) return null;
 
+    const venue = isObject(item["venue"]) ? decodeHTML(str(item["venue"], "venue")) : "";
+    const clock = /[ T](\d{2}):(\d{2})/.exec(start);
+    const time = item["all_day"] || clock === null ? "" : formatTime(Number(clock[1]), Number(clock[2]));
+    const categories = (Array.isArray(item["categories"]) ? (item["categories"] as unknown[]) : [])
+      .filter(isObject)
+      .map((category) => decodeHTML(str(category, "name")))
+      .filter((name) => name !== "" && name !== NOISE_CATEGORY);
+
     return makeEvent({
-      title: decodeHTML(str(obj(item, "title"), "rendered")),
-      venue: decodeHTML(str(acf, "venue")),
+      title: decodeHTML(str(item, "title")),
+      venue,
       date,
-      time: "",
-      cost: str(acf, "price"),
-      url: str(item, "link") || str(acf, "external_link"),
-      description: decodeHTML(str(acf, "external_artist")),
+      time,
+      cost: str(item, "cost"),
+      url: str(item, "url") || decodeHTML(str(item, "website")),
+      description: categories.join(", "),
     });
   });
 };

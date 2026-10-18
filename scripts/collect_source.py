@@ -63,11 +63,9 @@ _USER_AGENT = (
 # for what unbounded pagination cost Songkick under the proxy workaround).
 _MAX_PAGES_PER_DAY = 6
 
-# WXPN's REST API sorts by publish date, not event date, so a page's
-# position tells you nothing about which week it covers -- every page must
-# be fetched to be sure nothing in the target week is missed. Observed live
-# (2026-07-29): 495 total records across 5 pages of 100 (the API's own
-# per_page cap). Capped one page above that observed ceiling.
+# WXPN's Tribe Events API filters by date server-side, so a week is ~40 events
+# (one page of 50, its per_page cap). The cap only guards against a
+# `total_pages` that keeps growing.
 _MAX_PAGES_WXPN = 6
 
 # Calendar API queries are bounded by wall-clock instants, so the target week's
@@ -119,32 +117,32 @@ def collect_do215(week_start: datetime.date, week_end: datetime.date) -> FetchRe
     return FetchResult(raw_events=all_events, failed_requests=all_failed)
 
 
-_WXPN_API_URL = "https://backend.xpn.org/wp-json/wp/v2/event"
+_WXPN_API_URL = "https://xpn.org/wp-json/tribe/events/v1/events"
 
 
-def collect_wxpn(_week_start: datetime.date, _week_end: datetime.date) -> FetchResult:
-    # week_start/week_end are unused here -- the API has no server-side date
-    # filter (see wxpn.py's module docstring), so every page must be fetched
-    # regardless of window; filtering happens entirely in the parser.
+def collect_wxpn(week_start: datetime.date, week_end: datetime.date) -> FetchResult:
     session = build_session()
     events: list[dict] = []
     failed: list[str] = []
     page = 1
     total_pages = 1
     while page <= min(total_pages, _MAX_PAGES_WXPN):
-        url = f"{_WXPN_API_URL}?per_page=100&page={page}"
+        url = f"{_WXPN_API_URL}?per_page=50&page={page}&start_date={week_start}&end_date={week_end}"
         try:
             response = session.get(url, headers={"User-Agent": _USER_AGENT}, timeout=20)
             response.raise_for_status()
             payload = response.json()
-            if not isinstance(payload, list):
-                raise TypeError(f"expected a JSON array, got {type(payload).__name__}")
+            if not isinstance(payload, dict) or not isinstance(payload.get("events"), list):
+                raise TypeError("expected a JSON object with an 'events' array")
         except Exception as exc:  # noqa: BLE001 -- any failure here just means "skip this page", not crash the run
             failed.append(f"{url} ({exc})")
             page += 1
             continue
-        events.extend(payload)
-        total_pages = int(response.headers.get("X-WP-TotalPages", page))
+        events.extend(payload["events"])
+        try:
+            total_pages = int(payload.get("total_pages") or page)
+        except (TypeError, ValueError):
+            total_pages = page  # garbage page count: treat this as the last page rather than crash
         page += 1
     return FetchResult(raw_events=events, failed_requests=failed)
 

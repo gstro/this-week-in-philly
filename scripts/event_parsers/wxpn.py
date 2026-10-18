@@ -1,25 +1,29 @@
-"""wxpn -- WXPN's own WordPress REST API (backend.xpn.org), not the public
+"""wxpn -- WXPN's concert calendar, via the Modern Tribe Events REST API on
+xpn.org (`/wp-json/tribe/events/v1/events`), not the public
 xpn.org/concert-and-events/ page.
 
-That public page is Next.js RSC (`self.__next_f` payload chunks) with zero
-event data in its raw HTML -- confirmed live 2026-07-29 -- which is why this
-source needed a full Chromium render (`fetch_page_text.py`) before. The
-site's own JS bundle calls `https://backend.xpn.org/wp-json/wp/v2/event`
-directly; that endpoint is public, paginated, and returns structured JSON
-with no model in the loop.
+The site used to be read from `backend.xpn.org/wp-json/wp/v2/event`; that
+host stopped serving (its Pantheon site was removed -- the TLS certificate
+no longer covers the hostname and the origin answers "404 - Unknown site"),
+and the first failed run was 2026-09-28. The calendar moved to The Events
+Calendar plugin on xpn.org itself, confirmed live 2026-10-18.
 
-Two API quirks:
+API quirks:
 
-- `per_page` is capped at 100 (a value above that 400s), and results are
-  sorted by WordPress publish date, not the event's own date -- an event in
-  next week's window could be on any page. There is no server-side way to
-  sort or filter by the ACF event date, so collect_source.py's collector
-  fetches every page (bounded by `X-WP-Total-Pages`, capped defensively)
-  and this parser filters client-side on `acf.date`.
-- `acf.date` is a full "YYYY-MM-DD HH:MM:SS" string, but the time portion is
-  always "00:00:00" in every record observed (2026-07-29) -- not a real
-  showtime, just a date. Time is left blank rather than reporting a fake
-  midnight start.
+- Unlike the old endpoint, this one filters server-side: `start_date` and
+  `end_date` bound the window, so the collector fetches only the target
+  week. `per_page` is capped at 50 (a larger value is silently clamped), and
+  the response is an object (`events`, `total`, `total_pages`), which
+  collect_source.py flattens into the bare array this parser takes.
+- Most events are `all_day` with a "00:00:00" start -- a date, not a
+  showtime -- so time is left blank for those. A few (the Free At Noon
+  series) carry a real start time, which is surfaced.
+- Titles, venue names and the `website` ticket link are HTML-escaped
+  ("Ortlieb&#8217;s", "&amp;" in query strings), so they're entity-decoded.
+- `venue` is an object when set and an empty array when not.
+- The "Philadelphia Area" category is on nearly every event, so it carries no
+  signal; the remaining categories ("WXPN Welcomes", "Free At Noon", "Central
+  PA") become the description.
 """
 
 from __future__ import annotations
@@ -31,6 +35,12 @@ from typing import Any
 
 from .base import Event, ParseError, write_event
 
+_NOISE_CATEGORY = "Philadelphia Area"
+
+
+def _unescape(value: object) -> str:
+    return html.unescape(str(value or ""))
+
 
 def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_kwargs: Any) -> list[Event]:  # noqa: ANN401
     try:
@@ -39,39 +49,40 @@ def parse(raw_json: str, week_start: datetime.date, week_end: datetime.date, **_
         raise ParseError(f"response isn't valid JSON: {exc}") from exc
 
     if not isinstance(payload, list):
-        raise ParseError("response is not a JSON array of posts -- API shape may have changed")
+        raise ParseError("response is not a JSON array of events -- API shape may have changed")
 
     events: list[Event] = []
     for item in payload:
         if not isinstance(item, dict):
             continue
 
-        acf = item.get("acf") or {}
-        raw_date = acf.get("date")
-        if not raw_date:
-            continue
-        date_part = str(raw_date)[:10]
+        raw_start = str(item.get("start_date") or "")
         try:
-            event_date = datetime.date.fromisoformat(date_part)
+            start = datetime.datetime.fromisoformat(raw_start)
         except ValueError:
             continue
+        event_date = start.date()
         if not (week_start <= event_date <= week_end):
             continue
 
-        title = html.unescape(str(item.get("title", {}).get("rendered", "")))
-        venue = html.unescape(str(acf.get("venue") or ""))
-        artist = acf.get("external_artist") or ""
-        description = html.unescape(str(artist)) if artist else ""
+        venue = item.get("venue")
+        venue_name = _unescape(venue.get("venue")) if isinstance(venue, dict) else ""
+        time = "" if item.get("all_day") else start.strftime("%-I:%M %p")
+        categories = [
+            _unescape(c.get("name"))
+            for c in item.get("categories") or []
+            if isinstance(c, dict) and c.get("name") != _NOISE_CATEGORY
+        ]
 
         events.append(
             write_event(
-                title=title,
-                venue=venue,
+                title=_unescape(item.get("title")),
+                venue=venue_name,
                 date=str(event_date),
-                time="",
-                cost=str(acf.get("price") or ""),
-                url=str(item.get("link") or acf.get("external_link") or ""),
-                description=description,
+                time=time,
+                cost=str(item.get("cost") or ""),
+                url=str(item.get("url") or "") or _unescape(item.get("website")),
+                description=", ".join(c for c in categories if c),
             )
         )
 

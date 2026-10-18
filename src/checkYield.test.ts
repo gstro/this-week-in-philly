@@ -276,7 +276,7 @@ describe("real expected_yield.json sanity", () => {
       expect(config.min_expected as number, source).toBeGreaterThanOrEqual(0);
     }
 
-    for (const quietSource of ["meetup-owasp", "meetup-ai-philly", "meetup-philly-film-club", "philly-shows"]) {
+    for (const quietSource of ["meetup-owasp", "meetup-ai-philly", "philly-shows", "r5-productions"]) {
       expect(expected.sources[quietSource]!.min_expected).toBe(0);
     }
   });

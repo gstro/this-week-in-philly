@@ -143,6 +143,6 @@ One-time local consent tools, not pipeline stages. Both receive the browser redi
 
 - **cinéSPEAK also rate-limits (HTTP 429 on the 2026-09-21 and 2026-10-05 runs).** Independent of the cap above; a retry with backoff would cover it.
 
-- **WXPN has failed since the 2026-09-28 run:** `backend.xpn.org`'s TLS certificate doesn't cover that hostname (curl rejects it too, 2026-10-09), so both stacks fail the same way. A site-side problem; if it persists, find the API's new host.
+- **WXPN moved (fixed 2026-10-18):** `backend.xpn.org` stopped serving after the 2026-09-28 run (its TLS cert no longer covers the host and the origin answers "Unknown site"), so both stacks failed the same way. Both now read the Tribe Events API at `xpn.org/wp-json/tribe/events/v1/events`, which filters by date server-side (`per_page` caps at 50). The parser's input shape changed with it, so the old `wp/v2/event` fixture and its `acf.*` field handling are gone.
 
 - `spotify_lookup`'s follower-count tie-break (#71) is inert: live artist search results carry no `followers`, so name clashes still follow Spotify's drifting order.

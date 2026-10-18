@@ -378,8 +378,8 @@ describe("do215", () => {
 });
 
 describe("wxpn", () => {
-  const start = "2026-08-03";
-  const end = "2026-08-09";
+  const start = "2026-10-19";
+  const end = "2026-10-25";
   const fixture = (): Event[] => wxpn(read("wxpn.json"), start, end);
 
   it("filters to the target week", () => {
@@ -388,20 +388,30 @@ describe("wxpn", () => {
     expect(titles(events).has("Samantha Fish")).toBe(false);
     expect(titles(events).has("Malformed Entry, No Date")).toBe(false);
   });
-  it("unescapes HTML entities in the title", () => {
-    expect(find(fixture(), (e) => e.title.includes("Devin Tuel")).title).toBe("Devin Tuel & Stephen Harms / JR Everhart / Joey Sweeney");
+  it("unescapes HTML entities", () => {
+    expect(find(fixture(), (e) => e.title.includes("Tom")).title).toBe("Tom & Jerry / The Cats");
+    expect(find(fixture(), (e) => e.title.includes("Sweet Gloom")).venue).toBe("Ortlieb\u2019s");
   });
-  it("leaves time blank, not a fake midnight", () => {
-    expect(find(fixture(), (e) => e.title.includes("PINKNOISE"))).toMatchObject({ time: "", date: "2026-08-03" });
+  it("leaves time blank for all-day events, not a fake midnight", () => {
+    expect(find(fixture(), (e) => e.title.includes("Mike D"))).toMatchObject({ time: "", date: "2026-10-19" });
   });
-  it("skips entries with no acf.date", () => {
+  it("carries the start time of timed events", () => {
+    expect(find(fixture(), (e) => e.title.includes("SAM AND LOUISE")).time).toBe("12:00 PM");
+    expect(find(fixture(), (e) => e.title === "The Maks").time).toBe("8:00 AM");
+  });
+  it("leaves venue blank when the event has none", () => {
+    expect(find(fixture(), (e) => e.title.includes("Tom")).venue).toBe("");
+  });
+  it("skips entries with no start_date", () => {
     expect(fixture().every((e) => e.title !== "Malformed Entry, No Date")).toBe(true);
   });
-  it("falls back to external_link when the wp link is missing", () => {
-    expect(find(fixture(), (e) => e.title.includes("No wp link")).url).toBe("https://tickets.example.com/no-wp-link");
+  it("falls back to the unescaped website when the xpn.org url is missing", () => {
+    expect(find(fixture(), (e) => e.title.includes("Tom"))).toMatchObject({ url: "https://tickets.example.com/e?a=1&b=2", cost: "$20" });
   });
-  it("carries external_artist as the description", () => {
-    expect(find(fixture(), (e) => e.title.includes("Isley Brothers")).description).toBe("The Isley Brothers / Stephanie Mills");
+  it("carries categories, minus the noise one, as the description", () => {
+    expect(find(fixture(), (e) => e.title.includes("Mike D")).description).toBe("WXPN Welcomes");
+    expect(find(fixture(), (e) => e.title.includes("SAM AND LOUISE")).description).toBe("Free At Noon, WXPN Welcomes");
+    expect(find(fixture(), (e) => e.title.includes("Sweet Gloom")).description).toBe("");
   });
   it("throws when the response is not a list", () => {
     expect(() => wxpn(JSON.stringify({ error: "not found" }), start, end)).toThrow(ParseError);
@@ -718,10 +728,10 @@ describe("fixed Python bugs", () => {
     expect(warn).toHaveBeenCalledOnce();
   });
 
-  it("wxpn: a non-object acf skips that post, not the source", () => {
+  it("wxpn: a non-string title skips that event, not the source", () => {
     const raw = JSON.stringify([
-      { title: { rendered: "Bad" }, acf: "nope" },
-      { title: { rendered: "Good" }, acf: { date: "2026-07-22 00:00:00", price: false } },
+      { title: { rendered: "Bad" }, start_date: "2026-07-22 00:00:00" },
+      { title: "Good", start_date: "2026-07-22 00:00:00", all_day: true, cost: false },
     ]);
     expect(wxpn(raw, WEEK_START, WEEK_END)).toMatchObject([{ title: "Good", cost: "" }]);
     expect(warn).toHaveBeenCalledOnce();

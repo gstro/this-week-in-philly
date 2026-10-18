@@ -135,34 +135,33 @@ describe("do215", () => {
 });
 
 describe("wxpn", () => {
-  const page = (n: number): string => `https://backend.xpn.org/wp-json/wp/v2/event?per_page=100&page=${String(n)}`;
+  const page = (n: number): string =>
+    `https://xpn.org/wp-json/tribe/events/v1/events?per_page=50&page=${String(n)}&start_date=2026-10-19&end_date=2026-10-25`;
+  const body = (totalPages: unknown, events: unknown[] = []): { events: unknown[]; total_pages: unknown } => ({ events, total_pages: totalPages });
 
-  it("pages until X-WP-TotalPages", async () => {
-    const requested = serve({
-      [page(1)]: { body: [], headers: { "X-WP-TotalPages": "2" } },
-      [page(2)]: { body: [], headers: { "X-WP-TotalPages": "2" } },
-    });
-    expect(await collectWxpn("2026-10-12", "2026-10-18")).toEqual({ events: [], failed: [] });
+  it("pages until total_pages", async () => {
+    const requested = serve({ [page(1)]: body(2), [page(2)]: body(2) });
+    expect(await collectWxpn("2026-10-19", "2026-10-25")).toEqual({ events: [], failed: [] });
     expect(requested).toEqual([page(1), page(2)]);
   });
 
   it(`stops at ${String(MAX_PAGES_WXPN)} pages`, async () => {
     const routes: Record<string, Canned> = {};
-    for (let n = 1; n <= 8; n++) routes[page(n)] = { body: [], headers: { "X-WP-TotalPages": "99" } };
+    for (let n = 1; n <= 8; n++) routes[page(n)] = body(99);
     expect(serve(routes)).toBeDefined();
-    await collectWxpn("2026-10-12", "2026-10-18");
+    await collectWxpn("2026-10-19", "2026-10-25");
     expect(vi.mocked(get)).toHaveBeenCalledTimes(MAX_PAGES_WXPN);
   });
 
   it("a garbage page count means no further pages, not a crash", async () => {
-    const requested = serve({ [page(1)]: { body: [], headers: { "X-WP-TotalPages": "lots" } } });
-    await collectWxpn("2026-10-12", "2026-10-18");
+    const requested = serve({ [page(1)]: body("lots") });
+    await collectWxpn("2026-10-19", "2026-10-25");
     expect(requested).toEqual([page(1)]);
   });
 
-  it("a non-array page counts as a failed request", async () => {
-    serve({ [page(1)]: { code: "rest_error" } });
-    await expect(collectWxpn("2026-10-12", "2026-10-18")).rejects.toThrow(/every request failed .*expected a JSON array, got object/);
+  it("a page without an events array counts as a failed request", async () => {
+    serve({ [page(1)]: { code: "rest_no_route" } });
+    await expect(collectWxpn("2026-10-19", "2026-10-25")).rejects.toThrow(/every request failed .*expected a JSON object with an 'events' array/);
   });
 });
 

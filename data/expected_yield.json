@@ -32,7 +32,6 @@
     "meetup-dc215": { "min_expected": 0, "note": "Same reasoning as meetup-code-coffee." },
     "meetup-philadelphia-horror-meetup-group": { "min_expected": 0, "note": "Same reasoning as meetup-code-coffee. Renamed 2026-08-01 from meetup-horror to match what the Collection Routine actually writes -- SKILL.md documents the output filename as meetup-horror.json (line 59), but the real 2026-08-03 run wrote meetup-philadelphia-horror-meetup-group.json (the Meetup group's URL slug) instead. Content and source field are correct, only the filename deviates. Accepted as the de facto convention rather than fixed at the source, since the data itself was never wrong." },
     "meetup-owasp": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
-    "meetup-philly-film-club": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "meetup-philly-hardware": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "meetup-tech-in-motion": { "min_expected": 0, "note": "Confirmed genuinely empty every observed run." },
     "philadelphia-film-society": {
@@ -56,8 +55,8 @@
       "note": "Deterministic parser. Historical legitimate range 2-7 (excludes the 2026-07-27 fabricated 0); floor set at the low end."
     },
     "r5-productions": {
-      "min_expected": 1,
-      "note": "Deterministic parser. Historical range was 7/week across all runs prior to 2026-08-03 -- floor of 5 was calibrated against that alone. The real 2026-08-03 run confirmed a genuine 2-event week (verified directly: 2 well-formed events, real venue/price/URL, not an extraction failure) and correctly tripped check_yield.py's floor; lowered to 2 at the time. The scheduled 2026-08-30 run for the week of 2026-08-31 wrote 1 and tripped that floor in turn -- verified directly against a live fetch of the events page: 1 real, well-formed event (Successor Tour, Spike Hellis @ Ruba Club, 2026-09-05), not an extraction failure. Lowered again to 1 for the same reason as before: a confirmed-legitimate quiet week is not a recurring false positive to chase."
+      "min_expected": 0,
+      "note": "Deterministic parser. Historical range was 7/week across all runs prior to 2026-08-03 -- floor of 5 was calibrated against that alone. The real 2026-08-03 run confirmed a genuine 2-event week (verified directly: 2 well-formed events, real venue/price/URL, not an extraction failure) and correctly tripped check_yield.py's floor; lowered to 2 at the time. The scheduled 2026-08-30 run for the week of 2026-08-31 wrote 1 and tripped that floor in turn -- verified directly against a live fetch of the events page: 1 real, well-formed event (Successor Tour, Spike Hellis @ Ruba Club, 2026-09-05), not an extraction failure. Lowered again to 1 for the same reason as before: a confirmed-legitimate quiet week is not a recurring false positive to chase. The scheduled 2026-10-18 run for the week of 2026-10-19 wrote 0 and tripped the floor of 1 -- verified directly against a live fetch: the page's markup was intact (51 event blocks) and its earliest listed date was 2026-10-27, so the week genuinely has no R5 shows. Lowered to 0 (the meetup-* precedent): the parser's own structural validation (it raises if the markup blocks are missing) already covers a real failure, and this source goes fully quiet often enough that a floor only produces false positives."
     },
     "the-rotunda": {
       "min_expected": 1,
@@ -69,7 +68,7 @@
     },
     "wxpn": {
       "min_expected": 1,
-      "note": "v1 marked this 'partial' at 0 events. A deterministic parser now backs this source (scripts/event_parsers/wxpn.py + scripts/collect_source.py, backend.xpn.org's own WordPress REST API) -- confirmed live 2026-07-29 against the real week of 2026-08-03: 46 events in well under a second. Floor raised from 0 to 15, comfortably below that real number but high enough to catch a real regression, now that the source is stable."
+      "note": "Reads the Tribe Events API on xpn.org (scripts/event_parsers/wxpn.py + scripts/collect_source.py). Replaced backend.xpn.org's wp/v2/event endpoint, whose host stopped serving (TLS cert no longer covers it, origin answers 'Unknown site'; first failed run 2026-09-28). Confirmed live 2026-10-18 against the week of 2026-10-19: 38 events. A failed fetch raises and lands in the manifest as a failure rather than a short count, so this floor only catches a successful-but-empty response."
     }
   }
 }

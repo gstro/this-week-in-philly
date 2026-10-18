@@ -1,98 +1,138 @@
 [
   {
-    "id": 504384,
-    "title": {
-      "rendered": "PINKNOISE / Deadlands"
+    "title": "Mike D 5D / Thank You",
+    "url": "https://xpn.org/event/mike-d-5d-thank-you/",
+    "website": "https://www.utphilly.com/events/detail/?event_id=1527324",
+    "start_date": "2026-10-19 00:00:00",
+    "all_day": true,
+    "cost": "",
+    "venue": {
+      "venue": "Union Transfer"
     },
-    "link": "https://xpn.org/event/pinknoise-deadlands/",
-    "acf": {
-      "date": "2026-08-03 00:00:00",
-      "venue": "MilkBoy",
-      "price": null,
-      "external_link": "https://www.tixr.com/groups/milkboy/events/pinknoise-194612",
-      "external_artist": "PINKNOISE / Deadlands"
-    }
+    "categories": [
+      {
+        "name": "Philadelphia Area",
+        "slug": "philadelphia-area"
+      },
+      {
+        "name": "WXPN Welcomes",
+        "slug": "xpn-welcomes"
+      }
+    ]
   },
   {
-    "id": 504488,
-    "title": {
-      "rendered": "Rolling Quartz"
+    "title": "Sweet Gloom / Rat Jester / Milkspiller",
+    "url": "https://xpn.org/event/sweet-gloom-rat-jester-milkspiller/",
+    "website": "https://dice.fm/partner/tickets/event/k676b8-sweet-gloom-rat-jester-and-milkspiller-20th-oct-ortliebs-philadelphia-tickets?dice_id=10595567&amp;dice_channel=web&amp;dice_tags=organic&amp;dice_campaign=DICE&amp;dice_feature=mio_marketing&amp;_branch_match_id=1427047065559758097&amp;utm_source=web&amp;utm_campaign=DICE&amp;utm_medium=mio_marketing&amp;_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1fcxTEm1MDFPTUtMSrGvK0pNSy0qysxLj08qyi8vTi2yDU5MSyzKBADG%2B2W9OwAAAA%3D%3D",
+    "start_date": "2026-10-20 00:00:00",
+    "all_day": true,
+    "cost": "",
+    "venue": {
+      "venue": "Ortlieb&#8217;s"
     },
-    "link": "https://xpn.org/event/rolling-quartz/",
-    "acf": {
-      "date": "2026-08-05 00:00:00",
-      "venue": "PhilaMOCA",
-      "price": null,
-      "external_link": "https://www.leopresents.com/tm-event/rolling-quartz-my-turn-2026-tour-in-philadelphia/",
-      "external_artist": "Rolling Quartz"
-    }
+    "categories": [
+      {
+        "name": "Philadelphia Area",
+        "slug": "philadelphia-area"
+      }
+    ]
   },
   {
-    "id": 491212,
-    "title": {
-      "rendered": "Devin Tuel &amp; Stephen Harms / JR Everhart / Joey Sweeney"
+    "title": "WXPN Free At Noon: SAM AND LOUISE SULLIVAN",
+    "url": "https://xpn.org/event/wxpn-free-at-noon-sam-and-louise-sullivan/",
+    "website": "https://www.eventbrite.com/e/wxpn-free-at-noon-with-sam-louise-sullivan-tickets-2001389808794?aff=oddtdtcreator",
+    "start_date": "2026-10-23 12:00:00",
+    "all_day": false,
+    "cost": "",
+    "venue": {
+      "venue": "The Music Hall at World Stage (formerly World Cafe Live)"
     },
-    "link": "https://xpn.org/event/devin-tuel-stephen-harms-jr-everhart-joey-sweeney/",
-    "acf": {
-      "date": "2026-08-06 00:00:00",
-      "venue": "Johnny Brenda's",
-      "price": null,
-      "external_link": "https://johnnybrendas.com/event/devin-tuel-stephen-harms/johnny-brendas/philadelphia-pennsylvania/",
-      "external_artist": "Devin Tuel & Stephen Harms / JR Everhart / Joey Sweeney"
-    }
+    "categories": [
+      {
+        "name": "Free At Noon",
+        "slug": "free-at-noon"
+      },
+      {
+        "name": "Philadelphia Area",
+        "slug": "philadelphia-area"
+      },
+      {
+        "name": "WXPN Welcomes",
+        "slug": "xpn-welcomes"
+      }
+    ]
   },
   {
-    "id": 504801,
-    "title": {
-      "rendered": "The Isley Brothers / Stephanie Mills"
+    "title": "The Maks",
+    "url": "https://xpn.org/event/the-maks/",
+    "website": "https://lititzshirtfactory.com/product/the-maks-phillys-dynamic-trio-with-special-guest-kenny-arbuckle/",
+    "start_date": "2026-10-23 08:00:00",
+    "all_day": false,
+    "cost": "",
+    "venue": {
+      "venue": "Lititz Shirt Factory"
     },
-    "link": "https://xpn.org/event/the-isley-brothers-stephanie-mills/",
-    "acf": {
-      "date": "2026-08-06 00:00:00",
-      "venue": "The Dell Music Center",
-      "price": null,
-      "external_link": "https://thedellmusiccenter.com/event/3016-2/",
-      "external_artist": "The Isley Brothers / Stephanie Mills"
-    }
+    "categories": [
+      {
+        "name": "Central PA",
+        "slug": "central-pa"
+      }
+    ]
   },
   {
-    "id": 504901,
-    "title": {
-      "rendered": "Samantha Fish"
-    },
-    "link": "https://xpn.org/event/samantha-fish/",
-    "acf": {
-      "date": "2026-11-20 00:00:00",
-      "venue": "Keswick Theatre",
-      "price": null,
-      "external_link": "https://www.axs.com/events/1537672/samantha-fish-tickets?skin=keswick&src=AEGLIVE_WROAKDTT030115VEN001",
-      "external_artist": "Samantha Fish"
-    }
+    "title": "Tom &amp; Jerry / The Cats",
+    "url": "",
+    "website": "https://tickets.example.com/e?a=1&amp;b=2",
+    "start_date": "2026-10-19 00:00:00",
+    "all_day": true,
+    "cost": "$20",
+    "venue": [],
+    "categories": [
+      {
+        "name": "Philadelphia Area",
+        "slug": "philadelphia-area"
+      }
+    ]
   },
   {
-    "id": 999001,
-    "title": {
-      "rendered": "Malformed Entry, No Date"
+    "title": "Samantha Fish",
+    "url": "https://xpn.org/event/mike-d-5d-thank-you/",
+    "website": "https://www.utphilly.com/events/detail/?event_id=1527324",
+    "start_date": "2026-11-02 00:00:00",
+    "all_day": true,
+    "cost": "",
+    "venue": {
+      "venue": "Union Transfer"
     },
-    "link": "https://xpn.org/event/malformed-entry/",
-    "acf": {
-      "venue": "Unknown Venue",
-      "price": null,
-      "external_link": null,
-      "external_artist": null
-    }
+    "categories": [
+      {
+        "name": "Philadelphia Area",
+        "slug": "philadelphia-area"
+      },
+      {
+        "name": "WXPN Welcomes",
+        "slug": "xpn-welcomes"
+      }
+    ]
   },
   {
-    "id": 999002,
-    "title": {
-      "rendered": "No wp link, external_link only"
+    "title": "Malformed Entry, No Date",
+    "url": "https://xpn.org/event/mike-d-5d-thank-you/",
+    "website": "https://www.utphilly.com/events/detail/?event_id=1527324",
+    "all_day": true,
+    "cost": "",
+    "venue": {
+      "venue": "Union Transfer"
     },
-    "acf": {
-      "date": "2026-08-04 00:00:00",
-      "venue": "Some Venue",
-      "price": null,
-      "external_link": "https://tickets.example.com/no-wp-link",
-      "external_artist": null
-    }
+    "categories": [
+      {
+        "name": "Philadelphia Area",
+        "slug": "philadelphia-area"
+      },
+      {
+        "name": "WXPN Welcomes",
+        "slug": "xpn-welcomes"
+      }
+    ]
   }
 ]
