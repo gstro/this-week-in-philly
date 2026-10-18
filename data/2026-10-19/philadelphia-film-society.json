@@ -1,0 +1,33 @@
+{
+  "source": "Philadelphia Film Society",
+  "collected_at": "2026-10-18T18:27:29.435775+00:00",
+  "events": [
+    {
+      "title": "Tenzing (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-10-21",
+      "time": "12:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated PG. Runtime: 2 hr 5 min."
+    },
+    {
+      "title": "Never After Dark (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-10-21",
+      "time": "3:30 PM, 8:20 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 45 min."
+    },
+    {
+      "title": "The History of Concrete (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-10-21",
+      "time": "5:55 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 42 min."
+    }
+  ]
+}
