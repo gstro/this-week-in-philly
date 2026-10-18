@@ -80,7 +80,6 @@ MEETUP_GROUPS: list[tuple[str, str, str]] = [
     ("meetup-dc215", "Meetup: DC 215", "dc_215"),
     ("meetup-owasp", "Meetup: OWASP", "owasp-philadelphia-chapter"),
     ("meetup-philly-hardware", "Meetup: Philly Hardware", "philly-hardware"),
-    ("meetup-philly-film-club", "Meetup: Philly Film Club", "philly-film-club"),
 ]
 
 # Sources whose fetching is a loop owned by collect_source.py.

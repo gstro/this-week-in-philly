@@ -565,54 +565,65 @@ def test_do215_empty_events_list_is_not_an_error() -> None:
 
 
 # ---------------------------------------------------------------------------
-# wxpn -- WXPN's own WordPress REST API (wxpn.json fixture trimmed from a
-# real 2026-07-29 fetch of backend.xpn.org/wp-json/wp/v2/event)
+# wxpn -- WXPN's Tribe Events API on xpn.org (wxpn.json fixture trimmed from a
+# real 2026-10-18 fetch of xpn.org/wp-json/tribe/events/v1/events)
 # ---------------------------------------------------------------------------
 
-WXPN_WEEK_START = datetime.date(2026, 8, 3)
-WXPN_WEEK_END = datetime.date(2026, 8, 9)
+WXPN_WEEK_START = datetime.date(2026, 10, 19)
+WXPN_WEEK_END = datetime.date(2026, 10, 25)
 
 
 def test_wxpn_filters_to_target_week() -> None:
     events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
-    # Fixture: 4 in-window, 1 out-of-window (Samantha Fish, Nov), 1 malformed
-    # (no acf.date), 1 in-window with no wp `link` field.
+    # Fixture: 5 in-window, 1 out-of-window (Samantha Fish, Nov), 1 malformed
+    # (no start_date).
     assert len(events) == 5
     assert "Samantha Fish" not in {e["title"] for e in events}
     assert "Malformed Entry, No Date" not in {e["title"] for e in events}
 
 
-def test_wxpn_unescapes_html_entities_in_title() -> None:
+def test_wxpn_unescapes_html_entities() -> None:
     events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
-    devin_tuel = next(e for e in events if "Devin Tuel" in e["title"])
-    assert devin_tuel["title"] == "Devin Tuel & Stephen Harms / JR Everhart / Joey Sweeney"
-    assert "&amp;" not in devin_tuel["title"]
+    assert next(e for e in events if "Tom" in e["title"])["title"] == "Tom & Jerry / The Cats"
+    assert next(e for e in events if "Sweet Gloom" in e["title"])["venue"] == "Ortlieb\u2019s"
 
 
-def test_wxpn_time_is_blank_not_a_fake_midnight() -> None:
-    # acf.date's time portion is always 00:00:00 in the real API (not a real
-    # showtime) -- must not be surfaced as if it were one.
+def test_wxpn_all_day_events_have_blank_time_not_a_fake_midnight() -> None:
     events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
-    pinknoise = next(e for e in events if "PINKNOISE" in e["title"])
-    assert pinknoise["time"] == ""
-    assert pinknoise["date"] == "2026-08-03"
+    mike_d = next(e for e in events if "Mike D" in e["title"])
+    assert mike_d["time"] == ""
+    assert mike_d["date"] == "2026-10-19"
 
 
-def test_wxpn_skips_entries_with_no_acf_date() -> None:
+def test_wxpn_timed_events_carry_their_start_time() -> None:
+    events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
+    assert next(e for e in events if "SAM AND LOUISE" in e["title"])["time"] == "12:00 PM"
+    assert next(e for e in events if e["title"] == "The Maks")["time"] == "8:00 AM"
+
+
+def test_wxpn_venue_is_blank_when_the_event_has_none() -> None:
+    # The API sends an empty array, not an object, for an event with no venue.
+    events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
+    assert next(e for e in events if "Tom" in e["title"])["venue"] == ""
+
+
+def test_wxpn_skips_entries_with_no_start_date() -> None:
     events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
     assert all(e["title"] != "Malformed Entry, No Date" for e in events)
 
 
-def test_wxpn_url_falls_back_to_external_link_when_wp_link_missing() -> None:
+def test_wxpn_url_falls_back_to_unescaped_website_when_xpn_url_missing() -> None:
     events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
-    no_wp_link = next(e for e in events if "No wp link" in e["title"])
-    assert no_wp_link["url"] == "https://tickets.example.com/no-wp-link"
+    tom = next(e for e in events if "Tom" in e["title"])
+    assert tom["url"] == "https://tickets.example.com/e?a=1&b=2"
+    assert tom["cost"] == "$20"
 
 
-def test_wxpn_description_carries_external_artist() -> None:
+def test_wxpn_description_carries_categories_minus_the_noise_one() -> None:
     events = wxpn_parser.parse(_read("wxpn.json"), WXPN_WEEK_START, WXPN_WEEK_END)
-    isley = next(e for e in events if "Isley Brothers" in e["title"])
-    assert isley["description"] == "The Isley Brothers / Stephanie Mills"
+    assert next(e for e in events if "Mike D" in e["title"])["description"] == "WXPN Welcomes"
+    assert next(e for e in events if "SAM AND LOUISE" in e["title"])["description"] == "Free At Noon, WXPN Welcomes"
+    assert next(e for e in events if "Sweet Gloom" in e["title"])["description"] == ""
 
 
 def test_wxpn_raises_when_response_is_not_a_list() -> None:

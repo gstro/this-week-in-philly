@@ -240,5 +240,5 @@ def test_real_expected_yield_file_is_well_formed_and_exempts_known_quiet_sources
         assert isinstance(config.get("min_expected"), int), source
         assert config["min_expected"] >= 0, source
 
-    for quiet_source in ["meetup-owasp", "meetup-ai-philly", "meetup-philly-film-club", "philly-shows"]:
+    for quiet_source in ["meetup-owasp", "meetup-ai-philly", "philly-shows", "r5-productions"]:
         assert expected["sources"][quiet_source]["min_expected"] == 0

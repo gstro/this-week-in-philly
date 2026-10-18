@@ -131,9 +131,12 @@ describe("collectWeek", () => {
 });
 
 describe("SOURCES", () => {
-  it("covers exactly the stems the Python's last production run wrote", () => {
+  it("covers exactly the stems the Python's last production run wrote, bar retired sources", () => {
     const manifest = readJson(join(REPO_ROOT, "data", "2026-10-05", "_manifest.json")) as { sources: Record<string, unknown> };
-    expect(SOURCES.map((source) => source.stem).sort()).toEqual(Object.keys(manifest.sources).sort());
+    // The Meetup group was deleted (2026-10-18) after that manifest was written.
+    const retired = new Set(["meetup-philly-film-club"]);
+    const written = Object.keys(manifest.sources).filter((stem) => !retired.has(stem));
+    expect(SOURCES.map((source) => source.stem).sort()).toEqual(written.sort());
   });
 
   it("has unique stems", () => {

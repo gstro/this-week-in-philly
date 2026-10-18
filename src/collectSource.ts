@@ -61,9 +61,9 @@ export type Collector = (weekStart: string, weekEnd: string) => Promise<Collecte
 // its own silent-cost risk (docs/COLLECTION_PROXY_ISSUE.md: Songkick).
 export const MAX_PAGES_PER_DAY = 6;
 
-// WXPN's REST API sorts by publish date, not event date, so every page must
-// be fetched. Observed live (2026-07-29): 495 records across 5 pages of 100
-// (the API's per_page cap). Capped one page above that.
+// WXPN's Tribe Events API filters by date server-side, so a week is ~40 events
+// (one page of 50, its per_page cap). The cap only guards against a
+// `total_pages` that keeps growing.
 export const MAX_PAGES_WXPN = 6;
 
 // A venue calendar's week is a few events (one page of up to 250). The cap
@@ -125,24 +125,23 @@ export async function collectDo215(weekStart: string, weekEnd: string): Promise<
   return { events: PARSERS["do215"]!(JSON.stringify({ events }), weekStart, weekEnd), failed };
 }
 
-// --- WXPN: one paginated WP REST endpoint with no date filter ---
+// --- WXPN: one date-filtered Tribe Events endpoint, paginated ---
 
-const WXPN_API_URL = "https://backend.xpn.org/wp-json/wp/v2/event";
+const WXPN_API_URL = "https://xpn.org/wp-json/tribe/events/v1/events";
 
 export async function collectWxpn(weekStart: string, weekEnd: string): Promise<Collected> {
-  // The API has no server-side date filter (see eventParsers/wxpn.ts), so
-  // every page is fetched whatever the window; the parser does the filtering.
   const records: unknown[] = [];
   const failed: string[] = [];
   let totalPages = 1;
   for (let page = 1; page <= Math.min(totalPages, MAX_PAGES_WXPN); page++) {
-    const url = `${WXPN_API_URL}?per_page=100&page=${String(page)}`;
+    const url = `${WXPN_API_URL}?per_page=50&page=${String(page)}&start_date=${weekStart}&end_date=${weekEnd}`;
     try {
-      const { payload, headers } = await getJson(url);
-      if (!Array.isArray(payload)) throw new TypeError(`expected a JSON array, got ${payload === null ? "null" : typeof payload}`);
-      records.push(...(payload as unknown[]));
-      const header = Number(headers.get("x-wp-totalpages"));
-      totalPages = Number.isInteger(header) && header > 0 ? header : page;
+      const { payload } = await getJson(url);
+      const events = (payload as { events?: unknown } | null)?.events;
+      if (!Array.isArray(events)) throw new TypeError("expected a JSON object with an 'events' array");
+      records.push(...(events as unknown[]));
+      const count = Number((payload as { total_pages?: unknown }).total_pages);
+      totalPages = Number.isInteger(count) && count > 0 ? count : page;
     } catch (err) {
       failed.push(failure(url, err));
     }

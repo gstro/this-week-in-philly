@@ -118,7 +118,6 @@ const MEETUP_GROUPS = [
   ["meetup-dc215", "Meetup: DC 215", "dc_215"],
   ["meetup-owasp", "Meetup: OWASP", "owasp-philadelphia-chapter"],
   ["meetup-philly-hardware", "Meetup: Philly Hardware", "philly-hardware"],
-  ["meetup-philly-film-club", "Meetup: Philly Film Club", "philly-film-club"],
 ] as const;
 
 /** Every source, in run order. */
