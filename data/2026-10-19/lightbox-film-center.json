@@ -1,0 +1,24 @@
+{
+  "source": "Lightbox Film Center",
+  "collected_at": "2026-10-18T18:27:12.125888+00:00",
+  "events": [
+    {
+      "title": "Screamplay + Manos: The Hands of Fate (Double Feature)",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-10-21",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/screamplay-manos-the-hands-of-fate-double-feature",
+      "description": "New Restoration"
+    },
+    {
+      "title": "Magic Thinking",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-10-25",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/magic-thinking",
+      "description": "Philadelphia Premiere"
+    }
+  ]
+}

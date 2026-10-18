@@ -1,0 +1,69 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-10-18T18:26:48.672234+00:00",
+  "events": [
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-19",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk."
+    },
+    {
+      "title": "Bela\u2019s Birthday Bash",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-20",
+      "time": "7:00, 7:30",
+      "cost": "$15",
+      "url": "https://www.etix.com/ticket/p/38118249/",
+      "description": "Featuring the Bela Lugosi classics WHITE ZOMBIE (1932) and INVISIBLE GHOST (1941) on 16mm!"
+    },
+    {
+      "title": "ROZZ WILLIAMS: ROMEO\u2019S DISTRESS",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-21",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/98856000/",
+      "description": "New documentary on the founder of Christian Death!"
+    },
+    {
+      "title": "Sandy Loaf\u2019s SMOKERS LOUNGE + short films",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-22",
+      "time": "7:00, 7:30",
+      "cost": "$15\u2013$20",
+      "url": "https://www.etix.com/ticket/p/79132468/",
+      "description": "Philly Premiere of SMOKER\u2019S LOUNGE plus short films, discounted admission with a homemade mask, cash prize for best mask!"
+    },
+    {
+      "title": "En Plastic & Nadafinger as Plasticfinger",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-23",
+      "time": "7:30, 8:00",
+      "cost": "$15\u2013$20",
+      "url": "https://www.etix.com/ticket/p/80813341/",
+      "description": ""
+    },
+    {
+      "title": "TROLL 2 w/ George Hardy in attendance!",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-24",
+      "time": "7:00, 7:30",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/59033608",
+      "description": "Fan favorite George Hardy in attendance for autographs, photos, and a post-screening Q&A!"
+    },
+    {
+      "title": "THESE PEOPLE w/ Cory McAbee in attendance",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-10-25",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/76266260/",
+      "description": "THE AMERICAN ASTRONAUT filmmaker in attendance!"
+    }
+  ]
+}
