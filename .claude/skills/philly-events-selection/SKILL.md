@@ -301,9 +301,16 @@ nothing you annotate disappears silently.
   address is more useful as an independent check on the source's than as an echo of it.
 - `honorable_mentions`: id only — 2–3 max per day, omit array if none.
 - `why`: 2–3 sentences for Top 3 picks only — more substantial than `note`.
-- `note`: 1–2 sentences, on `annotations` entries — carry from the candidate's `description` if useful,
-  otherwise write fresh. Omit the field entirely if there's genuinely nothing useful to add beyond
-  title/venue/time (`html_render.py` already treats a missing `note` as fine).
+- `note`: 1–2 sentences, on `annotations` entries. The row already shows the title, venue, time and
+  cost, so a note must add something those don't. Build it from the candidate's `description`: pull
+  out the concrete facts it holds (lineup or band members, genre, what a workshop teaches, runtime or
+  rating, a notable guest, whether it's a one-off or recurring) and use **only facts that appear in that
+  description** — don't fill gaps from memory about the act or venue. If the `description` is empty or is
+  just boilerplate (doors/age policy, a category tag, an "About the venue" paragraph), **omit the field**;
+  a blank is correct, a guess is not. Never write "<Title> at <Venue>." — `merge_selections.py` drops any
+  note that only restates the title and venue, so it would be wasted output.
+  - Bad: `"Matt Kahn Quartet at Chris' Jazz Cafe."` (omit it, or use the description:)
+  - Good: `"Matt Kahn on guitar with John Swana on EVI; sets at 7:30 and 9:00."`
 - `time`: **omit this field on a top3 pick** unless the candidate's own `time` needs cleanup — the merge
   step copies the candidate's `time` through verbatim by default. Only include it as an override when the
   candidate's `time` is a list, a doors/show pair, or a range rather than **a single, cleanly parseable

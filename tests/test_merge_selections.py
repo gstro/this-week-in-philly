@@ -10,6 +10,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 from merge_selections import (
@@ -17,6 +19,7 @@ from merge_selections import (
     build_events,
     build_honorable_mentions,
     build_top3,
+    is_redundant_note,
     merge,
 )
 
@@ -129,6 +132,33 @@ def test_merge_top3_pick_appears_in_events_with_its_annotated_note() -> None:
     assert event["title"] == "Saetia"
     assert event["note"] == "Also a benefit show."
     assert "is_music" not in event  # zero consumers read is_music off events[]
+
+
+def test_merge_drops_a_note_that_only_restates_title_and_venue() -> None:
+    candidates = _candidates_doc(
+        [_candidate("c0000", "Matt Kahn Quartet", "Chris' Jazz Cafe, 1421 Sansom St, Philadelphia, PA", "2026-08-03")]
+    )
+    annotations = _annotations_doc(
+        [_day("2026-08-03", top3=[_top3_pick("c0000")], annotations=[_annotation("c0000", note="Matt Kahn Quartet at Chris' Jazz Cafe.")])]
+    )
+    event = merge(candidates, annotations)["days"][0]["events"][0]
+    assert "note" not in event
+
+
+@pytest.mark.parametrize(
+    ("note", "title", "venue", "redundant"),
+    [
+        ("Tenzing (2026) screens at PFS Bourse Theater.", "Tenzing (2026)", "PFS Bourse Theater", True),
+        ("The Addams Family: The Musical, ongoing run at Walnut Street Theatre.", "THE ADDAMS FAMILY: The Musical", "Walnut Street Theatre", True),
+        ("Cory McAbee's THESE PEOPLE.", "THESE PEOPLE w/ Cory McAbee", "Anywhere", True),
+        ("Ratas En Zelo at Th\u00e9\u00e2tre.", "Ratas en Zelo", "Theatre", True),
+        ("Weekly farmers market at Clark Park.", "Farmers Market", "Clark Park", False),
+        ("Bruce Cockburn, Canadian folk songwriter, at Keswick Theatre.", "Bruce Cockburn", "Keswick Theatre", False),
+        ("Rare reunion show, only East Coast date.", "Saetia", "First Unitarian", False),
+    ],
+)
+def test_is_redundant_note(note: str, title: str, venue: str, redundant: bool) -> None:
+    assert is_redundant_note(note, title, venue) is redundant
 
 
 # --- id resolution failures ---
