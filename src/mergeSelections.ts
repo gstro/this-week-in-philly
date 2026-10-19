@@ -101,6 +101,28 @@ import { writeJson } from "./lib/json.js";
 const TIME_RE = /^\d{1,2}:\d{2} [AP]M$/;
 
 /**
+ * A `note` that only restates the row's own title and venue ("Matt Kahn
+ * Quartet at Chris' Jazz Cafe.") renders as repeated text under the event, so
+ * the merge drops it. Measured over every committed week (2026-10-18): 56 of
+ * 1547 notes, all of them pure restatement. The test is deliberately strict --
+ * a note with even one word beyond the title, venue and these glue words is
+ * kept. Mirrors is_redundant_note in scripts/merge_selections.py.
+ */
+const NOTE_GLUE = new Set(
+  "a an the at of in on and or to for with by from is are as this that its it screens screening shows show ongoing recurring run".split(" "),
+);
+
+function noteTokens(text: string): string[] {
+  const folded = text.normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase();
+  return folded.replace(/['\u2019]s\b/g, "").match(/[a-z0-9]+/g) ?? [];
+}
+
+export function isRedundantNote(note: string, title: string, venue: string): boolean {
+  const known = new Set([...noteTokens(title), ...noteTokens(venue.split(",")[0] ?? ""), ...NOTE_GLUE]);
+  return noteTokens(note).every((token) => known.has(token));
+}
+
+/**
  * The sort's time parser is deliberately NOT TIME_RE -- it mirrors
  * Python's `strptime("%I:%M %p")`, which is both looser and stricter in
  * different places, and the difference is load-bearing because events[]
@@ -457,7 +479,7 @@ export function buildEvents(
       category: ann.category!,
       source: candidate.source ?? "",
       sold_out: ann.sold_out ?? false,
-      ...(ann.note ? { note: ann.note } : {}),
+      ...(ann.note && !isRedundantNote(ann.note, candidate.title ?? "", candidate.venue ?? "") ? { note: ann.note } : {}),
       // Recurrence, carried from the candidate so html_render.py can
       // build the "All Week / Recurring" table. groupRecurring() in
       // prepareSelectionInput has emitted these since the v2 data

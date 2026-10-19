@@ -22,6 +22,7 @@ import {
   buildEvents,
   buildHonorableMentions,
   buildTop3,
+  isRedundantNote,
   merge,
   parseTimeForSort,
 } from "./mergeSelections.js";
@@ -112,6 +113,28 @@ describe("merge: end-to-end happy path", () => {
     expect(event.title).toBe("Saetia");
     expect(event.note).toBe("Also a benefit show.");
     expect(event).not.toHaveProperty("is_music"); // zero consumers read is_music off events[]
+  });
+
+  it("drops a note that only restates title and venue", () => {
+    const candidates = candidatesDoc([candidate("c0000", "Matt Kahn Quartet", "Chris' Jazz Cafe, 1421 Sansom St, Philadelphia, PA", "2026-08-03")]);
+    const annotations = annotationsDoc([
+      day("2026-08-03", { top3: [top3Pick("c0000")], annotations: [annotation("c0000", { note: "Matt Kahn Quartet at Chris' Jazz Cafe." })] }),
+    ]);
+    expect(merge(candidates, annotations).days[0]!.events[0]!).not.toHaveProperty("note");
+  });
+});
+
+describe("isRedundantNote", () => {
+  it.each([
+    ["Tenzing (2026) screens at PFS Bourse Theater.", "Tenzing (2026)", "PFS Bourse Theater", true],
+    ["The Addams Family: The Musical, ongoing run at Walnut Street Theatre.", "THE ADDAMS FAMILY: The Musical", "Walnut Street Theatre", true],
+    ["Cory McAbee's THESE PEOPLE.", "THESE PEOPLE w/ Cory McAbee", "Anywhere", true],
+    ["Ratas En Zelo at Th\u00e9\u00e2tre.", "Ratas en Zelo", "Theatre", true],
+    ["Weekly farmers market at Clark Park.", "Farmers Market", "Clark Park", false],
+    ["Bruce Cockburn, Canadian folk songwriter, at Keswick Theatre.", "Bruce Cockburn", "Keswick Theatre", false],
+    ["Rare reunion show, only East Coast date.", "Saetia", "First Unitarian", false],
+  ])("%s", (note, title, venue, redundant) => {
+    expect(isRedundantNote(note, title, venue)).toBe(redundant);
   });
 });
 

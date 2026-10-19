@@ -84,6 +84,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from datetime import datetime
 from datetime import time as dt_time
 from pathlib import Path
@@ -97,6 +98,29 @@ import common
 # points in the pipeline (this one at merge time, that one as a
 # CI-visible post-condition on the merge's own output).
 _TIME_RE = re.compile(r"^\d{1,2}:\d{2} [AP]M$")
+
+
+# A `note` that only restates the row's own title and venue ("Matt Kahn Quartet
+# at Chris' Jazz Cafe.") renders as repeated text under the event, so the merge
+# drops it. Measured over every committed week (2026-10-18): 56 of 1547 notes,
+# all of them pure restatement. The test is deliberately strict -- a note with
+# even one word beyond the title, venue and these glue words is kept.
+_NOTE_GLUE = frozenset(
+    ["a", "an", "the", "at", "of", "in", "on", "and", "or", "to", "for", "with", "by", "from", "is", "are", "as", "this", "that", "its", "it", "screens", "screening", "shows", "show", "ongoing", "recurring", "run"]
+)
+
+
+def _note_tokens(text: str) -> list[str]:
+    folded = "".join(c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c)).lower()
+    return re.findall(r"[a-z0-9]+", re.sub(r"['\u2019]s\b", "", folded))
+
+
+def is_redundant_note(note: str, title: str, venue: str) -> bool:
+    """True if `note` says nothing beyond the event's title, venue name (the
+    part before the first comma -- the rest is the street address) and glue
+    words. Mirrored by isRedundantNote in src/mergeSelections.ts."""
+    known = set(_note_tokens(title)) | set(_note_tokens(venue.split(",")[0])) | _NOTE_GLUE
+    return all(token in known for token in _note_tokens(note))
 
 
 class MergeError(Exception):
@@ -296,7 +320,7 @@ def build_events(
             "category": ann["category"],
             "source": candidate.get("source", ""),
             "sold_out": ann.get("sold_out", False),
-            **({"note": ann["note"]} if ann.get("note") else {}),
+            **({"note": ann["note"]} if ann.get("note") and not is_redundant_note(ann["note"], candidate.get("title", ""), candidate.get("venue", "")) else {}),
             # Recurrence, carried from the candidate so html_render.py can
             # build the "All Week / Recurring" table. group_recurring() in
             # prepare_selection_input.py has emitted these since the v2 data
