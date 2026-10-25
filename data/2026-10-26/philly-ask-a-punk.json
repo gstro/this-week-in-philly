@@ -1,0 +1,76 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-10-25T12:40:13.422269+00:00",
+  "events": [
+    {
+      "title": "EXCESS BLOOD (PDX), ACID TEST, COVER BANDS",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-10-29",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/excess-blood-pdx-acid-test-cover-bands",
+      "description": "OUT OF TOWN BAND / death rock / goth / punk",
+      "venue_address": "5001 Market Street"
+    },
+    {
+      "title": "MISCHIEF NIGHT 10 YEAR CELEBRATION! THIN LIPS & SUPERWEAKS",
+      "venue": "God's Automatic Body (5522 Baltimore Ave.)",
+      "date": "2026-10-30",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/mischief-night-10-year-celebration-thin-lips-and-superweaks",
+      "description": "mischief night / punk / riffs",
+      "venue_address": "5522 Baltimore Ave."
+    },
+    {
+      "title": "GOD'S THIRD ANNUAL HALLOWEEN COVER SHOW!",
+      "venue": "God's Automatic Body (5522 Baltimore Ave.)",
+      "date": "2026-10-31",
+      "time": "7:00 AM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/gods-third-annual-halloween-cover-show",
+      "description": "HALLOWEEN / cover show / spooky",
+      "venue_address": "5522 Baltimore Ave."
+    },
+    {
+      "title": "Devil Master / Zorn / Coffin Dust / Diabolus / Satanic Magick / Early Grave",
+      "venue": "The First Unitarian Church (2125 Chestnut Street)",
+      "date": "2026-10-31",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/devil-master-zorn-coffin-dust-diabolus-satanic-magick-early-grave",
+      "description": "",
+      "venue_address": "2125 Chestnut Street"
+    },
+    {
+      "title": "Dance Macabre: After Hours Halloween Dance Party",
+      "venue": "Sanctuary (West Philly)",
+      "date": "2026-10-31",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/dance-macabre-after-hours-halloween-dance-party",
+      "description": "after party / dance / goth",
+      "venue_address": "West Philly"
+    },
+    {
+      "title": "BAD LUCK 13 RIOT HALLOWEEN EXTRAVAGANZA + MORE",
+      "venue": "Underground Arts (1200 Callowhill Street)",
+      "date": "2026-11-01",
+      "time": "4:30 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/bad-luck-13-riot-halloween-extravaganza-more",
+      "description": "Horror / Metalpunk / hardcore / hardcore punk",
+      "venue_address": "1200 Callowhill Street"
+    },
+    {
+      "title": "Halloween Hangover with Nature Boys, The Spine, Todd Killingz Gold, and Total Whine",
+      "venue": "Cousin Danny's (5001 Market Street)",
+      "date": "2026-11-01",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/halloween-hangover-with-nature-boys-the-spine-todd-killingz-gold-and-total-whine",
+      "description": "",
+      "venue_address": "5001 Market Street"
+    }
+  ]
+}

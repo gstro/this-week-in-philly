@@ -1,0 +1,24 @@
+{
+  "source": "Lightbox Film Center",
+  "collected_at": "2026-10-25T12:40:41.216984+00:00",
+  "events": [
+    {
+      "title": "Capone Cries A Lot",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-10-28",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/capone-cries-a-lot-2",
+      "description": "New Restoration"
+    },
+    {
+      "title": "Roy From Space (Roy del Espacio)",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-11-01",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/roy-from-space-roy-del-espacio",
+      "description": "New Restoration"
+    }
+  ]
+}

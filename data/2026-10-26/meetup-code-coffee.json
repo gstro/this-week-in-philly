@@ -1,0 +1,33 @@
+{
+  "source": "Meetup: Code & Coffee",
+  "collected_at": "2026-10-25T12:40:20.185941+00:00",
+  "events": [
+    {
+      "title": "OG Coffee&Code Coding!",
+      "venue": "(online)",
+      "date": "2026-10-28",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316898970/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n# \u2615 The OG Coffee&Code Meetup\n\n### A Blockspace Community \u00d7 Coffee&Code Collaboration\n\nBefore the hype. Before the buzzwords. Before \u201cAI-powered everything.\u201d\nThis is **The OG Coffee&Code**\u2014the meetup that started it all, now presented in collaboration with the **Blockspace Community**.\nNo panels. No pitches. No pressure.\nJust good people, good coffee, and focused time to build, learn, and connect.\n\n## What this meetup is\n\nAn open, welcoming space for coders, builders, designers, and curious minds.\nBring your own project, homework, startup, side quest, experiment, or idea. Work at your own pace, meet other builders, ask questions, exchange ideas, or simply enjoy being productive around like-minded people.\nExpect:\n\n* Focused building time\n* Organic conversations\n* Spontaneous debugging\n* Knowledge sharing\n* Genuine community\n\nThis meetup is beginner-friendly, expert-respected, and ego-free.\n\n## What this meetup is not\n\n\u274c A lecture\n\u274c A sales event\n\u274c A recruiting trap\n\u274c A 90-minute presentation\n\n## How it works\n\n1. Show up\n2. Grab coffee \u2615\n3. Open your laptop, notebook, or sketchpad\n4. Work at your own pace\n5. Chat when you want and focus when you need\n6. Leave having made progress\u2014or at least a new friend\n\n## Who should attend\n\n* Software engineers and data professionals\n* Students and self-learners\n* Founders and indie hackers\n* Designers, tinkerers, and technologists\n* Members of the Blockspace and Coffee&Code communities\n* Anyone who enjoys building things with other humans\n\nWhether this is your first Coffee&Code, you are part of the Blockspace Community, or you have been attending since day one, you are welcome.\nThis collaboration brings together two communities around a shared goal: creating a relaxed, supportive space where people can build, learn, and connect.\n\n**Come for the code.**\n**Stay for the community.**\n**Leave caffeinated. \u2615\ud83d\ude80**"
+    },
+    {
+      "title": "Debug & Debrief",
+      "venue": "(online)",
+      "date": "2026-10-29",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316764151/",
+      "description": "C.O.D.E - Community of Developers & Engineers\nBring a laptop and whatever you are working on. Share what you are stuck on and the room digs in together, or put your headphones on and work quietly.\n\n**Both are welcome.**\n\n**All skill levels welcome, 18 and over.**\n\nWhether you shipped software for twenty years or wrote your first line of code last week, there is a seat for you.\n\nNo talks, no pitches, no dress code. Less networking event in business attire, more late office hours in good company.\nSide projects, real work, something you are trying to learn, a job hunt, a bug you cannot crack.\n\nWhatever you bring, you will find people who want to dig into it with you."
+    },
+    {
+      "title": "Claude Code vs. Codex: Loops, Graphs, and Harnesses",
+      "venue": "(online)",
+      "date": "2026-10-31",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316937225/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n## Claude Code vs. Codex: Loops, Graphs, and Harnesses\n\nThis is a casual pair-programming meetup for developers experimenting with Claude Code, Codex, and agentic coding workflows.\nThere is no formal presentation and no fixed curriculum. Bring a laptop, a repository, a side project, or a workflow you want to test. We will work in small groups, compare approaches, debug problems, and share what is working.\n\nPossible areas to explore include:\n\n* Building iterative coding-agent loops\n* Comparing Claude Code and Codex on the same task\n* Designing graph-based agent workflows\n* Creating reusable coding harnesses\n* Managing context across large repositories\n* Running tests and validating agent-generated changes\n* Using sandboxes, permissions, and approval steps\n* Coordinating subagents or parallel tasks\n* Measuring latency, token usage, cost, and completion quality\n* Debugging failed or incomplete agent runs\n\nYou do not need to be an expert in either tool. This meetup is for people who want hands-on time to experiment, pair with other developers, and learn through building.\nBring something you are working on, or join someone else\u2019s project.\nHosted by **CODE**.\n\n**CODE**\nWebsite: [https://www.codephilly.com](https://www.codephilly.com/)\nInstagram: [https://www.instagram.com/coffeecodephilly](https://www.instagram.com/coffeecodephilly)\nDiscord: [https://discord.gg/2ad8NmvC2](https://discord.gg/2ad8NmvC2)"
+    }
+  ]
+}
