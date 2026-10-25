@@ -1,0 +1,510 @@
+{
+  "source": "WXPN",
+  "collected_at": "2026-10-25T12:40:40.203986+00:00",
+  "events": [
+    {
+      "title": "Little Barrie",
+      "venue": "Arden Gild Hall",
+      "date": "2026-10-26",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/little-barrie/",
+      "description": "WXPN Welcomes"
+    },
+    {
+      "title": "Haley Reinhart / Corinne",
+      "venue": "City Winery",
+      "date": "2026-10-26",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/haley-reinhart-corinne/",
+      "description": ""
+    },
+    {
+      "title": "Flooding / Bloodsports / E. Atencio",
+      "venue": "Johnny Brenda\u2019s",
+      "date": "2026-10-26",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/flooding-bloodsports-e-atencio/",
+      "description": ""
+    },
+    {
+      "title": "Hawthorne Heights / letlive. / Creeper",
+      "venue": "Brooklyn Bowl",
+      "date": "2026-10-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/hawthorne-heights-letlive-creeper/",
+      "description": ""
+    },
+    {
+      "title": "Smidley",
+      "venue": "Ruba Club",
+      "date": "2026-10-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/smidley/",
+      "description": ""
+    },
+    {
+      "title": "Dan Wilkins Quartet",
+      "venue": "Chris\u2019 Jazz Cafe",
+      "date": "2026-10-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/dan-wilkins-quartet/",
+      "description": ""
+    },
+    {
+      "title": "John Oates & The Good Road Band",
+      "venue": "City Winery",
+      "date": "2026-10-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/john-oates-the-good-road-band/",
+      "description": ""
+    },
+    {
+      "title": "Lilyisthatyou / James the Seventh",
+      "venue": "The First Unitarian Church",
+      "date": "2026-10-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/lilyisthatyou-james-the-seventh/",
+      "description": ""
+    },
+    {
+      "title": "Chanpan / Shebad",
+      "venue": "Johnny Brenda\u2019s",
+      "date": "2026-10-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/chanpan-shebad/",
+      "description": ""
+    },
+    {
+      "title": "Fuller / Le Keep",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-10-27",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/fuller-le-keep/",
+      "description": ""
+    },
+    {
+      "title": "The Nth Power / Arnetta Johnson",
+      "venue": "118 North",
+      "date": "2026-10-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-nth-power-arnetta-johnson/",
+      "description": ""
+    },
+    {
+      "title": "The Bogmen / The Fractals",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-10-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-bogmen-the-fractals/",
+      "description": ""
+    },
+    {
+      "title": "Allison Russell / Sug Daniels",
+      "venue": "The Colonial Theatre",
+      "date": "2026-10-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/allison-russell-sug-daniels/",
+      "description": "WXPN Welcomes"
+    },
+    {
+      "title": "Journey",
+      "venue": "Xfinity Mobile Arena",
+      "date": "2026-10-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/journey/",
+      "description": ""
+    },
+    {
+      "title": "Baby Blue Sound Collective",
+      "venue": "Chris\u2019 Jazz Cafe",
+      "date": "2026-10-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/baby-blue-sound-collective/",
+      "description": ""
+    },
+    {
+      "title": "Nice As F*#k / Jenny Lewis",
+      "venue": "Theatre of Living Arts",
+      "date": "2026-10-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/nice-as-fk-jenny-lewis/",
+      "description": ""
+    },
+    {
+      "title": "Jukebox the Ghost / HalloQueen / Extremely Accurate Birds",
+      "venue": "Union Transfer",
+      "date": "2026-10-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jukebox-the-ghost-halloqueen-extremely-accurate-birds/",
+      "description": ""
+    },
+    {
+      "title": "Onelinedrawing / American Motors / Dear Forbidden",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-10-28",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/onelinedrawing-american-motors-dear-forbidden/",
+      "description": ""
+    },
+    {
+      "title": "Hunter Flynn",
+      "venue": "118 North",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/hunter-flynn/",
+      "description": ""
+    },
+    {
+      "title": "Guerilla Toss / Ben Katzman\u2019s DeGreaser / Grocer",
+      "venue": "Ruba Club",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/guerilla-toss/",
+      "description": ""
+    },
+    {
+      "title": "Dev Lemons",
+      "venue": "Ukie Club",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/dev-lemons/",
+      "description": ""
+    },
+    {
+      "title": "Hurricane Wisdom",
+      "venue": "Brooklyn Bowl",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/hurricane-wisdom/",
+      "description": ""
+    },
+    {
+      "title": "Katie Neary & Her Band",
+      "venue": "Chris\u2019 Jazz Cafe",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/katie-neary-her-band/",
+      "description": ""
+    },
+    {
+      "title": "Nate Hook & His Quartet",
+      "venue": "Chris\u2019 Jazz Cafe",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/nate-hook-his-quartet/",
+      "description": ""
+    },
+    {
+      "title": "Hot Patootie & The Blowfish playing the music of Rocky Horror Picture Show feat. Droozy / Shoot the Messenger",
+      "venue": "The Grape",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/hot-patootie-the-blowfish-playing-the-music-of-rocky-horror-picture-show-feat-droozy-shoot-the-messenger/",
+      "description": ""
+    },
+    {
+      "title": "The Wild Hymns / Paper Graves",
+      "venue": "Kennett Flash",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-wild-hymns-paper-graves/",
+      "description": ""
+    },
+    {
+      "title": "Jacuzzi Boys / Strange Velvet",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-10-29",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jacuzzi-boys-strange-velvet/",
+      "description": ""
+    },
+    {
+      "title": "Griffin William Sherry / Max Bartos",
+      "venue": "118 North",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/griffin-william-sherry-max-bartos/",
+      "description": ""
+    },
+    {
+      "title": "Arun Ramamurthy Trio / Rudresh Mahanthappa Hero Trio",
+      "venue": "Zellerbach Theatre",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/arun-ramamurthy-trio-rudresh-mahanthappa/",
+      "description": ""
+    },
+    {
+      "title": "Mary Gauthier / Jaimee Harris",
+      "venue": "Arden Gild Hall",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/mary-gauthier-jaimee-harris/",
+      "description": "WXPN Welcomes"
+    },
+    {
+      "title": "Built To Spill / Quasi / Melanie Redford",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/built-to-spill-quasi-melanie-redford/",
+      "description": "WXPN Welcomes"
+    },
+    {
+      "title": "Patrick Droney / Tenille Townes",
+      "venue": "Brooklyn Bowl",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/patrick-droney-tenille-townes/",
+      "description": ""
+    },
+    {
+      "title": "Brian Seymour",
+      "venue": "118 North",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/brian-seymour/",
+      "description": ""
+    },
+    {
+      "title": "Friend / Disaster Artist /  Nysa / Sound of Jeb / Precious Little Life",
+      "venue": "Ukie Club",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/friend-disaster-artist-nysa-sound-of-jeb-precious-little-life/",
+      "description": ""
+    },
+    {
+      "title": "Rico Jones & His Quintet",
+      "venue": "Chris\u2019 Jazz Cafe",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/rico-jones-his-quintet/",
+      "description": ""
+    },
+    {
+      "title": "Keenan TreVon",
+      "venue": "City Winery",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/keenan-trevon/",
+      "description": ""
+    },
+    {
+      "title": "The Royal Scam \u2014 A Tribute To Steely Dan",
+      "venue": "Sellersville Theater",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-royal-scam-a-tribute-to-steely-dan/",
+      "description": ""
+    },
+    {
+      "title": "Holywatr / Mercury",
+      "venue": "Union Transfer",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/holywatr-mercury/",
+      "description": ""
+    },
+    {
+      "title": "Vince Staples / Private School",
+      "venue": "Franklin Music Hall",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/vince-staples-private-school/",
+      "description": ""
+    },
+    {
+      "title": "Coco Montoya",
+      "venue": "The Grand",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/coco-montoya/",
+      "description": ""
+    },
+    {
+      "title": "SOLD OUT \u2013 WXPN Free At Noon: RICHARD THOMPSON",
+      "venue": "The Music Hall at World Stage (formerly World Cafe Live)",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/wxpn-free-at-noon-richard-thompson/",
+      "description": "Free At Noon, WXPN Welcomes"
+    },
+    {
+      "title": "The Ant and Ang Band",
+      "venue": "Kennett Flash",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-ant-and-ang-band/",
+      "description": ""
+    },
+    {
+      "title": "Afro-Cuban All Stars",
+      "venue": "Miller Theater @ The Kimmel Center",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/afro-cuban-all-stars/",
+      "description": ""
+    },
+    {
+      "title": "The Band Joe / Floating / Cameron Brooks",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-band-joe-floating-cameron-brooks/",
+      "description": ""
+    },
+    {
+      "title": "Boney James",
+      "venue": "Lansdowne Theater",
+      "date": "2026-10-30",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/boney-james/",
+      "description": ""
+    },
+    {
+      "title": "Built To Spill / Quasi / Melanie Redford",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-10-31",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/built-to-spill-quasi-melanie-redford-2/",
+      "description": "WXPN Welcomes"
+    },
+    {
+      "title": "She Wants Revenge / Rosegarden Funeral Party",
+      "venue": "Brooklyn Bowl",
+      "date": "2026-10-31",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/she-wants-revenge-rosegarden-funeral-party/",
+      "description": ""
+    },
+    {
+      "title": "Willie Nile / Robinson Treacher",
+      "venue": "Jersey Shore Arts Center",
+      "date": "2026-10-31",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/willie-nile-robinson-treacher/",
+      "description": ""
+    },
+    {
+      "title": "Suzanne Vega",
+      "venue": "The Queen",
+      "date": "2026-11-01",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/suzanne-vega/",
+      "description": "WXPN Welcomes"
+    },
+    {
+      "title": "Jesse James DeConto / Antar Goodwin / Claire Wellin",
+      "venue": "118 North",
+      "date": "2026-11-01",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/jesse-james-deconto-antar-goodwin-claire-wellin/",
+      "description": ""
+    },
+    {
+      "title": "Willi Carlisle / East Nash Grass",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-11-01",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/willi-carlisle-east-nash-grass/",
+      "description": ""
+    },
+    {
+      "title": "Ben Dunnill",
+      "venue": "City Winery",
+      "date": "2026-11-01",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/ben-dunnill/",
+      "description": ""
+    },
+    {
+      "title": "Danny Paisley & The Southern Grass",
+      "venue": "The Mill at Rockdale",
+      "date": "2026-11-01",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/danny-paisley-the-southern-grass/",
+      "description": ""
+    },
+    {
+      "title": "heavens to betsy / Calamity Jane",
+      "venue": "The First Unitarian Church",
+      "date": "2026-11-01",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/heavens-to-betsy-calamity-jane/",
+      "description": ""
+    },
+    {
+      "title": "Judah & The Lion / Breakfield / Band of Silver",
+      "venue": "Union Transfer",
+      "date": "2026-11-01",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/judah-the-lion-breakfield-band-of-silver/",
+      "description": ""
+    },
+    {
+      "title": "Michael Feinstein",
+      "venue": "Keswick Theatre",
+      "date": "2026-11-01",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/michael-feinstein/",
+      "description": ""
+    }
+  ]
+}
