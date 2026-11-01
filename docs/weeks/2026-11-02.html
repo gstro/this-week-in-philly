@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week in Philadelphia — November 2–8, 2026</title>
+  <!-- ── Link preview ──
+       This report is delivered as a shared link, so the unfurl IS the
+       product's first impression; without these it previewed as a bare URL.
+       No og:image on purpose: there is no artwork to point at and a
+       generated one would be a second thing to keep true. -->
+  <meta name="description" content="21 handpicked things to do in Philadelphia, November 2–8, 2026 — chosen from 167 events across 13 sources.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="This Week in Philadelphia">
+  <meta property="og:title" content="This Week in Philadelphia — November 2–8, 2026">
+  <meta property="og:description" content="21 handpicked things to do in Philadelphia, November 2–8, 2026 — chosen from 167 events across 13 sources.">
+  <meta property="og:url" content="https://gstro.github.io/this-week-in-philly/weeks/2026-11-02.html">
+  <link rel="canonical" href="https://gstro.github.io/this-week-in-philly/weeks/2026-11-02.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#111111">
+  <!-- Inline data URI, not a file: Pages serves this site from a project
+       subpath, so an absolute /favicon.svg 404s, and a relative one would
+       need a different depth from docs/index.html than from docs/weeks/. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Cpath d='M16 6.5 18.47 12.6 25.03 13.06 19.99 17.3 21.59 23.68 16 20.2 10.41 23.68 12.01 17.3 7.44 13.06 13.53 12.6Z' fill='%23c9a84c'/%3E%3C/svg%3E">
+  <style>
+    /* ── Palette ──
+       Every colour in this stylesheet is a token so the dark block below can
+       restate the palette and nothing else. The light values are the report's
+       original ones, unchanged -- with one exception noted at --feature-meta.
+
+       Dark is not a mechanical inversion. In light the Top 3 card is the
+       darkest thing on a pale page; inverting that would sink it into the
+       background, so in dark it becomes the most *elevated* surface instead
+       (page < card < feature), keeping "raised means important" true in both
+       themes. Every dark pair clears WCAG AA (4.5:1) -- measured, not
+       eyeballed; the light theme does not, and fixing that is its own slice. */
+    :root {
+      --page-bg: #f0ede8;
+      --page-fg: #1c1c1c;
+      --rule: #d8d4ce;
+      --rule-soft: #eee;
+      --muted: #999;
+      --muted-strong: #888;
+      --muted-faint: #bbb;
+      --gold: #c9a84c;
+      --header-bg: #111;
+      --header-fg: #fff;
+      --card-bg: #fff;
+      --card-fg: #1c1c1c;
+      --card-venue: #444;
+      --card-shadow: rgba(0,0,0,0.06);
+      --feature-bg: #1c1c1c;
+      --feature-fg: #fff;
+      --feature-why: #999;
+      --feature-venue: #bbb;
+      /* Was #666, the one light value this change moves: 2.97:1 on the Top 3
+         card, the only outright unreadable pair in the light theme. #848484
+         clears AA at 4.56:1 and stays dimmer than --feature-why, so the
+         card's hierarchy is unchanged. */
+      --feature-meta: #848484;
+      --free: #2d7a3a;
+      --sold-out: #c0392b;
+      /* The card red, lightened for the dark Top 3 card where #c0392b muddies. */
+      --sold-out-feature: #e06a5c;
+      --table-fg: #555;
+      --source-silent: #c3bfb8;
+      /* The de-emphasis neutral for chart fills: everything that isn't a
+         Top 3 pick. Re-stepped from a paler grey, which sat 14.0 ΔE from
+         --gold -- under the 15 normal-vision floor, i.e. hard to tell apart
+         even with full colour vision. */
+      --stat-bar: #7d7568;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page-bg: #1a1815;
+        --page-fg: #ece8e1;
+        --rule: #3a352e;
+        --rule-soft: #2e2a25;
+        --muted: #a8a29a;
+        --muted-strong: #b5afa6;
+        --muted-faint: #918a80;
+        --gold: #d7b75f;
+        --header-bg: #100f0d;
+        --header-fg: #f3efe8;
+        --card-bg: #26231f;
+        --card-fg: #ece8e1;
+        --card-venue: #cfc8bd;
+        --card-shadow: rgba(0,0,0,0.45);
+        --feature-bg: #2e2a25;
+        --feature-fg: #f5f1ea;
+        --feature-why: #b9b2a8;
+        --feature-venue: #d0c9be;
+        --feature-meta: #a59e94;
+        --free: #7ec98b;
+        --sold-out: #ff8a7a;
+        --sold-out-feature: #ff9d8f;
+        --table-fg: #cfc8bd;
+        --source-silent: #8a8279;
+        --stat-bar: #8a8279;
+      }
+      /* The subtitle sits on --header-bg, which stays near-black in both
+         themes, so it needs its own value rather than --muted-strong. */
+      .subtitle { color: #9b948b; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* overflow-wrap inherits, so this one declaration keeps every long string
+       (venues carry full street addresses -- 130 chars is real) inside its
+       column instead of forcing the page to scroll sideways. */
+    body { background: var(--page-bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; color: var(--page-fg); overflow-wrap: break-word; }
+
+    /* ── Keyboard affordances ──
+       The page is ~80 links deep before the first day, and the day index is
+       itself the shortcut past it, so the skip link targets that nav rather
+       than the content wrapper. It is off-canvas until focused, never
+       display:none, which would take it out of the tab order entirely.
+       :focus-visible (not :focus) so a mouse click on a card link doesn't
+       leave a ring behind it. */
+    .skip-link { position: absolute; left: -9999px; top: 0; background: var(--header-bg); color: var(--header-fg); padding: 0.6rem 1rem; font-size: 0.8rem; z-index: 1; }
+    .skip-link:focus { left: 0; }
+    a:focus-visible, .skip-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+
+    /* ── Heading resets ──
+       The day/category/section labels became real h2/h3 elements for the
+       document outline (they were <div>s, so the page had one heading in
+       total and no structure for reader mode or a screen reader's heading
+       list). Their appearance is unchanged, which means undoing the UA
+       stylesheet's bold and its em-relative sizing everywhere the class
+       below doesn't already state both. */
+    h2, h3 { font-size: inherit; font-weight: 400; }
+
+    /* ── Header ── */
+    .site-header { background: var(--header-bg); width: 100%; }
+    .site-header-inner { max-width: 800px; margin: 0 auto; padding: 1.4rem 1.5rem 1.5rem; }
+    .eyebrow { font-size: 0.62rem; text-transform: uppercase; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 0.45rem; }
+    h1 { color: var(--header-fg); font-size: 1.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+    h1 span { color: var(--gold); }
+    .subtitle { color: var(--muted-strong); font-size: 0.82rem; }
+    .header-playlist { margin-top: 0.6rem; font-size: 0.75rem; }
+    .header-playlist a { color: var(--gold); text-decoration: none; }
+    .header-playlist a:hover { text-decoration: underline; }
+
+    /* ── Content wrapper ── */
+    .content { max-width: 800px; margin: 0 auto; padding: 1.75rem 1.5rem 3rem; }
+    hr.day-sep { border: none; border-top: 1px solid var(--rule); margin: 2.25rem 0; }
+
+    /* ── Day index ──
+       Seven links, no JS. The page runs ~11 cards a day across 7 days, which
+       is short enough that a sticky bar or a back-to-top button would cost
+       more than they return (REPORT_IMPROVEMENTS_BRAINSTORM.md #16, #24, both
+       dropped on those grounds) but long enough to want one jump per day. */
+    .day-index { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; margin-bottom: 1.75rem; font-size: 0.72rem; }
+    .day-index a { color: var(--page-fg); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 0.1rem; }
+    .day-index a:hover { border-bottom-color: var(--gold); }
+    .day-index .day-index-count { color: var(--muted); margin-left: 0.25rem; }
+
+    /* ── Day header ── */
+    .day-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; scroll-margin-top: 0.75rem; }
+    .day-name { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; flex-shrink: 0; }
+    .day-date { font-size: 1.25rem; font-weight: 700; color: var(--page-fg); flex-shrink: 0; }
+    .day-rule { flex: 1; height: 1px; background: var(--rule); }
+
+    /* ── Top 3 card ── */
+    .top3-card { background: var(--feature-bg); border-radius: 7px; padding: 1rem 1.25rem; margin-bottom: 0.65rem; }
+    .top3-label { font-size: 0.62rem; text-transform: uppercase; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    .top3-pick { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.9rem; }
+    .top3-pick:last-child { margin-bottom: 0; }
+    .pick-num { color: var(--gold); font-weight: 700; font-size: 0.9rem; min-width: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; }
+    .pick-main { flex: 1; min-width: 0; }
+    .pick-name { color: var(--feature-fg); font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
+    .pick-name a { color: var(--gold); text-decoration: none; }
+    .pick-name a:hover { text-decoration: underline; }
+    .pick-name a.event-link { color: var(--feature-fg); }
+    .pick-why { color: var(--feature-why); font-size: 0.76rem; margin-top: 0.25rem; line-height: 1.5; }
+    /* max-width caps the flex-shrink: 0 column: a venue carrying a full street
+       address (130 chars is real) otherwise sizes to its own content and starves
+       .pick-main down to one letter per line. */
+    .pick-meta { text-align: right; flex-shrink: 0; min-width: 130px; max-width: 50%; }
+    .pick-venue { color: var(--feature-venue); font-size: 0.76rem; }
+    .pick-venue a { color: inherit; text-decoration: none; }
+    .pick-venue a:hover { text-decoration: underline; }
+    .pick-time-cost { color: var(--feature-meta); font-size: 0.68rem; margin-top: 0.15rem; }
+    .pick-time-cost .sold-out { color: var(--sold-out-feature); font-size: inherit; }
+
+    /* ── Honorable mentions ── */
+    p.hm { font-size: 0.77rem; color: var(--muted); font-style: italic; margin-bottom: 1.3rem; line-height: 1.5; }
+
+    /* ── Category header ── */
+    .cat-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; margin-top: 1.1rem; }
+    .cat-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
+
+    /* ── Event cards ── */
+    .event-card { background: var(--card-bg); border-radius: 5px; padding: 0.5rem 0.75rem; box-shadow: 0 1px 2px var(--card-shadow); display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; }
+    .event-left { flex: 1; min-width: 0; }
+    .event-name { font-size: 0.85rem; font-weight: 700; color: var(--card-fg); line-height: 1.3; }
+    .event-name a { color: inherit; text-decoration: none; }
+    .event-name a:hover { text-decoration: underline; }
+    .event-note { font-size: 0.73rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4; }
+    .event-right { text-align: right; flex-shrink: 0; min-width: 120px; max-width: 50%; }
+    .event-venue { font-size: 0.78rem; font-weight: 700; color: var(--card-venue); }
+    .event-time { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+    .price-free { font-size: 0.7rem; color: var(--free); }
+    .price-paid { font-size: 0.7rem; color: var(--muted); }
+    .sold-out { font-size: 0.7rem; color: var(--sold-out); font-weight: 600; }
+
+    /* ── All Week table ── */
+    .allweek-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+    .allweek-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
+    .allweek-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .allweek-table th { text-align: left; padding: 0.3rem 0.5rem; color: var(--muted-strong); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--rule); }
+    .allweek-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--rule-soft); color: var(--table-fg); vertical-align: top; }
+    .allweek-table tr:last-child td { border-bottom: none; }
+    .allweek-table td strong { color: var(--page-fg); }
+
+    .cat-omitted { font-size: 0.7rem; color: var(--muted-faint); font-style: italic; margin: 0.15rem 0 0 0.75rem; }
+
+    /* ── Week in Numbers ──
+       Two marks only: --gold for what won a Top 3 slot, --stat-bar for
+       everything else. That's an emphasis pair (one accent + a de-emphasis
+       neutral), not a categorical palette, which is why the pair clears the
+       two checks that decide whether adjacent segments can be told apart --
+       CVD separation 19.0 light / 19.3 dark, normal-vision 20.2 / 20.4 -- while
+       "failing" the chroma floor, whose complaint is that --stat-bar reads
+       gray. It is supposed to read gray. Gold sits just outside the dark
+       lightness band for the same reason it always has: it's the report's
+       existing brand accent, not a slot chosen for this chart. Gold's low
+       contrast against the light paper (1.96:1) is what makes the per-row
+       count labels mandatory rather than decorative. */
+    .stats-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.6rem; margin-top: 2.5rem; margin-bottom: 0.9rem; }
+    .stats-label::after { content: ''; flex: 1; border-top: 1px solid var(--rule); }
+
+    /* Funnel: a KPI row, not a chart -- four headline numbers. Proportional
+       figures, not tabular: these don't align in a column. */
+    .funnel { display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem; margin-bottom: 1.6rem; }
+    .funnel-value { font-size: 1.15rem; font-weight: 700; color: var(--page-fg); line-height: 1.2; }
+    .funnel-label { font-size: 0.62rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.08em; margin-top: 0.1rem; }
+    .funnel-drop { font-size: 0.62rem; color: var(--muted-faint); margin-top: 0.1rem; }
+
+    .stats-block { margin-bottom: 1.5rem; }
+    .stats-block-title { font-size: 0.7rem; font-weight: 700; color: var(--card-venue); margin-bottom: 0.1rem; }
+    .stats-legend { font-size: 0.65rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .stats-legend .swatch { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 2px; margin-right: 0.25rem; vertical-align: baseline; }
+    .swatch-top3 { background: var(--gold); }
+    .swatch-listed { background: var(--stat-bar); }
+
+    .statbar-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem; font-size: 0.72rem; }
+    .statbar-name { flex: 0 0 8.5rem; color: var(--page-fg); min-width: 0; }
+    .statbar-track { flex: 1; min-width: 0; display: flex; align-items: center; }
+    /* <= 24px thick, square at the baseline, 4px rounded at the data end. The
+       gold segment leads so Top 3 counts align across rows; the 2px right
+       margin is the surface gap that separates the two fills -- a gap, never a
+       border drawn around the mark. */
+    /* min-width so the smallest real value still reads as a mark: a single
+       event is 1.3% of Do215's 76 and would otherwise render as a 1px sliver
+       indistinguishable from nothing at all. */
+    .statbar-fill { height: 9px; min-width: 6px; }
+    .statbar-top3 { background: var(--gold); border-radius: 2px 0 0 2px; margin-right: 2px; }
+    .statbar-rest { background: var(--stat-bar); border-radius: 0 4px 4px 0; }
+    .statbar-top3:only-child { border-radius: 2px 4px 4px 0; margin-right: 0; }
+    .statbar-rest:only-child { border-radius: 2px 4px 4px 2px; }
+    /* Outside the bar end, never inside it: a count inside a 1-event bar would
+       be clipped. tabular-nums here because these DO align in a column. */
+    .statbar-value { flex: 0 0 auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .statbar-value strong { color: var(--page-fg); font-weight: 700; }
+
+    .stats-health { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+    .stats-health .below-floor { color: var(--sold-out); font-weight: 600; }
+
+    /* ── Sources footer ── */
+    .sources { text-align: center; font-size: 0.7rem; color: var(--muted); margin-top: 3rem; line-height: 2.2; }
+    .sources a { color: var(--muted); text-decoration: none; }
+    .sources a:hover { color: var(--page-fg); }
+    /* Watched but silent this week -- dimmer than a contributor, still legible. */
+    .sources a.source-silent { color: var(--source-silent); }
+    .source-count { color: var(--source-silent); font-size: 0.62rem; margin-left: 0.2rem; }
+    .sources-failure { text-align: center; font-size: 0.7rem; color: var(--muted-faint); margin-top: 0.4rem; }
+
+    /* ── Narrow screens ──
+       Every card above is a desktop flex row with a fixed-width, right-aligned
+       meta column (130px / 120px). Below ~600px those columns eat a third of a
+       phone screen and squeeze the title into a ribbon, so each card wraps its
+       meta column onto its own full-width line and left-aligns it. The All Week
+       table -- four columns, unfittable at 375px -- becomes stacked cards that
+       label themselves from the td data-label attributes. */
+    @media (max-width: 600px) {
+      .site-header-inner { padding: 1.1rem 1rem 1.2rem; }
+      h1 { font-size: 1.5rem; }
+      .content { padding: 1.35rem 1rem 2.5rem; }
+
+      .day-header { gap: 0.5rem; }
+      .day-date { font-size: 1.1rem; }
+
+      .top3-card { padding: 0.9rem 1rem; }
+      .top3-pick { flex-wrap: wrap; }
+      /* 1.85rem = .pick-num's 1.1rem min-width + .top3-pick's 0.75rem gap, so
+         the meta line hangs under the title rather than under the number. It has
+         to be padding, not margin: flex-basis 100% + a left margin would put the
+         venue 1.85rem past the card's right edge. */
+      .pick-meta { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; margin: 0.3rem 0 0; padding-left: 1.85rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      .pick-venue { flex-basis: 100%; }
+      .pick-time-cost { margin-top: 0; }
+
+      .event-card { flex-wrap: wrap; gap: 0.15rem; }
+      .event-right { flex-basis: 100%; min-width: 0; max-width: none; text-align: left; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.05rem 0.4rem; }
+      /* Venue on its own line so the time and price below it don't read as a
+         continuation of the address. */
+      .event-venue { flex-basis: 100%; }
+      .event-time { margin-top: 0; }
+      /* :not(:empty) -- clean_cost() legitimately yields "" (53 of them in the
+         week of 2026-08-10 alone), and the separator must not dangle after the
+         time with no price behind it. */
+      .event-time + div:not(:empty)::before { content: "·"; color: var(--rule); margin-right: 0.4rem; }
+
+      .allweek-table, .allweek-table tbody, .allweek-table tr, .allweek-table td { display: block; width: 100%; }
+      .allweek-table thead { display: none; }
+      .allweek-table tr { background: var(--card-bg); border-radius: 5px; box-shadow: 0 1px 2px var(--card-shadow); padding: 0.5rem 0.75rem; margin-bottom: 0.35rem; }
+      .allweek-table td { border-bottom: none; padding: 0.1rem 0; }
+      .allweek-table td::before { content: attr(data-label) ": "; color: var(--muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+      .allweek-table td:first-child::before { content: none; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#day-index">Skip to the day index</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="eyebrow">Weekly Guide</div>
+    <h1>This Week in <span>Philadelphia</span></h1>
+    <div class="subtitle">November 2–8, 2026 &nbsp;·&nbsp; Compiled <time datetime="2026-11-01">Sunday, November 1</time></div>
+    <div class="header-playlist"><a href="https://open.spotify.com/playlist/7ppO8omzP8wd3YglBnmTiS">♫ This week's music on Spotify</a></div>
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- DAY INDEX -->
+  <nav class="day-index" id="day-index" aria-label="Jump to a day">
+    <a href="#monday">Monday<span class="day-index-count">11</span></a>
+    <a href="#tuesday">Tuesday<span class="day-index-count">12</span></a>
+    <a href="#wednesday">Wednesday<span class="day-index-count">28</span></a>
+    <a href="#thursday">Thursday<span class="day-index-count">22</span></a>
+    <a href="#friday">Friday<span class="day-index-count">33</span></a>
+    <a href="#saturday">Saturday<span class="day-index-count">38</span></a>
+    <a href="#sunday">Sunday<span class="day-index-count">23</span></a>
+  </nav>
+  <h2 class="day-header" id="monday">
+    <span class="day-name">Monday</span>
+    <time class="day-date" datetime="2026-11-02">November 2</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name">Dirty Old Power Tour | <a href="https://open.spotify.com/artist/4IDpDJIDfK96HMLD4Tphyl">AJJ</a></div>
+        <div class="pick-why">AJJ (Andrew Jackson Jihad) bring their Dirty Old Power tour to Philly&#39;s most storied punk venue, with Greet Death opening. Folk-punk with teeth and a political streak, all ages, at a church that&#39;s hosted hardcore and DIY shows for decades. Doors 7:30, show 8; $33.02.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2125+Chestnut+St%2C+Philadelphia%2C+PA+19103">The First Unitarian Church</a></div>
+        <div class="pick-time-cost">8:00 PM · $33.02</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://cinespeak.eventive.org/schedule/6ab2ba26d8428377e2ad3a37">Palestine Cinema Days 2026: Foragers</a></div>
+        <div class="pick-why">Palestine Cinema Days returns with &quot;Foragers,&quot; a documentary feature screening at Vox Populi, the artist-run gallery and project space in Chinatown North. A film program with explicit political stakes rather than a passive watch -- exactly the kind of screening easy to miss outside a dedicated series like this.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=319+N+11th+St%2C+Philadelphia%2C+PA+19107">Vox Populi</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="">BIG NIGHT screening &amp; TIMPANO tasting!</a></div>
+        <div class="pick-why">Thirty years of &quot;Big Night,&quot; Stanley Tucci and Campbell Scott&#39;s beloved Jersey Shore food film, celebrated with a screening and three Philly chefs&#39; own takes on the movie&#39;s showpiece timpano. A members&#39; press club turning a cult food movie into an actual tasting is the kind of unrepeatable mashup worth building a Monday around.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1522+Latimer+St%2C+Philadelphia%2C+PA+19102">Pen &amp; Pencil Club, 1522 Latimer St, Philadelphia, PA 19102, USA</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: SOLD OUT!!!! In-person! Fire Museum Presents: Ak&#39;chamel and Ecology: HomeStones (<strong>SOLD OUT</strong>) at The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://r5productions.com/event/ajj/the-first-unitarian-church/philadelphia-pennsylvania/">⭐ Dirty Old Power Tour | AJJ</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The First Unitarian Church</div>
+      <div class="event-time">Doors: 7:30 pm | Show: 8 pm</div>
+      <div class="price-paid">$33.02</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/fire-museum-presents-ak-chamel-and-ecology-homestones">SOLD OUT!!!! In-person! Fire Museum Presents: Ak&#39;chamel and Ecology: HomeStones</a></div>
+      <div class="event-note">Ritualistic drone/noise duo Ak&#39;chamel, in from Texas; already sold out.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="sold-out">SOLD OUT</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/harbour-southcourt/">Harbour / Southcourt</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Underground Arts</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/paige-fish-hank-garret/">Paige Fish / Hank Garret</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">MilkBoy</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/pretty-sick-computerwife/">Pretty Sick / Computerwife</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Foundry</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://cinespeak.eventive.org/schedule/6ab2ba26d8428377e2ad3a37">⭐ Palestine Cinema Days 2026: Foragers</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Vox Populi</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="">⭐ BIG NIGHT screening &amp; TIMPANO tasting!</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Pen &amp; Pencil Club, 1522 Latimer St, Philadelphia, PA 19102, USA</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://psychotronicphilly.org/">Philadelphia Psychotronic Film Society</a></div>
+      <div class="event-note">$5 at the door; programmers warn it may contain extreme subject matter.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00, 7:30</div>
+      <div class="price-paid">$5 At Door</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjRxajZiOWg2c3NqNmRoazY4cTMwYzFkNjRyamljcG02Z3NqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">☕️ Coffee Talk</a></div>
+      <div class="event-note">Twice-monthly hangout (1st/3rd Mondays) for trans and non-binary folks, their partners, and allies. Snacks and coffee provided.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🌿 Markets &amp; Outdoors</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="">Native Plant Prep Party</a></div>
+      <div class="event-note">Pack seed packets for next year&#39;s citywide native-plant seed giveaway; beer and pretzels provided.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Sulimay&#39;s Restaurant, 632 E Girard Ave, Philadelphia, PA 19125, USA</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/317140722/">A NIGHTMARE ON ELM STREET 3: DREAM WARRIORS</a></div>
+      <div class="event-note">Online group watch of the third Nightmare on Elm Street, hosted by the Philadelphia horror meetup.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">9:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="tuesday">
+    <span class="day-name">Tuesday</span>
+    <time class="day-date" datetime="2026-11-03">November 3</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.etix.com/ticket/p/31065160/">Godzilla Day 2026</a></div>
+        <div class="pick-why">A 16mm print of &quot;Godzilla vs. the Smog Monster&quot; plus trailers, shorts, and a special guest kaiju in costume -- the kind of gloriously weird double feature PhilaMOCA exists for. In Callowhill just above Chinatown; the Broad Street Line&#39;s Spring Garden stop is the closest way in.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/6rsUydMSborFpWv0JkQgiz">Timo Andres</a> / Aaron Diehl</div>
+        <div class="pick-why">Pianist Aaron Diehl, one of the most acclaimed jazz musicians of his generation, pairs with composer-pianist Timo Andres for a classical/jazz crossover recital at the Kimmel Center&#39;s Perelman Theatre -- a genuinely rare bill in an intimate room built for exactly this kind of listening.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=300+S+Broad+St%2C+Philadelphia%2C+PA+19102">Perelman Theatre</a></div>
+        <div class="pick-time-cost">7:30 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name">Big World Tour | <a href="https://open.spotify.com/artist/59RNNqeEfkq3X5pfOQxZ3C">Hovvdy</a></div>
+        <div class="pick-why">Hovvdy&#39;s Big World Tour lands at First Unitarian on the strength of a genuinely devoted indie following. Doors 7:30, show 8; $30.96.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2125+Chestnut+St%2C+Philadelphia%2C+PA+19103">The First Unitarian Church</a></div>
+        <div class="pick-time-cost">8:00 PM · $30.96</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://r5productions.com/event/hovvdy/the-first-unitarian-church/philadelphia-pennsylvania/">⭐ Big World Tour | Hovvdy</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The First Unitarian Church</div>
+      <div class="event-time">Doors: 7:30 pm | Show: 8 pm</div>
+      <div class="price-paid">$30.96</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/timo-andres-aaron-diehl/">⭐ Timo Andres / Aaron Diehl</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Perelman Theatre</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://r5productions.com/event/bass-drum-of-death/johnny-brendas/philadelphia-pennsylvania/">Bass Drum Of Death</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda’s</div>
+      <div class="event-time">Doors: 7 pm | Show: 8 pm</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/cannelle/">Cannelle</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Warehouse on Watts</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/powerpocket/">Powerpocket</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Chris’ Jazz Cafe</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/frank-maza-javier-limon/">Frank Maza / Javier Limon</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Winery</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/toronzo-cannon/">Toronzo Cannon</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Sellersville Theater</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/palace-willie-j-healey/">Palace / Willie J. Healey</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Franklin Music Hall</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/blu-detiger/">Blu DeTiger</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Underground Arts</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/31065160/">⭐ Godzilla Day 2026</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00, 7:30</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">📚 Literary</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9zM2NiOWg2c3NqNmRwaTZrcDMwYzFkNjRyamljcG42Y3EzNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">✏️ The Writing Room</a></div>
+      <div class="event-note">Three 40-minute silent-writing blocks with 10-minute breaks and accountability check-ins; BYO coffee and chargers.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">5:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/317140748/">A NIGHTMARE ON ELM STREET 4: THE DREAM MASTER and 5: THE DREAM CHILD</a></div>
+      <div class="event-note">Online double feature: Nightmare on Elm Street 4 and 5, hosted by the Philadelphia horror meetup.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="wednesday">
+    <span class="day-name">Wednesday</span>
+    <time class="day-date" datetime="2026-11-04">November 4</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.etix.com/ticket/p/66382982/">NASH THE SLASH RISES AGAIN!</a></div>
+        <div class="pick-why">Nash the Slash -- the mummy-bandaged, gas-masked Canadian avant-garde violinist and glass-harmonica player -- built a cult following over four decades before his death in 2014; this is most likely a tribute night resurrecting his persona and catalog rather than the man himself, but PhilaMOCA is exactly the room built for that stunt. $12, two sets (7:00 and 7:30). In Callowhill just above Chinatown; the Broad Street Line&#39;s Spring Garden stop is the closest way in.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
+        <div class="pick-time-cost">7:00 PM · $12</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.google.com/calendar/event?eid=YzhzNmFjcGtjbGgzMmI5bzY4cWo0YjlrNzFnajBiYjFjb282MmJiMWM5aGplY2I0YzVpNjhjMWhjNF8yMDI2MTEwNFQyMzAwMDBaIHQ4cW1pdmU2M24yN21kajdndDAzbnRjMnU4QGc&amp;ctz=America/New_York">NLG Know Your Rights and Risks Training</a></div>
+        <div class="pick-why">The National Lawyers Guild runs a practical know-your-rights-and-risks training at Wooden Shoe Books -- exactly the kind of civic-defense programming the anarchist bookstore&#39;s political-education line is built around, and genuinely useful beyond the evening itself.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=704+South+St%2C+Philadelphia%2C+PA+19147">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</a></div>
+        <div class="pick-time-cost">6:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.lightboxfilmcenter.org/events/a-rimbaud">A. Rimbaud</a></div>
+        <div class="pick-why">Lightbox Film Center brings its Philadelphia premiere of &quot;A. Rimbaud&quot; to Bok, pairing the city&#39;s premier repertory/arthouse programmer with a film named for the poet -- a literary subject getting a cinephile&#39;s treatment rather than a biopic gloss.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=800+Mifflin+St%2C+Philadelphia%2C+PA+19148">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: THE COOK, THE THIEF, HIS WIFE &amp; HER LOVER at PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102 · In-person! Lesbian Art/ists Across the Decades with Sinister Wisdom. Panel discussion featuring exhibiting artists KT Abadir-Mullally, Ira Balachanthiran and Morgan Gwenwald at The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/66382982/">⭐ NASH THE SLASH RISES AGAIN!</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00, 7:30</div>
+      <div class="price-paid">$12</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-11-04-12-00-00-0500">In-person! Weekly improvised music drop-in jam session</a></div>
+      <div class="event-note">The Rotunda&#39;s standing Wednesday improvised-music drop-in jam.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/hiss-golden-messenger-sam-amidon/">Hiss Golden Messenger / Sam Amidon</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ardmore Music Hall</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/jackie-johnson-her-ensemble/">Jackie Johnson &amp; Her Ensemble</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Chris’ Jazz Cafe</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/elena-pinderhughes/">Elena Pinderhughes</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Winery</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/banda-al9-log-flume/">Banda AL9 / Log Flume</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kung Fu Neckite</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/one-alternative/">One Alternative</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kennett Flash</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/kate-nash/">Kate Nash</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Nikki Lopez</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/hamilton-leithauser-rostam-johanna-samuels/">Hamilton Leithauser + Rostam / Johanna Samuels</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Underground Arts</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/ryan-tennis-the-clubhouse-band/">Ryan Tennis &amp; the Clubhouse Band</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Fallser Club</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <p class="cat-omitted">+ 3 more not shown</p>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.lightboxfilmcenter.org/events/a-rimbaud">⭐ A. Rimbaud</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-film-society-center-aaxow/theater-page">THE COOK, THE THIEF, HIS WIFE &amp; HER LOVER</a></div>
+      <div class="event-note">Rated R. Runtime: 1 hr 55 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-east-theater-aandq/theater-page">Naza (2026)</a></div>
+      <div class="event-note">Rated Not Rated. Runtime: 1 hr 17 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106</div>
+      <div class="event-time">3:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-east-theater-aandq/theater-page">You Can See Everything (2026)</a></div>
+      <div class="event-note">Rated R. Runtime: 2 hr 54 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page">Fatherland (2026)</a></div>
+      <div class="event-note">Rated Not Rated. Runtime: 1 hr 22 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106</div>
+      <div class="event-time">4:00 PM, 6:10 PM, 8:45 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page">Wicker (2026)</a></div>
+      <div class="event-note">Rated R. Runtime: 1 hr 45 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106</div>
+      <div class="event-time">3:30 PM, 6:00 PM, 8:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page">The Only Living Pickpocket in New York (2026)</a></div>
+      <div class="event-note">Rated R. Runtime: 1 hr 28 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106</div>
+      <div class="event-time">4:30 PM, 6:40 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page">You Can See Everything (2026)</a></div>
+      <div class="event-note">Rated R. Runtime: 2 hr 54 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106</div>
+      <div class="event-time">3:45 PM, 7:45 PM, 8:15 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page">Fjord (2026)</a></div>
+      <div class="event-note">Rated Not Rated. Runtime: 2 hr 26 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106</div>
+      <div class="event-time">4:15 PM, 7:20 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=YzhzNmFjcGtjbGgzMmI5bzY4cWo0YjlrNzFnajBiYjFjb282MmJiMWM5aGplY2I0YzVpNjhjMWhjNF8yMDI2MTEwNFQyMzAwMDBaIHQ4cW1pdmU2M24yN21kajdndDAzbnRjMnU4QGc&amp;ctz=America/New_York">⭐ NLG Know Your Rights and Risks Training</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Wooden Shoe Books, 704 South St, Philadelphia, PA 19147</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/lesbian-art-ists-across-the-decades-with-sinister-wisdom-panel-discussion-featuring-exhibiting-artists-kt-abadir-mullally-ira-balachanthiran-and-morgan-gwenwald">In-person! Lesbian Art/ists Across the Decades with Sinister Wisdom. Panel discussion featuring exhibiting artists KT Abadir-Mullally, Ira Balachanthiran and Morgan Gwenwald</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="">clay club: garlands</a></div>
+      <div class="event-note">Make polymer-clay garlands; building entrance is on Percy St, two steps up but an elevator inside.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">915 Spring Garden St, Philadelphia, PA 19123, USA</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNnNwamdiOWg2c3NqNmUxZzYwczMwYzFkNjRyamljcG82MHNqZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">📼 Analog A/V Session</a></div>
+      <div class="event-note">Hands-on VHS and audio-cassette analog/digital transfer session; donation-based, $5-$15 recommended.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">2:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/dc_215/events/317168560/">Cracking &lt;redacted&gt;: Subverting Legacy Software</a></div>
+      <div class="event-note">DC215&#39;s AppSec Village talk on reverse-engineering a legacy licensing system via database, web-proxy, and .NET disassembly.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/317140777/">Freddy&#39;s Dead: The Final Nightmare and Wes Craven&#39;s New Nightmare</a></div>
+      <div class="event-note">Online double feature: Freddy&#39;s Dead: The Final Nightmare and Wes Craven&#39;s New Nightmare.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">8:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="thursday">
+    <span class="day-name">Thursday</span>
+    <time class="day-date" datetime="2026-11-05">November 5</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/2KiesFSnD8ccUdEeZZOo4q">Ami Taf Ra</a> &amp; Kamasi Washington</div>
+        <div class="pick-why">Kamasi Washington -- the GRAMMY-nominated saxophonist and bandleader who helped drive jazz&#39;s biggest crossover moment in a decade -- plays two sets with Ami Taf Ra. A genuinely rare, must-see booking for a City Winery date; confirmed for 6:00 PM and 9:30 PM.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=990+Filbert+St%2C+Philadelphia%2C+PA+19107">City Winery</a></div>
+        <div class="pick-time-cost">6:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFsNjByM2FiOWg2c3NqNmU5ZzZjcTMwYzFkNjRyamljcHA2NG8zY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">🎶 Learn to Livecode with Strudel!</a></div>
+        <div class="pick-why">The Philly Electronic Music Club walks total beginners through Strudel, a live-coding language for music, ending in a group jam session. Software, DIY culture, and music collapse into one free evening at Iffy Books -- no programming experience required.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
+        <div class="pick-time-cost">6:30 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNzRvajRiOWg2c3NqNmUxbzc0bzMwYzFkNjRyamljcG83NHEzOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">🎶 Beginner Soldering: Modded Audio Aux Cable</a></div>
+        <div class="pick-why">A beginner soldering workshop building a modded 3.5mm audio aux cable with a volume knob -- approachable, hands-on DIY electronics at Iffy Books for the cost of a $4.86 kit plus a pay-what-you-can instructor donation.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=404+S.+20th+St%2C+Philadelphia%2C+PA+19146">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</a></div>
+        <div class="pick-time-cost">2:30 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: WXPN 88.5 Welcomes | The Singer In My Band Tour | This Is Lorelei at The First Unitarian Church · Oldest Sea at PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/ami-taf-ra-kamasi-washington/">⭐ Ami Taf Ra &amp; Kamasi Washington</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Winery</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/54049261/">Oldest Sea</a></div>
+      <div class="event-note">With Bruise Bath, ShyGodwin, and Diuretic.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00, 7:30</div>
+      <div class="price-paid">$15</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://r5productions.com/event/this-is-lorelei/the-first-unitarian-church/philadelphia-pennsylvania/">WXPN 88.5 Welcomes | The Singer In My Band Tour | This Is Lorelei</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The First Unitarian Church</div>
+      <div class="event-time">Doors: 7:30 pm | Show: 8 pm</div>
+      <div class="price-paid">$25.81</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/erini-fos-an-asia-minor-story">In-person! Erini - Fos: An Asia Minor Story</a></div>
+      <div class="event-note">Greek/Anatolian-inflected project centered on Smyrna-era history and migration.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/fruit-bats/">Fruit Bats / Sarah Klang</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Union Transfer</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/punch-brothers/">Punch Brothers</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Keswick Theatre</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/donna-the-buffalo-assembly-of-dust/">Donna The Buffalo / Assembly of Dust</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ardmore Music Hall</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/hfb-ensemble/">HFB Ensemble</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Chris’ Jazz Cafe</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/matt-kahn-his-trio/">Matt Kahn &amp; His Trio</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Chris’ Jazz Cafe</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/pete-muller-the-kindred-souls-the-alternate-routes/">Pete Muller &amp; The Kindred Souls / The Alternate Routes</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Winery</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <p class="cat-omitted">+ 9 more not shown</p>
+
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNzRvajRiOWg2c3NqNmUxbzc0bzMwYzFkNjRyamljcG83NHEzOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">⭐ 🎶 Beginner Soldering: Modded Audio Aux Cable</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">2:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFsNjByM2FiOWg2c3NqNmU5ZzZjcTMwYzFkNjRyamljcHA2NG8zY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">⭐ 🎶 Learn to Livecode with Strudel!</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/events/asylum-13-the-rapture-2026-01-01-2026-02-05-2026-03-05-2026-04-02-2026-05-07-2026-06-04-2026-07-02-2026-08-06-2026-09-03-2026-10-01-2026-11-05/">Asylum 13: The Rapture</a></div>
+      <div class="event-note">21+, 9pm, $10. DJs Michael Mythix and Dr. Octo-Pussy; in Wilmington, DE.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Bar XIII, 1706 Philadelphia Pike (Wilmington, DE)</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="friday">
+    <span class="day-name">Friday</span>
+    <time class="day-date" datetime="2026-11-06">November 6</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://philly.askapunk.net/event/benefit-show-spac-x-homies-helping-homies">Benefit Show SPAC x Homies Helping Homies</a></div>
+        <div class="pick-why">A metal/punk/screamo benefit show for Homies Helping Homies at their own South Philly garage space -- small, all-ages, and run for mutual aid rather than profit. Exactly the DIY, easy-to-miss show the punk and hardcore interest is built to catch.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2444+W+Ritner+St">Homies Helping Homies Garage (2444 W Ritner St)</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.thephillypigeon.org/">The Late(ish) Poetry Show</a></div>
+        <div class="pick-why">Philly Pigeon&#39;s Late(ish) Poetry Show brings spoken word to PhilaMOCA&#39;s oddball stage -- $15-25, two sets starting at 8:00 and 8:30. In Callowhill just above Chinatown; the Broad Street Line&#39;s Spring Garden stop is the closest way in.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=531+N+12th+St%2C+Philadelphia%2C+PA+19123">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</a></div>
+        <div class="pick-time-cost">8:00 PM · $15–$25</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://r5productions.com/event/basia-bulat/philadelphia-ethical-society/philadelphia-pennsylvania/">2026 Solo Tour | A Special Seated Evening with | Basia Bulat</a></div>
+        <div class="pick-why">A special seated solo show from Basia Bulat at the Philadelphia Ethical Society on Rittenhouse Square -- an intimate room for a songwriter who usually plays with a full band. Doors 7:30, show 8; $37.14.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1906+S+Rittenhouse+Square%2C+Philadelphia%2C+PA+19103">Philadelphia Ethical Society</a></div>
+        <div class="pick-time-cost">8:00 PM · $37.14</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: WXPN Free At Noon: QUEEN OF JEANS at WXPN 3025 Walnut Street · Black Violin / Jon Muq at Lansdowne Theater</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/event/benefit-show-spac-x-homies-helping-homies">⭐ Benefit Show SPAC x Homies Helping Homies</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Homies Helping Homies Garage (2444 W Ritner St)</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://r5productions.com/event/basia-bulat/philadelphia-ethical-society/philadelphia-pennsylvania/">⭐ 2026 Solo Tour | A Special Seated Evening with | Basia Bulat</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Philadelphia Ethical Society</div>
+      <div class="event-time">Doors: 7:30 pm | Show: 8 pm</div>
+      <div class="price-paid">$37.14</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/black-violin-jon-muq/">Black Violin / Jon Muq</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Lansdowne Theater</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/wxpn-free-at-noon-queen-of-jeans/">WXPN Free At Noon: QUEEN OF JEANS</a></div>
+      <div class="event-note">Free, no ticket -- WXPN&#39;s Free At Noon series.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">WXPN 3025 Walnut Street</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/steve-earle-chris-pierce/">Steve Earle / Chris Pierce</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Sellersville Theater</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/suzanne-vega-2/">Suzanne Vega</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">McCarter Theatre Center</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/olivia-barton/">Olivia Barton</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ortlieb’s</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/eggy/">Eggy</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ardmore Music Hall</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/winyah-foxtide/">Winyah / Foxtide</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Brooklyn Bowl</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/conrad-herwig-victor-north-daniel-cohen/">Conrad Herwig / Victor North / Daniel Cohen</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Chris’ Jazz Cafe</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <p class="cat-omitted">+ 17 more not shown</p>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/316899427/">GODZILLA MINUS ONE (2023)</a></div>
+      <div class="event-note">Streamed watch-along ahead of seeing the sequel in person; 2023, Japanese with subtitles.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">9:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">📚 Literary</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.thephillypigeon.org/">⭐ The Late(ish) Poetry Show</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">8:00, 8:30</div>
+      <div class="price-paid">$15–$25</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/events/pleasurecation-skin-tight-edition/">PLEASUREcation: &quot;Skin Tight&quot; edition</a></div>
+      <div class="event-note">21+. DJ Xris SMack!.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Pleasure Garden Club, 6039 Passyunk Ave.</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNxajRiOWg2c3NqNmU5bzcwbzMwYzFkNjRyamljcHA3NHFqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">💻 Philly 2600 Meetup</a></div>
+      <div class="event-note">Monthly gathering of local hackers, phreaks, infosec folks, and tinkerers.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/dc_215/events/316813589/">Open House</a></div>
+      <div class="event-note">Show off a project -- war-driving rig, Flipper Zero, or whatever you&#39;re tinkering with -- or just come hang out.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/events/a-black-celebration-21/">A Black Celebration</a></div>
+      <div class="event-note">21+, 9pm-2am, $10 adv / $15 DOS. DJs Baby Berlin and Alex English.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda&#39;s, 1201 North Frankford Ave</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="saturday">
+    <span class="day-name">Saturday</span>
+    <time class="day-date" datetime="2026-11-07">November 7</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://r5productions.com/event/william-basinski/the-sanctuary-of-the-first-unitarian-church/philadelphia-pennsylvania/">25 Years of &#39;The Disintegration Loops&#39; | A Special Seated Show with | William Basinski</a></div>
+        <div class="pick-why">William Basinski performs &quot;The Disintegration Loops&quot; live for its 25th anniversary -- a seated show for one of modern ambient music&#39;s most significant, elegiac works, at a venue built for exactly this kind of event. Already sold out, but worth knowing about regardless. Doors 7:30, show 8.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=2125+Chestnut+St%2C+Philadelphia%2C+PA+19103">The Sanctuary of the First Unitarian Church</a></div>
+        <div class="pick-time-cost">8:00 PM · <span class="sold-out">SOLD OUT</span></div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name">In-person! The Second Annual Philadelphia Modular Synth Fest featuring: Kevin Dal-Mare, <a href="https://open.spotify.com/artist/5SdBetkE3WMDOLwWZF17gY">David Taliento</a>, Jair-Rohm Parker Wells, Kwame Johnson, Sandy James!</div>
+        <div class="pick-why">The second annual Philadelphia Modular Synth Fest brings five area modular/eurorack performers to The Rotunda -- DIY electronics and experimental music overlap directly, and an annual one-off like this is exactly the kind of Rotunda booking worth elevating over its standing weeklies.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
+        <div class="pick-time-cost">1:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/4EqBsJHfwAhroX6yob0EJi">Housie</a> (rva), Sediment, Insectoids</div>
+        <div class="pick-why">Housie, Sediment, and Insectoids play crust/hardcore punk at Sanctuary, a DIY all-ages space in West Philly, with an out-of-town band on the bill. Further out than University City proper -- reachable via the Baltimore Ave or Chester Ave trolleys, or the El to 40th St and a bus/walk from there.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=West+Philly">Sanctuary (West Philly)</a></div>
+        <div class="pick-time-cost">7:00 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: Human Wannabes Anniversary: Anime Music Party at PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123 · Smoke at PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102 · Sex Dwarf: Notorious November at Broad Hall, 699 N. Broad St.</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/guitar-synth-festival">⭐ In-person! The Second Annual Philadelphia Modular Synth Fest featuring: Kevin Dal-Mare, David Taliento, Jair-Rohm Parker Wells, Kwame Johnson, Sandy James!</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">1:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://philly.askapunk.net/event/housie-rva-sediment-insectoids">⭐ Housie (rva), Sediment, Insectoids</a></div>
+      <div class="event-note">Crust/hardcore punk; Housie is an out-of-town touring band.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Sanctuary (West Philly)</div>
+      <div class="event-time">7:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://r5productions.com/event/william-basinski/the-sanctuary-of-the-first-unitarian-church/philadelphia-pennsylvania/">⭐ 25 Years of &#39;The Disintegration Loops&#39; | A Special Seated Show with | William Basinski</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Sanctuary of the First Unitarian Church</div>
+      <div class="event-time">Doors: 7:30 pm | Show: 8 pm</div>
+      <div class="sold-out">SOLD OUT</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://events.ticketleap.com/tickets/human-wannabes/human-wannabes-nov-2026-4th-anime-game-live-music-party">Human Wannabes Anniversary: Anime Music Party</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:00, 7:30</div>
+      <div class="price-paid">$10</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/eggy-2/">Eggy</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ardmore Music Hall</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/conrad-herwig-victor-north-daniel-cohen-2/">Conrad Herwig / Victor North / Daniel Cohen</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Chris’ Jazz Cafe</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/the-hooters-2/">The Hooters</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Keswick Theatre</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/daniel-villareal-2/">Daniel Villareal</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Solar Myth</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/teen-jesus-and-the-jean-teasers/">Teen Jesus and the Jean Teasers</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda’s</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/carsie-blanton-the-burning-hell/">Carsie Blanton / The Burning Hell</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Underground Arts</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <p class="cat-omitted">+ 16 more not shown</p>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-film-society-center-aaxow/theater-page">Smoke</a></div>
+      <div class="event-note">Rated R. Runtime: 1 hr 52 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102</div>
+      <div class="event-time">7:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-film-society-center-aaxow/theater-page">James and the Giant Peach</a></div>
+      <div class="event-note">Rated PG. Runtime: 1 hr 20 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102</div>
+      <div class="event-time">2:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-film-society-center-aaxow/theater-page">Little Odessa</a></div>
+      <div class="event-note">Rated R. Runtime: 14 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102</div>
+      <div class="event-time">4:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-film-society-center-aaxow/theater-page">THE COOK, THE THIEF, HIS WIFE &amp; HER LOVER</a></div>
+      <div class="event-note">Rated R. Runtime: 1 hr 55 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102</div>
+      <div class="event-time">6:30 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.fandango.com/pfs-film-society-center-aaxow/theater-page">Gandahar (1987)</a></div>
+      <div class="event-note">Rated PG. Runtime: 1 hr 25 min.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102</div>
+      <div class="event-time">9:15 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="">South Philly Sala / November 7/ Let there be light</a></div>
+      <div class="event-note">Mutual-aid repair cafe -- bring a broken lamp to fix, or restore a donated vintage one to take home.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">2322 S 10th St, Philadelphia, PA 19148, USA</div>
+      <div class="event-time">1:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="">Intro to Watercolor</a></div>
+      <div class="event-note">Beginner-friendly 2-hour watercolor class covering brush control, color mixing, and wet-on-wet blending.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Freehand Art Supply, 308 E Girard Ave, Philadelphia, PA 19125, USA</div>
+      <div class="event-time">3:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNnNyajZiOWg2c3NqOGMxazZzcTMwYzFkNjRyamlkMWc2a3EzY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">📓 DIY Digital Notebook Workshop</a></div>
+      <div class="event-note">No-solder build of a pocket digital notebook on a breadboard, using a Seeed XIAO ESP32-S3, OLED display, and microSD reader.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">10:30 AM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/code-coffee-philly/events/316048092/">Claude Code Philly</a></div>
+      <div class="event-note">Weekly hands-on build/pair-coding session using Claude for real-world projects.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">1:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/events/sex-dwarf-notorious-november/">Sex Dwarf: Notorious November</a></div>
+      <div class="event-note">21+, 8pm-1am, $5 cover before 9pm / $10 after. DJ Robert Drake.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Broad Hall, 699 N. Broad St.</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/316900084/">Dinner and a Movie – GODZILLA MINUS ZERO (2026)</a></div>
+      <div class="event-note">Online group watch of the 2026 Godzilla Minus Zero ahead of dinner, hosted by the Philadelphia horror meetup.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">3:45 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/events/frankenstein-pop-up-exhibit-2026-09-12-2026-09-19-2026-10-03-2026-10-10-2026-10-17-2026-10-24-2026-10-31-2026-11-07/">Frankenstein Pop-up Exhibit</a></div>
+      <div class="event-note">11am-3pm, included with museum admission.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Mütter Museum, 19 S 22nd St</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <hr class="day-sep">
+  <h2 class="day-header" id="sunday">
+    <span class="day-name">Sunday</span>
+    <time class="day-date" datetime="2026-11-08">November 8</time>
+    <span class="day-rule"></span>
+  </h2>
+
+  <div class="top3-card">
+    <h3 class="top3-label">⭐ Top 3 Picks</h3>
+    <div class="top3-pick">
+      <div class="pick-num">1</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.lightboxfilmcenter.org/events/falling-leaves">Falling Leaves</a></div>
+        <div class="pick-why">Lightbox Film Center screens a new restoration of &quot;Falling Leaves&quot; at Bok -- the kind of repertory/preservation booking that justifies Lightbox&#39;s place on the elevated-venue list, and a rare chance to see a restored print theatrically.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=800+Mifflin+St%2C+Philadelphia%2C+PA+19148">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</a></div>
+        <div class="pick-time-cost">5:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">2</div>
+      <div class="pick-main">
+        <div class="pick-name"><a class="event-link" href="https://www.therotunda.org/event/nuevo-mundo">In-person! Nuevo mundo (1978, Not Rated, 1h 35min) + workshop on ancestral connection and syncretism</a></div>
+        <div class="pick-why">A screening of &quot;Nuevo mundo&quot; (1978) paired with a workshop on ancestral connection and syncretism -- film and community cultural practice combined at The Rotunda, exactly the kind of one-off programming the venue&#39;s elevation is meant to reward.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=4014+Walnut+St%2C+Philadelphia%2C+PA+19104">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</a></div>
+        <div class="pick-time-cost">6:00 PM · Not listed</div>
+      </div>
+    </div>
+    <div class="top3-pick">
+      <div class="pick-num">3</div>
+      <div class="pick-main">
+        <div class="pick-name"><a href="https://open.spotify.com/artist/7AZwAitWq1KcFoIJhRWb6V">Deerhoof</a> / Eraser / Nympho</div>
+        <div class="pick-why">Deerhoof -- the long-running, critically adored noise-rock/experimental outfit -- play Underground Arts with Eraser and Nympho opening. Decades in and still genuinely strange, a textbook &quot;talked about afterward&quot; booking. In Callowhill, a few blocks above Chinatown; the Broad Street Line&#39;s Spring Garden stop is the closest way in.</div>
+      </div>
+      <div class="pick-meta">
+        <div class="pick-venue"><a href="https://www.google.com/maps/search/?api=1&amp;query=1200+Callowhill+St%2C+Philadelphia%2C+PA+19107">Underground Arts</a></div>
+        <div class="pick-time-cost">8:00 PM · Not listed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hm">Honorable mentions: The Variety Show IV at PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123 · Black Squirrel Noir at Black Squirrel Club, 1049 Sarah St</p>
+
+  <h3 class="cat-label">🎵 Music &amp; Concerts</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/deerhoof-eraser-nympho/">⭐ Deerhoof / Eraser / Nympho</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Underground Arts</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/lia-menaker-kuf-knotz-christine-elise-brittany-ann-tranbaugh/">Lia Menaker / Kuf Knotz &amp; Christine Elise / Brittany Ann Tranbaugh</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Johnny Brenda’s</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/the-olllam-feat-joe-dart/">the olllam (feat. Joe Dart)</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Ardmore Music Hall</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/new-constellations-vox-rea/">New Constellations / Vox Rea</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Brooklyn Bowl</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/breakwater/">Breakwater</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">City Winery</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/kidz-bop-daytime-dance-party/">KIDZ BOP Daytime Dance Party</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Queen</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/george-clanton-ryan-hemsworth/">George Clanton / Ryan Hemsworth</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Union Transfer</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/gcs-feat-eric-gales-dennis-chambers-billy-sheehan/">GCS feat. Eric Gales, Dennis Chambers &amp; Billy Sheehan</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Grand</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/joe-dennison-stratospheerius-jane-getter-premonition/">Joe Deninzon &amp; Stratospheerius / Jane Getter Premonition</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kennett Flash</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://xpn.org/event/lake-drive-nightbreakers-moonroof/">Lake Drive / Nightbreakers / Moonroof</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Kung Fu Necktie</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <p class="cat-omitted">+ 5 more not shown</p>
+
+  <h3 class="cat-label">🎬 Film &amp; Cinema</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.lightboxfilmcenter.org/events/falling-leaves">⭐ Falling Leaves</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA</div>
+      <div class="event-time">5:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.therotunda.org/event/nuevo-mundo">⭐ In-person! Nuevo mundo (1978, Not Rated, 1h 35min) + workshop on ancestral connection and syncretism</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">The Rotunda, 4014 Walnut St, Philadelphia, PA 19104</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🤝 Community &amp; Politics</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNyamdiOWg2c3NqOGM5bDYwbzMwYzFkNjRyamlkMWg2a3JqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">🧵 Anarchist Sewing Club</a></div>
+      <div class="event-note">Sewing/mending meetup -- machines and supplies provided for anyone who needs them.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">3:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎨 Arts &amp; Workshops</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="">diy bookmarks w/ lamcha matcha</a></div>
+      <div class="event-note">Matcha cafe pop-up while making bookmarks and swapping books.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">915 Spring Garden St, Philadelphia, PA 19123, USA</div>
+      <div class="event-time">12:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">💻 Tech &amp; Maker</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.google.com/calendar/event?eid=XzY0bzMwYzFsNjByMzhiOWg2c3NqOGM5bTYwczMwYzFkNjRyamlkMWg2b3MzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&amp;ctz=America/New_York">🏠 IndieWeb Homebrew Website Club</a></div>
+      <div class="event-note">Worldwide meetup network for people building their own websites and blogs outside social-media platforms.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States</div>
+      <div class="event-time">6:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">👻 Horror &amp; Occult</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://phillygoth.net/events/black-squirrel-noir/">Black Squirrel Noir</a></div>
+      <div class="event-note">6pm-10pm, $10 adv / $15 DOS. DJs Kathy Fadigan, Jon Gill, and EGBIII spinning alternative, New Wave, and goth.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">Black Squirrel Club, 1049 Sarah St</div>
+      <div class="event-time">Various</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.meetup.com/philadelphia-horror-meetup-group/events/317140692/">TV SHOW NIGHT: Dexter: Resurrection - Season 2</a></div>
+      <div class="event-note">Weekly group stream of the new Dexter season, online.</div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">(online)</div>
+      <div class="event-time">9:00 PM</div>
+      <div class="price-paid">Not listed</div>
+    </div>
+  </div>
+
+  <h3 class="cat-label">🎪 Festivals &amp; Major Events</h3>
+  <div class="event-card">
+    <div class="event-left">
+      <div class="event-name"><a href="https://www.etix.com/ticket/p/97241528/">The Variety Show IV</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-venue">PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123</div>
+      <div class="event-time">7:30, 8:00</div>
+      <div class="price-paid">$20</div>
+    </div>
+  </div>
+
+  <!-- WEEK IN NUMBERS -->
+  <h2 class="stats-label">Week in Numbers</h2>
+
+  <div class="funnel">
+    <div class="funnel-stage">
+      <div class="funnel-value">178</div>
+      <div class="funnel-label">Collected</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-value">178</div>
+      <div class="funnel-label">Candidates</div>
+      <div class="funnel-drop">−0% from collected</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-value">167</div>
+      <div class="funnel-label">Listed</div>
+      <div class="funnel-drop">−6% from candidates</div>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-value">21</div>
+      <div class="funnel-label">Top 3 picks</div>
+      <div class="funnel-drop">−87% from listed</div>
+    </div>
+  </div>
+
+  <div class="stats-block">
+    <h3 class="stats-block-title">By category</h3>
+    <div class="stats-legend"><span class="swatch swatch-top3"></span>Top 3 pick <span class="swatch swatch-listed"></span>listed, not picked</div>
+    <div class="statbar-row" title="🎵 Music &amp; Concerts: 11 of 114 listed events became a Top 3 pick">
+      <div class="statbar-name">🎵 Music &amp; Concerts</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 9.6%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 90.4%"></span>
+      </div>
+      <div class="statbar-value"><strong>11</strong> / 114</div>
+    </div>
+    <div class="statbar-row" title="🎬 Film &amp; Cinema: 6 of 21 listed events became a Top 3 pick">
+      <div class="statbar-name">🎬 Film &amp; Cinema</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 5.3%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 13.2%"></span>
+      </div>
+      <div class="statbar-value"><strong>6</strong> / 21</div>
+    </div>
+    <div class="statbar-row" title="👻 Horror &amp; Occult: 0 of 10 listed events became a Top 3 pick">
+      <div class="statbar-name">👻 Horror &amp; Occult</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 8.8%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 10</div>
+    </div>
+    <div class="statbar-row" title="💻 Tech &amp; Maker: 2 of 9 listed events became a Top 3 pick">
+      <div class="statbar-name">💻 Tech &amp; Maker</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 1.8%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 6.1%"></span>
+      </div>
+      <div class="statbar-value"><strong>2</strong> / 9</div>
+    </div>
+    <div class="statbar-row" title="🤝 Community &amp; Politics: 1 of 5 listed events became a Top 3 pick">
+      <div class="statbar-name">🤝 Community &amp; Politics</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 0.9%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 3.5%"></span>
+      </div>
+      <div class="statbar-value"><strong>1</strong> / 5</div>
+    </div>
+    <div class="statbar-row" title="🎨 Arts &amp; Workshops: 0 of 4 listed events became a Top 3 pick">
+      <div class="statbar-name">🎨 Arts &amp; Workshops</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 3.5%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 4</div>
+    </div>
+    <div class="statbar-row" title="📚 Literary: 1 of 2 listed events became a Top 3 pick">
+      <div class="statbar-name">📚 Literary</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-top3" style="width: 0.9%"></span>
+        <span class="statbar-fill statbar-rest" style="width: 0.9%"></span>
+      </div>
+      <div class="statbar-value"><strong>1</strong> / 2</div>
+    </div>
+    <div class="statbar-row" title="🌿 Markets &amp; Outdoors: 0 of 1 listed events became a Top 3 pick">
+      <div class="statbar-name">🌿 Markets &amp; Outdoors</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 0.9%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 1</div>
+    </div>
+    <div class="statbar-row" title="🎪 Festivals &amp; Major Events: 0 of 1 listed events became a Top 3 pick">
+      <div class="statbar-name">🎪 Festivals &amp; Major Events</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 0.9%"></span>
+      </div>
+      <div class="statbar-value"><strong>0</strong> / 1</div>
+    </div>
+  </div>
+
+  <div class="stats-block">
+    <h3 class="stats-block-title">By source</h3>
+    <div class="statbar-row" title="The Key by WXPN supplied 99 of this week's listed events">
+      <div class="statbar-name">The Key by WXPN</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 100.0%"></span>
+      </div>
+      <div class="statbar-value">99</div>
+    </div>
+    <div class="statbar-row" title="Philadelphia Film Society supplied 13 of this week's listed events">
+      <div class="statbar-name">Philadelphia Film Society</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 13.1%"></span>
+      </div>
+      <div class="statbar-value">13</div>
+    </div>
+    <div class="statbar-row" title="Iffy Books supplied 9 of this week's listed events">
+      <div class="statbar-name">Iffy Books</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 9.1%"></span>
+      </div>
+      <div class="statbar-value">9</div>
+    </div>
+    <div class="statbar-row" title="Meetup supplied 9 of this week's listed events">
+      <div class="statbar-name">Meetup</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 9.1%"></span>
+      </div>
+      <div class="statbar-value">9</div>
+    </div>
+    <div class="statbar-row" title="PhilaMOCA supplied 7 of this week's listed events">
+      <div class="statbar-name">PhilaMOCA</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 7.1%"></span>
+      </div>
+      <div class="statbar-value">7</div>
+    </div>
+    <div class="statbar-row" title="Luma supplied 6 of this week's listed events">
+      <div class="statbar-name">Luma</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 6.1%"></span>
+      </div>
+      <div class="statbar-value">6</div>
+    </div>
+    <div class="statbar-row" title="Phillygoth.net supplied 6 of this week's listed events">
+      <div class="statbar-name">Phillygoth.net</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 6.1%"></span>
+      </div>
+      <div class="statbar-value">6</div>
+    </div>
+    <div class="statbar-row" title="R5 Productions supplied 6 of this week's listed events">
+      <div class="statbar-name">R5 Productions</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 6.1%"></span>
+      </div>
+      <div class="statbar-value">6</div>
+    </div>
+    <div class="statbar-row" title="The Rotunda supplied 6 of this week's listed events">
+      <div class="statbar-name">The Rotunda</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 6.1%"></span>
+      </div>
+      <div class="statbar-value">6</div>
+    </div>
+    <div class="statbar-row" title="Lightbox Film Center supplied 2 of this week's listed events">
+      <div class="statbar-name">Lightbox Film Center</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 2.0%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="Philly Ask A Punk supplied 2 of this week's listed events">
+      <div class="statbar-name">Philly Ask A Punk</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 2.0%"></span>
+      </div>
+      <div class="statbar-value">2</div>
+    </div>
+    <div class="statbar-row" title="Wooden Shoe Books supplied 1 of this week's listed events">
+      <div class="statbar-name">Wooden Shoe Books</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 1.0%"></span>
+      </div>
+      <div class="statbar-value">1</div>
+    </div>
+    <div class="statbar-row" title="cinéSPEAK supplied 1 of this week's listed events">
+      <div class="statbar-name">cinéSPEAK</div>
+      <div class="statbar-track">
+        <span class="statbar-fill statbar-rest" style="width: 1.0%"></span>
+      </div>
+      <div class="statbar-value">1</div>
+    </div>
+  </div>
+
+  <p class="stats-health">
+    21 sources collected · 15 contributed events ·
+    none below their expected floor
+  </p>
+
+  <!-- SOURCES FOOTER -->
+  <div class="sources">
+    <a href="https://do215.com" class="source-silent">Do215</a> ·
+    <a href="https://lightboxfilmcenter.org">Lightbox Film Center</a><span class="source-count">2</span> ·
+    <a href="https://cinesp.net">cinéSPEAK</a><span class="source-count">1</span> ·
+    <a href="https://filmadelphia.org">Philadelphia Film Society</a><span class="source-count">13</span> ·
+    <a href="https://philamoca.org">PhilaMOCA</a><span class="source-count">7</span> ·
+    <a href="https://phillygoth.net">Phillygoth.net</a><span class="source-count">6</span> ·
+    <a href="https://www.philly-shows.com" class="source-silent">Philly-Shows.com</a> ·
+    <a href="https://iffybooks.net">Iffy Books</a><span class="source-count">9</span> ·
+    <a href="https://woodenshoebooks.org">Wooden Shoe Books</a><span class="source-count">1</span> ·
+    <a href="https://therotunda.org">The Rotunda</a><span class="source-count">6</span> ·
+    <a href="https://r5productions.com">R5 Productions</a><span class="source-count">6</span> ·
+    <a href="https://philly.askapunk.net">Philly Ask A Punk</a><span class="source-count">2</span> ·
+    <a href="https://xpn.org">The Key by WXPN</a><span class="source-count">99</span> ·
+    <a href="https://meetup.com">Meetup</a><span class="source-count">9</span> ·
+    <a href="https://lu.ma">Luma</a><span class="source-count">6</span> ·
+    <a href="https://calendar.google.com" class="source-silent">Google Calendar</a>
+  </div>
+  <p class="sources-failure">⚠️ do215 unavailable this week (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json)) — events from that source may be missing.</p>
+
+</div>
+</body>
+</html>
