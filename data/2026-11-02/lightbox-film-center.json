@@ -1,0 +1,24 @@
+{
+  "source": "Lightbox Film Center",
+  "collected_at": "2026-11-01T14:24:39.260283+00:00",
+  "events": [
+    {
+      "title": "A. Rimbaud",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/a-rimbaud",
+      "description": "Philadelphia Premiere"
+    },
+    {
+      "title": "Falling Leaves",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-11-08",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/falling-leaves",
+      "description": "New Restoration"
+    }
+  ]
+}

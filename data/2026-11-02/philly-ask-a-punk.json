@@ -1,0 +1,26 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-11-01T14:24:25.702367+00:00",
+  "events": [
+    {
+      "title": "Benefit Show SPAC x Homies Helping Homies",
+      "venue": "Homies Helping Homies Garage (2444 W Ritner St)",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/benefit-show-spac-x-homies-helping-homies",
+      "description": "metal / philadelphia / punk / screamo",
+      "venue_address": "2444 W Ritner St"
+    },
+    {
+      "title": "Housie (rva), Sediment, Insectoids",
+      "venue": "Sanctuary (West Philly)",
+      "date": "2026-11-07",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/housie-rva-sediment-insectoids",
+      "description": "OUT OF TOWN BAND / crust / hardcore punk",
+      "venue_address": "West Philly"
+    }
+  ]
+}

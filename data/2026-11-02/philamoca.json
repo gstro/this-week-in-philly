@@ -1,0 +1,69 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-11-01T14:24:32.821857+00:00",
+  "events": [
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-02",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk."
+    },
+    {
+      "title": "Godzilla Day 2026",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-03",
+      "time": "7:00, 7:30",
+      "cost": "",
+      "url": "https://www.etix.com/ticket/p/31065160/",
+      "description": "16mm screening of GODZILLA VS THE SMOG MONSTER plus trailers, shorts, and special guest kaiju!"
+    },
+    {
+      "title": "NASH THE SLASH RISES AGAIN!",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-04",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/66382982/",
+      "description": ""
+    },
+    {
+      "title": "Oldest Sea",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-05",
+      "time": "7:00, 7:30",
+      "cost": "$15",
+      "url": "https://www.etix.com/ticket/p/54049261/",
+      "description": ""
+    },
+    {
+      "title": "The Late(ish) Poetry Show",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-06",
+      "time": "8:00, 8:30",
+      "cost": "$15\u2013$25",
+      "url": "https://www.thephillypigeon.org/",
+      "description": ""
+    },
+    {
+      "title": "Human Wannabes Anniversary: Anime Music Party",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-07",
+      "time": "7:00, 7:30",
+      "cost": "$10",
+      "url": "https://events.ticketleap.com/tickets/human-wannabes/human-wannabes-nov-2026-4th-anime-game-live-music-party",
+      "description": ""
+    },
+    {
+      "title": "The Variety Show IV",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-08",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/97241528/",
+      "description": ""
+    }
+  ]
+}

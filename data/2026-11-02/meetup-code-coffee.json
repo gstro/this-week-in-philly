@@ -1,0 +1,15 @@
+{
+  "source": "Meetup: Code & Coffee",
+  "collected_at": "2026-11-01T14:24:35.340389+00:00",
+  "events": [
+    {
+      "title": "Claude Code Philly",
+      "venue": "(online)",
+      "date": "2026-11-07",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316048092/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n## Claude Code Saturdays \ud83e\udd16\ud83d\udcbb\n\n**A weekly hands-on meetup for builders using Claude to write, refactor, and reason about code.**\nClaude Code Saturdays is a relaxed, collaborative session for developers, founders, and tinkerers who want to explore what\u2019s possible with Anthropic\u2019s Claude for real-world coding tasks. Whether you\u2019re prototyping a new app, improving an existing codebase, or just experimenting with AI-assisted development, this meetup is a space to learn by doing.\n\n### What to Expect\n\n* \ud83e\uddd1\u200d\ud83d\udcbb **Live coding & pair-building** with Claude\n* \ud83d\udd0d **Prompting techniques** for better code generation and refactoring\n* \ud83e\udde0 **Reasoning-heavy tasks**: debugging, architecture, tests, and docs\n* \ud83d\ude80 **Show & tell**: share what you\u2019re building or stuck on\n* \u2615 **Casual, friendly atmosphere**\u2014bring your laptop and curiosity\n\n### Who Should Attend\n\n* Software engineers (any level)\n* Startup founders and indie hackers\n* Students learning to code with AI\n* Anyone curious about AI-assisted development with Claude\n\nYou don\u2019t need to be an expert\u2014just a willingness to experiment and learn together.\n\n### What to Bring\n\n* A laptop\n* A project, idea, or problem (optional but encouraged)\n* Access to Claude (or just come observe and discuss)\n\nLet\u2019s spend our Saturdays building smarter, faster, and more thoughtfully\u2014with Claude as our coding companion.\n\ud83d\udc49 **RSVP and join us for Claude Code Saturdays!**"
+    }
+  ]
+}

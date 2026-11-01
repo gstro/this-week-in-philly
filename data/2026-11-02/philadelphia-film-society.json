@@ -1,0 +1,123 @@
+{
+  "source": "Philadelphia Film Society",
+  "collected_at": "2026-11-01T14:24:58.915290+00:00",
+  "events": [
+    {
+      "title": "THE COOK, THE THIEF, HIS WIFE & HER LOVER",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-11-04",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 55 min."
+    },
+    {
+      "title": "James and the Giant Peach",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-11-07",
+      "time": "2:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated PG. Runtime: 1 hr 20 min."
+    },
+    {
+      "title": "Little Odessa",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-11-07",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 14 min."
+    },
+    {
+      "title": "Smoke",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-11-07",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 52 min."
+    },
+    {
+      "title": "THE COOK, THE THIEF, HIS WIFE & HER LOVER",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-11-07",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 55 min."
+    },
+    {
+      "title": "Gandahar (1987)",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-11-07",
+      "time": "9:15 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated PG. Runtime: 1 hr 25 min."
+    },
+    {
+      "title": "Fatherland (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "4:00 PM, 6:10 PM, 8:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 22 min."
+    },
+    {
+      "title": "Wicker (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "3:30 PM, 6:00 PM, 8:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 45 min."
+    },
+    {
+      "title": "The Only Living Pickpocket in New York (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "4:30 PM, 6:40 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 28 min."
+    },
+    {
+      "title": "You Can See Everything (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "3:45 PM, 7:45 PM, 8:15 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 2 hr 54 min."
+    },
+    {
+      "title": "Fjord (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "4:15 PM, 7:20 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 2 hr 26 min."
+    },
+    {
+      "title": "You Can See Everything (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 2 hr 54 min."
+    },
+    {
+      "title": "Naza (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "3:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 17 min."
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "week": "2026-11-02",
+  "date": "2026-11-08",
+  "collection_failures": [
+    "do215 (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json))"
+  ],
+  "candidates": [
+    {
+      "title": "🧵 Anarchist Sewing Club",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-11-08",
+      "time": "3:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNyamdiOWg2c3NqOGM5bDYwbzMwYzFkNjRyamlkMWg2a3JqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Interested in learning to sew, mend or make clothes? Already know how and wanna hang out with people while sewing? Come and join us! Sewing supplies and a sewing machine will be available for anyone needing them.\n  \nImage credit",
+      "source": "Iffy Books",
+      "id": "c0008"
+    },
+    {
+      "title": "🏠 IndieWeb Homebrew Website Club",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-11-08",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFsNjByMzhiOWg2c3NqOGM5bTYwczMwYzFkNjRyamlkMWg2b3MzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Homebrew Website Club is a growing world-wide network of meetups for everyone who wants to take back their web experience from social media silos, and own their online identities & content, or just want support with blogging!",
+      "source": "Iffy Books",
+      "id": "c0009"
+    },
+    {
+      "title": "Falling Leaves",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-11-08",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/falling-leaves",
+      "description": "New Restoration",
+      "source": "Lightbox Film Center",
+      "id": "c0011"
+    },
+    {
+      "title": "diy bookmarks w/ lamcha matcha",
+      "venue": "915 Spring Garden St, Philadelphia, PA 19123, USA",
+      "date": "2026-11-08",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "",
+      "description": "Get up-to-date information at: https://luma.com/3z1avs3m\n\nAddress:\n915 Spring Garden St\nthe entrance for club is on percy street located in the same building as triple bottom. there are 2 steps to enter the building, but once inside there is an elevator. we open doors for club 5 minutes prior to the start time and close the doors 15 minutes after. please allow time for parking and transportation!\nPhiladelphia, Pennsylvania\nUnited States\n\njoin us for our matcha cafe with lamcha, while we spend the afternoon creating bookmarks, swapping books, and drinking matcha!\nall materials are included, and…",
+      "source": "Luma",
+      "id": "c0018"
+    },
+    {
+      "title": "TV SHOW NIGHT: Dexter: Resurrection - Season 2",
+      "venue": "(online)",
+      "date": "2026-11-08",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317140692/",
+      "description": "Philadelphia Area Horror Meetup Group\nCome watch the new Dexter season! We'll join together every Sunday at 9pm to stream!\n\n**DEXTER: RESURRECTION: Season 2**\n\n* **November 1 - Episode 1**\n* **November 8 - Episode 2**\n* **November 15 - Episode 3**\n* **November 22 - Episode 4**\n* **November 29 - Episode 5**\n* **December 6 - Episode 6**\n* **December 13 - Episode 7**\n* **December 20 - Episode 8**\n* **December 27 - Episode 9**\n* **January 3 - Episode 10**",
+      "source": "Meetup: Philadelphia Horror",
+      "id": "c0027"
+    },
+    {
+      "title": "The Variety Show IV",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-08",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/97241528/",
+      "description": "",
+      "source": "PhilaMOCA",
+      "id": "c0047"
+    },
+    {
+      "title": "Black Squirrel Noir",
+      "venue": "Black Squirrel Club, 1049 Sarah St",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/black-squirrel-noir/",
+      "description": "6pm-10pm, $10 adv / $15 DOS Featuring: DJs Kathy Fadigan, Jon Gill, & EGBIII spinning alternative, New Wave, & goth Links: Facebook event",
+      "source": "Phillygoth.net",
+      "id": "c0055"
+    },
+    {
+      "title": "In-person! Nuevo mundo (1978, Not Rated, 1h 35min) + workshop on ancestral connection and syncretism",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-11-08",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/nuevo-mundo",
+      "description": "In-person! Nuevo mundo (1978, Not Rated, 1h 35min) + workshop on ancestral connection and syncretism",
+      "source": "The Rotunda",
+      "id": "c0067"
+    },
+    {
+      "title": "Lia Menaker / Kuf Knotz & Christine Elise / Brittany Ann Tranbaugh",
+      "venue": "Johnny Brenda’s",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/lia-menaker-kuf-knotz-christine-elise-brittany-ann-tranbaugh/",
+      "description": "WXPN Welcomes",
+      "source": "WXPN",
+      "id": "c0163"
+    },
+    {
+      "title": "the olllam (feat. Joe Dart)",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-olllam-feat-joe-dart/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0164"
+    },
+    {
+      "title": "New Constellations / Vox Rea",
+      "venue": "Brooklyn Bowl",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/new-constellations-vox-rea/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0165"
+    },
+    {
+      "title": "Breakwater",
+      "venue": "City Winery",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/breakwater/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0166"
+    },
+    {
+      "title": "KIDZ BOP Daytime Dance Party",
+      "venue": "The Queen",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/kidz-bop-daytime-dance-party/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0167"
+    },
+    {
+      "title": "Deerhoof / Eraser / Nympho",
+      "venue": "Underground Arts",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/deerhoof-eraser-nympho/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0168"
+    },
+    {
+      "title": "George Clanton / Ryan Hemsworth",
+      "venue": "Union Transfer",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/george-clanton-ryan-hemsworth/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0169"
+    },
+    {
+      "title": "GCS feat. Eric Gales, Dennis Chambers & Billy Sheehan",
+      "venue": "The Grand",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/gcs-feat-eric-gales-dennis-chambers-billy-sheehan/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0170"
+    },
+    {
+      "title": "Joe Deninzon & Stratospheerius / Jane Getter Premonition",
+      "venue": "Kennett Flash",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/joe-dennison-stratospheerius-jane-getter-premonition/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0171"
+    },
+    {
+      "title": "Lake Drive / Nightbreakers / Moonroof",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/lake-drive-nightbreakers-moonroof/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0172"
+    },
+    {
+      "title": "Archer Oh / Integra Pink",
+      "venue": "Nikki Lopez",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/archer-oh-integra-pink/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0173"
+    },
+    {
+      "title": "Bad Static / Soji / Froggy",
+      "venue": "Ortlieb’s",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/bad-static-soji-froggy/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0174"
+    },
+    {
+      "title": "Robbie Fulks / Heather Maloney",
+      "venue": "Sellersville Theater",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/robbie-fulks-heather-maloney/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0175"
+    },
+    {
+      "title": "PHER",
+      "venue": "SOUTH Jazz Club",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/pher/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0176"
+    },
+    {
+      "title": "Michigander / Wildermiss",
+      "venue": "The Foundry",
+      "date": "2026-11-08",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/michigander-wildermiss/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0177"
+    }
+  ]
+}
