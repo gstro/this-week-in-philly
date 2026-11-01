@@ -1,0 +1,1203 @@
+{
+  "week": "2026-11-02",
+  "collection_failures": [
+    "do215 (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json))"
+  ],
+  "days": [
+    {
+      "date": "2026-11-02",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0056",
+          "rank": 1,
+          "time": "8:00 PM",
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "AJJ (Andrew Jackson Jihad) bring their Dirty Old Power tour to Philly's most storied punk venue, with Greet Death opening. Folk-punk with teeth and a political streak, all ages, at a church that's hosted hardcore and DIY shows for decades. Doors 7:30, show 8; $33.02."
+        },
+        {
+          "id": "c0000",
+          "rank": 2,
+          "time": "7:00 PM",
+          "address": "319 N 11th St, Philadelphia, PA 19107",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Palestine Cinema Days returns with \"Foragers,\" a documentary feature screening at Vox Populi, the artist-run gallery and project space in Chinatown North. A film program with explicit political stakes rather than a passive watch -- exactly the kind of screening easy to miss outside a dedicated series like this."
+        },
+        {
+          "id": "c0013",
+          "rank": 3,
+          "time": "7:00 PM",
+          "address": "1522 Latimer St, Philadelphia, PA 19102",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Thirty years of \"Big Night,\" Stanley Tucci and Campbell Scott's beloved Jersey Shore food film, celebrated with a screening and three Philly chefs' own takes on the movie's showpiece timpano. A members' press club turning a cult food movie into an actual tasting is the kind of unrepeatable mashup worth building a Monday around."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0062"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0056",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0000",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0013",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0062",
+          "category": "🎵 Music & Concerts",
+          "sold_out": true,
+          "note": "Ritualistic drone/noise duo Ak'chamel, in from Texas; already sold out."
+        },
+        {
+          "id": "c0001",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Twice-monthly hangout (1st/3rd Mondays) for trans and non-binary folks, their partners, and allies. Snacks and coffee provided."
+        },
+        {
+          "id": "c0012",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Pack seed packets for next year's citywide native-plant seed giveaway; beer and pretzels provided."
+        },
+        {
+          "id": "c0022",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online group watch of the third Nightmare on Elm Street, hosted by the Philadelphia horror meetup."
+        },
+        {
+          "id": "c0041",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "$5 at the door; programmers warn it may contain extreme subject matter."
+        },
+        {
+          "id": "c0070",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0071",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0072",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0042",
+          "rank": 1,
+          "time": "7:00 PM",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A 16mm print of \"Godzilla vs. the Smog Monster\" plus trailers, shorts, and a special guest kaiju in costume -- the kind of gloriously weird double feature PhilaMOCA exists for. In Callowhill just above Chinatown; the Broad Street Line's Spring Garden stop is the closest way in."
+        },
+        {
+          "id": "c0081",
+          "rank": 2,
+          "time": "7:30 PM",
+          "address": "300 S Broad St, Philadelphia, PA 19102",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Pianist Aaron Diehl, one of the most acclaimed jazz musicians of his generation, pairs with composer-pianist Timo Andres for a classical/jazz crossover recital at the Kimmel Center's Perelman Theatre -- a genuinely rare bill in an intimate room built for exactly this kind of listening."
+        },
+        {
+          "id": "c0058",
+          "rank": 3,
+          "time": "8:00 PM",
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Hovvdy's Big World Tour lands at First Unitarian on the strength of a genuinely devoted indie following. Doors 7:30, show 8; $30.96."
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0042",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0081",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0058",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0002",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Three 40-minute silent-writing blocks with 10-minute breaks and accountability check-ins; BYO coffee and chargers."
+        },
+        {
+          "id": "c0023",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online double feature: Nightmare on Elm Street 4 and 5, hosted by the Philadelphia horror meetup."
+        },
+        {
+          "id": "c0057",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0073",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0074",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0075",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0076",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0079",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0080",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0043",
+          "rank": 1,
+          "time": "7:00 PM",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Nash the Slash -- the mummy-bandaged, gas-masked Canadian avant-garde violinist and glass-harmonica player -- built a cult following over four decades before his death in 2014; this is most likely a tribute night resurrecting his persona and catalog rather than the man himself, but PhilaMOCA is exactly the room built for that stunt. $12, two sets (7:00 and 7:30). In Callowhill just above Chinatown; the Broad Street Line's Spring Garden stop is the closest way in."
+        },
+        {
+          "id": "c0068",
+          "rank": 2,
+          "time": "6:00 PM",
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The National Lawyers Guild runs a practical know-your-rights-and-risks training at Wooden Shoe Books -- exactly the kind of civic-defense programming the anarchist bookstore's political-education line is built around, and genuinely useful beyond the evening itself."
+        },
+        {
+          "id": "c0010",
+          "rank": 3,
+          "time": "7:00 PM",
+          "address": "800 Mifflin St, Philadelphia, PA 19148",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Lightbox Film Center brings its Philadelphia premiere of \"A. Rimbaud\" to Bok, pairing the city's premier repertory/arthouse programmer with a film named for the poet -- a literary subject getting a cinephile's treatment rather than a biopic gloss."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0028"
+        },
+        {
+          "id": "c0064"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0043",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0068",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0010",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0028",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated R. Runtime: 1 hr 55 min."
+        },
+        {
+          "id": "c0064",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0003",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Hands-on VHS and audio-cassette analog/digital transfer session; donation-based, $5-$15 recommended."
+        },
+        {
+          "id": "c0014",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Make polymer-clay garlands; building entrance is on Percy St, two steps up but an elevator inside."
+        },
+        {
+          "id": "c0020",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "DC215's AppSec Village talk on reverse-engineering a legacy licensing system via database, web-proxy, and .NET disassembly."
+        },
+        {
+          "id": "c0024",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online double feature: Freddy's Dead: The Final Nightmare and Wes Craven's New Nightmare."
+        },
+        {
+          "id": "c0034",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated Not Rated. Runtime: 1 hr 22 min."
+        },
+        {
+          "id": "c0035",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated R. Runtime: 1 hr 45 min."
+        },
+        {
+          "id": "c0036",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated R. Runtime: 1 hr 28 min."
+        },
+        {
+          "id": "c0037",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated R. Runtime: 2 hr 54 min."
+        },
+        {
+          "id": "c0038",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated R. Runtime: 2 hr 54 min."
+        },
+        {
+          "id": "c0039",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated Not Rated. Runtime: 2 hr 26 min."
+        },
+        {
+          "id": "c0040",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated Not Rated. Runtime: 1 hr 17 min."
+        },
+        {
+          "id": "c0063",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Rotunda's standing Wednesday improvised-music drop-in jam."
+        },
+        {
+          "id": "c0082",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0084",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0085",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0086",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0087",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0088",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0089",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0090",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0091",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0092",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0093",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0100",
+          "rank": 1,
+          "time": "6:00 PM",
+          "address": "990 Filbert St, Philadelphia, PA 19107",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Kamasi Washington -- the GRAMMY-nominated saxophonist and bandleader who helped drive jazz's biggest crossover moment in a decade -- plays two sets with Ami Taf Ra. A genuinely rare, must-see booking for a City Winery date; confirmed for 6:00 PM and 9:30 PM."
+        },
+        {
+          "id": "c0005",
+          "rank": 2,
+          "time": "6:30 PM",
+          "address": "404 S. 20th St, Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Philly Electronic Music Club walks total beginners through Strudel, a live-coding language for music, ending in a group jam session. Software, DIY culture, and music collapse into one free evening at Iffy Books -- no programming experience required."
+        },
+        {
+          "id": "c0004",
+          "rank": 3,
+          "time": "2:30 PM",
+          "address": "404 S. 20th St, Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A beginner soldering workshop building a modded 3.5mm audio aux cable with a volume knob -- approachable, hands-on DIY electronics at Iffy Books for the cost of a $4.86 kit plus a pay-what-you-can instructor donation."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0059"
+        },
+        {
+          "id": "c0044"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0100",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0005",
+          "category": "💻 Tech & Maker",
+          "sold_out": false
+        },
+        {
+          "id": "c0004",
+          "category": "💻 Tech & Maker",
+          "sold_out": false
+        },
+        {
+          "id": "c0059",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0044",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "With Bruise Bath, ShyGodwin, and Diuretic."
+        },
+        {
+          "id": "c0065",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Greek/Anatolian-inflected project centered on Smyrna-era history and migration."
+        },
+        {
+          "id": "c0050",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "21+, 9pm, $10. DJs Michael Mythix and Dr. Octo-Pussy; in Wilmington, DE."
+        },
+        {
+          "id": "c0094",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0095",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0097",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0098",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0099",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0102",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0103",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0104",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0105",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0106",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0107",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0108",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0109",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0110",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0111",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0048",
+          "rank": 1,
+          "time": "7:00 PM",
+          "address": "2444 W Ritner St, Philadelphia, PA 19145",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A metal/punk/screamo benefit show for Homies Helping Homies at their own South Philly garage space -- small, all-ages, and run for mutual aid rather than profit. Exactly the DIY, easy-to-miss show the punk and hardcore interest is built to catch."
+        },
+        {
+          "id": "c0045",
+          "rank": 2,
+          "time": "8:00 PM",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Philly Pigeon's Late(ish) Poetry Show brings spoken word to PhilaMOCA's oddball stage -- $15-25, two sets starting at 8:00 and 8:30. In Callowhill just above Chinatown; the Broad Street Line's Spring Garden stop is the closest way in."
+        },
+        {
+          "id": "c0060",
+          "rank": 3,
+          "time": "8:00 PM",
+          "address": "1906 S Rittenhouse Square, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A special seated solo show from Basia Bulat at the Philadelphia Ethical Society on Rittenhouse Square -- an intimate room for a songwriter who usually plays with a full band. Doors 7:30, show 8; $37.14."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0136"
+        },
+        {
+          "id": "c0131"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0048",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0045",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0060",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0136",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Free, no ticket -- WXPN's Free At Noon series."
+        },
+        {
+          "id": "c0131",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0006",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Monthly gathering of local hackers, phreaks, infosec folks, and tinkerers."
+        },
+        {
+          "id": "c0021",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Show off a project -- war-driving rig, Flipper Zero, or whatever you're tinkering with -- or just come hang out."
+        },
+        {
+          "id": "c0025",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Streamed watch-along ahead of seeing the sequel in person; 2023, Japanese with subtitles."
+        },
+        {
+          "id": "c0051",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "21+, 9pm-2am, $10 adv / $15 DOS. DJs Baby Berlin and Alex English."
+        },
+        {
+          "id": "c0052",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "21+. DJ Xris SMack!."
+        },
+        {
+          "id": "c0113",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0114",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0115",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0116",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0118",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0119",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0121",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0122",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0123",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0124",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0125",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0127",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0128",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0129",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0130",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0132",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0133",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0134",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0137",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0138",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0139",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0140",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0141",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-07",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0061",
+          "rank": 1,
+          "time": "8:00 PM",
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": true,
+          "why": "William Basinski performs \"The Disintegration Loops\" live for its 25th anniversary -- a seated show for one of modern ambient music's most significant, elegiac works, at a venue built for exactly this kind of event. Already sold out, but worth knowing about regardless. Doors 7:30, show 8."
+        },
+        {
+          "id": "c0066",
+          "rank": 2,
+          "time": "1:00 PM",
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "The second annual Philadelphia Modular Synth Fest brings five area modular/eurorack performers to The Rotunda -- DIY electronics and experimental music overlap directly, and an annual one-off like this is exactly the kind of Rotunda booking worth elevating over its standing weeklies."
+        },
+        {
+          "id": "c0049",
+          "rank": 3,
+          "time": "7:00 PM",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Housie, Sediment, and Insectoids play crust/hardcore punk at Sanctuary, a DIY all-ages space in West Philly, with an out-of-town band on the bill. Further out than University City proper -- reachable via the Baltimore Ave or Chester Ave trolleys, or the El to 40th St and a bus/walk from there."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0046"
+        },
+        {
+          "id": "c0032"
+        },
+        {
+          "id": "c0054"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0061",
+          "category": "🎵 Music & Concerts",
+          "sold_out": true
+        },
+        {
+          "id": "c0066",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0049",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Crust/hardcore punk; Housie is an out-of-town touring band."
+        },
+        {
+          "id": "c0046",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0032",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated R. Runtime: 1 hr 52 min."
+        },
+        {
+          "id": "c0054",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "21+, 8pm-1am, $5 cover before 9pm / $10 after. DJ Robert Drake."
+        },
+        {
+          "id": "c0007",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "No-solder build of a pocket digital notebook on a breadboard, using a Seeed XIAO ESP32-S3, OLED display, and microSD reader."
+        },
+        {
+          "id": "c0016",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Mutual-aid repair cafe -- bring a broken lamp to fix, or restore a donated vintage one to take home."
+        },
+        {
+          "id": "c0017",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Beginner-friendly 2-hour watercolor class covering brush control, color mixing, and wet-on-wet blending."
+        },
+        {
+          "id": "c0019",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Weekly hands-on build/pair-coding session using Claude for real-world projects."
+        },
+        {
+          "id": "c0026",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online group watch of the 2026 Godzilla Minus Zero ahead of dinner, hosted by the Philadelphia horror meetup."
+        },
+        {
+          "id": "c0029",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated R. Runtime: 1 hr 55 min."
+        },
+        {
+          "id": "c0030",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated PG. Runtime: 1 hr 20 min."
+        },
+        {
+          "id": "c0031",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated R. Runtime: 14 min."
+        },
+        {
+          "id": "c0033",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Rated PG. Runtime: 1 hr 25 min."
+        },
+        {
+          "id": "c0053",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "11am-3pm, included with museum admission."
+        },
+        {
+          "id": "c0117",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0120",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0126",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0135",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0143",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0144",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0146",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0147",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0148",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0149",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0150",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0151",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0152",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0153",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0154",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0155",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0157",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0158",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0159",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0160",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0161",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0162",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-08",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0011",
+          "rank": 1,
+          "time": "5:00 PM",
+          "address": "800 Mifflin St, Philadelphia, PA 19148",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Lightbox Film Center screens a new restoration of \"Falling Leaves\" at Bok -- the kind of repertory/preservation booking that justifies Lightbox's place on the elevated-venue list, and a rare chance to see a restored print theatrically."
+        },
+        {
+          "id": "c0067",
+          "rank": 2,
+          "time": "6:00 PM",
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A screening of \"Nuevo mundo\" (1978) paired with a workshop on ancestral connection and syncretism -- film and community cultural practice combined at The Rotunda, exactly the kind of one-off programming the venue's elevation is meant to reward."
+        },
+        {
+          "id": "c0168",
+          "rank": 3,
+          "time": "8:00 PM",
+          "address": "1200 Callowhill St, Philadelphia, PA 19107",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Deerhoof -- the long-running, critically adored noise-rock/experimental outfit -- play Underground Arts with Eraser and Nympho opening. Decades in and still genuinely strange, a textbook \"talked about afterward\" booking. In Callowhill, a few blocks above Chinatown; the Broad Street Line's Spring Garden stop is the closest way in."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0047"
+        },
+        {
+          "id": "c0055"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0011",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0067",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0168",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0047",
+          "category": "🎪 Festivals & Major Events",
+          "sold_out": false
+        },
+        {
+          "id": "c0055",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "6pm-10pm, $10 adv / $15 DOS. DJs Kathy Fadigan, Jon Gill, and EGBIII spinning alternative, New Wave, and goth."
+        },
+        {
+          "id": "c0008",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Sewing/mending meetup -- machines and supplies provided for anyone who needs them."
+        },
+        {
+          "id": "c0009",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Worldwide meetup network for people building their own websites and blogs outside social-media platforms."
+        },
+        {
+          "id": "c0018",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Matcha cafe pop-up while making bookmarks and swapping books."
+        },
+        {
+          "id": "c0027",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Weekly group stream of the new Dexter season, online."
+        },
+        {
+          "id": "c0163",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0164",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0165",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0166",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0167",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0169",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0170",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0171",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0172",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0173",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0174",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0175",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0176",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0177",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    }
+  ]
+}
