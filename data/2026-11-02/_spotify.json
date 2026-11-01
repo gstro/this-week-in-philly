@@ -1,48 +1,6 @@
 {
   "2026 Solo Tour | A Special Seated Evening with | Basia Bulat": null,
   "25 Years of 'The Disintegration Loops' | A Special Seated Show with | William Basinski": null,
-  "Akeem Ali": {
-    "artists": [
-      {
-        "matched_text": "Akeem Ali",
-        "spotify_url": "https://open.spotify.com/artist/5aTVaxCp68WGSX8qRkVM3X"
-      }
-    ],
-    "matched_text": "Akeem Ali",
-    "spotify_url": "https://open.spotify.com/artist/5aTVaxCp68WGSX8qRkVM3X"
-  },
-  "Ali Tod / Andrea Nardello": {
-    "artists": [
-      {
-        "matched_text": "Ali Tod",
-        "spotify_url": "https://open.spotify.com/artist/7maZpvtQ85u1NNcT5PB0BA"
-      },
-      {
-        "matched_text": "Andrea Nardello",
-        "spotify_url": "https://open.spotify.com/artist/1kZ5zpsZ87dkLtwBBGbrKg"
-      }
-    ],
-    "matched_text": "Ali Tod",
-    "spotify_url": "https://open.spotify.com/artist/7maZpvtQ85u1NNcT5PB0BA"
-  },
-  "Alter Bridge / Big Wreck / Tim Montana": {
-    "artists": [
-      {
-        "matched_text": "Alter Bridge",
-        "spotify_url": "https://open.spotify.com/artist/4DWX7u8BV0vZIQSpJQQDWU"
-      },
-      {
-        "matched_text": "Big Wreck",
-        "spotify_url": "https://open.spotify.com/artist/557SGrCJ59ysjCE1xjVZbS"
-      },
-      {
-        "matched_text": "Tim Montana",
-        "spotify_url": "https://open.spotify.com/artist/5RM955coCWa6UkFtlMapwC"
-      }
-    ],
-    "matched_text": "Alter Bridge",
-    "spotify_url": "https://open.spotify.com/artist/4DWX7u8BV0vZIQSpJQQDWU"
-  },
   "Ami Taf Ra & Kamasi Washington": {
     "artists": [
       {
@@ -57,79 +15,15 @@
     "matched_text": "Ami Taf Ra",
     "spotify_url": "https://open.spotify.com/artist/2KiesFSnD8ccUdEeZZOo4q"
   },
-  "Archer Oh / Integra Pink": {
-    "artists": [
-      {
-        "matched_text": "Archer Oh",
-        "spotify_url": "https://open.spotify.com/artist/0X9Bm4IwV18URXuurahcug"
-      },
-      {
-        "matched_text": "Integra Pink",
-        "spotify_url": "https://open.spotify.com/artist/1u2cERy6KQfYhxpEowrCFy"
-      }
-    ],
-    "matched_text": "Archer Oh",
-    "spotify_url": "https://open.spotify.com/artist/0X9Bm4IwV18URXuurahcug"
-  },
-  "Babehoven / Jane Lai": {
+  "Babehoven": {
     "artists": [
       {
         "matched_text": "Babehoven",
         "spotify_url": "https://open.spotify.com/artist/3Yjr5lVbAr2Fe7Lmpwja70"
-      },
-      {
-        "matched_text": "Jane Lai",
-        "spotify_url": "https://open.spotify.com/artist/14I5ceHnb49Zvng1V6li2o"
       }
     ],
     "matched_text": "Babehoven",
     "spotify_url": "https://open.spotify.com/artist/3Yjr5lVbAr2Fe7Lmpwja70"
-  },
-  "Bad Static / Soji / Froggy": {
-    "artists": [
-      {
-        "matched_text": "Bad Static",
-        "spotify_url": "https://open.spotify.com/artist/5k5AaSliWze7UUGI1JJzMF"
-      },
-      {
-        "matched_text": "Soji",
-        "spotify_url": "https://open.spotify.com/artist/0SHGv6oqFOlCft8lU3fL4w"
-      },
-      {
-        "matched_text": "Froggy",
-        "spotify_url": "https://open.spotify.com/artist/56XPNd00el3UReEbg94ynV"
-      }
-    ],
-    "matched_text": "Bad Static",
-    "spotify_url": "https://open.spotify.com/artist/5k5AaSliWze7UUGI1JJzMF"
-  },
-  "Banda AL9 / Log Flume": {
-    "artists": [
-      {
-        "matched_text": "Banda AL9",
-        "spotify_url": "https://open.spotify.com/artist/1IbLVq7OjqcArp3TkgfaOX"
-      },
-      {
-        "matched_text": "Log Flume",
-        "spotify_url": "https://open.spotify.com/artist/5w3zXuQaZgipbRaFxtFwn0"
-      }
-    ],
-    "matched_text": "Banda AL9",
-    "spotify_url": "https://open.spotify.com/artist/1IbLVq7OjqcArp3TkgfaOX"
-  },
-  "Banshee / Laila Mach": {
-    "artists": [
-      {
-        "matched_text": "Banshee",
-        "spotify_url": "https://open.spotify.com/artist/0DG7J8Q9Alnt65HJv6owzf"
-      },
-      {
-        "matched_text": "Laila Mach",
-        "spotify_url": "https://open.spotify.com/artist/7e2OOYhl3Pss82Di6WEyTQ"
-      }
-    ],
-    "matched_text": "Banshee",
-    "spotify_url": "https://open.spotify.com/artist/0DG7J8Q9Alnt65HJv6owzf"
   },
   "Bass Drum Of Death": {
     "artists": [
@@ -140,20 +34,6 @@
     ],
     "matched_text": "Bass Drum Of Death",
     "spotify_url": "https://open.spotify.com/artist/5LtAyeDVOVcydj65LvgICY"
-  },
-  "Bears Have Hearts / Flavor Wave": {
-    "artists": [
-      {
-        "matched_text": "Bears Have Hearts",
-        "spotify_url": "https://open.spotify.com/artist/7qC8YPnilF4kzTxsyG7Nv6"
-      },
-      {
-        "matched_text": "Flavor Wave",
-        "spotify_url": "https://open.spotify.com/artist/1fwNVyeaLQ7WMvv8pUPt5x"
-      }
-    ],
-    "matched_text": "Bears Have Hearts",
-    "spotify_url": "https://open.spotify.com/artist/7qC8YPnilF4kzTxsyG7Nv6"
   },
   "Benefit Show SPAC x Homies Helping Homies": null,
   "Big World Tour | Hovvdy": {
@@ -166,147 +46,20 @@
     "matched_text": "Hovvdy",
     "spotify_url": "https://open.spotify.com/artist/59RNNqeEfkq3X5pfOQxZ3C"
   },
-  "Black Violin / Jon Muq": {
+  "Bow and Arrow (Lea Bertucci + Michael Behari) & Angel Meat (Anna Young + Myles Donovan)": null,
+  "Bowerbird- Postal Pieces 3": null,
+  "Completely Yes: The Music of Stevie Wonder": null,
+  "Curtis Symphony Orchestra: Yannick Leads Mahler 9": {
     "artists": [
       {
-        "matched_text": "Black Violin",
-        "spotify_url": "https://open.spotify.com/artist/4zeHJ3kiJyjYXlIOcG4MA7"
-      },
-      {
-        "matched_text": "Jon Muq",
-        "spotify_url": "https://open.spotify.com/artist/5zAZlJoWriAEhhOlm96vPe"
+        "matched_text": "Curtis Symphony Orchestra",
+        "spotify_url": "https://open.spotify.com/artist/2KIvwxDqCvHRXdX6bbTX7F"
       }
     ],
-    "matched_text": "Black Violin",
-    "spotify_url": "https://open.spotify.com/artist/4zeHJ3kiJyjYXlIOcG4MA7"
+    "matched_text": "Curtis Symphony Orchestra",
+    "spotify_url": "https://open.spotify.com/artist/2KIvwxDqCvHRXdX6bbTX7F"
   },
-  "Blck Teeth": {
-    "artists": [
-      {
-        "matched_text": "Blck Teeth",
-        "spotify_url": "https://open.spotify.com/artist/0sMBMsAEik4Ik9M34pATGU"
-      }
-    ],
-    "matched_text": "Blck Teeth",
-    "spotify_url": "https://open.spotify.com/artist/0sMBMsAEik4Ik9M34pATGU"
-  },
-  "Blu DeTiger": {
-    "artists": [
-      {
-        "matched_text": "Blu DeTiger",
-        "spotify_url": "https://open.spotify.com/artist/5NyCIBCeU080ynEj33S4hC"
-      }
-    ],
-    "matched_text": "Blu DeTiger",
-    "spotify_url": "https://open.spotify.com/artist/5NyCIBCeU080ynEj33S4hC"
-  },
-  "Bobbyy / Akai Solo": {
-    "artists": [
-      {
-        "matched_text": "Bobbyy",
-        "spotify_url": "https://open.spotify.com/artist/4HG8rcZw0L6Buc3PVllqRH"
-      },
-      {
-        "matched_text": "Akai Solo",
-        "spotify_url": "https://open.spotify.com/artist/7cQ876SWYGtVObh8n0jXC4"
-      }
-    ],
-    "matched_text": "Bobbyy",
-    "spotify_url": "https://open.spotify.com/artist/4HG8rcZw0L6Buc3PVllqRH"
-  },
-  "Breakwater": {
-    "artists": [
-      {
-        "matched_text": "Breakwater",
-        "spotify_url": "https://open.spotify.com/artist/2yNou41pOCJ9f6U0uwRc1v"
-      }
-    ],
-    "matched_text": "Breakwater",
-    "spotify_url": "https://open.spotify.com/artist/2yNou41pOCJ9f6U0uwRc1v"
-  },
-  "Bungalow Collect": {
-    "artists": [
-      {
-        "matched_text": "Bungalow Collect",
-        "spotify_url": "https://open.spotify.com/artist/4JR4QR71dWswPhgIEeu8xJ"
-      }
-    ],
-    "matched_text": "Bungalow Collect",
-    "spotify_url": "https://open.spotify.com/artist/4JR4QR71dWswPhgIEeu8xJ"
-  },
-  "Cannelle": {
-    "artists": [
-      {
-        "matched_text": "Cannelle",
-        "spotify_url": "https://open.spotify.com/artist/0wBhtCF5VHSgXPGm7xfDtg"
-      }
-    ],
-    "matched_text": "Cannelle",
-    "spotify_url": "https://open.spotify.com/artist/0wBhtCF5VHSgXPGm7xfDtg"
-  },
-  "Carsie Blanton / The Burning Hell": {
-    "artists": [
-      {
-        "matched_text": "Carsie Blanton",
-        "spotify_url": "https://open.spotify.com/artist/1NkiZTHV6voDpcA7eEQQMb"
-      },
-      {
-        "matched_text": "The Burning Hell",
-        "spotify_url": "https://open.spotify.com/artist/09kohMK0MSHgpmKWiQeQ5E"
-      }
-    ],
-    "matched_text": "Carsie Blanton",
-    "spotify_url": "https://open.spotify.com/artist/1NkiZTHV6voDpcA7eEQQMb"
-  },
-  "Conrad Herwig / Victor North / Daniel Cohen": {
-    "artists": [
-      {
-        "matched_text": "Conrad Herwig",
-        "spotify_url": "https://open.spotify.com/artist/7xHUfrXaMkL3lRpJxO6QdI"
-      },
-      {
-        "matched_text": "Victor North",
-        "spotify_url": "https://open.spotify.com/artist/3tN9tolKxXDeSZ7FikQsHw"
-      },
-      {
-        "matched_text": "Daniel Cohen",
-        "spotify_url": "https://open.spotify.com/artist/76jyaEDOp9q0qO993cbMXh"
-      }
-    ],
-    "matched_text": "Conrad Herwig",
-    "spotify_url": "https://open.spotify.com/artist/7xHUfrXaMkL3lRpJxO6QdI"
-  },
-  "Cowboy Junkies": {
-    "artists": [
-      {
-        "matched_text": "Cowboy Junkies",
-        "spotify_url": "https://open.spotify.com/artist/3CYSRCHfilgR8DSbkCMp5j"
-      }
-    ],
-    "matched_text": "Cowboy Junkies",
-    "spotify_url": "https://open.spotify.com/artist/3CYSRCHfilgR8DSbkCMp5j"
-  },
-  "Daniel Villareal": {
-    "artists": [
-      {
-        "matched_text": "Daniel Villareal",
-        "spotify_url": "https://open.spotify.com/artist/23ttGslDbWhNOsJnJajDeG"
-      }
-    ],
-    "matched_text": "Daniel Villareal",
-    "spotify_url": "https://open.spotify.com/artist/23ttGslDbWhNOsJnJajDeG"
-  },
-  "Dave Thaker": {
-    "artists": [
-      {
-        "matched_text": "Dave Thaker",
-        "spotify_url": "https://open.spotify.com/artist/1ccRfxdyLG4sus4tE6CDVp"
-      }
-    ],
-    "matched_text": "Dave Thaker",
-    "spotify_url": "https://open.spotify.com/artist/1ccRfxdyLG4sus4tE6CDVp"
-  },
-  "Deerhoof / Eraser / Nympho": {
+  "Deerhoof": {
     "artists": [
       {
         "matched_text": "Deerhoof",
@@ -316,6 +69,7 @@
     "matched_text": "Deerhoof",
     "spotify_url": "https://open.spotify.com/artist/7AZwAitWq1KcFoIJhRWb6V"
   },
+  "Descarga: A Latin Jam Session": null,
   "Dirty Old Power Tour | AJJ": {
     "artists": [
       {
@@ -325,44 +79,6 @@
     ],
     "matched_text": "AJJ",
     "spotify_url": "https://open.spotify.com/artist/4IDpDJIDfK96HMLD4Tphyl"
-  },
-  "Donna The Buffalo / Assembly of Dust": {
-    "artists": [
-      {
-        "matched_text": "Donna The Buffalo",
-        "spotify_url": "https://open.spotify.com/artist/3dV4xRik9AJpX2befK2ZGa"
-      },
-      {
-        "matched_text": "Assembly of Dust",
-        "spotify_url": "https://open.spotify.com/artist/1dwRnam2taNMv8H3VR6isd"
-      }
-    ],
-    "matched_text": "Donna The Buffalo",
-    "spotify_url": "https://open.spotify.com/artist/3dV4xRik9AJpX2befK2ZGa"
-  },
-  "Dregsy / Cole Berggren": {
-    "artists": [
-      {
-        "matched_text": "Dregsy",
-        "spotify_url": "https://open.spotify.com/artist/3zIWO7iTwbCdellib961E6"
-      },
-      {
-        "matched_text": "Cole Berggren",
-        "spotify_url": "https://open.spotify.com/artist/5SOTtmYt9mvMzVKgtHPzzY"
-      }
-    ],
-    "matched_text": "Dregsy",
-    "spotify_url": "https://open.spotify.com/artist/3zIWO7iTwbCdellib961E6"
-  },
-  "Eggy": {
-    "artists": [
-      {
-        "matched_text": "Eggy",
-        "spotify_url": "https://open.spotify.com/artist/3Jqddl1bpuCsjUuw2fCOuH"
-      }
-    ],
-    "matched_text": "Eggy",
-    "spotify_url": "https://open.spotify.com/artist/3Jqddl1bpuCsjUuw2fCOuH"
   },
   "Elena Pinderhughes": {
     "artists": [
@@ -374,69 +90,45 @@
     "matched_text": "Elena Pinderhughes",
     "spotify_url": "https://open.spotify.com/artist/1djeOKOhlMmpiF6gyGVUcu"
   },
-  "Flycatcher / Flycatcher": {
+  "First Friday: Miki Yamanaka Trio & PAAFF": {
     "artists": [
       {
-        "matched_text": "Flycatcher",
-        "spotify_url": "https://open.spotify.com/artist/4j5N6CLoWuY6yv1NOzFLyn"
-      }
-    ],
-    "matched_text": "Flycatcher",
-    "spotify_url": "https://open.spotify.com/artist/4j5N6CLoWuY6yv1NOzFLyn"
-  },
-  "Frank Maza / Javier Limon": {
-    "artists": [
+        "matched_text": "First Friday",
+        "spotify_url": "https://open.spotify.com/artist/5dd7OW0qAM3cgRjSxZ59ta"
+      },
       {
-        "matched_text": "Frank Maza",
-        "spotify_url": "https://open.spotify.com/artist/5PSHGxg1VQAESRSvZBCbYD"
+        "matched_text": "Miki Yamanaka",
+        "spotify_url": "https://open.spotify.com/artist/1vG4psOZT6eAff7QJT4ous"
       }
     ],
-    "matched_text": "Frank Maza",
-    "spotify_url": "https://open.spotify.com/artist/5PSHGxg1VQAESRSvZBCbYD"
+    "matched_text": "First Friday",
+    "spotify_url": "https://open.spotify.com/artist/5dd7OW0qAM3cgRjSxZ59ta"
   },
-  "Fruit Bats / Sarah Klang": {
+  "Fruit Bats": {
     "artists": [
       {
         "matched_text": "Fruit Bats",
         "spotify_url": "https://open.spotify.com/artist/6Qm9stX6XO1a4c7BXQDDgc"
-      },
-      {
-        "matched_text": "Sarah Klang",
-        "spotify_url": "https://open.spotify.com/artist/6Pm0evhKSUGTGYDxzpGGKf"
       }
     ],
     "matched_text": "Fruit Bats",
     "spotify_url": "https://open.spotify.com/artist/6Qm9stX6XO1a4c7BXQDDgc"
   },
-  "GCS feat. Eric Gales, Dennis Chambers & Billy Sheehan": {
+  "Ghost Harmonics: BORBS, World Assembly Body Opera, Bianca Stone, Corey Qureshi, Erinrose Mager, and Kelly Hoffer": {
     "artists": [
       {
-        "matched_text": "Dennis Chambers",
-        "spotify_url": "https://open.spotify.com/artist/5tdGXBxRVers4lWxUqRMzn"
+        "matched_text": "Ghost Harmonics",
+        "spotify_url": "https://open.spotify.com/artist/11Jc1UpBSauQM81KFS9Yhh"
       },
       {
-        "matched_text": "Billy Sheehan",
-        "spotify_url": "https://open.spotify.com/artist/0GXvIHZC6fUFoclPbf7Lbm"
+        "matched_text": "BORBS",
+        "spotify_url": "https://open.spotify.com/artist/5ceCkVLZYxRgKH8E2X8YME"
       }
     ],
-    "matched_text": "Dennis Chambers",
-    "spotify_url": "https://open.spotify.com/artist/5tdGXBxRVers4lWxUqRMzn"
+    "matched_text": "Ghost Harmonics",
+    "spotify_url": "https://open.spotify.com/artist/11Jc1UpBSauQM81KFS9Yhh"
   },
-  "George Clanton / Ryan Hemsworth": {
-    "artists": [
-      {
-        "matched_text": "George Clanton",
-        "spotify_url": "https://open.spotify.com/artist/1G5v3lpMz7TeoW0yGpRQHr"
-      },
-      {
-        "matched_text": "Ryan Hemsworth",
-        "spotify_url": "https://open.spotify.com/artist/2CgysNw5B7rFNRtRjQbPZ9"
-      }
-    ],
-    "matched_text": "George Clanton",
-    "spotify_url": "https://open.spotify.com/artist/1G5v3lpMz7TeoW0yGpRQHr"
-  },
-  "Giles Corey / Kathryn Mohr / Val Acton Loper": {
+  "Giles Corey, Kathryn Mohr, and Val Acton Loper": {
     "artists": [
       {
         "matched_text": "Giles Corey",
@@ -454,89 +146,26 @@
     "matched_text": "Giles Corey",
     "spotify_url": "https://open.spotify.com/artist/6mkkQ4HQo21YZRKw3tRQSv"
   },
-  "Greater Philadelphia Gamer Symphony Orchestra": null,
-  "Groove Merchants / Emily Drinker / Superpink / Christopher Burkholder": {
-    "artists": [
-      {
-        "matched_text": "Groove Merchants",
-        "spotify_url": "https://open.spotify.com/artist/6wXo2yYq5uSA3oJ058me1Y"
-      },
-      {
-        "matched_text": "Emily Drinker",
-        "spotify_url": "https://open.spotify.com/artist/2v0y1QOwiZytVYIb0KUh7l"
-      },
-      {
-        "matched_text": "Superpink",
-        "spotify_url": "https://open.spotify.com/artist/0wmUqT6erD09o1cnSpHgnR"
-      },
-      {
-        "matched_text": "Christopher Burkholder",
-        "spotify_url": "https://open.spotify.com/artist/6hmGRJwD2HjFd09VnjtraB"
-      }
-    ],
-    "matched_text": "Groove Merchants",
-    "spotify_url": "https://open.spotify.com/artist/6wXo2yYq5uSA3oJ058me1Y"
-  },
   "HFB Ensemble": null,
-  "Hamilton Leithauser + Rostam / Johanna Samuels": {
+  "Hamilton Leithauser + Rostam": {
     "artists": [
       {
-        "matched_text": "Hamilton Leithauser",
-        "spotify_url": "https://open.spotify.com/artist/3ZXXJ9nO1Dn9B0AJ25eAQY"
-      },
-      {
-        "matched_text": "Rostam",
-        "spotify_url": "https://open.spotify.com/artist/04XggbrM51GcFPTxBYtRXT"
-      },
-      {
-        "matched_text": "Johanna Samuels",
-        "spotify_url": "https://open.spotify.com/artist/3NsEv68AsYdjKdCJ4AhHTa"
+        "matched_text": "Hamilton Leithauser + Rostam",
+        "spotify_url": "https://open.spotify.com/artist/3h0w83PsjASrm5999trG4n"
       }
     ],
-    "matched_text": "Hamilton Leithauser",
-    "spotify_url": "https://open.spotify.com/artist/3ZXXJ9nO1Dn9B0AJ25eAQY"
+    "matched_text": "Hamilton Leithauser + Rostam",
+    "spotify_url": "https://open.spotify.com/artist/3h0w83PsjASrm5999trG4n"
   },
-  "Harbour / Southcourt": {
+  "Harbour": {
     "artists": [
       {
         "matched_text": "Harbour",
         "spotify_url": "https://open.spotify.com/artist/58bPSgeKpyyFlJ9LatULIO"
-      },
-      {
-        "matched_text": "Southcourt",
-        "spotify_url": "https://open.spotify.com/artist/0Q9B4uehudditCDzJ00JlS"
       }
     ],
     "matched_text": "Harbour",
     "spotify_url": "https://open.spotify.com/artist/58bPSgeKpyyFlJ9LatULIO"
-  },
-  "Hiss Golden Messenger / Sam Amidon": {
-    "artists": [
-      {
-        "matched_text": "Hiss Golden Messenger",
-        "spotify_url": "https://open.spotify.com/artist/37eqxl8DyLd5sQN54wYJbE"
-      },
-      {
-        "matched_text": "Sam Amidon",
-        "spotify_url": "https://open.spotify.com/artist/6TTJ0xLPPNDyv4bXyukzU4"
-      }
-    ],
-    "matched_text": "Hiss Golden Messenger",
-    "spotify_url": "https://open.spotify.com/artist/37eqxl8DyLd5sQN54wYJbE"
-  },
-  "Hoot and Hellmouth / Kettle of Hawks": {
-    "artists": [
-      {
-        "matched_text": "Hellmouth",
-        "spotify_url": "https://open.spotify.com/artist/7GdST24wAIi3Wm2tHc7uZW"
-      },
-      {
-        "matched_text": "Kettle of Hawks",
-        "spotify_url": "https://open.spotify.com/artist/66TRLI1empy9qIX4UYilxF"
-      }
-    ],
-    "matched_text": "Hellmouth",
-    "spotify_url": "https://open.spotify.com/artist/7GdST24wAIi3Wm2tHc7uZW"
   },
   "Housie (rva), Sediment, Insectoids": {
     "artists": [
@@ -556,12 +185,15 @@
     "matched_text": "Housie",
     "spotify_url": "https://open.spotify.com/artist/4EqBsJHfwAhroX6yob0EJi"
   },
-  "Human Wannabes Anniversary: Anime Music Party": null,
-  "Imperial Teen / Gay Meat": {
+  "Imperial Teen, Kristeen Young, Gay Meat": {
     "artists": [
       {
         "matched_text": "Imperial Teen",
         "spotify_url": "https://open.spotify.com/artist/17VzpmwXT0Rd7EKaJB841P"
+      },
+      {
+        "matched_text": "Kristeen Young",
+        "spotify_url": "https://open.spotify.com/artist/6g01WfakTZUoArOiHWwVos"
       },
       {
         "matched_text": "Gay Meat",
@@ -571,248 +203,10 @@
     "matched_text": "Imperial Teen",
     "spotify_url": "https://open.spotify.com/artist/17VzpmwXT0Rd7EKaJB841P"
   },
-  "In Her Own Words / Every Avenue / Fluorescents / Goalkeeper": {
-    "artists": [
-      {
-        "matched_text": "In Her Own Words",
-        "spotify_url": "https://open.spotify.com/artist/3NBHNlkwYabSLvnisILPSI"
-      },
-      {
-        "matched_text": "Every Avenue",
-        "spotify_url": "https://open.spotify.com/artist/1IpSmgcN9F3KNa7j9JtAE4"
-      },
-      {
-        "matched_text": "Fluorescents",
-        "spotify_url": "https://open.spotify.com/artist/3k7eYa4LVI5wqhLj7PACE2"
-      },
-      {
-        "matched_text": "Goalkeeper",
-        "spotify_url": "https://open.spotify.com/artist/1foCMRbxVRo99EWPglSD3n"
-      }
-    ],
-    "matched_text": "In Her Own Words",
-    "spotify_url": "https://open.spotify.com/artist/3NBHNlkwYabSLvnisILPSI"
-  },
   "In-person! Erini - Fos: An Asia Minor Story": null,
-  "In-person! The Second Annual Philadelphia Modular Synth Fest featuring: Kevin Dal-Mare, David Taliento, Jair-Rohm Parker Wells, Kwame Johnson, Sandy James!": {
-    "artists": [
-      {
-        "matched_text": "David Taliento",
-        "spotify_url": "https://open.spotify.com/artist/5SdBetkE3WMDOLwWZF17gY"
-      },
-      {
-        "matched_text": "Jair-Rohm Parker Wells",
-        "spotify_url": "https://open.spotify.com/artist/6Tfhif9vcie5wzzt23ixTR"
-      },
-      {
-        "matched_text": "Sandy James",
-        "spotify_url": "https://open.spotify.com/artist/3uMGtRCpNMiYsrHpZMNuFw"
-      }
-    ],
-    "matched_text": "David Taliento",
-    "spotify_url": "https://open.spotify.com/artist/5SdBetkE3WMDOLwWZF17gY"
-  },
   "In-person! Weekly improvised music drop-in jam session": null,
-  "Jackie Johnson & Her Ensemble": {
-    "artists": [
-      {
-        "matched_text": "Jackie Johnson",
-        "spotify_url": "https://open.spotify.com/artist/1s76wgx3sEcXUU1ie0n9we"
-      },
-      {
-        "matched_text": "Her Ensemble",
-        "spotify_url": "https://open.spotify.com/artist/60LMcgWPaQLRwx8dZicM3z"
-      }
-    ],
-    "matched_text": "Jackie Johnson",
-    "spotify_url": "https://open.spotify.com/artist/1s76wgx3sEcXUU1ie0n9we"
-  },
-  "Joe Deninzon & Stratospheerius / Jane Getter Premonition": {
-    "artists": [
-      {
-        "matched_text": "Joe Deninzon",
-        "spotify_url": "https://open.spotify.com/artist/3VKVc5OQCFWXFyhRI01zOD"
-      },
-      {
-        "matched_text": "Stratospheerius",
-        "spotify_url": "https://open.spotify.com/artist/5joZgBleXbfAaTYOF8R5hA"
-      },
-      {
-        "matched_text": "Jane Getter Premonition",
-        "spotify_url": "https://open.spotify.com/artist/2RsuDfEsuKWNNzD8jOC1P4"
-      }
-    ],
-    "matched_text": "Joe Deninzon",
-    "spotify_url": "https://open.spotify.com/artist/3VKVc5OQCFWXFyhRI01zOD"
-  },
-  "Josh Rouse": {
-    "artists": [
-      {
-        "matched_text": "Josh Rouse",
-        "spotify_url": "https://open.spotify.com/artist/38euc5ce2q2MMzaoJcPstz"
-      }
-    ],
-    "matched_text": "Josh Rouse",
-    "spotify_url": "https://open.spotify.com/artist/38euc5ce2q2MMzaoJcPstz"
-  },
-  "Justin Austin / Howard Watkins": {
-    "artists": [
-      {
-        "matched_text": "Justin Austin",
-        "spotify_url": "https://open.spotify.com/artist/15OmUN2yDI7jTXuCqVTMuS"
-      },
-      {
-        "matched_text": "Howard Watkins",
-        "spotify_url": "https://open.spotify.com/artist/7MPyH1Jeo8k3ritnpaXDAy"
-      }
-    ],
-    "matched_text": "Justin Austin",
-    "spotify_url": "https://open.spotify.com/artist/15OmUN2yDI7jTXuCqVTMuS"
-  },
-  "KIDZ BOP Daytime Dance Party": null,
-  "Kate Nash": {
-    "artists": [
-      {
-        "matched_text": "Kate Nash",
-        "spotify_url": "https://open.spotify.com/artist/5vBKu1igxFo6g1sHADkIdg"
-      }
-    ],
-    "matched_text": "Kate Nash",
-    "spotify_url": "https://open.spotify.com/artist/5vBKu1igxFo6g1sHADkIdg"
-  },
-  "Kim Waters": {
-    "artists": [
-      {
-        "matched_text": "Kim Waters",
-        "spotify_url": "https://open.spotify.com/artist/6kgHtfY7ECO4JWbOpXOu4I"
-      }
-    ],
-    "matched_text": "Kim Waters",
-    "spotify_url": "https://open.spotify.com/artist/6kgHtfY7ECO4JWbOpXOu4I"
-  },
-  "Lake Drive / Nightbreakers / Moonroof": {
-    "artists": [
-      {
-        "matched_text": "Lake Drive",
-        "spotify_url": "https://open.spotify.com/artist/4c1FmV7XS1RFb7jAj9TXIY"
-      },
-      {
-        "matched_text": "Nightbreakers",
-        "spotify_url": "https://open.spotify.com/artist/6n8s4rSE2P1f02YvHMOYFz"
-      },
-      {
-        "matched_text": "Moonroof",
-        "spotify_url": "https://open.spotify.com/artist/6HO599GtzYWMF4BsvwB1E6"
-      }
-    ],
-    "matched_text": "Lake Drive",
-    "spotify_url": "https://open.spotify.com/artist/4c1FmV7XS1RFb7jAj9TXIY"
-  },
-  "Lia Menaker / Kuf Knotz & Christine Elise / Brittany Ann Tranbaugh": {
-    "artists": [
-      {
-        "matched_text": "Lia Menaker",
-        "spotify_url": "https://open.spotify.com/artist/37NS0lpeIGIA2qNDr5HtyM"
-      },
-      {
-        "matched_text": "Kuf Knotz",
-        "spotify_url": "https://open.spotify.com/artist/6xGgvHAQIxa4Wfg2xdIZTU"
-      },
-      {
-        "matched_text": "Christine Elise",
-        "spotify_url": "https://open.spotify.com/artist/08yP8oklwveHNpoDhu1BrI"
-      },
-      {
-        "matched_text": "Brittany Ann Tranbaugh",
-        "spotify_url": "https://open.spotify.com/artist/6xeAE2cdbCEJw0Ciay3lTI"
-      }
-    ],
-    "matched_text": "Lia Menaker",
-    "spotify_url": "https://open.spotify.com/artist/37NS0lpeIGIA2qNDr5HtyM"
-  },
-  "Louise Bichan": {
-    "artists": [
-      {
-        "matched_text": "Louise Bichan",
-        "spotify_url": "https://open.spotify.com/artist/3ylsAHGSGLYTlIr3lv9Zfg"
-      }
-    ],
-    "matched_text": "Louise Bichan",
-    "spotify_url": "https://open.spotify.com/artist/3ylsAHGSGLYTlIr3lv9Zfg"
-  },
-  "MADSKA / New Planets / Kickstand Dismount": {
-    "artists": [
-      {
-        "matched_text": "MADSKA",
-        "spotify_url": "https://open.spotify.com/artist/3ZHVOV68GHCdecjl8o5jGj"
-      },
-      {
-        "matched_text": "New Planets",
-        "spotify_url": "https://open.spotify.com/artist/0pPzSAHLLzZ0Oppa7uemq2"
-      },
-      {
-        "matched_text": "Kickstand Dismount",
-        "spotify_url": "https://open.spotify.com/artist/05HR3dBSpxAFWXKBbuV6bj"
-      }
-    ],
-    "matched_text": "MADSKA",
-    "spotify_url": "https://open.spotify.com/artist/3ZHVOV68GHCdecjl8o5jGj"
-  },
-  "Madds Buckley / Brye": {
-    "artists": [
-      {
-        "matched_text": "Madds Buckley",
-        "spotify_url": "https://open.spotify.com/artist/4BLdbgVNetzII3ggCMsNtq"
-      },
-      {
-        "matched_text": "Brye",
-        "spotify_url": "https://open.spotify.com/artist/6Z5uMO0V6jlOuZ7LUDrSsC"
-      }
-    ],
-    "matched_text": "Madds Buckley",
-    "spotify_url": "https://open.spotify.com/artist/4BLdbgVNetzII3ggCMsNtq"
-  },
-  "Marty O’Reilly": null,
-  "Matt Kahn & His Trio": null,
-  "Michigander / Wildermiss": {
-    "artists": [
-      {
-        "matched_text": "Michigander",
-        "spotify_url": "https://open.spotify.com/artist/0oL26Dn9y761yfJgNb3vfu"
-      },
-      {
-        "matched_text": "Wildermiss",
-        "spotify_url": "https://open.spotify.com/artist/7K9fyLw4RPBp8PIFkif2eB"
-      }
-    ],
-    "matched_text": "Michigander",
-    "spotify_url": "https://open.spotify.com/artist/0oL26Dn9y761yfJgNb3vfu"
-  },
-  "Moonbloom": {
-    "artists": [
-      {
-        "matched_text": "Moonbloom",
-        "spotify_url": "https://open.spotify.com/artist/72WANEiqcUIXAeKb7EKyUs"
-      }
-    ],
-    "matched_text": "Moonbloom",
-    "spotify_url": "https://open.spotify.com/artist/72WANEiqcUIXAeKb7EKyUs"
-  },
   "NASH THE SLASH RISES AGAIN!": null,
-  "New Constellations / Vox Rea": {
-    "artists": [
-      {
-        "matched_text": "New Constellations",
-        "spotify_url": "https://open.spotify.com/artist/5WF5jtgP0H31QTl5g4WxW9"
-      },
-      {
-        "matched_text": "Vox Rea",
-        "spotify_url": "https://open.spotify.com/artist/4SRrbYd7KBkGdOCAekSnY1"
-      }
-    ],
-    "matched_text": "New Constellations",
-    "spotify_url": "https://open.spotify.com/artist/5WF5jtgP0H31QTl5g4WxW9"
-  },
+  "Not just Jazz free music concerts": null,
   "Oldest Sea": {
     "artists": [
       {
@@ -823,60 +217,8 @@
     "matched_text": "Oldest Sea",
     "spotify_url": "https://open.spotify.com/artist/7B1KPBeUlJ6cFnY3Hf65Um"
   },
-  "Oldest Sea / Bruise Bath / ShyGodwin / Diuretic": {
-    "artists": [
-      {
-        "matched_text": "Oldest Sea",
-        "spotify_url": "https://open.spotify.com/artist/7B1KPBeUlJ6cFnY3Hf65Um"
-      },
-      {
-        "matched_text": "Bruise Bath",
-        "spotify_url": "https://open.spotify.com/artist/54y6g4xYNy4wjtD4Uo8Hki"
-      },
-      {
-        "matched_text": "ShyGodwin",
-        "spotify_url": "https://open.spotify.com/artist/0aKvk5J5YkGdMPJ0jWZbUE"
-      }
-    ],
-    "matched_text": "Oldest Sea",
-    "spotify_url": "https://open.spotify.com/artist/7B1KPBeUlJ6cFnY3Hf65Um"
-  },
-  "Olivia Barton": {
-    "artists": [
-      {
-        "matched_text": "Olivia Barton",
-        "spotify_url": "https://open.spotify.com/artist/0S3L5s6PIqKBIu21j910N1"
-      }
-    ],
-    "matched_text": "Olivia Barton",
-    "spotify_url": "https://open.spotify.com/artist/0S3L5s6PIqKBIu21j910N1"
-  },
-  "One Alternative": {
-    "artists": [
-      {
-        "matched_text": "One Alternative",
-        "spotify_url": "https://open.spotify.com/artist/5SsBwikBUrl58TZYx8kc3p"
-      }
-    ],
-    "matched_text": "One Alternative",
-    "spotify_url": "https://open.spotify.com/artist/5SsBwikBUrl58TZYx8kc3p"
-  },
-  "Orange Dog Club / Pokejawn": {
-    "artists": [
-      {
-        "matched_text": "Orange Dog Club",
-        "spotify_url": "https://open.spotify.com/artist/7bU64wIvBElELVsQabM3VG"
-      },
-      {
-        "matched_text": "Pokejawn",
-        "spotify_url": "https://open.spotify.com/artist/1DbkmBUjZfNBDhw2pgttHQ"
-      }
-    ],
-    "matched_text": "Orange Dog Club",
-    "spotify_url": "https://open.spotify.com/artist/7bU64wIvBElELVsQabM3VG"
-  },
-  "PHER": null,
-  "Paige Fish / Hank Garret": {
+  "Open Improvisation Lab: Taal Baladi": null,
+  "Paige Fish": {
     "artists": [
       {
         "matched_text": "Paige Fish",
@@ -886,7 +228,7 @@
     "matched_text": "Paige Fish",
     "spotify_url": "https://open.spotify.com/artist/10djoaqJLN6H4oORnKJ63P"
   },
-  "Palace / Willie J. Healey": {
+  "Palace": {
     "artists": [
       {
         "matched_text": "Palace",
@@ -896,92 +238,16 @@
     "matched_text": "Palace",
     "spotify_url": "https://open.spotify.com/artist/48vDIufGC8ujPuBiTxY8dm"
   },
-  "Pete Muller & The Kindred Souls / The Alternate Routes": {
-    "artists": [
-      {
-        "matched_text": "Pete Muller",
-        "spotify_url": "https://open.spotify.com/artist/55BUDwcDLKgwBPOKTrr4sc"
-      },
-      {
-        "matched_text": "The Kindred Souls",
-        "spotify_url": "https://open.spotify.com/artist/0pd6ODYXmaJdHJXkXaLpeF"
-      },
-      {
-        "matched_text": "The Alternate Routes",
-        "spotify_url": "https://open.spotify.com/artist/2bIN86ZmfyWfkN9c3C3YXE"
-      }
-    ],
-    "matched_text": "Pete Muller",
-    "spotify_url": "https://open.spotify.com/artist/55BUDwcDLKgwBPOKTrr4sc"
-  },
   "Powerpocket": null,
-  "Pretty Sick / Computerwife": {
+  "Pretty Sick": {
     "artists": [
       {
         "matched_text": "Pretty Sick",
         "spotify_url": "https://open.spotify.com/artist/5JUGL6ec4eULQ5eVEbOC7e"
-      },
-      {
-        "matched_text": "Computerwife",
-        "spotify_url": "https://open.spotify.com/artist/2URzewPhxn6Si52NkbYxIQ"
       }
     ],
     "matched_text": "Pretty Sick",
     "spotify_url": "https://open.spotify.com/artist/5JUGL6ec4eULQ5eVEbOC7e"
-  },
-  "Punch Brothers": {
-    "artists": [
-      {
-        "matched_text": "Punch Brothers",
-        "spotify_url": "https://open.spotify.com/artist/4gFssfOmWNY3LfIZ3zyoy4"
-      }
-    ],
-    "matched_text": "Punch Brothers",
-    "spotify_url": "https://open.spotify.com/artist/4gFssfOmWNY3LfIZ3zyoy4"
-  },
-  "RaiNao": {
-    "artists": [
-      {
-        "matched_text": "RaiNao",
-        "spotify_url": "https://open.spotify.com/artist/42LEQxfXLEuzdqorKBbUVN"
-      }
-    ],
-    "matched_text": "RaiNao",
-    "spotify_url": "https://open.spotify.com/artist/42LEQxfXLEuzdqorKBbUVN"
-  },
-  "Robbie Fulks / Heather Maloney": {
-    "artists": [
-      {
-        "matched_text": "Robbie Fulks",
-        "spotify_url": "https://open.spotify.com/artist/0l5iOYpiSkQFYR3uPNoMDe"
-      },
-      {
-        "matched_text": "Heather Maloney",
-        "spotify_url": "https://open.spotify.com/artist/3epjAWvLxTBlI9FgGCUNID"
-      }
-    ],
-    "matched_text": "Robbie Fulks",
-    "spotify_url": "https://open.spotify.com/artist/0l5iOYpiSkQFYR3uPNoMDe"
-  },
-  "Ryan Tennis & the Clubhouse Band": {
-    "artists": [
-      {
-        "matched_text": "Ryan Tennis",
-        "spotify_url": "https://open.spotify.com/artist/0GOXPHVQjnuiU3652BRfMD"
-      }
-    ],
-    "matched_text": "Ryan Tennis",
-    "spotify_url": "https://open.spotify.com/artist/0GOXPHVQjnuiU3652BRfMD"
-  },
-  "Ryshon Jones / Sauce Boss": {
-    "artists": [
-      {
-        "matched_text": "Ryshon Jones",
-        "spotify_url": "https://open.spotify.com/artist/5GynM2WdtAIS1IbA5Z23Hs"
-      }
-    ],
-    "matched_text": "Ryshon Jones",
-    "spotify_url": "https://open.spotify.com/artist/5GynM2WdtAIS1IbA5Z23Hs"
   },
   "SOLD OUT!!!! In-person! Fire Museum Presents: Ak'chamel and Ecology: HomeStones": {
     "artists": [
@@ -993,177 +259,48 @@
     "matched_text": "Ecology: HomeStones",
     "spotify_url": "https://open.spotify.com/artist/1iD9ePE2zBoaGowkqAsIKe"
   },
-  "Sleeping With Sirens / Rain City Drive": {
+  "Secret Chord Concerts: Gili Yalo Ethiofunk Concert and Sigd Celebration": null,
+  "Sloptart ~ Smellco ~ Annalakka": null,
+  "Slum Village & Pete Rock": {
     "artists": [
       {
-        "matched_text": "Rain City Drive",
-        "spotify_url": "https://open.spotify.com/artist/4rMxZovfLSDjEL9eI2pKo7"
-      }
-    ],
-    "matched_text": "Rain City Drive",
-    "spotify_url": "https://open.spotify.com/artist/4rMxZovfLSDjEL9eI2pKo7"
-  },
-  "Sloptart / Smellco / Annalakka": {
-    "artists": [
-      {
-        "matched_text": "Sloptart",
-        "spotify_url": "https://open.spotify.com/artist/4EnuEVnDOqgDZcJvfdyyrV"
+        "matched_text": "Slum Village",
+        "spotify_url": "https://open.spotify.com/artist/1020a42xVklY6c56imNcaa"
       },
       {
-        "matched_text": "Smellco",
-        "spotify_url": "https://open.spotify.com/artist/6v4JMqXf9O7S1m4vXgK8U6"
+        "matched_text": "Pete Rock",
+        "spotify_url": "https://open.spotify.com/artist/3BeQqzKdlARoOd6y30kCO2"
+      }
+    ],
+    "matched_text": "Slum Village",
+    "spotify_url": "https://open.spotify.com/artist/1020a42xVklY6c56imNcaa"
+  },
+  "The Monday Night Jam Session hosted by Richard Hill Jr. and Friends": null,
+  "The Tenor Madness Septet with Saxophonists Eric Alexander, Victor North & Daniel Cohen": {
+    "artists": [
+      {
+        "matched_text": "Victor North",
+        "spotify_url": "https://open.spotify.com/artist/3tN9tolKxXDeSZ7FikQsHw"
       },
       {
-        "matched_text": "Annalakka",
-        "spotify_url": "https://open.spotify.com/artist/7HLEblBhyvfhxOiPIxUt2u"
+        "matched_text": "Daniel Cohen",
+        "spotify_url": "https://open.spotify.com/artist/76jyaEDOp9q0qO993cbMXh"
       }
     ],
-    "matched_text": "Sloptart",
-    "spotify_url": "https://open.spotify.com/artist/4EnuEVnDOqgDZcJvfdyyrV"
+    "matched_text": "Victor North",
+    "spotify_url": "https://open.spotify.com/artist/3tN9tolKxXDeSZ7FikQsHw"
   },
-  "Steve Earle / Chris Pierce": {
+  "This Is Lorelei, with @": {
     "artists": [
       {
-        "matched_text": "Steve Earle",
-        "spotify_url": "https://open.spotify.com/artist/2UBTfUoLI07iRqGeUrwhZh"
-      },
-      {
-        "matched_text": "Chris Pierce",
-        "spotify_url": "https://open.spotify.com/artist/559oVBc653k5TOpiwhhr3r"
+        "matched_text": "This Is Lorelei",
+        "spotify_url": "https://open.spotify.com/artist/0GmYGGZZIU8vHbI0bAXZun"
       }
     ],
-    "matched_text": "Steve Earle",
-    "spotify_url": "https://open.spotify.com/artist/2UBTfUoLI07iRqGeUrwhZh"
+    "matched_text": "This Is Lorelei",
+    "spotify_url": "https://open.spotify.com/artist/0GmYGGZZIU8vHbI0bAXZun"
   },
-  "Susan Werner / Heather Maloney": {
-    "artists": [
-      {
-        "matched_text": "Susan Werner",
-        "spotify_url": "https://open.spotify.com/artist/22t90SdeLXy0hg1eoiLokC"
-      },
-      {
-        "matched_text": "Heather Maloney",
-        "spotify_url": "https://open.spotify.com/artist/3epjAWvLxTBlI9FgGCUNID"
-      }
-    ],
-    "matched_text": "Susan Werner",
-    "spotify_url": "https://open.spotify.com/artist/22t90SdeLXy0hg1eoiLokC"
-  },
-  "Suzanne Vega": {
-    "artists": [
-      {
-        "matched_text": "Suzanne Vega",
-        "spotify_url": "https://open.spotify.com/artist/3X0tJzVYoWlfjLYI0Ridsw"
-      }
-    ],
-    "matched_text": "Suzanne Vega",
-    "spotify_url": "https://open.spotify.com/artist/3X0tJzVYoWlfjLYI0Ridsw"
-  },
-  "Te Vista / Wallace Tonight / Webb Chapel / Ogler": {
-    "artists": [
-      {
-        "matched_text": "Te Vista",
-        "spotify_url": "https://open.spotify.com/artist/0eg56j6Oj0UdA5SXKTkrWN"
-      },
-      {
-        "matched_text": "Webb Chapel",
-        "spotify_url": "https://open.spotify.com/artist/6UwNFwY6xPCvLQiaH0S83d"
-      },
-      {
-        "matched_text": "Ogler",
-        "spotify_url": "https://open.spotify.com/artist/4fDbjo0DldAwYVBPb6Z6bS"
-      }
-    ],
-    "matched_text": "Te Vista",
-    "spotify_url": "https://open.spotify.com/artist/0eg56j6Oj0UdA5SXKTkrWN"
-  },
-  "Teen Jesus and the Jean Teasers": {
-    "artists": [
-      {
-        "matched_text": "Teen Jesus and the Jean Teasers",
-        "spotify_url": "https://open.spotify.com/artist/3KrgUUwoRQ6OQp4IOmqnSF"
-      }
-    ],
-    "matched_text": "Teen Jesus and the Jean Teasers",
-    "spotify_url": "https://open.spotify.com/artist/3KrgUUwoRQ6OQp4IOmqnSF"
-  },
-  "The Hooters": {
-    "artists": [
-      {
-        "matched_text": "The Hooters",
-        "spotify_url": "https://open.spotify.com/artist/7uhvDINTTiD0XBrP9fquN1"
-      }
-    ],
-    "matched_text": "The Hooters",
-    "spotify_url": "https://open.spotify.com/artist/7uhvDINTTiD0XBrP9fquN1"
-  },
-  "The Longest Johns / Sean Dagher": {
-    "artists": [
-      {
-        "matched_text": "The Longest Johns",
-        "spotify_url": "https://open.spotify.com/artist/5k979N1TnPncUyqlXlaRSv"
-      },
-      {
-        "matched_text": "Sean Dagher",
-        "spotify_url": "https://open.spotify.com/artist/5JgxqXmh1TrVDZn7gAgqLw"
-      }
-    ],
-    "matched_text": "The Longest Johns",
-    "spotify_url": "https://open.spotify.com/artist/5k979N1TnPncUyqlXlaRSv"
-  },
-  "The Quixote Project Duo": {
-    "artists": [
-      {
-        "matched_text": "The Quixote Project",
-        "spotify_url": "https://open.spotify.com/artist/0WehRe9xUkWsgJJuXxhJ6I"
-      }
-    ],
-    "matched_text": "The Quixote Project",
-    "spotify_url": "https://open.spotify.com/artist/0WehRe9xUkWsgJJuXxhJ6I"
-  },
-  "The Robert Cray Band": {
-    "artists": [
-      {
-        "matched_text": "The Robert Cray Band",
-        "spotify_url": "https://open.spotify.com/artist/6cAtGdArQhrU7tTBoeWY3P"
-      }
-    ],
-    "matched_text": "The Robert Cray Band",
-    "spotify_url": "https://open.spotify.com/artist/6cAtGdArQhrU7tTBoeWY3P"
-  },
-  "The Smithereens / John Cowsill": {
-    "artists": [
-      {
-        "matched_text": "The Smithereens",
-        "spotify_url": "https://open.spotify.com/artist/06KgaEpSluofkcChSo7TNr"
-      },
-      {
-        "matched_text": "John Cowsill",
-        "spotify_url": "https://open.spotify.com/artist/7jp6bEDgb4YH3MMw1kpsqs"
-      }
-    ],
-    "matched_text": "The Smithereens",
-    "spotify_url": "https://open.spotify.com/artist/06KgaEpSluofkcChSo7TNr"
-  },
-  "The Wrecks / Worry Club / Kid Sistr": {
-    "artists": [
-      {
-        "matched_text": "The Wrecks",
-        "spotify_url": "https://open.spotify.com/artist/458aS6ALc3QkzwfR5USt34"
-      },
-      {
-        "matched_text": "Worry Club",
-        "spotify_url": "https://open.spotify.com/artist/7Fkc1Q81Zy25eZ5dmnURGl"
-      },
-      {
-        "matched_text": "Kid Sistr",
-        "spotify_url": "https://open.spotify.com/artist/7ysZTe2PbCTqmC2tE1dpCk"
-      }
-    ],
-    "matched_text": "The Wrecks",
-    "spotify_url": "https://open.spotify.com/artist/458aS6ALc3QkzwfR5USt34"
-  },
-  "Timo Andres / Aaron Diehl": {
+  "Timo Andres, piano & Aaron Diehl, piano": {
     "artists": [
       {
         "matched_text": "Timo Andres",
@@ -1177,104 +314,38 @@
     "matched_text": "Timo Andres",
     "spotify_url": "https://open.spotify.com/artist/6rsUydMSborFpWv0JkQgiz"
   },
-  "Toronzo Cannon": {
+  "Trash Strike, XPURITYX, Rights Abuse, Drawn By Blood, False Nine": {
     "artists": [
       {
-        "matched_text": "Toronzo Cannon",
-        "spotify_url": "https://open.spotify.com/artist/0zqygsU5SAxzfK5hop7As6"
-      }
-    ],
-    "matched_text": "Toronzo Cannon",
-    "spotify_url": "https://open.spotify.com/artist/0zqygsU5SAxzfK5hop7As6"
-  },
-  "WXPN 88.5 Welcomes | The Singer In My Band Tour | This Is Lorelei": {
-    "artists": [
-      {
-        "matched_text": "This Is Lorelei",
-        "spotify_url": "https://open.spotify.com/artist/0GmYGGZZIU8vHbI0bAXZun"
-      }
-    ],
-    "matched_text": "This Is Lorelei",
-    "spotify_url": "https://open.spotify.com/artist/0GmYGGZZIU8vHbI0bAXZun"
-  },
-  "WXPN Free At Noon: QUEEN OF JEANS": {
-    "artists": [
-      {
-        "matched_text": "QUEEN OF JEANS",
-        "spotify_url": "https://open.spotify.com/artist/61HFuOrTUb63I9b11WdnqL"
-      }
-    ],
-    "matched_text": "QUEEN OF JEANS",
-    "spotify_url": "https://open.spotify.com/artist/61HFuOrTUb63I9b11WdnqL"
-  },
-  "WesGhost": {
-    "artists": [
-      {
-        "matched_text": "WesGhost",
-        "spotify_url": "https://open.spotify.com/artist/6YmJPuYzqe1HsJArGYcHBJ"
-      }
-    ],
-    "matched_text": "WesGhost",
-    "spotify_url": "https://open.spotify.com/artist/6YmJPuYzqe1HsJArGYcHBJ"
-  },
-  "Winyah / Foxtide": {
-    "artists": [
-      {
-        "matched_text": "Winyah",
-        "spotify_url": "https://open.spotify.com/artist/4iyP4VOGOLzbt2Vxcyu6zG"
+        "matched_text": "XPURITYX",
+        "spotify_url": "https://open.spotify.com/artist/16I7eS8R4sDEzSZi3nLCga"
       },
       {
-        "matched_text": "Foxtide",
-        "spotify_url": "https://open.spotify.com/artist/5hTigSXgVwn9Mvaz8MBHxv"
+        "matched_text": "Rights Abuse",
+        "spotify_url": "https://open.spotify.com/artist/0YgooC6mI3mxXTpYMNTyQR"
+      },
+      {
+        "matched_text": "Drawn By Blood",
+        "spotify_url": "https://open.spotify.com/artist/3JzvmiWlqxMdUOxunQl2I5"
+      },
+      {
+        "matched_text": "False Nine",
+        "spotify_url": "https://open.spotify.com/artist/2q6VguStwEoKk9fZonJ2nn"
       }
     ],
-    "matched_text": "Winyah",
-    "spotify_url": "https://open.spotify.com/artist/4iyP4VOGOLzbt2Vxcyu6zG"
+    "matched_text": "XPURITYX",
+    "spotify_url": "https://open.spotify.com/artist/16I7eS8R4sDEzSZi3nLCga"
   },
-  "almost monday / feel trip.": {
+  "Vocalist Jackie Johnson & Her Ensemble": {
     "artists": [
       {
-        "matched_text": "almost monday",
-        "spotify_url": "https://open.spotify.com/artist/42FzVuyJH8YbkhzWSR2n8E"
-      },
-      {
-        "matched_text": "feel trip.",
-        "spotify_url": "https://open.spotify.com/artist/7ysdcHcrr06qQJ1BL0dKVU"
+        "matched_text": "Her Ensemble",
+        "spotify_url": "https://open.spotify.com/artist/60LMcgWPaQLRwx8dZicM3z"
       }
     ],
-    "matched_text": "almost monday",
-    "spotify_url": "https://open.spotify.com/artist/42FzVuyJH8YbkhzWSR2n8E"
+    "matched_text": "Her Ensemble",
+    "spotify_url": "https://open.spotify.com/artist/60LMcgWPaQLRwx8dZicM3z"
   },
-  "lady lychee / Nectarine Girl / Bruiser and Bicycle / Double Dose": {
-    "artists": [
-      {
-        "matched_text": "lady lychee",
-        "spotify_url": "https://open.spotify.com/artist/6g1CcGbVsYsxwfsJNyBSg3"
-      },
-      {
-        "matched_text": "Nectarine Girl",
-        "spotify_url": "https://open.spotify.com/artist/4uEVWU1ZQu0r9m6XzbKHHX"
-      },
-      {
-        "matched_text": "Bicycle",
-        "spotify_url": "https://open.spotify.com/artist/0nwKbT0N4cKRnB6CA4DERz"
-      },
-      {
-        "matched_text": "Double Dose",
-        "spotify_url": "https://open.spotify.com/artist/0PekJc8BKTGLkGKnZGUaF0"
-      }
-    ],
-    "matched_text": "lady lychee",
-    "spotify_url": "https://open.spotify.com/artist/6g1CcGbVsYsxwfsJNyBSg3"
-  },
-  "the olllam (feat. Joe Dart)": {
-    "artists": [
-      {
-        "matched_text": "the olllam",
-        "spotify_url": "https://open.spotify.com/artist/6LtwY43IVeNpnireOVay0H"
-      }
-    ],
-    "matched_text": "the olllam",
-    "spotify_url": "https://open.spotify.com/artist/6LtwY43IVeNpnireOVay0H"
-  }
+  "Wavy Movy Fundraising Festival": null,
+  "[SOLD OUT] Spanish Love Songs": null
 }
