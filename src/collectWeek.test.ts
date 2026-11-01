@@ -2,7 +2,7 @@
 // sources (no network); the sources themselves are covered by
 // collectSource.test.ts and the eventParsers tests.
 
-import { mkdtempSync, readFileSync, readdirSync } from "node:fs";
+import { mkdtempSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -122,6 +122,49 @@ describe("collectWeek", () => {
     expect(Object.keys(manifest.sources)).toEqual(["zeta"]);
   });
 
+  describe("--merge", () => {
+    const weekDir = (outRoot: string): string => join(outRoot, "2026-10-12");
+
+    it("re-collects the named stems into the existing manifest, keeping the rest and the original window", async () => {
+      const outRoot = mkdtempSync(join(tmpdir(), "collect-week-"));
+      const first = await collectWeek({ weekStart: "2026-10-12", outRoot, sources });
+      const keptFile = readFileSync(join(weekDir(outRoot), "alpha.json"), "utf8");
+      const merged = await collectWeek({ weekStart: "2026-10-12", outRoot, sources, only: new Set(["zeta"]), merge: true });
+
+      expect(Object.keys(merged.sources)).toEqual(Object.keys(first.sources));
+      expect(merged.sources.alpha).toEqual(first.sources.alpha);
+      expect(merged.run_started).toBe(first.run_started);
+      expect(merged.run_completed > first.run_completed).toBe(true);
+      expect(readFileSync(join(weekDir(outRoot), "alpha.json"), "utf8")).toBe(keptFile); // untouched
+      const zeta = readJson(join(weekDir(outRoot), "zeta.json")).collected_at as string;
+      expect(zeta > merged.run_started && zeta < merged.run_completed).toBe(true);
+      expect(readJson(join(weekDir(outRoot), "_manifest.json"))).toEqual(merged);
+    });
+
+    it("replaces a failed entry with the fresh result", async () => {
+      const outRoot = mkdtempSync(join(tmpdir(), "collect-week-"));
+      let healthy = false;
+      const flaky: Source = {
+        stem: "flaky",
+        name: "Flaky",
+        collect: () => (healthy ? Promise.resolve({ events: [], failed: [] }) : Promise.reject(new Error("site moved"))),
+      };
+      expect((await collectWeek({ weekStart: "2026-10-12", outRoot, sources: [flaky] })).sources.flaky?.status).toBe("failed");
+      healthy = true;
+      const merged = await collectWeek({ weekStart: "2026-10-12", outRoot, sources: [flaky], only: new Set(["flaky"]), merge: true });
+      expect(merged.sources.flaky).toEqual({ status: "ok", events: 0 });
+    });
+
+    it("refuses without --only, without a manifest, or with another week's manifest", async () => {
+      const outRoot = mkdtempSync(join(tmpdir(), "collect-week-"));
+      await expect(collectWeek({ weekStart: "2026-10-12", outRoot, sources, merge: true })).rejects.toThrow(/--merge only makes sense with --only/);
+      await expect(collectWeek({ weekStart: "2026-10-12", outRoot, sources, only: new Set(["zeta"]), merge: true })).rejects.toThrow(/needs an existing/);
+      await collectWeek({ weekStart: "2026-10-12", outRoot, sources });
+      writeFileSync(join(weekDir(outRoot), "_manifest.json"), JSON.stringify({ week: "2026-10-05", run_started: "x", run_completed: "y", sources: {} }));
+      await expect(collectWeek({ weekStart: "2026-10-12", outRoot, sources, only: new Set(["zeta"]), merge: true })).rejects.toThrow(/not a manifest for 2026-10-12/);
+    });
+  });
+
   it("escapes non-ASCII like Python's json.dump", async () => {
     const outRoot = mkdtempSync(join(tmpdir(), "collect-week-"));
     const accented: Source = { stem: "cine", name: "cinéSPEAK", collect: () => Promise.resolve({ events: [], failed: [] }) };
@@ -149,6 +192,12 @@ describe("CLI", () => {
     expect(await run(["--week-start", "2026-10-13"])).toBe(2);
     expect(await run(["--week-start", "2026-02-30"])).toBe(2);
     expect(await run(["--bogus"])).toBe(2);
+  });
+
+  it("exits 2 for --merge without --only, or with no manifest to merge into", async () => {
+    const outRoot = mkdtempSync(join(tmpdir(), "collect-week-"));
+    expect(await run(["--week-start", "2026-10-12", "--out-root", outRoot, "--merge"])).toBe(2);
+    expect(await run(["--week-start", "2026-10-12", "--out-root", outRoot, "--only", "none-such", "--merge"])).toBe(2);
   });
 
   it("runs the requested subset", async () => {
