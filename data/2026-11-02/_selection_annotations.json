@@ -1,0 +1,877 @@
+{
+  "week": "2026-11-02",
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-11-02",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0506",
+          "rank": 1,
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "time": "8:00 PM",
+          "why": "AJJ (formerly Andrew Jackson Jihad) bring their scrappy, politically sharp folk-punk to Philly on the Dirty Old Power tour, with Greet Death opening. It's an all-ages R5 Productions show at First Unitarian — Philly's home base for exactly this kind of DIY, community-minded bill. Doors at 7:30, show at 8; tickets run about $33."
+        },
+        {
+          "id": "c0000",
+          "rank": 2,
+          "address": "319 N 11th St, Philadelphia, PA 19107",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Palestine Cinema Days' touring program brings the documentary \"Foragers\" to Vox Populi — a rare chance to see Palestinian and Palestine-focused nonfiction film on a big screen here, outside the festival circuit. Vox Populi is an artist-run cooperative gallery, a few blocks from the Convention Center and the Market-Frankford Line's 11th Street stop."
+        },
+        {
+          "id": "c0494",
+          "rank": 3,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "time": "7:30 PM",
+          "why": "PhilaMOCA's long-running Psychotronic Film Society pulls another deep-cut genre oddity out of the vault — cheap ($5 at the door), weird, and exactly what this venue exists for. Doors at 7, screening at 7:30; the series doesn't always name the film in advance, which is part of the appeal."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0029"
+        },
+        {
+          "id": "c0033"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0506",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0000",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0494",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0029",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Cookbook authors Leah Koenig and Susan Spungen talk Jewish desserts, paired with a tasting from The Dessert Table and The Cookie Queen."
+        },
+        {
+          "id": "c0033",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Ongoing reading group working through Ursula K. Le Guin's The Dispossessed — her anarchist-utopia novel, a direct hit for anyone into leftist political fiction."
+        },
+        {
+          "id": "c0004",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0008",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0006",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0511",
+          "category": "🎵 Music & Concerts",
+          "sold_out": true,
+          "note": "Fire Museum Presents: experimental duo Ak'chamel and Ecology, now sold out."
+        },
+        {
+          "id": "c0034",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0030",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0475",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online meetup watch-along for A Nightmare on Elm Street 3: Dream Warriors (1987)."
+        },
+        {
+          "id": "c0021",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Guided tour of the Art Museum's Marcel Duchamp exhibition; runs multiple days this week."
+        },
+        {
+          "id": "c0023",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Guided tour through the museum's Titian to Turner collection; runs multiple days this week."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0073",
+          "rank": 1,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "time": "7:30 PM",
+          "why": "PhilaMOCA marks Godzilla Day with a 16mm screening of \"Godzilla vs. the Smog Monster,\" plus trailers, shorts, and a promised special guest kaiju. It's the kind of gleefully specific, print-format programming that makes this the city's best home for genre film. Doors at 7, screening at 7:30."
+        },
+        {
+          "id": "c0507",
+          "rank": 2,
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "time": "8:00 PM",
+          "why": "Hovvdy bring their warm, unhurried indie-folk to First Unitarian on their Big World Tour, with Christian Lee Hutson opening — another all-ages R5 bill at Philly's most storied all-ages room. Doors 7:30, show 8; tickets around $31."
+        },
+        {
+          "id": "c0051",
+          "rank": 3,
+          "address": "300 S Broad St, Philadelphia, PA 19102",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "An unusual two-piano bill: contemporary-classical pianist/composer Timo Andres paired with jazz pianist Aaron Diehl at the Perelman Theater. Diehl is one of the more interesting jazz pianists working today, and this crossover pairing is a genuinely distinctive program for a Tuesday night in Center City."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0457"
+        },
+        {
+          "id": "c0071"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0073",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0507",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0051",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0457",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Silent co-working session for writers at Iffy Books — three 40-minute writing blocks with breaks, BYO coffee."
+        },
+        {
+          "id": "c0071",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Election night community gathering at Headlong Dance Theater; details are thin on Do215, so confirm specifics before heading over. *(confirm details)*"
+        },
+        {
+          "id": "c0041",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0039",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Palace (Willie J. Healey opening, per WXPN) at Franklin Music Hall."
+        },
+        {
+          "id": "c0045",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0065",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Free outdoor jazz series at FDR Park, South Philly."
+        },
+        {
+          "id": "c0050",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Viewing party for The Boulet Brothers' Dragula season 7 premiere at Strangelove's, in the Gayborhood."
+        },
+        {
+          "id": "c0048",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Community guitar skill-share at The Velvet Whip."
+        },
+        {
+          "id": "c0049",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Experimental improvisation session built around Taal Baladi (Arabic rhythmic patterns)."
+        },
+        {
+          "id": "c0476",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online meetup watch-along for Nightmare on Elm Street 4 and 5."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0481",
+          "rank": 1,
+          "address": "1412 Chestnut Street, Philadelphia, PA 19102",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Peter Greenaway's grotesque, operatic 1989 classic gets a rare theatrical outing at PFS's Film Society Center — gorgeous, violent, and about as far from a typical multiplex Wednesday as repertory film gets. Rated R, 1 hr 55 min."
+        },
+        {
+          "id": "c0517",
+          "rank": 2,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The National Lawyers Guild runs a Know Your Rights and Risks training at Wooden Shoe Books — practical, timely legal-rights education for protest, direct action, and organizing, hosted at Philly's longest-running anarchist bookshop. No cost is listed; confirm admission when you arrive."
+        },
+        {
+          "id": "c0458",
+          "rank": 3,
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "time": "2:00 PM",
+          "why": "Iffy Books opens its gear up for an afternoon of VHS and audio-cassette experimentation — bring tapes, learn analog-to-digital and digital-to-analog transfer, and tinker with hardware most people threw out years ago. Exactly the hands-on DIY-electronics programming this space is known for."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0119"
+        },
+        {
+          "id": "c0110"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0481",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0517",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0458",
+          "category": "💻 Tech & Maker",
+          "sold_out": false
+        },
+        {
+          "id": "c0119",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "A Nash the Slash tribute/revival night at PhilaMOCA — the masked, bandaged avant-garde musician's cult following keeps this kind of programming alive. $12 at the door."
+        },
+        {
+          "id": "c0110",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Marxist Reading Group works through Bukharin's The ABCs of Communism at People's Headquarters."
+        },
+        {
+          "id": "c0513",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Panel on lesbian artists across the decades with Sinister Wisdom, featuring exhibiting artists KT Abadir-Mullally, Ira Balachanthiran and Morgan Gwenwald."
+        },
+        {
+          "id": "c0512",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Rotunda's standing Wednesday drop-in improvised-music jam."
+        },
+        {
+          "id": "c0531",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Jazz flutist Elena Pinderhughes at City Winery."
+        },
+        {
+          "id": "c0091",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Jazz vocalist Jackie Johnson and her ensemble at Chris' Jazz Cafe."
+        },
+        {
+          "id": "c0083",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0120",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Latin jazz jam session at Black Squirrel Club."
+        },
+        {
+          "id": "c0085",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Expert panel on medical AI at the Mütter Museum."
+        },
+        {
+          "id": "c0473",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "DC215 AppSec Village session on reverse-engineering and patching legacy software. Online."
+        },
+        {
+          "id": "c0111",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Talk on Reconstruction and the Second Founding at the National Constitution Center."
+        },
+        {
+          "id": "c0477",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online meetup watch-along for Freddy's Dead: The Final Nightmare and Wes Craven's New Nightmare."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0460",
+          "rank": 1,
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "time": "6:30 PM",
+          "why": "Iffy Books hosts a beginner-friendly introduction to Strudel, a live-coding tool for making music with code, ending in a group livecode jam. No programming experience required — DIY electronics, functional-style programming, and music overlapping in exactly the way this space does best."
+        },
+        {
+          "id": "c0495",
+          "rank": 2,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "time": "7:30 PM",
+          "why": "PhilaMOCA stacks Oldest Sea with three more local acts — Bruise Bath, ShyGodwin, and Diuretic — for $15, an all-local, multi-band bill that's easy to miss outside this venue's own listings. Doors 7, show 7:30."
+        },
+        {
+          "id": "c0155",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Experimental composer Lea Bertucci (paired with Michael Behari as Bow and Arrow) splits a bill with the duo Angel Meat at The Perch in Kensington — a small-room experimental/noise show that's easy to miss. Bertucci's work spans tape loops, saxophone, and site-specific sound installation; expect something more textural than a standard rock bill. A quick ride up the Market-Frankford Line into Kensington."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0541"
+        },
+        {
+          "id": "c0138"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0460",
+          "category": "💻 Tech & Maker",
+          "sold_out": false
+        },
+        {
+          "id": "c0495",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0155",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0541",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Jazz saxophonist Kamasi Washington co-headlines with Ami Taf Ra at City Winery — no showtime listed; check the venue site before heading over."
+        },
+        {
+          "id": "c0138",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "This Is Lorelei (WXPN Welcomes, an R5 all-ages show) at First Unitarian."
+        },
+        {
+          "id": "c0459",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Beginner soldering workshop: build a 3.5mm audio aux cable with a volume knob."
+        },
+        {
+          "id": "c0126",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Imperial Teen, Kristeen Young, and Gay Meat — indie/punk triple bill."
+        },
+        {
+          "id": "c0124",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Fruit Bats, with Sarah Klang opening (per WXPN), at Union Transfer."
+        },
+        {
+          "id": "c0135",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0143",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "HFB Ensemble at Chris' Jazz Cafe."
+        },
+        {
+          "id": "c0514",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Erini — Fos: An Asia Minor Story, at The Rotunda."
+        },
+        {
+          "id": "c0187",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "The Moth's Philadelphia GrandSLAM storytelling competition at Bok Building."
+        },
+        {
+          "id": "c0127",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Slum Village & Pete Rock at Brooklyn Bowl."
+        },
+        {
+          "id": "c0134",
+          "category": "🎵 Music & Concerts",
+          "sold_out": true
+        },
+        {
+          "id": "c0175",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Renters United Philadelphia's monthly tenant-organizing meeting, over Zoom."
+        },
+        {
+          "id": "c0178",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "\"Jewish or Antisemitic LIVE,\" hosted by Eitan Levine, at the Weitzman museum."
+        },
+        {
+          "id": "c0176",
+          "category": "📚 Literary",
+          "sold_out": true,
+          "note": "Oscar Wilde: Shadows Beneath the Spotlight, at the Rosenbach — now sold out."
+        },
+        {
+          "id": "c0171",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Preview Party kicking off the Art Museum's 50th Annual Craft Show, which runs through the weekend."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0498",
+          "rank": 1,
+          "address": "2444 W Ritner St, Philadelphia, PA 19145",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Homies Helping Homies' South Philly garage space hosts a benefit show in support of SPAC, stacked with a metal/punk/screamo bill — the kind of DIY, all-local, community-funding lineup that only shows up on punk-specific listings like Ask a Punk. All-ages, basement-show energy, minutes from Point Breeze."
+        },
+        {
+          "id": "c0501",
+          "rank": 2,
+          "address": "1201 North Frankford Ave, Philadelphia, PA 19125",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "time": "9:00 PM",
+          "why": "Johnny Brenda's goes goth for A Black Celebration, a dark-music DJ night from Phillygoth.net with DJs Baby Berlin and Alex English. 21+, 9pm–2am, $10 advance / $15 at the door — a straightforward match for anyone into gothic club culture. In Fishtown; nearest stop is Girard on the Market-Frankford Line, or the 15 trolley."
+        },
+        {
+          "id": "c0496",
+          "rank": 3,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "time": "8:30 PM",
+          "why": "The Philly Pigeon's Late(ish) Poetry Show brings spoken word to PhilaMOCA's screen-and-stage room — $15–25 for a small, text-forward night at a venue better known for film. Doors 8, show 8:30."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0461"
+        },
+        {
+          "id": "c0509"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0498",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0501",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0496",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0461",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Philly 2600's monthly meetup for local hackers, phreaks, and infosec folks, at Iffy Books."
+        },
+        {
+          "id": "c0509",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Basia Bulat, seated solo show at Philadelphia Ethical Society. $37."
+        },
+        {
+          "id": "c0218",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Tenor Madness Septet, with saxophonists Eric Alexander and Victor North, at Chris' Jazz Cafe — a later set with trombonist Conrad Herwig follows."
+        },
+        {
+          "id": "c0240",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Miki Yamanaka Trio, part of a First Friday jazz/PAAFF collaboration at the Barnes Foundation."
+        },
+        {
+          "id": "c0285",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "\"Sex & Death\"-themed drag/performance night at Prism Arts Philadelphia."
+        },
+        {
+          "id": "c0268",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Open studio and exhibition for Dunu's artists-in-residence at Termite TV Studio, Cherry Street Pier."
+        },
+        {
+          "id": "c0239",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "First Friday opening at Arch Enemy Arts, the city's go-to gallery for dark and pop-surrealist work."
+        },
+        {
+          "id": "c0264",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "First Friday double opening at Paradigm Gallery: André Schulze's \"Restored and Reimagined\" and Kyle Montgomery's \"LUX.\""
+        },
+        {
+          "id": "c0270",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Completely Yes plays the music of Stevie Wonder at Woodmere Art Museum."
+        },
+        {
+          "id": "c0478",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online meetup watch-along for Godzilla Minus One, ahead of the sequel's theatrical run."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-07",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0510",
+          "rank": 1,
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "time": "8:00 PM",
+          "why": "William Basinski brings \"The Disintegration Loops\" — his landmark, elegiac ambient work built from tape loops literally dissolving as they played, recorded in the days around 9/11 — to a seated 25th-anniversary performance in First Unitarian's sanctuary, with claire rousay opening. About as rare and significant as an experimental-music booking gets in Philadelphia. Doors 7:30, show 8."
+        },
+        {
+          "id": "c0515",
+          "rank": 2,
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Rotunda's second annual Modular Synth Fest gathers five local electronic/experimental artists — Kevin Dal-Mare, David Taliento, Jair-Rohm Parker Wells, Kwame Johnson, and Sandy James — for an afternoon built entirely around hardware synthesis. The DIY-electronics-meets-music crossover this space exists for, and a real rarity on the Philly calendar."
+        },
+        {
+          "id": "c0499",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Sanctuary in West Philly hosts a crust/hardcore punk bill headlined by out-of-town act Housie (rva), with Sediment and Insectoids — the kind of DIY show that lives entirely on Ask a Punk's radar and nowhere else."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0486"
+        },
+        {
+          "id": "c0504"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0510",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0515",
+          "category": "💻 Tech & Maker",
+          "sold_out": false
+        },
+        {
+          "id": "c0499",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0486",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Gandahar (1987), René Laloux's hallucinatory French animated sci-fi cult classic, at PFS Film Society Center."
+        },
+        {
+          "id": "c0504",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Sex Dwarf: Notorious November, a goth/industrial dance night hosted by WXPN's own Robert Drake, at Broad Hall. 21+, $5 before 9pm."
+        },
+        {
+          "id": "c0485",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Smoke (1995) at PFS Film Society Center."
+        },
+        {
+          "id": "c0312",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Ghost Harmonics: an experimental bill at The Perch featuring poet Bianca Stone alongside BORBS, World Assembly Body Opera, and others."
+        },
+        {
+          "id": "c0310",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Giles Corey (Dan Barrett's dark-ambient project) with Kathryn Mohr and Val Acton Loper, at Ukie Club."
+        },
+        {
+          "id": "c0503",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Frankenstein pop-up exhibit at the Mütter Museum — included with admission; has been running weekly since September."
+        },
+        {
+          "id": "c0396",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "August Lamm's \"You Don't Need a Smartphone\" book tour stop at Studio 34."
+        },
+        {
+          "id": "c0462",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Build a pocket digital notebook with a USB keyboard, at Iffy Books."
+        },
+        {
+          "id": "c0313",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Sloptart, Smellco, and Annalakka at Silk City."
+        },
+        {
+          "id": "c0472",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Claude Code Philly's weekly hands-on meetup for builders using Claude to write code. Online."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-08",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0403",
+          "rank": 1,
+          "address": "1200 Callowhill St, Philadelphia, PA 19107",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Deerhoof — one of indie rock's most genuinely singular, long-running experimental bands — hits Underground Arts with Eraser and Nympho opening. Twenty-plus years in, they still don't sound like anyone else; a rare chance to see a true original in a room this size."
+        },
+        {
+          "id": "c0413",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A five-band punk and metal matinee at Nikki Lopez — Trash Strike, XPURITYX, Rights Abuse, Drawn By Blood, and False Nine — starting at 1pm, the kind of all-day DIY bill that's easy to miss if you're not specifically looking for it."
+        },
+        {
+          "id": "c0452",
+          "rank": 3,
+          "address": "101 S Independence Mall East, Philadelphia, PA 19106",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Secret Chord Concerts pairs an Ethiofunk set from Gili Yalo with a Sigd celebration — the Ethiopian Jewish holiday marking renewal of the covenant — at the Weitzman museum. A genuinely rare pairing of live world music and a specific cultural observance you won't find anywhere else in the city this week."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0433"
+        },
+        {
+          "id": "c0505"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0403",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0413",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0452",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0433",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Bowerbird presents Postal Pieces 3, an experimental/new-music program, at The Perch."
+        },
+        {
+          "id": "c0505",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Black Squirrel Noir: alternative, new wave, and goth DJ night with Kathy Fadigan, Jon Gill, and EGBIII. $10 advance / $15 at the door."
+        },
+        {
+          "id": "c0516",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Screening of Nuevo mundo (1978) paired with a workshop on ancestral connection and syncretism, at The Rotunda."
+        },
+        {
+          "id": "c0463",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Anarchist Sewing Club — learn to sew or mend clothes, or just hang out sewing, at Iffy Books."
+        },
+        {
+          "id": "c0464",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "IndieWeb Homebrew Website Club, part of a worldwide network reclaiming the web from social media, at Iffy Books."
+        },
+        {
+          "id": "c0444",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Barnes Cinema screens Powwow People, Sky Hopinka's documentary, at the Barnes Foundation."
+        },
+        {
+          "id": "c0437",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Philly DSA's New Member 101 orientation session."
+        },
+        {
+          "id": "c0449",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Wavy Movy Fundraising Festival at The Perch."
+        },
+        {
+          "id": "c0480",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Weekly online watch party for Dexter: Resurrection, Season 2."
+        },
+        {
+          "id": "c0428",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Curtis Symphony Orchestra, Yannick Nézet-Séguin conducting Mahler's Ninth, at Marian Anderson Hall."
+        }
+      ]
+    }
+  ]
+}
