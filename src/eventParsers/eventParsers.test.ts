@@ -79,10 +79,12 @@ describe("registry", () => {
   it("serialises with Python's key order and ensure_ascii escaping", () => {
     // collect_week.py writes events with json.dumps(indent=2); the optional
     // venue keys come last and only when present.
-    const [event] = do215(read("do215-venue-objects.json"), "2026-08-03", "2026-08-09").filter(
-      (e) => e.title === "Address already carries locality",
+    const [event] = do215(
+      JSON.stringify({ events: [{ id: 1, title: "T", permalink: "/p", occurrence_date: "2026-08-05", tz_adjusted_begin_time: "2026-08-05T19:00:00-04:00", venue: { id: 7, title: "V" } }] }),
+      "2026-08-03",
+      "2026-08-09",
     );
-    expect(Object.keys(event ?? {})).toEqual(["title", "venue", "date", "time", "cost", "url", "description", "venue_address", "venue_id"]);
+    expect(Object.keys(event ?? {})).toEqual(["title", "venue", "date", "time", "cost", "url", "description", "venue_id"]);
     const coffee = find(gcal(read("gcal.json"), "2026-08-03", "2026-08-09"), (e) => e.title.includes("Coffee Talk"));
     expect(writeJsonAsciiEscaped(coffee)).toContain('"title": "\\u2615\\ufe0f Coffee Talk"');
   });
@@ -295,85 +297,6 @@ describe("meetup-ical", () => {
   });
   it("throws when the response isn't iCal at all", () => {
     expect(() => meetup("<html><body>404 not found</body></html>", WEEK_START, WEEK_END)).toThrow(ParseError);
-  });
-});
-
-describe("do215", () => {
-  const start = "2026-08-03";
-  const end = "2026-08-09";
-  const fixture = (): Event[] => do215(read("do215.json"), start, end);
-  const venueEvents = (): Map<string, Event> =>
-    new Map(do215(read("do215-venue-objects.json"), start, end).map((e) => [e.title, e]));
-
-  it("filters to the target week", () => {
-    const events = fixture();
-    expect(events).toHaveLength(3);
-    expect(titles(events)).toEqual(new Set(["Drink Responsibly", "Happy Together 2026 Tour", "KALEO - Way Down We Go Tour"]));
-  });
-  it("dedupes by event id", () => {
-    expect(fixture().filter((e) => e.title === "Happy Together 2026 Tour")).toHaveLength(1);
-  });
-  it("drops is_ongoing events even when in the window", () => {
-    expect(do215(read("do215.json"), "2026-06-01", "2026-06-10")).toEqual([]);
-  });
-  it("drops stale entries outside the window even when not ongoing", () => {
-    expect(do215(read("do215.json"), "2026-05-20", "2026-05-26")).toEqual([]);
-  });
-  it("uses tz_adjusted_begin_date, not the mis-offset begin_time", () => {
-    expect(find(fixture(), (e) => e.title.includes("Happy Together"))).toMatchObject({ date: "2026-08-05", time: "7:00 PM" });
-  });
-  it("formats the venue with city and state when present", () => {
-    expect(find(fixture(), (e) => e.title.includes("Happy Together")).venue).toBe("Lansdowne Theater, Lansdowne, PA");
-  });
-  it("omits the city when the venue has none", () => {
-    expect(find(fixture(), (e) => e.title === "Drink Responsibly").venue).toBe("Winston On The Water");
-  });
-  it("appends the address to the venue title rather than replacing it", () => {
-    // Venue 511812 "Nikki Lopez" reads like a person's name but is a real DIY
-    // venue; appending is the only lossless move (see do215.ts).
-    expect(venueEvents().get("Address already carries locality")).toMatchObject({
-      venue: "Nikki Lopez, 304 South St, Philadelphia, PA 19147",
-      venue_address: "304 South St, Philadelphia, PA 19147",
-      venue_id: "511812",
-    });
-  });
-  it("composes locality onto a bare street address", () => {
-    expect(venueEvents().get("Bare street address")).toMatchObject({
-      venue_address: "121 N Christopher Columbus Blvd, Philadelphia, PA 19106",
-      venue: "Cherry Street Pier, 121 N Christopher Columbus Blvd, Philadelphia, PA 19106",
-    });
-  });
-  it("does not repeat a venue name that is also its address", () => {
-    expect(venueEvents().get("Address restates the title")?.venue).toBe("Upper Merion Township Building Park");
-  });
-  it("treats null and blank addresses as absent", () => {
-    const events = venueEvents();
-    for (const title of ["Null address falls back to city and state", "Empty and padded address"]) {
-      const event = events.get(title);
-      expect(event, title).toBeDefined();
-      expect(event).not.toHaveProperty("venue_address");
-      expect(event?.venue.endsWith(", Philadelphia, PA"), title).toBe(true);
-    }
-  });
-  it("omits venue_id when the object has none", () => {
-    expect(venueEvents().get("Venue object has no id at all")).not.toHaveProperty("venue_id");
-  });
-  it("marks free events explicitly", () => {
-    expect(find(fixture(), (e) => e.title === "Drink Responsibly").cost).toBe("Free");
-  });
-  it("builds the full URL from the permalink", () => {
-    expect(find(fixture(), (e) => e.title.includes("Happy Together")).url).toBe(
-      "https://do215.com/events/2026/8/5/happy-together-2026-tour-tickets",
-    );
-  });
-  it("throws when the events key is missing", () => {
-    expect(() => do215(JSON.stringify({ paging: {} }), start, end)).toThrow(ParseError);
-  });
-  it("throws on invalid JSON", () => {
-    expect(() => do215("not json at all", start, end)).toThrow(ParseError);
-  });
-  it("treats an empty events list as valid", () => {
-    expect(do215(JSON.stringify({ events: [] }), start, end)).toEqual([]);
   });
 });
 
@@ -612,31 +535,6 @@ describe("fixed Python bugs", () => {
         <div class="rhp-event__info--list"><a id="eventTitle" href="/b"><h2>Undated Show</h2></a></div>
       </div>`;
     expect(r5(html, WEEK_START, WEEK_END).map((e) => e.title)).toEqual(["Dated Show"]);
-  });
-
-  it("do215: a null title skips the event; a null permalink or venue title reads as empty, never 'None'", () => {
-    const raw = JSON.stringify({
-      events: [
-        { id: 1, title: null, tz_adjusted_begin_date: "2026-08-05T19:00:00-04:00", permalink: "/x" },
-        { id: 2, title: "Real Show", tz_adjusted_begin_date: "2026-08-05T19:00:00-04:00", permalink: null, venue: { title: null, city: "Philadelphia" } },
-      ],
-    });
-    const events = do215(raw, "2026-08-03", "2026-08-09");
-    expect(events).toEqual([
-      { title: "Real Show", venue: ", Philadelphia", date: "2026-08-05", time: "7:00 PM", cost: "", url: "", description: "" },
-    ]);
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining("has no title"));
-  });
-
-  it("do215: a non-object venue skips only that event", () => {
-    const raw = JSON.stringify({
-      events: [
-        { id: 1, title: "Bad Venue", tz_adjusted_begin_date: "2026-08-05T19:00:00-04:00", venue: "Somewhere" },
-        { id: 2, title: "Good", tz_adjusted_begin_date: "2026-08-05T19:00:00-04:00" },
-      ],
-    });
-    expect(do215(raw, "2026-08-03", "2026-08-09").map((e) => e.title)).toEqual(["Good"]);
-    expect(warn).toHaveBeenCalledOnce();
   });
 
   it("philly-ask-a-punk: string tags are used as-is, not split into characters", () => {

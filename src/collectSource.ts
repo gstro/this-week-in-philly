@@ -43,7 +43,7 @@ import { writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
 
-import { type Event, PARSERS, ParseError, parseLightboxIndex } from "./eventParsers/index.js";
+import { type Event, PARSERS, ParseError, decodeDo215DayPage, parseLightboxIndex } from "./eventParsers/index.js";
 import { fetchPageText } from "./fetchPageText.js";
 import { errorMessage, get, readText } from "./lib/http.js";
 import { writeJsonAsciiEscaped } from "./lib/json.js";
@@ -55,11 +55,14 @@ export interface Collected {
 
 export type Collector = (weekStart: string, weekEnd: string) => Promise<Collected>;
 
-// Per-day pagination cap. Observed live (2026-07-29): a typical day is 1-3
-// pages; a big day (concerts + a multi-week festival re-listed daily) hit 4.
-// Capped well above that rather than left unbounded -- an unbounded loop is
-// its own silent-cost risk (docs/COLLECTION_PROXY_ISSUE.md: Songkick).
-export const MAX_PAGES_PER_DAY = 6;
+// Per-day pagination cap. Do215's rebuilt site pages 20 events at a time
+// (2026-11-01): a typical day is 2-5 pages and a big Saturday took 8 (143
+// events), so the old cap of 6 -- set for the previous API -- would have cut
+// that Saturday off at 120. Still capped rather than left unbounded -- an
+// unbounded loop is its own silent-cost risk (docs/COLLECTION_PROXY_ISSUE.md:
+// Songkick) -- and hitting the cap is recorded as a failure so the manifest
+// says so, never a silent truncation.
+export const MAX_PAGES_PER_DAY = 15;
 
 // WXPN's Tribe Events API filters by date server-side, so a week is ~40 events
 // (one page of 50, its per_page cap). The cap only guards against a
@@ -97,25 +100,25 @@ export function addDays(date: string, days: number): string {
   return day.toISOString().slice(0, 10);
 }
 
-// --- do215: one JSON URL per day, each paginated ---
+// --- do215: one SvelteKit data URL per day, each paginated ---
 
 export async function collectDo215(weekStart: string, weekEnd: string): Promise<Collected> {
   const events: unknown[] = [];
   const failed: string[] = [];
   for (const day of datesBetween(weekStart, weekEnd)) {
     const [year, month, dayOfMonth] = day.split("-").map(Number) as [number, number, number];
-    const base = `https://do215.com/events/${String(year)}/${String(month)}/${String(dayOfMonth)}.json`;
+    const base = `https://do215.com/events/${String(year)}/${String(month)}/${String(dayOfMonth)}/__data.json`;
     let totalPages = 1;
     for (let page = 1; page <= Math.min(totalPages, MAX_PAGES_PER_DAY); page++) {
       const url = page === 1 ? base : `${base}?page=${String(page)}`;
       try {
         const { payload } = await getJson(url);
-        if (typeof payload !== "object" || payload === null || Array.isArray(payload)) {
-          throw new TypeError("expected a JSON object");
+        const decoded = decodeDo215DayPage(payload);
+        events.push(...decoded.events);
+        totalPages = decoded.totalPages;
+        if (page === 1 && totalPages > MAX_PAGES_PER_DAY) {
+          failed.push(`${base} (truncated: ${String(totalPages)} pages exist, fetching only the first ${String(MAX_PAGES_PER_DAY)})`);
         }
-        const body = payload as { events?: unknown; paging?: { total_pages?: unknown } };
-        if (Array.isArray(body.events)) events.push(...(body.events as unknown[]));
-        totalPages = typeof body.paging?.total_pages === "number" ? body.paging.total_pages : 1;
       } catch (err) {
         failed.push(failure(url, err));
       }

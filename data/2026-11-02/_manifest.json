@@ -1,15 +1,15 @@
 {
   "week": "2026-11-02",
   "run_started": "2026-11-01T14:24:25.556684+00:00",
-  "run_completed": "2026-11-01T14:24:59.457175+00:00",
+  "run_completed": "2026-11-01T22:52:32.135869+00:00",
   "sources": {
     "cinespeak": {
       "status": "ok",
       "events": 1
     },
     "do215": {
-      "status": "failed",
-      "reason": "ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json)"
+      "status": "ok",
+      "events": 516
     },
     "iffy-books": {
       "status": "ok",

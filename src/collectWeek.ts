@@ -40,9 +40,23 @@
  *   node dist/collectWeek.js                       # next Monday's week
  *   node dist/collectWeek.js --week-start 2026-08-03
  *   node dist/collectWeek.js --only do215,wxpn     # a subset, for debugging
+ *   node dist/collectWeek.js --week-start 2026-11-02 --only do215 --merge
+ *       # re-collect one source into a week that already exists
+ *
+ * `--only` alone replaces the week's `_manifest.json` with one holding just
+ * the sources it ran and a fresh run window -- fine for debugging into a
+ * scratch `--out-root`, wrong for a week on main: every other source's file
+ * would lose its manifest entry and fall outside the new window, and
+ * checkYield's provenance and manifest-agreement checks would fail the week.
+ * `--merge` (which needs `--only` and an existing manifest) is the repair
+ * path: it keeps every other entry and the original `run_started`, replaces
+ * only the named sources' entries, and moves `run_completed` forward so the
+ * re-collected files' `collected_at` still fall inside the window. Added
+ * 2026-11-01 to re-collect Do215 for the week of 2026-11-02 after its site
+ * replaced the endpoint the first run used.
  */
 
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseArgs } from "node:util";
@@ -182,17 +196,32 @@ export interface CollectWeekOptions {
   outRoot?: string;
   /** Stems to run; all when undefined. */
   only?: ReadonlySet<string>;
+  /** With `only`: update the week's existing manifest instead of replacing it. */
+  merge?: boolean;
   sources?: readonly Source[];
 }
 
-export async function collectWeek({ weekStart, outRoot = DATA_DIR, only, sources = SOURCES }: CollectWeekOptions): Promise<Manifest> {
+/** The week's committed manifest, for a merge. A missing or mismatched one is an error, never "start fresh". */
+function readExistingManifest(outDir: string, weekStart: string): Manifest {
+  const path = join(outDir, "_manifest.json");
+  if (!existsSync(path)) throw new Error(`--merge needs an existing ${path}`);
+  const manifest = JSON.parse(readFileSync(path, "utf8")) as Partial<Manifest>;
+  if (manifest.week !== weekStart || typeof manifest.run_started !== "string" || manifest.sources === undefined) {
+    throw new Error(`${path} is not a manifest for ${weekStart}`);
+  }
+  return manifest as Manifest;
+}
+
+export async function collectWeek({ weekStart, outRoot = DATA_DIR, only, merge = false, sources = SOURCES }: CollectWeekOptions): Promise<Manifest> {
+  if (merge && !only) throw new Error("--merge only makes sense with --only");
   const weekEnd = addDays(weekStart, 6);
   const outDir = join(outRoot, weekStart);
+  const existing = merge ? readExistingManifest(outDir, weekStart) : undefined;
   mkdirSync(outDir, { recursive: true });
-  const runStarted = utcTimestamp();
+  const runStarted = existing?.run_started ?? utcTimestamp();
   console.error(`Collecting ${weekStart} .. ${weekEnd} into ${outDir}`);
 
-  const entries: Record<string, ManifestEntry> = {};
+  const entries: Record<string, ManifestEntry> = { ...existing?.sources };
   for (const source of sources) {
     if (only && !only.has(source.stem)) continue;
     const skipped: string[] = [];
@@ -231,7 +260,7 @@ export async function collectWeek({ weekStart, outRoot = DATA_DIR, only, sources
   return manifest;
 }
 
-const USAGE = "usage: collectWeek.js [--week-start YYYY-MM-DD (a Monday)] [--out-root DIR] [--only stem,stem]";
+const USAGE = "usage: collectWeek.js [--week-start YYYY-MM-DD (a Monday)] [--out-root DIR] [--only stem,stem [--merge]]";
 
 /** The CLI; returns the exit code. Source failures don't fail the run (checkYield judges the result). */
 export async function run(argv: string[]): Promise<number> {
@@ -239,7 +268,7 @@ export async function run(argv: string[]): Promise<number> {
   try {
     ({ values } = parseArgs({
       args: argv,
-      options: { "week-start": { type: "string" }, "out-root": { type: "string" }, only: { type: "string" } },
+      options: { "week-start": { type: "string" }, "out-root": { type: "string" }, only: { type: "string" }, merge: { type: "boolean" } },
     }));
   } catch (err) {
     console.error(`${errorMessage(err)}\n${USAGE}`);
@@ -252,7 +281,21 @@ export async function run(argv: string[]): Promise<number> {
     return 2;
   }
   const only = values.only === undefined ? undefined : new Set(values.only.split(",").map((stem) => stem.trim()));
-  await collectWeek({ weekStart, ...(values["out-root"] !== undefined && { outRoot: values["out-root"] }), ...(only && { only }) });
+  if (values.merge && !only) {
+    console.error(`--merge needs --only\n${USAGE}`);
+    return 2;
+  }
+  try {
+    await collectWeek({
+      weekStart,
+      ...(values["out-root"] !== undefined && { outRoot: values["out-root"] }),
+      ...(only && { only }),
+      ...(values.merge && { merge: true }),
+    });
+  } catch (err) {
+    console.error(errorMessage(err));
+    return 2;
+  }
   return 0;
 }
 

@@ -22,6 +22,7 @@ import * as theRotunda from "./theRotunda.js";
 import * as wxpn from "./wxpn.js";
 
 export { type Event, type EventParser, type ParserOptions, ParseError, skippedRecords } from "./base.js";
+export { decodeDayPage as decodeDo215DayPage } from "./do215.js";
 export { parseIndex as parseLightboxIndex } from "./lightbox.js";
 
 export const PARSERS: Readonly<Record<string, EventParser>> = {

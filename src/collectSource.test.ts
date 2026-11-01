@@ -26,6 +26,7 @@ import {
 } from "./collectSource.js";
 import { ParseError } from "./eventParsers/index.js";
 import { fetchPageText } from "./fetchPageText.js";
+import { dayPagePayload } from "./lib/devalueTestUtil.js";
 import { HttpError, get } from "./lib/http.js";
 
 vi.mock("./lib/http.js", async (importActual) => ({ ...(await importActual<object>()), get: vi.fn() }));
@@ -52,9 +53,18 @@ function serve(routes: Record<string, Canned>): string[] {
   return requested;
 }
 
-// A do215 event the real parser accepts (shape from tests/fixtures/parse_events).
+// A do215 event the real parser accepts (the SvelteKit listing's shape).
 function do215Event(id: number, day: string): object {
-  return { id, title: `Event ${String(id)}`, permalink: `/events/${String(id)}`, tz_adjusted_begin_date: `${day}T20:00:00-04:00`, venue: { title: "Venue" } };
+  const [year, month, dayOfMonth] = day.split("-").map(Number) as [number, number, number];
+  return {
+    id,
+    title: `Event ${String(id)}`,
+    permalink: `/events/${String(year)}/${String(month)}/${String(dayOfMonth)}/event-${String(id)}`,
+    event_type: "single_day",
+    occurrence_date: day,
+    tz_adjusted_begin_time: `${day}T20:00:00-04:00`,
+    venue: { id: 7, title: "Venue" },
+  };
 }
 
 beforeEach(() => {
@@ -83,33 +93,47 @@ describe("dates", () => {
 });
 
 describe("do215", () => {
-  const base = "https://do215.com/events/2026/10/12.json";
+  const dayUrl = (day: number): string => `https://do215.com/events/2026/10/${String(day)}/__data.json`;
+  const base = dayUrl(12);
 
   it("pages each day until total_pages, building unpadded day URLs", async () => {
     const requested = serve({
-      [base]: { events: [do215Event(1, "2026-10-12")], paging: { total_pages: 2 } },
-      [`${base}?page=2`]: { events: [do215Event(2, "2026-10-12")], paging: { total_pages: 2 } },
-      "https://do215.com/events/2026/10/13.json": { events: [], paging: { total_pages: 1 } },
+      [base]: dayPagePayload([do215Event(1, "2026-10-12")], 2),
+      [`${base}?page=2`]: dayPagePayload([do215Event(2, "2026-10-12")], 2),
+      [dayUrl(13)]: dayPagePayload([], 1, "2026-10-13"),
     });
     const { events, failed } = await collectDo215("2026-10-12", "2026-10-13");
-    expect(requested).toEqual([base, `${base}?page=2`, "https://do215.com/events/2026/10/13.json"]);
+    expect(requested).toEqual([base, `${base}?page=2`, dayUrl(13)]);
     expect(events.map((event) => event.title)).toEqual(["Event 1", "Event 2"]);
     expect(failed).toEqual([]);
   });
 
-  it(`stops at ${String(MAX_PAGES_PER_DAY)} pages a day whatever total_pages says`, async () => {
+  it(`stops at ${String(MAX_PAGES_PER_DAY)} pages a day and records the truncation`, async () => {
     const routes: Record<string, Canned> = {};
-    for (let page = 1; page <= 8; page++) {
-      routes[page === 1 ? base : `${base}?page=${String(page)}`] = { events: [do215Event(page, "2026-10-12")], paging: { total_pages: 99 } };
+    for (let page = 1; page <= MAX_PAGES_PER_DAY + 2; page++) {
+      routes[page === 1 ? base : `${base}?page=${String(page)}`] = dayPagePayload([do215Event(page, "2026-10-12")], MAX_PAGES_PER_DAY + 2);
     }
     const requested = serve(routes);
-    await collectDo215("2026-10-12", "2026-10-12");
+    const { events, failed } = await collectDo215("2026-10-12", "2026-10-12");
     expect(requested).toHaveLength(MAX_PAGES_PER_DAY);
+    expect(events).toHaveLength(MAX_PAGES_PER_DAY);
+    expect(failed).toEqual([`${base} (truncated: ${String(MAX_PAGES_PER_DAY + 2)} pages exist, fetching only the first ${String(MAX_PAGES_PER_DAY)})`]);
   });
 
-  it("records a failed page or a non-object page and carries on", async () => {
+  it("reaches a page past the old cap of 6 (a 143-event Saturday is 8 pages)", async () => {
+    const routes: Record<string, Canned> = {};
+    for (let page = 1; page <= 8; page++) {
+      routes[page === 1 ? base : `${base}?page=${String(page)}`] = dayPagePayload([do215Event(page, "2026-10-12")], 8);
+    }
+    serve(routes);
+    const { events, failed } = await collectDo215("2026-10-12", "2026-10-12");
+    expect(events).toHaveLength(8);
+    expect(failed).toEqual([]);
+  });
+
+  it("records a failed page or an unrecognisable page and carries on", async () => {
     serve({
-      [base]: { events: [do215Event(1, "2026-10-12")], paging: { total_pages: 3 } },
+      [base]: dayPagePayload([do215Event(1, "2026-10-12")], 3),
       [`${base}?page=2`]: new HttpError(503, `${base}?page=2`, "Service Unavailable"),
       [`${base}?page=3`]: "[1, 2]",
     });
@@ -117,22 +141,29 @@ describe("do215", () => {
     expect(events).toHaveLength(1);
     expect(failed).toEqual([
       `${base}?page=2 (HTTP 503 Service Unavailable for ${base}?page=2)`,
-      `${base}?page=3 (expected a JSON object)`,
+      expect.stringContaining(`${base}?page=3 (response isn't a SvelteKit data payload`) as unknown as string,
     ]);
   });
 
   it("throws when every request failed instead of returning nothing", async () => {
-    serve({ [base]: new Error("down"), "https://do215.com/events/2026/10/13.json": new Error("down") });
+    serve({ [base]: new Error("down"), [dayUrl(13)]: new Error("down") });
     await expect(collectDo215("2026-10-12", "2026-10-13")).rejects.toThrow(
       new ParseError(`every request failed (2 attempted); first: ${base} (down)`),
     );
   });
 
+  it("throws, rather than write an empty week, when the site stops sending the listing", async () => {
+    // The 2026-11-01 failure mode in a new coat: every URL answers 200, none carries a listing.
+    serve({ [base]: { type: "data", nodes: [{ type: "skip" }] } });
+    await expect(collectDo215("2026-10-12", "2026-10-12")).rejects.toThrow(/every request failed \(1 attempted\).*no data node carries 'browse'/);
+  });
+
   it("an empty week with no failures is a real empty result", async () => {
-    serve({ [base]: { events: [], paging: { total_pages: 1 } } });
+    serve({ [base]: dayPagePayload([], 1) });
     expect(await collectDo215("2026-10-12", "2026-10-12")).toEqual({ events: [], failed: [] });
   });
 });
+
 
 describe("wxpn", () => {
   const page = (n: number): string =>
@@ -297,8 +328,8 @@ describe("CLI", () => {
   });
 
   it("writes the source file and warns about a partial failure", async () => {
-    const base = "https://do215.com/events/2026/10/12.json";
-    serve({ [base]: { events: [do215Event(1, "2026-10-12")], paging: { total_pages: 2 } }, [`${base}?page=2`]: new Error("reset") });
+    const base = "https://do215.com/events/2026/10/12/__data.json";
+    serve({ [base]: dayPagePayload([do215Event(1, "2026-10-12")], 2), [`${base}?page=2`]: new Error("reset") });
     const out = join(dir, "partial.json");
     expect(await run(args(out))).toBe(0);
     const written = JSON.parse(readFileSync(out, "utf8")) as { source: string; events: unknown[] };
@@ -308,7 +339,7 @@ describe("CLI", () => {
   });
 
   it("exits 1 and writes nothing when every request failed", async () => {
-    serve({ "https://do215.com/events/2026/10/12.json": new Error("down") });
+    serve({ "https://do215.com/events/2026/10/12/__data.json": new Error("down") });
     const out = join(dir, "failed.json");
     expect(await run(args(out))).toBe(1);
     expect(existsSync(out)).toBe(false);
