@@ -1,152 +1,458 @@
 {
   "week": "2026-11-02",
   "date": "2026-11-04",
-  "collection_failures": [
-    "do215 (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json))"
-  ],
+  "collection_failures": [],
   "candidates": [
     {
-      "title": "📼 Analog A/V Session",
-      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
-      "date": "2026-11-04",
-      "time": "2:00 PM",
-      "cost": "",
-      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNnNwamdiOWg2c3NqNmUxZzYwczMwYzFkNjRyamljcG82MHNqZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
-      "description": "Come experiment with VHS tapes and audio cassettes! We’ll have equipment on hand for analog-to-digital and digital-to-analog transfers. \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailInstructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5–$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit",
-      "source": "Iffy Books",
-      "id": "c0003"
-    },
-    {
-      "title": "A. Rimbaud",
-      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
-      "date": "2026-11-04",
-      "time": "7:00 PM",
-      "cost": "",
-      "url": "https://www.lightboxfilmcenter.org/events/a-rimbaud",
-      "description": "Philadelphia Premiere",
-      "source": "Lightbox Film Center",
-      "id": "c0010"
-    },
-    {
-      "title": "clay club: garlands",
-      "venue": "915 Spring Garden St, Philadelphia, PA 19123, USA",
-      "date": "2026-11-04",
-      "time": "7:00 PM",
-      "cost": "",
-      "url": "",
-      "description": "Get up-to-date information at: https://luma.com/r5gibs2q\n\nAddress:\n915 Spring Garden St\nthe entrance for club is on percy street located in the same building as triple bottom. there are 2 steps to enter the building, but once inside there is an elevator. we open doors for club 5 minutes prior to the start time and close the doors 15 minutes after. please allow time for parking and transportation!\nPhiladelphia, PA\nUnited States\n\nlet’s play with clay!\nusing polymer clay, we will create our clay garlands, perfect for your fall or any place in your home you want to add a lil more cuteness.\nall mat…",
-      "source": "Luma",
-      "id": "c0014"
-    },
-    {
-      "title": "Cracking <redacted>: Subverting Legacy Software",
-      "venue": "(online)",
-      "date": "2026-11-04",
-      "time": "6:00 PM",
-      "cost": "",
-      "url": "https://www.meetup.com/dc_215/events/317168560/",
-      "description": "DC215\nLegacy software: the stuff nobody wants to touch and everybody still depends on. Join DC215's AppSec Village session as Ag digs into how he cracked some legacy business software, and why that matters for anyone defending real-world systems. We will will discuss the steps and techniques used to collect details from the database, web proxy interceptions, and .NET disassembly and how to put it all together to fully subvert the licensing system. We'll go light on details about tool usage and focus more on the overarching process.\n\nItinerary:\n6:00 PM: Open House\n6:45 PM: Talk\n7:30 PM: Q&A / H…",
-      "source": "Meetup: DC 215",
-      "id": "c0020"
-    },
-    {
-      "title": "Freddy's Dead: The Final Nightmare and Wes Craven's New Nightmare",
-      "venue": "(online)",
+      "title": "Alice Cooper - Alice's Attic Tour",
+      "venue": "Hershey Theatre",
       "date": "2026-11-04",
       "time": "8:00 PM",
       "cost": "",
-      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317140777/",
-      "description": "Philadelphia Area Horror Meetup Group\n**Freddy's Dead: The Final Nightmare**\n1991 - 1hr 33mins\nHorror/Comedy\nDream-haunting Freddy Krueger returns once again to prowl the nightmares of Springwood's last surviving teenager, and of a woman whose personal connection to Krueger may mean his doom.\n\n**Wes Craven's New Nightmare**\n1994 - 1hr 52mins\nHorror/Fantasy\nA demonic force has chosen Freddy Krueger as its portal to the real world. Can Heather Langenkamp play the part of Nancy one last time and trap the evil trying to enter our world?",
-      "source": "Meetup: Philadelphia Horror",
-      "id": "c0024"
+      "url": "https://do215.com/events/2026/11/4/alice-cooper-alice-s-attic-tour-tickets",
+      "description": "Music (Rock, Metal)",
+      "source": "Do215",
+      "id": "c0078"
     },
     {
-      "title": "THE COOK, THE THIEF, HIS WIFE & HER LOVER",
-      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "title": "Kate Nash",
+      "venue": "Nikki Lopez",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/kate-nash-tickets-pebxldo",
+      "description": "Music (Folk & Blues, Rock) · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0079"
+    },
+    {
+      "title": "Adam Ray: WHO IS ME Tour",
+      "venue": "The Fillmore",
       "date": "2026-11-04",
       "time": "7:30 PM",
       "cost": "",
-      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
-      "description": "Rated R. Runtime: 1 hr 55 min.",
-      "source": "Philadelphia Film Society",
-      "id": "c0028"
+      "url": "https://do215.com/events/2026/11/4/adam-ray-who-is-me-tour-tickets",
+      "description": "Comedy · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0080"
     },
     {
-      "title": "Fatherland (2026)",
-      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "title": "Hiss Golden Messenger",
+      "venue": "Ardmore Music Hall",
       "date": "2026-11-04",
-      "time": "4:00 PM, 6:10 PM, 8:45 PM",
+      "time": "8:00 PM",
       "cost": "",
-      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
-      "description": "Rated Not Rated. Runtime: 1 hr 22 min.",
-      "source": "Philadelphia Film Society",
-      "id": "c0034"
+      "url": "https://do215.com/events/2026/11/4/hiss-golden-messenger-tickets",
+      "description": "Music (Indie & Alternative, Folk & Blues) · Main Line Suburbs, Ardmore",
+      "source": "Do215",
+      "id": "c0081"
     },
     {
-      "title": "Wicker (2026)",
-      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "title": "Brutalismus 3000",
+      "venue": "Union Transfer",
       "date": "2026-11-04",
-      "time": "3:30 PM, 6:00 PM, 8:30 PM",
+      "time": "8:00 PM",
       "cost": "",
-      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
-      "description": "Rated R. Runtime: 1 hr 45 min.",
-      "source": "Philadelphia Film Society",
-      "id": "c0035"
+      "url": "https://do215.com/events/2026/11/4/brutalismus-3000-tickets",
+      "description": "Music (Electronic / Dance, Hip Hop) · North Philly, Spring Garden",
+      "source": "Do215",
+      "id": "c0082"
     },
     {
-      "title": "The Only Living Pickpocket in New York (2026)",
-      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "title": "Hamilton Leithauser + Rostam",
+      "venue": "Underground Arts",
       "date": "2026-11-04",
-      "time": "4:30 PM, 6:40 PM",
+      "time": "8:00 PM",
       "cost": "",
-      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
-      "description": "Rated R. Runtime: 1 hr 28 min.",
-      "source": "Philadelphia Film Society",
-      "id": "c0036"
+      "url": "https://do215.com/events/2026/11/4/hamilton-leithauser-rostam-tickets",
+      "description": "Music (Folk & Blues, Indie & Alternative) · North Philly, Callowhill / Loft District",
+      "source": "Do215",
+      "id": "c0083"
     },
     {
-      "title": "You Can See Everything (2026)",
-      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "title": "Young Miko - Late Checkout Tour",
+      "venue": "Xfinity Mobile Arena",
       "date": "2026-11-04",
-      "time": "3:45 PM, 7:45 PM, 8:15 PM",
+      "time": "8:00 PM",
       "cost": "",
-      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
-      "description": "Rated R. Runtime: 2 hr 54 min.",
-      "source": "Philadelphia Film Society",
-      "id": "c0037"
+      "url": "https://do215.com/events/2026/11/4/young-miko-late-checkout-tour-tickets",
+      "description": "Music (Latin) · South Philly, Sports Complex",
+      "source": "Do215",
+      "id": "c0084"
     },
     {
-      "title": "You Can See Everything (2026)",
-      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "title": "Medical AI As We See It: An Expert Panel Discussion",
+      "venue": "Mütter Museum",
       "date": "2026-11-04",
       "time": "6:00 PM",
       "cost": "",
-      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
-      "description": "Rated R. Runtime: 2 hr 54 min.",
-      "source": "Philadelphia Film Society",
-      "id": "c0038"
+      "url": "https://do215.com/events/2026/11/4/medical-ai-as-we-see-it-an-expert-panel-discussion-tickets",
+      "description": "Arts & Culture · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0085"
     },
     {
-      "title": "Fjord (2026)",
-      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "title": "Brass Against: Halloween Tour",
+      "venue": "Elkton Music Hall",
       "date": "2026-11-04",
-      "time": "4:15 PM, 7:20 PM",
+      "time": "7:00 PM",
       "cost": "",
-      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
-      "description": "Rated Not Rated. Runtime: 2 hr 26 min.",
-      "source": "Philadelphia Film Society",
-      "id": "c0039"
+      "url": "https://do215.com/events/2026/11/4/brass-against-halloween-tour-tickets",
+      "description": "Music (Pop, Indie & Alternative)",
+      "source": "Do215",
+      "id": "c0086"
     },
     {
-      "title": "Naza (2026)",
-      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "title": "Will Overman + Vinnie Paolizzi",
+      "venue": "118 North",
       "date": "2026-11-04",
-      "time": "3:30 PM",
+      "time": "7:30 PM",
       "cost": "",
-      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
-      "description": "Rated Not Rated. Runtime: 1 hr 17 min.",
-      "source": "Philadelphia Film Society",
-      "id": "c0040"
+      "url": "https://do215.com/events/2026/11/4/will-overman-vinnie-paolizzi-tickets",
+      "description": "Food & Drink · Main Line Suburbs, Bryn Mawr",
+      "source": "Do215",
+      "id": "c0087"
+    },
+    {
+      "title": "Banda AL9 ~ The Burkharts",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/banda-al9-the-burkharts-tickets",
+      "description": "Music (Indie & Alternative) · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0088"
+    },
+    {
+      "title": "Jenny Zigrino",
+      "venue": "Claude's Comedy Club & Bar",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/jenny-zigrino-tickets",
+      "description": "Comedy (Hip Hop)",
+      "source": "Do215",
+      "id": "c0089"
+    },
+    {
+      "title": "Special Event: Daniela Mora",
+      "venue": "Helium Comedy Club",
+      "date": "2026-11-04",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/special-event-daniela-mora-tickets",
+      "description": "Comedy (Pop) · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0090"
+    },
+    {
+      "title": "Vocalist Jackie Johnson & Her Ensemble",
+      "venue": "Chris' Jazz Cafe",
+      "date": "2026-11-04",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/vocalist-jackie-johnson-her-ensemble-tickets",
+      "description": "Music · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0091"
+    },
+    {
+      "title": "Jackie Evans **SOLD OUT**",
+      "venue": "MilkBoy",
+      "date": "2026-11-04",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/jackie-evans-tickets",
+      "description": "Music (Classical) · Center City, Midtown Village / Gayborhood",
+      "source": "Do215",
+      "id": "c0092"
+    },
+    {
+      "title": "Pepper Playhouse: The SAS Project Benefit Show",
+      "venue": "Franky Bradley's",
+      "date": "2026-11-04",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/pepper-playhouse-the-sas-project-benefit-show-tickets",
+      "description": "DJ/Parties · Center City, Midtown Village / Gayborhood",
+      "source": "Do215",
+      "id": "c0093"
+    },
+    {
+      "title": "Philly All-Pro Comedy Showcase",
+      "venue": "Punch Line",
+      "date": "2026-11-04",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/philly-all-pro-comedy-showcase-tickets",
+      "description": "Comedy · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0094"
+    },
+    {
+      "title": "Madds Buckley 2026/2027 North American Tour",
+      "venue": "The Foundry",
+      "date": "2026-11-04",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/madds-buckley-2026-2027-north-american-tour-tickets",
+      "description": "Music (Indie & Alternative, Electronic / Dance) · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0095"
+    },
+    {
+      "title": "Karaoke Night w/ Alyssa Marie",
+      "venue": "Lucy’s",
+      "date": "2026-11-04",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/karaoke-night-w-alyssa-marie-tickets",
+      "description": "DJ/Parties · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0096"
+    },
+    {
+      "title": "Madra Salach",
+      "venue": "Johnny Brenda's",
+      "date": "2026-11-04",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/madra-salach-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0097"
+    },
+    {
+      "title": "Board Game Night - Harleysville",
+      "venue": "Neshaminy Creek Brewing Co",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/weekly/wed/board-game-night-harleysville",
+      "description": "Trivia, Open Mics & Other · Bucks County Suburbs, Doylestown",
+      "source": "Do215",
+      "id": "c0098"
+    },
+    {
+      "title": "Little Explorers: Colorful Leaves",
+      "venue": "Bartram's Garden",
+      "date": "2026-11-04",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/little-explorers-colorful-leaves-tickets",
+      "description": "Outdoors · West Philly, University City",
+      "source": "Do215",
+      "id": "c0099"
+    },
+    {
+      "title": "5B Botanical Watercolor (1/4)",
+      "venue": "Woodmere Art Museum",
+      "date": "2026-11-04",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/5b-botanical-watercolor-1-4-tickets",
+      "description": "Arts & Culture · Northwest Philly, Chestnut Hill",
+      "source": "Do215",
+      "id": "c0100"
+    },
+    {
+      "title": "Prenatal / Postpartum Wellness Retreat",
+      "venue": "Bok Building",
+      "date": "2026-11-04",
+      "time": "11:30 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/prenatal-postpartum-wellness-retreat-tickets",
+      "description": "Arts & Culture · South Philly, East Passyunk",
+      "source": "Do215",
+      "id": "c0101"
+    },
+    {
+      "title": "Connecting Community at the School for Advanced Research, Indian Arts Research Center Division",
+      "venue": "Benjamin Franklin Hall",
+      "date": "2026-11-04",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/connecting-community-at-the-school-for-advanced-research-indian-arts-research-center-division-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0102"
+    },
+    {
+      "title": "Babalouie BBQ",
+      "venue": "Wissahickon Brewing Company",
+      "date": "2026-11-04",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/babalouie-bbq-tickets",
+      "description": "Food & Drink · Northwest Philly, Manayunk",
+      "source": "Do215",
+      "id": "c0103"
+    },
+    {
+      "title": "SWWAG Workshop: Putting the Farm to Bed to Prepare Your Winter Garden",
+      "venue": "Bartram's Garden",
+      "date": "2026-11-04",
+      "time": "4:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/swwag-workshop-putting-the-farm-to-bed-to-prepare-your-winter-garden-tickets",
+      "description": "Outdoors · West Philly, University City",
+      "source": "Do215",
+      "id": "c0104"
+    },
+    {
+      "title": "Mind and Mood Recharge",
+      "venue": "Penn Museum",
+      "date": "2026-11-04",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/mind-and-mood-recharge-tickets",
+      "description": "Arts & Culture · West Philly, University City",
+      "source": "Do215",
+      "id": "c0105"
+    },
+    {
+      "title": "Mind and Mood Recharge at Penn Museum",
+      "venue": "Schuylkill Banks",
+      "date": "2026-11-04",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/mind-and-mood-recharge-at-penn-museum-tickets",
+      "description": "Outdoors",
+      "source": "Do215",
+      "id": "c0106"
+    },
+    {
+      "title": "The First Bite | Pinche Guey Taqueria | Newark De",
+      "venue": "Pinche Güey Taqueria",
+      "date": "2026-11-04",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/the-first-bite-pinche-guey-taqueria-newark-de-tickets",
+      "description": "DJ/Parties",
+      "source": "Do215",
+      "id": "c0107"
+    },
+    {
+      "title": "Miniature Ceramics on the Wheel w/Tuft the World",
+      "venue": "Bok Building",
+      "date": "2026-11-04",
+      "time": "5:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/miniature-ceramics-on-the-wheel-w-tuft-the-world-tickets",
+      "description": "Arts & Culture · South Philly, East Passyunk",
+      "source": "Do215",
+      "id": "c0108"
+    },
+    {
+      "title": "Button-Down Upcycling with Studio Dingen",
+      "venue": "Stitch and Destroy",
+      "date": "2026-11-04",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/button-down-upcycling-with-studio-dingen-tickets",
+      "description": "Arts & Culture · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0109"
+    },
+    {
+      "title": "Marxist Reading Group: The ABCs of Communism",
+      "venue": "People's Headquarters",
+      "date": "2026-11-04",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/marxist-reading-group-the-abcs-of-communism-tickets",
+      "description": "Charity & Activism",
+      "source": "Do215",
+      "id": "c0110"
+    },
+    {
+      "title": "Reconstruction and the Second Founding",
+      "venue": "National Constitution Center",
+      "date": "2026-11-04",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/reconstruction-and-the-second-founding-tickets",
+      "description": "Arts & Family · Center City, Old City",
+      "source": "Do215",
+      "id": "c0111"
+    },
+    {
+      "title": "Philly's 30's 40's 40's Mixer And Jakeya Limitless Presents: Whisky Wednesday",
+      "venue": "The Velvet Whip",
+      "date": "2026-11-04",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/philly-s-30-s-40-s-40-s-mixer-and-jakeya-limitless-presents-whisky-wednesday-tickets",
+      "description": "DJ/Parties",
+      "source": "Do215",
+      "id": "c0112"
+    },
+    {
+      "title": "Quizzo",
+      "venue": "FRINGE BAR",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/quizzo-tickets",
+      "description": "Food & Drink · Center City, Penn's Landing / Waterfront",
+      "source": "Do215",
+      "id": "c0113"
+    },
+    {
+      "title": "Artifacts in Action Virtual Lecture",
+      "venue": "Penn Museum",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/artifacts-in-action-virtual-lecture-tickets",
+      "description": "Arts & Culture · West Philly, University City",
+      "source": "Do215",
+      "id": "c0114"
+    },
+    {
+      "title": "Museum Mindfulness at Home: Watercolor Wonders",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/museum-mindfulness-at-home-watercolor-wonders-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "id": "c0115"
+    },
+    {
+      "title": "A. Rimbaud",
+      "venue": "Bok Building",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/a-rimbaud-tickets",
+      "description": "Arts & Culture · South Philly, East Passyunk",
+      "source": "Do215",
+      "id": "c0116"
+    },
+    {
+      "title": "The Power to Change Wednesdays",
+      "venue": "Kadampa Meditation Center Philadelphia",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/the-power-to-change-wednesdays-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0117"
+    },
+    {
+      "title": "Moonstone Poetry Series every Wednesday 7pm",
+      "venue": "Fergie's Pub",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/moonstone-poetry-series-every-wednesday-7pm-tickets",
+      "description": "Trivia, Open Mics & Other",
+      "source": "Do215",
+      "id": "c0118"
     },
     {
       "title": "NASH THE SLASH RISES AGAIN!",
@@ -157,7 +463,172 @@
       "url": "https://www.etix.com/ticket/p/66382982/",
       "description": "",
       "source": "PhilaMOCA",
-      "id": "c0043"
+      "id": "c0119"
+    },
+    {
+      "title": "Descarga: A Latin Jam Session",
+      "venue": "Black Squirrel Club",
+      "date": "2026-11-04",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/descarga-a-latin-jam-session-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0120"
+    },
+    {
+      "title": "Survivor Season 51 Watch Party",
+      "venue": "Dock Street Brewery South",
+      "date": "2026-11-04",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/survivor-season-51-watch-party-tickets",
+      "description": "Drag",
+      "source": "Do215",
+      "id": "c0121"
+    },
+    {
+      "title": "Off Leash Comedy",
+      "venue": "Fergie's Pub",
+      "date": "2026-11-04",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/4/off-leash-comedy-tickets",
+      "description": "Trivia, Open Mics & Other",
+      "source": "Do215",
+      "id": "c0122"
+    },
+    {
+      "title": "📼 Analog A/V Session",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-11-04",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNnNwamdiOWg2c3NqNmUxZzYwczMwYzFkNjRyamljcG82MHNqZ2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Come experiment with VHS tapes and audio cassettes! We’ll have equipment on hand for analog-to-digital and digital-to-analog transfers. \nRegister:\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailInstructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5–$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit",
+      "source": "Iffy Books",
+      "id": "c0458"
+    },
+    {
+      "title": "clay club: garlands",
+      "venue": "915 Spring Garden St, Philadelphia, PA 19123, USA",
+      "date": "2026-11-04",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "",
+      "description": "Get up-to-date information at: https://luma.com/r5gibs2q\n\nAddress:\n915 Spring Garden St\nthe entrance for club is on percy street located in the same building as triple bottom. there are 2 steps to enter the building, but once inside there is an elevator. we open doors for club 5 minutes prior to the start time and close the doors 15 minutes after. please allow time for parking and transportation!\nPhiladelphia, PA\nUnited States\n\nlet’s play with clay!\nusing polymer clay, we will create our clay garlands, perfect for your fall or any place in your home you want to add a lil more cuteness.\nall mat…",
+      "source": "Luma",
+      "id": "c0467"
+    },
+    {
+      "title": "Cracking <redacted>: Subverting Legacy Software",
+      "venue": "(online)",
+      "date": "2026-11-04",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/317168560/",
+      "description": "DC215\nLegacy software: the stuff nobody wants to touch and everybody still depends on. Join DC215's AppSec Village session as Ag digs into how he cracked some legacy business software, and why that matters for anyone defending real-world systems. We will will discuss the steps and techniques used to collect details from the database, web proxy interceptions, and .NET disassembly and how to put it all together to fully subvert the licensing system. We'll go light on details about tool usage and focus more on the overarching process.\n\nItinerary:\n6:00 PM: Open House\n6:45 PM: Talk\n7:30 PM: Q&A / H…",
+      "source": "Meetup: DC 215",
+      "id": "c0473"
+    },
+    {
+      "title": "Freddy's Dead: The Final Nightmare and Wes Craven's New Nightmare",
+      "venue": "(online)",
+      "date": "2026-11-04",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317140777/",
+      "description": "Philadelphia Area Horror Meetup Group\n**Freddy's Dead: The Final Nightmare**\n1991 - 1hr 33mins\nHorror/Comedy\nDream-haunting Freddy Krueger returns once again to prowl the nightmares of Springwood's last surviving teenager, and of a woman whose personal connection to Krueger may mean his doom.\n\n**Wes Craven's New Nightmare**\n1994 - 1hr 52mins\nHorror/Fantasy\nA demonic force has chosen Freddy Krueger as its portal to the real world. Can Heather Langenkamp play the part of Nancy one last time and trap the evil trying to enter our world?",
+      "source": "Meetup: Philadelphia Horror",
+      "id": "c0477"
+    },
+    {
+      "title": "THE COOK, THE THIEF, HIS WIFE & HER LOVER",
+      "venue": "PFS Film Society Center, 1412 Chestnut Street, Philadelphia, PA 19102",
+      "date": "2026-11-04",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-film-society-center-aaxow/theater-page",
+      "description": "Rated R. Runtime: 1 hr 55 min.",
+      "source": "Philadelphia Film Society",
+      "id": "c0481"
+    },
+    {
+      "title": "Fatherland (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "4:00 PM, 6:10 PM, 8:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 22 min.",
+      "source": "Philadelphia Film Society",
+      "id": "c0487"
+    },
+    {
+      "title": "Wicker (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "3:30 PM, 6:00 PM, 8:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 45 min.",
+      "source": "Philadelphia Film Society",
+      "id": "c0488"
+    },
+    {
+      "title": "The Only Living Pickpocket in New York (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "4:30 PM, 6:40 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 28 min.",
+      "source": "Philadelphia Film Society",
+      "id": "c0489"
+    },
+    {
+      "title": "You Can See Everything (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "3:45 PM, 7:45 PM, 8:15 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 2 hr 54 min.",
+      "source": "Philadelphia Film Society",
+      "id": "c0490"
+    },
+    {
+      "title": "You Can See Everything (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 2 hr 54 min.",
+      "source": "Philadelphia Film Society",
+      "id": "c0491"
+    },
+    {
+      "title": "Fjord (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "4:15 PM, 7:20 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 2 hr 26 min.",
+      "source": "Philadelphia Film Society",
+      "id": "c0492"
+    },
+    {
+      "title": "Naza (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-04",
+      "time": "3:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 17 min.",
+      "source": "Philadelphia Film Society",
+      "id": "c0493"
     },
     {
       "title": "In-person! Weekly improvised music drop-in jam session",
@@ -168,7 +639,7 @@
       "url": "https://www.therotunda.org/event/in-person-weekly-improvised-music-drop-in-jam-session-2026-11-04-12-00-00-0500",
       "description": "In-person! Weekly improvised music drop-in jam session",
       "source": "The Rotunda",
-      "id": "c0063"
+      "id": "c0512"
     },
     {
       "title": "In-person! Lesbian Art/ists Across the Decades with Sinister Wisdom. Panel discussion featuring exhibiting artists KT Abadir-Mullally, Ira Balachanthiran and Morgan Gwenwald",
@@ -179,7 +650,7 @@
       "url": "https://www.therotunda.org/event/lesbian-art-ists-across-the-decades-with-sinister-wisdom-panel-discussion-featuring-exhibiting-artists-kt-abadir-mullally-ira-balachanthiran-and-morgan-gwenwald",
       "description": "In-person! Lesbian Art/ists Across the Decades with Sinister Wisdom. Panel discussion featuring exhibiting artists KT Abadir-Mullally, Ira Balachanthiran and Morgan Gwenwald",
       "source": "The Rotunda",
-      "id": "c0064"
+      "id": "c0513"
     },
     {
       "title": "NLG Know Your Rights and Risks Training",
@@ -190,7 +661,7 @@
       "url": "https://www.google.com/calendar/event?eid=YzhzNmFjcGtjbGgzMmI5bzY4cWo0YjlrNzFnajBiYjFjb282MmJiMWM5aGplY2I0YzVpNjhjMWhjNF8yMDI2MTEwNFQyMzAwMDBaIHQ4cW1pdmU2M24yN21kajdndDAzbnRjMnU4QGc&ctz=America/New_York",
       "description": "",
       "source": "Wooden Shoe Books",
-      "id": "c0068"
+      "id": "c0517"
     },
     {
       "title": "Hiss Golden Messenger / Sam Amidon",
@@ -201,7 +672,7 @@
       "url": "https://xpn.org/event/hiss-golden-messenger-sam-amidon/",
       "description": "WXPN Welcomes",
       "source": "WXPN",
-      "id": "c0082"
+      "id": "c0528"
     },
     {
       "title": "The Robert Cray Band",
@@ -212,7 +683,7 @@
       "url": "https://xpn.org/event/the-robert-cray-band/",
       "description": "Central PA, WXPN Welcomes",
       "source": "WXPN",
-      "id": "c0083"
+      "id": "c0529"
     },
     {
       "title": "Jackie Johnson & Her Ensemble",
@@ -223,7 +694,7 @@
       "url": "https://xpn.org/event/jackie-johnson-her-ensemble/",
       "description": "",
       "source": "WXPN",
-      "id": "c0084"
+      "id": "c0530"
     },
     {
       "title": "Elena Pinderhughes",
@@ -234,7 +705,7 @@
       "url": "https://xpn.org/event/elena-pinderhughes/",
       "description": "",
       "source": "WXPN",
-      "id": "c0085"
+      "id": "c0531"
     },
     {
       "title": "Banda AL9 / Log Flume",
@@ -245,7 +716,7 @@
       "url": "https://xpn.org/event/banda-al9-log-flume/",
       "description": "",
       "source": "WXPN",
-      "id": "c0086"
+      "id": "c0532"
     },
     {
       "title": "One Alternative",
@@ -256,18 +727,7 @@
       "url": "https://xpn.org/event/one-alternative/",
       "description": "",
       "source": "WXPN",
-      "id": "c0087"
-    },
-    {
-      "title": "Kate Nash",
-      "venue": "Nikki Lopez",
-      "date": "2026-11-04",
-      "time": "",
-      "cost": "",
-      "url": "https://xpn.org/event/kate-nash/",
-      "description": "",
-      "source": "WXPN",
-      "id": "c0088"
+      "id": "c0533"
     },
     {
       "title": "Hamilton Leithauser + Rostam / Johanna Samuels",
@@ -278,7 +738,7 @@
       "url": "https://xpn.org/event/hamilton-leithauser-rostam-johanna-samuels/",
       "description": "",
       "source": "WXPN",
-      "id": "c0089"
+      "id": "c0534"
     },
     {
       "title": "Ryan Tennis & the Clubhouse Band",
@@ -289,7 +749,7 @@
       "url": "https://xpn.org/event/ryan-tennis-the-clubhouse-band/",
       "description": "",
       "source": "WXPN",
-      "id": "c0090"
+      "id": "c0535"
     },
     {
       "title": "Madds Buckley / Brye",
@@ -300,7 +760,7 @@
       "url": "https://xpn.org/event/madds-buckley-brye/",
       "description": "",
       "source": "WXPN",
-      "id": "c0091"
+      "id": "c0536"
     },
     {
       "title": "Cowboy Junkies",
@@ -311,7 +771,7 @@
       "url": "https://xpn.org/event/cowboy-junkies/",
       "description": "",
       "source": "WXPN",
-      "id": "c0092"
+      "id": "c0537"
     },
     {
       "title": "Dave Thaker",
@@ -322,7 +782,7 @@
       "url": "https://xpn.org/event/dave-thaker/",
       "description": "",
       "source": "WXPN",
-      "id": "c0093"
+      "id": "c0538"
     }
   ]
 }

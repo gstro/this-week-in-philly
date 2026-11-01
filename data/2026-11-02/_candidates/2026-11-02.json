@@ -1,9 +1,7 @@
 {
   "week": "2026-11-02",
   "date": "2026-11-02",
-  "collection_failures": [
-    "do215 (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json))"
-  ],
+  "collection_failures": [],
   "candidates": [
     {
       "title": "Palestine Cinema Days 2026: Foragers",
@@ -17,6 +15,363 @@
       "id": "c0000"
     },
     {
+      "title": "Taylor Tomlinson",
+      "venue": "Helium Comedy Club",
+      "date": "2026-11-02",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/taylor-tomlinson-tickets",
+      "description": "Comedy · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0001"
+    },
+    {
+      "title": "AJJ, with Greet Death",
+      "venue": "First Unitarian Church",
+      "date": "2026-11-02",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/ajj-with-greet-death-tickets",
+      "description": "Music (Indie & Alternative, Folk & Blues) · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0003"
+    },
+    {
+      "title": "Harbour",
+      "venue": "Underground Arts",
+      "date": "2026-11-02",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/harbour-tickets",
+      "description": "Music (Indie & Alternative) · North Philly, Callowhill / Loft District",
+      "source": "Do215",
+      "id": "c0004"
+    },
+    {
+      "title": "Carbon Copy Quizzo",
+      "venue": "Carbon Copy",
+      "date": "2026-11-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/weekly/mon/carbon-copy-quizzo",
+      "description": "Trivia, Open Mics & Other",
+      "source": "Do215",
+      "id": "c0005"
+    },
+    {
+      "title": "Paige Fish",
+      "venue": "MilkBoy",
+      "date": "2026-11-02",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/paige-fish-tickets",
+      "description": "Music · Center City, Midtown Village / Gayborhood",
+      "source": "Do215",
+      "id": "c0006"
+    },
+    {
+      "title": "Ak'chamel & Ecology : HomeStones",
+      "venue": "The Rotunda",
+      "date": "2026-11-02",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/ak-chamel-ecology-homestones-tickets",
+      "description": "Music · West Philly, University City",
+      "source": "Do215",
+      "id": "c0007"
+    },
+    {
+      "title": "Pretty Sick",
+      "venue": "The Foundry",
+      "date": "2026-11-02",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/pretty-sick-tickets",
+      "description": "Music (Indie & Alternative) · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0008"
+    },
+    {
+      "title": "Paige Fish: The Midnight Crisis Tour w/ Special Guest Hank Garrett",
+      "venue": "World Stage Live",
+      "date": "2026-11-02",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/paige-fish-on-tour-tickets",
+      "description": "Music · West Philly, University City",
+      "source": "Do215",
+      "id": "c0009"
+    },
+    {
+      "title": "Wellness Walks",
+      "venue": "The Farm at Awbury",
+      "date": "2026-11-02",
+      "time": "7:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/wellness-walks-tickets",
+      "description": "Arts & Culture · Northwest Philly, Mt. Airy",
+      "source": "Do215",
+      "id": "c0010"
+    },
+    {
+      "title": "We Walk Philly",
+      "venue": "Clark Park",
+      "date": "2026-11-02",
+      "time": "8:30 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/we-walk-philly-tickets",
+      "description": "Outdoors · West Philly, University City",
+      "source": "Do215",
+      "id": "c0012"
+    },
+    {
+      "title": "2A | Drawing and Painting I and II (1/1)",
+      "venue": "Woodmere Art Museum",
+      "date": "2026-11-02",
+      "time": "9:30 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/2a-drawing-and-painting-i-and-ii-1-1-tickets",
+      "description": "Arts & Culture · Northwest Philly, Chestnut Hill",
+      "source": "Do215",
+      "id": "c0014"
+    },
+    {
+      "title": "UNITE HERE East Stroudsburg Volunteer Canvass",
+      "venue": "78 Courtland St.",
+      "date": "2026-11-02",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/unite-here-east-stroudsburg-volunteer-canvass-tickets",
+      "description": "Charity & Activism",
+      "source": "Do215",
+      "id": "c0015"
+    },
+    {
+      "title": "Lehigh Valley Labor to Labor GOTV",
+      "venue": "Teamsters Local 773",
+      "date": "2026-11-02",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/lehigh-valley-labor-to-labor-gotv-tickets",
+      "description": "Charity & Activism",
+      "source": "Do215",
+      "id": "c0017"
+    },
+    {
+      "title": "A Nation of Artists: Members’ Closer Look",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-02",
+      "time": "11:30 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/a-nation-of-artists-members-closer-look-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "id": "c0019"
+    },
+    {
+      "title": "Exhibition Tour: Marcel Duchamp",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-02",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/exhibition-tour-marcel-duchamp-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-02",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08"
+      ],
+      "recurrence_count": 5,
+      "id": "c0021"
+    },
+    {
+      "title": "Mondays @ McCormick's - - 2000 Market St. Every Monday @ noon - Demand Dave McCormick meet with us!",
+      "venue": "Senator McCormicks Philly Ofc.",
+      "date": "2026-11-02",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/mondays-mccormick-s-2000-market-st-every-monday-noon-demand-dave-mccormick-meet-with-us-tickets",
+      "description": "Charity & Activism",
+      "source": "Do215",
+      "id": "c0022"
+    },
+    {
+      "title": "Titian to Turner",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-02",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/titian-to-turner-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-02",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08"
+      ],
+      "recurrence_count": 5,
+      "id": "c0023"
+    },
+    {
+      "title": "Industry Night at Buttonwood Grill",
+      "venue": "Peddler's Village",
+      "date": "2026-11-02",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/industry-night-at-buttonwood-grill-tickets",
+      "description": "Arts & Family · Bucks County Suburbs, New Hope",
+      "source": "Do215",
+      "id": "c0024"
+    },
+    {
+      "title": "PA Labor 2026 - Harrisburg Labor-to-Labor GOTV Canvass",
+      "venue": "Pennsylvania AFL-CIO Headquarters",
+      "date": "2026-11-02",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/pa-labor-2026-harrisburg-labor-to-labor-gotv-canvass-tickets",
+      "description": "Charity & Activism",
+      "source": "Do215",
+      "id": "c0025"
+    },
+    {
+      "title": "Philly Pub Sing",
+      "venue": "Fergie's Pub",
+      "date": "2026-11-02",
+      "time": "5:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/philly-pub-sing-tickets",
+      "description": "Trivia, Open Mics & Other",
+      "source": "Do215",
+      "id": "c0027"
+    },
+    {
+      "title": "Course | The Odes of John Keats with Sean Hughes | Virtual",
+      "venue": "The Rosenbach Museum and Library",
+      "date": "2026-11-02",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/course-the-odes-of-john-keats-with-sean-hughes-virtual-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0028"
+    },
+    {
+      "title": "A Sweet Conversation: Leah Koenig & Susan Spungen on Jewish Desserts, with a Tasting from The Dessert Table & The Cookie Queen",
+      "venue": "Weitzman National Museum of American Jewish History",
+      "date": "2026-11-02",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/a-sweet-conversation-leah-koenig-susan-spungen-on-jewish-desserts-with-a-tasting-from-the-dessert-table-the-cookie-queen-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0029"
+    },
+    {
+      "title": "PES Classics Book Club",
+      "venue": "Philadelphia Ethical Society",
+      "date": "2026-11-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/pes-classics-book-club-tickets",
+      "description": "Charity & Activism · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0030"
+    },
+    {
+      "title": "Watch Wilma - Digital Streaming",
+      "venue": "Wilma Theatre",
+      "date": "2026-11-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/watch-wilma-digital-streaming-tickets",
+      "description": "Theatre & Performing Arts · Center City, Avenue of the Arts",
+      "source": "Do215",
+      "id": "c0031"
+    },
+    {
+      "title": "Virtual Phone Banks: Member to Member",
+      "venue": "Philadelphia",
+      "date": "2026-11-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/virtual-phone-banks-member-to-member-tickets",
+      "description": "Charity & Activism",
+      "source": "Do215",
+      "id": "c0032"
+    },
+    {
+      "title": "\"The Dispossessed\" Book Club: Session #",
+      "venue": "Philadelphia",
+      "date": "2026-11-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/the-dispossessed-book-club-session-tickets",
+      "description": "Charity & Activism",
+      "source": "Do215",
+      "id": "c0033"
+    },
+    {
+      "title": "The Monday Night Jam Session hosted by Richard Hill Jr. and Friends",
+      "venue": "Black Squirrel Club",
+      "date": "2026-11-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/the-monday-night-jam-session-hosted-by-richard-hill-jr-and-friends-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0034"
+    },
+    {
+      "title": "EF: Open Mic & Industry Night",
+      "venue": "Wissahickon Brewing Company",
+      "date": "2026-11-02",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/ef-open-mic-industry-night-tickets",
+      "description": "Food & Drink · Northwest Philly, Manayunk",
+      "source": "Do215",
+      "id": "c0035"
+    },
+    {
+      "title": "Paige Fish VIP Experience Upgrade",
+      "venue": "World Stage Live",
+      "date": "2026-11-02",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/paige-fish-vip-experience-upgrade-tickets",
+      "description": "Music · West Philly, University City",
+      "source": "Do215",
+      "id": "c0036"
+    },
+    {
+      "title": "Showcase Supreme",
+      "venue": "Claude's Comedy Club & Bar",
+      "date": "2026-11-02",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/showcase-supreme-tickets",
+      "description": "Comedy",
+      "source": "Do215",
+      "id": "c0037"
+    },
+    {
+      "title": "Open Mic Night",
+      "venue": "Fergie's Pub",
+      "date": "2026-11-02",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/2/open-mic-night-tickets",
+      "description": "Trivia, Open Mics & Other",
+      "source": "Do215",
+      "id": "c0038"
+    },
+    {
       "title": "☕️ Coffee Talk",
       "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
       "date": "2026-11-02",
@@ -25,7 +380,7 @@
       "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjRxajZiOWg2c3NqNmRoazY4cTMwYzFkNjRyamljcG02Z3NqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
       "description": "A social hangout every first and third Monday for trans and non-binary people, their significant others, and allies. We have snacks and coffee.",
       "source": "Iffy Books",
-      "id": "c0001"
+      "id": "c0456"
     },
     {
       "title": "Native Plant Prep Party",
@@ -36,7 +391,7 @@
       "url": "",
       "description": "Get up-to-date information at: https://luma.com/oemofy6g\n\nAddress:\nSulimay's Restaurant\nPhiladelphia, PA\nUnited States\n\nWe're gearing up for the 2027 iteration of the Philly Native Plant Project, and we need YOUR HELP!\nThis year we distributed 15,000 packets of native plant seeds throughout the city. We're doing it again!\nWe've got seeds, we've got stickers, we need YOUR hands to help us pack everything up.\nWe'll provide beers and pretzels, you bring those paws. We'll have some fun educational material to share out with your neighborhoods too.\n\nHosted by DGS / Skype a Scientist",
       "source": "Luma",
-      "id": "c0012"
+      "id": "c0465"
     },
     {
       "title": "BIG NIGHT screening & TIMPANO tasting!",
@@ -47,7 +402,7 @@
       "url": "",
       "description": "Get up-to-date information at: https://luma.com/cr2xox31\n\nAddress:\nPen & Pencil Club\nPhiladelphia, PA\nUnited States\n\nOn Monday Nov. 2, we're celebrating 30 years of the best food film to come out of the Jersey Shore, \"The Big Night\" by Stanley Tucci and Campbell Scott.\nNo matter how hard we tried, we couldn't get Tucci to join us. So instead, we got three amazing Philly chefs to whip up their version of the timpano, the drum-shaped Italian baked pasta pie that Primo (Tony Shalhoub) and Secondo (Tucci) make for the legendary bandleader Louis Prima. Maybe you've never watched the film, or maybe…",
       "source": "Luma",
-      "id": "c0013"
+      "id": "c0466"
     },
     {
       "title": "A NIGHTMARE ON ELM STREET 3: DREAM WARRIORS",
@@ -58,7 +413,7 @@
       "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317140722/",
       "description": "Philadelphia Area Horror Meetup Group\n**A Nightmare on Elm Street 3: Dream Warriors**\n1987 - 1hr 35mins\nHorror/Fantasy\nA psychiatrist, familiar with the knife-wielding dream demon Freddy Krueger, helps teens at a mental hospital battle the killer who is invading their dreams.",
       "source": "Meetup: Philadelphia Horror",
-      "id": "c0022"
+      "id": "c0475"
     },
     {
       "title": "Philadelphia Psychotronic Film Society",
@@ -69,7 +424,7 @@
       "url": "https://psychotronicphilly.org/",
       "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk.",
       "source": "PhilaMOCA",
-      "id": "c0041"
+      "id": "c0494"
     },
     {
       "title": "Dirty Old Power Tour | AJJ",
@@ -80,7 +435,7 @@
       "url": "https://r5productions.com/event/ajj/the-first-unitarian-church/philadelphia-pennsylvania/",
       "description": "Dirty Old Power Tour",
       "source": "R5 Productions",
-      "id": "c0056"
+      "id": "c0506"
     },
     {
       "title": "SOLD OUT!!!! In-person! Fire Museum Presents: Ak'chamel and Ecology: HomeStones",
@@ -91,7 +446,7 @@
       "url": "https://www.therotunda.org/event/fire-museum-presents-ak-chamel-and-ecology-homestones",
       "description": "SOLD OUT!!!! In-person! Fire Museum Presents: Ak'chamel and Ecology: HomeStones",
       "source": "The Rotunda",
-      "id": "c0062"
+      "id": "c0511"
     },
     {
       "title": "AJJ / Greet Death",
@@ -102,7 +457,7 @@
       "url": "https://xpn.org/event/ajj-greet-death/",
       "description": "",
       "source": "WXPN",
-      "id": "c0069"
+      "id": "c0518"
     },
     {
       "title": "Harbour / Southcourt",
@@ -113,7 +468,7 @@
       "url": "https://xpn.org/event/harbour-southcourt/",
       "description": "",
       "source": "WXPN",
-      "id": "c0070"
+      "id": "c0519"
     },
     {
       "title": "Paige Fish / Hank Garret",
@@ -124,7 +479,7 @@
       "url": "https://xpn.org/event/paige-fish-hank-garret/",
       "description": "",
       "source": "WXPN",
-      "id": "c0071"
+      "id": "c0520"
     },
     {
       "title": "Pretty Sick / Computerwife",
@@ -135,7 +490,7 @@
       "url": "https://xpn.org/event/pretty-sick-computerwife/",
       "description": "",
       "source": "WXPN",
-      "id": "c0072"
+      "id": "c0521"
     }
   ]
 }

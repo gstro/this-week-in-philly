@@ -1,10 +1,1017 @@
 {
   "week": "2026-11-02",
   "date": "2026-11-06",
-  "collection_failures": [
-    "do215 (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json))"
-  ],
+  "collection_failures": [],
   "candidates": [
+    {
+      "title": "We Walk Philly",
+      "venue": "Clark Park",
+      "date": "2026-11-06",
+      "time": "8:30 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/we-walk-philly-tickets",
+      "description": "Outdoors · West Philly, University City",
+      "source": "Do215",
+      "id": "c0013"
+    },
+    {
+      "title": "Spotlight Magic!",
+      "venue": "Boardwalk Hall",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/spotlight-magic-tickets",
+      "description": "Music",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08"
+      ],
+      "recurrence_count": 3,
+      "id": "c0191"
+    },
+    {
+      "title": "The Best of Steve Martin & Martin Short",
+      "venue": "Wind Creek Event Center",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/the-best-of-steve-martin-martin-short-tickets",
+      "description": "Comedy (Folk & Blues, Jazz)",
+      "source": "Do215",
+      "id": "c0192"
+    },
+    {
+      "title": "Fuel & Lit",
+      "venue": "Xcite Center at Parx Casino",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/fuel-lit-tickets",
+      "description": "Music (Rock, Indie & Alternative, Punk) · Bucks County Suburbs, Doylestown",
+      "source": "Do215",
+      "id": "c0193"
+    },
+    {
+      "title": "Sleeping With Sirens: An Ending In Itself Tour",
+      "venue": "The Fillmore",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/sleeping-with-sirens-an-ending-in-itself-tour-tickets",
+      "description": "Music (Rock, Indie & Alternative, Metal) · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0194"
+    },
+    {
+      "title": "Black Violin",
+      "venue": "Lansdowne Theater",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/black-violin-tickets",
+      "description": "Music (Pop, Classical, R&B / Soul) · Delaware County Suburbs, Lansdowne",
+      "source": "Do215",
+      "id": "c0195"
+    },
+    {
+      "title": "Hamilton Leithauser + Rostam: The Joint Tour with support from Johanna Samuels",
+      "venue": "World Stage Live",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/hamilton-leithauser-rostam-the-joint-tour-with-support-from-johanna-samuels-tickets",
+      "description": "Music (Folk & Blues, Indie & Alternative) · West Philly, University City",
+      "source": "Do215",
+      "id": "c0196"
+    },
+    {
+      "title": "Meduza",
+      "venue": "The Ave",
+      "date": "2026-11-06",
+      "time": "9:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/meduza-tickets",
+      "description": "Music (Electronic / Dance) · Center City, Penn's Landing / Waterfront",
+      "source": "Do215",
+      "id": "c0197"
+    },
+    {
+      "title": "Valentino Khan",
+      "venue": "NOTO Philadelphia",
+      "date": "2026-11-06",
+      "time": "10:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/valentino-khan-tickets",
+      "description": "Food & Drink · Center City, Chinatown",
+      "source": "Do215",
+      "id": "c0198"
+    },
+    {
+      "title": "The Wrecks - Finally : OUTSIDE Tour",
+      "venue": "Theatre of Living Arts",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/the-wrecks-finally-outside-tour-tickets",
+      "description": "Music (Indie & Alternative, Pop, Punk) · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0199"
+    },
+    {
+      "title": "The Wrecks - Finally : OUTSIDE Tour",
+      "venue": "Theater of the Living Arts",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/the-wrecks-finally-outside-tour-tickets-leAPkvK",
+      "description": "Music (Indie & Alternative, Pop, Punk)",
+      "source": "Do215",
+      "id": "c0200"
+    },
+    {
+      "title": "Josh Johnson",
+      "venue": "Academy of Music",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/josh-johnson-tickets",
+      "description": "Theatre & Performing Arts · Center City, Avenue of the Arts",
+      "source": "Do215",
+      "id": "c0201"
+    },
+    {
+      "title": "Josh Johnson's Comedy Band Camp",
+      "venue": "Academy of Music",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/josh-johnson-s-comedy-band-camp-tickets",
+      "description": "Comedy · Center City, Avenue of the Arts",
+      "source": "Do215",
+      "id": "c0202"
+    },
+    {
+      "title": "IKU , Kaizenova, MF ANT, Sticky , Vader",
+      "venue": "Nikki Lopez",
+      "date": "2026-11-06",
+      "time": "10:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/iku-kaizenova-mf-ant-sticky-vader-tickets",
+      "description": "Music (Electronic / Dance, Hip Hop, Metal, Rock) · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0204"
+    },
+    {
+      "title": "Eggy",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/eggy-tickets",
+      "description": "Music (Rock) · Main Line Suburbs, Ardmore",
+      "source": "Do215",
+      "id": "c0205"
+    },
+    {
+      "title": "Dual Pathways",
+      "venue": "Underground Arts",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/dual-pathways-tickets",
+      "description": "Music (Electronic / Dance, Rock) · North Philly, Callowhill / Loft District",
+      "source": "Do215",
+      "id": "c0207"
+    },
+    {
+      "title": "Kelsey Waldon",
+      "venue": "118 North",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/kelsey-waldon-tickets",
+      "description": "Food & Drink (Folk & Blues, Country) · Main Line Suburbs, Bryn Mawr",
+      "source": "Do215",
+      "id": "c0208"
+    },
+    {
+      "title": "Book of Bass: Chapter 7 ft. Bommer",
+      "venue": "Warehouse on Watts",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/book-of-bass-chapter-7-ft-bommer-tickets",
+      "description": "DJ/Parties (Electronic / Dance) · North Philly, Callowhill / Loft District",
+      "source": "Do215",
+      "id": "c0209"
+    },
+    {
+      "title": "Groove Merchants (EP Release Show)",
+      "venue": "MilkBoy",
+      "date": "2026-11-06",
+      "time": "6:15 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/groove-merchants-ep-release-show-tickets",
+      "description": "Music · Center City, Midtown Village / Gayborhood",
+      "source": "Do215",
+      "id": "c0210"
+    },
+    {
+      "title": "DJ Santi",
+      "venue": "Concourse",
+      "date": "2026-11-06",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/dj-santi-tickets",
+      "description": "DJ/Parties · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0211"
+    },
+    {
+      "title": "Spanish Love Songs",
+      "venue": "Ukie Club",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/spanish-love-songs-tickets",
+      "description": "Music (Indie & Alternative) · North Philly, Northern Liberties",
+      "source": "Do215",
+      "id": "c0212"
+    },
+    {
+      "title": "An Evening with The Hooters",
+      "venue": "Keswick Theatre",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/an-evening-with-the-hooters-tickets",
+      "description": "Music (Indie & Alternative) · Northwest Philly, Keswick (Glenside)",
+      "source": "Do215",
+      "id": "c0213"
+    },
+    {
+      "title": "Winyah",
+      "venue": "Brooklyn Bowl Philadelphia",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/winyah-tickets",
+      "description": "Music (Indie & Alternative) · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0215"
+    },
+    {
+      "title": "Take A Trip with Mario Cotto",
+      "venue": "The Sound Lounge",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/take-a-trip-with-mario-cotto-tickets",
+      "description": "DJ/Parties",
+      "source": "Do215",
+      "id": "c0216"
+    },
+    {
+      "title": "VOILÀ Presents: Moonbloom",
+      "venue": "Union Transfer",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/voila-presents-moonbloom-tickets",
+      "description": "Music · North Philly, Spring Garden",
+      "source": "Do215",
+      "id": "c0217"
+    },
+    {
+      "title": "The Tenor Madness Septet with Saxophonists Eric Alexander, Victor North & Daniel Cohen",
+      "venue": "Chris' Jazz Cafe",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/the-tenor-madness-septet-with-saxophonists-eric-alexander-victor-north-daniel-cohen-tickets",
+      "description": "Music · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0218"
+    },
+    {
+      "title": "The All Star Septet With Trombonist Conrad Herwig + Saxophonists Victor North & Daniel Cohen",
+      "venue": "Chris' Jazz Cafe",
+      "date": "2026-11-06",
+      "time": "9:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/the-tenor-madness-septet-with-saxophonists-eric-alexander-victor-north-daniel-cohen-tickets-d0kndzk",
+      "description": "Music · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0220"
+    },
+    {
+      "title": "Gavn!",
+      "venue": "Warehouse on Watts",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/gavn-tickets-b9gaBkE",
+      "description": "DJ/Parties · North Philly, Callowhill / Loft District",
+      "source": "Do215",
+      "id": "c0221"
+    },
+    {
+      "title": "Gavn!",
+      "venue": "Ukie Club",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/gavn-tickets",
+      "description": "Music · North Philly, Northern Liberties",
+      "source": "Do215",
+      "id": "c0222"
+    },
+    {
+      "title": "The All Star Septet With Trombonist Conrad Herwig + Saxophonists Victor North",
+      "venue": "Chris' Jazz Cafe",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/the-all-star-septet-with-trombonist-conrad-herwig-saxophonists-victor-north-tickets",
+      "description": "Music · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0223"
+    },
+    {
+      "title": "Akeem Ali -the Texture Tour",
+      "venue": "The Foundry",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/akeem-ali-the-texture-tour-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0224"
+    },
+    {
+      "title": "Rhythm of the Night 90's House/UKG/Trance",
+      "venue": "The Dolphin",
+      "date": "2026-11-06",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/rhythm-of-the-night-90-s-house-ukg-trance-tickets",
+      "description": "Music (Hip Hop, Metal) · South Philly, East Passyunk",
+      "source": "Do215",
+      "id": "c0225"
+    },
+    {
+      "title": "Tony Baker",
+      "venue": "Punch Line",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/tony-baker-tickets",
+      "description": "Comedy · North Philly, Fishtown",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08"
+      ],
+      "recurrence_count": 3,
+      "id": "c0226"
+    },
+    {
+      "title": "at The Fitler Club: Carsen White AKA Nurse Stankk",
+      "venue": "Helium Comedy Club",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/at-the-filter-club-carsen-white-aka-nurse-stankk-tickets",
+      "description": "Comedy · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0227"
+    },
+    {
+      "title": "Peyton Ruddy",
+      "venue": "Claude's Comedy Club & Bar",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/peyton-ruddy-tickets",
+      "description": "Comedy",
+      "source": "Do215",
+      "id": "c0229"
+    },
+    {
+      "title": "Olivia Barton",
+      "venue": "Ortlieb's",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/olivia-barton-tickets",
+      "description": "Music (Folk & Blues) · North Philly, Northern Liberties",
+      "source": "Do215",
+      "id": "c0231"
+    },
+    {
+      "title": "Orange Dog Club",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/orange-dog-club-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0232"
+    },
+    {
+      "title": "Justin Austin, baritone & Howard Watkins, piano",
+      "venue": "Perelman Theater",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/justin-austin-baritone-howard-watkins-piano-tickets",
+      "description": "Theatre & Performing Arts · Center City, Avenue of the Arts",
+      "source": "Do215",
+      "id": "c0233"
+    },
+    {
+      "title": "Nick Di Paolo",
+      "venue": "Rivers Casino",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/nick-di-paolo-tickets",
+      "description": "Comedy · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0234"
+    },
+    {
+      "title": "Matt Friend",
+      "venue": "Harrah's Philadelphia",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/matt-friend-tickets",
+      "description": "Comedy (Pop)",
+      "source": "Do215",
+      "id": "c0235"
+    },
+    {
+      "title": "Ali Tod with Andrea Nardello",
+      "venue": "The Fallser Club",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/ali-tod-with-andrea-nardello-tickets",
+      "description": "Music · Northwest Philly, Manayunk",
+      "source": "Do215",
+      "id": "c0236"
+    },
+    {
+      "title": "Switch Angel",
+      "venue": "MilkBoy",
+      "date": "2026-11-06",
+      "time": "10:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/switch-angel-tickets",
+      "description": "Music (Electronic / Dance) · Center City, Midtown Village / Gayborhood",
+      "source": "Do215",
+      "id": "c0237"
+    },
+    {
+      "title": "First Friday Opening for 'Donna Dodson: Match of the Matriarchs'",
+      "venue": "Museum for Art in Wood",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/first-friday-opening-for-donna-dodson-match-of-the-matriarchs-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0238"
+    },
+    {
+      "title": "First Friday November 6th @ Arch Enemy Arts",
+      "venue": "Arch Enemy Arts",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/first-friday-november-6th-arch-enemy-arts-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0239"
+    },
+    {
+      "title": "First Friday: Miki Yamanaka Trio & PAAFF",
+      "venue": "The Barnes Foundation",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/first-friday-miki-yamanaka-trio-paaff-tickets",
+      "description": "DJ/Parties · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0240"
+    },
+    {
+      "title": "Jazzy First Fridays at Positano Coast!",
+      "venue": "Positano Coast",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/jazzy-first-fridays-at-positano-coast-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0241"
+    },
+    {
+      "title": "Banshee, Laila Mach",
+      "venue": "Nikki Lopez",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/banshee-tickets",
+      "description": "Music · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0242"
+    },
+    {
+      "title": "Philadelphia Comedy Club",
+      "venue": "Club 624",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/philadelphia-comedy-club-tickets",
+      "description": "DJ/Parties · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0243"
+    },
+    {
+      "title": "Daniel Villarreal",
+      "venue": "Solar Myth",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/daniel-villarreal-tickets",
+      "description": "Music · South Philly, East Passyunk",
+      "source": "Do215",
+      "id": "c0244"
+    },
+    {
+      "title": "Ryshon Jones Live with Sauce Boss",
+      "venue": "City Winery",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/ryshon-jones-live-with-sauce-boss-tickets",
+      "description": "Music · Center City, Chinatown",
+      "source": "Do215",
+      "id": "c0246"
+    },
+    {
+      "title": "Recession Pop Dance Party",
+      "venue": "Anchor Rock Club",
+      "date": "2026-11-06",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/recession-pop-dance-party-tickets",
+      "description": "Music",
+      "source": "Do215",
+      "id": "c0247"
+    },
+    {
+      "title": "Emo Night Philly",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-11-06",
+      "time": "10:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/emo-night-philly-tickets",
+      "description": "DJ/Parties · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0248"
+    },
+    {
+      "title": "Caribbean Night",
+      "venue": "Silk City",
+      "date": "2026-11-06",
+      "time": "10:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/caribbean-night-tickets",
+      "description": "Music · North Philly, Northern Liberties",
+      "source": "Do215",
+      "id": "c0250"
+    },
+    {
+      "title": "Nick Viagas & Austin Locke",
+      "venue": "Claude's Comedy Club & Bar",
+      "date": "2026-11-06",
+      "time": "11:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/nick-viagas-austin-locke-tickets",
+      "description": "Comedy",
+      "source": "Do215",
+      "id": "c0251"
+    },
+    {
+      "title": "Members' Hour: Marcel Duchamp",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-06",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/members-hour-marcel-duchamp-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "id": "c0252"
+    },
+    {
+      "title": "Meet The Artists: 50th Annual PMA Craft Show",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-06",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/meet-the-artists-50th-annual-pma-craft-show-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08"
+      ],
+      "recurrence_count": 3,
+      "id": "c0253"
+    },
+    {
+      "title": "General Admission: 50th Annual PMA Craft Show",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-06",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/general-admission-50th-annual-pma-craft-show-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08"
+      ],
+      "recurrence_count": 3,
+      "id": "c0254"
+    },
+    {
+      "title": "Americana Indian Jewelry and Art Sale",
+      "venue": "Greater Philadelphia Expo Center at Oaks",
+      "date": "2026-11-06",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/americana-indian-jewelry-and-art-sale-tickets",
+      "description": "Convention · Montgomery County Suburbs, King of Prussia",
+      "source": "Do215",
+      "id": "c0255"
+    },
+    {
+      "title": "Sketching in the Galleries",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-06",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/sketching-in-the-galleries-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "id": "c0256"
+    },
+    {
+      "title": "The Great Philadelphia Comedy Magic Walking Tour",
+      "venue": "4th & Ranstead Streets",
+      "date": "2026-11-06",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/the-great-philadelphia-comedy-magic-walking-tour-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08"
+      ],
+      "recurrence_count": 3,
+      "id": "c0258"
+    },
+    {
+      "title": "Mismatched Friendship Bracelets",
+      "venue": "The Fabric Workshop and Museum",
+      "date": "2026-11-06",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/mismatched-friendship-bracelets-tickets",
+      "description": "Arts & Culture · Center City, Chinatown",
+      "source": "Do215",
+      "id": "c0259"
+    },
+    {
+      "title": "EXHIBITION OPENING & LECTURE: Bouquet of Stories: Celebrating Philadelphia’s Gardening Heritage",
+      "venue": "The Athenaeum of Philadelphia, 219 S 6th Street, Philadelphia, PA 19106",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/exhibition-opening-lecture-bouquet-of-stories-celebrating-philadelphia-s-gardening-heritage-tickets",
+      "description": "Outdoors",
+      "source": "Do215",
+      "id": "c0260"
+    },
+    {
+      "title": "Friday Nights",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/friday-nights-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "id": "c0261"
+    },
+    {
+      "title": "First Fridays with Cara Cartney",
+      "venue": "Broken Goblet Brewing",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/first-fridays-with-cara-cartney-tickets",
+      "description": "Music · Bucks County Suburbs, Doylestown",
+      "source": "Do215",
+      "id": "c0262"
+    },
+    {
+      "title": "Small Works: A Group Show at Seven Arts Framing Opening Reception",
+      "venue": "Seven Arts Framing",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/small-works-a-group-show-at-seven-arts-framing-opening-reception-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0263"
+    },
+    {
+      "title": "André Schulze: Restored and Reimagined at Paradigm Gallery",
+      "venue": "Paradigm Arts Building",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/andre-schulze-restored-and-reimagined-at-paradigm-gallery-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0264"
+    },
+    {
+      "title": "Kyle Montgomery: LUX at Paradigm Gallery",
+      "venue": "Paradigm Arts Building",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/kyle-montgomery-lux-at-paradigm-gallery-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0265"
+    },
+    {
+      "title": "Fields of Remembrance, a Solo show by Elena Drozdova",
+      "venue": "Pii Gallery",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/fields-of-remembrance-a-solo-show-by-elena-drozdova-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0266"
+    },
+    {
+      "title": "Fields of Remembrance, a solo exhibition by Elena Drozdova",
+      "venue": "Pii Gallery",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/fields-of-remembrance-a-solo-exhibition-by-elena-drozdova-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0267"
+    },
+    {
+      "title": "Dunu Artists in Residence Exhibition and Open Studio at Termite TV Studio",
+      "venue": "Cherry Street Pier",
+      "date": "2026-11-06",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/dunu-artists-in-residence-exhibition-and-open-studio-at-termite-tv-studio-tickets",
+      "description": "Arts & Culture · Center City, Penn's Landing / Waterfront",
+      "source": "Do215",
+      "id": "c0268"
+    },
+    {
+      "title": "Accessibility Open House",
+      "venue": "Lobby of Arden Theatre Company",
+      "date": "2026-11-06",
+      "time": "5:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/accessibility-open-house-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0269"
+    },
+    {
+      "title": "Completely Yes: The Music of Stevie Wonder",
+      "venue": "Woodmere Art Museum",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/completely-yes-the-music-of-stevie-wonder-tickets",
+      "description": "Arts & Culture · Northwest Philly, Chestnut Hill",
+      "source": "Do215",
+      "id": "c0270"
+    },
+    {
+      "title": "Horizons: American Landscapes from Tradition to Tomorrow",
+      "venue": "Pennsylvania Academy of the Fine Arts Museum",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/horizons-american-landscapes-from-tradition-to-tomorrow-tickets",
+      "description": "Arts & Culture · Center City, Avenue of the Arts",
+      "source": "Do215",
+      "id": "c0271"
+    },
+    {
+      "title": "The Art of Storytelling: Opening Showcase + OPEN MIC",
+      "venue": "The People’s Gallery",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/the-art-of-storytelling-opening-showcase-open-mic-tickets",
+      "description": "Arts & Culture · Center City, Washington Square West",
+      "source": "Do215",
+      "id": "c0272"
+    },
+    {
+      "title": "Architecture Tour",
+      "venue": "Pennsylvania Academy of the Fine Arts Museum",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/architecture-tour-tickets",
+      "description": "Arts & Culture · Center City, Avenue of the Arts",
+      "source": "Do215",
+      "id": "c0273"
+    },
+    {
+      "title": "Dueling Pianos",
+      "venue": "Lucy’s",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/dueling-pianos-tickets",
+      "description": "DJ/Parties · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0274"
+    },
+    {
+      "title": "VOCALS – Massimo Bruto",
+      "venue": "Midnight & The Wicked",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/vocals-massimo-bruto-tickets",
+      "description": "Arts & Culture · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0275"
+    },
+    {
+      "title": "PIANO – Jason Long",
+      "venue": "Midnight & The Wicked",
+      "date": "2026-11-06",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/piano-jason-long-tickets",
+      "description": "Arts & Culture · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0276"
+    },
+    {
+      "title": "Keys to the Future: Benefit for Cecil Anchor Point",
+      "venue": "Elkton Music Hall",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/keys-to-the-future-benefit-for-cecil-anchor-point-tickets",
+      "description": "Music",
+      "source": "Do215",
+      "id": "c0277"
+    },
+    {
+      "title": "We The People: Our Story Continues",
+      "venue": "National Constitution Center",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/we-the-people-our-story-continues-tickets",
+      "description": "Arts & Family · Center City, Old City",
+      "source": "Do215",
+      "id": "c0278"
+    },
+    {
+      "title": "Stranger Things Fan Celebration Day",
+      "venue": "Netflix House Philadelphia",
+      "date": "2026-11-06",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/stranger-things-fan-celebration-day-tickets",
+      "description": "Arts & Family",
+      "source": "Do215",
+      "id": "c0279"
+    },
+    {
+      "title": "Dr. Steve Taubman's Mind Magic: A Night of Laughter and Astonishment",
+      "venue": "Christ Church Neighborhood House",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/dr-steve-taubman-s-mind-magic-a-night-of-laughter-and-astonishment-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0280"
+    },
+    {
+      "title": "Sofar Sounds - Cobbs Creek / West Philadelphia",
+      "venue": "Sofar Sounds - Secret Location",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/sofar-sounds-cobbs-creek-west-philadelphia-tickets",
+      "description": "Music",
+      "source": "Do215",
+      "id": "c0282"
+    },
+    {
+      "title": "Nick Hopping (Comics to Watch)",
+      "venue": "Next in Line Comedy Club",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/nick-hopping-comics-to-watch-tickets",
+      "description": "Comedy · North Philly, Callowhill / Loft District",
+      "source": "Do215",
+      "id": "c0283"
+    },
+    {
+      "title": "Jillian Ashcraft & Oliver Mayman Quartet: Autumn Nocturne",
+      "venue": "Black Squirrel Club",
+      "date": "2026-11-06",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/jillian-ashcraft-oliver-mayman-quartet-autumn-nocturne-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0284"
+    },
+    {
+      "title": "Get You a Babe Who Can Do Both: Sex & Death",
+      "venue": "Prism Arts Philadelphia",
+      "date": "2026-11-06",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/get-you-a-babe-who-can-do-both-slide-decks-and-striptease-tickets",
+      "description": "Drag · North Philly, Callowhill / Loft District",
+      "source": "Do215",
+      "id": "c0285"
+    },
+    {
+      "title": "DJ Ella",
+      "venue": "Lucy’s",
+      "date": "2026-11-06",
+      "time": "10:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/dj-ella-tickets",
+      "description": "DJ/Parties · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0286"
+    },
+    {
+      "title": "DJ Smooth",
+      "venue": "Midnight & The Wicked",
+      "date": "2026-11-06",
+      "time": "10:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/dj-smooth-10-pm-to-2-am-tickets",
+      "description": "Arts & Culture · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0287"
+    },
+    {
+      "title": "Family Art & Story Hour",
+      "venue": "Frances M. Maguire Art Museum",
+      "date": "2026-11-06",
+      "time": "10:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/6/family-art-story-hour-tickets",
+      "description": "Arts & Culture · Main Line Suburbs, Ardmore",
+      "source": "Do215",
+      "id": "c0288"
+    },
     {
       "title": "💻 Philly 2600 Meetup",
       "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
@@ -14,7 +1021,7 @@
       "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNxajRiOWg2c3NqNmU5bzcwbzMwYzFkNjRyamljcHA3NHFqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
       "description": "> The Philly 2600 meeting is a monthly gathering of local hackers, phreaks, nerds, geeks, activists, tinkerers, developers, infosec professionals, and other interesting people.",
       "source": "Iffy Books",
-      "id": "c0006"
+      "id": "c0461"
     },
     {
       "title": "platonic love club: friend dating (20s)",
@@ -25,7 +1032,7 @@
       "url": "",
       "description": "Get up-to-date information at: https://luma.com/3lz2au81\n\nAddress:\nAt My House\nPhiladelphia, Pennsylvania\nUnited States\n\nplatonic love club is the cutest, sweetest evening dedicated to making friends!! think bumble bff, but irl (and better) <333 we guide you with conversation starters, curated prompts, & even an after-hang.\nperf for introverts and extroverts! everyone coming is looking to make friends (whew) :) drinks and n/a bevs are provided.\nas per our communities request, we have divided our dates by age. this plc is reserved for folks ages 21-29.\nlate arrival policy:\nto ensure a smooth an…",
       "source": "Luma",
-      "id": "c0015"
+      "id": "c0468"
     },
     {
       "title": "Open House",
@@ -36,7 +1043,7 @@
       "url": "https://www.meetup.com/dc_215/events/316813589/",
       "description": "DC215\nJoin us at Ex Machina Parlor and Reclaimers Hall as we celebrate the hacker spirit! Show off your latest toy or project. Whether it's your war driving rig or your shiny new Flipper Zero we want to see what you're doing! Or just come chill, grab a drink, and enjoy whatever's playing on the big screen.",
       "source": "Meetup: DC 215",
-      "id": "c0021"
+      "id": "c0474"
     },
     {
       "title": "GODZILLA MINUS ONE (2023)",
@@ -47,7 +1054,7 @@
       "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/316899427/",
       "description": "Philadelphia Area Horror Meetup Group\nLet's stream this movie as we get prepared to see the new sequel in person!!\n\n**Godzilla Minus One**\n2023 - 2hr 5mins\nAction/Sci-fi\n**Language**: Japanese w/ English subtitles\n\nA kamikaze pilot plagued by survivor's guilt seeks redemption when a giant monster he failed to kill is transformed by radiation from atomic bomb tests and lays siege to post-war Japan.",
       "source": "Meetup: Philadelphia Horror",
-      "id": "c0025"
+      "id": "c0478"
     },
     {
       "title": "The Late(ish) Poetry Show",
@@ -58,7 +1065,7 @@
       "url": "https://www.thephillypigeon.org/",
       "description": "",
       "source": "PhilaMOCA",
-      "id": "c0045"
+      "id": "c0496"
     },
     {
       "title": "Benefit Show SPAC x Homies Helping Homies",
@@ -69,7 +1076,7 @@
       "url": "https://philly.askapunk.net/event/benefit-show-spac-x-homies-helping-homies",
       "description": "metal / philadelphia / punk / screamo",
       "source": "Philly Ask A Punk",
-      "id": "c0048"
+      "id": "c0498"
     },
     {
       "title": "A Black Celebration",
@@ -80,7 +1087,7 @@
       "url": "https://phillygoth.net/events/a-black-celebration-21/",
       "description": "21+, 9pm-2am, $10 adv / $15 DOS Featuring: DJs Baby Berlin & Alex English Links: Facebook event",
       "source": "Phillygoth.net",
-      "id": "c0051"
+      "id": "c0501"
     },
     {
       "title": "PLEASUREcation: \"Skin Tight\" edition",
@@ -91,7 +1098,7 @@
       "url": "https://phillygoth.net/events/pleasurecation-skin-tight-edition/",
       "description": "21+ Featuring: DJ Xris SMack! Links: Event page",
       "source": "Phillygoth.net",
-      "id": "c0052"
+      "id": "c0502"
     },
     {
       "title": "2026 Solo Tour | A Special Seated Evening with | Basia Bulat",
@@ -102,7 +1109,7 @@
       "url": "https://r5productions.com/event/basia-bulat/philadelphia-ethical-society/philadelphia-pennsylvania/",
       "description": "2026 Solo Tour | A Special Seated Evening with",
       "source": "R5 Productions",
-      "id": "c0060"
+      "id": "c0509"
     },
     {
       "title": "Basia Bulat",
@@ -113,7 +1120,7 @@
       "url": "https://xpn.org/event/basia-bulat/",
       "description": "",
       "source": "WXPN",
-      "id": "c0112"
+      "id": "c0552"
     },
     {
       "title": "Steve Earle / Chris Pierce",
@@ -124,7 +1131,7 @@
       "url": "https://xpn.org/event/steve-earle-chris-pierce/",
       "description": "WXPN Welcomes",
       "source": "WXPN",
-      "id": "c0113"
+      "id": "c0553"
     },
     {
       "title": "Suzanne Vega",
@@ -135,29 +1142,7 @@
       "url": "https://xpn.org/event/suzanne-vega-2/",
       "description": "New Jersey, WXPN Welcomes",
       "source": "WXPN",
-      "id": "c0114"
-    },
-    {
-      "title": "Olivia Barton",
-      "venue": "Ortlieb’s",
-      "date": "2026-11-06",
-      "time": "",
-      "cost": "",
-      "url": "https://xpn.org/event/olivia-barton/",
-      "description": "",
-      "source": "WXPN",
-      "id": "c0115"
-    },
-    {
-      "title": "Eggy",
-      "venue": "Ardmore Music Hall",
-      "date": "2026-11-06",
-      "time": "",
-      "cost": "",
-      "url": "https://xpn.org/event/eggy/",
-      "description": "",
-      "source": "WXPN",
-      "id": "c0116"
+      "id": "c0554"
     },
     {
       "title": "Winyah / Foxtide",
@@ -168,7 +1153,7 @@
       "url": "https://xpn.org/event/winyah-foxtide/",
       "description": "",
       "source": "WXPN",
-      "id": "c0118"
+      "id": "c0555"
     },
     {
       "title": "Conrad Herwig / Victor North / Daniel Cohen",
@@ -179,7 +1164,7 @@
       "url": "https://xpn.org/event/conrad-herwig-victor-north-daniel-cohen/",
       "description": "",
       "source": "WXPN",
-      "id": "c0119"
+      "id": "c0556"
     },
     {
       "title": "Ryshon Jones / Sauce Boss",
@@ -190,7 +1175,7 @@
       "url": "https://xpn.org/event/ryshon-jones-sauce-boss/",
       "description": "",
       "source": "WXPN",
-      "id": "c0121"
+      "id": "c0558"
     },
     {
       "title": "Te Vista / Wallace Tonight / Webb Chapel / Ogler",
@@ -201,7 +1186,7 @@
       "url": "https://xpn.org/event/te-vista-wallace-tonight-webb-chapel-ogler/",
       "description": "",
       "source": "WXPN",
-      "id": "c0122"
+      "id": "c0559"
     },
     {
       "title": "lady lychee / Nectarine Girl / Bruiser and Bicycle / Double Dose",
@@ -212,7 +1197,7 @@
       "url": "https://xpn.org/event/lady-lychee-nectarine-girl-bruiser-and-bicycle-double-dose/",
       "description": "",
       "source": "WXPN",
-      "id": "c0123"
+      "id": "c0560"
     },
     {
       "title": "Moonbloom",
@@ -223,7 +1208,7 @@
       "url": "https://xpn.org/event/moonbloom/",
       "description": "",
       "source": "WXPN",
-      "id": "c0124"
+      "id": "c0561"
     },
     {
       "title": "The Hooters",
@@ -234,7 +1219,7 @@
       "url": "https://xpn.org/event/the-hooters/",
       "description": "",
       "source": "WXPN",
-      "id": "c0125"
+      "id": "c0562"
     },
     {
       "title": "Marty O’Reilly",
@@ -245,7 +1230,7 @@
       "url": "https://xpn.org/event/marty-oreilly/",
       "description": "",
       "source": "WXPN",
-      "id": "c0127"
+      "id": "c0564"
     },
     {
       "title": "Dregsy / Cole Berggren",
@@ -256,7 +1241,7 @@
       "url": "https://xpn.org/event/dregsy-cole-berggren/",
       "description": "",
       "source": "WXPN",
-      "id": "c0128"
+      "id": "c0565"
     },
     {
       "title": "Justin Austin / Howard Watkins",
@@ -267,7 +1252,7 @@
       "url": "https://xpn.org/event/justin-austin-howard-watkins/",
       "description": "",
       "source": "WXPN",
-      "id": "c0129"
+      "id": "c0566"
     },
     {
       "title": "Orange Dog Club / Pokejawn",
@@ -278,7 +1263,7 @@
       "url": "https://xpn.org/event/orange-dog-club-pokejawn/",
       "description": "",
       "source": "WXPN",
-      "id": "c0130"
+      "id": "c0567"
     },
     {
       "title": "Black Violin / Jon Muq",
@@ -289,7 +1274,7 @@
       "url": "https://xpn.org/event/black-violin-jon-muq/",
       "description": "",
       "source": "WXPN",
-      "id": "c0131"
+      "id": "c0568"
     },
     {
       "title": "Groove Merchants / Emily Drinker / Superpink / Christopher Burkholder",
@@ -300,18 +1285,7 @@
       "url": "https://xpn.org/event/groove-merchants-emily-drinker-superpink-christopher-burkholder/",
       "description": "",
       "source": "WXPN",
-      "id": "c0132"
-    },
-    {
-      "title": "Banshee / Laila Mach",
-      "venue": "Nikki Lopez",
-      "date": "2026-11-06",
-      "time": "",
-      "cost": "",
-      "url": "https://xpn.org/event/banshee-laila-mach/",
-      "description": "",
-      "source": "WXPN",
-      "id": "c0133"
+      "id": "c0569"
     },
     {
       "title": "Daniel Villareal",
@@ -322,7 +1296,7 @@
       "url": "https://xpn.org/event/daniel-villareal/",
       "description": "",
       "source": "WXPN",
-      "id": "c0134"
+      "id": "c0570"
     },
     {
       "title": "WXPN Free At Noon: QUEEN OF JEANS",
@@ -333,7 +1307,7 @@
       "url": "https://xpn.org/event/wxpn-free-at-noon-queen-of-jeans/",
       "description": "Free At Noon, WXPN Welcomes",
       "source": "WXPN",
-      "id": "c0136"
+      "id": "c0572"
     },
     {
       "title": "Ali Tod / Andrea Nardello",
@@ -344,7 +1318,7 @@
       "url": "https://xpn.org/event/ali-tod-andrea-nardello/",
       "description": "",
       "source": "WXPN",
-      "id": "c0137"
+      "id": "c0573"
     },
     {
       "title": "Sleeping With Sirens / Rain City Drive",
@@ -355,7 +1329,7 @@
       "url": "https://xpn.org/event/sleeping-with-sirens-rain-city-drive/",
       "description": "",
       "source": "WXPN",
-      "id": "c0138"
+      "id": "c0574"
     },
     {
       "title": "Akeem Ali",
@@ -366,7 +1340,7 @@
       "url": "https://xpn.org/event/akeem-ali/",
       "description": "",
       "source": "WXPN",
-      "id": "c0139"
+      "id": "c0575"
     },
     {
       "title": "In Her Own Words / Every Avenue / Fluorescents / Goalkeeper",
@@ -377,7 +1351,7 @@
       "url": "https://xpn.org/event/in-her-own-words-every-avenue-fluorescents-goalkeeper/",
       "description": "",
       "source": "WXPN",
-      "id": "c0140"
+      "id": "c0576"
     },
     {
       "title": "The Wrecks / Worry Club / Kid Sistr",
@@ -388,7 +1362,7 @@
       "url": "https://xpn.org/event/the-wrecks-worry-club-kid-sistr/",
       "description": "",
       "source": "WXPN",
-      "id": "c0141"
+      "id": "c0577"
     },
     {
       "title": "WXPN Thank A Member Funky Friday Dance Party at West Art!",
@@ -399,7 +1373,7 @@
       "url": "https://xpn.org/event/wxpn-thank-a-member-funky-friday-dance-party-at-west-art/",
       "description": "Central PA, WXPN Welcomes",
       "source": "WXPN",
-      "id": "c0142"
+      "id": "c0578"
     }
   ]
 }

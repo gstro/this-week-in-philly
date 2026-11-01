@@ -1,64 +1,645 @@
 {
   "week": "2026-11-02",
   "date": "2026-11-08",
-  "collection_failures": [
-    "do215 (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json))"
-  ],
+  "collection_failures": [],
   "candidates": [
     {
-      "title": "🧵 Anarchist Sewing Club",
-      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "title": "Olivia Rodrigo: The Unraveled Tour",
+      "venue": "Xfinity Mobile Arena",
       "date": "2026-11-08",
-      "time": "3:00 PM",
+      "time": "7:00 PM",
       "cost": "",
-      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNyamdiOWg2c3NqOGM5bDYwbzMwYzFkNjRyamlkMWg2a3JqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
-      "description": "Interested in learning to sew, mend or make clothes? Already know how and wanna hang out with people while sewing? Come and join us! Sewing supplies and a sewing machine will be available for anyone needing them.\n  \nImage credit",
-      "source": "Iffy Books",
-      "id": "c0008"
+      "url": "https://do215.com/events/2026/11/8/olivia-rodrigo-the-unraveled-tour-tickets",
+      "description": "Music (Pop) · South Philly, Sports Complex",
+      "source": "Do215",
+      "id": "c0291"
     },
     {
-      "title": "🏠 IndieWeb Homebrew Website Club",
-      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "title": "SILVER STAR TICKETS - Olivia Rodrigo: The Unraveled Tour",
+      "venue": "Xfinity Mobile Arena",
       "date": "2026-11-08",
-      "time": "6:00 PM",
+      "time": "7:00 PM",
       "cost": "",
-      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFsNjByMzhiOWg2c3NqOGM5bTYwczMwYzFkNjRyamlkMWg2b3MzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
-      "description": "Homebrew Website Club is a growing world-wide network of meetups for everyone who wants to take back their web experience from social media silos, and own their online identities & content, or just want support with blogging!",
-      "source": "Iffy Books",
-      "id": "c0009"
+      "url": "https://do215.com/events/2026/11/8/silver-star-tickets-olivia-rodrigo-the-unraveled-tour-tickets",
+      "description": "Music (Pop) · South Philly, Sports Complex",
+      "source": "Do215",
+      "id": "c0293"
     },
     {
-      "title": "Falling Leaves",
-      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "title": "Geese - Getting Killed Again Tour",
+      "venue": "The Fillmore",
       "date": "2026-11-08",
-      "time": "5:00 PM",
+      "time": "8:00 PM",
       "cost": "",
-      "url": "https://www.lightboxfilmcenter.org/events/falling-leaves",
-      "description": "New Restoration",
-      "source": "Lightbox Film Center",
-      "id": "c0011"
+      "url": "https://do215.com/events/2026/11/8/geese-getting-killed-again-tour-tickets",
+      "description": "Music (Electronic / Dance) · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0295"
     },
     {
-      "title": "diy bookmarks w/ lamcha matcha",
-      "venue": "915 Spring Garden St, Philadelphia, PA 19123, USA",
+      "title": "Kennedy",
+      "venue": "Helium Comedy Club",
       "date": "2026-11-08",
-      "time": "12:00 PM",
+      "time": "3:30 PM",
       "cost": "",
-      "url": "",
-      "description": "Get up-to-date information at: https://luma.com/3z1avs3m\n\nAddress:\n915 Spring Garden St\nthe entrance for club is on percy street located in the same building as triple bottom. there are 2 steps to enter the building, but once inside there is an elevator. we open doors for club 5 minutes prior to the start time and close the doors 15 minutes after. please allow time for parking and transportation!\nPhiladelphia, Pennsylvania\nUnited States\n\njoin us for our matcha cafe with lamcha, while we spend the afternoon creating bookmarks, swapping books, and drinking matcha!\nall materials are included, and…",
-      "source": "Luma",
-      "id": "c0018"
+      "url": "https://do215.com/events/2026/11/8/kennedy-tickets",
+      "description": "Comedy (Indie & Alternative, Pop) · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0303"
     },
     {
-      "title": "TV SHOW NIGHT: Dexter: Resurrection - Season 2",
-      "venue": "(online)",
+      "title": "Art Kids Studio",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-08",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/art-kids-studio-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "id": "c0359"
+    },
+    {
+      "title": "Art Kids Tour",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-08",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/art-kids-tour-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "id": "c0372"
+    },
+    {
+      "title": "Deerhoof",
+      "venue": "Underground Arts",
+      "date": "2026-11-08",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/deerhoof-tickets",
+      "description": "Music (Rock, Indie & Alternative, World, Pop) · North Philly, Callowhill / Loft District",
+      "source": "Do215",
+      "id": "c0403"
+    },
+    {
+      "title": "George Clanton",
+      "venue": "Union Transfer",
+      "date": "2026-11-08",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/george-clanton-tickets",
+      "description": "Music (Electronic / Dance, Indie & Alternative) · North Philly, Spring Garden",
+      "source": "Do215",
+      "id": "c0404"
+    },
+    {
+      "title": "Michigander",
+      "venue": "The Foundry",
+      "date": "2026-11-08",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/michigander-tickets",
+      "description": "Music (Indie & Alternative) · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0405"
+    },
+    {
+      "title": "Drag Brunch",
+      "venue": "Fabrika",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/weekly/sun/drag-brunch-tickets",
+      "description": "Drag · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0406"
+    },
+    {
+      "title": "New Constellations: It Comes In Waves Tour",
+      "venue": "Brooklyn Bowl Philadelphia",
+      "date": "2026-11-08",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/new-constellations-it-comes-in-waves-tour-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0407"
+    },
+    {
+      "title": "Bob & Barbara's Karaoke Night",
+      "venue": "Bob & Barbara's Lounge",
       "date": "2026-11-08",
       "time": "9:00 PM",
       "cost": "",
-      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317140692/",
-      "description": "Philadelphia Area Horror Meetup Group\nCome watch the new Dexter season! We'll join together every Sunday at 9pm to stream!\n\n**DEXTER: RESURRECTION: Season 2**\n\n* **November 1 - Episode 1**\n* **November 8 - Episode 2**\n* **November 15 - Episode 3**\n* **November 22 - Episode 4**\n* **November 29 - Episode 5**\n* **December 6 - Episode 6**\n* **December 13 - Episode 7**\n* **December 20 - Episode 8**\n* **December 27 - Episode 9**\n* **January 3 - Episode 10**",
-      "source": "Meetup: Philadelphia Horror",
-      "id": "c0027"
+      "url": "https://do215.com/events/weekly/sun/bob-barbaras-karaoke-night-tickets",
+      "description": "Karaoke · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0408"
+    },
+    {
+      "title": "Wohlreich Junior Fellows Career Day",
+      "venue": "Mütter Museum",
+      "date": "2026-11-08",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/wohlreich-junior-fellows-career-day-tickets",
+      "description": "Arts & Culture · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0409"
+    },
+    {
+      "title": "Irene Tu",
+      "venue": "Helium Comedy Club",
+      "date": "2026-11-08",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/irene-tu-tickets",
+      "description": "Comedy · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0410"
+    },
+    {
+      "title": "PhillyKinder presents  Deutscher Familiennachmittag und Laternenumzug",
+      "venue": "The German Society of Pennsylvania",
+      "date": "2026-11-08",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/phillykinder-presents-deutscher-familiennachmittag-und-laternenumzug-tickets",
+      "description": "Arts & Culture · North Philly, Spring Garden",
+      "source": "Do215",
+      "id": "c0411"
+    },
+    {
+      "title": "Headhouse Farmers Market",
+      "venue": "Headhouse Shambles",
+      "date": "2026-11-08",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/weekly/sun/headhouse-farmers-market-hmgvjeqn",
+      "description": "Market · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0412"
+    },
+    {
+      "title": "Trash Strike, XPURITYX, Rights Abuse, Drawn By Blood, False Nine",
+      "venue": "Nikki Lopez",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/trash-strike-xpurityx-rights-abuse-drawn-by-blood-false-nine-tickets",
+      "description": "Music (Punk, Metal) · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0413"
+    },
+    {
+      "title": "Bryan Andrews ** SOLD OUT **",
+      "venue": "MilkBoy",
+      "date": "2026-11-08",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/bryan-andrews-tickets",
+      "description": "Music · Center City, Midtown Village / Gayborhood",
+      "source": "Do215",
+      "id": "c0414"
+    },
+    {
+      "title": "Bad Static, Soji, and Froggy",
+      "venue": "Ortlieb's",
+      "date": "2026-11-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/bad-static-soji-and-froggy-tickets",
+      "description": "Music (Punk, R&B / Soul, Hip Hop) · North Philly, Northern Liberties",
+      "source": "Do215",
+      "id": "c0415"
+    },
+    {
+      "title": "Lake Drive ~ Nightbreakers ~ Moonroof",
+      "venue": "Kung Fu Necktie",
+      "date": "2026-11-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/lake-drive-nightbreakers-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0416"
+    },
+    {
+      "title": "Archer Oh, Integra Pink",
+      "venue": "Nikki Lopez",
+      "date": "2026-11-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/archer-oh-tickets",
+      "description": "Music · South Philly, South Street",
+      "source": "Do215",
+      "id": "c0417"
+    },
+    {
+      "title": "Jon Savage and the Classic Rockers",
+      "venue": "118 North",
+      "date": "2026-11-08",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/jon-savage-and-the-classic-rockers-tickets",
+      "description": "Food & Drink · Main Line Suburbs, Bryn Mawr",
+      "source": "Do215",
+      "id": "c0418"
+    },
+    {
+      "title": "Sunday Funday",
+      "venue": "Neshaminy Creek Brewing Co",
+      "date": "2026-11-08",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/weekly/sun/sunday-funday-tickets",
+      "description": "Food & Drink · Bucks County Suburbs, Doylestown",
+      "source": "Do215",
+      "id": "c0419"
+    },
+    {
+      "title": "Ellie's Beat Garden",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-11-08",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/ellie-s-beat-garden-tickets",
+      "description": "Music (Electronic / Dance) · Main Line Suburbs, Ardmore",
+      "source": "Do215",
+      "id": "c0420"
+    },
+    {
+      "title": "The Olllam",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-11-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/the-olllam-tickets",
+      "description": "Music (Folk & Blues) · Main Line Suburbs, Ardmore",
+      "source": "Do215",
+      "id": "c0421"
+    },
+    {
+      "title": "Lee Emi (Emilee Petersmark of The Crane Wives) @ First Unitarian Church of Philadelphia Sanctuary",
+      "venue": "First Unitarian Church of Philadelphia Sanctuary",
+      "date": "2026-11-08",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/lee-emi-emilee-petersmark-of-the-crane-wives-first-unitarian-church-of-philadelphia-sanctuary-tickets",
+      "description": "Music",
+      "source": "Do215",
+      "id": "c0422"
+    },
+    {
+      "title": "Tease & Tell: Right In The Feels",
+      "venue": "Franky Bradley's",
+      "date": "2026-11-08",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/tease-tell-right-in-the-feels-tickets",
+      "description": "DJ/Parties · Center City, Midtown Village / Gayborhood",
+      "source": "Do215",
+      "id": "c0423"
+    },
+    {
+      "title": "MC Hammersmith",
+      "venue": "Helium Comedy Club",
+      "date": "2026-11-08",
+      "time": "8:15 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/mc-hammersmith-tickets",
+      "description": "Comedy · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0424"
+    },
+    {
+      "title": "Smooth Tailgate 11/08",
+      "venue": "PBR Philly",
+      "date": "2026-11-08",
+      "time": "8:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/smooth-tailgate-11-08-tickets",
+      "description": "Arts & Family",
+      "source": "Do215",
+      "id": "c0425"
+    },
+    {
+      "title": "Goat Storytime",
+      "venue": "The Farm at Awbury",
+      "date": "2026-11-08",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/free-goat-storytime-tickets",
+      "description": "Arts & Family · Northwest Philly, Mt. Airy",
+      "source": "Do215",
+      "id": "c0426"
+    },
+    {
+      "title": "Giants vs. Eagles Watch Party",
+      "venue": "FRINGE BAR",
+      "date": "2026-11-08",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/giants-vs-eagles-watch-party-tickets",
+      "description": "Food & Drink · Center City, Penn's Landing / Waterfront",
+      "source": "Do215",
+      "id": "c0427"
+    },
+    {
+      "title": "Curtis Symphony Orchestra: Yannick Leads Mahler 9",
+      "venue": "Marian Anderson Hall",
+      "date": "2026-11-08",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/curtis-symphony-orchestra-yannick-leads-mahler-9-tickets",
+      "description": "Music · Center City, Avenue of the Arts",
+      "source": "Do215",
+      "id": "c0428"
+    },
+    {
+      "title": "David Earl's Birthday Party",
+      "venue": "Anchor Rock Club",
+      "date": "2026-11-08",
+      "time": "5:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/david-earl-s-birthday-party-tickets",
+      "description": "Music",
+      "source": "Do215",
+      "id": "c0429"
+    },
+    {
+      "title": "Squirrel Noir",
+      "venue": "Black Squirrel Club",
+      "date": "2026-11-08",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/squirrel-noir-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0430"
+    },
+    {
+      "title": "Elyssa Phillips",
+      "venue": "Claude's Comedy Club & Bar",
+      "date": "2026-11-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/elyssa-phillips-tickets",
+      "description": "Comedy (Indie & Alternative)",
+      "source": "Do215",
+      "id": "c0431"
+    },
+    {
+      "title": "Lia Menaker",
+      "venue": "Johnny Brenda's",
+      "date": "2026-11-08",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/lia-menaker-tickets",
+      "description": "Music · North Philly, Fishtown",
+      "source": "Do215",
+      "id": "c0432"
+    },
+    {
+      "title": "Bowerbird- Postal Pieces 3",
+      "venue": "The Perch Music & Arts Workshop",
+      "date": "2026-11-08",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/bowerbird-postal-pieces-3-tickets",
+      "description": "Music · North Philly, Kensington",
+      "source": "Do215",
+      "id": "c0433"
+    },
+    {
+      "title": "Mercado Latino",
+      "venue": "FDR Park",
+      "date": "2026-11-08",
+      "time": "8:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/mercado-latino-tickets",
+      "description": "Outdoors · South Philly, Sports Complex",
+      "source": "Do215",
+      "id": "c0434"
+    },
+    {
+      "title": "EF: YOGA - Wissahickon Warriors",
+      "venue": "Wissahickon Brewing Company",
+      "date": "2026-11-08",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/ef-yoga-wissahickon-warriors-tickets",
+      "description": "Food & Drink · Northwest Philly, Manayunk",
+      "source": "Do215",
+      "id": "c0435"
+    },
+    {
+      "title": "Official F1® Arcade SÃo Paulo Watch Party",
+      "venue": "F1 Arcade",
+      "date": "2026-11-08",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/official-f1-arcade-sao-paulo-watch-party-tickets",
+      "description": "Gaming · Center City, Midtown Village / Gayborhood",
+      "source": "Do215",
+      "id": "c0436"
+    },
+    {
+      "title": "Philly DSA New Member 101",
+      "venue": "Philadelphia",
+      "date": "2026-11-08",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/new-member-101-tickets",
+      "description": "Charity & Activism",
+      "source": "Do215",
+      "id": "c0437"
+    },
+    {
+      "title": "Philly Bound Vintage Market",
+      "venue": "Bok Building",
+      "date": "2026-11-08",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/philly-bound-vintage-market-tickets",
+      "description": "Arts & Culture · South Philly, East Passyunk",
+      "source": "Do215",
+      "id": "c0438"
+    },
+    {
+      "title": "Family Art Day",
+      "venue": "Pennsylvania Academy of the Fine Arts Museum",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/family-art-day-tickets",
+      "description": "Arts & Culture · Center City, Avenue of the Arts",
+      "source": "Do215",
+      "id": "c0439"
+    },
+    {
+      "title": "Making Felted Soap",
+      "venue": "Cherry Street Pier",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/making-felted-soap-tickets",
+      "description": "Arts & Culture · Center City, Penn's Landing / Waterfront",
+      "source": "Do215",
+      "id": "c0440"
+    },
+    {
+      "title": "[SOLD OUT] Course | Making a Medieval Bat Book | In-Person",
+      "venue": "The Rosenbach Museum and Library",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/course-making-a-medieval-bat-book-in-person-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0441"
+    },
+    {
+      "title": "Ekphrastic Poetry Workshop",
+      "venue": "Woodmere Art Museum",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/ekphrastic-poetry-workshop-tickets",
+      "description": "Arts & Culture · Northwest Philly, Chestnut Hill",
+      "source": "Do215",
+      "id": "c0442"
+    },
+    {
+      "title": "Gundamentals 1.0",
+      "venue": "LAVA",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/gundamentals-1-0-tickets",
+      "description": "Charity & Activism · West Philly, University City",
+      "source": "Do215",
+      "id": "c0443"
+    },
+    {
+      "title": "Barnes Cinema: Powwow People by Sky Hopinka",
+      "venue": "The Barnes Foundation",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/barnes-cinema-powwow-people-by-sky-hopinka-tickets",
+      "description": "Arts & Culture · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0444"
+    },
+    {
+      "title": "Eagles Game w/ DJ PHIL",
+      "venue": "Lucy’s",
+      "date": "2026-11-08",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/eagles-game-w-dj-phil-tickets",
+      "description": "DJ/Parties · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0445"
+    },
+    {
+      "title": "1B | Studio Oil Painting (2/4)",
+      "venue": "Woodmere Art Museum",
+      "date": "2026-11-08",
+      "time": "1:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/1b-studio-oil-painting-2-4-tickets",
+      "description": "Arts & Culture · Northwest Philly, Chestnut Hill",
+      "source": "Do215",
+      "id": "c0446"
+    },
+    {
+      "title": "Open Mic & Gallery",
+      "venue": "Bartram's Garden",
+      "date": "2026-11-08",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/open-mic-gallery-tickets",
+      "description": "Outdoors · West Philly, University City",
+      "source": "Do215",
+      "id": "c0447"
+    },
+    {
+      "title": "Paint & Sip Workshop With Penelope Fox Art Studio",
+      "venue": "Broken Goblet Brewing",
+      "date": "2026-11-08",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/paint-sip-workshop-with-penelope-fox-art-studio-tickets",
+      "description": "Music · Bucks County Suburbs, Doylestown",
+      "source": "Do215",
+      "id": "c0448"
+    },
+    {
+      "title": "Wavy Movy Fundraising Festival",
+      "venue": "The Perch Music & Arts Workshop",
+      "date": "2026-11-08",
+      "time": "3:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/wavy-movy-fundraising-festival-tickets",
+      "description": "Music · North Philly, Kensington",
+      "source": "Do215",
+      "id": "c0449"
+    },
+    {
+      "title": "Gundamentals 3.0",
+      "venue": "LAVA",
+      "date": "2026-11-08",
+      "time": "3:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/gundamentals-3-0-tickets",
+      "description": "Charity & Activism · West Philly, University City",
+      "source": "Do215",
+      "id": "c0450"
+    },
+    {
+      "title": "Falling Leaves",
+      "venue": "Bok Building",
+      "date": "2026-11-08",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/falling-leaves-tickets",
+      "description": "Arts & Culture · South Philly, East Passyunk",
+      "source": "Do215",
+      "id": "c0451"
+    },
+    {
+      "title": "Secret Chord Concerts: Gili Yalo Ethiofunk Concert and Sigd Celebration",
+      "venue": "Weitzman National Museum of American Jewish History",
+      "date": "2026-11-08",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/secret-chord-concerts-gili-yalo-ethiofunk-concert-and-sigd-celebration-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0452"
+    },
+    {
+      "title": "Free Admission at American Swedish Historical Museum",
+      "venue": "FDR Park",
+      "date": "2026-11-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/free-admission-at-american-swedish-historical-museum-tickets",
+      "description": "Outdoors · South Philly, Sports Complex",
+      "source": "Do215",
+      "id": "c0453"
+    },
+    {
+      "title": "Mercado Latino / Latino Market at FDR Park",
+      "venue": "FDR Park",
+      "date": "2026-11-08",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/8/mercado-latino-latino-market-at-fdr-park-tickets",
+      "description": "Outdoors · South Philly, Sports Complex",
+      "source": "Do215",
+      "id": "c0454"
     },
     {
       "title": "The Variety Show IV",
@@ -69,7 +650,51 @@
       "url": "https://www.etix.com/ticket/p/97241528/",
       "description": "",
       "source": "PhilaMOCA",
-      "id": "c0047"
+      "id": "c0455"
+    },
+    {
+      "title": "🧵 Anarchist Sewing Club",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-11-08",
+      "time": "3:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNyamdiOWg2c3NqOGM5bDYwbzMwYzFkNjRyamlkMWg2a3JqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Interested in learning to sew, mend or make clothes? Already know how and wanna hang out with people while sewing? Come and join us! Sewing supplies and a sewing machine will be available for anyone needing them.\n  \nImage credit",
+      "source": "Iffy Books",
+      "id": "c0463"
+    },
+    {
+      "title": "🏠 IndieWeb Homebrew Website Club",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-11-08",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFsNjByMzhiOWg2c3NqOGM5bTYwczMwYzFkNjRyamlkMWg2b3MzMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Homebrew Website Club is a growing world-wide network of meetups for everyone who wants to take back their web experience from social media silos, and own their online identities & content, or just want support with blogging!",
+      "source": "Iffy Books",
+      "id": "c0464"
+    },
+    {
+      "title": "diy bookmarks w/ lamcha matcha",
+      "venue": "915 Spring Garden St, Philadelphia, PA 19123, USA",
+      "date": "2026-11-08",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "",
+      "description": "Get up-to-date information at: https://luma.com/3z1avs3m\n\nAddress:\n915 Spring Garden St\nthe entrance for club is on percy street located in the same building as triple bottom. there are 2 steps to enter the building, but once inside there is an elevator. we open doors for club 5 minutes prior to the start time and close the doors 15 minutes after. please allow time for parking and transportation!\nPhiladelphia, Pennsylvania\nUnited States\n\njoin us for our matcha cafe with lamcha, while we spend the afternoon creating bookmarks, swapping books, and drinking matcha!\nall materials are included, and…",
+      "source": "Luma",
+      "id": "c0471"
+    },
+    {
+      "title": "TV SHOW NIGHT: Dexter: Resurrection - Season 2",
+      "venue": "(online)",
+      "date": "2026-11-08",
+      "time": "9:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317140692/",
+      "description": "Philadelphia Area Horror Meetup Group\nCome watch the new Dexter season! We'll join together every Sunday at 9pm to stream!\n\n**DEXTER: RESURRECTION: Season 2**\n\n* **November 1 - Episode 1**\n* **November 8 - Episode 2**\n* **November 15 - Episode 3**\n* **November 22 - Episode 4**\n* **November 29 - Episode 5**\n* **December 6 - Episode 6**\n* **December 13 - Episode 7**\n* **December 20 - Episode 8**\n* **December 27 - Episode 9**\n* **January 3 - Episode 10**",
+      "source": "Meetup: Philadelphia Horror",
+      "id": "c0480"
     },
     {
       "title": "Black Squirrel Noir",
@@ -80,7 +705,7 @@
       "url": "https://phillygoth.net/events/black-squirrel-noir/",
       "description": "6pm-10pm, $10 adv / $15 DOS Featuring: DJs Kathy Fadigan, Jon Gill, & EGBIII spinning alternative, New Wave, & goth Links: Facebook event",
       "source": "Phillygoth.net",
-      "id": "c0055"
+      "id": "c0505"
     },
     {
       "title": "In-person! Nuevo mundo (1978, Not Rated, 1h 35min) + workshop on ancestral connection and syncretism",
@@ -91,7 +716,7 @@
       "url": "https://www.therotunda.org/event/nuevo-mundo",
       "description": "In-person! Nuevo mundo (1978, Not Rated, 1h 35min) + workshop on ancestral connection and syncretism",
       "source": "The Rotunda",
-      "id": "c0067"
+      "id": "c0516"
     },
     {
       "title": "Lia Menaker / Kuf Knotz & Christine Elise / Brittany Ann Tranbaugh",
@@ -102,7 +727,7 @@
       "url": "https://xpn.org/event/lia-menaker-kuf-knotz-christine-elise-brittany-ann-tranbaugh/",
       "description": "WXPN Welcomes",
       "source": "WXPN",
-      "id": "c0163"
+      "id": "c0596"
     },
     {
       "title": "the olllam (feat. Joe Dart)",
@@ -113,7 +738,7 @@
       "url": "https://xpn.org/event/the-olllam-feat-joe-dart/",
       "description": "",
       "source": "WXPN",
-      "id": "c0164"
+      "id": "c0597"
     },
     {
       "title": "New Constellations / Vox Rea",
@@ -124,7 +749,7 @@
       "url": "https://xpn.org/event/new-constellations-vox-rea/",
       "description": "",
       "source": "WXPN",
-      "id": "c0165"
+      "id": "c0598"
     },
     {
       "title": "Breakwater",
@@ -135,7 +760,7 @@
       "url": "https://xpn.org/event/breakwater/",
       "description": "",
       "source": "WXPN",
-      "id": "c0166"
+      "id": "c0599"
     },
     {
       "title": "KIDZ BOP Daytime Dance Party",
@@ -146,7 +771,7 @@
       "url": "https://xpn.org/event/kidz-bop-daytime-dance-party/",
       "description": "",
       "source": "WXPN",
-      "id": "c0167"
+      "id": "c0600"
     },
     {
       "title": "Deerhoof / Eraser / Nympho",
@@ -157,7 +782,7 @@
       "url": "https://xpn.org/event/deerhoof-eraser-nympho/",
       "description": "",
       "source": "WXPN",
-      "id": "c0168"
+      "id": "c0601"
     },
     {
       "title": "George Clanton / Ryan Hemsworth",
@@ -168,7 +793,7 @@
       "url": "https://xpn.org/event/george-clanton-ryan-hemsworth/",
       "description": "",
       "source": "WXPN",
-      "id": "c0169"
+      "id": "c0602"
     },
     {
       "title": "GCS feat. Eric Gales, Dennis Chambers & Billy Sheehan",
@@ -179,7 +804,7 @@
       "url": "https://xpn.org/event/gcs-feat-eric-gales-dennis-chambers-billy-sheehan/",
       "description": "",
       "source": "WXPN",
-      "id": "c0170"
+      "id": "c0603"
     },
     {
       "title": "Joe Deninzon & Stratospheerius / Jane Getter Premonition",
@@ -190,29 +815,7 @@
       "url": "https://xpn.org/event/joe-dennison-stratospheerius-jane-getter-premonition/",
       "description": "",
       "source": "WXPN",
-      "id": "c0171"
-    },
-    {
-      "title": "Lake Drive / Nightbreakers / Moonroof",
-      "venue": "Kung Fu Necktie",
-      "date": "2026-11-08",
-      "time": "",
-      "cost": "",
-      "url": "https://xpn.org/event/lake-drive-nightbreakers-moonroof/",
-      "description": "",
-      "source": "WXPN",
-      "id": "c0172"
-    },
-    {
-      "title": "Archer Oh / Integra Pink",
-      "venue": "Nikki Lopez",
-      "date": "2026-11-08",
-      "time": "",
-      "cost": "",
-      "url": "https://xpn.org/event/archer-oh-integra-pink/",
-      "description": "",
-      "source": "WXPN",
-      "id": "c0173"
+      "id": "c0604"
     },
     {
       "title": "Bad Static / Soji / Froggy",
@@ -223,7 +826,7 @@
       "url": "https://xpn.org/event/bad-static-soji-froggy/",
       "description": "",
       "source": "WXPN",
-      "id": "c0174"
+      "id": "c0605"
     },
     {
       "title": "Robbie Fulks / Heather Maloney",
@@ -234,7 +837,7 @@
       "url": "https://xpn.org/event/robbie-fulks-heather-maloney/",
       "description": "",
       "source": "WXPN",
-      "id": "c0175"
+      "id": "c0606"
     },
     {
       "title": "PHER",
@@ -245,7 +848,7 @@
       "url": "https://xpn.org/event/pher/",
       "description": "",
       "source": "WXPN",
-      "id": "c0176"
+      "id": "c0607"
     },
     {
       "title": "Michigander / Wildermiss",
@@ -256,7 +859,7 @@
       "url": "https://xpn.org/event/michigander-wildermiss/",
       "description": "",
       "source": "WXPN",
-      "id": "c0177"
+      "id": "c0608"
     }
   ]
 }
