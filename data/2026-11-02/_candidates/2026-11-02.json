@@ -1,0 +1,141 @@
+{
+  "week": "2026-11-02",
+  "date": "2026-11-02",
+  "collection_failures": [
+    "do215 (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json))"
+  ],
+  "candidates": [
+    {
+      "title": "Palestine Cinema Days 2026: Foragers",
+      "venue": "Vox Populi",
+      "date": "2026-11-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://cinespeak.eventive.org/schedule/6ab2ba26d8428377e2ad3a37",
+      "description": "Documentary Feature",
+      "source": "cinéSPEAK",
+      "id": "c0000"
+    },
+    {
+      "title": "☕️ Coffee Talk",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-11-02",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjRxajZiOWg2c3NqNmRoazY4cTMwYzFkNjRyamljcG02Z3NqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "A social hangout every first and third Monday for trans and non-binary people, their significant others, and allies. We have snacks and coffee.",
+      "source": "Iffy Books",
+      "id": "c0001"
+    },
+    {
+      "title": "Native Plant Prep Party",
+      "venue": "Sulimay's Restaurant, 632 E Girard Ave, Philadelphia, PA 19125, USA",
+      "date": "2026-11-02",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "",
+      "description": "Get up-to-date information at: https://luma.com/oemofy6g\n\nAddress:\nSulimay's Restaurant\nPhiladelphia, PA\nUnited States\n\nWe're gearing up for the 2027 iteration of the Philly Native Plant Project, and we need YOUR HELP!\nThis year we distributed 15,000 packets of native plant seeds throughout the city. We're doing it again!\nWe've got seeds, we've got stickers, we need YOUR hands to help us pack everything up.\nWe'll provide beers and pretzels, you bring those paws. We'll have some fun educational material to share out with your neighborhoods too.\n\nHosted by DGS / Skype a Scientist",
+      "source": "Luma",
+      "id": "c0012"
+    },
+    {
+      "title": "BIG NIGHT screening & TIMPANO tasting!",
+      "venue": "Pen & Pencil Club, 1522 Latimer St, Philadelphia, PA 19102, USA",
+      "date": "2026-11-02",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "",
+      "description": "Get up-to-date information at: https://luma.com/cr2xox31\n\nAddress:\nPen & Pencil Club\nPhiladelphia, PA\nUnited States\n\nOn Monday Nov. 2, we're celebrating 30 years of the best food film to come out of the Jersey Shore, \"The Big Night\" by Stanley Tucci and Campbell Scott.\nNo matter how hard we tried, we couldn't get Tucci to join us. So instead, we got three amazing Philly chefs to whip up their version of the timpano, the drum-shaped Italian baked pasta pie that Primo (Tony Shalhoub) and Secondo (Tucci) make for the legendary bandleader Louis Prima. Maybe you've never watched the film, or maybe…",
+      "source": "Luma",
+      "id": "c0013"
+    },
+    {
+      "title": "A NIGHTMARE ON ELM STREET 3: DREAM WARRIORS",
+      "venue": "(online)",
+      "date": "2026-11-02",
+      "time": "9:30 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317140722/",
+      "description": "Philadelphia Area Horror Meetup Group\n**A Nightmare on Elm Street 3: Dream Warriors**\n1987 - 1hr 35mins\nHorror/Fantasy\nA psychiatrist, familiar with the knife-wielding dream demon Freddy Krueger, helps teens at a mental hospital battle the killer who is invading their dreams.",
+      "source": "Meetup: Philadelphia Horror",
+      "id": "c0022"
+    },
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-02",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk.",
+      "source": "PhilaMOCA",
+      "id": "c0041"
+    },
+    {
+      "title": "Dirty Old Power Tour | AJJ",
+      "venue": "The First Unitarian Church",
+      "date": "2026-11-02",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$33.02",
+      "url": "https://r5productions.com/event/ajj/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": "Dirty Old Power Tour",
+      "source": "R5 Productions",
+      "id": "c0056"
+    },
+    {
+      "title": "SOLD OUT!!!! In-person! Fire Museum Presents: Ak'chamel and Ecology: HomeStones",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-11-02",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/fire-museum-presents-ak-chamel-and-ecology-homestones",
+      "description": "SOLD OUT!!!! In-person! Fire Museum Presents: Ak'chamel and Ecology: HomeStones",
+      "source": "The Rotunda",
+      "id": "c0062"
+    },
+    {
+      "title": "AJJ / Greet Death",
+      "venue": "The First Unitarian Church",
+      "date": "2026-11-02",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/ajj-greet-death/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0069"
+    },
+    {
+      "title": "Harbour / Southcourt",
+      "venue": "Underground Arts",
+      "date": "2026-11-02",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/harbour-southcourt/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0070"
+    },
+    {
+      "title": "Paige Fish / Hank Garret",
+      "venue": "MilkBoy",
+      "date": "2026-11-02",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/paige-fish-hank-garret/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0071"
+    },
+    {
+      "title": "Pretty Sick / Computerwife",
+      "venue": "The Foundry",
+      "date": "2026-11-02",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/pretty-sick-computerwife/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0072"
+    }
+  ]
+}

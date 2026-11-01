@@ -1,0 +1,273 @@
+{
+  "week": "2026-11-02",
+  "date": "2026-11-05",
+  "collection_failures": [
+    "do215 (ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json))"
+  ],
+  "candidates": [
+    {
+      "title": "🎶 Beginner Soldering: Modded Audio Aux Cable",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-11-05",
+      "time": "2:30 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNzRvajRiOWg2c3NqNmUxbzc0bzMwYzFkNjRyamljcG83NHEzOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "Make a 3.5mm audio aux cable with a volume knob and port for a low-pass capacitor. This workshop is suitable for total beginners. \nRegistration\nPlease enable JavaScript in your browser to complete this form.Name/pseudonym:Email address:EmailConfirm EmailPurchase a kit:Modded Aux Cable Kit - $4.86(prices include sales tax)Instructor donation:$0 / donate later$5$10$15$20$25$30(recommended $5–$15, notaflof)Credit card info: *CardName on CardComments or questions?Submit",
+      "source": "Iffy Books",
+      "id": "c0004"
+    },
+    {
+      "title": "🎶 Learn to Livecode with Strudel!",
+      "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+      "date": "2026-11-05",
+      "time": "6:30 PM",
+      "cost": "",
+      "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFsNjByM2FiOWg2c3NqNmU5ZzZjcTMwYzFkNjRyamljcHA2NG8zY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+      "description": "@searchfortheinfinitelight will walk us through the basics of strudel and we’ll end the sessions with a strudel jam! \nNO PROGRAMMING EXPERIENCE REQUIRED!!! \nIf you have any questions, or want to help with jam setup, please join our discord! \nOrganized by the Philly Electronic Music Club",
+      "source": "Iffy Books",
+      "id": "c0005"
+    },
+    {
+      "title": "Oldest Sea",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-05",
+      "time": "7:00, 7:30",
+      "cost": "$15",
+      "url": "https://www.etix.com/ticket/p/54049261/",
+      "description": "",
+      "source": "PhilaMOCA",
+      "id": "c0044"
+    },
+    {
+      "title": "Asylum 13: The Rapture",
+      "venue": "Bar XIII, 1706 Philadelphia Pike (Wilmington, DE)",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://phillygoth.net/events/asylum-13-the-rapture-2026-01-01-2026-02-05-2026-03-05-2026-04-02-2026-05-07-2026-06-04-2026-07-02-2026-08-06-2026-09-03-2026-10-01-2026-11-05/",
+      "description": "21+, 9pm, $10 Featuring: DJs Michael Mythix & Dr. Octo-Pussy Links:",
+      "source": "Phillygoth.net",
+      "id": "c0050"
+    },
+    {
+      "title": "WXPN 88.5 Welcomes | The Singer In My Band Tour | This Is Lorelei",
+      "venue": "The First Unitarian Church",
+      "date": "2026-11-05",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$25.81",
+      "url": "https://r5productions.com/event/this-is-lorelei/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": "WXPN 88.5 Welcomes | The Singer In My Band Tour",
+      "source": "R5 Productions",
+      "id": "c0059"
+    },
+    {
+      "title": "In-person! Erini - Fos: An Asia Minor Story",
+      "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+      "date": "2026-11-05",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.therotunda.org/event/erini-fos-an-asia-minor-story",
+      "description": "In-person! Erini - Fos: An Asia Minor Story",
+      "source": "The Rotunda",
+      "id": "c0065"
+    },
+    {
+      "title": "Fruit Bats / Sarah Klang",
+      "venue": "Union Transfer",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/fruit-bats/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0094"
+    },
+    {
+      "title": "Punch Brothers",
+      "venue": "Keswick Theatre",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/punch-brothers/",
+      "description": "WXPN Welcomes",
+      "source": "WXPN",
+      "id": "c0095"
+    },
+    {
+      "title": "Marty Stuart and His Fabulous Superlatives",
+      "venue": "Strand Theatre @ Appell Center for the Performing Arts",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/marty-stuart-and-his-fabulous-superlatives/",
+      "description": "Central PA, WXPN Welcomes",
+      "source": "WXPN",
+      "id": "c0096"
+    },
+    {
+      "title": "Donna The Buffalo / Assembly of Dust",
+      "venue": "Ardmore Music Hall",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/donna-the-buffalo-assembly-of-dust/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0097"
+    },
+    {
+      "title": "HFB Ensemble",
+      "venue": "Chris’ Jazz Cafe",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/hfb-ensemble/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0098"
+    },
+    {
+      "title": "Matt Kahn & His Trio",
+      "venue": "Chris’ Jazz Cafe",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/matt-kahn-his-trio/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0099"
+    },
+    {
+      "title": "Ami Taf Ra & Kamasi Washington",
+      "venue": "City Winery",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/ami-taf-ra-kamasi-washington/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0100"
+    },
+    {
+      "title": "Ami Taf Ra / Kamasi Washington",
+      "venue": "City Winery",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/ami-taf-ra-kamasi-washington-2/",
+      "description": "WXPN Welcomes",
+      "source": "WXPN",
+      "id": "c0101"
+    },
+    {
+      "title": "Pete Muller & The Kindred Souls / The Alternate Routes",
+      "venue": "City Winery",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/pete-muller-the-kindred-souls-the-alternate-routes/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0102"
+    },
+    {
+      "title": "Louise Bichan",
+      "venue": "Zoetropolis Cinema Stillhouse",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/louise-bichan/",
+      "description": "Lehigh Valley",
+      "source": "WXPN",
+      "id": "c0103"
+    },
+    {
+      "title": "Alter Bridge / Big Wreck / Tim Montana",
+      "venue": "Franklin Music Hall",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/alter-bridge-big-wreck-tim-montana/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0104"
+    },
+    {
+      "title": "Babehoven / Jane Lai",
+      "venue": "Johnny Brenda’s",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/babehoven-jane-lai/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0105"
+    },
+    {
+      "title": "Imperial Teen / Gay Meat",
+      "venue": "Nikki Lopez",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/imperial-teen-gay-meat/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0106"
+    },
+    {
+      "title": "The Quixote Project Duo",
+      "venue": "Liberty Bell Gastropub",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/the-quixote-project-duo-2/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0107"
+    },
+    {
+      "title": "Oldest Sea / Bruise Bath / ShyGodwin / Diuretic",
+      "venue": "PhilaMOCA",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/oldest-sea-bruise-bath-shygodwin-diuretic/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0108"
+    },
+    {
+      "title": "Kim Waters",
+      "venue": "SOUTH Jazz Club",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/kim-waters/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0109"
+    },
+    {
+      "title": "RaiNao",
+      "venue": "The Foundry",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/rainao/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0110"
+    },
+    {
+      "title": "Blck Teeth",
+      "venue": "Time",
+      "date": "2026-11-05",
+      "time": "",
+      "cost": "",
+      "url": "https://xpn.org/event/blck-teeth/",
+      "description": "",
+      "source": "WXPN",
+      "id": "c0111"
+    }
+  ]
+}

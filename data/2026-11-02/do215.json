@@ -1,0 +1,6 @@
+{
+  "source": "Do215",
+  "status": "failed",
+  "reason": "ParseError: every request failed (7 attempted); first: https://do215.com/events/2026/11/2.json (HTTP 404 for https://do215.com/events/2026/11/2.json)",
+  "collected_at": "2026-11-01T14:24:36.384083+00:00"
+}
