@@ -185,6 +185,9 @@ shown Sunday's *own* showtimes — never a day inside the following week it was 
 - **`scripts/event_parsers/do215.py`** — Do215's undocumented JSON API
   (`do215.com/events/YYYY/M/D.json`), replacing 7 sequential `fetch_page_text.py` browser loads.
   Live-verified: 467 events for the week of 2026-08-03 (see note below on volume).
+  *(Update 2026-11-01: Do215 replaced its platform and `.../D.json` now 404s. The source reads
+  `do215.com/events/YYYY/M/D/__data.json` instead, via `src/collectSource.ts` /
+  `src/eventParsers/do215.ts`; see PR #107. The retired Python parser is unmaintained.)*
 - **`scripts/event_parsers/wxpn.py`** — WXPN's own WordPress REST API
   (`backend.xpn.org/wp-json/wp/v2/event`), replacing a full Chromium render of a client-rendered
   Next.js page that had zero event data in its raw HTML. Live-verified: 46 events for the week of

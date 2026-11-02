@@ -20,6 +20,7 @@ import {
   checkManifestFileAgreement,
   checkNonDestructive,
   checkProvenance,
+  checkRequiredSources,
   checkYieldFloor,
   collectIssues,
   formatReport,
@@ -224,6 +225,79 @@ describe("manifest/file agreement", () => {
     const sourceFiles = { do215: { events: [{ title: "x" }] } };
     const onDisk = new Set(["do215.json", ...NON_SOURCE_FILES]);
     expect(checkManifestFileAgreement(manifest, sourceFiles, onDisk)).toEqual([]);
+  });
+});
+
+describe("derived artifacts in committed weeks", () => {
+  it("every _-prefixed file in every committed week is exempt from the orphan check", () => {
+    // _recent_picks.json (earlier) and _playlist.json (found 2026-11-01, when
+    // collection-check.yml went red on main after Presentation committed one)
+    // were each added without the exemption. Checking what is actually on
+    // disk catches the next new derived artifact the same way.
+    const dataDir = join(import.meta.dirname, "..", "data");
+    const unexempt = new Set<string>();
+    for (const week of readdirSync(dataDir)) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(week)) continue;
+      for (const name of readdirSync(join(dataDir, week))) {
+        if (name.startsWith("_") && name.endsWith(".json") && !NON_SOURCE_FILES.has(name)) unexempt.add(name);
+      }
+    }
+    expect([...unexempt]).toEqual([]);
+  });
+
+  it("a completed week with a playlist sidecar passes the agreement check", () => {
+    const manifest = { sources: { do215: { status: "ok", events: 1 } } };
+    const sourceFiles = { do215: { events: [{ title: "x" }] } };
+    expect(checkManifestFileAgreement(manifest, sourceFiles, new Set(["do215.json", "_playlist.json"]))).toEqual([]);
+  });
+});
+
+describe("required sources", () => {
+  const expected = { sources: { do215: { min_expected: 1, required: true }, luma: { min_expected: 1 } }, _meta: {} };
+
+  it("flags a required source that failed, with its reason", () => {
+    // The 2026-11-01 failure: Do215's endpoint 404'd, the run stayed green.
+    const manifest = {
+      sources: {
+        do215: { status: "failed", reason: "ParseError: every request failed (7 attempted); first: .../2/__data.json (HTTP 404)" },
+        luma: { status: "ok", events: 7 },
+      },
+    };
+    const issues = checkRequiredSources(manifest, expected);
+    expect(issues).toHaveLength(1);
+    expect(issues[0]).toMatchObject({ check: "required_source", source: "do215" });
+    expect(issues[0]!.message).toContain("HTTP 404");
+  });
+
+  it("flags a required source missing from the manifest", () => {
+    expect(checkRequiredSources({ sources: { luma: { status: "ok", events: 1 } } }, expected)[0]).toMatchObject({
+      check: "required_source",
+      source: "do215",
+      message: expect.stringContaining("no manifest entry") as string,
+    });
+  });
+
+  it("passes a required source that is ok, even with few events (the floor judges that)", () => {
+    expect(checkRequiredSources({ sources: { do215: { status: "ok", events: 0 } } }, expected)).toEqual([]);
+  });
+
+  it("lets a source without the flag fail without failing the run", () => {
+    const manifest = { sources: { do215: { status: "ok", events: 500 }, luma: { status: "failed", reason: "down" } } };
+    expect(checkRequiredSources(manifest, expected)).toEqual([]);
+  });
+
+  it("is part of collectIssues and the printed report", () => {
+    const manifest = { sources: { do215: { status: "failed", reason: "down" } } };
+    const issues = collectIssues(manifest, {}, new Set(), expected);
+    expect(issues.some((i) => i.check === "required_source")).toBe(true);
+    expect(formatReport(issues, "2026-11-02")).toContain("REQUIRED SOURCE FAILED");
+  });
+
+  it("is switched on for Do215 in the committed expected_yield.json", () => {
+    const real = JSON.parse(readFileSync(join(import.meta.dirname, "..", "data", "expected_yield.json"), "utf8")) as {
+      sources: Record<string, { required?: boolean }>;
+    };
+    expect(real.sources.do215?.required).toBe(true);
   });
 });
 

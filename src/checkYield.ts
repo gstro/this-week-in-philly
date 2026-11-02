@@ -61,6 +61,7 @@ import { DATA_DIR, REPO_ROOT, loadJson } from "./common.js";
 export const NON_SOURCE_FILES = new Set([
   "_manifest.json",
   "_candidates.json",
+  "_playlist.json",
   "_recent_picks.json",
   "_selection_annotations.json",
   "_selections.json",
@@ -92,7 +93,7 @@ export interface SourceFile {
 }
 
 export interface ExpectedYield {
-  sources?: Record<string, { min_expected?: number }>;
+  sources?: Record<string, { min_expected?: number; required?: boolean }>;
   _meta?: { total_floor?: number };
 }
 
@@ -197,6 +198,35 @@ export function checkYieldFloor(manifest: Manifest, expected: ExpectedYield): Is
   return issues;
 }
 
+/**
+ * A source flagged `"required": true` in expected_yield.json must be `ok` in
+ * the manifest. The yield floor above skips failed sources (it only judges
+ * what an ok source wrote), so without this a required source failing outright
+ * passes: on 2026-11-01 Do215 -- most of a week's volume -- failed, the run
+ * stayed green, and Selection and the published report ran on 178 events
+ * instead of ~600. Failing here stops Collection before anything is committed
+ * or Selection is triggered, so a re-run is the only way forward; that is the
+ * point. Opt-in per source rather than every source with a floor, so a small
+ * source going down (Luma, Iffy Books) still just lands as a failed entry.
+ */
+export function checkRequiredSources(manifest: Manifest, expected: ExpectedYield): Issue[] {
+  const issues: Issue[] = [];
+  for (const [source, rules] of Object.entries(expected.sources ?? {})) {
+    if (rules.required !== true) continue;
+    const result = manifest.sources?.[source];
+    if (result === undefined) {
+      issues.push({ check: "required_source", source, message: "required source has no manifest entry (data/expected_yield.json)" });
+    } else if (result.status !== "ok") {
+      issues.push({
+        check: "required_source",
+        source,
+        message: `required source did not collect (status ${pyRepr(result.status ?? "missing")}): ${result.reason ?? "no reason recorded"}`,
+      });
+    }
+  }
+  return issues;
+}
+
 export function checkManifestFileAgreement(
   manifest: Manifest,
   sourceFiles: Record<string, SourceFile>,
@@ -276,6 +306,7 @@ export function collectIssues(
   const issues = [
     ...checkProvenance(manifest, sourceFiles),
     ...checkYieldFloor(manifest, expected),
+    ...checkRequiredSources(manifest, expected),
     ...checkManifestFileAgreement(manifest, sourceFiles, filesOnDisk),
   ];
   if (priorSourceFiles != null) {
@@ -357,6 +388,7 @@ export function formatReport(issues: Issue[], week: string): string {
   const labels: Record<string, string> = {
     provenance: "PROVENANCE (fabricated / unfetched)",
     yield_floor: "YIELD FLOOR (suspiciously low)",
+    required_source: "REQUIRED SOURCE FAILED",
     file_agreement: "MANIFEST/FILE MISMATCH",
     non_destructive: "DESTRUCTIVE RE-COLLECTION",
   };
