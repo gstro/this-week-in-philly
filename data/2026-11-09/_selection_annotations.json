@@ -1,0 +1,377 @@
+{
+  "week": "2026-11-09",
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-11-09",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0000",
+          "rank": 1,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Film critic and curator Ashley Clark discusses and signs his book on Julie Dash's Daughters of the Dust, the landmark 1991 Gullah-set indie drama — a rare chance at real critical context on an underseen American classic, hosted at a brewery rather than a lecture hall. No cost listed."
+        },
+        {
+          "id": "c0526",
+          "rank": 2,
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Iffy Books runs its own HTML-from-scratch workshop, teaching the basics of building and hosting a static personal site on Neocities — reclaiming the web from platforms, one page at a time. Led by Ragman/Richard Green; no experience needed, laptops optional. Pay-what-you-can, suggested $10–$25, nobody turned away for lack of funds."
+        },
+        {
+          "id": "c0568",
+          "rank": 3,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "time": "7:30 PM",
+          "why": "A gloriously dumb double feature of DIY backyard-budget monster movies — 2004's Suburban Sasquatch and 2016's Bigfoot Runs Amok — screened the communal, so-bad-it's-good way PhilaMOCA does best. Doors at 7:00, screening at 7:30. $12 for both films."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0002" },
+        { "id": "c0033" },
+        { "id": "c0593" }
+      ],
+      "annotations": [
+        { "id": "c0000", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0526", "category": "💻 Tech & Maker", "sold_out": false, "note": "Pay-what-you-can HTML/Neocities workshop; no experience needed." },
+        { "id": "c0568", "category": "👻 Horror & Occult", "sold_out": false, "note": "Double feature; $12." },
+        { "id": "c0002", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0033", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0593", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0003", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0006", "category": "📚 Literary", "sold_out": false },
+        { "id": "c0009", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0011", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0020", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0021", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0023", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0027", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0029", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0030", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0032", "category": "🎵 Music & Concerts", "sold_out": false }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0042",
+          "rank": 1,
+          "address": "1009 Canal St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Saosin mark 20 years of their self-titled EP — a foundational record for 2000s screamo and post-hardcore — with a full-album anniversary set at Brooklyn Bowl. Anniversary shows for scene-defining records like this don't repeat often."
+        },
+        {
+          "id": "c0041",
+          "rank": 2,
+          "address": "1200 Callowhill Street, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Detroit electro-industrial act ADULT. co-headlines with noise-shoegaze veterans A Place To Bury Strangers, plus LUNACY opening (per Phillygoth's listing) — a night spanning EBM, industrial, and noise rock at Underground Arts. Doors 8:00, show 9:00. 21+."
+        },
+        {
+          "id": "c0057",
+          "rank": 3,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "time": "7:30 PM",
+          "why": "Director Mark Pellington visits PhilaMOCA in person for a documentary on 'Buzz,' the revolutionary, underseen 1990 MTV late-night program — a rare chance to hear directly from someone who shaped early experimental music television. Doors at 7:00, screening at 7:30. $12."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0077" },
+        { "id": "c0084" },
+        { "id": "c0527" }
+      ],
+      "annotations": [
+        { "id": "c0042", "category": "🎵 Music & Concerts", "sold_out": false, "note": "20th anniversary of the band's self-titled screamo/post-hardcore EP." },
+        { "id": "c0041", "category": "🎵 Music & Concerts", "sold_out": false, "note": "EBM/industrial double bill with LUNACY opening; 21+." },
+        { "id": "c0057", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Director Mark Pellington in attendance; $12." },
+        { "id": "c0077", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0084", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0527", "category": "📚 Literary", "sold_out": false, "note": "Silent co-working writing sessions in three 40-minute units; BYO everything." },
+        { "id": "c0044", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0045", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0049", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0065", "category": "📚 Literary", "sold_out": false, "note": "Listed start time (8:00 AM) looks like a scrape error for an evening reading — confirm before heading out. *(confirm details)*" },
+        { "id": "c0080", "category": "📚 Literary", "sold_out": false },
+        { "id": "c0083", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0087", "category": "📚 Literary", "sold_out": false }
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0600",
+          "rank": 1,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Gala Rexer (University of Warwick) and Nada Matta (Drexel) discuss Rexer's new book on how Israeli state surveillance and border policy shape Palestinian women's reproductive freedom, drawn from two years of ethnographic fieldwork. Dense, serious political-education programming — exactly what Wooden Shoe anchors. Free."
+        },
+        {
+          "id": "c0143",
+          "rank": 2,
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A talk tied to a new book on Eugene Debs — five-time Socialist Party presidential candidate and the most prominent socialist in American history. Rare to see an event built explicitly around Debs rather than invoking him in passing; useful grounding for anyone interested in the real history behind 'democratic socialism.' Free, Rittenhouse Square."
+        },
+        {
+          "id": "c0097",
+          "rank": 3,
+          "address": "1026 Spring Garden St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Chat Pile's lurching sludge-noise headlines over Philly's own Soul Glo, whose ferocious, explicitly political hardcore has made them one of the most vital bands the city's produced this decade. Shallowater and Skullpresser round out a stacked bill."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0159" },
+        { "id": "c0586" },
+        { "id": "c0529" }
+      ],
+      "annotations": [
+        { "id": "c0600", "category": "🤝 Community & Politics", "sold_out": false, "note": "Academic talk on reproductive injustice under Israeli state surveillance in Palestine; free." },
+        { "id": "c0143", "category": "📚 Literary", "sold_out": false, "note": "Talk centered on Eugene Debs's life and legacy." },
+        { "id": "c0097", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Sludge/noise headliner over Philly hardcore band Soul Glo, with Shallowater and Skullpresser." },
+        { "id": "c0159", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Title suggests a program built around The Fugs, the profane 1960s folk-punk forerunner of punk — not confirmed by the listing itself." },
+        { "id": "c0586", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0529", "category": "💻 Tech & Maker", "sold_out": false, "note": "Bimonthly meetup on sustainable, resilient computing; in-person or remote via Jitsi." },
+        { "id": "c0528", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0533", "category": "📚 Literary", "sold_out": false },
+        { "id": "c0551", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0541", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0573", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0574", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0154", "category": "🎨 Arts & Workshops", "sold_out": false }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0601",
+          "rank": 1,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Malcolm Harris moderates a conversation with Clarissa Redwine and JS Tan — organizers chronicled in their new book on tech-worker organizing under Trump-era conditions — about what that resistance looks like now. A rare chance to hear directly from people doing the organizing, not just writing about it, at the city's anarchist bookstore. Free."
+        },
+        {
+          "id": "c0589",
+          "rank": 2,
+          "address": "1201 Frankford Ave, Philadelphia, PA 19125",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "time": "9:00 PM",
+          "why": "Small Brown Bike mark 25 years since 'Dead Reckoning' — a foundational Midwest emo/post-hardcore record — with a full anniversary set at Johnny Brenda's. $27.65, doors at 8, set at 9."
+        },
+        {
+          "id": "c0536",
+          "rank": 3,
+          "address": "699 N Broad St, Philadelphia, PA 19123",
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Xenia Matthews — a Sundance and BlackStar alum — previews her debut feature MAMABABY with an exclusive screening and talkback, then a fundraiser party for the film's completion. Lush, strange, community-funded filmmaking, with all proceeds going toward finishing it. Screening at 7:00, party at 8:30."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0596" },
+        { "id": "c0581" },
+        { "id": "c0530" }
+      ],
+      "annotations": [
+        { "id": "c0601", "category": "🤝 Community & Politics", "sold_out": false, "note": "Conversation on tech worker organizing with authors Clarissa Redwine and JS Tan, moderated by Malcolm Harris." },
+        { "id": "c0589", "category": "🎵 Music & Concerts", "sold_out": false, "note": "25th anniversary of the album 'Dead Reckoning.'" },
+        { "id": "c0536", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Exclusive screening and talkback, followed by a fundraiser party; proceeds fund the film's completion." },
+        { "id": "c0596", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0581", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Industrial/goth DJ night themed around Throbbing Gristle; 21+, $10 adv/$15 DOS." },
+        { "id": "c0530", "category": "💻 Tech & Maker", "sold_out": false, "note": "Monthly reading group, currently on the final third of this month's book." },
+        { "id": "c0188", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0182", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0175", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0179", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0206", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0542", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0552", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0232", "category": "🎬 Film & Cinema", "sold_out": false }
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0320",
+          "rank": 1,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A screening centered on the human impact of ICE enforcement, hosted at a church rather than a theater — grassroots political programming rather than a multiplex release. Free. Given the venue and the 'Charity & Activism' framing, likely includes community discussion, though the listing doesn't confirm that."
+        },
+        {
+          "id": "c0247",
+          "rank": 2,
+          "address": "1200 Callowhill Street, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Night one of a two-night, one-time benefit show for WOAR — Philadelphia's center against sexual violence — stacking bands into a fundraiser bill at Underground Arts (per WXPN's listing: The Sea, The Sea, sports., endive, flowersforpersephone, and It Happened One Night). Bands donating a night's work to a cause."
+        },
+        {
+          "id": "c0261",
+          "rank": 3,
+          "address": "1200 Callowhill Street, Philadelphia, PA 19123",
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "An 80s and 90s goth DJ night gets a Friday the 13th framing at Underground Arts — dark wave, deathrock, and post-punk for the city's goth scene on the one night of the year built for it. DJ/dance format, not a live show."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0597" },
+        { "id": "c0602" },
+        { "id": "c0278" }
+      ],
+      "annotations": [
+        { "id": "c0320", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Screening on the realities of ICE enforcement; free." },
+        { "id": "c0247", "category": "🎵 Music & Concerts", "sold_out": false, "note": "One-time benefit for WOAR (Philadelphia's center against sexual violence); night one of two." },
+        { "id": "c0261", "category": "👻 Horror & Occult", "sold_out": false, "note": "80s/90s goth DJ night, Friday the 13th edition." },
+        { "id": "c0597", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0602", "category": "🤝 Community & Politics", "sold_out": false, "note": "De-escalation 101 training from the Red Rabbis for community safety/care; masks required and provided. Monthly, second Friday." },
+        { "id": "c0278", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0241", "category": "🎪 Festivals & Major Events", "sold_out": false },
+        { "id": "c0569", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0317", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0531", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0242", "category": "🎵 Music & Concerts", "sold_out": false }
+      ]
+    },
+    {
+      "date": "2026-11-14",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0575",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Five hardcore, post-hardcore, and math-rock bands packed into an actual living room in North Philly — about as DIY and easy-to-miss as a show gets, surfaced through Philly Ask a Punk's listings. 6:05 PM start, unusually early for a house show — worth confirming before heading over."
+        },
+        {
+          "id": "c0387",
+          "rank": 2,
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "WHY? (Yoni Wolf's long-running experimental hip-hop/indie project) plays the First Unitarian Church with Serengeti opening. A separate listing for the same show frames it as 'A Special Seated Show' on an 'Oh Golly / Yes Lord' tour — suggesting a more intimate, stripped-down set than WHY?'s usual full-band gigs."
+        },
+        {
+          "id": "c0443",
+          "rank": 3,
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A dual release celebration for 'Avalon Rise!' and 'Letters of Fire' brings together Erik Ruin — known for his work with the Justseeds artists' cooperative, per general background on him rather than this listing — with Appalachian writer Madeline ffitch and musician Elizabeth LaPrelle. Small-press, politically engaged, multi-disciplinary work unlikely to get a second local stop."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0576" },
+        { "id": "c0571" },
+        { "id": "c0598" }
+      ],
+      "annotations": [
+        { "id": "c0575", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Five-band hardcore/post-hardcore/math-rock house show." },
+        { "id": "c0387", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Seated show; Serengeti opens." },
+        { "id": "c0443", "category": "📚 Literary", "sold_out": false, "note": "Dual release for two small-press works." },
+        { "id": "c0576", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Hardcore punk bill with an out-of-town touring band; 'two-step' and 'unity' hardcore tags." },
+        { "id": "c0571", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Record collector fair at PhilaMOCA; early-bird $10 at 10 AM, drops to $5 from 11 AM–4 PM." },
+        { "id": "c0598", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0577", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0583", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0591", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0532", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0344", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0381", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0349", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0419", "category": "🎨 Arts & Workshops", "sold_out": false }
+      ]
+    },
+    {
+      "date": "2026-11-15",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0572",
+          "rank": 1,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "time": "8:00 PM",
+          "why": "Negativland — the pioneering culture-jamming sound-collage group whose work on media manipulation and copyright predates and shaped decades of sample-based art — perform with visual artist Sue-C in a rare Philly date. Experimental, political, and genuinely strange in exactly the way PhilaMOCA exists for. Doors 7:30, show at 8. $20–$25."
+        },
+        {
+          "id": "c0507",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Philadelphia chapter of the Democratic Socialists of America kicks off a canvassing push from Columbus Square Park — direct, on-the-ground political organizing rather than a panel or a reading about it. Free, open to anyone who wants to show up and knock doors."
+        },
+        {
+          "id": "c0578",
+          "rank": 3,
+          "address": "4215 Baltimore Ave, Philadelphia, PA 19104",
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "An out-of-town hardcore punk bill lands at The Pouch, a DIY space on Baltimore Ave (West Philly, served by the 34 trolley) — LA bands LACKEY and REARRANGED FACE touring through with locals Sappers and Krot. Classic small-room, no-frills hardcore show."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0484" },
+        { "id": "c0462" },
+        { "id": "c0599" }
+      ],
+      "annotations": [
+        { "id": "c0572", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Rare Philly date for culture-jamming group Negativland; $20–$25." },
+        { "id": "c0507", "category": "🤝 Community & Politics", "sold_out": false, "note": "DSA Philadelphia chapter canvassing kickoff." },
+        { "id": "c0578", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Out-of-town hardcore punk bill with locals Sappers and Krot." },
+        { "id": "c0484", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0462", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0599", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0456", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0459", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0478", "category": "🌿 Markets & Outdoors", "sold_out": false },
+        { "id": "c0548", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0554", "category": "👻 Horror & Occult", "sold_out": false }
+      ]
+    }
+  ]
+}
