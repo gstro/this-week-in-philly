@@ -1,0 +1,78 @@
+{
+  "source": "Meetup: Code & Coffee",
+  "collected_at": "2026-11-08T14:24:35.096176+00:00",
+  "events": [
+    {
+      "title": "OG Coffee&Code Coding!",
+      "venue": "(online)",
+      "date": "2026-11-11",
+      "time": "3:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/317296391/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n# \u2615 The OG CODE Meetup\n\n### A Blockspace Community \u00d7 CODE Collaboration\n\nBefore the hype. Before the buzzwords. Before \u201cAI-powered everything.\u201d\nThis is **The OG CODE**\u2014the meetup that started it all, now presented in collaboration with the **Blockspace Community**.\nNo panels. No pitches. No pressure.\nJust good people, good coffee, and focused time to build, learn, and connect.\n\n## What this meetup is\n\nAn open, welcoming space for coders, builders, designers, and curious minds.\nBring your own project, homework, startup, side quest, experiment, or idea. Work at your own pace, meet other builders, ask questions, exchange ideas, or simply enjoy being productive around like-minded people.\nExpect:\n\n* Focused building time\n* Organic conversations\n* Spontaneous debugging\n* Knowledge sharing\n* Genuine community\n\nThis meetup is beginner-friendly, expert-respected, and ego-free.\n\n## What this meetup is not\n\n\u274c A lecture\n\u274c A sales event\n\u274c A recruiting trap\n\u274c A 90-minute presentation\n\n## How it works\n\n1. Show up\n2. Grab coffee \u2615\n3. Open your laptop, notebook, or sketchpad\n4. Work at your own pace\n5. Chat when you want and focus when you need\n6. Leave having made progress\u2014or at least a new friend\n\n## Who should attend\n\n* Software engineers and data professionals\n* Students and self-learners\n* Founders and indie hackers\n* Designers, tinkerers, and technologists\n* Members of the Blockspace and CODE communities\n* Anyone who enjoys building things with other humans\n\nWhether this is your first CODE, you are part of the Blockspace Community, or you have been attending since day one, you are welcome.\nThis collaboration brings together two communities around a shared goal: creating a relaxed, supportive space where people can build, learn, and connect.\n\n**Come for the code.**\n**Stay for the community.**\n**Leave caffeinated. \u2615\ud83d\ude80**"
+    },
+    {
+      "title": "DataPhilly Webinar series: Confidence Intervals: How Much Can We Trust a Number?",
+      "venue": "(online)",
+      "date": "2026-11-12",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/317296298/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n\ud83d\udce2 Join DataPhilly for an online session with Raymond McCollum, who explains confidence intervals in an easy-to-follow way. The talk starts with simple averages, moves through regression, and ends with modern machine-learning models such as XGBoost.\n**What you\u2019ll learn:**\n\n* Why more data usually improves confidence\n* Why some parts of the data carry more information than others\n* How to measure uncertainty in complex predictions\n\n**Speaker Bio:**\nRaymond A. McCollum, Ph.D., is a data scientist and statistician with over 25 years of experience spanning defense, aerospace, and financial industries. His work includes applying statistics and data science to anti-submarine warfare for the U.S. Navy, conducting uncertainty analysis in heat shield measurements for NASA\u2019s Mars Lander, and developing automated underwriting systems for Prudential Financial. Over his career\u2014from entry-level analyst to Vice President of Data Science\u2014he has been recognized for innovative problem-solving and creative analytic design. He discovered that the mathematics underlying data analysis remains consistent across disciplines, forming the foundation for both classical statistics and modern data science. As Founder and CEO of Statistical Data Science Solutions (StatDSS), he focuses on advancing statistical rigor in real-world data science applications.\n\ud83d\udd17 Webinar access: [https://meet.google.com/aki-vdjp-ibg](https://meet.google.com/aki-vdjp-ibg)"
+    },
+    {
+      "title": "C.O.D.E. @ Pennovation Works \u2014 Innovation Hub Build Day",
+      "venue": "(online)",
+      "date": "2026-11-13",
+      "time": "10:00 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/317027503/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n# C.O.D.E. @ Pennovation Works \u2014 Innovation Hub Build Day\n\nJoin **C.O.D.E Community of Developers & Engineers** at Pennovation Works on **Nov 13** for an open build day focused on making progress, sharing ideas, and collaborating with other builders across Philadelphia.\nPennovation Works is the University of Pennsylvania\u2019s innovation campus, bringing together startups, researchers, engineers, founders, and teams working on new technology and products.\nThis is a working session rather than a formal presentation. Bring whatever you are currently building and spend the day alongside other developers, founders, designers, researchers, and technical creatives.\nYou can:\n\n* Work on your own project\n* Pair program or collaborate with others\n* Get feedback on something you\u2019re building\n* Meet potential collaborators\n* Work through technical blockers\n* Prototype a new idea\n* Contribute to an open-source project\n* Simply bring your laptop and get some focused work done\n\nThere is no required project, stack, company, or experience level. Whether you are building an AI agent, startup, open-source tool, research project, side project, or just experimenting with something new, you are welcome to join.\n**Date:** **Nov 13**\n**Location:** Pennovation Works, Philadelphia\nBring your laptop, something you want to work on, and a willingness to build with other people.\nHosted by **C.O.D.E Community of Developers & Engineers**."
+    },
+    {
+      "title": "Rust Tuesdays: Reverse Engineer Anything",
+      "venue": "(online)",
+      "date": "2026-11-13",
+      "time": "4:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/317127372/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n```\nJoin Eric Manganaro and Justin DiClemente at Pennovation Center for Reverse Engineer Anything (REA), with two talks on Rust and CNC control.\n\nEric Manganaro: Building a library of ideas with Rust\nEric will show how he uses Rust to capture ideas from programs he reverse engineers. His REA system stores recurring themes and architectural patterns so he can reuse them in new projects, in Rust or other languages.\n\nJustin DiClemente: REA for industrial automation\nJustin will show how REA applies to CNC control. A planned demo will run actual controller firmware against a simulated FPGA and a virtual CNC mill, tracing software commands through to machine motion.\n\nTime permitting, we\u2019ll also look at proprietary 3D printer software, with Bambu Lab as a possible example.\n\nPennovation Center\n3401 Grays Ferry Avenue, Philadelphia, PA\n```"
+    },
+    {
+      "title": "Online Talk and Demo : The Context Layer for a Grounded Data Agent",
+      "venue": "(online)",
+      "date": "2026-11-13",
+      "time": "8:30 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/317156866/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n**Abstract**\nData agents are most useful when they understand the data they work with, not only its structure. This talk explores how a context layer helps an agent make better decisions and write accurate SQL that stays grounded in the business. We will look at the building blocks of context, including ontology and a context graph, and how they come together so an agent can retrieve what is relevant, reason over it, check its own work and respond with confidence. We will also cover how to measure the incremental changes with evaluations. Attendees will leave with a clear mental model and practical patterns for building context-aware data agents.\nA 10-minute live demo of a simple Data Agent using Langchain\u2019s Deep Agent, follows the talk.\n**Details**\n\n* **Format:** 60 minutes: a 35 to 40 minute talk, a 10-minute live demo and 10 minutes for Q&A.\n* **Audience:** data, analytics and AI engineers building agents on top of databases.\n* **Level:** Intermediate.\n\n**Bio**\nSaket is a Principal Data Engineer\n\nHe specializes in building modern and highly scalable data platforms. This also includes driving Data platform AI strategy and Governance.\n\n**Date & Time**\nNov 13th 8:30 pm EST"
+    },
+    {
+      "title": "10x Villanova AI Workshop for Business Professionals - VIP Event",
+      "venue": "(online)",
+      "date": "2026-11-14",
+      "time": "10:30 AM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/317296169/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n## Hello Fellow Wildcats! \ud83d\udc4b\n\n\u200b\n\u200bWelcome to the VIP workshop for top business alumni, with a focus on Agents. We'll go over 10x use cases in a Live Demo format, with a focus on **\"verification loops\".**\n\u200b\n\u200bYou've gone to \"best prompting techniques\" events - which is basically \"putting a horse in front of a Ferrari\".\n\u200bAgents should check their own work, eliminating the bottleneck of going back and forth 5 times to get what you ACTUALLY want.\n\u200b\n\n## \u200b\u23f0 [ Event Timeline ]\n\n* \u200b10:30-10:45 \u27a1\ufe0f [ Claude Setup and Concepts ]\n* \u200b10:45-11:00 \u27a1\ufe0f [ 10x Workflows and Live Demo ]\n* \u200b11:00-11:30 \u27a1\ufe0f [ Setting up Verification Loops ]\n* \u200b11:30-11:45 \u27a1\ufe0f [ Q&A + Solving Your Problems ]\n* \u200b11:45-12:00 \u27a1\ufe0f [ Chill & Network, Closing Out ]\n\n\u200b\u2615\ufe0f We could head off to a nearby cafe (Refectory) and go over your specific processes and just chat for up to an hour as well after 12 PM.\n\u200b\n\u200b**Looking forward to seeing you guys! \ud83d\udc4b**\n\u200b\n\u200bCheers,\n\u200bHaluk Gul, Villanova AI/ML MBA\n\u200b\n\u200bWhat you need:\n\n* \u200bLaptop and a $20 Claude Pro Subscription\n* \u200bGood sleep + Low cortisol\n\n\u200b\n\u200b**PS: Complimentary refreshments and snacks provided.**"
+    },
+    {
+      "title": "Claude Code vs. Codex: Loops, Graphs, and Harnesses",
+      "venue": "(online)",
+      "date": "2026-11-14",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/316953560/",
+      "description": "C.O.D.E - Community of Developers & Engineers\n## Claude Code vs. Codex: Loops, Graphs, and Harnesses\n\nThis is a casual pair-programming meetup for developers experimenting with Claude Code, Codex, and agentic coding workflows.\nThere is no formal presentation and no fixed curriculum. Bring a laptop, a repository, a side project, or a workflow you want to test. We will work in small groups, compare approaches, debug problems, and share what is working.\n\nPossible areas to explore include:\n\n* Building iterative coding-agent loops\n* Comparing Claude Code and Codex on the same task\n* Designing graph-based agent workflows\n* Creating reusable coding harnesses\n* Managing context across large repositories\n* Running tests and validating agent-generated changes\n* Using sandboxes, permissions, and approval steps\n* Coordinating subagents or parallel tasks\n* Measuring latency, token usage, cost, and completion quality\n* Debugging failed or incomplete agent runs\n\nYou do not need to be an expert in either tool. This meetup is for people who want hands-on time to experiment, pair with other developers, and learn through building.\nBring something you are working on, or join someone else\u2019s project.\nHosted by **Coffee & Code Philadelphia**.\n\n**Coffee & Code Philadelphia**\nWebsite: [https://www.codephilly.com](https://www.codephilly.com/)\nMeetup: [https://www.meetup.com/code-coffee-philly/](https://www.meetup.com/code-coffee-philly/)\nLinkedIn: [https://www.linkedin.com/company/code-coffee-philadelphia](https://www.linkedin.com/company/code-coffee-philadelphia)\nInstagram: [https://www.instagram.com/coffeecodephilly](https://www.instagram.com/coffeecodephilly)\nDiscord: [https://discord.gg/2ad8NmvC2](https://discord.gg/2ad8NmvC2)\nLinktree: [https://linktr.ee/codecoffeephilly](https://linktr.ee/codecoffeephilly)\nSubstack: [https://substack.com/@codecoffeephilly](https://substack.com/@codecoffeephilly)"
+    },
+    {
+      "title": "Cups of Code: Connecting the Community",
+      "venue": "(online)",
+      "date": "2026-11-15",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/code-coffee-philly/events/317237650/",
+      "description": "C.O.D.E - Community of Developers & Engineers\nA fun and light code session where tech friends get together in a large and relaxed caf\u00e9 space, and code! Bring your laptop (or another coding device of choice) for a great opportunity to ask questions, share ongoing projects, help each other out, and meet other awesome coders. We're all about the code, and we hope to make a space for people who like to build.\n\n**Notes to keep in mind:**\n\n\\*Guest wireless internet access is good and free\n\nCome out and work, help, or just hang out!"
+    }
+  ]
+}

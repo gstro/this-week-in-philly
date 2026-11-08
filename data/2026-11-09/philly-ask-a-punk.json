@@ -1,0 +1,65 @@
+{
+  "source": "Philly Ask A Punk",
+  "collected_at": "2026-11-08T14:24:28.174982+00:00",
+  "events": [
+    {
+      "title": "After Nations, Sweepers, Objects, Rope Trick",
+      "venue": "Little Big Planet (1123 Walnut Street, Philadelphia, PA 19107)",
+      "date": "2026-11-11",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/after-nations-sweepers-objects-rope-trick",
+      "description": "experimental rock / no wave / post-metal / stoner",
+      "venue_address": "1123 Walnut Street, Philadelphia, PA 19107"
+    },
+    {
+      "title": "Music for Neighbors: So Totally/Loadcard/Subtle Body/Quatro Coles",
+      "venue": "Ortlieb's (847 N. 3rd St)",
+      "date": "2026-11-11",
+      "time": "8:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/music-for-neighbors-so-totallyloadcardsubtle-bodyquatro-coles",
+      "description": "",
+      "venue_address": "847 N. 3rd St"
+    },
+    {
+      "title": "Domepeace, Slaughter your Senses, Crosseyed, Violent Form, and Airball",
+      "venue": "Moms living room (1300 Adams ave)",
+      "date": "2026-11-14",
+      "time": "6:05 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/domepeace-slaughter-your-senses-crosseyed-violent-form-and-airball",
+      "description": "hardcore / hardcore punk / math rock / philadelphia / post-hardcore / punk",
+      "venue_address": "1300 Adams ave"
+    },
+    {
+      "title": "IDENTITY SHOCK + DEMENTED FX + SUBJECTS",
+      "venue": "ask a punk",
+      "date": "2026-11-14",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/identity-shock-demented-fx-subjects",
+      "description": "OUT OF TOWN BAND / hardcore punk / two-step / unity"
+    },
+    {
+      "title": "BABY MUFFLER (Providence), HIGHLIGHTER RABIES (NYC), T.T.L.C., and GRIPPER @ 1737phl",
+      "venue": "1737phl (DM Band/Promoter on IG for Address)",
+      "date": "2026-11-14",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/baby-muffler-providence-highlighter-rabies-nyc-ttlc-and-gripper-1737phl",
+      "description": "OUT OF TOWN BAND / egg / power pop / punk / rock n roll",
+      "venue_address": "DM Band/Promoter on IG for Address"
+    },
+    {
+      "title": "LACKEY (LA), REARRANGED FACE (LA), SAPPERS AND KROT @ THE POUCH",
+      "venue": "The Pouch (4215 Baltimore Ave Philadelphia)",
+      "date": "2026-11-15",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://philly.askapunk.net/event/lackey-la-rearranged-face-la-sappers-and-krot-the-pouch",
+      "description": "OUT OF TOWN BAND / egg / hardcore punk / punk",
+      "venue_address": "4215 Baltimore Ave Philadelphia"
+    }
+  ]
+}
