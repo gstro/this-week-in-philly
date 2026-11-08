@@ -1,0 +1,24 @@
+{
+  "source": "Lightbox Film Center",
+  "collected_at": "2026-11-08T14:24:44.006068+00:00",
+  "events": [
+    {
+      "title": "Apple Pie",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-11-11",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/apple-pie",
+      "description": "Co-presented with Space Melt Cinema"
+    },
+    {
+      "title": "Once Upon a Time There Was a Singing Blackbird",
+      "venue": "Bok Auditorium, 800 Mifflin St, Philadelphia, PA 19148, USA",
+      "date": "2026-11-15",
+      "time": "5:00 PM",
+      "cost": "",
+      "url": "https://www.lightboxfilmcenter.org/events/once-upon-a-time-there-was-a-singing-blackbird",
+      "description": "New Restoration"
+    }
+  ]
+}

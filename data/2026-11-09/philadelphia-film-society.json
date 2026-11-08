@@ -1,0 +1,114 @@
+{
+  "source": "Philadelphia Film Society",
+  "collected_at": "2026-11-08T14:25:01.329126+00:00",
+  "events": [
+    {
+      "title": "Fatherland (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-11",
+      "time": "3:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated Not Rated. Runtime: 1 hr 22 min."
+    },
+    {
+      "title": "Wicker (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-11",
+      "time": "3:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 45 min."
+    },
+    {
+      "title": "La Bola Negra (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-11",
+      "time": "4:00 PM, 7:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 2 hr 35 min."
+    },
+    {
+      "title": "Once Upon a Time in Harlem",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-11",
+      "time": "3:15 PM, 6:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated PG-13. Runtime: 1 hr 40 min."
+    },
+    {
+      "title": "The Only Living Pickpocket in New York (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-11",
+      "time": "5:25 PM, 7:45 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 1 hr 28 min."
+    },
+    {
+      "title": "You Can See Everything (2026)",
+      "venue": "PFS Bourse Theater, 400 Ranstead St, Philadelphia, PA 19106",
+      "date": "2026-11-11",
+      "time": "3:30 PM, 7:15 PM, 8:15 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-bourse-theater-aadjc/theater-page",
+      "description": "Rated R. Runtime: 2 hr 54 min."
+    },
+    {
+      "title": "Godzilla Minus Zero (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-11",
+      "time": "3:30 PM, 6:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 2 hr 15 min."
+    },
+    {
+      "title": "Wild Horse Nine (2026)",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-11",
+      "time": "4:00 PM, 7:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 1 hr 58 min."
+    },
+    {
+      "title": "Blood Rage",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-14",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 1 hr 22 min."
+    },
+    {
+      "title": "The Big Feast",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-14",
+      "time": "9:15 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated NC-17. Runtime: 2 hr 10 min."
+    },
+    {
+      "title": "The Yards",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-14",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 1 hr 55 min."
+    },
+    {
+      "title": "We Own the Night",
+      "venue": "PFS East Theater, 125 S. 2nd Street, Philadelphia, PA 19106",
+      "date": "2026-11-14",
+      "time": "4:30 PM",
+      "cost": "",
+      "url": "https://www.fandango.com/pfs-east-theater-aandq/theater-page",
+      "description": "Rated R. Runtime: 1 hr 58 min."
+    }
+  ]
+}
