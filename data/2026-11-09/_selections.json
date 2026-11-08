@@ -1,0 +1,1457 @@
+{
+  "week": "2026-11-09",
+  "total_events_after_dedup": 700,
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-11-09",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Daughters of the Dust—with Ashley Clark",
+          "venue": "Two Locals Brewing",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://cinespeak.eventive.org/schedule/6a7e1cb62571ef83030d86be",
+          "category": "🎬 Film & Cinema",
+          "source": "cinéSPEAK",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Film critic and curator Ashley Clark discusses and signs his book on Julie Dash's Daughters of the Dust, the landmark 1991 Gullah-set indie drama — a rare chance at real critical context on an underseen American classic, hosted at a brewery rather than a lecture hall. No cost listed."
+        },
+        {
+          "rank": 2,
+          "title": "🚧 Make Your First Website",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjBvMzRiOWg2c3NqOGNoazZzcDMwYzFkNjRyamlkMWk2a3EzOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Iffy Books runs its own HTML-from-scratch workshop, teaching the basics of building and hosting a static personal site on Neocities — reclaiming the web from platforms, one page at a time. Led by Ragman/Richard Green; no experience needed, laptops optional. Pay-what-you-can, suggested $10–$25, nobody turned away for lack of funds."
+        },
+        {
+          "rank": 3,
+          "title": "SUBURBAN SASQUATCH (2004)",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/32391941/",
+          "category": "👻 Horror & Occult",
+          "source": "PhilaMOCA",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A gloriously dumb double feature of DIY backyard-budget monster movies — 2004's Suburban Sasquatch and 2016's Bigfoot Runs Amok — screened the communal, so-bad-it's-good way PhilaMOCA does best. Doors at 7:00, screening at 7:30. $12 for both films."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Tear Dungeon",
+          "venue": "Kung Fu Necktie"
+        },
+        {
+          "title": "How To Rob A Bank: Film Screening",
+          "venue": "Film Society East"
+        },
+        {
+          "title": "In-person! Comm University Vogue Commentating Class",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104"
+        }
+      ],
+      "events": [
+        {
+          "title": "Tear Dungeon",
+          "venue": "Kung Fu Necktie",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/tear-dungeon-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Night Moves , giAnna",
+          "venue": "Nikki Lopez",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/night-moves-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "The Monday Night Jam Session hosted by Richard Hill Jr. and Friends",
+          "venue": "Black Squirrel Club",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/the-monday-night-jam-session-hosted-by-richard-hill-jr-and-friends-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Pinto Sunshine ~ Elephants Dancing ~ Wardrobe Malfunction ~ Delay 77",
+          "venue": "Silk City",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/pinto-sunshine-elephants-dancing-wardrobe-malfunction-delay-77-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Cinema with Comrades Happy Hour + Movie Meetup",
+          "venue": "PFS Bourse Movie Theater",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/cinema-with-comrades-happy-hour-movie-meetup-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Daughters of the Dust—with Ashley Clark",
+          "venue": "Two Locals Brewing",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://cinespeak.eventive.org/schedule/6a7e1cb62571ef83030d86be",
+          "category": "🎬 Film & Cinema",
+          "source": "cinéSPEAK",
+          "sold_out": false
+        },
+        {
+          "title": "BEING HEUMANN",
+          "venue": "AMC Cherry Hill IMAX",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/being-heumann-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "How To Rob A Bank: Film Screening",
+          "venue": "Film Society East",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/how-to-rob-a-bank-film-screening-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Since Forever: A Book Discussion with Jeff Ament",
+          "venue": "City Winery",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/since-forever-a-book-discussion-with-jeff-ament-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Mondays @ McCormick's - - 2000 Market St. Every Monday @ noon - Demand Dave McCormick meet with us!",
+          "venue": "Senator McCormicks Philly Ofc.",
+          "time": "12:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/mondays-mccormick-s-2000-market-st-every-monday-noon-demand-dave-mccormick-meet-with-us-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Exhibition Tour: Marcel Duchamp",
+          "venue": "Philadelphia Art Museum",
+          "time": "12:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/exhibition-tour-marcel-duchamp-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "recurrence_count": 5,
+          "occurrences": [
+            "2026-11-09",
+            "2026-11-12",
+            "2026-11-13",
+            "2026-11-14",
+            "2026-11-15"
+          ]
+        },
+        {
+          "title": "Titian to Turner",
+          "venue": "Philadelphia Art Museum",
+          "time": "2:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/titian-to-turner-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "recurrence_count": 5,
+          "occurrences": [
+            "2026-11-09",
+            "2026-11-12",
+            "2026-11-13",
+            "2026-11-14",
+            "2026-11-15"
+          ]
+        },
+        {
+          "title": "In-person! Comm University Vogue Commentating Class",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.therotunda.org/event/comm-university-vogue-commentating-class-2026-11-09-18-00-00-0500",
+          "category": "🎨 Arts & Workshops",
+          "source": "The Rotunda",
+          "sold_out": false
+        },
+        {
+          "title": "Collide Issue 14 Soft Release Party",
+          "venue": "The People’s Gallery",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/collide-issue-14-soft-release-party-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "King of Drag: The Royal Tour",
+          "venue": "Johnny Brenda's",
+          "time": "9:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/9/king-of-drag-the-royal-tour-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "🚧 Make Your First Website",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjBvMzRiOWg2c3NqOGNoazZzcDMwYzFkNjRyamlkMWk2a3EzOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "sold_out": false,
+          "note": "Pay-what-you-can HTML/Neocities workshop; no experience needed."
+        },
+        {
+          "title": "SUBURBAN SASQUATCH (2004)",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:00, 7:30",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/32391941/",
+          "category": "👻 Horror & Occult",
+          "source": "PhilaMOCA",
+          "sold_out": false,
+          "note": "Double feature; $12."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Saosin: 20 Years of Self-Titled",
+          "venue": "Brooklyn Bowl Philadelphia",
+          "address": "1009 Canal St, Philadelphia, PA 19123",
+          "venue_id": "489690",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/saosin-20-years-of-self-titled-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Saosin mark 20 years of their self-titled EP — a foundational record for 2000s screamo and post-hardcore — with a full-album anniversary set at Brooklyn Bowl. Anniversary shows for scene-defining records like this don't repeat often."
+        },
+        {
+          "rank": 2,
+          "title": "ADULT. + A Place To Bury Strangers",
+          "venue": "Underground Arts",
+          "address": "1200 Callowhill Street, Philadelphia, PA 19123",
+          "venue_id": "489718",
+          "time": "9:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/adult-a-place-to-bury-strangers-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Detroit electro-industrial act ADULT. co-headlines with noise-shoegaze veterans A Place To Bury Strangers, plus LUNACY opening (per Phillygoth's listing) — a night spanning EBM, industrial, and noise rock at Underground Arts. Doors 8:00, show 9:00. 21+."
+        },
+        {
+          "rank": 3,
+          "title": "THIS IS BUZZ w/ filmmaker Mark Pellington",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "venue_id": "489686",
+          "time": "7:30 PM",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/80927103",
+          "category": "🎬 Film & Cinema",
+          "source": "PhilaMOCA",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Director Mark Pellington visits PhilaMOCA in person for a documentary on 'Buzz,' the revolutionary, underseen 1990 MTV late-night program — a rare chance to hear directly from someone who shaped early experimental music television. Doors at 7:00, screening at 7:30. $12."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Free Renters Rights Clinic",
+          "venue": "Philadelphia"
+        },
+        {
+          "title": "The Boulet Brothers Dragula Season 7 Viewing Party",
+          "venue": "Strangelove's"
+        },
+        {
+          "title": "✏️ The Writing Room",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States"
+        }
+      ],
+      "events": [
+        {
+          "title": "Saosin: 20 Years of Self-Titled",
+          "venue": "Brooklyn Bowl Philadelphia",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/saosin-20-years-of-self-titled-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "20th anniversary of the band's self-titled screamo/post-hardcore EP."
+        },
+        {
+          "title": "The James Hunter Six with McKinley James",
+          "venue": "City Winery",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/the-james-hunter-six-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Boston Manor",
+          "venue": "The Foundry",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/boston-manor-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "ADULT. + A Place To Bury Strangers",
+          "venue": "Underground Arts",
+          "time": "9:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/adult-a-place-to-bury-strangers-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "EBM/industrial double bill with LUNACY opening; 21+."
+        },
+        {
+          "title": "Film | Soundless",
+          "venue": "Woodmere Art Museum",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/film-soundless-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "THIS IS BUZZ w/ filmmaker Mark Pellington",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:00, 7:30",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/80927103",
+          "category": "🎬 Film & Cinema",
+          "source": "PhilaMOCA",
+          "sold_out": false,
+          "note": "Director Mark Pellington in attendance; $12."
+        },
+        {
+          "title": "Prose Reading feat. Rutgers-Camden MFA Alumni",
+          "venue": "Tattooed Moms",
+          "time": "8:00 AM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/prose-reading-feat-rutgers-camden-mfa-alumni-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Listed start time (8:00 AM) looks like a scrape error for an evening reading — confirm before heading out. *(confirm details)*"
+        },
+        {
+          "title": "✏️ The Writing Room",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "5:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNm9zM2ViOWg2c3NqOGNwajYwbzMwYzFkNjRyamlkMWo2Y3NqMGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "📚 Literary",
+          "source": "Iffy Books",
+          "sold_out": false,
+          "note": "Silent co-working writing sessions in three 40-minute units; BYO everything."
+        },
+        {
+          "title": "Book Club | The Rosenbach Book Club: The Haunted House | In-Person",
+          "venue": "The Rosenbach Museum and Library",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/book-club-the-rosenbach-book-club-the-haunted-house-in-person-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "“The Dispossessed” Book Club: Session #",
+          "venue": "Philadelphia",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/the-dispossessed-book-club-session-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Free Renters Rights Clinic",
+          "venue": "Philadelphia",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/free-renters-rights-clinic-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "The Magicians Table",
+          "venue": "The Kimmel Center for the Performing Arts",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/the-magicians-table-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "recurrence_count": 6,
+          "occurrences": [
+            "2026-11-10",
+            "2026-11-11",
+            "2026-11-12",
+            "2026-11-13",
+            "2026-11-14",
+            "2026-11-15"
+          ]
+        },
+        {
+          "title": "The Boulet Brothers Dragula Season 7 Viewing Party",
+          "venue": "Strangelove's",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/10/the-boulet-brothers-dragula-season-7-viewing-party-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Demographic Anxieties: A Conversation with Gala Rexer",
+          "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+          "address": "704 South St, Philadelphia, PA 19147",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=NmczOHFlbDAxamhvdHN0anBzNGJuMGk5ODcgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&ctz=America/New_York",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Gala Rexer (University of Warwick) and Nada Matta (Drexel) discuss Rexer's new book on how Israeli state surveillance and border policy shape Palestinian women's reproductive freedom, drawn from two years of ethnographic fieldwork. Dense, serious political-education programming — exactly what Wooden Shoe anchors. Free."
+        },
+        {
+          "rank": 2,
+          "title": "Eugene Debs: American Socialist",
+          "venue": "Philadelphia Ethical Society",
+          "venue_id": "512571",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/11/eugene-debs-american-socialist-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A talk tied to a new book on Eugene Debs — five-time Socialist Party presidential candidate and the most prominent socialist in American history. Rare to see an event built explicitly around Debs rather than invoking him in passing; useful grounding for anyone interested in the real history behind 'democratic socialism.' Free, Rittenhouse Square."
+        },
+        {
+          "rank": 3,
+          "title": "Chat Pile",
+          "venue": "Union Transfer",
+          "address": "1026 Spring Garden St, Philadelphia, PA 19123",
+          "venue_id": "489588",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/11/chat-pile-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Chat Pile's lurching sludge-noise headlines over Philly's own Soul Glo, whose ferocious, explicitly political hardcore has made them one of the most vital bands the city's produced this decade. Shallowater and Skullpresser round out a stacked bill."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "FUGS FILM!",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123"
+        },
+        {
+          "title": "Protomartyr",
+          "venue": "The First Unitarian Church"
+        },
+        {
+          "title": "💾☀️ Permacomputing + Solarpunk Meetup",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States"
+        }
+      ],
+      "events": [
+        {
+          "title": "After Nations, Sweepers, Objects, Rope Trick",
+          "venue": "Little Big Planet (1123 Walnut Street, Philadelphia, PA 19107)",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/event/after-nations-sweepers-objects-rope-trick",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "sold_out": false
+        },
+        {
+          "title": "Chat Pile",
+          "venue": "Union Transfer",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/11/chat-pile-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Sludge/noise headliner over Philly hardcore band Soul Glo, with Shallowater and Skullpresser."
+        },
+        {
+          "title": "Music for Neighbors: So Totally/Loadcard/Subtle Body/Quatro Coles",
+          "venue": "Ortlieb's (847 N. 3rd St)",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/event/music-for-neighbors-so-totallyloadcardsubtle-bodyquatro-coles",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "sold_out": false
+        },
+        {
+          "title": "Protomartyr",
+          "venue": "The First Unitarian Church",
+          "time": "Doors: 7:30 pm | Show: 8 pm",
+          "cost": "$30.96",
+          "url": "https://r5productions.com/event/protomartyr-3/the-first-unitarian-church/philadelphia-pennsylvania/",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "sold_out": false
+        },
+        {
+          "title": "FUGS FILM!",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:00, 7:30",
+          "cost": "$12",
+          "url": "https://www.etix.com/ticket/p/46345981",
+          "category": "🎬 Film & Cinema",
+          "source": "PhilaMOCA",
+          "sold_out": false,
+          "note": "Title suggests a program built around The Fugs, the profane 1960s folk-punk forerunner of punk — not confirmed by the listing itself."
+        },
+        {
+          "title": "Eugene Debs: American Socialist",
+          "venue": "Philadelphia Ethical Society",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/11/eugene-debs-american-socialist-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Talk centered on Eugene Debs's life and legacy."
+        },
+        {
+          "title": "📚 Indy Hall Reading Club",
+          "venue": "Indy Hall Clubhouse, 709 N 2nd St 3rd Floor, Philadelphia, PA 19123, USA",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "",
+          "category": "📚 Literary",
+          "source": "Luma",
+          "sold_out": false
+        },
+        {
+          "title": "Demographic Anxieties: A Conversation with Gala Rexer",
+          "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=NmczOHFlbDAxamhvdHN0anBzNGJuMGk5ODcgdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&ctz=America/New_York",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "sold_out": false,
+          "note": "Academic talk on reproductive injustice under Israeli state surveillance in Palestine; free."
+        },
+        {
+          "title": "Experiencing Esherick Tour",
+          "venue": "Wharton Esherick Museum",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/11/experiencing-esherick-tour-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false,
+          "recurrence_count": 5,
+          "occurrences": [
+            "2026-11-11",
+            "2026-11-12",
+            "2026-11-13",
+            "2026-11-14",
+            "2026-11-15"
+          ]
+        },
+        {
+          "title": "📼 Analog A/V Session",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "2:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNnNwamliOWg2c3NqOGQxZzZrcjMwYzFkNjRyamlkMWs2NHEzY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "sold_out": false
+        },
+        {
+          "title": "OG Coffee&Code Coding!",
+          "venue": "(online)",
+          "time": "3:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/code-coffee-philly/events/317296391/",
+          "category": "💻 Tech & Maker",
+          "source": "Meetup: Code & Coffee",
+          "sold_out": false
+        },
+        {
+          "title": "💾☀️ Permacomputing + Solarpunk Meetup",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNjRyMzJiOWg2c3NqOGQxaTY0czMwYzFkNjRyamlkMWs2OHJqNGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "sold_out": false,
+          "note": "Bimonthly meetup on sustainable, resilient computing; in-person or remote via Jitsi."
+        },
+        {
+          "title": "Last House on the Left (2009)",
+          "venue": "(online)",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317248537/",
+          "category": "👻 Horror & Occult",
+          "source": "Meetup: Philadelphia Horror",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Against Tech Oligarchy",
+          "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+          "address": "704 South St, Philadelphia, PA 19147",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=NHFwMzVzbmRuMjhrZ3I1dmI2YTI0cGxpbmggdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&ctz=America/New_York",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Malcolm Harris moderates a conversation with Clarissa Redwine and JS Tan — organizers chronicled in their new book on tech-worker organizing under Trump-era conditions — about what that resistance looks like now. A rare chance to hear directly from people doing the organizing, not just writing about it, at the city's anarchist bookstore. Free."
+        },
+        {
+          "rank": 2,
+          "title": "'Dead Reckoning' 25th Anniversary | Small Brown Bike",
+          "venue": "Johnny Brenda’s",
+          "address": "1201 Frankford Ave, Philadelphia, PA 19125",
+          "time": "9:00 PM",
+          "cost": "$27.65",
+          "url": "https://r5productions.com/event/small-brown-bike/johnny-brendas/philadelphia-pennsylvania/",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Small Brown Bike mark 25 years since 'Dead Reckoning' — a foundational Midwest emo/post-hardcore record — with a full anniversary set at Johnny Brenda's. $27.65, doors at 8, set at 9."
+        },
+        {
+          "rank": 3,
+          "title": "MAMABABY SPIRIT SWAMP FUNDRAISER PARTY 🌴",
+          "venue": "Broad Hall, 699 N Broad St, Philadelphia, PA 19123, USA",
+          "address": "699 N Broad St, Philadelphia, PA 19123",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "",
+          "category": "🎬 Film & Cinema",
+          "source": "Luma",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Xenia Matthews — a Sundance and BlackStar alum — previews her debut feature MAMABABY with an exclusive screening and talkback, then a fundraiser party for the film's completion. Lush, strange, community-funded filmmaking, with all proceeds going toward finishing it. Screening at 7:00, party at 8:30."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "In-person! Secret Cinema: OLD FILMS ABOUT OLD FILMS ABOUT... (2026 EDITION)! films on 16mm",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104"
+        },
+        {
+          "title": "East Coast Power Dynamics Throbbing Gristle Thanksgiving",
+          "venue": "The Dolphin Tavern, 1539 S Broad St"
+        },
+        {
+          "title": "⚙️ Neo-Luddite Reading Group",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States"
+        }
+      ],
+      "events": [
+        {
+          "title": "Big Ass Truck",
+          "venue": "Ukie Club",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/12/big-ass-truck-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "John Coltrane’s Offering Revisited: Live at Temple University",
+          "venue": "Temple Performing Arts Center",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/12/john-coltrane-s-offering-revisited-live-at-temple-university-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Victoria Monét: Frequency Of Love Tour",
+          "venue": "The Met",
+          "time": "9:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/12/victoria-monet-frequency-of-love-tour-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Emo Night Philly Karaoke",
+          "venue": "Kung Fu Necktie",
+          "time": "10:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/12/emo-night-philly-karaoke-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "East Coast Power Dynamics Throbbing Gristle Thanksgiving",
+          "venue": "The Dolphin Tavern, 1539 S Broad St",
+          "time": "",
+          "cost": "Not listed",
+          "url": "https://phillygoth.net/events/east-coast-power-dynamics-2026-07-30-2026-08-27-2026-09-24-2026-10-29-2026-11-26/",
+          "category": "🎵 Music & Concerts",
+          "source": "Phillygoth.net",
+          "sold_out": false,
+          "note": "Industrial/goth DJ night themed around Throbbing Gristle; 21+, $10 adv/$15 DOS."
+        },
+        {
+          "title": "'Dead Reckoning' 25th Anniversary | Small Brown Bike",
+          "venue": "Johnny Brenda’s",
+          "time": "Doors: 8 pm | Show: 9 pm",
+          "cost": "$27.65",
+          "url": "https://r5productions.com/event/small-brown-bike/johnny-brendas/philadelphia-pennsylvania/",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "sold_out": false,
+          "note": "25th anniversary of the album 'Dead Reckoning.'"
+        },
+        {
+          "title": "Philadelphia Jewish Film and Media Festival: Once Upon My Mother",
+          "venue": "Weitzman National Museum of American Jewish History",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/12/philadelphia-jewish-film-and-media-festival-once-upon-my-mother-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "MAMABABY SPIRIT SWAMP FUNDRAISER PARTY 🌴",
+          "venue": "Broad Hall, 699 N Broad St, Philadelphia, PA 19123, USA",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "",
+          "category": "🎬 Film & Cinema",
+          "source": "Luma",
+          "sold_out": false,
+          "note": "Exclusive screening and talkback, followed by a fundraiser party; proceeds fund the film's completion."
+        },
+        {
+          "title": "In-person! Secret Cinema: OLD FILMS ABOUT OLD FILMS ABOUT... (2026 EDITION)! films on 16mm",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.therotunda.org/event/secret-cinema-films-on-16mm",
+          "category": "🎬 Film & Cinema",
+          "source": "The Rotunda",
+          "sold_out": false
+        },
+        {
+          "title": "Against Tech Oligarchy",
+          "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=NHFwMzVzbmRuMjhrZ3I1dmI2YTI0cGxpbmggdDhxbWl2ZTYzbjI3bWRqN2d0MDNudGMydThAZw&ctz=America/New_York",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "sold_out": false,
+          "note": "Conversation on tech worker organizing with authors Clarissa Redwine and JS Tan, moderated by Malcolm Harris."
+        },
+        {
+          "title": "Miss Lisa Lisa's Drag Show",
+          "venue": "Bob & Barbara's Lounge",
+          "time": "9:30 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/12/miss-lisa-lisa-s-drag-show-tickets-0ZMPNyX",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "DataPhilly Webinar series: Confidence Intervals: How Much Can We Trust a Number?",
+          "venue": "(online)",
+          "time": "5:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/code-coffee-philly/events/317296298/",
+          "category": "💻 Tech & Maker",
+          "source": "Meetup: Code & Coffee",
+          "sold_out": false
+        },
+        {
+          "title": "⚙️ Neo-Luddite Reading Group",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "6:30 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNm9yamFiOWg2c3NqOGQ5ZzcwcDMwYzFkNjRyamlkMWw2NHFqOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "sold_out": false,
+          "note": "Monthly reading group, currently on the final third of this month's book."
+        },
+        {
+          "title": "THE COMPANY OF WOLVES (1984)",
+          "venue": "(online)",
+          "time": "9:30 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317278578/",
+          "category": "👻 Horror & Occult",
+          "source": "Meetup: Philadelphia Horror",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "When ICE Melts Film Screening",
+          "venue": "Calvary United Methodist Church",
+          "venue_id": "540180",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/when-ice-melts-film-screening-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A screening centered on the human impact of ICE enforcement, hosted at a church rather than a theater — grassroots political programming rather than a multiplex release. Free. Given the venue and the 'Charity & Activism' framing, likely includes community discussion, though the listing doesn't confirm that."
+        },
+        {
+          "rank": 2,
+          "title": "Hurry Up Fest: A One-Time Benefit for Bands and WOAR - Philadelphia Center Against Sexual Violence",
+          "venue": "Underground Arts",
+          "address": "1200 Callowhill Street, Philadelphia, PA 19123",
+          "venue_id": "489718",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/hurry-up-fest-a-one-time-benefit-for-bands-and-woar-philadelphia-center-against-sexual-violence-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Night one of a two-night, one-time benefit show for WOAR — Philadelphia's center against sexual violence — stacking bands into a fundraiser bill at Underground Arts (per WXPN's listing: The Sea, The Sea, sports., endive, flowersforpersephone, and It Happened One Night). Bands donating a night's work to a cause."
+        },
+        {
+          "rank": 3,
+          "title": "The Downward Spiral: 80’s + 90’s Goth Night (Friday the 13th Edition)",
+          "venue": "Underground Arts",
+          "address": "1200 Callowhill Street, Philadelphia, PA 19123",
+          "venue_id": "489718",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/the-downward-spiral-80-s-90-s-goth-night-friday-the-13th-edition-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "An 80s and 90s goth DJ night gets a Friday the 13th framing at Underground Arts — dark wave, deathrock, and post-punk for the city's goth scene on the one night of the year built for it. DJ/dance format, not a live show."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "In-person! The Annual West Philly Swing Thing returns to The Rotunda for a 7th year, featuring Swing That Cat",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104"
+        },
+        {
+          "title": "Red Rabbits De-Escalation training",
+          "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147"
+        },
+        {
+          "title": "Nourish: A Celebration of Black Queer Art",
+          "venue": "Tattooed Moms"
+        }
+      ],
+      "events": [
+        {
+          "title": "Hurry Up Fest: A One-Time Benefit for Bands and WOAR - Philadelphia Center Against Sexual Violence",
+          "venue": "Underground Arts",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/hurry-up-fest-a-one-time-benefit-for-bands-and-woar-philadelphia-center-against-sexual-violence-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "One-time benefit for WOAR (Philadelphia's center against sexual violence); night one of two."
+        },
+        {
+          "title": "Beartooth",
+          "venue": "Franklin Music Hall",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/beartooth-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Echo Kid",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:30, 8:00",
+          "cost": "$15–$20",
+          "url": "https://www.etix.com/ticket/p/74805995/",
+          "category": "🎵 Music & Concerts",
+          "source": "PhilaMOCA",
+          "sold_out": false
+        },
+        {
+          "title": "When ICE Melts Film Screening",
+          "venue": "Calvary United Methodist Church",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/when-ice-melts-film-screening-tickets",
+          "category": "🎬 Film & Cinema",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Screening on the realities of ICE enforcement; free."
+        },
+        {
+          "title": "Red Rabbits De-Escalation training",
+          "venue": "Wooden Shoe Books, 704 South St, Philadelphia, PA 19147",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=Y2FlZ28wMDhrcjR1MjBtcHZsMzM2MHJiZzdfMjAyNjExMTRUMDAwMDAwWiB0OHFtaXZlNjNuMjdtZGo3Z3QwM250YzJ1OEBn&ctz=America/New_York",
+          "category": "🤝 Community & Politics",
+          "source": "Wooden Shoe Books",
+          "sold_out": false,
+          "note": "De-escalation 101 training from the Red Rabbis for community safety/care; masks required and provided. Monthly, second Friday."
+        },
+        {
+          "title": "TEASE Vol. 5: Glamour, Seduction & Burlesque",
+          "venue": "Fabrika",
+          "time": "6:45 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/tease-vol-5-glamour-seduction-burlesque-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Nourish: A Celebration of Black Queer Art",
+          "venue": "Tattooed Moms",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/nourish-a-celebration-of-black-queer-art-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "In-person! The Annual West Philly Swing Thing returns to The Rotunda for a 7th year, featuring Swing That Cat",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+          "time": "7:30 PM",
+          "cost": "Not listed",
+          "url": "https://www.therotunda.org/event/the-annual-west-philly-swing-thing-returns-to-the-rotunda-for-a-7th-year-featuring-swing-that-cat",
+          "category": "🎨 Arts & Workshops",
+          "source": "The Rotunda",
+          "sold_out": false
+        },
+        {
+          "title": "⚡️ Beginner Soldering: LED Spinning Top",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "2:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFrNnNvMzhiOWg2c3NqOGQ5bjcwcTMwYzFkNjRyamlkMWw3MHFqY2MxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "sold_out": false
+        },
+        {
+          "title": "The Downward Spiral: 80’s + 90’s Goth Night (Friday the 13th Edition)",
+          "venue": "Underground Arts",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/the-downward-spiral-80-s-90-s-goth-night-friday-the-13th-edition-tickets",
+          "category": "👻 Horror & Occult",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "80s/90s goth DJ night, Friday the 13th edition."
+        },
+        {
+          "title": "Dilly Dally Fest 4",
+          "venue": "Underground Arts",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/13/dilly-dally-fest-4-tickets",
+          "category": "🎪 Festivals & Major Events",
+          "source": "Do215",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-14",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "Domepeace, Slaughter your Senses, Crosseyed, Violent Form, and Airball",
+          "venue": "Moms living room (1300 Adams ave)",
+          "address": "1300 Adams ave",
+          "venue_address": "1300 Adams ave",
+          "time": "6:05 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/event/domepeace-slaughter-your-senses-crosseyed-violent-form-and-airball",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Five hardcore, post-hardcore, and math-rock bands packed into an actual living room in North Philly — about as DIY and easy-to-miss as a show gets, surfaced through Philly Ask a Punk's listings. 6:05 PM start, unusually early for a house show — worth confirming before heading over."
+        },
+        {
+          "rank": 2,
+          "title": "WHY?, with Serengeti",
+          "venue": "First Unitarian Church",
+          "address": "2125 Chestnut St, Philadelphia, PA 19103",
+          "venue_id": "489685",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/14/why-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "is_music": true,
+          "sold_out": false,
+          "why": "WHY? (Yoni Wolf's long-running experimental hip-hop/indie project) plays the First Unitarian Church with Serengeti opening. A separate listing for the same show frames it as 'A Special Seated Show' on an 'Oh Golly / Yes Lord' tour — suggesting a more intimate, stripped-down set than WHY?'s usual full-band gigs."
+        },
+        {
+          "rank": 3,
+          "title": "Madeline ffitch/Erik Ruin/Elizabeth LaPrelle: \"Avalon Rise!\" & \"Letters of Fire\" dual release celebration",
+          "venue": "Studio 34",
+          "venue_id": "504409",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/14/madeline-ffitch-erik-ruin-elizabeth-laprelle-avalon-rise-letters-of-fire-dual-release-celebration-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A dual release celebration for 'Avalon Rise!' and 'Letters of Fire' brings together Erik Ruin — known for his work with the Justseeds artists' cooperative, per general background on him rather than this listing — with Appalachian writer Madeline ffitch and musician Elizabeth LaPrelle. Small-press, politically engaged, multi-disciplinary work unlikely to get a second local stop."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "IDENTITY SHOCK + DEMENTED FX + SUBJECTS",
+          "venue": "ask a punk"
+        },
+        {
+          "title": "Philly Record Freak Out",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123"
+        },
+        {
+          "title": "In-person! Funky Sole fundamentals presents SOLEFULL Vol 18: An all age house music and dance experience",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104"
+        }
+      ],
+      "events": [
+        {
+          "title": "Radiator Hospital and Noun",
+          "venue": "Wild Air Beerworks",
+          "time": "6:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/14/radiator-hospital-and-noun-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Domepeace, Slaughter your Senses, Crosseyed, Violent Form, and Airball",
+          "venue": "Moms living room (1300 Adams ave)",
+          "time": "6:05 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/event/domepeace-slaughter-your-senses-crosseyed-violent-form-and-airball",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "sold_out": false,
+          "note": "Five-band hardcore/post-hardcore/math-rock house show."
+        },
+        {
+          "title": "Obliterati, Glazier, Leben, Jones, Vincent, Engleman, Radigue Homage Quintet,",
+          "venue": "Headlong Dance Theater",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/14/obliterati-glazier-leben-jones-vincent-engleman-radigue-homage-quintet-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "ISTA ~ Admin ~ Tabah ~ Ashy Faye",
+          "venue": "Kung Fu Necktie",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/14/ista-admin-tabah-ashy-faye-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "IDENTITY SHOCK + DEMENTED FX + SUBJECTS",
+          "venue": "ask a punk",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/event/identity-shock-demented-fx-subjects",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "sold_out": false,
+          "note": "Hardcore punk bill with an out-of-town touring band; 'two-step' and 'unity' hardcore tags."
+        },
+        {
+          "title": "BABY MUFFLER (Providence), HIGHLIGHTER RABIES (NYC), T.T.L.C., and GRIPPER @ 1737phl",
+          "venue": "1737phl (DM Band/Promoter on IG for Address)",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/event/baby-muffler-providence-highlighter-rabies-nyc-ttlc-and-gripper-1737phl",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "sold_out": false
+        },
+        {
+          "title": "In-person! Funky Sole fundamentals presents SOLEFULL Vol 18: An all age house music and dance experience",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.therotunda.org/event/solefull",
+          "category": "🎵 Music & Concerts",
+          "source": "The Rotunda",
+          "sold_out": false
+        },
+        {
+          "title": "WHY?, with Serengeti",
+          "venue": "First Unitarian Church",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/14/why-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Seated show; Serengeti opens."
+        },
+        {
+          "title": "Philly Record Freak Out",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "time": "10:00",
+          "cost": "$5–$10",
+          "url": "https://www.instagram.com/recordfreakout/",
+          "category": "🎵 Music & Concerts",
+          "source": "PhilaMOCA",
+          "sold_out": false,
+          "note": "Record collector fair at PhilaMOCA; early-bird $10 at 10 AM, drops to $5 from 11 AM–4 PM."
+        },
+        {
+          "title": "Building Stars, Babel Map, & Conduition",
+          "venue": "Thunderbird Hall, 2856 Frankford Ave",
+          "time": "",
+          "cost": "Not listed",
+          "url": "https://phillygoth.net/events/building-stars-babel-map-conduition/",
+          "category": "🎵 Music & Concerts",
+          "source": "Phillygoth.net",
+          "sold_out": false
+        },
+        {
+          "title": "Could You Keep It Dark? Tour | The Kilans",
+          "venue": "PhilaMOCA",
+          "time": "Doors: 7:30 pm | Show: 8 pm",
+          "cost": "$25.81",
+          "url": "https://r5productions.com/event/the-kilans-2/philamoca/philadelphia-pennsylvania/",
+          "category": "🎵 Music & Concerts",
+          "source": "R5 Productions",
+          "sold_out": false
+        },
+        {
+          "title": "Madeline ffitch/Erik Ruin/Elizabeth LaPrelle: \"Avalon Rise!\" & \"Letters of Fire\" dual release celebration",
+          "venue": "Studio 34",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/14/madeline-ffitch-erik-ruin-elizabeth-laprelle-avalon-rise-letters-of-fire-dual-release-celebration-tickets",
+          "category": "📚 Literary",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "Dual release for two small-press works."
+        },
+        {
+          "title": "Museum for Art in Wood presents Queering Wood Craft: What’s Queer Enough? Creativity, Risk and Failure",
+          "venue": "Virtual",
+          "time": "12:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/14/museum-for-art-in-wood-presents-queering-wood-craft-what-s-queer-enough-creativity-risk-and-failure-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "🚂 Model Internet Club",
+          "venue": "Iffy Books, 404 S. 20th St., Philadelphia, 19146, United States",
+          "time": "10:30 AM",
+          "cost": "Not listed",
+          "url": "https://www.google.com/calendar/event?eid=XzY0bzMwYzFqNnNyMzZiOWg2c3NqOGRobDY4cDMwYzFkNjRyamlkMW02a3NqOGMxZzgxa21jcGpwYzlubXVxcmo1cG42YXQwIHVpbTg0bmtxMjI2aW5oaHFhNDR2OThmb2lnamFrOXVzQGk&ctz=America/New_York",
+          "category": "💻 Tech & Maker",
+          "source": "Iffy Books",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-15",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "rank": 1,
+          "title": "NEGATIVLAND + Sue-C: Significantly Less Deceptive",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "cost": "$20–$25",
+          "url": "https://www.etix.com/ticket/p/87686068/",
+          "category": "🎵 Music & Concerts",
+          "source": "PhilaMOCA",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Negativland — the pioneering culture-jamming sound-collage group whose work on media manipulation and copyright predates and shaped decades of sample-based art — perform with visual artist Sue-C in a rare Philly date. Experimental, political, and genuinely strange in exactly the way PhilaMOCA exists for. Doors 7:30, show at 8. $20–$25."
+        },
+        {
+          "rank": 2,
+          "title": "Huge DSA Canvass Launch",
+          "venue": "Columbus Square Park",
+          "venue_id": "499831",
+          "time": "11:00 AM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/15/huge-dsa-canvass-launch-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The Philadelphia chapter of the Democratic Socialists of America kicks off a canvassing push from Columbus Square Park — direct, on-the-ground political organizing rather than a panel or a reading about it. Free, open to anyone who wants to show up and knock doors."
+        },
+        {
+          "rank": 3,
+          "title": "LACKEY (LA), REARRANGED FACE (LA), SAPPERS AND KROT @ THE POUCH",
+          "venue": "The Pouch (4215 Baltimore Ave Philadelphia)",
+          "address": "4215 Baltimore Ave Philadelphia",
+          "venue_address": "4215 Baltimore Ave Philadelphia",
+          "selection_address": "4215 Baltimore Ave, Philadelphia, PA 19104",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/event/lackey-la-rearranged-face-la-sappers-and-krot-the-pouch",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "is_music": true,
+          "sold_out": false,
+          "why": "An out-of-town hardcore punk bill lands at The Pouch, a DIY space on Baltimore Ave (West Philly, served by the 34 trolley) — LA bands LACKEY and REARRANGED FACE touring through with locals Sappers and Krot. Classic small-room, no-frills hardcore show."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "title": "Dark Side Presents Swamp A$$: A Drag & Burlesque Tribute to Shrek",
+          "venue": "Franky Bradley's"
+        },
+        {
+          "title": "Hurry Up Fest: A One-Time Benefit for Bands and WOAR - Philadelphia Center Against Sexual Violence (Day 3)",
+          "venue": "Underground Arts"
+        },
+        {
+          "title": "In-person! FLATstrap Launch Party",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104"
+        }
+      ],
+      "events": [
+        {
+          "title": "Hurry Up Fest: A One-Time Benefit for Bands and WOAR - Philadelphia Center Against Sexual Violence (Day 3)",
+          "venue": "Underground Arts",
+          "time": "4:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/15/hurry-up-fest-a-one-time-benefit-for-bands-and-woar-philadelphia-center-against-sexual-violence-day-3-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Bbymutha",
+          "venue": "Warehouse on Watts",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/15/bbymutha-tickets",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "LACKEY (LA), REARRANGED FACE (LA), SAPPERS AND KROT @ THE POUCH",
+          "venue": "The Pouch (4215 Baltimore Ave Philadelphia)",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://philly.askapunk.net/event/lackey-la-rearranged-face-la-sappers-and-krot-the-pouch",
+          "category": "🎵 Music & Concerts",
+          "source": "Philly Ask A Punk",
+          "sold_out": false,
+          "note": "Out-of-town hardcore punk bill with locals Sappers and Krot."
+        },
+        {
+          "title": "Sleep: North America 2026",
+          "venue": "Theater of the Living Arts",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/15/sleep-north-america-2026-tickets-eqzbxwd",
+          "category": "🎵 Music & Concerts",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "NEGATIVLAND + Sue-C: Significantly Less Deceptive",
+          "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:30, 8:00",
+          "cost": "$20–$25",
+          "url": "https://www.etix.com/ticket/p/87686068/",
+          "category": "🎵 Music & Concerts",
+          "source": "PhilaMOCA",
+          "sold_out": false,
+          "note": "Rare Philly date for culture-jamming group Negativland; $20–$25."
+        },
+        {
+          "title": "Huge DSA Canvass Launch",
+          "venue": "Columbus Square Park",
+          "time": "11:00 AM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/15/huge-dsa-canvass-launch-tickets",
+          "category": "🤝 Community & Politics",
+          "source": "Do215",
+          "sold_out": false,
+          "note": "DSA Philadelphia chapter canvassing kickoff."
+        },
+        {
+          "title": "In-person! FLATstrap Launch Party",
+          "venue": "The Rotunda, 4014 Walnut St, Philadelphia, PA 19104",
+          "time": "12:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.therotunda.org/event/flatstrap-launch-party",
+          "category": "🎨 Arts & Workshops",
+          "source": "The Rotunda",
+          "sold_out": false
+        },
+        {
+          "title": "Dark Side Presents Swamp A$$: A Drag & Burlesque Tribute to Shrek",
+          "venue": "Franky Bradley's",
+          "time": "8:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/15/dark-side-presents-swamp-a-a-drag-burlesque-tribute-to-shrek-tickets",
+          "category": "🎨 Arts & Workshops",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "Cups of Code: Connecting the Community",
+          "venue": "(online)",
+          "time": "1:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/code-coffee-philly/events/317237650/",
+          "category": "💻 Tech & Maker",
+          "source": "Meetup: Code & Coffee",
+          "sold_out": false
+        },
+        {
+          "title": "Atlantic City Punk Rock Flea Market - Holiday Edition",
+          "venue": "Anchor Rock Club",
+          "time": "12:00 PM",
+          "cost": "Not listed",
+          "url": "https://do215.com/events/2026/11/15/atlantic-city-punk-rock-flea-market-holiday-edition-tickets",
+          "category": "🌿 Markets & Outdoors",
+          "source": "Do215",
+          "sold_out": false
+        },
+        {
+          "title": "THE INKEEPERS (2011)",
+          "venue": "(online)",
+          "time": "7:00 PM",
+          "cost": "Not listed",
+          "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317290387/",
+          "category": "👻 Horror & Occult",
+          "source": "Meetup: Philadelphia Horror",
+          "sold_out": false
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-08T14:44:41"
+}
