@@ -1,0 +1,51 @@
+{
+  "source": "R5 Productions",
+  "collected_at": "2026-11-15T14:54:16.224052+00:00",
+  "events": [
+    {
+      "title": "Mask Lady And Late Night Girl Tour | Marci",
+      "venue": "PhilaMOCA",
+      "date": "2026-11-17",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$22.22",
+      "url": "https://r5productions.com/event/marci/philamoca/philadelphia-pennsylvania/",
+      "description": "Mask Lady And Late Night Girl Tour"
+    },
+    {
+      "title": "WXPN 88.5 Welcomes | Greg Freeman",
+      "venue": "The First Unitarian Church",
+      "date": "2026-11-18",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$30.96",
+      "url": "https://r5productions.com/event/greg-freeman/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": "WXPN 88.5 Welcomes"
+    },
+    {
+      "title": "The Underworld Tour | Sadurn",
+      "venue": "The First Unitarian Church",
+      "date": "2026-11-20",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$25.81",
+      "url": "https://r5productions.com/event/sadurn/the-first-unitarian-church/philadelphia-pennsylvania/",
+      "description": "The Underworld Tour"
+    },
+    {
+      "title": "The Seams Tour | James Ivy",
+      "venue": "Ukie Club",
+      "date": "2026-11-21",
+      "time": "Doors: 7 pm | Show: 8 pm",
+      "cost": "",
+      "url": "https://r5productions.com/event/james-ivy/ukie-club/philadelphia-pennsylvania/",
+      "description": "The Seams Tour"
+    },
+    {
+      "title": "WXPN 88.5 Welcomes | Mary In The Junkyard",
+      "venue": "PhilaMOCA",
+      "date": "2026-11-21",
+      "time": "Doors: 7:30 pm | Show: 8 pm",
+      "cost": "$25.81",
+      "url": "https://r5productions.com/event/mary-in-the-junkyard/philamoca/philadelphia-pennsylvania/",
+      "description": "WXPN 88.5 Welcomes"
+    }
+  ]
+}
