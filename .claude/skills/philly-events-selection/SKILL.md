@@ -181,7 +181,10 @@ Apply `event-selection-philosophy` rules for the day:
    took a slot in **four consecutive reports**. Match on the event, not the series — a new
    instalment (Dekalog Parts 3 & 4 after Parts 1 & 2) is different content and is fine.
 7. Exclude online-only candidates from Top 3 unless genuinely exceptional — still eligible for the
-   day's category listing
+   day's category listing. Only a `venue` of exactly `(online)` means online. `(venue not listed)`
+   means Collection couldn't find a venue (Meetup's feeds carry none, and the event page didn't
+   say either) — it is **unknown, not online**: don't exclude the event for it and never describe it
+   as online in a `note`. Say the location is unconfirmed (`*(confirm details)*`) if you pick it.
 8. Before finalizing a Top 3 pick: search `[event name] Philadelphia [date] postponed` to catch
    cancellations; venue websites are more reliable than aggregators for postponement status
 9. Apply `personal-interests`'s Geography section: for any Top 3 pick outside South Philly, Center

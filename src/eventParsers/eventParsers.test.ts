@@ -23,7 +23,7 @@ import { parse as gcal } from "./gcal.js";
 import { PARSERS } from "./index.js";
 import { parse as lightbox, parseIndex } from "./lightbox.js";
 import { parse as luma } from "./luma.js";
-import { parse as meetup } from "./meetup.js";
+import { parse as meetup, enrichVenues, venueFromEventPage } from "./meetup.js";
 import { parse as pfs } from "./philadelphiaFilmSociety.js";
 import { parse as philamoca } from "./philamoca.js";
 import { parse as askAPunk } from "./phillyAskAPunk.js";
@@ -244,6 +244,33 @@ describe("luma-ical", () => {
     expect(events).toHaveLength(2);
     expect(dates(events)).toEqual(new Set(["2026-07-22", "2026-07-23"]));
   });
+  it("treats a URL LOCATION as online", () => {
+    const ics = read("meetup.ics").replace("LOCATION:PhilaMOCA\\, 531 N 12th St\\, Philadelphia\\, PA 19123", "LOCATION:https://zoom.us/j/1");
+    expect(find(meetup(ics, WEEK_START, WEEK_END), (e) => e.title.includes("Watch Party")).venue).toBe("(online)");
+  });
+  it("reads the venue off an event page", () => {
+    const html = read("meetup_event_page.html");
+    const url = "https://www.meetup.com/code-coffee-philly/events/316048093/";
+    expect(venueFromEventPage(html, url)).toEqual(["Turkish Brew, 1444 N 7th St, Philadelphia, PA 19122", "1444 N 7th St, Philadelphia, PA 19122"]);
+    expect(venueFromEventPage(html, "https://www.meetup.com/g/events/999/")).toEqual(["(online)", ""]);
+    expect(venueFromEventPage(html, "https://www.meetup.com/g/events/1/")).toBeNull();
+    expect(venueFromEventPage("<html></html>", url)).toBeNull();
+  });
+  it("enrichVenues fills unknowns and reports failed fetches", async () => {
+    const page = read("meetup_event_page.html");
+    const ok = "https://www.meetup.com/code-coffee-philly/events/316048093/";
+    const bad = "https://www.meetup.com/code-coffee-philly/events/5/";
+    const events = [
+      { venue: "(venue not listed)", url: ok },
+      { venue: "(venue not listed)", url: bad },
+      { venue: "PhilaMOCA", url: "https://www.meetup.com/x/events/316048093/" },
+    ] as Event[];
+    const failed = await enrichVenues(events, (url) => (url === bad ? Promise.reject(new TypeError("boom")) : Promise.resolve(page)));
+    expect(events[0]).toMatchObject({ venue: "Turkish Brew, 1444 N 7th St, Philadelphia, PA 19122", venue_address: "1444 N 7th St, Philadelphia, PA 19122" });
+    expect(events[1]?.venue).toBe("(venue not listed)");
+    expect(events[2]?.venue).toBe("PhilaMOCA");
+    expect(failed).toEqual([`${bad} (TypeError)`]);
+  });
   it("unescapes iCal commas in LOCATION", () => {
     const happyHour = find(luma(read("luma.ics"), WEEK_START, WEEK_END), (e) => e.title.includes("Happy Hour"));
     expect(happyHour.venue).toBe("Morgan's Pier, 221 N Columbus Blvd, Philadelphia, PA 19106, USA");
@@ -285,8 +312,8 @@ describe("meetup-ical", () => {
     expect(events).toHaveLength(2);
     expect(dates(events)).toEqual(new Set(["2026-07-21", "2026-07-23"]));
   });
-  it("flags a missing LOCATION as online", () => {
-    expect(find(meetup(read("meetup.ics"), WEEK_START, WEEK_END), (e) => e.title.includes("SHARK")).venue).toBe("(online)");
+  it("does not claim a missing LOCATION is online", () => {
+    expect(find(meetup(read("meetup.ics"), WEEK_START, WEEK_END), (e) => e.title.includes("SHARK")).venue).toBe("(venue not listed)");
   });
   it("unescapes iCal commas in LOCATION", () => {
     const party = find(meetup(read("meetup.ics"), WEEK_START, WEEK_END), (e) => e.title.includes("Watch Party"));
