@@ -52,6 +52,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import collect_source
 import common
 from event_parsers import PARSERS, ParseError
+from event_parsers import meetup as meetup_parser
 from fetch_raw import fetch_raw
 
 # (output filename stem, source name, URL, parser key)
@@ -96,6 +97,8 @@ COLLECTOR_SOURCES: list[tuple[str, str, str]] = [
 ]
 
 _MAX_FETCH_CHARS = 200_000
+# A Meetup event page is ~110 KB; truncating it would cut off __NEXT_DATA__.
+_MAX_PAGE_CHARS = 1_000_000
 
 
 def _write_source(out_dir: Path, stem: str, source_name: str, events: list[dict]) -> None:
@@ -125,6 +128,20 @@ def collect_simple(
     events = PARSERS[parser_key](raw, week_start, week_end, **parser_kwargs)
     _write_source(out_dir, stem, source_name, events)
     return len(events)
+
+
+def collect_meetup(
+    out_dir: Path, stem: str, source_name: str, slug: str,
+    week_start: datetime.date, week_end: datetime.date,
+) -> tuple[int, list[str]]:
+    """Meetup's iCal has no LOCATION, so each event's venue is read from its
+    own page (see event_parsers/meetup.py). A page failing leaves that event's
+    venue "(venue not listed)" and is reported as a partial failure."""
+    raw = fetch_raw(f"https://www.meetup.com/{slug}/events/ical/", _MAX_FETCH_CHARS)
+    events = PARSERS["meetup-ical"](raw, week_start, week_end)
+    failed = meetup_parser.enrich_venues(events, lambda url: fetch_raw(url, _MAX_PAGE_CHARS))
+    _write_source(out_dir, stem, source_name, events)
+    return len(events), failed
 
 
 def collect_rotunda(
@@ -241,9 +258,9 @@ def main() -> None:
     for stem, source_name, slug in MEETUP_GROUPS:
         if only and stem not in only:
             continue
-        url = f"https://www.meetup.com/{slug}/events/ical/"
         try:
-            record_ok(stem, collect_simple(out_dir, stem, source_name, url, "meetup-ical", week_start, week_end))
+            count, failed_requests = collect_meetup(out_dir, stem, source_name, slug, week_start, week_end)
+            record_ok(stem, count, partial_failure_note(failed_requests))
         except Exception as exc:  # noqa: BLE001
             record_failed(stem, source_name, exc)
 

@@ -388,10 +388,54 @@ def test_meetup_filters_to_target_week() -> None:
     assert {e["date"] for e in events} == {"2026-07-21", "2026-07-23"}
 
 
-def test_meetup_flags_missing_location_as_online() -> None:
+def test_meetup_missing_location_is_not_claimed_to_be_online() -> None:
+    # Meetup's feeds carry no LOCATION for any event, so empty means unknown.
     events = meetup_parser.parse(_read("meetup.ics"), WEEK_START, WEEK_END)
     shark = next(e for e in events if "SHARK" in e["title"])
-    assert shark["venue"] == "(online)"
+    assert shark["venue"] == "(venue not listed)"
+
+
+def test_meetup_url_location_is_online() -> None:
+    ics = _read("meetup.ics").replace(
+        "LOCATION:PhilaMOCA\\, 531 N 12th St\\, Philadelphia\\, PA 19123", "LOCATION:https://zoom.us/j/1"
+    )
+    events = meetup_parser.parse(ics, WEEK_START, WEEK_END)
+    assert next(e for e in events if "Watch Party" in e["title"])["venue"] == "(online)"
+
+
+def test_meetup_venue_from_event_page() -> None:
+    html = _read("meetup_event_page.html")
+    url = "https://www.meetup.com/code-coffee-philly/events/316048093/"
+    assert meetup_parser.venue_from_event_page(html, url) == (
+        "Turkish Brew, 1444 N 7th St, Philadelphia, PA 19122",
+        "1444 N 7th St, Philadelphia, PA 19122",
+    )
+    assert meetup_parser.venue_from_event_page(html, "https://www.meetup.com/g/events/999/") == ("(online)", "")
+    assert meetup_parser.venue_from_event_page(html, "https://www.meetup.com/g/events/1/") is None
+    assert meetup_parser.venue_from_event_page("<html></html>", url) is None
+
+
+def test_meetup_enrich_venues_fills_unknowns_and_reports_failures() -> None:
+    page = _read("meetup_event_page.html")
+    ok = "https://www.meetup.com/code-coffee-philly/events/316048093/"
+    bad = "https://www.meetup.com/code-coffee-philly/events/5/"
+    events = [
+        {"venue": "(venue not listed)", "url": ok},
+        {"venue": "(venue not listed)", "url": bad},
+        {"venue": "PhilaMOCA", "url": "https://www.meetup.com/x/events/316048093/"},
+    ]
+
+    def fetch(url: str) -> str:
+        if url == bad:
+            raise OSError("boom")
+        return page
+
+    failed = meetup_parser.enrich_venues(events, fetch)
+    assert events[0]["venue"] == "Turkish Brew, 1444 N 7th St, Philadelphia, PA 19122"
+    assert events[0]["venue_address"] == "1444 N 7th St, Philadelphia, PA 19122"
+    assert events[1]["venue"] == "(venue not listed)"
+    assert events[2]["venue"] == "PhilaMOCA"
+    assert failed == [f"{bad} (OSError)"]
 
 
 def test_meetup_unescapes_ical_commas_in_location() -> None:

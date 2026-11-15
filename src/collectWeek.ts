@@ -64,6 +64,7 @@ import { parseArgs } from "node:util";
 import { COLLECTORS, type Collected, addDays, utcTimestamp } from "./collectSource.js";
 import { DATA_DIR, targetWeekMonday } from "./common.js";
 import { type Event, PARSERS, skippedRecords } from "./eventParsers/index.js";
+import { enrichVenues } from "./eventParsers/meetup.js";
 import { errorMessage, get, readText } from "./lib/http.js";
 import { writeJsonAsciiEscaped } from "./lib/json.js";
 
@@ -94,6 +95,22 @@ function simple(stem: string, name: string, url: string, parserKey: string): Sou
     stem,
     name,
     collect: async (weekStart, weekEnd) => ({ events: PARSERS[parserKey]!(await fetchBody(url), weekStart, weekEnd), failed: [] }),
+  };
+}
+
+/**
+ * Meetup's iCal has no LOCATION, so each event's venue is read from its own
+ * page (see eventParsers/meetup.ts). A page failing leaves that event's venue
+ * "(venue not listed)" and is reported as a partial failure.
+ */
+function meetupGroup(stem: string, name: string, slug: string): Source {
+  return {
+    stem,
+    name,
+    collect: async (weekStart, weekEnd): Promise<Collected> => {
+      const events = PARSERS["meetup-ical"]!(await fetchBody(`https://www.meetup.com/${slug}/events/ical/`), weekStart, weekEnd);
+      return { events, failed: await enrichVenues(events, fetchBody) };
+    },
   };
 }
 
@@ -144,7 +161,7 @@ export const SOURCES: readonly Source[] = [
   simple("phillygoth", "Phillygoth.net", "https://phillygoth.net/", "phillygoth"),
   simple("philly-shows", "Philly-Shows.com", "https://www.philly-shows.com/", "philly-shows"),
   rotunda,
-  ...MEETUP_GROUPS.map(([stem, name, slug]) => simple(stem, name, `https://www.meetup.com/${slug}/events/ical/`, "meetup-ical")),
+  ...MEETUP_GROUPS.map(([stem, name, slug]) => meetupGroup(stem, name, slug)),
   collector("do215", "Do215", "do215"),
   collector("wxpn", "WXPN", "wxpn"),
   collector("lightbox-film-center", "Lightbox Film Center", "lightbox-film-center"),
