@@ -1,0 +1,1241 @@
+{
+  "week": "2026-11-16",
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-11-16",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0008",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "A four-band underground bill — Humidifier, Knotfall, Granite01, and AMC Radio — at Nikki Lopez, the DIY house venue that's become one of South Philly's steadiest outlets for bands too small or too new for the bigger rooms. There's no marketing push behind this one; it's the kind of night you'd only catch by already being plugged into the scene."
+        },
+        {
+          "id": "c0009",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "847 N Franklin St, Philadelphia, PA 19123",
+          "why": "Dan Campbell — better known as the frontman of The Wonder Years, by general knowledge rather than this listing's own description — plays the third night of a short Philly stand at Ukie Club, the scrappy all-ages Northern Liberties DIY space. Catching night three of a limited run is the kind of thing you only get if you're paying attention. Northern Liberties; nearest stop is the Market-Frankford Line's Girard station, about a half-mile walk."
+        },
+        {
+          "id": "c0001",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1026 Spring Garden St, Philadelphia, PA 19123",
+          "why": "Die Spitz, the noise-punk outfit drawing real buzz for their feral live sets (general knowledge, not stated in this listing), play Union Transfer with Faetooth opening (per WXPN's listing for the same show). Spring Garden; nearest stop is the Broad Street Line's Spring Garden station, a few blocks east."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0013"
+        },
+        {
+          "id": "c0534"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0008",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0009",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0001",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0013",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Historian/journalist known for her writing on authoritarianism, including Twilight of Democracy and Autocracy, Inc. (general knowledge, not stated in this listing)."
+        },
+        {
+          "id": "c0534",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Volunteer seed-packing party ahead of the 2027 Philly Native Plant Project, which distributed 15,000 native seed packets citywide last year; beer and pretzels provided (per listing)."
+        },
+        {
+          "id": "c0002",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0006",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "With Hooky, ABBATIA, and Precious Little Life opening (per WXPN's listing for the same show)."
+        },
+        {
+          "id": "c0010",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0021",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0024",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0025",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Weekly protest/call-in action pressuring Sen. Dave McCormick; recurring every Monday."
+        },
+        {
+          "id": "c0026",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0027",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0028",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0030",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0036",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Discussion group on Ursula K. Le Guin's The Dispossessed; appears to be an ongoing numbered session rather than a one-off."
+        },
+        {
+          "id": "c0037",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Weekly open jam session hosted by Richard Hill Jr. and friends."
+        },
+        {
+          "id": "c0526",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Recurring (1st & 3rd Monday) social hangout for trans and non-binary people and allies, with snacks and coffee, at Iffy Books."
+        },
+        {
+          "id": "c0569",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Monthly psychotronic/cult film screening at PhilaMOCA; $5 at the door."
+        },
+        {
+          "id": "c0590",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Recurring ballroom/vogue commentating class at The Rotunda."
+        },
+        {
+          "id": "c0605",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0598",
+          "rank": 1,
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "why": "Meg Berkobien and Maria Cristina Hall present their translation of Montserrat Roig's Goodbye, Ramona, a 'rediscovered classic' (per the listing) following three generations of women named Ramona through radical twentieth-century Barcelona. It's the kind of translator-led literary event Wooden Shoe Books' line consistently makes room for."
+        },
+        {
+          "id": "c0591",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "4014 Walnut St, Philadelphia, PA 19104",
+          "why": "A free-improvisation set from musicians who've played in Cecil Taylor's NYC Tribe — about as direct a line to Taylor's free-jazz legacy as Philly gets. The Rotunda runs this kind of one-off experimental night constantly, distinct from its two standing weekly series (the Wednesday jam and Tuesday vogue practice)."
+        },
+        {
+          "id": "c0054",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "why": "Girl Tones and JT Loux play Nikki Lopez, tagged straightforwardly as a punk show by the listing itself, with no further lineup detail confirmed. South Street, a short walk from Point Breeze."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0535"
+        },
+        {
+          "id": "c0536"
+        },
+        {
+          "id": "c0094"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0598",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0591",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0054",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0535",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Monthly Philly meetup for Cursor (AI coding tool) users; this month runs a Think-Pair-Share format instead of talks."
+        },
+        {
+          "id": "c0536",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Recurring BYO-craft hangout at a Black-woman-owned space."
+        },
+        {
+          "id": "c0094",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Viewing party for The Boulet Brothers' Dragula Season 7, the drag/horror reality competition."
+        },
+        {
+          "id": "c0043",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0044",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "With Raye Zaragoza opening (per WXPN's listing for the same show)."
+        },
+        {
+          "id": "c0047",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "With Kuru and Olswel opening (per WXPN's listing for the same show)."
+        },
+        {
+          "id": "c0053",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "With Grace Gardner opening (per WXPN's listing for the same show)."
+        },
+        {
+          "id": "c0055",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0057",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Free improvisation set led by Blacksberg, Sullivan, Foster, and Szekely."
+        },
+        {
+          "id": "c0061",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0066",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0078",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0079",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Discussion of Janette Sadik-Khan's Streetfight, on NYC's street-redesign fights (general knowledge of the book, not stated in this listing)."
+        },
+        {
+          "id": "c0081",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0082",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Evening moonwalk and stargazing session in Fairmount Park."
+        },
+        {
+          "id": "c0083",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Free legal clinic on tenant rights."
+        },
+        {
+          "id": "c0085",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Social meetup for new Democratic Socialists of America members."
+        },
+        {
+          "id": "c0086",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Conor McPherson's ghost-story play, set in a rural Irish pub (general knowledge of the play, not stated in this listing)."
+        },
+        {
+          "id": "c0089",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0092",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Likely Hitchcock's 1940 wartime thriller of the same name (general knowledge, not confirmed in this listing)."
+        },
+        {
+          "id": "c0101",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0527",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Recurring silent co-working writing session in three 40-minute units, with breaks."
+        },
+        {
+          "id": "c0550",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online horror/sci-fi meetup screening; 2009 slow-burn babysitter horror film."
+        },
+        {
+          "id": "c0585",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "R5 Productions show, 'Mask Lady And Late Night Girl' tour."
+        },
+        {
+          "id": "c0612",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Drummer of The Police, playing a solo date (general knowledge, not stated in this listing)."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0599",
+          "rank": 1,
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "why": "Journalist and translator John Washington presents How to Close a Camp, a 'galvanizing, clear-eyed case' (per the listing) for dismantling the immigrant detention system, drawing on strategies from communities that have already shut camps down and won. Wooden Shoe Books' event line consistently pairs literature with direct political stakes, and this is as direct as it gets."
+        },
+        {
+          "id": "c0573",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1201 N Frankford Ave, Philadelphia, PA 19125",
+          "why": "DeSTRUCTOS celebrate the release of Say Past Fiery Star with Carnivorous Bells and Mesh opening — tagged by the promoter across the full spread of hardcore, noise rock, and post-punk, so this bill doesn't hedge on genre. An LP release show is a one-off by nature, not a standing night. Fishtown; nearest stop is the Market-Frankford Line's Girard station, about a quarter-mile."
+        },
+        {
+          "id": "c0156",
+          "rank": 3,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "address": "1901 S 9th St, Philadelphia, PA 19148",
+          "why": "A rare archival program of DEVO's own film and video work from 1976–1984 — the band that turned new wave into a visual-art project as much as a music one — screening at Bok Building's arts space. This is about as far from a standard reunion-tour cash-in as a legacy act's programming gets: a curated look at the work itself, not a concert."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0586"
+        },
+        {
+          "id": "c0107"
+        },
+        {
+          "id": "c0110"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0599",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0573",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0156",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0586",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "With Robber Robber opening (per WXPN's listing for the same show); WXPN-presented indie rock show at First Unitarian Church."
+        },
+        {
+          "id": "c0107",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The War and Treaty, a Grammy-nominated gospel-soul-Americana duo (general knowledge, not stated in this listing); a legacy act at a real room rather than an archival night."
+        },
+        {
+          "id": "c0110",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Jazz-funk one-off pairing Eddie Roberts (The New Mastersounds), Robert Walter (Greyboy Allstars), and Stanton Moore (Galactic) — general knowledge of these musicians, not stated in this listing. Ardmore, Main Line suburbs."
+        },
+        {
+          "id": "c0117",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Phoebe Judge, host of the true-crime podcast Criminal, performing live storytelling (general knowledge, not stated in this listing)."
+        },
+        {
+          "id": "c0127",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Doom/sludge metal bill — In The Company of Serpents, Omit All, and SLUDGE — tagged Metal by the listing."
+        },
+        {
+          "id": "c0128",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0130",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0135",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false
+        },
+        {
+          "id": "c0146",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0147",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Preview celebration for the new 'Land of the Free' exhibit at Eastern State Penitentiary."
+        },
+        {
+          "id": "c0152",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0153",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "DSA chapter discussion on navigating political differences within the organization."
+        },
+        {
+          "id": "c0564",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0570",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0592",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Rotunda's standing weekly improvised-music drop-in jam (Wednesdays) — a deprioritized recurring series per house rules, not a one-off."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-19",
+      "day_name": "Thursday",
+      "top3": [
+        {
+          "id": "c0574",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "5001 Market St, Philadelphia, PA 19139",
+          "why": "LA noise-punk outfit Period Bomb headline a five-band DIY bill — with Uncle Blender, The Playful Bunch, Good Pollution, and Stiff Curls — tagged straight down the line as noise punk, DIY, experimental, and noise rock. Cousin Danny's is a West Philly house-show space that rarely makes it onto anyone's radar outside the scene itself. West Philly; nearest stop is the Market-Frankford Line's 46th or 52nd Street station, each about a quarter-mile."
+        },
+        {
+          "id": "c0195",
+          "rank": 2,
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "8:00 PM",
+          "why": "Filmmaker Bruce Grossman and the film's subject, Niki Brisco, appear in person for this PhilaMOCA screening of The Pink Velvet Witch — the kind of director-and-subject Q&A that's genuinely hard to catch outside a festival run. Doors 7:30, show at 8."
+        },
+        {
+          "id": "c0206",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1131 S Broad St, Philadelphia, PA 19147",
+          "why": "Adam O'Farrill — one of the sharpest young trumpeters working in the AACM/free-jazz lineage (general knowledge, not stated in this listing) — brings his ELEPHANT project to Solar Myth, South Philly's serious listening room for exactly this kind of jazz."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0593"
+        },
+        {
+          "id": "c0245"
+        },
+        {
+          "id": "c0531"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0574",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0195",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0206",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0593",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "Local filmmakers share works-in-progress; one-off showcase distinct from The Rotunda's standing weekly jam/vogue sessions."
+        },
+        {
+          "id": "c0245",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Bob Lanzetti, guitarist of Snarky Puppy (general knowledge, not stated in this listing), plays a solo/side date."
+        },
+        {
+          "id": "c0531",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "No-instructor, peer-taught tech meetup — 'fuck around and figure it out' — for beginners, at Iffy Books."
+        },
+        {
+          "id": "c0166",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "With Threshold opening (per WXPN's listing for the same show)."
+        },
+        {
+          "id": "c0168",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Tagged Punk by the listing."
+        },
+        {
+          "id": "c0175",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "A theatrical/musical tribute built from Andrea Gibson's poetry, the queer spoken-word poet (general knowledge, not confirmed by this listing); Keswick Theatre is in Glenside, just outside Philadelphia on Regional Rail."
+        },
+        {
+          "id": "c0179",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Maze featuring Frankie Beverly's touring band, the soul/funk legacy act, continuing under the Maze name (general knowledge, not stated in this listing)."
+        },
+        {
+          "id": "c0181",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0192",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0199",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0203",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0207",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Grammy-nominated gospel group (general knowledge, not stated in this listing)."
+        },
+        {
+          "id": "c0214",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false
+        },
+        {
+          "id": "c0217",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0220",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0221",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0225",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Historian Lila Corwin Berman on the history of American Jewish citizenship and its limits."
+        },
+        {
+          "id": "c0226",
+          "category": "📚 Literary",
+          "sold_out": true,
+          "note": "Talk on Herman Melville's legacy and Moby-Dick (sold out)."
+        },
+        {
+          "id": "c0230",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Craft workshop centered on Lenape (Indigenous) culture and traditions."
+        },
+        {
+          "id": "c0247",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Drag show at Bob & Barbara's Lounge, a longtime South Philly queer-friendly dive bar (general knowledge, not confirmed by this listing)."
+        },
+        {
+          "id": "c0248",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0250",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0530",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Beginner soldering workshop; part of Iffy Books' recurring soldering-class series under different topics each week."
+        },
+        {
+          "id": "c0551",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online horror/sci-fi meetup screening; body-snatcher romance."
+        },
+        {
+          "id": "c0554",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Online talk on governance/security risks of autonomous AI agents."
+        },
+        {
+          "id": "c0578",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Goth/industrial/darkwave DJ night with DJs Zero & Batty Nox; recurring monthly series, in Wilmington, DE."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-20",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0340",
+          "rank": 1,
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "address": "258 E Girard Ave, Philadelphia, PA 19125",
+          "why": "Elizabeth Acevedo — a National Book Award winner (general knowledge, not stated in this listing) — launches her new book, Anger Is Only a Shadow, at Harriett's Bookshop, the Fishtown shop built around literature with an explicit political mission. Fishtown; nearest stop is the Market-Frankford Line's Girard station, a couple of blocks away."
+        },
+        {
+          "id": "c0344",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "9201 Germantown Ave, Philadelphia, PA 19118",
+          "why": "An evening with the Lenape Nation of Pennsylvania at Woodmere — a direct platform for Indigenous history and resistance in a region still named for a confederacy whose own descendants rarely get the mic in a mainstream museum setting. Chestnut Hill; reachable via Regional Rail's Chestnut Hill West line or the 23 bus."
+        },
+        {
+          "id": "c0310",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:30 PM",
+          "why": "Rachel Lichtman's long-running PhilaMOCA series PROGRAMME returns with Ted Leo (of Ted Leo and the Pharmacists — general knowledge, not stated in this listing), Perry Shall, and Joe McGinty on Rhodes piano. This series' guest lists tend toward exactly this kind of unpredictable, genre-blurring night."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0274"
+        },
+        {
+          "id": "c0594"
+        },
+        {
+          "id": "c0295"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0340",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0344",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0310",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0274",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Underworld Tour, with Kitchen and hemlock opening (per R5 Productions' billing for the same show)."
+        },
+        {
+          "id": "c0594",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Bowerbird presents a revisiting of Cornelius Cardew's Treatise, the landmark graphic score, performed by Arcana New Music Ensemble (general knowledge of the piece, not stated in this listing)."
+        },
+        {
+          "id": "c0295",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Anti-billionaire-themed burlesque night, tagged as a charity/benefit event (per listing)."
+        },
+        {
+          "id": "c0549",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Annual hacker-culture birthday-party convention, free to attend (per listing); venue listed as online but the description describes it as held in Philadelphia — confirm location before attending. *(confirm details)*"
+        },
+        {
+          "id": "c0600",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Monthly Third Friday lock-picking night at Wooden Shoe Books."
+        },
+        {
+          "id": "c0346",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0267",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false,
+          "note": "German-language film screening at the German Society of Pennsylvania, part of their regular film series."
+        },
+        {
+          "id": "c0286",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Benefit show for Fire Museum Presents, a local DIY promoter, with Circuit Cult, M.E., and Coyos."
+        },
+        {
+          "id": "c0268",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Single release show; tagged Indie & Alternative, Punk, Rock."
+        },
+        {
+          "id": "c0272",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0255",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "With Hot Water Music and Weakened Friends (per WXPN's billing for the same show); Philly's own Menzingers headlining their hometown stop."
+        },
+        {
+          "id": "c0280",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0307",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Resavoir, a Chicago jazz/soul collective (general knowledge, not stated in this listing), with Declan opening."
+        },
+        {
+          "id": "c0335",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Avant-garde jazz program, part of Woodmere's concert series."
+        },
+        {
+          "id": "c0343",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0333",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Tarot-reading happy hour."
+        },
+        {
+          "id": "c0334",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0345",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false
+        },
+        {
+          "id": "c0579",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Goth/industrial dance party; DJs Baby Berlin & Brad Scott."
+        },
+        {
+          "id": "c0580",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Goth/industrial night; DJs Mighty Mike Saga, Panzermensch, and Jackpot."
+        },
+        {
+          "id": "c0353",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0256",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0283",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0312",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Tribute show honoring the late Jeff Cannonball (local musician, per title; not otherwise described in this listing)."
+        },
+        {
+          "id": "c0656",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0601",
+          "rank": 1,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "704 South St, Philadelphia, PA 19147",
+          "why": "The Philly Tenants Union runs an interactive training on tenants' rights and what to actually do facing eviction — direct, usable knowledge rather than a lecture about the housing crisis in the abstract. It's squarely the kind of political-education event Wooden Shoe Books exists to host."
+        },
+        {
+          "id": "c0432",
+          "rank": 2,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "101 S 3rd St, Philadelphia, PA 19106",
+          "why": "Hartman Deetz — a Mashpee Wampanoag activist and artist (general knowledge, not stated in this listing) — speaks as part of the museum's 'Meet the Revolution' series, putting Indigenous perspective directly into a museum built around the Revolution's own founding mythology. Old City, an easy walk from Center City."
+        },
+        {
+          "id": "c0575",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "5001 Market St, Philadelphia, PA 19139",
+          "why": "An out-of-town headliner (Power Pants, from Virginia) plus three more power-pop and punk acts — Civic Mimic, Civil Rats, and TTLC — tagged straight down the line as power pop and punk, at the same West Philly DIY house space that hosted Thursday's noise-punk bill. West Philly; nearest stop is the Market-Frankford Line's 46th or 52nd Street station."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0457"
+        },
+        {
+          "id": "c0596"
+        },
+        {
+          "id": "c0589"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0601",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0432",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0575",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0457",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Benefit show organized by Philly Socialists (per title); tagged Charity & Activism."
+        },
+        {
+          "id": "c0596",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "The Veldt, a longtime Black shoegaze/dream-pop duo (general knowledge, not stated in this listing), with Noun and Sun Within opening."
+        },
+        {
+          "id": "c0589",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "WXPN-presented dream-pop/shoegaze show at PhilaMOCA; doors 7:30, show at 8."
+        },
+        {
+          "id": "c0547",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Weekly hands-on Claude Code coding meetup."
+        },
+        {
+          "id": "c0552",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Online double feature: Autopsy of Jane Doe (2016) and Marquis (1989)."
+        },
+        {
+          "id": "c0582",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Goth/darkwave DJ night at Nikki Lopez."
+        },
+        {
+          "id": "c0422",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Vendor market centering Black-owned businesses (per title)."
+        },
+        {
+          "id": "c0423",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false
+        },
+        {
+          "id": "c0431",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Diaspora-focused summit and holiday market (per title)."
+        },
+        {
+          "id": "c0446",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": false,
+          "note": "Emo-themed drag brunch."
+        },
+        {
+          "id": "c0455",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false
+        },
+        {
+          "id": "c0466",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Tribute to Antonio Carlos Jobim's songbook (general knowledge of the composer, not stated in this listing)."
+        },
+        {
+          "id": "c0401",
+          "category": "🤝 Community & Politics",
+          "sold_out": false
+        },
+        {
+          "id": "c0408",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Jen Shyu, MacArthur Fellow vocalist/composer known for genre-crossing avant-garde work (general knowledge, not stated in this listing)."
+        },
+        {
+          "id": "c0363",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0377",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0385",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0395",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0409",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0424",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false
+        },
+        {
+          "id": "c0447",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0541",
+          "category": "🤝 Community & Politics",
+          "sold_out": false,
+          "note": "Beginner self-defense workshop for FLINTA (Women, Lesbians, Intersex, Non-Binary, Trans, and Agender) folks; donation-based."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0572",
+          "rank": 1,
+          "category": "🎬 Film & Cinema",
+          "is_music": true,
+          "sold_out": false,
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "time": "7:00 PM",
+          "why": "A punk film premiere plus a live bill — Attack Dog, Nysa, and Disaster Artist — at PhilaMOCA, tagged simply as 'Film Screening / Philadelphia / punk' by the DIY show-listing site that caught it (per Philly Ask A Punk's listing for the same show). This is a hyperlocal one-off, not a studio release, and PhilaMOCA is exactly the room built for that."
+        },
+        {
+          "id": "c0576",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "5001 Market St, Philadelphia, PA 19139",
+          "why": "A five-band DIY bill at Cousin Danny's — ARCON visiting from Indiana, The Icks from Florida, plus locals Acid Test, Military School, and Peaceful Ezy Feeling — the same West Philly house-show space that's hosted two other under-the-radar punk bills already this week. West Philly; nearest stop is the Market-Frankford Line's 46th or 52nd Street station."
+        },
+        {
+          "id": "c0553",
+          "rank": 3,
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Exhumed Films — Philly's own 16mm repertory-horror crew (general knowledge, not stated in this listing) — projects four original 16mm broadcast prints of vintage made-for-TV horror at the Colonial Theatre in Phoenixville, about 28 miles west of Philadelphia. The lineup is kept a surprise, which is the point: this is about the format, real broadcast film prints rather than digital transfers, as much as the content."
+        }
+      ],
+      "honorable_mentions": [
+        {
+          "id": "c0597"
+        },
+        {
+          "id": "c0499"
+        },
+        {
+          "id": "c0525"
+        }
+      ],
+      "annotations": [
+        {
+          "id": "c0572",
+          "category": "🎬 Film & Cinema",
+          "sold_out": false
+        },
+        {
+          "id": "c0576",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0553",
+          "category": "👻 Horror & Occult",
+          "sold_out": false
+        },
+        {
+          "id": "c0597",
+          "category": "📚 Literary",
+          "sold_out": false,
+          "note": "Annual storytelling showcase from the Patchwork Storytelling Guild; this year's theme is 'Foundations — Stories That Made Us.'"
+        },
+        {
+          "id": "c0499",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Record release show for Spatial Recognition, doubling as a benefit for Fire Museum Presents, a local DIY promoter."
+        },
+        {
+          "id": "c0525",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Album release concert for Threshold (per title); no further details confirmed by this listing."
+        },
+        {
+          "id": "c0476",
+          "category": "🎨 Arts & Workshops",
+          "sold_out": true,
+          "note": "Tattoo flash day pairing tattoo artists with the Mutter Museum's medical-history collection (sold out)."
+        },
+        {
+          "id": "c0477",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false
+        },
+        {
+          "id": "c0501",
+          "category": "🌿 Markets & Outdoors",
+          "sold_out": false,
+          "note": "Latino community market at FDR Park."
+        },
+        {
+          "id": "c0478",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Death metal/grindcore bill."
+        },
+        {
+          "id": "c0497",
+          "category": "👻 Horror & Occult",
+          "sold_out": false,
+          "note": "Burlesque show themed around David Cronenberg and David Lynch's films."
+        },
+        {
+          "id": "c0533",
+          "category": "💻 Tech & Maker",
+          "sold_out": false,
+          "note": "Build a pocket digital notebook from an ESP32-S3 microcontroller, OLED display, and microSD reader; no soldering required."
+        },
+        {
+          "id": "c0513",
+          "category": "📚 Literary",
+          "sold_out": false
+        },
+        {
+          "id": "c0520",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false,
+          "note": "Louis Cato, bandleader of The Late Show with Stephen Colbert's house band (general knowledge, not stated in this listing)."
+        },
+        {
+          "id": "c0498",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0486",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        },
+        {
+          "id": "c0516",
+          "category": "🎵 Music & Concerts",
+          "sold_out": false
+        }
+      ]
+    }
+  ]
+}
