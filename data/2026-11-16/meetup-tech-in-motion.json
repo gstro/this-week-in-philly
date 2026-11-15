@@ -1,0 +1,15 @@
+{
+  "source": "Meetup: Tech in Motion",
+  "collected_at": "2026-11-15T14:54:21.893094+00:00",
+  "events": [
+    {
+      "title": "The Agentic AI Risk Gap: From Autonomy to Accountability",
+      "venue": "(online)",
+      "date": "2026-11-19",
+      "time": "1:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/techinmotionphilly/events/317166656/",
+      "description": "Tech in Motion: Philadelphia\n[Register here to receive your access link!](https://ctrly.io/Jhhfv )\n\nAI agents are moving beyond answering questions to writing code, accessing enterprise data, connecting to business tools, and executing workflows autonomously. While these capabilities can unlock significant productivity gains, they also introduce new security, governance, and accountability challenges.\n\n**How can teams give AI agents the freedom to work effectively while ensuring they operate within the right boundaries?** From managing permissions and mitigating prompt injection risks to establishing human oversight, building trust in autonomous systems requires the right safeguards.\n\nJoin technology, AI, and security leaders for a practical discussion on deploying and scaling agentic AI responsibly. We'll explore emerging risks, proven safeguards, and strategies for balancing innovation with security and accountability.\n\n**What You'll Learn**\n\n* Emerging risks in agentic AI, including prompt injection, unintended actions, and data access concerns.\n* Establishing permissions, guardrails, and human oversight for autonomous systems.\n* Security best practices, including least-privilege access, monitoring, and auditability.\n* Strategies for scaling agentic AI while balancing innovation, governance, and accountability."
+    }
+  ]
+}

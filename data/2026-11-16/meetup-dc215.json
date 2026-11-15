@@ -1,0 +1,24 @@
+{
+  "source": "Meetup: DC 215",
+  "collected_at": "2026-11-15T14:54:22.155869+00:00",
+  "events": [
+    {
+      "title": "Third Friday Lockpicking Workshop",
+      "venue": "(online)",
+      "date": "2026-11-20",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/317007934/",
+      "description": "DC215\nCome join us for our monthly Third Friday Lockpicking Workshop at Wooden Shoe Books! Whether you're a novice who just stumbled upon LockpickingLawyer, a seasoned safecracker, or somewhere in between, come join us for a evening of fun as we pop some locks!"
+    },
+    {
+      "title": "CURTISCON",
+      "venue": "(online)",
+      "date": "2026-11-20",
+      "time": "6:00 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/dc_215/events/317080834/",
+      "description": "DC215\nCurtisCon is an annual combination birthday party and hacker \"convention\" held in Philadelphia, PA to celebrate the music and ephemera of hacker culture and the fact that Curtis hasn't died yet. CurtisCon is (and will hopefully always remain) a free convention for hackers. If you would like to support the event, help buy more beer, or help support the artists performing at the event, please see the merch section.\n\nhttps://www.curtiscon.org/"
+    }
+  ]
+}

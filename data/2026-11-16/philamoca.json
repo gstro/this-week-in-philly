@@ -1,0 +1,69 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-11-15T14:54:18.858574+00:00",
+  "events": [
+    {
+      "title": "Philadelphia Psychotronic Film Society",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-16",
+      "time": "7:00, 7:30",
+      "cost": "$5 At Door",
+      "url": "https://psychotronicphilly.org/",
+      "description": "Warning: Psychotronic films may contain extreme subject matter, attend at your own risk."
+    },
+    {
+      "title": "Marci",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-17",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/94797403",
+      "description": ""
+    },
+    {
+      "title": "The Spirit of the People",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-18",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/55074803/",
+      "description": ""
+    },
+    {
+      "title": "THE PINK VELVET WITCH",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-19",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/48254749/",
+      "description": "Filmmaker Bruce Grossman and subject Niki Brisco in attendance!"
+    },
+    {
+      "title": "PROGRAMME 4",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-20",
+      "time": "7:00, 7:30",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/40460745/",
+      "description": "With guests Ted Leo, Perry Shall, Joe McGinty on the Rhodes piano, and Programme 4 creator Rachel Lichtman!"
+    },
+    {
+      "title": "Mary in the Junkyard",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-21",
+      "time": "7:30, 8:00",
+      "cost": "",
+      "url": "https://www.etix.com/ticket/p/63726119",
+      "description": ""
+    },
+    {
+      "title": "\u201cDave and Larry\u201d",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-22",
+      "time": "7:00, 7:30",
+      "cost": "$15",
+      "url": "https://www.etix.com/ticket/p/78196728/",
+      "description": ""
+    }
+  ]
+}
