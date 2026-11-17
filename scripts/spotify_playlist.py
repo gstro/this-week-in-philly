@@ -80,6 +80,9 @@ _MARKET = "US"
 # giving up on finding enough tracks. Plenty for --tracks-per-artist's
 # default of 3 -- most artists fill that from their single latest release.
 _ALBUMS_TO_CONSIDER = 10
+# Tracks fetched per album before filtering to the artist's own credits -- the
+# API maximum, so a credited track late in a long album isn't cut off by `limit`.
+_ALBUM_TRACKS_FETCH = 50
 
 DEFAULT_MAX_ARTISTS = 50
 
@@ -167,6 +170,13 @@ def track_uris_for_artist(sp: spotipy.Spotify, artist_id: str, limit: int) -> li
     reason to hand-parse partial ISO dates none of this project's other code
     has needed to.
 
+    Only tracks that credit `artist_id` are kept. A single or album can carry
+    tracks by other artists (2026-11-16: Knotfall's single "Shadowmap" is
+    track-credited to PS2 alone, who then appeared on the playlist without
+    being on the report). A track with no `artists` data at all is kept
+    rather than dropped, so a changed response shape degrades to the old
+    behaviour instead of an empty playlist.
+
     An artist with zero albums/singles simply yields [] -- a normal outcome
     (handled by the caller topping up from other artists), not an error.
     Genuine API failures (auth, rate limit, a now-deprecated endpoint -- see
@@ -184,8 +194,11 @@ def track_uris_for_artist(sp: spotipy.Spotify, artist_id: str, limit: int) -> li
     for album in ordered:
         if len(uris) >= limit:
             break
-        tracks = sp.album_tracks(album["id"], market=_MARKET, limit=limit)
+        tracks = sp.album_tracks(album["id"], market=_MARKET, limit=_ALBUM_TRACKS_FETCH)
         for track in tracks["items"]:
+            credits = track.get("artists")
+            if credits and not any(c.get("id") == artist_id for c in credits):
+                continue
             if track["uri"] not in seen:
                 seen.add(track["uri"])
                 uris.append(track["uri"])

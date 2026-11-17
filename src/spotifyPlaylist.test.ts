@@ -51,7 +51,7 @@ class FakeSpotify implements SpotifyUserApi {
       userId?: string;
       playlists?: Playlist[];
       albumsByArtist?: Record<string, Array<{ id: string; release_date: string }>>;
-      tracksByAlbum?: Record<string, Array<{ uri: string }>>;
+      tracksByAlbum?: Record<string, Array<{ uri: string; artists?: Array<{ id: string }> }>>;
       failArtist?: { id: string; error: Error };
     } = {},
   ) {}
@@ -210,12 +210,26 @@ describe("trackUrisForArtist", () => {
     expect(await trackUrisForArtist(reversed, "aaa", 2)).toEqual(["uri:new1", "uri:new2"]);
   });
 
-  it("asks for albums and singles in the US market, and for at most `limit` tracks per album", async () => {
+  it("skips tracks that do not credit the artist", async () => {
+    const api = new FakeSpotify({
+      albumsByArtist: { knotfall: [album("single", "2026-10-23")] },
+      tracksByAlbum: {
+        single: [
+          { uri: "uri:ps2", artists: [{ id: "ps2" }] },
+          { uri: "uri:own", artists: [{ id: "knotfall" }] },
+          { uri: "uri:collab", artists: [{ id: "x" }, { id: "knotfall" }] },
+        ],
+      },
+    });
+    expect(await trackUrisForArtist(api, "knotfall", 3)).toEqual(["uri:own", "uri:collab"]);
+  });
+
+  it("asks for albums and singles in the US market, and for the most tracks per album so credit filtering can't starve the limit", async () => {
     const api = new FakeSpotify({ albumsByArtist: { aaa: [album("a", "2026-01-01")] }, tracksByAlbum: { a: [track("uri:0")] } });
     await trackUrisForArtist(api, "aaa", 3);
     expect(api.calls).toEqual([
       { method: "GET", path: "/artists/aaa/albums", query: { include_groups: "album,single", country: "US", limit: "10" } },
-      { method: "GET", path: "/albums/a/tracks", query: { market: "US", limit: "3" } },
+      { method: "GET", path: "/albums/a/tracks", query: { market: "US", limit: "50" } },
     ]);
   });
 

@@ -326,6 +326,22 @@ def test_track_uris_for_artist_returns_empty_for_an_artist_with_no_albums() -> N
     assert sp_mod.track_uris_for_artist(sp, "no-releases", 3) == []
 
 
+def test_track_uris_for_artist_skips_tracks_that_do_not_credit_the_artist() -> None:
+    """2026-11-16: Knotfall's single "Shadowmap" is track-credited to PS2
+    alone; PS2 landed on the playlist without being on the report."""
+    sp = FakeSpotify(
+        albums_by_artist={"knotfall": [_album("single", "2026-10-23")]},
+        tracks_by_album={
+            "single": [
+                {"uri": "uri:ps2", "artists": [{"id": "ps2"}]},
+                {"uri": "uri:own", "artists": [{"id": "knotfall"}]},
+                {"uri": "uri:collab", "artists": [{"id": "x"}, {"id": "knotfall"}]},
+            ]
+        },
+    )
+    assert sp_mod.track_uris_for_artist(sp, "knotfall", 3) == ["uri:own", "uri:collab"]
+
+
 def test_track_uris_for_artist_stops_once_the_limit_is_reached() -> None:
     sp = FakeSpotify(
         albums_by_artist={"aaa": [_album("a", "2026-01-01")]},

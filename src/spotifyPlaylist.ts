@@ -86,6 +86,9 @@ const MARKET = "US";
 // giving up on finding enough tracks. Plenty for the default of 3 tracks per
 // artist: most fill that from their single latest release.
 const ALBUMS_TO_CONSIDER = 10;
+// Tracks fetched per album before filtering to the artist's own credits: the API
+// maximum, so a credited track late in a long album isn't cut off by `limit`.
+const ALBUM_TRACKS_FETCH = 50;
 
 export const DEFAULT_MAX_ARTISTS = 50;
 export const DEFAULT_TRACKS_PER_ARTIST = 3;
@@ -180,6 +183,12 @@ export function capArtists(artists: Array<[string, boolean]>, maxArtists: number
  * mixed precision (a bare year vs a full YYYY-MM-DD) can sort slightly out of
  * true order against each other, an accepted rough edge.
  *
+ * Only tracks that credit the artist are kept: on 2026-11-16 Knotfall's
+ * single "Shadowmap" was track-credited to PS2 alone, who then appeared on the
+ * playlist without being on the report. A track with no `artists` data is
+ * kept, so a changed response shape degrades to the old behaviour instead of
+ * an empty playlist.
+ *
  * An artist with no albums/singles yields [] -- a normal outcome (a run of
  * them is caught by the caller's zero-tracks guard), not an error. Genuine API
  * failures (auth, rate limit, a now-deprecated endpoint) are deliberately NOT
@@ -199,8 +208,13 @@ export async function trackUrisForArtist(api: Pick<SpotifyUserApi, "get">, artis
   const seen = new Set<string>();
   for (const album of ordered) {
     if (uris.length >= limit) break;
-    const tracks = await api.get<{ items: Array<{ uri: string }> }>(`/albums/${encodeURIComponent(album.id)}/tracks`, { market: MARKET, limit: String(limit) });
+    const tracks = await api.get<{ items: Array<{ uri: string; artists?: Array<{ id?: string }> }> }>(`/albums/${encodeURIComponent(album.id)}/tracks`, {
+      market: MARKET,
+      limit: String(ALBUM_TRACKS_FETCH),
+    });
     for (const track of tracks.items) {
+      // Only tracks crediting this artist (a track with no `artists` data is kept).
+      if (track.artists && track.artists.length > 0 && !track.artists.some((c) => c.id === artistId)) continue;
       if (!seen.has(track.uri)) {
         seen.add(track.uri);
         uris.push(track.uri);
