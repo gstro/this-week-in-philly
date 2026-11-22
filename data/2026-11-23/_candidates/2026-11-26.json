@@ -1,0 +1,195 @@
+{
+  "week": "2026-11-23",
+  "date": "2026-11-26",
+  "collection_failures": [],
+  "candidates": [
+    {
+      "title": "Wellness Walks",
+      "venue": "The Farm at Awbury",
+      "date": "2026-11-26",
+      "time": "7:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/wellness-walks-tickets",
+      "description": "Arts & Culture · Northwest Philly, Mt. Airy",
+      "source": "Do215",
+      "id": "c0013"
+    },
+    {
+      "title": "Dunkin' Thanksgiving Day Parade",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-26",
+      "time": "8:30 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/dunkin-thanksgiving-day-parade-tickets",
+      "description": "Holiday · West Philly, Fairmount Park",
+      "source": "Do215",
+      "id": "c0137"
+    },
+    {
+      "title": "Closed for Thanksgiving",
+      "venue": "Chris' Jazz Cafe",
+      "date": "2026-11-26",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/closed-for-thanksgiving-tickets",
+      "description": "Music · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0138"
+    },
+    {
+      "title": "Trivia Night - Crydon",
+      "venue": "Neshaminy Creek Brewing Co",
+      "date": "2026-11-26",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/weekly/thu/trivia-night",
+      "description": "Trivia, Open Mics & Other · Bucks County Suburbs, Doylestown",
+      "source": "Do215",
+      "id": "c0139"
+    },
+    {
+      "title": "Community ‘Friendsgivings’",
+      "venue": "First United Methodist Church of Germantown",
+      "date": "2026-11-26",
+      "time": "11:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/community-friendsgivings-tickets",
+      "description": "Holiday · Northwest Philly, Mt. Airy",
+      "source": "Do215",
+      "id": "c0140"
+    },
+    {
+      "title": "Board Game Night - Dublin",
+      "venue": "Neshaminy Creek Brewing Co",
+      "date": "2026-11-26",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/weekly/thu/board-game-night-dublin",
+      "description": "Food & Drink · Bucks County Suburbs, Doylestown",
+      "source": "Do215",
+      "id": "c0141"
+    },
+    {
+      "title": "Wellness Walks",
+      "venue": "Awbury Aboretum",
+      "date": "2026-11-26",
+      "time": "7:00 AM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/wellness-walks-tickets-1Zrm0KO",
+      "description": "Arts & Culture · Northwest Philly, Mt. Airy",
+      "source": "Do215",
+      "id": "c0142"
+    },
+    {
+      "title": "Historic Germantown Visitor Center Open",
+      "venue": "Historic Germantown",
+      "date": "2026-11-26",
+      "time": "12:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/historic-germantown-visitor-center-open-tickets",
+      "description": "Arts & Culture · Northwest Philly, Mt. Airy",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-26",
+        "2026-11-27",
+        "2026-11-28"
+      ],
+      "recurrence_count": 3,
+      "id": "c0143"
+    },
+    {
+      "title": "3 Stories in 30 Minutes Tour",
+      "venue": "Philadelphia Art Museum",
+      "date": "2026-11-26",
+      "time": "1:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/3-stories-in-30-minutes-tour-tickets",
+      "description": "Arts & Culture · West Philly, Fairmount Park",
+      "source": "Do215",
+      "occurrences": [
+        "2026-11-26",
+        "2026-11-27",
+        "2026-11-28"
+      ],
+      "recurrence_count": 3,
+      "id": "c0144"
+    },
+    {
+      "title": "Now Screening: The Further Mis-Adventures of Cliff Booth",
+      "venue": "Netflix House Philadelphia",
+      "date": "2026-11-26",
+      "time": "2:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/now-screening-the-further-mis-adventures-of-cliff-booth-tickets",
+      "description": "Arts & Family · Montgomery County Suburbs, King of Prussia",
+      "source": "Do215",
+      "id": "c0145"
+    },
+    {
+      "title": "Philadelphia Thanksgiving Day Early Dinner Cruise",
+      "venue": "Spirit of Philadelphia",
+      "date": "2026-11-26",
+      "time": "3:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/philadelphia-thanksgiving-day-early-dinner-cruise-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0146"
+    },
+    {
+      "title": "Thanksgiving Dinner",
+      "venue": "Sellersville Theater",
+      "date": "2026-11-26",
+      "time": "7:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/thanksgiving-dinner-tickets",
+      "description": "Theatre & Performing Arts · Bucks County Suburbs, Doylestown",
+      "source": "Do215",
+      "id": "c0147"
+    },
+    {
+      "title": "Wiss Quizzo! Hosted by Sean P. Maguire",
+      "venue": "Wissahickon Brewing Company",
+      "date": "2026-11-26",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/quizzo-with-sean-p-maguire-tickets",
+      "description": "Food & Drink · Northwest Philly, Manayunk",
+      "source": "Do215",
+      "id": "c0148"
+    },
+    {
+      "title": "Philadelphia Thanksgiving Day Dinner Cruise",
+      "venue": "Spirit of Philadephia",
+      "date": "2026-11-26",
+      "time": "7:30 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/philadelphia-thanksgiving-day-dinner-cruise-tickets",
+      "description": "Arts & Culture",
+      "source": "Do215",
+      "id": "c0149"
+    },
+    {
+      "title": "Wicked in The Vault – DJ Gallex (10 PM to 2 AM)",
+      "venue": "Midnight & The Wicked",
+      "date": "2026-11-26",
+      "time": "10:00 PM",
+      "cost": "",
+      "url": "https://do215.com/events/2026/11/26/wicked-in-the-vault-dj-gallex-10-pm-to-2-am-tickets",
+      "description": "Arts & Culture · Center City, Rittenhouse Square",
+      "source": "Do215",
+      "id": "c0150"
+    },
+    {
+      "title": "LATE NIGHT THANKSGIVING MOVIE - KRISTY (2014)",
+      "venue": "(online)",
+      "date": "2026-11-26",
+      "time": "9:30 PM",
+      "cost": "",
+      "url": "https://www.meetup.com/philadelphia-horror-meetup-group/events/317351329/",
+      "description": "Philadelphia Area Horror Meetup Group\nTime for our Thanksgiving horror movie!\n\n**KRISTY**\n2014 - 1hr 26mins\nHorror/Crime\nWhen a college girl who is alone on campus over the Thanksgiving break is targeted by a group of outcasts, she must conquer her deepest fears to outwit them and fight back.",
+      "source": "Meetup: Philadelphia Horror",
+      "id": "c0361"
+    }
+  ]
+}
