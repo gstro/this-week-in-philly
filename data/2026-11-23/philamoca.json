@@ -1,0 +1,24 @@
+{
+  "source": "PhilaMOCA",
+  "collected_at": "2026-11-22T16:11:17.664375+00:00",
+  "events": [
+    {
+      "title": "The Inglorious",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-28",
+      "time": "7:30, 8:00",
+      "cost": "$20",
+      "url": "https://www.etix.com/ticket/p/96986171/",
+      "description": ""
+    },
+    {
+      "title": "Andrzej \u017bu\u0142awski Book Release ft. L\u2019AMOUR BRAQUE (1985)",
+      "venue": "PhilaMOCA, 531 N 12th St, Philadelphia, PA 19123",
+      "date": "2026-11-29",
+      "time": "7:00, 7:30",
+      "cost": "$12",
+      "url": "https://www.etix.com/ticket/p/31118442/",
+      "description": "Author Samm Deighan in attendance to celebrate the release of her new book, HYSTERICAL EXCESS AND INHUMAN ECSTASY: THE CINEMA OF ANDRZEJ \u017bULAWSKI!"
+    }
+  ]
+}
