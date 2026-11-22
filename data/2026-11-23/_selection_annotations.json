@@ -1,0 +1,352 @@
+{
+  "week": "2026-11-23",
+  "collection_failures": [],
+  "days": [
+    {
+      "date": "2026-11-23",
+      "day_name": "Monday",
+      "top3": [
+        {
+          "id": "c0031",
+          "rank": 1,
+          "category": "📚 Literary",
+          "is_music": false,
+          "sold_out": false,
+          "why": "The final session of an eight-part read-through of Ursula K. Le Guin's The Dispossessed — her 1974 anarchist-utopia novel, one of the genre's foundational political texts — closes out with the group landing on the book's ambiguous politics rather than just recapping plot. *(confirm details)*: the listing gives no address beyond \"Philadelphia,\" so confirm the location before heading over."
+        },
+        {
+          "id": "c0349",
+          "rank": 2,
+          "category": "💻 Tech & Maker",
+          "is_music": false,
+          "sold_out": false,
+          "address": "404 S. 20th St., Philadelphia, PA 19146",
+          "why": "Iffy Books keeps running some of the city's best hands-on DIY-electronics programming, and this one's a genuine mashup: hand-build a small clay sculpture with an NFC tag embedded inside that can trigger phone shortcuts when tapped. $4.86 covers the clay-and-tag kit; instruction is pay-what-you-can ($5-$15 suggested, notaflof). Center City/Fitler Square, an easy walk from Rittenhouse."
+        },
+        {
+          "id": "c0023",
+          "rank": 3,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "525 Arch St, Philadelphia, PA 19106",
+          "why": "A talk marking the 150th anniversary of the Battle of Little Bighorn, reframing it through Native nations' own history and the broader fate of the American West — exactly the kind of indigenous-history programming that's easy to miss amid the museum's bigger exhibits. At the National Constitution Center in Old City, an easy walk from Center City."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0030" },
+        { "id": "c0393" }
+      ],
+      "annotations": [
+        { "id": "c0031", "category": "📚 Literary", "sold_out": false },
+        { "id": "c0349", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0023", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0030", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0393", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0392", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0010", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0017", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0021", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0022", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0024", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0025", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0027", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0358", "category": "👻 Horror & Occult", "sold_out": false, "note": "A quantum physicist's machine that tunnels into a subatomic universe accidentally reveals a radical cancer treatment — 2024 sci-fi/horror, 82 minutes, watched together online by the Philadelphia Area Horror Meetup Group." },
+        { "id": "c0032", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0002", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0020", "category": "🤝 Community & Politics", "sold_out": false }
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "day_name": "Tuesday",
+      "top3": [
+        {
+          "id": "c0067",
+          "rank": 1,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "2027 Fairmount Ave, Philadelphia, PA 19130",
+          "why": "Eastern State Penitentiary's lecture series turns its own history inside out this time, tracing a line from Philadelphia's founding \"natural rights\" rhetoric to the carceral state the city went on to help build — the kind of institution-critiquing public history that's easy to walk past. A one-off talk inside one of the city's most resonant sites for thinking about incarceration and state power. Fairmount — take the 48 bus or walk about 20 minutes from the Broad Street Line's Fairmount Ave stop."
+        },
+        {
+          "id": "c0043",
+          "rank": 2,
+          "category": "🎨 Arts & Workshops",
+          "is_music": false,
+          "sold_out": false,
+          "why": "Latrice Royale — a standout from RuPaul's Drag Race, by reputation — brings a holiday-themed send-up of White Christmas to City Winery for one night. Broad, campy, big-personality queer performance that's worth the ticket regardless of the room it's in. Center City, Chinatown."
+        },
+        {
+          "id": "c0074",
+          "rank": 3,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "address": "9201 Germantown Ave, Philadelphia, PA 19118",
+          "why": "A rare big-screen outing for Ninotchka, Ernst Lubitsch's 1939 comedy where Greta Garbo plays a stone-faced Soviet envoy who melts in gay Paris — witty, quietly political, and exactly the kind of repertory programming a commercial multiplex would never touch. Chestnut Hill — reachable via Regional Rail's Chestnut Hill East Line or the 23 bus up Germantown Ave."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0075" },
+        { "id": "c0047" }
+      ],
+      "annotations": [
+        { "id": "c0067", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0043", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0074", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0075", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0047", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0041", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0042", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0054", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0045", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0057", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0039", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0078", "category": "👻 Horror & Occult", "sold_out": false, "note": "Conor McPherson's acclaimed ghost-story play, by reputation — strangers trade supernatural tales in a rural Irish pub." },
+        { "id": "c0386", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0354", "category": "💻 Tech & Maker", "sold_out": false, "note": "Hands-on Rust coding meetup — ownership and borrowing, building a first CLI, or working on your own project, with help on compiler errors and systems-programming questions." },
+        { "id": "c0350", "category": "📚 Literary", "sold_out": false, "note": "Three 40-minute silent-writing sprints with 10-minute breaks and accountability check-ins; BYO coffee and laptop charger." },
+        { "id": "c0359", "category": "👻 Horror & Occult", "sold_out": false, "note": "A toxic-gas leak at a medical supply warehouse raises hungry zombies from a nearby cemetery — 1985 horror-comedy classic, 95 minutes, watched together online for a member's birthday." }
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "day_name": "Wednesday",
+      "top3": [
+        {
+          "id": "c0380",
+          "rank": 1,
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "time": "9:00 PM",
+          "address": "1200 Callowhill Street, Philadelphia, PA 19123",
+          "why": "Nocturne, which reads as a goth/industrial night that used to run regularly before it stopped, gets a one-off reunion with DJs Jon Gill, Kathy Fadigan, and Mike Saga spinning the old sets. 21+, 9pm-2am, $20 — a real chance to catch a scene that doesn't throw parties like this often anymore. Just north of the Convention Center at 13th & Callowhill, an easy walk from Jefferson Station or the Chinatown stop on the Broad-Ridge Spur."
+        },
+        {
+          "id": "c0381",
+          "rank": 2,
+          "category": "👻 Horror & Occult",
+          "is_music": false,
+          "sold_out": false,
+          "time": "10:00 PM",
+          "address": "700 North 2nd St, Philadelphia, PA 19123",
+          "why": "What looks like an annual \"Gothsgiving\" tradition in Philly's goth scene: DJs Baby Berlin and Plaguelustre spinning death rock, post-punk, darkwave, and goth at The 700. 21+, 10pm-2am, $10 advance/$15 door. Northern Liberties, a few blocks from the Market-Frankford Line's Girard stop or the 57 bus."
+        },
+        {
+          "id": "c0106",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1421 Sansom St, Philadelphia, PA 19102",
+          "why": "Vibraphonist Julian Lee leads his quartet for a Rittenhouse jazz-club set — low-key, chairs-and-cocktails jazz on a night most of the city is cooking or pre-gaming for Thanksgiving. Chris' Jazz Cafe is one of the city's few rooms still built around a stand-up jazz program, not a concept."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0379" },
+        { "id": "c0089" }
+      ],
+      "annotations": [
+        { "id": "c0380", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0381", "category": "👻 Horror & Occult", "sold_out": false },
+        { "id": "c0106", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0379", "category": "👻 Horror & Occult", "sold_out": false, "note": "No cover — DJ EBGIII spinning darkwave, goth rock, '80s electro, and industrial, 8pm-midnight." },
+        { "id": "c0089", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0101", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0085", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0131", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0127", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0355", "category": "💻 Tech & Maker", "sold_out": false, "note": "Low-key coding meetup — no panels or pitches, just coffee and focused time to build, learn, and connect, run in collaboration with Blockspace Community." },
+        { "id": "c0351", "category": "💻 Tech & Maker", "sold_out": false, "note": "Hands-on session experimenting with VHS tapes and audio cassettes, with equipment on hand for analog-to-digital and digital-to-analog transfers." },
+        { "id": "c0360", "category": "👻 Horror & Occult", "sold_out": false, "note": "A girl with unusual powers escapes a mental asylum and tries to make it on her own in New Orleans — 2021 fantasy/thriller, 106 minutes, watched together online by the Philly horror meetup." },
+        { "id": "c0387", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0371", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Rated R, 111 min." },
+        { "id": "c0372", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Rated R, 126 min." },
+        { "id": "c0373", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Rated R, 115 min." },
+        { "id": "c0375", "category": "🎬 Film & Cinema", "sold_out": false, "note": "Rated PG-13, 131 min." }
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "day_name": "Thursday",
+      "top3": [],
+      "annotations": [
+        { "id": "c0137", "category": "🎪 Festivals & Major Events", "sold_out": false },
+        { "id": "c0140", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0144", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0361", "category": "👻 Horror & Occult", "sold_out": false, "note": "A college student alone on campus over Thanksgiving break is targeted by a group of outcasts and must fight back — 2014 horror/crime, 86 minutes, the Philly horror meetup's Thanksgiving pick." }
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "day_name": "Friday",
+      "top3": [
+        {
+          "id": "c0173",
+          "rank": 1,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "435 Spring Garden St, Philadelphia, PA 19123",
+          "why": "Three-band punk/rock bill at Silk City on Black Friday night — Leadpetal, The Angies, and Nadafinger, the kind of all-local DIY lineup that's easy to miss under the holiday-shopping noise. Spring Garden/Northern Liberties, a few blocks from the Market-Frankford Line's Spring Garden stop or the 57 bus."
+        },
+        {
+          "id": "c0152",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": false,
+          "sold_out": false,
+          "why": "A James Brown tribute happy hour — the archival/tribute-night sweet spot for soul, done as a dance party rather than a note-for-note cover band. The Trestle Inn in Callowhill, a few blocks from the Convention Center and Jefferson Station."
+        },
+        {
+          "id": "c0176",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1421 Sansom St, Philadelphia, PA 19102",
+          "why": "Chris Oatts leads a full big band through a set with guest vocalist Chelsea Reed at Chris' Jazz Cafe — one of the city's few rooms that still books a working big band on a regular night, not just for a holiday special. Center City, Rittenhouse."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0189" },
+        { "id": "c0193" }
+      ],
+      "annotations": [
+        { "id": "c0173", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0152", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0176", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0189", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0193", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0163", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0411", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Miami-based jazz vocalist, by reputation, for a multi-night run at SOUTH Jazz Club." },
+        { "id": "c0221", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0169", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0168", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0362", "category": "👻 Horror & Occult", "sold_out": false, "note": "An Italian horror-fantasy (subtitled) about a haunted teacher who uncovers a village's dark healing ritual built around a teenage boy — 2025, 122 minutes." },
+        { "id": "c0210", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0206", "category": "🎪 Festivals & Major Events", "sold_out": false },
+        { "id": "c0195", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0410", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0388", "category": "🌿 Markets & Outdoors", "sold_out": false },
+        { "id": "c0428", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Ben Vaughn is a Philadelphia-rooted singer-songwriter and producer, by reputation, here leading a quintet for WXPN's long-running free lunchtime concert series." }
+      ]
+    },
+    {
+      "date": "2026-11-28",
+      "day_name": "Saturday",
+      "top3": [
+        {
+          "id": "c0275",
+          "rank": 1,
+          "category": "🤝 Community & Politics",
+          "is_music": false,
+          "sold_out": false,
+          "address": "258 E Girard Ave, Philadelphia, PA 19125",
+          "why": "Harriett's Bookshop — the Fishtown shop built around Black and women authors and named for Harriet Tubman — doesn't show up in Collection most weeks, so a rare appearance is worth taking. This is their Small Business Saturday trolley tour, moving shoppers between Black- and women-owned storefronts rather than steering foot traffic to the usual chains. Fishtown, near the Market-Frankford Line's Girard stop or the 15 trolley on Girard Ave."
+        },
+        {
+          "id": "c0378",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "319 N 11th St, Philadelphia, PA 19107",
+          "why": "A five-band punk and power-pop bill at Vox Populi, the long-running artist-run collective space, by reputation — Dark Sufers come down from New Jersey to headline, backed by local openers Shampoo, Sappers, The Speed Dials, and TTLC. A few blocks north of the Convention Center, near the Broad-Ridge Spur's Chinatown stop or Jefferson Station."
+        },
+        {
+          "id": "c0370",
+          "rank": 3,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "address": "1412 Chestnut Street, Philadelphia, PA 19102",
+          "why": "A rare theatrical rerun of Paul Thomas Anderson's Licorice Pizza — his 1970s San Fernando Valley coming-of-age story, one of the sharpest and funniest things he's made — at the Philadelphia Film Society's Chestnut Street screen. The kind of repertory booking that disappears fast once a studio's licensing window closes. Center City, Chestnut Street."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0352" },
+        { "id": "c0270" },
+        { "id": "c0249" }
+      ],
+      "annotations": [
+        { "id": "c0275", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0378", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0370", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0352", "category": "💻 Tech & Maker", "sold_out": false },
+        { "id": "c0270", "category": "🎵 Music & Concerts", "sold_out": false, "note": "Marcus Gilmore and David Virelles are major names on the current jazz scene, by reputation — part of Solar Myth's mentoring-series programming." },
+        { "id": "c0249", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0437", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0356", "category": "💻 Tech & Maker", "sold_out": false, "note": "Casual pair-programming meetup comparing Claude Code and Codex on the same tasks — bring a laptop and a project or workflow to test, work in small groups, compare notes." },
+        { "id": "c0357", "category": "💻 Tech & Maker", "sold_out": false, "note": "Open work session for Philly's DC215 hacking group to make progress together on an active CTF." },
+        { "id": "c0242", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0240", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0263", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0264", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0289", "category": "🎨 Arts & Workshops", "sold_out": false },
+        { "id": "c0258", "category": "📚 Literary", "sold_out": false },
+        { "id": "c0382", "category": "👻 Horror & Occult", "sold_out": false, "note": "Three themed decks aboard the Moshulu — emo with DJ Sabrina, metal with DJ Dan von DOOM, goth in the indoor lounge with DJ Kathy Fadigan. 21+, 10pm-2am, $7.18+." },
+        { "id": "c0384", "category": "👻 Horror & Occult", "sold_out": false, "note": "Back-to-back Cure and Smiths tribute sets — doors 6pm, show 7:30pm, $24+." },
+        { "id": "c0267", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0286", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0363", "category": "👻 Horror & Occult", "sold_out": false, "note": "A deaf writer fighting a masked killer in silence (Hush, 2016) paired with a blind woman defending against home invaders (See For Me, 2021) — both horror leads built around a missing sense." }
+      ]
+    },
+    {
+      "date": "2026-11-29",
+      "day_name": "Sunday",
+      "top3": [
+        {
+          "id": "c0377",
+          "rank": 1,
+          "category": "🎬 Film & Cinema",
+          "is_music": false,
+          "sold_out": false,
+          "time": "7:00 PM",
+          "address": "531 N 12th St, Philadelphia, PA 19123",
+          "why": "PhilaMOCA screens Andrzej Żuławski's 1985 L'Amour Braque (Mad Love) — one of the wilder entries in the Polish director's hysterical, maximalist filmography — to celebrate critic Samm Deighan's new book on his work, with Deighan herself in the room. Doors/reception at 7, screening introduction at 7:30. Exactly the kind of specialist film-and-literature crossover that justifies PhilaMOCA's whole existence. $12, Callowhill, an easy walk from the Convention Center or Jefferson Station."
+        },
+        {
+          "id": "c0311",
+          "rank": 2,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "847 N 3rd St, Philadelphia, PA 19123",
+          "why": "A jazz jam session at Ortlieb's raising money for Juntos, the South Kensington-based immigrant-rights and workers' organization — led by Corey Bernhard, with the usual Sunday-night Ortlieb's crowd of serious players sitting in. Real stakes behind a low-key night of music. Northern Liberties, near the Market-Frankford Line's Girard stop or the 57 bus."
+        },
+        {
+          "id": "c0315",
+          "rank": 3,
+          "category": "🎵 Music & Concerts",
+          "is_music": true,
+          "sold_out": false,
+          "address": "1100 Chestnut St, Philadelphia, PA 19107",
+          "why": "Blitzkid — a long-running horrorpunk duo, by reputation, in the Misfits/Samhain lineage — headlines at MilkBoy with The Gentlemen Ghosts and Fading Radiance opening. A rare bill that satisfies both the horror column and the punk column at once. Center City, Chestnut Street."
+        }
+      ],
+      "honorable_mentions": [
+        { "id": "c0390" },
+        { "id": "c0346" }
+      ],
+      "annotations": [
+        { "id": "c0377", "category": "🎬 Film & Cinema", "sold_out": false },
+        { "id": "c0311", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0315", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0390", "category": "🌿 Markets & Outdoors", "sold_out": false, "note": "An indoor flea market and holiday bazaar run by Animal ACTivists of Philly, with a Krampus appearance — animal-rights activism and market shopping under one roof at the Rotunda." },
+        { "id": "c0346", "category": "📚 Literary", "sold_out": false },
+        { "id": "c0332", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0391", "category": "🤝 Community & Politics", "sold_out": false },
+        { "id": "c0316", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0324", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0331", "category": "🎵 Music & Concerts", "sold_out": false },
+        { "id": "c0364", "category": "👻 Horror & Occult", "sold_out": false, "note": "Weekly group watch-along of Dexter: Resurrection Season 2 — this week is Episode 5." },
+        { "id": "c0345", "category": "🌿 Markets & Outdoors", "sold_out": false },
+        { "id": "c0314", "category": "🌿 Markets & Outdoors", "sold_out": false }
+      ]
+    }
+  ]
+}
